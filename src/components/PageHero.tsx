@@ -1,0 +1,55 @@
+import { motion } from 'framer-motion';
+
+interface PageHeroProps {
+  label: string;
+  title: string;
+  subtitle?: string;
+  image: string;
+}
+
+export default function PageHero({ label, title, subtitle, image }: PageHeroProps) {
+  return (
+    <section className="relative h-[60vh] min-h-[450px] max-h-[650px] overflow-hidden">
+      <div className="absolute inset-0">
+        <img src={image} alt={title} className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-b from-deep/55 via-deep/35 to-deep/65" />
+      </div>
+      <div className="relative h-full flex flex-col justify-end pb-16 md:pb-20">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 50 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
+            className="h-[1px] bg-brass-light mb-6"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-light mb-4"
+          >
+            {label}
+          </motion.p>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.45, ease: [0.25, 0.1, 0, 1] }}
+            className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-light leading-[1.08] tracking-[0.02em] max-w-3xl"
+          >
+            {title}
+          </motion.h1>
+          {subtitle && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.65 }}
+              className="mt-5 text-white/60 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide"
+            >
+              {subtitle}
+            </motion.p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}

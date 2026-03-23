@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Raeso-inspired warm contemporary palette */
+  --color-ivory: #F9F6F1;
+  --color-ivory-warm: #F3EEE6;
+  --color-ecru: #EBE5DA;
+  --color-sand: #DED7CB;
+  --color-tortora: #D0C9BD;
+  --color-stone: #B5AD9F;
+  --color-anthracite: #38342F;
+  --color-charcoal: #282520;
+  --color-deep: #1C1A17;
+
+  /* Brass — muted, warm, never shiny */
+  --color-brass: #B09872;
+  --color-brass-light: #C4AE8C;
+  --color-brass-muted: #9E8868;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Jost', 'Helvetica Neue', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-anthracite);
+  background-color: var(--color-ivory);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide default cursor on non-touch devices */
+@media (hover: hover) and (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}
+
+::selection {
+  background-color: var(--color-brass-light);
+  color: var(--color-deep);
+}
+
+/* ── Scrollbar — refined, visible, elegant ── */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-ecru);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-stone);
+  border-radius: 10px;
+  border: 1px solid var(--color-ecru);
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brass-muted);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: var(--color-brass);
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-stone) var(--color-ecru);
+}

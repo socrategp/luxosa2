@@ -84,9 +84,9 @@ function HomePercorsi() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const percorsi = [
-    { title: 'Equilibrio & Benessere della Cute', image: '/images/ritual-new.jpg' },
-    { title: 'Cura & Bellezza del Capello', image: '/images/hair-back-new.jpg' },
-    { title: 'Trasformazione Colore', image: '/images/transformation-new.jpg' },
+    { title: 'Equilibrio & Benessere della Cute', image: '/images/ritual.jpg' },
+    { title: 'Cura & Bellezza del Capello', image: '/images/hair-back.jpg' },
+    { title: 'Trasformazione Colore', image: '/images/transformation.jpg' },
   ];
 
   return (

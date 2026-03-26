@@ -58,7 +58,7 @@ function MethodCTA() {
 export default function IlMetodoPage() {
   return (
     <>
-      <PageHero label="Il Metodo" title="Sette pilastri.\nUn unico principio." subtitle="Un approccio fondato sulla conoscenza, costruito sull'esperienza, guidato dall'attenzione alla persona." image="/images/texture-new.jpg" />
+      <PageHero label="Il Metodo" title="Sette pilastri.\nUn unico principio." subtitle="Un approccio fondato sulla conoscenza, costruito sull'esperienza, guidato dall'attenzione alla persona." image="/images/texture.jpg" />
       <MethodApproach />
       <Method />
       <Signature />

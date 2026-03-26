@@ -28,7 +28,7 @@ function PercorsiIntro() {
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
-            <div className="aspect-[4/3] overflow-hidden"><img src="/images/care-hands-new.jpg" alt="Percorsi Luxosa" className="w-full h-full object-cover" /></div>
+            <div className="aspect-[4/3] overflow-hidden"><img src="/images/care-hands.jpg" alt="Percorsi Luxosa" className="w-full h-full object-cover" /></div>
           </motion.div>
         </div>
       </div>

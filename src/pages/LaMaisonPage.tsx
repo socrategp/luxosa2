@@ -28,7 +28,7 @@ function MaisonVision() {
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
-            <div className="aspect-[3/4] overflow-hidden"><img src="/images/woman-portrait-new.jpg" alt="La visione Luxosa" className="w-full h-full object-cover" /></div>
+            <div className="aspect-[3/4] overflow-hidden"><img src="/images/woman-portrait.jpg" alt="La visione Luxosa" className="w-full h-full object-cover" /></div>
             <div className="absolute -bottom-4 -left-4 w-20 h-20 border-l border-b border-brass/30" />
           </motion.div>
         </div>

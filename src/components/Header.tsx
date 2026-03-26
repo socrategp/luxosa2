@@ -54,23 +54,34 @@ export default function Header() {
             </Link>
 
             <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
-              {navItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.href}
-                  className={`text-[12.5px] tracking-[0.14em] uppercase font-light transition-all duration-700 hover:opacity-60 ${
-                    scrolled ? 'text-anthracite/85' : 'text-white/90'
-                  } ${
-                    location.pathname === item.href
-                      ? scrolled ? 'text-anthracite' : 'text-white'
-                      : ''
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-
+  {navItems.map((item) => {
+    const isActive = item.href === '/'
+      ? location.pathname === '/'
+      : location.pathname.startsWith(item.href);
+    return (
+      <Link
+        key={item.label}
+        to={item.href}
+        className="relative group"
+      >
+        <span
+          className={`text-[12.5px] tracking-[0.14em] uppercase transition-all duration-700 ${
+            isActive
+              ? scrolled ? 'font-normal text-anthracite' : 'font-normal text-white'
+              : scrolled ? 'font-light text-anthracite/60 group-hover:text-anthracite/90' : 'font-light text-white/60 group-hover:text-white/90'
+          }`}
+        >
+          {item.label}
+        </span>
+        <span
+          className={`absolute -bottom-1.5 left-0 h-[1px] bg-brass transition-all duration-500 ease-out ${
+            isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-40'
+          }`}
+        />
+      </Link>
+    );
+  })}
+</nav>
             <div className="hidden lg:flex items-center">
               <Link
                 to="/contatti"

@@ -20,7 +20,7 @@ const sedi: Sede[] = [
     name: 'Luxosa Messina Cavour',
     city: 'Messina',
     address: 'Via Cavour, 98122 Messina (ME)',
-    image: '/images/messina-new.jpg',
+    image: '/images/messina.jpg',
     description: 'La prima sede Luxosa. Un luogo dove la cura evoluta di cute e capelli incontra l\'eleganza e la tradizione della Sicilia orientale. Uno spazio raffinato nel cuore di Messina.',
     status: 'active',
   },

@@ -57,7 +57,7 @@ function PercorsiCTA() {
 export default function IPercorsiPage() {
   return (
     <>
-      <PageHero label="I Percorsi" title="Percorsi di benessere per cute e capelli,non semplici servizi." subtitle="Ogni area è pensata per rispondere a un'esigenza specifica, con la profondità e l'attenzione che ogni persona merita." image="/images/hair-back-new.jpg" />
+      <PageHero label="I Percorsi" title="Percorsi di benessere per cute e capelli,non semplici servizi." subtitle="Ogni area è pensata per rispondere a un'esigenza specifica, con la profondità e l'attenzione che ogni persona merita." image="/images/hair-back.jpg" />
       <PercorsiIntro />
       <Percorsi />
       <Signature />

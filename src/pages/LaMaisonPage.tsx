@@ -93,7 +93,7 @@ function MaisonQuote() {
 export default function LaMaisonPage() {
   return (
     <>
-      <PageHero label="La Maison" title="Chi è Luxosa." subtitle="Una maison italiana dedicata alla trasformazione della donna attraverso percorsi evoluti di cura, benessere e bellezza." image="/images/consultation.jpg" />
+      <PageHero label="La Maison" title="Chi è Luxosa." subtitle="Una maison italiana dedicata alla trasformazione della donna attraverso percorsi evoluti di cura, benessere e bellezza." image="/images/consultation-new.jpg" />
       <MaisonVision />
       <MaisonValues />
       <Authority />

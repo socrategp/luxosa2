@@ -20,6 +20,7 @@ export default function App() {
           <Route path="/il-metodo" element={<IlMetodoPage />} />
           <Route path="/i-percorsi" element={<IPercorsiPage />} />
           <Route path="/esperienza" element={<EsperienzaPage />} />
+          <Route path="/la-tua-soluzione" element={<LaTuaSoluzionePage />} />
           <Route path="/sedi" element={<SediPage />} />
           <Route path="/sedi/messina-cavour" element={<MessinaCavourPage />} />
           <Route path="/contatti" element={<ContattiPage />} />

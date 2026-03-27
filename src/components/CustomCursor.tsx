@@ -16,17 +16,24 @@ export default function CustomCursor() {
   const springY = useSpring(trailY, { damping: 28, stiffness: 180, mass: 0.5 });
 
   const isTouchDevice = useRef(false);
-  const rafRef = useRef<number>(0);
   const lastCheck = useRef(0);
 
-  // Detect if cursor is over a dark or light area
   const detectBackground = useCallback((x: number, y: number) => {
     const now = Date.now();
-    if (now - lastCheck.current < 100) return; // throttle to 10fps
+    if (now - lastCheck.current < 80) return;
     lastCheck.current = now;
 
+    // Temporarily hide cursor elements to get the real element underneath
     const el = document.elementFromPoint(x, y);
     if (!el) return;
+
+    // Skip header — treat as whatever is behind it
+    const header = (el as HTMLElement).closest?.('header');
+    if (header) {
+      // If in the top area, check if we're over a hero (dark) or content (light)
+      setOnDark(y < window.innerHeight * 0.7 && document.querySelector('section.bg-deep, section[class*="overflow-hidden"]') !== null);
+      return;
+    }
 
     let target: Element | null = el;
     while (target && target !== document.documentElement) {
@@ -35,7 +42,6 @@ export default function CustomCursor() {
         const match = bg.match(/\d+/g);
         if (match) {
           const [r, g, b] = match.map(Number);
-          // Perceived luminance
           const lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
           setOnDark(lum < 0.45);
         }
@@ -43,7 +49,6 @@ export default function CustomCursor() {
       }
       target = target.parentElement;
     }
-    // Default to light (ivory body)
     setOnDark(false);
   }, []);
 
@@ -76,7 +81,9 @@ export default function CustomCursor() {
     updateHoverListeners();
 
     function updateHoverListeners() {
-      const hoverables = document.querySelectorAll('a, button, [role="button"], input, textarea, select, [data-cursor-hover]');
+      const hoverables = document.querySelectorAll(
+        'a, button, [role="button"], input, textarea, select, [data-cursor-hover]'
+      );
       hoverables.forEach((el) => {
         el.addEventListener('mouseenter', () => setIsHovering(true));
         el.addEventListener('mouseleave', () => setIsHovering(false));
@@ -90,25 +97,27 @@ export default function CustomCursor() {
       document.removeEventListener('mousedown', onDown);
       document.removeEventListener('mouseup', onUp);
       observer.disconnect();
-      cancelAnimationFrame(rafRef.current);
     };
   }, [cursorX, cursorY, trailX, trailY, isVisible, detectBackground]);
 
-  if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+  if (
+    typeof window !== 'undefined' &&
+    ('ontouchstart' in window || navigator.maxTouchPoints > 0)
+  ) {
     return null;
   }
 
-  // Color scheme based on background
+  // Adaptive colors — no mix-blend-difference, clean rendering
   const dotColor = onDark ? '#ffffff' : '#1C1A17';
   const ringColor = isHovering
-    ? 'rgba(196,174,140,0.75)' // gold on hover, always
+    ? 'rgba(196,174,140,0.75)'
     : onDark
-      ? 'rgba(196,174,140,0.6)'  // gold on dark
-      : 'rgba(28,26,23,0.35)';    // dark on light
+      ? 'rgba(196,174,140,0.55)'
+      : 'rgba(28,26,23,0.3)';
 
   return (
     <>
-      {/* Inner dot */}
+      {/* Inner dot — adaptive color, no mix-blend */}
       <motion.div
         className="fixed top-0 left-0 z-[9999] pointer-events-none"
         style={{
@@ -129,7 +138,7 @@ export default function CustomCursor() {
         />
       </motion.div>
 
-      {/* Outer ring */}
+      {/* Outer ring — gold/dark adaptive */}
       <motion.div
         className="fixed top-0 left-0 z-[9998] pointer-events-none"
         style={{
@@ -150,7 +159,7 @@ export default function CustomCursor() {
             width: { type: 'spring', damping: 20, stiffness: 250 },
             height: { type: 'spring', damping: 20, stiffness: 250 },
             opacity: { duration: 0.25 },
-            borderColor: { duration: 0.35, ease: 'easeOut' },
+            borderColor: { duration: 0.3, ease: 'easeOut' },
           }}
           className="rounded-full"
           style={{ borderStyle: 'solid', borderWidth: 1.2 }}
@@ -159,3 +168,4 @@ export default function CustomCursor() {
     </>
   );
 }
+

@@ -25,6 +25,7 @@ export default function Footer() {
                 { label: 'Il Metodo', href: '/il-metodo' },
                 { label: 'I Percorsi', href: '/i-percorsi' },
                 { label: 'L\'Esperienza', href: '/esperienza' },
+                { label: 'La Tua Soluzione', href: '/la-tua-soluzione' },
                 { label: 'Sedi', href: '/sedi' },
                 { label: 'Contatti', href: '/contatti' },
               ].map((item) => (
@@ -39,14 +40,14 @@ export default function Footer() {
             <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Contatti</h4>
             <div className="flex flex-col gap-4">
               <a href="tel:+390000000000" className="flex items-center gap-3 text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors">
-                <Phone size={14} strokeWidth={1.3} className="text-brass/50" />+39 000 000 0000
+                <Phone size={14} strokeWidth={1.3} className="text-brass/50" />+39 090 240 3220
               </a>
               <a href="mailto:info@luxosa.it" className="flex items-center gap-3 text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors">
-                <Mail size={14} strokeWidth={1.3} className="text-brass/50" />info@luxosa.it
+                <Mail size={14} strokeWidth={1.3} className="text-brass/50" />messinacavour@luxosa.it
               </a>
               <div className="flex items-start gap-3 text-[13px] font-light text-ivory/45">
                 <MapPin size={14} strokeWidth={1.3} className="text-brass/50 flex-shrink-0 mt-0.5" />
-                <span>Via Cavour<br />Messina, Italia</span>
+                <span>Via Cavour, 1<br />Messina, Italia</span>
               </div>
             </div>
           </div>
@@ -56,7 +57,8 @@ export default function Footer() {
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-3 text-[13px] font-light text-ivory/45">
                 <Clock size={14} strokeWidth={1.3} className="text-brass/50" />
-                <div><p>Martedì — Sabato</p><p>09:00 — 19:00</p></div>
+                <div><p>Martedì — Venerdì</p><p>09:00 — 18:30</p></div>
+                <div><p>Sabato</p><p>09:00 — 19:00</p></div>
               </div>
               <p className="text-[12px] font-light text-ivory/30 mt-2">Domenica e Lunedì chiuso<br />Su appuntamento</p>
             </div>

@@ -28,6 +28,7 @@ export default function Header() {
     { label: 'Il Metodo', href: '/il-metodo' },
     { label: 'I Percorsi', href: '/i-percorsi' },
     { label: 'L\'Esperienza', href: '/esperienza' },
+    { label: 'La Tua Soluzione', href: '/la-tua-soluzione' },
     { label: 'Sedi', href: '/sedi' },
     { label: 'Contatti', href: '/contatti' },
   ];

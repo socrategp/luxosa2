@@ -5,6 +5,7 @@ import LaMaisonPage from './pages/LaMaisonPage';
 import IlMetodoPage from './pages/IlMetodoPage';
 import IPercorsiPage from './pages/IPercorsiPage';
 import EsperienzaPage from './pages/EsperienzaPage';
+import LaTuaSoluzionePage from './pages/LaTuaSoluzionePage';
 import SediPage from './pages/SediPage';
 import ContattiPage from './pages/ContattiPage';
 import MessinaCavourPage from './pages/sedi/MessinaCavourPage';

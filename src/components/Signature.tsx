@@ -28,14 +28,14 @@ export default function Signature() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-28 md:py-36 lg:py-44 bg-ecru/40">
+    <section className="py-32 md:py-48 lg:py-56 bg-ecru/40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         {/* Header */}
         <div className="max-w-2xl mb-16 md:mb-24">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
           >
             Momenti Signature
@@ -43,13 +43,13 @@ export default function Signature() {
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
             className="h-[1px] bg-brass mt-4 mb-8"
           />
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
             className="font-serif text-[32px] md:text-[40px] lg:text-[46px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
           >
             Esperienze selezionate,<br />
@@ -58,7 +58,7 @@ export default function Signature() {
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.35 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
             className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light"
           >
             Pochi momenti, selezionati con cura. Ogni esperienza signature rappresenta l'espressione più alta del nostro metodo.
@@ -72,7 +72,7 @@ export default function Signature() {
               key={s.title}
               initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.25 + i * 0.12 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.25 + i * 0.12 }}
               className="group border-t border-sand/60 py-10 md:py-12 cursor-pointer"
             >
               <div className="grid md:grid-cols-12 gap-4 md:gap-8 items-start">

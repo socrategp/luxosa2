@@ -16,7 +16,7 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="esperienza" className="py-28 md:py-36 lg:py-44 bg-ivory-warm">
+    <section id="esperienza" className="py-32 md:py-48 lg:py-56 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-5 gap-16 lg:gap-20">
           {/* Left: Image */}
@@ -31,6 +31,7 @@ export default function Experience() {
                 src="/images/care-hands-new.jpg"
                 alt="L'esperienza Luxosa"
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             <div className="absolute -top-4 -right-4 w-16 h-16 border-t border-r border-brass/25" />
@@ -41,7 +42,7 @@ export default function Experience() {
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
               className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
             >
               L'Esperienza
@@ -49,13 +50,13 @@ export default function Experience() {
             <motion.div
               initial={{ width: 0 }}
               animate={inView ? { width: 40 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
               className="h-[1px] bg-brass mt-4 mb-8"
             />
             <motion.h2
               initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
               className="font-serif text-[32px] md:text-[40px] lg:text-[46px] font-light leading-[1.12] text-charcoal tracking-[0.01em] mb-6"
             >
               Sentirsi accolta,<br />
@@ -64,7 +65,7 @@ export default function Experience() {
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.35 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
               className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light mb-12 max-w-lg"
             >
               L'esperienza Luxosa è costruita attorno alla persona. Ogni dettaglio — dall'accoglienza al congedo — è pensato per far sentire la cliente al sicuro, vista e valorizzata.

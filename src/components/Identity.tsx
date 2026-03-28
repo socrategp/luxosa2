@@ -7,7 +7,7 @@ export default function Identity() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section id="identita" className="py-28 md:py-36 lg:py-44 bg-ivory">
+    <section id="identita" className="py-32 md:py-48 lg:py-56 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Text */}
@@ -15,7 +15,7 @@ export default function Identity() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}
             >
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">
                 La Maison
@@ -26,7 +26,7 @@ export default function Identity() {
             <motion.h2
               initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.15 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
               className="font-serif text-[32px] md:text-[40px] lg:text-[46px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
             >
               Non un salone.<br />
@@ -36,7 +36,7 @@ export default function Identity() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }}
               className="mt-8 space-y-5"
             >
               <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
@@ -53,7 +53,7 @@ export default function Identity() {
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
               className="mt-10 pt-8 border-t border-sand/60"
             >
               <p className="font-serif text-[20px] md:text-[22px] italic text-charcoal/70 font-light leading-relaxed">

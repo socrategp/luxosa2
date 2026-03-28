@@ -7,7 +7,7 @@ export default function CTAFinal() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="contatti" className="py-28 md:py-36 lg:py-44 bg-ivory-warm relative overflow-hidden">
+    <section id="contatti" className="py-32 md:py-48 lg:py-56 bg-ivory-warm relative overflow-hidden">
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{
@@ -37,7 +37,7 @@ export default function CTAFinal() {
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.4 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }}
           className="mt-8 text-[15px] md:text-[17px] leading-[1.8] text-anthracite/65 font-light max-w-xl mx-auto"
         >
           La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo.
@@ -47,7 +47,7 @@ export default function CTAFinal() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.55 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.55 }}
           className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5"
         >
           <a
@@ -68,7 +68,7 @@ export default function CTAFinal() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.75 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }}
           className="mt-16 pt-10 border-t border-sand/50"
         >
           <p className="font-serif text-[17px] md:text-[19px] italic text-charcoal/50 font-light">

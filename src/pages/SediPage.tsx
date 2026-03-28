@@ -20,7 +20,7 @@ const sedi: Sede[] = [
     name: 'Luxosa Messina Cavour',
     city: 'Messina',
     address: 'Via Cavour, 98122 Messina (ME)',
-    image: '/images/messina.jpg',
+    image: '/images/messina-city.jpg',
     description: 'La prima sede Luxosa. Un luogo dove la cura evoluta di cute e capelli incontra l\'eleganza e la tradizione della Sicilia orientale. Uno spazio raffinato nel cuore di Messina.',
     status: 'active',
   },
@@ -31,18 +31,18 @@ function SediGrid() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-28 md:py-36 bg-ivory">
+    <section className="py-32 md:py-48 lg:py-56 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         {/* Intro */}
         <div className="max-w-2xl mb-16 md:mb-24">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
             <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Le Nostre Sedi</span>
             <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
           </motion.div>
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
             Ogni sede, un'esperienza<br />unica e coerente.
           </motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.3 }} className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light">
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light">
             Ogni sede Luxosa è progettata per offrire la stessa qualità di cura, lo stesso metodo e la stessa attenzione alla persona. Ogni spazio è un'estensione della nostra visione.
           </motion.p>
         </div>
@@ -54,7 +54,7 @@ function SediGrid() {
               key={sede.slug}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 + i * 0.1 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.2 + i * 0.1 }}
               className="group"
             >
               {sede.status === 'active' ? (
@@ -74,7 +74,7 @@ function SediGrid() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.5 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
           className="mt-20 md:mt-28 text-center"
         >
           <div className="inline-block border-t border-b border-sand/60 py-6 px-8 md:px-16">

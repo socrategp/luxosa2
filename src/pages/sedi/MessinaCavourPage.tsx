@@ -19,17 +19,17 @@ function MCHero() {
       <div className="relative h-full flex flex-col justify-end pb-20 md:pb-28">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
           <motion.div initial={{ width: 0 }} animate={{ width: 50 }} transition={{ duration: 1, delay: 0.2 }} className="h-[1px] bg-brass-light mb-6" />
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.3 }} className="flex items-center gap-2 mb-4">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="flex items-center gap-2 mb-4">
             <MapPin size={14} strokeWidth={1.3} className="text-brass-light" />
             <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">Messina — Via Cavour</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[52px] lg:text-[64px] text-white font-light leading-[1.08] tracking-[0.02em] max-w-3xl">
             Luxosa<br />Messina Cavour.
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.75 }} className="mt-5 text-white/60 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide">
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/60 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide">
             La cura evoluta nel cuore della Sicilia orientale. Un luogo dove competenza, metodo e accoglienza si incontrano.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.95 }} className="mt-8 flex flex-col sm:flex-row gap-4">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.95 }} className="mt-8 flex flex-col sm:flex-row gap-4">
             <a href="#mc-contatti" className="inline-flex items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-white px-8 py-4 transition-all duration-500">Prenota una consulenza</a>
             <a href="#mc-metodo" className="inline-flex items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/80 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500">Scopri la sede</a>
           </motion.div>
@@ -58,18 +58,18 @@ function MCAbout() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-about" className="py-24 md:py-32 bg-ivory">
+    <section id="mc-about" className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">La Sede</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
               Un punto di riferimento<br />per la cura evoluta.
             </motion.h2>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }} className="mt-8 space-y-5">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
               <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
                 Luxosa Messina Cavour è la prima sede della maison. Situata nel cuore di Messina, lungo la storica Via Cavour, rappresenta l'espressione più completa della visione Luxosa: un luogo dove la cura di cute e capelli diventa scienza, metodo e accompagnamento.
               </p>
@@ -99,35 +99,35 @@ function MCSpace() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-spazio" className="py-24 md:py-32 bg-ecru/50">
+    <section id="mc-spazio" className="py-28 md:py-40 lg:py-48 bg-ecru/50">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-14 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Lo Spazio</motion.span>
-          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Lo Spazio</motion.span>
+          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">
             Progettato per accogliere,<br />proteggere, rigenerare.
           </motion.h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.25 }} className="aspect-[3/4] md:aspect-auto md:row-span-2 overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="aspect-[3/4] md:aspect-auto md:row-span-2 overflow-hidden">
             <img src="/images/space-new.jpg" alt="Salone" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.35 }} className="aspect-[4/3] overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="aspect-[4/3] overflow-hidden">
             <img src="/images/salon-reception-new.jpg" alt="Reception" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.45 }} className="aspect-[4/3] overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="aspect-[4/3] overflow-hidden">
             <img src="/images/space-detail-new.jpg" alt="Dettaglio" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.55 }} className="aspect-[4/3] overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.55 }} className="aspect-[4/3] overflow-hidden">
             <img src="/images/salon-wash-new.jpg" alt="Area lavaggio" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
           </motion.div>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.65 }} className="aspect-[4/3] overflow-hidden">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.65 }} className="aspect-[4/3] overflow-hidden">
             <img src="/images/stylist-work-new.jpg" alt="Ambiente" className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000" />
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.7 }} className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.7 }} className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4">
           {['Luce naturale', 'Materiali pregiati', 'Comfort acustico', 'Aria purificata', 'Design italiano'].map((q) => (
             <span key={q} className="text-[12px] tracking-[0.25em] uppercase text-stone font-light">{q}</span>
           ))}
@@ -152,17 +152,17 @@ function MCMethod() {
   ];
 
   return (
-    <section id="mc-metodo" className="py-24 md:py-32 bg-ivory">
+    <section id="mc-metodo" className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
-          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Come lavoriamo<br />nella sede di Messina.</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.35 }} className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light">Il Metodo Luxosa viene applicato con la stessa rigore e la stessa sensibilità in ogni sede.</motion.p>
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
+          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Come lavoriamo<br />nella sede di Messina.</motion.h2>
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light">Il Metodo Luxosa viene applicato con la stessa rigore e la stessa sensibilità in ogni sede.</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((s, i) => (
-            <motion.div key={s.title} initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.2 + i * 0.08 }} className="group">
+            <motion.div key={s.title} initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.2 + i * 0.08 }} className="group">
               <div className="flex items-start gap-5">
                 <div className="flex-shrink-0 w-12 h-12 rounded-full border border-brass/25 flex items-center justify-center group-hover:border-brass/50 transition-colors duration-500">
                   <s.icon size={20} strokeWidth={1.2} className="text-brass-muted" />
@@ -186,16 +186,16 @@ function MCTeam() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-team" className="py-24 md:py-32 bg-charcoal text-ivory">
+    <section id="mc-team" className="py-28 md:py-40 lg:py-48 bg-charcoal text-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
-            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">Il Team</motion.span>
-            <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-ivory">
+            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">Il Team</motion.span>
+            <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-ivory">
               Professioniste dedicate<br />alla cura.
             </motion.h2>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.35 }} className="mt-8 space-y-5">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-8 space-y-5">
               <p className="text-[15px] md:text-[16px] leading-[1.8] text-ivory/65 font-light">
                 Il team di Luxosa Messina Cavour è composto da professioniste selezionate per competenza, sensibilità e dedizione. Ogni membro del team condivide la visione Luxosa e ne incarna i valori.
               </p>
@@ -203,7 +203,7 @@ function MCTeam() {
                 La formazione è continua e costante: aggiornamento tecnico, approfondimento metodologico, sviluppo della capacità di ascolto e relazione con la cliente.
               </p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.5 }} className="mt-10 flex flex-wrap gap-6">
+            <motion.div initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }} className="mt-10 flex flex-wrap gap-6">
               {['Formazione continua', 'Competenza certificata', 'Ascolto empatico'].map((q) => (
                 <span key={q} className="text-[11px] tracking-[0.2em] uppercase text-brass-light/60 font-light border border-brass/20 px-4 py-2">{q}</span>
               ))}
@@ -236,12 +236,12 @@ function MCServices() {
   ];
 
   return (
-    <section id="mc-servizi" className="py-24 md:py-32 bg-ivory-warm">
+    <section id="mc-servizi" className="py-28 md:py-40 lg:py-48 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="max-w-2xl mb-14 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">I Percorsi Disponibili</motion.span>
-          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">I Percorsi Disponibili</motion.span>
+          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
             Cosa offriamo<br />nella sede di Messina.
           </motion.h2>
         </div>
@@ -284,16 +284,16 @@ function MCTestimonials() {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-ecru/40">
+    <section className="py-28 md:py-40 lg:py-48 bg-ecru/40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="text-center mb-14 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Voci dalla Sede</motion.span>
-          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Chi si è affidata a noi.</motion.h2>
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Voci dalla Sede</motion.span>
+          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Chi si è affidata a noi.</motion.h2>
         </div>
         <div className="grid md:grid-cols-3 gap-10 md:gap-8">
           {testimonials.map((t, i) => (
-            <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.25 + i * 0.1 }} className="text-center">
+            <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.25 + i * 0.1 }} className="text-center">
               <p className="font-serif text-[17px] md:text-[18px] italic font-light leading-[1.7] text-charcoal/60 mb-5">"{t.quote}"</p>
               <p className="text-[13px] tracking-[0.1em] uppercase text-charcoal/80 font-light">{t.name}</p>
               <p className="text-[11px] tracking-[0.15em] text-stone font-light mt-1">{t.detail}</p>
@@ -311,20 +311,20 @@ function MCContact() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-contatti" className="py-24 md:py-32 bg-ivory">
+    <section id="mc-contatti" className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Map / Info */}
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Dove Trovarci</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-8">
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-8">
               Luxosa Messina Cavour
             </motion.h2>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }} className="space-y-5">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="space-y-5">
               <div className="flex items-start gap-4">
                 <MapPin size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                 <div>
@@ -350,7 +350,7 @@ function MCContact() {
             </motion.div>
 
             {/* Map embed placeholder */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.45 }} className="mt-10 aspect-[16/9] bg-ecru overflow-hidden">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="mt-10 aspect-[16/9] bg-ecru overflow-hidden">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3132.5!2d15.5544!3d38.1937!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzjCsDExJzM3LjMiTiAxNcKwMzMnMTUuOCJF!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
                 width="100%"
@@ -366,7 +366,7 @@ function MCContact() {
 
           {/* CTA */}
           <div className="lg:pt-16">
-            <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }} className="bg-charcoal text-ivory p-10 md:p-12 mb-8">
+            <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="bg-charcoal text-ivory p-10 md:p-12 mb-8">
               <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">Prenoti una consulenza</h3>
               <p className="text-[14px] md:text-[15px] leading-[1.8] text-ivory/55 font-light mb-8">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</p>
               <div className="space-y-4">
@@ -379,7 +379,7 @@ function MCContact() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.45 }} className="bg-ecru/50 p-8 md:p-10">
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="bg-ecru/50 p-8 md:p-10">
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-brass-muted font-light mb-4">Informazioni Utili</h4>
               <div className="space-y-4 text-[14px] font-light text-anthracite/65">
                 <p>• La consulenza iniziale ha una durata di circa 30 minuti</p>
@@ -389,7 +389,7 @@ function MCContact() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 0.7, delay: 0.6 }} className="mt-8 pt-8 border-t border-sand/50 text-center">
+            <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.6 }} className="mt-8 pt-8 border-t border-sand/50 text-center">
               <p className="font-serif text-[17px] italic text-charcoal/50 font-light">Si affidi a un metodo di cura pensato per Lei.</p>
             </motion.div>
           </div>

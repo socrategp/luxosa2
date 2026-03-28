@@ -40,14 +40,14 @@ export default function Percorsi() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="percorsi" className="py-28 md:py-36 lg:py-44 bg-ivory">
+    <section id="percorsi" className="py-32 md:py-48 lg:py-56 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         {/* Header */}
         <div className="max-w-2xl mb-16 md:mb-24">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
           >
             I Percorsi
@@ -55,13 +55,13 @@ export default function Percorsi() {
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
             className="h-[1px] bg-brass mt-4 mb-8"
           />
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
             className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-charcoal tracking-[0.01em]"
           >
             Non servizi, ma percorsi<br />
@@ -70,7 +70,7 @@ export default function Percorsi() {
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.35 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
             className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light"
           >
             Ogni area è pensata per rispondere a un'esigenza specifica, con la profondità e l'attenzione che ogni persona merita.
@@ -84,7 +84,7 @@ export default function Percorsi() {
               key={p.title}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.15 + i * 0.08 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.15 + i * 0.08 }}
               className="group cursor-pointer"
             >
               <div className="aspect-[4/3] overflow-hidden mb-5">

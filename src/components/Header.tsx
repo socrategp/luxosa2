@@ -23,8 +23,7 @@ export default function Header() {
   }, [location.pathname]);
 
   const navItems = [
-    { label: 'Brand', href: '/' },
-    { label: 'La Maison', href: '/la-maison' },
+    { label: 'La Maison', href: '/' },
     { label: 'Il Metodo', href: '/il-metodo' },
     { label: 'I Percorsi', href: '/i-percorsi' },
     { label: 'L\'Esperienza', href: '/esperienza' },
@@ -38,20 +37,20 @@ export default function Header() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
           scrolled
-            ? 'bg-ivory/40 backdrop-blur-xl'
-            : 'bg-transparent'
+            ? 'bg-ivory/25 backdrop-blur-2xl border-b border-anthracite/5 shadow-sm'
+            : 'bg-transparent border-b border-transparent'
         }`}
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
           <div className="flex items-center justify-between h-20 md:h-24">
-            <Link to="/" className="relative z-50">
-              <span
-                className={`font-serif text-2xl md:text-[28px] tracking-[0.35em] font-light transition-colors duration-700 ${
-                  scrolled ? 'text-anthracite' : 'text-white'
+            <Link to="/" className="relative z-50 transition-opacity duration-300 hover:opacity-80">
+              <img
+                src="/images/luxosa-logo-orizzontale-bianco-tras.png"
+                alt="Luxosa"
+                className={`h-7 md:h-9 w-auto object-contain transition-all duration-700 ${
+                  !scrolled || menuOpen ? 'brightness-0 invert' : ''
                 }`}
-              >
-                LUXOSA
-              </span>
+              />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-8 xl:gap-10">
@@ -98,6 +97,8 @@ export default function Header() {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Chiudi menu' : 'Apri menu'}
+              aria-expanded={menuOpen}
               className={`lg:hidden relative z-50 p-2 transition-colors duration-700 ${
                 menuOpen ? 'text-ivory' : scrolled ? 'text-anthracite' : 'text-white'
               }`}

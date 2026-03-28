@@ -48,14 +48,14 @@ export default function Authority() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-28 md:py-36 lg:py-44 bg-charcoal text-ivory">
+    <section className="py-32 md:py-48 lg:py-56 bg-charcoal text-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-20 md:mb-28">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light"
           >
             La Nostra Autorevolezza
@@ -63,13 +63,13 @@ export default function Authority() {
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
             className="h-[1px] bg-brass mx-auto mt-4 mb-8"
           />
           <motion.h2
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
             className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-ivory tracking-[0.01em]"
           >
             La fiducia si costruisce<br />
@@ -84,7 +84,7 @@ export default function Authority() {
               key={p.title}
               initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 + i * 0.1 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.2 + i * 0.1 }}
               className="text-center"
             >
               <div className="w-14 h-14 rounded-full border border-brass/30 flex items-center justify-center mx-auto mb-5">
@@ -105,7 +105,7 @@ export default function Authority() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.5 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-light/70 font-light text-center mb-12"
           >
             Voci di chi si è affidata
@@ -116,7 +116,7 @@ export default function Authority() {
                 key={t.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.7, delay: 0.6 + i * 0.1 }}
+                transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.6 + i * 0.1 }}
                 className="text-center"
               >
                 <p className="font-serif text-[17px] md:text-[18px] italic font-light leading-[1.7] text-ivory/70 mb-5">

@@ -156,9 +156,9 @@ function SoluzioneIntro({ onStart }: { onStart: () => void }) {
   const ref = useRef(null);
   const v = useInView(ref, { once: true, margin: '-80px' });
   return (
-    <section className="py-24 md:py-32 bg-ivory">
+    <section className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[800px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
           <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Inizia il Tuo Viaggio</span>
           <div className="w-10 h-[1px] bg-brass mx-auto mt-4 mb-8" />
           <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] font-light leading-[1.3] text-charcoal">
@@ -170,7 +170,7 @@ function SoluzioneIntro({ onStart }: { onStart: () => void }) {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={v ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }}
             className="mt-10"
           >
             <button
@@ -238,7 +238,7 @@ function DiagnosticTool() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={v ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}
         >
           {/* Progress bar */}
           {!showResult && (
@@ -424,7 +424,7 @@ function Rassicurazione() {
   const ref = useRef(null);
   const v = useInView(ref, { once: true, margin: '-80px' });
   return (
-    <section className="py-24 md:py-32 bg-ivory">
+    <section className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid md:grid-cols-3 gap-10 md:gap-8">
           {[
@@ -448,16 +448,16 @@ function SoluzioneCTA() {
   const ref = useRef(null);
   const v = useInView(ref, { once: true, margin: '-80px' });
   return (
-    <section className="py-24 md:py-32 bg-charcoal text-ivory">
+    <section className="py-28 md:py-40 lg:py-48 bg-charcoal text-ivory">
       <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
         <motion.div initial={{ width: 0 }} animate={v ? { width: 50 } : {}} transition={{ duration: 1 }} className="h-[1px] bg-brass mx-auto mb-10" />
-        <motion.h2 initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="font-serif text-[28px] md:text-[36px] lg:text-[42px] font-light leading-[1.12] text-ivory">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[28px] md:text-[36px] lg:text-[42px] font-light leading-[1.12] text-ivory">
           Il percorso giusto inizia<br />da una conversazione.
         </motion.h2>
-        <motion.p initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.3 }} className="mt-6 text-[15px] leading-[1.8] text-ivory/45 font-light max-w-lg mx-auto">
+        <motion.p initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-6 text-[15px] leading-[1.8] text-ivory/45 font-light max-w-lg mx-auto">
           La consulenza Luxosa è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo verso la cura che merita.
         </motion.p>
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.45 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
           <Link to="/contatti" className="group inline-flex items-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-10 py-4.5 hover:bg-brass-light transition-all duration-500">
             Prenota la sua consulenza <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
           </Link>
@@ -492,7 +492,6 @@ export default function LaTuaSoluzionePage() {
         title="Trovi il percorso<br>pensato per Lei."
         subtitle="Risponda a poche domande. La guideremo verso la cura più adatta alle sue esigenze."
         image="/images/soluzione-hero.jpg"
-        height="medium"
       />
       <SoluzioneIntro onStart={handleStart} />
 
@@ -503,7 +502,7 @@ export default function LaTuaSoluzionePage() {
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.1, 0, 1] }}
+              transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
             >
               <DiagnosticTool />
               <Rassicurazione />

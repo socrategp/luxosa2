@@ -9,16 +9,16 @@ function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section className="py-28 md:py-36 bg-ivory">
+    <section className="py-32 md:py-48 lg:py-56 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           {/* Form */}
           <div>
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8 }}>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Scriva a Luxosa</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-8">
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-8">
               Prenoti una consulenza<br />o richieda informazioni.
             </motion.h2>
 
@@ -28,7 +28,7 @@ function ContactForm() {
                 <p className="text-[14px] text-anthracite/60 font-light">Le risponderemo entro 24 ore.</p>
               </motion.div>
             ) : (
-              <motion.form initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }} onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-6">
+              <motion.form initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label className="block text-[11px] tracking-[0.2em] uppercase text-anthracite/50 font-light mb-2">Nome</label>
@@ -70,7 +70,7 @@ function ContactForm() {
           </div>
 
           {/* Info */}
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.3 }} className="lg:pt-16">
+          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="lg:pt-16">
             <div className="bg-ecru/40 p-8 md:p-10 mb-8">
               <h3 className="font-serif text-[22px] font-light text-charcoal mb-6">Luxosa Messina Cavour</h3>
               <div className="space-y-4">

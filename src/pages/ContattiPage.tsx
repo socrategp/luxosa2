@@ -84,22 +84,21 @@ function ContactForm() {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <MapPin size={16} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
-                  <p className="text-[14px] font-light text-anthracite/70">Via Cavour<br />98122 Messina (ME), Italia</p>
+                  <p className="text-[14px] font-light text-anthracite/70">Corso Cavour 1<br />98122 Messina (ME), Italia</p>
                 </div>
                 <div className="flex items-center gap-3">
                   <Phone size={16} strokeWidth={1.3} className="text-brass-muted" />
-                  <a href="tel:+390000000000" className="text-[14px] font-light text-anthracite/70 hover:text-anthracite transition-colors">+39 000 000 0000</a>
+                  <a href="tel:+390902043220" className="text-[14px] font-light text-anthracite/70 hover:text-anthracite transition-colors">+39 090 204 3220</a>
                 </div>
                 <div className="flex items-center gap-3">
                   <Mail size={16} strokeWidth={1.3} className="text-brass-muted" />
-                  <a href="mailto:messina@luxosa.it" className="text-[14px] font-light text-anthracite/70 hover:text-anthracite transition-colors">messina@luxosa.it</a>
+                  <a href="mailto:messinacavour@luxosa.it" className="text-[14px] font-light text-anthracite/70 hover:text-anthracite transition-colors">messinacavour@luxosa.it</a>
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock size={16} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                   <div className="text-[14px] font-light text-anthracite/70">
-                    <p>Martedì — Sabato</p>
-                    <p>09:00 — 19:00</p>
-                    <p className="text-anthracite/40 mt-1">Domenica e Lunedì chiuso</p>
+                    <p>Martedì — Venerdì: 09:00 — 18:30</p>
+                    <p>Sabato: 09:00 — 19:00</p>
                   </div>
                 </div>
               </div>

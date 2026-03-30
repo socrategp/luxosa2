@@ -21,7 +21,7 @@ function MCHero() {
           <motion.div initial={{ width: 0 }} animate={{ width: 50 }} transition={{ duration: 1, delay: 0.2 }} className="h-[1px] bg-brass-light mb-6" />
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="flex items-center gap-2 mb-4">
             <MapPin size={14} strokeWidth={1.3} className="text-brass-light" />
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">Messina — Via Cavour</span>
+            <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">Messina — Corso Cavour</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[52px] lg:text-[64px] text-white font-light leading-[1.08] tracking-[0.02em] max-w-3xl">
             Luxosa<br />Messina Cavour.
@@ -71,7 +71,7 @@ function MCAbout() {
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
               <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
-                Luxosa Messina Cavour è la prima sede della maison. Situata nel cuore di Messina, lungo la storica Via Cavour, rappresenta l'espressione più completa della visione Luxosa: un luogo dove la cura di cute e capelli diventa scienza, metodo e accompagnamento.
+                Luxosa Messina Cavour è la prima sede della maison. Situata nel cuore di Messina, lungo il storico Corso Cavour, rappresenta l'espressione più completa della visione Luxosa: un luogo dove la cura di cute e capelli diventa scienza, metodo e accompagnamento.
               </p>
               <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
                 Lo spazio è stato progettato per offrire un'esperienza di accoglienza totale: ambienti luminosi, materiali naturali, un'atmosfera che comunica ordine, raffinatezza e protezione. Ogni dettaglio riflette il metodo Luxosa.
@@ -328,23 +328,23 @@ function MCContact() {
               <div className="flex items-start gap-4">
                 <MapPin size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[15px] font-light text-charcoal">Via Cavour</p>
+                  <p className="text-[15px] font-light text-charcoal">Corso Cavour 1</p>
                   <p className="text-[14px] font-light text-anthracite/60">98122 Messina (ME), Italia</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <Phone size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="tel:+390000000000" className="text-[15px] font-light text-charcoal hover:text-brass-muted transition-colors">+39 000 000 0000</a>
+                <a href="tel:+390902043220" className="text-[15px] font-light text-charcoal hover:text-brass-muted transition-colors">+39 090 204 3220</a>
               </div>
               <div className="flex items-center gap-4">
                 <Mail size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="mailto:messina@luxosa.it" className="text-[15px] font-light text-charcoal hover:text-brass-muted transition-colors">messina@luxosa.it</a>
+                <a href="mailto:messinacavour@luxosa.it" className="text-[15px] font-light text-charcoal hover:text-brass-muted transition-colors">messinacavour@luxosa.it</a>
               </div>
               <div className="flex items-start gap-4">
                 <Clock size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
-                <div className="text-[15px] font-light text-charcoal">
-                  <p>Martedì — Sabato: 09:00 — 19:00</p>
-                  <p className="text-anthracite/50 text-[13px] mt-1">Domenica e Lunedì chiuso · Su appuntamento</p>
+                <div className="text-[15px] font-light text-charcoal space-y-1">
+                  <p>Martedì — Venerdì: 09:00 — 18:30</p>
+                  <p>Sabato: 09:00 — 19:00</p>
                 </div>
               </div>
             </motion.div>

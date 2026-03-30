@@ -1,5 +1,5 @@
 import Hero from '../components/Hero';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Ear, Search, Fingerprint, Heart } from 'lucide-react';
@@ -45,6 +45,47 @@ function HomeIdentity() {
   );
 }
 
+function CinematicBreak() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+  const inView = useInView(ref, { once: true, margin: '-15%' });
+
+  return (
+    <section ref={ref} className="relative h-[70vh] min-h-[480px] max-h-[720px] overflow-hidden">
+      <motion.div className="absolute inset-0" style={{ y }}>
+        <img
+          src="/images/consultation-new.jpg"
+          alt=""
+          className="w-full h-[120%] -top-[10%] absolute object-cover object-center"
+        />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-r from-deep/85 via-deep/60 to-deep/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-deep/20 via-transparent to-deep/40" />
+
+      <div className="relative z-10 h-full flex items-center">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { width: 48 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase }}
+            className="h-[1px] bg-brass-light mb-10"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.4, ease: premiumEase, delay: 0.2 }}
+            className="font-serif text-[32px] md:text-[48px] lg:text-[64px] xl:text-[76px] text-white font-light leading-[1.1] tracking-[0.01em] max-w-3xl"
+          >
+            "La vera competenza<br />non si dimostra.<br />
+            <em className="text-brass-light not-italic">Si percepisce.</em>"
+          </motion.p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function MaisonValues() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
@@ -61,7 +102,7 @@ function MaisonValues() {
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">I Nostri Valori</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">I principi che guidano<br />ogni nostra scelta.</motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[46px] lg:text-[56px] font-light leading-[1.08] text-charcoal">I principi che guidano<br />ogni nostra scelta.</motion.h2>
         </div>
         <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
           {values.map((v, i) => (
@@ -75,6 +116,7 @@ function MaisonValues() {
     </section>
   );
 }
+
 
 function HomeMethod() {
   const ref = useRef(null);
@@ -92,7 +134,7 @@ function HomeMethod() {
         <div className="text-center max-w-2xl mx-auto mb-20 md:mb-28">
           <motion.span initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 50 } : {}} transition={{ duration: 1.2, delay: 0.2, ease: premiumEase }} className="h-[1px] bg-brass mx-auto mt-5 mb-10" />
-          <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.25, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[52px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">Un approccio fondato<br />sulla conoscenza.</motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.25, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">Un approccio fondato<br />sulla conoscenza.</motion.h2>
           <motion.p initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.4, ease: premiumEase }} className="mt-8 text-[15px] md:text-[17px] leading-[1.8] text-anthracite/70 font-light">Il Metodo Luxosa guida ogni percorso attraverso sette pilastri, dalla prima consulenza al risultato.</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-10">
@@ -131,7 +173,7 @@ function HomePercorsi() {
         <div className="max-w-2xl mb-20 md:mb-28">
           <motion.span initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">I Percorsi</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 50 } : {}} transition={{ duration: 1.2, delay: 0.15, ease: premiumEase }} className="h-[1px] bg-brass mt-5 mb-10" />
-          <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.25, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[52px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">Non servizi, ma percorsi<br />di accompagnamento.</motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.25, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">Non servizi, ma percorsi<br />di accompagnamento.</motion.h2>
         </div>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {percorsi.map((p, i) => (
@@ -167,7 +209,7 @@ function HomeCTA() {
       </div>
       <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center relative z-10" ref={ref}>
         <motion.div initial={{ width: 0 }} animate={inView ? { width: 60 } : {}} transition={{ duration: 1.2, delay: 0.1, ease: premiumEase }} className="h-[1px] bg-brass mx-auto mb-12" />
-        <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.2, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[56px] font-light leading-[1.15] text-charcoal tracking-[0.01em]">Inizi da una consulenza.<br />Scopra il percorso più adatto a Lei.</motion.h2>
+        <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.2, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">Inizi da una consulenza.<br />Scopra il percorso più adatto a Lei.</motion.h2>
         <motion.p initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.4, ease: premiumEase }} className="mt-10 text-[15px] md:text-[17px] leading-[1.8] text-anthracite/65 font-light max-w-2xl mx-auto">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</motion.p>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.55, ease: premiumEase }} className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
@@ -189,6 +231,7 @@ export default function HomePage() {
     <>
       <Hero />
       <HomeIdentity />
+      <CinematicBreak />
       <MaisonValues />
       <Authority />
       <HomeMethod />

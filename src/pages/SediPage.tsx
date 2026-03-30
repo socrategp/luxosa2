@@ -127,7 +127,7 @@ export default function SediPage() {
     <>
       <PageHero
         label="Sedi"
-        title="I luoghi della cura."
+        title="I luoghi della trasformazione."
         subtitle="Ogni sede Luxosa è un'estensione del metodo: ordine, armonia, luce e comfort al servizio della persona."
         image="/images/space-new.jpg"
       />

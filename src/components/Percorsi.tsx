@@ -91,7 +91,7 @@ export default function Percorsi() {
                 <img
                   src={p.image}
                   alt={p.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04] ease-out"
                 />
               </div>
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal tracking-wide mb-2">

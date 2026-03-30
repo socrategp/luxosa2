@@ -17,7 +17,7 @@ export default function PageHero({ label, title, subtitle, image }: PageHeroProp
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <section ref={ref} className="relative h-[60vh] min-h-[450px] max-h-[650px] overflow-hidden">
+    <section ref={ref} className="relative h-[75vh] min-h-[550px] max-h-[780px] overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <img src={image} alt={title} className="w-full h-[120%] -top-[10%] object-cover absolute" />
         <div className="absolute inset-0 bg-gradient-to-b from-deep/40 via-deep/30 to-deep/90" />

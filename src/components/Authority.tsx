@@ -77,6 +77,30 @@ export default function Authority() {
           </motion.h2>
         </div>
 
+        {/* Stats Row */}
+        <div className="grid grid-cols-3 gap-4 mb-20 md:mb-28 pb-16 md:pb-20 border-b border-ivory/10">
+          {[
+            { num: '12+', label: 'anni di esperienza' },
+            { num: '3.000+', label: 'percorsi personalizzati' },
+            { num: '2', label: 'sedi a Messina' },
+          ].map((item, i) => (
+            <motion.div
+              key={item.num}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.2 + i * 0.1 }}
+              className="text-center"
+            >
+              <span className="font-serif text-[52px] md:text-[72px] lg:text-[88px] font-light text-brass-light/70 leading-none block">
+                {item.num}
+              </span>
+              <p className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-ivory/35 font-light mt-3">
+                {item.label}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
         {/* Proofs Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 mb-24 md:mb-32">
           {proofs.map((p, i) => (

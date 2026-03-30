@@ -1,10 +1,52 @@
 import PageHero from '../components/PageHero';
 import Percorsi from '../components/Percorsi';
 import Signature from '../components/Signature';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+
+const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+
+function CinematicBreak() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
+  const inView = useInView(ref, { once: true, margin: '-15%' });
+
+  return (
+    <section ref={ref} className="relative h-[65vh] min-h-[480px] max-h-[720px] overflow-hidden">
+      <motion.div className="absolute inset-0" style={{ y }}>
+        <img
+          src="/images/ritual-new.jpg"
+          alt=""
+          className="w-full h-[120%] -top-[10%] absolute object-cover object-center"
+        />
+      </motion.div>
+      <div className="absolute inset-0 bg-gradient-to-r from-deep/85 via-deep/60 to-deep/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-deep/20 via-transparent to-deep/40" />
+      <div className="relative z-10 h-full flex items-center">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { width: 48 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase }}
+            className="h-[1px] bg-brass-light mb-10"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.4, ease: premiumEase, delay: 0.2 }}
+            className="font-serif text-[32px] md:text-[48px] lg:text-[64px] xl:text-[76px] text-white font-light leading-[1.1] tracking-[0.01em] max-w-3xl"
+          >
+            "Ogni capello racconta<br />una storia.<br />
+            <em className="text-brass-light not-italic">Noi la sappiamo leggere.</em>"
+          </motion.p>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 function PercorsiIntro() {
   const ref = useRef(null);
@@ -60,6 +102,7 @@ export default function IPercorsiPage() {
       <PageHero label="I Percorsi" title="Percorsi di benessere per cute e capelli,non semplici servizi." subtitle="Ogni area è pensata per rispondere a un'esigenza specifica, con la profondità e l'attenzione che ogni persona merita." image="/images/hair-back.jpg" />
       <PercorsiIntro />
       <Percorsi />
+      <CinematicBreak />
       <Signature />
       <PercorsiCTA />
     </>

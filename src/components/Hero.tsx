@@ -102,17 +102,17 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-20"
+        transition={{ delay: 2.2, duration: 1 }}
+        className="absolute bottom-10 right-12 md:right-16 flex flex-col items-end gap-3 z-20"
       >
-        <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 font-light">
-          Scopri
-        </span>
         <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="w-[1px] h-8 bg-gradient-to-b from-white/40 to-transparent"
+          animate={{ y: [0, 7, 0] }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"
         />
+        <span className="text-[9px] tracking-[0.35em] uppercase text-white/30 font-light" style={{ writingMode: 'vertical-rl' }}>
+          scroll
+        </span>
       </motion.div>
     </section>
   );

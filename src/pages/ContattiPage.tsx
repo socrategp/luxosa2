@@ -70,8 +70,16 @@ function ContactForm() {
           </div>
 
           {/* Info */}
-          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="lg:pt-16">
-            <div className="bg-ecru/40 p-8 md:p-10 mb-8">
+          <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="flex flex-col gap-8">
+            <div className="aspect-[3/4] overflow-hidden group">
+              <img
+                src="/images/woman-portrait-new.jpg"
+                alt="Luxosa"
+                className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04] ease-out"
+                loading="lazy"
+              />
+            </div>
+            <div className="bg-ecru/40 p-8 md:p-10">
               <h3 className="font-serif text-[22px] font-light text-charcoal mb-6">Luxosa Messina Cavour</h3>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">

@@ -44,32 +44,49 @@ export default function Space() {
           </motion.p>
         </div>
 
-        {/* Images Grid */}
-        <div className="grid md:grid-cols-2 gap-4 md:gap-6">
+        {/* Images Grid — asimmetrico editoriale */}
+        <div className="grid grid-cols-12 gap-4 md:gap-5">
+          {/* Immagine grande sinistra — 7 colonne, portrait */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }}
-            className="aspect-[4/3] overflow-hidden"
+            className="col-span-12 md:col-span-7 aspect-[3/2] md:aspect-auto md:h-[580px] overflow-hidden"
           >
             <img
               src="/images/space-new.jpg"
               alt="Lo spazio Luxosa"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
+              className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out"
             />
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }}
-            className="aspect-[4/3] overflow-hidden"
-          >
-            <img
-              src="/images/space-detail-new.jpg"
-              alt="Dettaglio dello spazio"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-            />
-          </motion.div>
+
+          {/* Stack destra — 5 colonne, due immagini */}
+          <div className="col-span-12 md:col-span-5 flex flex-col gap-4 md:gap-5 md:h-[580px]">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }}
+              className="flex-1 overflow-hidden"
+            >
+              <img
+                src="/images/space-detail-new.jpg"
+                alt="Dettaglio dello spazio"
+                className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.6 }}
+              className="flex-1 overflow-hidden"
+            >
+              <img
+                src="/images/salon-reception-new.jpg"
+                alt="Reception Luxosa"
+                className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out"
+              />
+            </motion.div>
+          </div>
         </div>
 
         {/* Atmosphere qualities */}

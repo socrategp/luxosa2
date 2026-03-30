@@ -1,11 +1,11 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft, Sparkles, RotateCcw } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Sparkles, RotateCcw, X } from 'lucide-react';
 import PageHero from '../components/PageHero';
 
 /* ═══════════════════════════════════════════════════════════════
-   DATA — Diagnostic questions & solution mapping
+   DATA
    ═══════════════════════════════════════════════════════════════ */
 
 interface Question {
@@ -67,7 +67,6 @@ const questions: Question[] = [
   },
 ];
 
-/* ═══ Solution mapping ═══ */
 interface Solution {
   title: string;
   subtitle: string;
@@ -147,54 +146,28 @@ function getSolution(answers: Record<string, string>): Solution {
   };
 }
 
+const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+
 /* ═══════════════════════════════════════════════════════════════
-   COMPONENTS
+   QUIZ OVERLAY — fullscreen modal
    ═══════════════════════════════════════════════════════════════ */
 
-/* ─── Intro with "Inizia Adesso" gate ─── */
-function SoluzioneIntro({ onStart }: { onStart: () => void }) {
-  const ref = useRef(null);
-  const v = useInView(ref, { once: true, margin: '-80px' });
-  return (
-    <section className="py-28 md:py-40 lg:py-48 bg-ivory">
-      <div className="max-w-[800px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
-          <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Inizia il Tuo Viaggio</span>
-          <div className="w-10 h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] font-light leading-[1.3] text-charcoal">
-            Ogni donna ha esigenze uniche. Risponda a poche domande e la guideremo verso il percorso di cura più adatto a Lei.
-          </p>
-          <p className="mt-6 text-[14px] md:text-[15px] leading-[1.8] text-anthracite/55 font-light max-w-lg mx-auto">
-            Questo strumento non sostituisce la consulenza. La prepara. Le permette di arrivare al primo incontro con maggiore consapevolezza.
-          </p>
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={v ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }}
-            className="mt-10"
-          >
-            <button
-              onClick={onStart}
-              className="group inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.22em] uppercase font-light px-12 py-5 hover:bg-deep transition-all duration-500"
-            >
-              Inizia adesso
-              <ArrowRight size={15} strokeWidth={1.5} className="group-hover:translate-x-1.5 transition-transform duration-500" />
-            </button>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Diagnostic Tool ─── */
-function DiagnosticTool() {
-  const ref = useRef(null);
-  const v = useInView(ref, { once: true, margin: '-60px' });
+function QuizOverlay({ onClose }: { onClose: () => void }) {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
   const [direction, setDirection] = useState(1);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
+
+  // Scroll to top when step or result changes
+  useEffect(() => {
+    scrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step, showResult]);
 
   const currentQ = questions[step];
   const totalSteps = questions.length;
@@ -203,7 +176,6 @@ function DiagnosticTool() {
   const selectOption = useCallback((optionId: string) => {
     const newAnswers = { ...answers, [currentQ.id]: optionId };
     setAnswers(newAnswers);
-
     setTimeout(() => {
       if (step < totalSteps - 1) {
         setDirection(1);
@@ -227,31 +199,39 @@ function DiagnosticTool() {
     setStep(0);
     setAnswers({});
     setShowResult(false);
-    setDirection(-1);
+    setDirection(1);
   }, []);
 
   const solution = showResult ? getSolution(answers) : null;
 
   return (
-    <section className="py-16 md:py-24 bg-ecru/30" ref={ref}>
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={v ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}
-        >
-          {/* Progress bar */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45, ease: premiumEase }}
+      className="fixed inset-0 z-[60] bg-ivory flex flex-col"
+    >
+      {/* ── Top bar ── */}
+      <div className="flex-shrink-0 border-b border-sand/40 bg-ivory">
+        <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 h-[68px] flex items-center gap-6">
+          {/* Label / step info */}
+          <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light flex-shrink-0">
+            {showResult ? 'La tua soluzione' : 'Il Tuo Viaggio'}
+          </span>
+
+          {/* Progress bar — visibile solo durante il quiz */}
           {!showResult && (
-            <div className="max-w-[700px] mx-auto mb-12 md:mb-16">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] tracking-[0.2em] uppercase text-anthracite/40 font-light">
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[10px] tracking-[0.18em] uppercase text-anthracite/35 font-light truncate">
                   {currentQ.label}
                 </span>
-                <span className="text-[11px] tracking-[0.15em] text-anthracite/30 font-light">
+                <span className="text-[10px] text-anthracite/25 font-light flex-shrink-0 ml-4">
                   {step + 1} / {totalSteps}
                 </span>
               </div>
-              <div className="h-[2px] bg-sand/60 w-full">
+              <div className="h-[1px] bg-sand/60 w-full">
                 <motion.div
                   className="h-full bg-brass"
                   animate={{ width: `${progress}%` }}
@@ -261,37 +241,63 @@ function DiagnosticTool() {
             </div>
           )}
 
-          {/* Question / Result */}
+          {showResult && <div className="flex-1" />}
+
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            aria-label="Chiudi"
+            className="flex-shrink-0 flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-anthracite/35 font-light hover:text-anthracite/70 transition-colors duration-300 p-1"
+          >
+            <X size={18} strokeWidth={1} />
+            <span className="hidden sm:inline">Chiudi</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ── Scrollable content ── */}
+      <div ref={scrollRef} className="flex-1 overflow-y-auto">
+        <div className="min-h-full flex flex-col justify-center py-16 md:py-20 lg:py-24">
           <AnimatePresence mode="wait">
-            {!showResult ? (
+            {/* ── QUESTION ── */}
+            {!showResult && (
               <motion.div
                 key={`q-${step}`}
                 initial={{ opacity: 0, x: direction * 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: direction * -40 }}
                 transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="max-w-[700px] mx-auto"
+                className="max-w-[680px] mx-auto px-6 md:px-10 w-full"
               >
-                <h2 className="font-serif text-[28px] md:text-[36px] lg:text-[40px] font-light leading-[1.15] text-charcoal text-center mb-3">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, ease: premiumEase }}
+                  className="font-serif text-[28px] md:text-[36px] lg:text-[42px] font-light leading-[1.15] text-charcoal text-center mb-3"
+                >
                   {currentQ.question}
-                </h2>
-                <p className="text-[14px] text-anthracite/50 font-light text-center mb-10 md:mb-14">
+                </motion.h2>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, ease: premiumEase, delay: 0.1 }}
+                  className="text-[14px] text-anthracite/45 font-light text-center mb-10 md:mb-14 tracking-wide"
+                >
                   {currentQ.subtitle}
-                </p>
+                </motion.p>
 
-                {/* Options */}
                 <div className="space-y-3">
                   {currentQ.options.map((opt, i) => (
                     <motion.button
                       key={opt.id}
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 + i * 0.06, duration: 0.4 }}
+                      transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
                       onClick={() => selectOption(opt.id)}
                       className={`w-full text-left p-5 md:p-6 border transition-all duration-500 group ${
                         answers[currentQ.id] === opt.id
-                          ? 'border-brass bg-brass/8'
-                          : 'border-sand/50 bg-ivory/50 hover:border-brass/30 hover:bg-ivory'
+                          ? 'border-brass bg-brass/[0.05]'
+                          : 'border-sand/50 bg-white/20 hover:border-brass/30 hover:bg-white/50'
                       }`}
                     >
                       <div className="flex items-start gap-4">
@@ -305,7 +311,7 @@ function DiagnosticTool() {
                           )}
                         </div>
                         <div>
-                          <h3 className="text-[15px] md:text-[16px] font-light text-charcoal mb-1">{opt.text}</h3>
+                          <p className="text-[15px] md:text-[16px] font-light text-charcoal mb-1">{opt.text}</p>
                           <p className="text-[13px] leading-[1.6] text-anthracite/45 font-light">{opt.subtext}</p>
                         </div>
                       </div>
@@ -313,27 +319,30 @@ function DiagnosticTool() {
                   ))}
                 </div>
 
-                {/* Back button */}
                 {step > 0 && (
-                  <div className="mt-8 text-center">
+                  <div className="mt-10 text-center">
                     <button
                       onClick={goBack}
-                      className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-anthracite/35 font-light hover:text-anthracite/60 transition-colors"
+                      className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-anthracite/30 font-light hover:text-anthracite/55 transition-colors"
                     >
                       <ArrowLeft size={14} strokeWidth={1.5} /> Domanda precedente
                     </button>
                   </div>
                 )}
               </motion.div>
-            ) : solution && (
+            )}
+
+            {/* ── RESULT ── */}
+            {showResult && solution && (
               <motion.div
                 key="result"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.6, ease: premiumEase }}
+                className="w-full"
               >
                 {/* Result header */}
-                <div className="text-center mb-12 md:mb-16">
+                <div className="text-center mb-12 md:mb-16 px-6">
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -342,89 +351,138 @@ function DiagnosticTool() {
                   >
                     <Sparkles size={22} strokeWidth={1.2} className="text-brass" />
                   </motion.div>
-                  <p className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">La sua soluzione</p>
-                  <h2 className="font-serif text-[32px] md:text-[42px] lg:text-[48px] font-light leading-[1.1] text-charcoal">
+                  <p className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">
+                    La sua soluzione
+                  </p>
+                  <h2 className="font-serif text-[30px] md:text-[44px] lg:text-[52px] font-light leading-[1.1] text-charcoal">
                     {solution.title}
                   </h2>
-                  <p className="mt-3 font-serif text-[18px] md:text-[20px] italic text-charcoal/50 font-light">
+                  <p className="mt-3 font-serif text-[17px] md:text-[20px] italic text-charcoal/45 font-light">
                     {solution.subtitle}
                   </p>
                 </div>
 
-                {/* Result content */}
-                <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 max-w-[1200px] mx-auto">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={solution.image} alt={solution.title} className="w-full h-full object-cover" />
+                {/* Result content — image + text */}
+                <div className="max-w-[1200px] mx-auto px-6 md:px-10 lg:px-16">
+                  <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+                    <div className="aspect-[4/3] lg:aspect-[3/4] overflow-hidden">
+                      <img
+                        src={solution.image}
+                        alt={solution.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-col justify-center lg:py-4">
+                      <div className="mb-6">
+                        <span className="text-[11px] tracking-[0.2em] uppercase text-brass-muted font-light border border-brass/20 px-3 py-1.5">
+                          {solution.percorso}
+                        </span>
+                      </div>
+                      <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light mb-8">
+                        {solution.description}
+                      </p>
+                      <h4 className="text-[11px] tracking-[0.25em] uppercase text-brass-muted font-light mb-5">
+                        Cosa include
+                      </h4>
+                      <div className="space-y-3.5 mb-10">
+                        {solution.highlights.map((h, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <div className="w-1.5 h-1.5 rounded-full bg-brass/50 flex-shrink-0" />
+                            <span className="text-[14px] text-anthracite/60 font-light">{h}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <Link
+                          to="/contatti"
+                          onClick={onClose}
+                          className="group inline-flex items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-deep transition-all duration-500"
+                        >
+                          {solution.cta}
+                          <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                        <Link
+                          to="/i-percorsi"
+                          onClick={onClose}
+                          className="inline-flex items-center justify-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/50 font-light border border-sand/60 px-8 py-4 hover:border-anthracite/20 hover:text-anthracite/70 transition-all duration-500"
+                        >
+                          Esplora tutti i percorsi
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex flex-col justify-center">
-                    <div className="mb-3">
-                      <span className="text-[11px] tracking-[0.2em] uppercase text-brass-muted font-light border border-brass/20 px-3 py-1">
-                        {solution.percorso}
-                      </span>
-                    </div>
-                    <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light mb-8">
-                      {solution.description}
-                    </p>
 
-                    <h4 className="text-[11px] tracking-[0.25em] uppercase text-brass-muted font-light mb-4">
-                      Cosa include
-                    </h4>
-                    <div className="space-y-3 mb-10">
-                      {solution.highlights.map((h, i) => (
-                        <div key={i} className="flex items-center gap-3">
-                          <div className="w-1.5 h-1.5 rounded-full bg-brass/50" />
-                          <span className="text-[14px] text-anthracite/60 font-light">{h}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <Link
-                        to="/contatti"
-                        className="group inline-flex items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-deep transition-all duration-500"
-                      >
-                        {solution.cta}
-                        <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                      <Link
-                        to="/i-percorsi"
-                        className="inline-flex items-center justify-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/50 font-light border border-sand/60 px-8 py-4 hover:border-anthracite/20 hover:text-anthracite/70 transition-all duration-500"
-                      >
-                        Esplora tutti i percorsi
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Actions below result */}
-                <div className="mt-14 md:mt-20 pt-10 border-t border-sand/40 max-w-[1200px] mx-auto">
-                  <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+                  {/* Bottom actions */}
+                  <div className="mt-14 md:mt-20 pt-10 border-t border-sand/40 flex flex-col sm:flex-row items-center justify-between gap-6">
                     <button
                       onClick={reset}
-                      className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-anthracite/35 font-light hover:text-anthracite/60 transition-colors"
+                      className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-anthracite/30 font-light hover:text-anthracite/55 transition-colors"
                     >
-                      <RotateCcw size={14} strokeWidth={1.5} /> Ricomincia il percorso
+                      <RotateCcw size={14} strokeWidth={1.5} /> Ricomincia
                     </button>
-                    <p className="text-[13px] text-anthracite/40 font-light text-center sm:text-right max-w-sm">
-                      Questo risultato è indicativo. La consulenza in sede definirà il percorso su misura per Lei.
-                    </p>
+                    <button
+                      onClick={onClose}
+                      className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-anthracite/30 font-light hover:text-anthracite/55 transition-colors"
+                    >
+                      <ArrowLeft size={14} strokeWidth={1.5} /> Torna alla pagina
+                    </button>
                   </div>
                 </div>
+
+                <div className="pb-16 md:pb-24" />
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE SECTIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+function SoluzioneIntro({ onStart }: { onStart: () => void }) {
+  const ref = useRef(null);
+  const v = useInView(ref, { once: true, margin: '-80px' });
+  return (
+    <section className="py-28 md:py-40 lg:py-48 bg-ivory">
+      <div className="max-w-[800px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase }}>
+          <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Inizia il Tuo Viaggio</span>
+          <div className="w-10 h-[1px] bg-brass mx-auto mt-4 mb-8" />
+          <p className="font-serif text-[24px] md:text-[30px] lg:text-[34px] font-light leading-[1.3] text-charcoal">
+            Ogni donna ha esigenze uniche. Risponda a poche domande e la guideremo verso il percorso di cura più adatto a lei.
+          </p>
+          <p className="mt-6 text-[14px] md:text-[15px] leading-[1.8] text-anthracite/55 font-light max-w-lg mx-auto">
+            Questo strumento non sostituisce la consulenza. La prepara. Le permette di arrivare al primo incontro con maggiore consapevolezza.
+          </p>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={v ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1, ease: premiumEase, delay: 0.4 }}
+          className="mt-10"
+        >
+          <button
+            onClick={onStart}
+            className="group inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.22em] uppercase font-light px-12 py-5 hover:bg-deep transition-all duration-500"
+          >
+            Inizia subito
+            <ArrowRight size={15} strokeWidth={1.5} className="group-hover:translate-x-1.5 transition-transform duration-500" />
+          </button>
         </motion.div>
       </div>
     </section>
   );
 }
 
-/* ─── Rassicurazione ─── */
 function Rassicurazione() {
   const ref = useRef(null);
   const v = useInView(ref, { once: true, margin: '-80px' });
   return (
-    <section className="py-28 md:py-40 lg:py-48 bg-ivory">
+    <section className="py-28 md:py-40 lg:py-48 bg-ecru/40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid md:grid-cols-3 gap-10 md:gap-8">
           {[
@@ -432,7 +490,7 @@ function Rassicurazione() {
             { title: 'La consulenza è senza impegno', text: 'Dura circa 30 minuti. Non è una vendita: è un momento di comprensione reciproca per costruire fiducia.' },
             { title: 'Ogni percorso è personalizzato', text: 'Nessun protocollo standard. Il piano di cura viene costruito su misura, rispettando la sua unicità.' },
           ].map((item, i) => (
-            <motion.div key={item.title} initial={{ opacity: 0, y: 25 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.1 + i * 0.1 }} className="border-t border-brass/15 pt-6">
+            <motion.div key={item.title} initial={{ opacity: 0, y: 25 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, ease: premiumEase, delay: 0.1 + i * 0.1 }} className="border-t border-brass/15 pt-6">
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-3">{item.title}</h3>
               <p className="text-[14px] leading-[1.75] text-anthracite/55 font-light">{item.text}</p>
             </motion.div>
@@ -443,7 +501,6 @@ function Rassicurazione() {
   );
 }
 
-/* ─── CTA Finale ─── */
 function SoluzioneCTA() {
   const ref = useRef(null);
   const v = useInView(ref, { once: true, margin: '-80px' });
@@ -451,17 +508,17 @@ function SoluzioneCTA() {
     <section className="py-28 md:py-40 lg:py-48 bg-charcoal text-ivory">
       <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
         <motion.div initial={{ width: 0 }} animate={v ? { width: 50 } : {}} transition={{ duration: 1 }} className="h-[1px] bg-brass mx-auto mb-10" />
-        <motion.h2 initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[28px] md:text-[36px] lg:text-[42px] font-light leading-[1.12] text-ivory">
+        <motion.h2 initial={{ opacity: 0, y: 20 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="font-serif text-[28px] md:text-[36px] lg:text-[42px] font-light leading-[1.12] text-ivory">
           Il percorso giusto inizia<br />da una conversazione.
         </motion.h2>
-        <motion.p initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-6 text-[15px] leading-[1.8] text-ivory/45 font-light max-w-lg mx-auto">
+        <motion.p initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.3 }} className="mt-6 text-[15px] leading-[1.8] text-ivory/45 font-light max-w-lg mx-auto">
           La consulenza Luxosa è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo verso la cura che merita.
         </motion.p>
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
-          <Link to="/contatti" className="group inline-flex items-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-10 py-4.5 hover:bg-brass-light transition-all duration-500">
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={v ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.45 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+          <Link to="/contatti" className="group inline-flex items-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-10 py-4 hover:bg-brass-light transition-all duration-500">
             Prenota la sua consulenza <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform" />
           </Link>
-          <Link to="/il-metodo" className="inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/50 font-light border border-ivory/15 px-10 py-4.5 hover:border-ivory/30 hover:text-ivory/80 transition-all duration-500">
+          <Link to="/il-metodo" className="inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/50 font-light border border-ivory/15 px-10 py-4 hover:border-ivory/30 hover:text-ivory/80 transition-all duration-500">
             Scopri il metodo
           </Link>
         </motion.div>
@@ -474,44 +531,25 @@ function SoluzioneCTA() {
    PAGE
    ═══════════════════════════════════════════════════════════════ */
 export default function LaTuaSoluzionePage() {
-  const [started, setStarted] = useState(false);
-  const diagnosticRef = useRef<HTMLDivElement>(null);
-
-  const handleStart = () => {
-    setStarted(true);
-    // Smooth scroll to diagnostic after a brief delay for the animation
-    setTimeout(() => {
-      diagnosticRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
-  };
+  const [quizOpen, setQuizOpen] = useState(false);
 
   return (
     <>
       <PageHero
         label="La Tua Soluzione"
-        title="Trovi il percorso<br>pensato per Lei."
+        title="Trovi il percorso pensato per lei."
         subtitle="Risponda a poche domande. La guideremo verso la cura più adatta alle sue esigenze."
         image="/images/soluzione-hero.jpg"
       />
-      <SoluzioneIntro onStart={handleStart} />
-
-      {/* Diagnostic appears only after clicking "Inizia Adesso" */}
-      <div ref={diagnosticRef}>
-        <AnimatePresence>
-          {started && (
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.25, 0.1, 0, 1] }}
-            >
-              <DiagnosticTool />
-              <Rassicurazione />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
+      <SoluzioneIntro onStart={() => setQuizOpen(true)} />
+      <Rassicurazione />
       <SoluzioneCTA />
+
+      <AnimatePresence>
+        {quizOpen && (
+          <QuizOverlay onClose={() => setQuizOpen(false)} />
+        )}
+      </AnimatePresence>
     </>
   );
 }

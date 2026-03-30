@@ -18,19 +18,19 @@ export default function Experience() {
   return (
     <section id="esperienza" className="py-32 md:py-48 lg:py-56 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
-        <div className="grid lg:grid-cols-5 gap-16 lg:gap-20">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left: Image */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
-            className="lg:col-span-2 relative"
+            className="relative group"
           >
             <div className="aspect-[3/4] overflow-hidden">
               <img
                 src="/images/care-hands-new.jpg"
                 alt="L'esperienza Luxosa"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04] ease-out"
                 loading="lazy"
               />
             </div>
@@ -38,7 +38,7 @@ export default function Experience() {
           </motion.div>
 
           {/* Right: Content */}
-          <div className="lg:col-span-3">
+          <div>
             <motion.span
               initial={{ opacity: 0, y: 15 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}

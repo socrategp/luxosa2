@@ -47,40 +47,57 @@ export default function Method() {
   return (
     <section id="metodo" className="py-32 md:py-48 lg:py-56 bg-ecru/50">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
-        {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-20 md:mb-28">
-          <motion.span
-            initial={{ opacity: 0, y: 15 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
-            className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Il Metodo
-          </motion.span>
+        {/* Header — split: testo sinistra + immagine destra */}
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24 md:mb-32 lg:mb-40">
+          <div>
+            <motion.span
+              initial={{ opacity: 0, y: 15 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
+              className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
+            >
+              Il Metodo
+            </motion.span>
+            <motion.div
+              initial={{ width: 0 }}
+              animate={inView ? { width: 40 } : {}}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
+              className="h-[1px] bg-brass mt-4 mb-8"
+            />
+            <motion.h2
+              initial={{ opacity: 0, y: 25 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
+              className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-charcoal tracking-[0.01em]"
+            >
+              Sette pilastri.<br />
+              Un unico principio: la cura.
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
+              className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light"
+            >
+              Il Metodo Luxosa non è una formula. È un approccio fondato sulla conoscenza, costruito sull'esperienza, guidato dall'attenzione alla persona.
+            </motion.p>
+          </div>
           <motion.div
-            initial={{ width: 0 }}
-            animate={inView ? { width: 40 } : {}}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
-            className="h-[1px] bg-brass mx-auto mt-4 mb-8"
-          />
-          <motion.h2
-            initial={{ opacity: 0, y: 25 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
-            className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-charcoal tracking-[0.01em]"
+            initial={{ opacity: 0, x: 30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="relative group"
           >
-            Sette pilastri.<br />
-            Un unico principio: la cura.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
-            className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light"
-          >
-            Il Metodo Luxosa non è una formula. È un approccio fondato sulla conoscenza,<br className="hidden md:block" />
-            costruito sull'esperienza, guidato dall'attenzione alla persona.
-          </motion.p>
+            <div className="aspect-[3/4] overflow-hidden">
+              <img
+                src="/images/consultation-new.jpg"
+                alt="Il Metodo Luxosa"
+                className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04] ease-out"
+                loading="lazy"
+              />
+            </div>
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 border-b border-l border-brass/25" />
+          </motion.div>
         </div>
 
         {/* Pillars Grid */}

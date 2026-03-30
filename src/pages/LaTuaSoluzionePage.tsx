@@ -257,7 +257,10 @@ function QuizOverlay({ onClose }: { onClose: () => void }) {
 
       {/* ── Scrollable content ── */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto">
-        <div className="min-h-full flex flex-col justify-center py-16 md:py-20 lg:py-24">
+        {/* Spacer flex: centra quando il contenuto entra, scrolla quando eccede */}
+        <div className="flex flex-col min-h-full">
+          <div className="flex-1" />
+          <div className="py-6 sm:py-8 md:py-12 w-full">
           <AnimatePresence mode="wait">
             {/* ── QUESTION ── */}
             {!showResult && (
@@ -273,7 +276,7 @@ function QuizOverlay({ onClose }: { onClose: () => void }) {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: premiumEase }}
-                  className="font-serif text-[28px] md:text-[36px] lg:text-[42px] font-light leading-[1.15] text-charcoal text-center mb-3"
+                  className="font-serif text-[26px] md:text-[34px] lg:text-[42px] font-light leading-[1.15] text-charcoal text-center mb-2 md:mb-3"
                 >
                   {currentQ.question}
                 </motion.h2>
@@ -281,7 +284,7 @@ function QuizOverlay({ onClose }: { onClose: () => void }) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, ease: premiumEase, delay: 0.1 }}
-                  className="text-[14px] text-anthracite/45 font-light text-center mb-10 md:mb-14 tracking-wide"
+                  className="text-[13px] md:text-[14px] text-anthracite/45 font-light text-center mb-6 md:mb-10 tracking-wide"
                 >
                   {currentQ.subtitle}
                 </motion.p>
@@ -294,7 +297,7 @@ function QuizOverlay({ onClose }: { onClose: () => void }) {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.1 + i * 0.07, duration: 0.4 }}
                       onClick={() => selectOption(opt.id)}
-                      className={`w-full text-left p-5 md:p-6 border transition-all duration-500 group ${
+                      className={`w-full text-left p-4 md:p-5 border transition-all duration-500 group ${
                         answers[currentQ.id] === opt.id
                           ? 'border-brass bg-brass/[0.05]'
                           : 'border-sand/50 bg-white/20 hover:border-brass/30 hover:bg-white/50'
@@ -433,7 +436,9 @@ function QuizOverlay({ onClose }: { onClose: () => void }) {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+          </div>{/* end py-6 wrapper */}
+          <div className="flex-1" />{/* bottom spacer */}
+        </div>{/* end flex flex-col min-h-full */}
       </div>
     </motion.div>
   );

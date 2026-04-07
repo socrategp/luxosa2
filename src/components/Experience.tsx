@@ -1,14 +1,18 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Clock, Eye, Shield, Leaf, Users, HeartHandshake } from 'lucide-react';
 
-const qualities = [
-  { icon: Eye, label: 'Ascolto attento', text: 'Ogni incontro inizia dalla comprensione autentica delle esigenze e dei desideri della persona.' },
-  { icon: Clock, label: 'Tempo dedicato', text: 'Nessuna fretta. Ogni appuntamento ha il tempo necessario per garantire cura e risultato.' },
-  { icon: Shield, label: 'Protezione', text: 'Protocolli pensati per proteggere cute e capelli, rispettando la loro natura e il loro equilibrio.' },
-  { icon: Leaf, label: 'Ritualità', text: 'Ogni gesto è parte di un rituale di benessere, studiato per offrire comfort e rigenerazione.' },
-  { icon: Users, label: 'Presenza', text: 'Un team formato e attento, che accompagna la cliente con competenza e sensibilità.' },
-  { icon: HeartHandshake, label: 'Continuità', text: 'La relazione non termina con il trattamento. Ogni percorso prevede un accompagnamento nel tempo.' },
+const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+
+const esperienze = [
+  { name: 'Piega Lux', copy: `Non una semplice piega. Un gesto che nutre, valorizza e restituisce luce al capello nel suo miglior momento.` },
+  { name: 'Taglio Signature', copy: `Un taglio che nasce dall'osservazione e dalla visione. Non routine, ma progetto.` },
+  { name: 'Nuances', copy: `Il colore nella sua espressione più raffinata: luce, profondità e naturalezza.` },
+  { name: 'Luce Signature', copy: `Schiariture costruite con precisione, per un risultato sofisticato e mai forzato.` },
+  { name: 'RicciOsa', copy: `Il gesto dedicato al capello riccio quando definizione, elasticità e rispetto diventano una priorità.` },
+  { name: 'RicciOso', copy: `Per mossi e wavy che cercano equilibrio, forma e durata.` },
+  { name: 'Cheratina Pro', copy: `Per chi desidera ordine, morbidezza e controllo senza rinunciare al movimento.` },
+  { name: 'Area Cura', copy: `Quando la salute del capello torna a essere il primo obiettivo.` },
+  { name: 'Consulenza ColorLux', copy: `Un momento dedicato esclusivamente al colore, prima ancora di sceglierlo.` },
 ];
 
 export default function Experience() {
@@ -16,84 +20,46 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="esperienza" className="py-32 md:py-48 lg:py-56 bg-ivory-warm">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
-        <div className="grid lg:grid-cols-5 gap-16 lg:gap-20">
-          {/* Left: Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="lg:col-span-2 relative"
+    <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
+        <div className="max-w-2xl mb-16 md:mb-20">
+          <motion.span
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: premiumEase }}
+            className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
           >
-            <div className="aspect-[3/4] overflow-hidden">
-              <img
-                src="/images/care-hands-new.jpg"
-                alt="L'esperienza Luxosa"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div className="absolute -top-4 -right-4 w-16 h-16 border-t border-r border-brass/25" />
-          </motion.div>
+            Le esperienze
+          </motion.span>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { width: 40 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }}
+            className="h-[1px] bg-brass mt-4 mb-8"
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 25 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
+            className="text-[15px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light"
+          >
+            Non le scegli come si sfoglia un menu. Le scopri insieme a noi, nel contesto del percorso che stai costruendo.
+          </motion.p>
+        </div>
 
-          {/* Right: Content */}
-          <div className="lg:col-span-3">
-            <motion.span
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
-              className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-            >
-              L'Esperienza
-            </motion.span>
+        <div className="grid md:grid-cols-3 gap-x-10 gap-y-0">
+          {esperienze.map((e, i) => (
             <motion.div
-              initial={{ width: 0 }}
-              animate={inView ? { width: 40 } : {}}
-              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
-              className="h-[1px] bg-brass mt-4 mb-8"
-            />
-            <motion.h2
-              initial={{ opacity: 0, y: 25 }}
+              key={e.name}
+              initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
-              className="font-serif text-[32px] md:text-[40px] lg:text-[46px] font-light leading-[1.12] text-charcoal tracking-[0.01em] mb-6"
+              transition={{ duration: 1, ease: premiumEase, delay: 0.2 + i * 0.07 }}
+              className="border-t border-sand/50 py-8"
             >
-              Sentirsi accolta,<br />
-              compresa, guidata.
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
-              className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light mb-12 max-w-lg"
-            >
-              L'esperienza Luxosa è costruita attorno alla persona. Ogni dettaglio — dall'accoglienza al congedo — è pensato per far sentire la cliente al sicuro, vista e valorizzata.
-            </motion.p>
-
-            {/* Qualities Grid */}
-            <div className="grid sm:grid-cols-2 gap-8">
-              {qualities.map((q, i) => (
-                <motion.div
-                  key={q.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.3 + i * 0.07 }}
-                  className="flex items-start gap-4"
-                >
-                  <q.icon size={20} strokeWidth={1.2} className="text-brass-muted flex-shrink-0 mt-0.5" />
-                  <div>
-                    <h4 className="text-[14px] tracking-[0.08em] uppercase font-medium text-charcoal mb-1">
-                      {q.label}
-                    </h4>
-                    <p className="text-[13px] md:text-[14px] leading-[1.7] text-anthracite/55 font-light">
-                      {q.text}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+              <h3 className="font-serif text-[22px] md:text-[24px] font-light text-charcoal mb-3 tracking-wide">{e.name}</h3>
+              <p className="text-[14px] leading-[1.8] text-anthracite/60 font-light">{e.copy}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

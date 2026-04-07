@@ -23,6 +23,25 @@
   --font-sans: 'Jost', 'Helvetica Neue', sans-serif;
 }
 
+/* ══ SCALA TIPOGRAFICA LUXOSA ═══════════════════════════════
+ *
+ * Font serif: Cormorant Garamond  |  Font sans: Jost
+ *
+ * HERO H1 (homepage):    40 / 56 / 68 / 76px  — font-normal, leading-[1.08]
+ * HERO H1 (pagine int.): 36 / 50 / 60px       — font-light, leading-[1.08]
+ * H2 sezione (homepage): 34 / 44 / 50px       — font-light, leading-[1.12]
+ * H2 sezione (interne):  30 / 38 / 44px       — font-light, leading-[1.12]
+ * H3 card/sottosezione:  20-26 / 22-24px      — font-light, tracking-wide
+ * Quote cinematic:        32 / 48 / 60-64px    — eccezione scenica
+ * Stats/numerali:         52 / 72 / 88px       — eccezione scenica
+ * Body:                   14-15 / 15-16px      — font-light, leading-[1.85]
+ * Small body:             13 / 14px            — font-light
+ * Label uppercase:        10-11px              — tracking-[0.35em], uppercase
+ * Caption/micro:          8-9px                — font-light
+ *
+ * Max H2 desktop: 44px (eccezioni: hero fino a 60px, cinematic fino a 64px)
+ * ═══════════════════════════════════════════════════════════ */
+
 html {
   scroll-behavior: smooth;
 }

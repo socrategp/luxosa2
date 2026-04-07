@@ -119,7 +119,7 @@ export default function CustomCursor() {
     <>
       {/* Inner dot — adaptive color, no mix-blend */}
       <motion.div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
+        className="fixed top-0 left-0 z-[10001] pointer-events-none"
         style={{
           x: cursorX,
           y: cursorY,
@@ -140,7 +140,7 @@ export default function CustomCursor() {
 
       {/* Outer ring — gold/dark adaptive */}
       <motion.div
-        className="fixed top-0 left-0 z-[9998] pointer-events-none"
+        className="fixed top-0 left-0 z-[10000] pointer-events-none"
         style={{
           x: springX,
           y: springY,

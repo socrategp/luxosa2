@@ -1,25 +1,31 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 
 export default function Footer() {
   return (
     <footer className="bg-deep text-ivory/70 pt-20 pb-10">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-16 border-b border-ivory/8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-16 border-b border-ivory/10">
+
+          {/* Col 1 — Brand */}
           <div className="lg:col-span-1">
             <Link to="/">
               <img
                 src="/images/luxosa-logo-orizzontale-bianco-tras.png"
                 alt="Luxosa"
-                className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
+                className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
               />
             </Link>
-            <p className="mt-4 text-[13px] leading-[1.8] font-light text-ivory/40">
+            <p className="mt-5 text-[13px] leading-[1.8] font-light text-ivory/40">
               Maison di cura evoluta<br />per cute e capelli.
             </p>
+            <p className="mt-1 text-[12px] font-light text-ivory/25 tracking-wide">Messina</p>
             <div className="mt-6 w-8 h-[1px] bg-brass/40" />
+            <p className="mt-5 text-[10px] tracking-[0.35em] uppercase text-brass-light/50 font-light">
+              Ama. Splendi. Osa.
+            </p>
           </div>
 
+          {/* Col 2 — Navigazione */}
           <div>
             <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Navigazione</h4>
             <nav className="flex flex-col gap-3">
@@ -27,56 +33,57 @@ export default function Footer() {
                 { label: 'La Maison', href: '/' },
                 { label: 'Il Metodo', href: '/il-metodo' },
                 { label: 'I Percorsi', href: '/i-percorsi' },
-                { label: 'L\'Esperienza', href: '/esperienza' },
-                { label: 'La Tua Soluzione', href: '/la-tua-soluzione' },
+                { label: "L'Esperienza", href: '/esperienza' },
                 { label: 'Sedi', href: '/sedi' },
                 { label: 'Contatti', href: '/contatti' },
               ].map((item) => (
-                <Link key={item.label} to={item.href} className="text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors duration-400 tracking-wide">
+                <Link
+                  key={item.label}
+                  to={item.href}
+                  className="text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors duration-400 tracking-wide"
+                >
                   {item.label}
                 </Link>
               ))}
             </nav>
           </div>
 
+          {/* Col 3 — Club Luxosa */}
           <div>
-            <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Contatti</h4>
-            <div className="flex flex-col gap-4">
-              <a href="tel:+390000000000" className="flex items-center gap-3 text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors">
-                <Phone size={14} strokeWidth={1.3} className="text-brass/50" />+39 090 240 3220
-              </a>
-              <a href="mailto:info@luxosa.it" className="flex items-center gap-3 text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors">
-                <Mail size={14} strokeWidth={1.3} className="text-brass/50" />messinacavour@luxosa.it
-              </a>
-              <div className="flex items-start gap-3 text-[13px] font-light text-ivory/45">
-                <MapPin size={14} strokeWidth={1.3} className="text-brass/50 flex-shrink-0 mt-0.5" />
-                <span>Via Cavour, 1<br />Messina, Italia</span>
-              </div>
+            <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Club Luxosa</h4>
+            <p className="text-[13px] font-light text-ivory/40 leading-[1.8] mb-6">
+              Un accesso riservato. Un riconoscimento che si guadagna nel tempo.
+            </p>
+            <div className="flex gap-2 mb-7">
+              {['AMA', 'SPLENDI', 'OSA'].map((badge) => (
+                <span
+                  key={badge}
+                  className="text-[9px] tracking-[0.22em] uppercase font-light text-brass-light/70 border border-brass-light/30 px-2.5 py-1"
+                >
+                  {badge}
+                </span>
+              ))}
             </div>
+            <Link
+              to="/contatti"
+              className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/40 hover:text-ivory/70 transition-colors duration-400 inline-flex items-center gap-2"
+            >
+              Scopri il Club →
+            </Link>
           </div>
 
-          <div>
-            <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Orari</h4>
-            <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-3 text-[13px] font-light text-ivory/45">
-                <Clock size={14} strokeWidth={1.3} className="text-brass/50" />
-                <div><p>Martedì — Venerdì</p><p>09:00 — 18:30</p></div>
-                <div><p>Sabato</p><p>09:00 — 19:00</p></div>
-              </div>
-              <p className="text-[12px] font-light text-ivory/30 mt-2">Domenica e Lunedì chiuso<br />Su appuntamento</p>
-            </div>
-          </div>
+          {/* Col 4 — Legal placeholder / empty */}
+          <div className="hidden lg:block" />
         </div>
 
-        <div className="pt-20 lg:pt-24 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-ivory/10 pb-8">
-          <p className="text-[11px] tracking-[0.15em] text-ivory/25 font-light">© 2025 Luxosa. Tutti i diritti riservati.</p>
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-[11px] tracking-[0.15em] text-ivory/25 font-light">© 2026 Luxosa. Tutti i diritti riservati.</p>
           <div className="flex gap-6">
-            <a href="#" className="text-[11px] tracking-[0.1em] text-ivory/25 hover:text-ivory/50 font-light transition-colors">Privacy Policy</a>
-            <a href="#" className="text-[11px] tracking-[0.1em] text-ivory/25 hover:text-ivory/50 font-light transition-colors">Cookie Policy</a>
+            <Link to="/privacy-policy" className="text-[11px] tracking-[0.1em] text-ivory/25 hover:text-ivory/50 font-light transition-colors">Privacy Policy</Link>
+            <Link to="/cookie-policy" className="text-[11px] tracking-[0.1em] text-ivory/25 hover:text-ivory/50 font-light transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>
-
     </footer>
   );
 }

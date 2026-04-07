@@ -70,7 +70,7 @@ export default function Authority() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
-            className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-ivory tracking-[0.01em]"
+            className="font-serif text-[32px] md:text-[40px] lg:text-[44px] font-light leading-[1.1] text-ivory tracking-[0.01em]"
           >
             La fiducia si costruisce<br />
             con i fatti.

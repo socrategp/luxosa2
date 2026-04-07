@@ -8,6 +8,8 @@ import LaTuaSoluzionePage from './pages/LaTuaSoluzionePage';
 import SediPage from './pages/SediPage';
 import ContattiPage from './pages/ContattiPage';
 import MessinaCavourPage from './pages/sedi/MessinaCavourPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import CookiePolicyPage from './pages/CookiePolicyPage';
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
           <Route path="/sedi" element={<SediPage />} />
           <Route path="/sedi/messina-cavour" element={<MessinaCavourPage />} />
           <Route path="/contatti" element={<ContattiPage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

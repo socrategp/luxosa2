@@ -46,9 +46,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
-            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-medium mb-6 drop-shadow-md"
+            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-light mb-6 drop-shadow-md"
           >
-            Maison di cura evoluta per cute e capelli
+            La Maison
           </motion.p>
 
           <motion.h1
@@ -57,8 +57,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
             className="font-serif text-[40px] md:text-[56px] lg:text-[68px] xl:text-[76px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
           >
-            Dove la cura<br />
-            diventa metodo.
+            Un luogo in cui<br />riconoscerti.
           </motion.h1>
 
           <motion.p
@@ -67,9 +66,7 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
             className="mt-6 md:mt-8 text-white/70 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide"
           >
-            Ogni percorso nasce dall'ascolto, dall'analisi e dalla comprensione
-            profonda della persona. Perché la vera bellezza si rivela con
-            intelligenza e sensibilità.
+            Luxosa è la maison italiana dedicata alla cura e alla bellezza dei capelli. Qui la donna viene accolta, ascoltata e accompagnata con metodo, eleganza e attenzione reale.
           </motion.p>
 
           <motion.div
@@ -78,22 +75,18 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1.3 }}
             className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4"
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-              <Link
-                to="/contatti"
-                className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-white px-8 py-4 transition-all duration-500"
-              >
-                Prenota una consulenza
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-              <Link
-                to="/il-metodo"
-                className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/80 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500"
-              >
-                Scopri il metodo
-              </Link>
-            </motion.div>
+            <Link
+              to="/il-metodo"
+              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-white px-8 py-4 transition-all duration-500"
+            >
+              Scopri il Metodo
+            </Link>
+            <Link
+              to="/i-percorsi"
+              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/80 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500"
+            >
+              Esplora i Percorsi
+            </Link>
           </motion.div>
         </div>
       </div>

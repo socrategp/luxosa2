@@ -6,7 +6,7 @@ export default function Space() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="spazio" className="py-32 md:py-48 lg:py-56 bg-ivory">
+    <section id="spazio" className="py-20 md:py-32 lg:py-40 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">

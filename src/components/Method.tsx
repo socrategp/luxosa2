@@ -1,147 +1,329 @@
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Ear, Search, Fingerprint, Route, RefreshCw, Heart, Sparkles } from 'lucide-react';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 
-const pillars = [
+const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+
+const fasi = [
   {
-    icon: Ear,
-    title: 'Ascolto',
-    description: 'Ogni percorso inizia dalla comprensione profonda delle esigenze, della storia e delle aspettative della persona.',
+    num: '01',
+    name: 'Ascolto',
+    accade: 'Raccogliamo storia, abitudini, desideri, aspettative e tutto ciò che conta davvero.',
+    sente: 'Finalmente qualcuno che vuole capire davvero.',
   },
   {
-    icon: Search,
-    title: 'Analisi',
-    description: 'Un\'indagine accurata dello stato di cute e capelli, per costruire una base di conoscenza solida e personalizzata.',
+    num: '02',
+    name: 'Osservazione',
+    accade: 'Leggiamo in modo approfondito cute, capello, struttura e segnali utili a orientare il percorso.',
+    sente: 'Vedono ciò che io non sapevo di avere.',
   },
   {
-    icon: Fingerprint,
-    title: 'Personalizzazione',
-    description: 'Nessun protocollo standard. Ogni intervento viene disegnato su misura, rispettando l\'unicità della cliente.',
+    num: '03',
+    name: 'Progetto',
+    accade: 'Definiamo insieme un obiettivo, una direzione e i passi necessari per arrivarci.',
+    sente: 'Ho un piano. Non sto improvvisando più.',
   },
   {
-    icon: Route,
-    title: 'Percorso',
-    description: 'Non un singolo trattamento, ma un cammino strutturato verso il risultato desiderato, con tappe chiare e misurabili.',
+    num: '04',
+    name: 'Costruzione',
+    accade: 'Ogni seduta diventa parte di un disegno coerente, pensato per generare un risultato concreto.',
+    sente: 'Ogni volta che torno, c\'è continuità.',
   },
   {
-    icon: RefreshCw,
-    title: 'Continuità',
-    description: 'La cura autentica richiede costanza. Accompagniamo la cliente nel tempo, adattando il percorso alla sua evoluzione.',
-  },
-  {
-    icon: Heart,
-    title: 'Cura',
-    description: 'Attenzione autentica alla persona, al suo comfort, al suo benessere. Ogni gesto è pensato per proteggere e valorizzare.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Risultato',
-    description: 'Una bellezza che si rivela naturalmente, frutto di competenza, metodo e dedizione. Visibile, autentica, duratura.',
+    num: '05',
+    name: 'Trasformazione',
+    accade: 'Il risultato emerge nel tempo, si consolida e apre una nuova fase di ascolto e crescita.',
+    sente: 'Non sono la stessa di quando sono entrata.',
   },
 ];
+
+// Circle positions: 5 nodi a 72° partendo da -90° (top)
+const getPhasePosition = (index: number) => {
+  const angle = -90 + index * 72;
+  const rad = (angle * Math.PI) / 180;
+  const radius = 130;
+  const cx = 250;
+  const cy = 250;
+  return {
+    x: cx + radius * Math.cos(rad),
+    y: cy + radius * Math.sin(rad),
+  };
+};
+
+// SVG arc path from phase i to phase i+1
+const getArcPath = (index: number) => {
+  const pos1 = getPhasePosition(index);
+  const pos2 = getPhasePosition((index + 1) % 5);
+  return `M ${pos1.x} ${pos1.y} A 130,130 0 0,1 ${pos2.x} ${pos2.y}`;
+};
+
+// Label position (further out for readability)
+const getLabelPosition = (index: number) => {
+  const angle = -90 + index * 72;
+  const rad = (angle * Math.PI) / 180;
+  const radius = 175;
+  const cx = 250;
+  const cy = 250;
+  return {
+    x: cx + radius * Math.cos(rad),
+    y: cy + radius * Math.sin(rad),
+    angle,
+  };
+};
+
+function usePhasesCycle(active: boolean) {
+  const [phase, setPhase] = useState(0);
+  const [drawnArcs, setDrawnArcs] = useState<Set<number>>(new Set());
+  const [drawingArc, setDrawingArc] = useState<number | null>(null);
+  const [cycleCount, setCycleCount] = useState(0);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const timings = {
+      PHASE_HOLD: 2800,
+      ARC_DRAW: 2000,
+      RESTART_DELAY: 1200,
+    };
+
+    let timeoutId: NodeJS.Timeout;
+
+    const nextPhase = (phase + 1) % 5;
+
+    // Start drawing the arc from current phase to next
+    timeoutId = setTimeout(() => {
+      setDrawingArc(phase);
+    }, timings.PHASE_HOLD);
+
+    // After arc is drawn, mark it as complete
+    const arcCompleteTimeout = setTimeout(() => {
+      setDrawnArcs((prev) => new Set(prev).add(phase));
+      setDrawingArc(null);
+
+      if (nextPhase === 0) {
+        // End of cycle — restart after delay
+        const restartTimeout = setTimeout(() => {
+          setPhase(0);
+          setDrawnArcs(new Set());
+          setCycleCount((c) => c + 1);
+        }, timings.RESTART_DELAY);
+        return () => clearTimeout(restartTimeout);
+      } else {
+        // Move to next phase
+        setPhase(nextPhase);
+      }
+    }, timings.PHASE_HOLD + timings.ARC_DRAW);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearTimeout(arcCompleteTimeout);
+    };
+  }, [phase, active]);
+
+  return { phase, drawnArcs, drawingArc, cycleCount };
+}
+
+function CircleViz({
+  activePhase,
+  drawnArcs,
+  drawingArc,
+  cycleCount,
+}: {
+  activePhase: number;
+  drawnArcs: Set<number>;
+  drawingArc: number | null;
+  cycleCount: number;
+}) {
+  const cycleColor = cycleCount % 2 === 0 ? '#C4AE8C' : '#F9F6F1'; // brass-light or ivory
+
+  return (
+    <svg
+      viewBox="0 0 500 500"
+      className="w-full max-w-[680px] mx-auto"
+      style={{ overflow: 'visible' }}
+    >
+      {/* Guide circle */}
+      <circle cx={250} cy={250} r={130} stroke="rgba(249,246,241,0.08)" strokeWidth="0.6" fill="none" />
+
+      {/* Arcs */}
+      {fasi.map((_, i) => {
+        const isDrawn = drawnArcs.has(i);
+        const isDrawing = drawingArc === i;
+
+        return (
+          <motion.path
+            key={`arc-${i}-${cycleCount}`}
+            d={getArcPath(i)}
+            stroke={cycleColor}
+            strokeWidth="1.2"
+            fill="none"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={
+              isDrawn ? { pathLength: 1, opacity: 1 } : isDrawing ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }
+            }
+            transition={{
+              pathLength: {
+                duration: isDrawing ? 2 : 0,
+                ease: premiumEase,
+              },
+              opacity: { duration: 0.3 },
+            }}
+          />
+        );
+      })}
+
+      {/* Phase dots and rings */}
+      {fasi.map((_, i) => {
+        const pos = getPhasePosition(i);
+        const isActive = i === activePhase;
+
+        return (
+          <g key={`phase-${i}`}>
+            {/* Ring (outer glow when active) */}
+            <motion.circle
+              cx={pos.x}
+              cy={pos.y}
+              animate={{
+                r: isActive ? 12 : 0,
+                opacity: isActive ? 0.4 : 0,
+              }}
+              stroke={cycleColor}
+              strokeWidth="0.6"
+              fill="none"
+              transition={{ duration: 0.8, ease: premiumEase }}
+            />
+
+            {/* Dot */}
+            <motion.circle
+              cx={pos.x}
+              cy={pos.y}
+              animate={{
+                r: isActive ? 6.5 : 3.5,
+                fillOpacity: isActive ? 1 : 0.25,
+              }}
+              fill={cycleColor}
+              transition={{ duration: 0.8, ease: premiumEase }}
+            />
+          </g>
+        );
+      })}
+
+      {/* Phase labels (SVG text) */}
+      {fasi.map((fase, i) => {
+        const label = getLabelPosition(i);
+        const isActive = i === activePhase;
+        const textAnchor = label.angle > -60 && label.angle < 60 ? 'start' : label.angle > 120 || label.angle < -120 ? 'end' : 'middle';
+
+        return (
+          <motion.text
+            key={`label-${i}`}
+            x={label.x}
+            y={label.y}
+            textAnchor={textAnchor}
+            fontFamily="Jost, sans-serif"
+            fontSize="12"
+            letterSpacing="0.16em"
+            fontWeight="300"
+            fill={cycleColor}
+            animate={{
+              fillOpacity: isActive ? 1 : 0.3,
+            }}
+            transition={{ duration: 0.6 }}
+            dominantBaseline="middle"
+          >
+            {isActive ? fase.name.toUpperCase() : fase.name}
+          </motion.text>
+        );
+      })}
+    </svg>
+  );
+}
 
 export default function Method() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const { phase, drawnArcs, drawingArc, cycleCount } = usePhasesCycle(inView);
 
   return (
-    <section id="metodo" className="py-32 md:py-48 lg:py-56 bg-ecru/50">
+    <section id="metodo" className="py-20 md:py-32 lg:py-40 bg-charcoal">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
-        {/* Header — split: testo sinistra + immagine destra */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center mb-24 md:mb-32 lg:mb-40">
-          <div>
-            <motion.span
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
-              className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-            >
-              Il Metodo
-            </motion.span>
-            <motion.div
-              initial={{ width: 0 }}
-              animate={inView ? { width: 40 } : {}}
-              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
-              className="h-[1px] bg-brass mt-4 mb-8"
-            />
-            <motion.h2
-              initial={{ opacity: 0, y: 25 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
-              className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-charcoal tracking-[0.01em]"
-            >
-              Sette pilastri.<br />
-              Un unico principio: la cura.
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
-              className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light"
-            >
-              Il Metodo Luxosa non è una formula. È un approccio fondato sulla conoscenza, costruito sull'esperienza, guidato dall'attenzione alla persona.
-            </motion.p>
-          </div>
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="relative group"
+        {/* Header */}
+        <div className="mb-10 md:mb-14">
+          <motion.span
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: premiumEase }}
+            className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light"
           >
-            <div className="aspect-[3/4] overflow-hidden">
-              <img
-                src="/images/consultation-new.jpg"
-                alt="Il Metodo Luxosa"
-                className="w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-[1.04] ease-out"
-                loading="lazy"
-              />
-            </div>
-            <div className="absolute -bottom-4 -left-4 w-16 h-16 border-b border-l border-brass/25" />
-          </motion.div>
+            Le fasi
+          </motion.span>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { width: 40 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }}
+            className="h-[1px] bg-brass-light/40 mt-4 mb-6"
+          />
         </div>
 
-        {/* Pillars Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-14 lg:gap-y-16">
-          {pillars.map((pillar, i) => (
-            <motion.div
-              key={pillar.title}
-              initial={{ opacity: 0, y: 25 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.2 + i * 0.08 }}
-              className={`group ${
-                i === 6 ? 'md:col-span-2 lg:col-span-1 md:max-w-md md:mx-auto lg:max-w-none' : ''
-              }`}
-            >
-              <div className="flex items-start gap-5">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full border border-brass/25 flex items-center justify-center group-hover:border-brass/50 transition-colors duration-500">
-                  <pillar.icon size={20} strokeWidth={1.2} className="text-brass-muted" />
+        {/* Main content: Circle + Phase Info */}
+        <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-20 items-start">
+          {/* Left: Circle visualization */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
+          >
+            <CircleViz activePhase={phase} drawnArcs={drawnArcs} drawingArc={drawingArc} cycleCount={cycleCount} />
+          </motion.div>
+
+          {/* Right: Phase info panel */}
+          <div className="lg:pt-20">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`phase-${phase}-${cycleCount}`}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.6, ease: premiumEase }}
+                className="space-y-5"
+              >
+                {/* Phase number label */}
+                <div className="text-[10px] tracking-[0.35em] uppercase text-brass-light/50 font-light">
+                  {fasi[phase].num} / 05
                 </div>
-                <div>
-                  <h3 className="font-serif text-[22px] md:text-[24px] font-light text-charcoal mb-2 tracking-wide">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-[14px] md:text-[15px] leading-[1.75] text-anthracite/65 font-light">
-                    {pillar.description}
+
+                {/* Phase name */}
+                <h3 className="font-serif text-[28px] md:text-[32px] lg:text-[38px] text-ivory font-light tracking-[0.02em] leading-none">
+                  {fasi[phase].name.toUpperCase()}
+                </h3>
+
+                {/* Decorative line */}
+                <div className="h-[1px] bg-brass-light/40 w-8" />
+
+                {/* Phase description */}
+                <div className="space-y-5">
+                  <p className="text-[13px] md:text-[14px] lg:text-[14px] leading-[1.8] text-ivory/65 font-light">
+                    {fasi[phase].accade}
+                  </p>
+
+                  <p className="text-[13px] md:text-[14px] lg:text-[14px] leading-[1.8] text-brass-light/70 font-light italic">
+                    "{fasi[phase].sente}"
                   </p>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
-        {/* Bottom Statement */}
+        {/* Quote footer */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.8 }}
-          className="mt-20 md:mt-28 text-center"
+          transition={{ duration: 1.2, ease: premiumEase, delay: 0.9 }}
+          className="mt-20 md:mt-28 border-t border-brass-light/20 pt-10"
         >
-          <div className="inline-block border-t border-b border-sand/60 py-6 px-8 md:px-16">
-            <p className="font-serif text-[18px] md:text-[21px] italic text-charcoal/65 font-light leading-relaxed">
-              Da Luxosa, nulla è casuale, standard o improvvisato.<br className="hidden md:block" />
-              Ogni scelta è il frutto di competenza, analisi e rispetto per la persona.
-            </p>
-          </div>
+          <p className="font-serif text-[18px] md:text-[22px] italic text-ivory/50 font-light leading-[1.6] max-w-2xl">
+            "Trasformazione non è un punto finale. È una soglia. Per questo Luxosa costruisce relazioni nel tempo, non appuntamenti isolati."
+          </p>
         </motion.div>
       </div>
     </section>

@@ -11,7 +11,7 @@ function EsperienzaIntro() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-32 md:py-48 lg:py-56 bg-ivory">
+    <section className="py-20 md:py-32 lg:py-40 bg-ivory">
       <div className="max-w-[1000px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
           <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">La Qualità dell'Esperienza</span>
@@ -33,7 +33,7 @@ function EsperienzaCTA() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-24 md:py-32 lg:py-40 bg-ivory-warm">
+    <section className="py-16 md:py-20 lg:py-40 bg-ivory-warm">
       <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center" ref={ref}>
         <motion.div initial={{ width: 0 }} animate={inView ? { width: 50 } : {}} transition={{ duration: 1 }} className="h-[1px] bg-brass mx-auto mb-10" />
         <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Viva l'esperienza Luxosa.</motion.h2>

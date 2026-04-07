@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Ear, Search, Fingerprint, Heart } from 'lucide-react';
 import Authority from '../components/Authority';
+import LuxosaValuesRing from '../components/LuxosaValuesRing';
 
 const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
 
@@ -28,14 +29,14 @@ function HomeIdentity() {
               <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/80 font-light">Per questo non offriamo trattamenti standardizzati. Offriamo percorsi di cura costruiti su ascolto, analisi e personalizzazione.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.45, ease: premiumEase }} className="mt-12">
-              <Link to="/la-maison" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">
+              <Link to="/il-metodo" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">
                 Scopri la nostra visione <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </Link>
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.5, delay: 0.2 }} className="relative group">
             <motion.div initial={{ scale: 1.15 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 1.8, ease: premiumEase }} className="aspect-[3/4] overflow-hidden">
-                <img src="/images/woman-portrait.jpg" alt="La visione Luxosa" className="w-full h-full object-cover transition-transform duration-[15s] group-hover:scale-110 ease-out" />
+                <img src="/images/woman-portrait.jpg" alt="La visione Luxosa" className="w-full h-full object-cover transition-transform duration-[15s] group-hover:scale-[1.04] ease-out" />
             </motion.div>
             <div className="absolute -bottom-6 -left-6 w-24 h-24 border-l border-b border-brass/30" />
           </motion.div>
@@ -50,6 +51,12 @@ function CinematicBreak() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
   const inView = useInView(ref, { once: true, margin: '-15%' });
+
+  const quoteWords: { text: string; accent?: boolean }[] = [
+    { text: '"La' }, { text: 'vera' }, { text: 'competenza' },
+    { text: 'non' }, { text: 'si' }, { text: 'dimostra.' },
+    { text: 'Si', accent: true }, { text: 'percepisce."', accent: true },
+  ];
 
   return (
     <section ref={ref} className="relative h-[70vh] min-h-[480px] max-h-[720px] overflow-hidden">
@@ -71,51 +78,26 @@ function CinematicBreak() {
             transition={{ duration: 1.2, ease: premiumEase }}
             className="h-[1px] bg-brass-light mb-10"
           />
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.4, ease: premiumEase, delay: 0.2 }}
-            className="font-serif text-[32px] md:text-[48px] lg:text-[64px] xl:text-[76px] text-white font-light leading-[1.1] tracking-[0.01em] max-w-3xl"
-          >
-            "La vera competenza<br />non si dimostra.<br />
-            <em className="text-brass-light not-italic">Si percepisce.</em>"
-          </motion.p>
+          <p className="font-serif text-[32px] md:text-[48px] lg:text-[64px] xl:text-[76px] text-ivory font-light leading-[1.1] tracking-[0.01em] max-w-3xl">
+            {quoteWords.map((w, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 + i * 0.08, duration: 0.65, ease: premiumEase }}
+                className={`inline-block mr-[0.28em]${w.accent ? ' text-brass-light' : ''}`}
+              >
+                {w.text}
+              </motion.span>
+            ))}
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
-function MaisonValues() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-  const values = [
-    { title: 'Competenza', text: 'Una conoscenza profonda di cute e capelli, aggiornata costantemente con i più avanzati protocolli del settore.' },
-    { title: 'Personalizzazione', text: 'Nessun percorso è uguale a un altro. Ogni scelta nasce dall\'unicità della persona che abbiamo di fronte.' },
-    { title: 'Accompagnamento', text: 'La relazione con la cliente non si esaurisce in un appuntamento. È un percorso continuo di cura e attenzione.' },
-    { title: 'Integrità', text: 'Trasparenza, onestà e rispetto guidano ogni nostra azione. La fiducia si costruisce con i fatti.' },
-  ];
 
-  return (
-    <section className="py-32 md:py-48 lg:py-56 bg-ecru/50">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
-        <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">I Nostri Valori</motion.span>
-          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[46px] lg:text-[56px] font-light leading-[1.08] text-charcoal">I principi che guidano<br />ogni nostra scelta.</motion.h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-14">
-          {values.map((v, i) => (
-            <motion.div key={v.title} initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.2 + i * 0.1 }} className="border-t border-sand/60 pt-8">
-              <h3 className="font-serif text-[24px] font-light text-charcoal mb-3 tracking-wide">{v.title}</h3>
-              <p className="text-[14px] md:text-[15px] leading-[1.8] text-anthracite/65 font-light">{v.text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
 
 
 function HomeMethod() {
@@ -181,7 +163,7 @@ function HomePercorsi() {
               <Link to="/i-percorsi" className="block w-full">
                 <div className="aspect-[4/5] overflow-hidden mb-6 relative">
                     <div className="absolute inset-0 bg-deep/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                    <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-[15s] group-hover:scale-110 ease-out" />
+                    <img src={p.image} alt={p.title} className="w-full h-full object-cover transition-transform duration-[15s] group-hover:scale-[1.04] ease-out" />
                 </div>
                 <h3 className="font-serif text-[22px] md:text-[24px] font-light text-charcoal tracking-wide group-hover:text-brass transition-colors duration-500 leading-snug">{p.title}</h3>
               </Link>
@@ -212,14 +194,17 @@ function HomeCTA() {
         <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.2, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">Inizi da una consulenza.<br />Scopra il percorso più adatto a Lei.</motion.h2>
         <motion.p initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.4, ease: premiumEase }} className="mt-10 text-[15px] md:text-[17px] leading-[1.8] text-anthracite/65 font-light max-w-2xl mx-auto">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</motion.p>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.55, ease: premiumEase }} className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-6">
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-              <Link to="/contatti" className="group inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5 hover:bg-deep shadow-xl shadow-deep/10 hover:shadow-2xl hover:shadow-deep/20 transition-all duration-500">
-                Prenota una consulenza <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-              </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 400, damping: 25 }}>
-              <Link to="/sedi" className="inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/70 font-light border border-anthracite/20 px-10 py-5 hover:border-anthracite/40 hover:text-anthracite transition-all duration-500 bg-transparent">Le nostre sedi</Link>
-          </motion.div>
+          <Link to="/contatti" className="relative overflow-hidden group inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5 shadow-xl shadow-deep/10 hover:shadow-2xl hover:shadow-deep/20 transition-shadow duration-500">
+            <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
+            <span className="relative z-10 flex items-center gap-3">
+              Prenota una consulenza
+              <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+            </span>
+          </Link>
+          <Link to="/sedi" className="relative overflow-hidden group inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/70 font-light border border-anthracite/20 px-10 py-5 bg-transparent transition-colors duration-300">
+            <span className="absolute inset-0 bg-charcoal translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
+            <span className="relative z-10 group-hover:text-ivory transition-colors duration-300">Le nostre sedi</span>
+          </Link>
         </motion.div>
       </div>
     </section>
@@ -232,7 +217,7 @@ export default function HomePage() {
       <Hero />
       <HomeIdentity />
       <CinematicBreak />
-      <MaisonValues />
+      <LuxosaValuesRing />
       <Authority />
       <HomeMethod />
       <HomePercorsi />

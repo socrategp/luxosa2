@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { DiagnosticTakeover } from './DiagnosticTakeover';
 
 // Pagine senza hero scura: il header parte già in modalità solid ivory
 const LIGHT_TOP_PAGES = ['/privacy-policy', '/cookie-policy'];
@@ -13,6 +14,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(isLightTop);
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [quizOpen, setQuizOpen] = useState(false);
   const lastScrollY = useRef(0);
 
   // Reset header state ad ogni cambio pagina
@@ -58,8 +60,7 @@ export default function Header() {
     { label: 'La Maison', href: '/' },
     { label: 'Il Metodo', href: '/il-metodo' },
     { label: 'I Percorsi', href: '/i-percorsi' },
-    { label: 'L\'Esperienza', href: '/esperienza' },
-    { label: 'La Tua Soluzione', href: '/la-tua-soluzione' },
+    { label: "L'Esperienza", href: '/esperienza' },
     { label: 'Sedi', href: '/sedi' },
     { label: 'Contatti', href: '/contatti' },
   ];
@@ -70,6 +71,9 @@ export default function Header() {
 
   return (
     <>
+      <AnimatePresence>
+        {quizOpen && <DiagnosticTakeover onReset={() => setQuizOpen(false)} />}
+      </AnimatePresence>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] ${
           hidden && !menuOpen ? '-translate-y-full' : 'translate-y-0'
@@ -127,16 +131,16 @@ export default function Header() {
 
             {/* CTA desktop */}
             <div className="hidden lg:flex items-center">
-              <Link
-                to="/contatti"
+              <button
+                onClick={() => setQuizOpen(true)}
                 className={`text-[11.5px] tracking-[0.14em] uppercase font-light px-6 py-2.5 border transition-all duration-500 ${
                   solid
                     ? 'border-anthracite/25 text-anthracite hover:bg-anthracite hover:text-ivory'
                     : 'border-white/35 text-white/90 hover:border-white/60 hover:text-white'
                 }`}
               >
-                Prenota
-              </Link>
+                La tua soluzione
+              </button>
             </div>
 
             {/* Hamburger mobile */}
@@ -191,20 +195,12 @@ export default function Header() {
                 transition={{ delay: 0.48, duration: 0.5, ease: [0.25, 0.1, 0, 1] }}
                 className="mt-10 flex flex-col items-center gap-4"
               >
-                <Link
-                  to="/contatti"
-                  onClick={() => setMenuOpen(false)}
-                  className="text-[12px] tracking-[0.18em] uppercase text-ivory border border-ivory/25 px-8 py-3 hover:bg-ivory/10 transition-all duration-400"
+                <button
+                  onClick={() => { setMenuOpen(false); setQuizOpen(true); }}
+                  className="text-[12px] tracking-[0.18em] uppercase text-ivory border border-ivory/25 px-8 py-3 hover:bg-ivory/10 transition-all duration-300"
                 >
-                  Prenota una consulenza
-                </Link>
-                <a
-                  href="tel:+390902403220"
-                  className="flex items-center gap-2 text-stone/70 text-[13px] tracking-wider mt-2 hover:text-stone transition-colors"
-                >
-                  <Phone size={13} strokeWidth={1.5} />
-                  +39 090 240 3220
-                </a>
+                  La tua soluzione
+                </button>
               </motion.div>
             </nav>
           </motion.div>

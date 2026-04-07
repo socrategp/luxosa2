@@ -16,7 +16,7 @@ export default function Experience() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="esperienza" className="py-32 md:py-48 lg:py-56 bg-ivory-warm">
+    <section id="esperienza" className="py-20 md:py-32 lg:py-40 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left: Image */}

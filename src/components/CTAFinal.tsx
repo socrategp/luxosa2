@@ -7,7 +7,7 @@ export default function CTAFinal() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="contatti" className="py-32 md:py-48 lg:py-56 bg-ivory-warm relative overflow-hidden">
+    <section id="contatti" className="py-20 md:py-32 lg:py-40 bg-ivory-warm relative overflow-hidden">
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0" style={{

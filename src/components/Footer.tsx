@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {

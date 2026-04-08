@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import Method from '../components/Method';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 function MethodIntro() {
   const ref = useRef(null);
@@ -209,7 +209,7 @@ export default function IlMetodoPage() {
         label="Il Metodo"
         title="Ogni scelta nasce da una visione."
         subtitle="In Luxosa il risultato non nasce dall'intuizione del momento, ma da un metodo chiaro, professionale e costruito per accompagnarti nel tempo."
-        image="/images/texture.jpg"
+        image="/images/texture-new.jpg"
       />
       <MethodIntro />
       <Method />

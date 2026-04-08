@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 const esperienze = [
   { name: 'Piega Lux', copy: `Non una semplice piega. Un gesto che nutre, valorizza e restituisce luce al capello nel suo miglior momento.` },

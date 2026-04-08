@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 function SediManifesto() {
   const ref = useRef(null);

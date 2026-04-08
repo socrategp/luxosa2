@@ -1,33 +1,35 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import MainLayout from './layouts/MainLayout';
-import HomePage from './pages/HomePage';
-import IlMetodoPage from './pages/IlMetodoPage';
-import IPercorsiPage from './pages/IPercorsiPage';
-import EsperienzaPage from './pages/EsperienzaPage';
-import LaTuaSoluzionePage from './pages/LaTuaSoluzionePage';
-import SediPage from './pages/SediPage';
-import ContattiPage from './pages/ContattiPage';
-import MessinaCavourPage from './pages/sedi/MessinaCavourPage';
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
-import CookiePolicyPage from './pages/CookiePolicyPage';
+
+const HomePage = lazy(() => import('./pages/HomePage'));
+const IlMetodoPage = lazy(() => import('./pages/IlMetodoPage'));
+const IPercorsiPage = lazy(() => import('./pages/IPercorsiPage'));
+const EsperienzaPage = lazy(() => import('./pages/EsperienzaPage'));
+const SediPage = lazy(() => import('./pages/SediPage'));
+const ContattiPage = lazy(() => import('./pages/ContattiPage'));
+const MessinaCavourPage = lazy(() => import('./pages/sedi/MessinaCavourPage'));
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
+const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/il-metodo" element={<IlMetodoPage />} />
-          <Route path="/i-percorsi" element={<IPercorsiPage />} />
-          <Route path="/esperienza" element={<EsperienzaPage />} />
-          <Route path="/la-tua-soluzione" element={<LaTuaSoluzionePage />} />
-          <Route path="/sedi" element={<SediPage />} />
-          <Route path="/sedi/messina-cavour" element={<MessinaCavourPage />} />
-          <Route path="/contatti" element={<ContattiPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/il-metodo" element={<IlMetodoPage />} />
+            <Route path="/i-percorsi" element={<IPercorsiPage />} />
+            <Route path="/esperienza" element={<EsperienzaPage />} />
+            <Route path="/sedi" element={<SediPage />} />
+            <Route path="/sedi/messina-cavour" element={<MessinaCavourPage />} />
+            <Route path="/contatti" element={<ContattiPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

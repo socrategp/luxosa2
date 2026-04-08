@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Send } from 'lucide-react';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 function ContactMain() {
   const ref = useRef(null);

@@ -15,7 +15,7 @@ const navItems = [
   { label: 'Contatti', href: '/contatti' },
 ];
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 export default function Header() {
   const [scrollY, setScrollY] = useState(0);

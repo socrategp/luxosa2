@@ -6,7 +6,7 @@ import { ArrowRight } from 'lucide-react';
 import Authority from '../components/Authority';
 import LuxosaValuesRing from '../components/LuxosaValuesRing';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 function HomeIdentity() {
   const ref = useRef(null);

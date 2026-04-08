@@ -7,7 +7,7 @@ import PageHero from '../components/PageHero';
 import Percorsi from '../components/Percorsi';
 import { DiagnosticTakeover } from '../components/DiagnosticTakeover';
 
-const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
+import { premiumEase } from '../lib/animations';
 
 function PercorsiIntro() {
   const ref = useRef(null);

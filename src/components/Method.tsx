@@ -265,7 +265,7 @@ export default function Method() {
         </div>
 
         {/* Main content: Circle + Phase Info */}
-        <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-20 items-start">
+        <div className="grid lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-20 items-center">
           {/* Left: Circle visualization */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -276,7 +276,7 @@ export default function Method() {
           </motion.div>
 
           {/* Right: Phase info panel */}
-          <div className="lg:pt-20">
+          <div>
             <AnimatePresence mode="wait">
               <motion.div
                 key={`phase-${phase}-${cycleCount}`}

@@ -115,8 +115,9 @@ export default function LuxosaValuesRing() {
           {/* ─── SVG Ring ─────────────────────────────────────── */}
           <div className="shrink-0 w-full max-w-[680px]">
             <svg
-              viewBox="0 0 700 700"
+              viewBox="0 0 750 750"
               className="w-full h-auto"
+              style={{ overflow: 'visible' }}
               role="group"
               aria-label="I valori Luxosa"
             >
@@ -201,16 +202,17 @@ export default function LuxosaValuesRing() {
                       y={ly}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      fontFamily="Cormorant Garamond, serif"
-                      fontWeight={isActive ? '400' : '300'}
-                      letterSpacing="0.04em"
+                      fontFamily="Jost, sans-serif"
+                      fontWeight="300"
+                      letterSpacing="0.16em"
+                      fontSize="17"
                       animate={{
-                        fill: isActive ? '#B09872' : 'rgba(40,37,32,0.38)',
-                        fontSize: isActive ? 15 : 13.5,
+                        fillOpacity: isActive ? 1 : 0.3,
                       }}
+                      fill={isActive ? '#B09872' : '#282520'}
                       transition={{ duration: 0.9, ease: premiumEase }}
                     >
-                      {v.title}
+                      {isActive ? v.title.toUpperCase() : v.title}
                     </motion.text>
 
                     {/* Active dot */}

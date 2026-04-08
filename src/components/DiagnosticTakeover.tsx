@@ -21,6 +21,7 @@ interface OptionDef {
   text: string;
   subtext?: string;
   scores: Partial<Scores>;
+  image?: string;
 }
 
 interface QuestionDef {
@@ -54,6 +55,124 @@ const MAX_SCORES: Scores = {
   colore: 15,
   armonia: 15,
   rituale: 20,
+};
+
+// ── OPTION IMAGES ─────────────────────────────────────────────
+// Path: /images/quiz/options/{id}.jpg — 800x600, 4:3, warm premium tones
+// Fallback: themed gradient if image not yet available
+
+const OPTION_IMAGES: Record<string, string> = {
+  // D1 — Tipo di capello
+  d1_lisci: '/images/quiz/options/d1_lisci.jpg',
+  d1_mossi: '/images/quiz/options/d1_mossi.jpg',
+  d1_ricci: '/images/quiz/options/d1_ricci.jpg',
+  d1_molto_ricci: '/images/quiz/options/d1_molto_ricci.jpg',
+  // D2 — Stato attuale
+  d2_fragili: '/images/quiz/options/d2_fragili.jpg',
+  d2_crespi: '/images/quiz/options/d2_crespi.jpg',
+  d2_sottili: '/images/quiz/options/d2_sottili.jpg',
+  d2_grassi: '/images/quiz/options/d2_grassi.jpg',
+  d2_secchi: '/images/quiz/options/d2_secchi.jpg',
+  d2_sani: '/images/quiz/options/d2_sani.jpg',
+  // D3 — Priorità
+  d3_cute: '/images/quiz/options/d3_cute.jpg',
+  d3_rovinato: '/images/quiz/options/d3_rovinato.jpg',
+  d3_colore: '/images/quiz/options/d3_colore.jpg',
+  d3_forma: '/images/quiz/options/d3_forma.jpg',
+  d3_tutto: '/images/quiz/options/d3_tutto.jpg',
+  // D4a–D7a — Cute
+  d4a_prurito: '/images/quiz/options/d4a_prurito.jpg',
+  d4a_desquamazione: '/images/quiz/options/d4a_desquamazione.jpg',
+  d4a_grassa: '/images/quiz/options/d4a_grassa.jpg',
+  d4a_rossori: '/images/quiz/options/d4a_rossori.jpg',
+  d4a_tira: '/images/quiz/options/d4a_tira.jpg',
+  d5a_settimane: '/images/quiz/options/d5a_settimane.jpg',
+  d5a_mesi: '/images/quiz/options/d5a_mesi.jpg',
+  d5a_anno: '/images/quiz/options/d5a_anno.jpg',
+  d5a_sempre: '/images/quiz/options/d5a_sempre.jpg',
+  d6a_mai: '/images/quiz/options/d6a_mai.jpg',
+  d6a_prodotti: '/images/quiz/options/d6a_prodotti.jpg',
+  d6a_salone: '/images/quiz/options/d6a_salone.jpg',
+  d6a_dermatologo: '/images/quiz/options/d6a_dermatologo.jpg',
+  d7a_no: '/images/quiz/options/d7a_no.jpg',
+  d7a_lieve: '/images/quiz/options/d7a_lieve.jpg',
+  d7a_evidente: '/images/quiz/options/d7a_evidente.jpg',
+  // D4b–D7b — Struttura
+  d4b_colorazioni: '/images/quiz/options/d4b_colorazioni.jpg',
+  d4b_decolorazioni: '/images/quiz/options/d4b_decolorazioni.jpg',
+  d4b_stiratura: '/images/quiz/options/d4b_stiratura.jpg',
+  d4b_calore: '/images/quiz/options/d4b_calore.jpg',
+  d4b_aggressivi: '/images/quiz/options/d4b_aggressivi.jpg',
+  d5b_sane: '/images/quiz/options/d5b_sane.jpg',
+  d5b_aperte: '/images/quiz/options/d5b_aperte.jpg',
+  d5b_spezzano: '/images/quiz/options/d5b_spezzano.jpg',
+  d6b_morbido: '/images/quiz/options/d6b_morbido.jpg',
+  d6b_ruvido: '/images/quiz/options/d6b_ruvido.jpg',
+  d6b_secco: '/images/quiz/options/d6b_secco.jpg',
+  d6b_paglia: '/images/quiz/options/d6b_paglia.jpg',
+  d7b_morbidezza: '/images/quiz/options/d7b_morbidezza.jpg',
+  d7b_rinforzare: '/images/quiz/options/d7b_rinforzare.jpg',
+  d7b_ricominciare: '/images/quiz/options/d7b_ricominciare.jpg',
+  // D4c–D7c — Colore
+  d4c_naturale: '/images/quiz/options/d4c_naturale.jpg',
+  d4c_tinta: '/images/quiz/options/d4c_tinta.jpg',
+  d4c_decolorazioni: '/images/quiz/options/d4c_decolorazioni.jpg',
+  d4c_grigi_coprire: '/images/quiz/options/d4c_grigi_coprire.jpg',
+  d4c_grigi_valorizzare: '/images/quiz/options/d4c_grigi_valorizzare.jpg',
+  d5c_spegne: '/images/quiz/options/d5c_spegne.jpg',
+  d5c_luminoso: '/images/quiz/options/d5c_luminoso.jpg',
+  d5c_uniforme: '/images/quiz/options/d5c_uniforme.jpg',
+  d5c_viso: '/images/quiz/options/d5c_viso.jpg',
+  d5c_danneggia: '/images/quiz/options/d5c_danneggia.jpg',
+  d6c_frequente: '/images/quiz/options/d6c_frequente.jpg',
+  d6c_normale: '/images/quiz/options/d6c_normale.jpg',
+  d6c_raro: '/images/quiz/options/d6c_raro.jpg',
+  d6c_mai: '/images/quiz/options/d6c_mai.jpg',
+  d7c_naturalezza: '/images/quiz/options/d7c_naturalezza.jpg',
+  d7c_luminosita: '/images/quiz/options/d7c_luminosita.jpg',
+  d7c_copertura: '/images/quiz/options/d7c_copertura.jpg',
+  d7c_cambiamento: '/images/quiz/options/d7c_cambiamento.jpg',
+  // D4d–D7d — Forma
+  d4d_volume: '/images/quiz/options/d4d_volume.jpg',
+  d4d_ricci: '/images/quiz/options/d4d_ricci.jpg',
+  d4d_piega: '/images/quiz/options/d4d_piega.jpg',
+  d4d_taglio: '/images/quiz/options/d4d_taglio.jpg',
+  d5d_poco: '/images/quiz/options/d5d_poco.jpg',
+  d5d_medio: '/images/quiz/options/d5d_medio.jpg',
+  d5d_molto: '/images/quiz/options/d5d_molto.jpg',
+  d5d_troppo: '/images/quiz/options/d5d_troppo.jpg',
+  d6d_mai: '/images/quiz/options/d6d_mai.jpg',
+  d6d_qualche: '/images/quiz/options/d6d_qualche.jpg',
+  d6d_sempre: '/images/quiz/options/d6d_sempre.jpg',
+  d7d_liberi: '/images/quiz/options/d7d_liberi.jpg',
+  d7d_disciplinati: '/images/quiz/options/d7d_disciplinati.jpg',
+  d7d_voluminosi: '/images/quiz/options/d7d_voluminosi.jpg',
+  d7d_scoprire: '/images/quiz/options/d7d_scoprire.jpg',
+  // D4e–D7e — Completo
+  d4e_cute: '/images/quiz/options/d4e_cute.jpg',
+  d4e_capello: '/images/quiz/options/d4e_capello.jpg',
+  d4e_colore: '/images/quiz/options/d4e_colore.jpg',
+  d4e_forma: '/images/quiz/options/d4e_forma.jpg',
+  d4e_nonso: '/images/quiz/options/d4e_nonso.jpg',
+  d5e_cercando: '/images/quiz/options/d5e_cercando.jpg',
+  d5e_insoddisfatta: '/images/quiz/options/d5e_insoddisfatta.jpg',
+  d5e_prima: '/images/quiz/options/d5e_prima.jpg',
+  d6e_risultati: '/images/quiz/options/d6e_risultati.jpg',
+  d6e_presa: '/images/quiz/options/d6e_presa.jpg',
+  d6e_capire: '/images/quiz/options/d6e_capire.jpg',
+  d6e_tutto: '/images/quiz/options/d6e_tutto.jpg',
+  d7e_se_funziona: '/images/quiz/options/d7e_se_funziona.jpg',
+  d7e_continuita: '/images/quiz/options/d7e_continuita.jpg',
+  d7e_valutare: '/images/quiz/options/d7e_valutare.jpg',
+  // D8–D9 — Stile di vita
+  d8_ogni_giorno: '/images/quiz/options/d8_ogni_giorno.jpg',
+  d8_2_3: '/images/quiz/options/d8_2_3.jpg',
+  d8_settimana: '/images/quiz/options/d8_settimana.jpg',
+  d8_meno: '/images/quiz/options/d8_meno.jpg',
+  d9_amo: '/images/quiz/options/d9_amo.jpg',
+  d9_non_piacciono: '/images/quiz/options/d9_non_piacciono.jpg',
+  d9_trascuro: '/images/quiz/options/d9_trascuro.jpg',
+  d9_ci_lavoro: '/images/quiz/options/d9_ci_lavoro.jpg',
 };
 
 // ── FASE 1: CONOSCENZA (comuni a tutte) ────────────────────────
@@ -772,12 +891,16 @@ function QuizContent({
         </div>
       )}
 
-      {/* Option cards */}
+      {/* Option cards with images */}
       {!isText && (
         <>
-          <div className={`grid grid-cols-1 sm:grid-cols-2 gap-3 ${q.options.length >= 5 ? 'lg:grid-cols-3' : ''}`}>
+          <div className={`grid grid-cols-2 gap-3 md:gap-4 ${
+            q.options.length === 3 ? 'sm:grid-cols-3' :
+            q.options.length >= 5 ? 'lg:grid-cols-3' : ''
+          }`}>
             {q.options.map((opt, i) => {
               const isSelected = selectedIds.includes(opt.id);
+              const imgSrc = OPTION_IMAGES[opt.id];
               return (
                 <motion.button
                   key={opt.id}
@@ -789,32 +912,61 @@ function QuizContent({
                       ? onMultiToggle(q.id, opt.id, maxSel)
                       : onSingleSelect(q.id, opt.id)
                   }
-                  className={`group relative text-left p-4 md:p-5 border transition-all duration-300 ${
+                  className={`group relative text-left overflow-hidden border transition-all duration-500 ${
                     isSelected
-                      ? 'border-brass bg-brass/5 shadow-sm'
-                      : 'border-sand/40 bg-white/60 hover:border-brass/35 hover:bg-white hover:shadow-sm'
+                      ? 'border-brass shadow-md ring-1 ring-brass/20'
+                      : 'border-sand/40 bg-white/60 hover:border-brass/35 hover:shadow-md'
                   }`}
                 >
-                  <div className={`absolute top-0 left-0 w-[3px] transition-all duration-300 ${
-                    isSelected ? 'h-full bg-brass' : 'h-0 bg-sand/20 group-hover:h-full'
-                  }`} />
-                  <div className="relative z-10">
-                    {isMulti && (
-                      <div className={`w-4 h-4 border mb-3 flex items-center justify-center transition-all duration-300 ${
-                        isSelected ? 'bg-brass border-brass' : 'border-anthracite/25'
-                      }`}>
-                        {isSelected && <Check size={10} strokeWidth={2.5} className="text-ivory" />}
-                      </div>
+                  {/* Image area */}
+                  <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-ecru via-sand/30 to-tortora/20">
+                    {imgSrc && (
+                      <img
+                        src={imgSrc}
+                        alt={opt.text}
+                        className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                        loading="lazy"
+                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                      />
                     )}
-                    <p className={`text-[13px] md:text-[14px] font-light leading-[1.5] transition-colors duration-300 ${
+                    {/* Gradient overlay for readability */}
+                    <div className={`absolute inset-0 transition-opacity duration-500 ${
+                      isSelected
+                        ? 'bg-gradient-to-t from-brass/20 via-transparent to-brass/5'
+                        : 'bg-gradient-to-t from-deep/10 via-transparent to-transparent'
+                    }`} />
+                    {/* Selected check badge */}
+                    {isSelected && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute top-2.5 right-2.5 w-6 h-6 bg-brass flex items-center justify-center"
+                      >
+                        <Check size={12} strokeWidth={2.5} className="text-ivory" />
+                      </motion.div>
+                    )}
+                    {/* Multi-select checkbox */}
+                    {isMulti && !isSelected && (
+                      <div className="absolute top-2.5 right-2.5 w-5 h-5 border border-ivory/60 bg-deep/20 backdrop-blur-sm" />
+                    )}
+                  </div>
+
+                  {/* Text area */}
+                  <div className="px-3 py-3 md:px-4 md:py-3.5">
+                    <p className={`text-[12px] md:text-[13px] font-light leading-[1.4] transition-colors duration-300 ${
                       isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
                     }`}>
                       {opt.text}
                     </p>
                     {opt.subtext && (
-                      <p className="mt-1 text-[11px] md:text-[12px] leading-[1.6] text-anthracite/38 font-light">{opt.subtext}</p>
+                      <p className="mt-1 text-[10px] md:text-[11px] leading-[1.5] text-anthracite/35 font-light line-clamp-2">{opt.subtext}</p>
                     )}
                   </div>
+
+                  {/* Bottom accent line */}
+                  <div className={`absolute bottom-0 left-0 right-0 h-[2px] transition-all duration-500 ${
+                    isSelected ? 'bg-brass' : 'bg-transparent group-hover:bg-brass/20'
+                  }`} />
                 </motion.button>
               );
             })}

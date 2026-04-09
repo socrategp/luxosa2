@@ -34,7 +34,7 @@ function EsperienzaIntro() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
-            className="text-[15px] md:text-[17px] leading-[1.85] text-anthracite/75 font-light"
+            className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/75 font-light"
           >
             Le esperienze Luxosa non sono voci di un listino. Sono i gesti attraverso cui il metodo prende forma, ciascuno con una propria identità, una propria intenzione, un proprio modo di prendersi cura di te.
           </motion.p>
@@ -42,7 +42,7 @@ function EsperienzaIntro() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
-            className="mt-5 text-[15px] md:text-[17px] leading-[1.85] text-anthracite/75 font-light"
+            className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/75 font-light"
           >
             Qui trovi il mondo Luxosa come mappa di possibilità, non come catalogo.
           </motion.p>
@@ -63,7 +63,7 @@ function PricingNote() {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: premiumEase }}
-          className="text-[14px] md:text-[15px] font-light italic text-anthracite/45 text-center max-w-2xl mx-auto leading-[1.8] border-t border-sand/50 pt-10"
+          className="text-[17px] md:text-[18px] font-light italic text-anthracite/45 text-center max-w-2xl mx-auto leading-[1.8] border-t border-sand/50 pt-10"
         >
           I prezzi delle esperienze Luxosa sono disponibili su richiesta in sede. Ogni preventivo è personalizzato, perché ogni capello è diverso.
         </motion.p>

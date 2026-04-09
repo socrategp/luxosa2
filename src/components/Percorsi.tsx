@@ -100,7 +100,7 @@ function PercorsoRow({ percorso, index }: { percorso: typeof percorsi[0]; index:
         </h3>
         <div className="h-[1px] w-8 bg-brass/50 mb-5" />
         <p className="text-[11px] tracking-[0.2em] uppercase text-brass-muted font-light mb-5">{percorso.focus}</p>
-        <p className="text-[14px] md:text-[15px] leading-[1.85] text-anthracite/65 font-light max-w-sm">
+        <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light max-w-sm">
           {percorso.desc}
         </p>
       </motion.div>

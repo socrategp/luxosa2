@@ -64,7 +64,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
-            className="mt-6 md:mt-8 text-white/70 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide"
+            className="mt-6 md:mt-8 text-white/70 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
           >
             Luxosa è la maison italiana dedicata alla cura e alla bellezza dei capelli. Qui la donna viene accolta, ascoltata e accompagnata con metodo, eleganza e attenzione reale.
           </motion.p>

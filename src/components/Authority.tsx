@@ -93,7 +93,7 @@ export default function Authority() {
               <h3 className="font-serif text-[19px] md:text-[20px] font-light text-ivory mb-3 tracking-wide">
                 {p.title}
               </h3>
-              <p className="text-[13px] md:text-[14px] leading-[1.75] text-ivory/50 font-light">
+              <p className="text-[16px] md:text-[17px] leading-[1.75] text-ivory/50 font-light">
                 {p.text}
               </p>
             </motion.div>
@@ -119,10 +119,10 @@ export default function Authority() {
                 transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.6 + i * 0.1 }}
                 className="text-center"
               >
-                <p className="font-serif text-[17px] md:text-[18px] italic font-light leading-[1.7] text-ivory/70 mb-5">
+                <p className="font-serif text-[20px] md:text-[18px] italic font-light leading-[1.7] text-ivory/70 mb-5">
                   "{t.quote}"
                 </p>
-                <p className="text-[13px] tracking-[0.1em] uppercase text-ivory/90 font-light">
+                <p className="text-[16px] tracking-[0.1em] uppercase text-ivory/90 font-light">
                   {t.name}
                 </p>
                 <p className="text-[11px] tracking-[0.15em] text-ivory/40 font-light mt-1">

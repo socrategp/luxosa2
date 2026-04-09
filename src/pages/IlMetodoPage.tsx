@@ -33,7 +33,7 @@ function MethodIntro() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
-            className="text-[15px] md:text-[17px] leading-[1.85] text-anthracite/80 font-light"
+            className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
           >
             In Luxosa il risultato non nasce dall'intuizione del momento, ma da un metodo chiaro, professionale e costruito per accompagnarti nel tempo.
           </motion.p>
@@ -41,7 +41,7 @@ function MethodIntro() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
-            className="mt-5 text-[15px] md:text-[17px] leading-[1.85] text-anthracite/80 font-light"
+            className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
           >
             Ogni donna entra in un sistema di lavoro che osserva, comprende, definisce una direzione e la sviluppa con continuità. Non una procedura rigida: un modo preciso di prendersi cura di te.
           </motion.p>
@@ -151,10 +151,10 @@ function PrimoIncontro() {
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
               className="mt-8 space-y-5"
             >
-              <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/75 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
                 Il primo incontro in Luxosa è un momento di conoscenza approfondita. Non una valutazione rapida, ma il tempo necessario per ascoltare la tua storia, osservare il tuo capello, capire le tue abitudini e chiarire dove desideri arrivare.
               </p>
-              <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/75 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
                 Da qui nasce la direzione del percorso. Ogni informazione rilevante viene custodita e aggiornata nel tempo, così che nulla si perda tra una seduta e l'altra e ogni passo successivo abbia continuità.
               </p>
             </motion.div>

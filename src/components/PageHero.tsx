@@ -17,12 +17,12 @@ export default function PageHero({ label, title, subtitle, image }: PageHeroProp
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <section ref={ref} className="relative h-[60vh] min-h-[450px] max-h-[650px] overflow-hidden">
+    <section ref={ref} className="relative h-[85vh] min-h-[620px] max-h-[900px] overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <img src={image} alt={title} className="w-full h-[120%] -top-[10%] object-cover absolute" />
         <div className="absolute inset-0 bg-gradient-to-b from-deep/40 via-deep/30 to-deep/90" />
       </motion.div>
-      <div className="relative h-full flex flex-col justify-end pb-16 md:pb-20">
+      <div className="relative h-full flex flex-col justify-end pb-24 md:pb-32 lg:pb-36">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
           <motion.div
             initial={{ width: 0 }}
@@ -51,7 +51,7 @@ export default function PageHero({ label, title, subtitle, image }: PageHeroProp
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.65 }}
-              className="mt-5 text-white/60 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide"
+              className="mt-5 text-white/60 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
             >
               {subtitle}
             </motion.p>

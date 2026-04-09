@@ -301,11 +301,11 @@ export default function Method() {
 
                 {/* Phase description */}
                 <div className="space-y-5">
-                  <p className="text-[13px] md:text-[14px] lg:text-[14px] leading-[1.8] text-ivory/65 font-light">
+                  <p className="text-[16px] md:text-[17px] lg:text-[17px] leading-[1.8] text-ivory/65 font-light">
                     {fasi[phase].accade}
                   </p>
 
-                  <p className="text-[13px] md:text-[14px] lg:text-[14px] leading-[1.8] text-brass-light/70 font-light italic">
+                  <p className="text-[16px] md:text-[17px] lg:text-[17px] leading-[1.8] text-brass-light/70 font-light italic">
                     "{fasi[phase].sente}"
                   </p>
                 </div>

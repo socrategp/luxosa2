@@ -763,11 +763,11 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
       <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-2">
         Scopri il tuo percorso ideale
       </h2>
-      <p className="text-[14px] leading-[1.8] text-anthracite/55 font-light mb-8">
+      <p className="text-[17px] leading-[1.8] text-anthracite/55 font-light mb-8">
         Rispondi a poche domande sul tuo capello, sulla tua cute e sulle tue abitudini. In pochi minuti riceverai un suggerimento personalizzato.
       </p>
 
-      <div className="border border-sand/50 p-6 md:p-8 bg-ecru/20 mb-8 space-y-4 text-[13px] leading-[1.85] text-anthracite/65 font-light">
+      <div className="border border-sand/50 p-6 md:p-8 bg-ecru/20 mb-8 space-y-4 text-[16px] leading-[1.85] text-anthracite/65 font-light">
         <p>
           <strong className="text-charcoal/80 font-normal">IMPORTANTE:</strong> Il risultato di questo test ha valore esclusivamente orientativo e non costituisce in alcun modo una diagnosi medica, tricologica o dermatologica. La valutazione definitiva avviene esclusivamente in sede, durante la consulenza professionale con la tua professionista Luxosa.
         </p>
@@ -793,7 +793,7 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
         }`}>
           {accepted && <Check size={11} strokeWidth={2.5} className="text-ivory" />}
         </div>
-        <span className="text-[13px] leading-[1.7] text-anthracite/65 font-light">
+        <span className="text-[16px] leading-[1.7] text-anthracite/65 font-light">
           Ho letto e accetto le condizioni sopra indicate. *
         </span>
       </button>
@@ -867,7 +867,7 @@ function QuizContent({
           {q.question}
         </h2>
         {q.subtitle && (
-          <p className="text-[12px] md:text-[13px] text-anthracite/40 font-light italic">{q.subtitle}</p>
+          <p className="text-[12px] md:text-[16px] text-anthracite/40 font-light italic">{q.subtitle}</p>
         )}
         <div className="w-8 h-[1px] bg-brass/30 mx-auto mt-5" />
       </div>
@@ -880,7 +880,7 @@ function QuizContent({
             onChange={e => onTextChange(q.id, e.target.value)}
             maxLength={500}
             placeholder="Scrivi qui liberamente…"
-            className="w-full h-36 md:h-44 bg-white/60 border border-sand/50 px-5 py-4 text-[14px] text-anthracite/80 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/25"
+            className="w-full h-36 md:h-44 bg-white/60 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/25"
           />
           <div className="text-right mt-1.5">
             <span className="text-[11px] text-anthracite/25 font-light">{textValue.length}/500</span>
@@ -953,7 +953,7 @@ function QuizContent({
 
                   {/* Text area */}
                   <div className="px-3 py-3 md:px-4 md:py-3.5">
-                    <p className={`text-[12px] md:text-[13px] font-light leading-[1.4] transition-colors duration-300 ${
+                    <p className={`text-[12px] md:text-[16px] font-light leading-[1.4] transition-colors duration-300 ${
                       isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
                     }`}>
                       {opt.text}
@@ -1020,7 +1020,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
     onSubmit({ nome: nome.trim(), email: email.trim(), whatsapp: whatsapp.trim() });
   };
 
-  const inputClass = 'w-full bg-white/60 border border-sand/50 px-5 py-4 text-[14px] text-anthracite/80 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/28';
+  const inputClass = 'w-full bg-white/60 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/28';
 
   return (
     <motion.div
@@ -1041,7 +1041,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
       <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">
         Ricevi il tuo risultato.
       </h2>
-      <p className="text-[14px] leading-[1.8] text-anthracite/55 font-light mb-10">
+      <p className="text-[17px] leading-[1.8] text-anthracite/55 font-light mb-10">
         Per ricevere il tuo risultato personalizzato e permetterci di contattarti per la consulenza gratuita in sede, lasciaci i tuoi dati.
       </p>
 
@@ -1146,7 +1146,7 @@ function ResultScreen({
             <h3 className="font-serif text-[32px] md:text-[42px] font-light leading-[1.1] text-charcoal mb-2">
               {content.nome}
             </h3>
-            <p className="font-serif text-[16px] md:text-[18px] italic text-anthracite/40 font-light">
+            <p className="font-serif text-[19px] md:text-[18px] italic text-anthracite/40 font-light">
               {content.sottotitolo}
             </p>
           </div>
@@ -1171,11 +1171,11 @@ function ResultScreen({
           <div className="space-y-6">
             <div>
               <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-2">Cosa risolve</span>
-              <p className="text-[14px] md:text-[15px] leading-[1.85] text-anthracite/65 font-light">{content.cosaRisolve}</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light">{content.cosaRisolve}</p>
             </div>
             <div className="border-t border-sand/35 pt-5">
               <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-2">Perché è giusto per te</span>
-              <p className="text-[14px] md:text-[15px] leading-[1.85] text-anthracite/65 font-light italic">{content.percheTe}</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light italic">{content.percheTe}</p>
             </div>
           </div>
         </div>
@@ -1195,7 +1195,7 @@ function ResultScreen({
                 <div className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[6px] flex-shrink-0" />
                   <div>
-                    <h4 className="font-serif text-[17px] font-light text-charcoal mb-1">{es.nome}</h4>
+                    <h4 className="font-serif text-[20px] font-light text-charcoal mb-1">{es.nome}</h4>
                     <p className="text-[12px] leading-[1.7] text-anthracite/45 font-light">{es.sottotitolo}</p>
                   </div>
                 </div>

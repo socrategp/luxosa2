@@ -17,7 +17,7 @@ function Section({ number, title, children }: SectionProps) {
           {title}
         </h2>
       </div>
-      <div className="pl-10 md:pl-16 space-y-4 text-[14px] md:text-[15px] leading-[1.85] text-anthracite/70 font-light">
+      <div className="pl-10 md:pl-16 space-y-4 text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">
         {children}
       </div>
     </div>
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease, delay: 0.45 }}
-            className="mt-6 text-[13px] text-stone font-light tracking-wide"
+            className="mt-6 text-[16px] text-stone font-light tracking-wide"
           >
             Ultimo aggiornamento: [data da definire] — Versione 1.0
           </motion.p>
@@ -69,10 +69,10 @@ export default function PrivacyPolicyPage() {
 
           {/* Intro */}
           <div className="mb-14 pb-10 border-b border-sand/60">
-            <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/75 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
               La presente informativa descrive le modalità di raccolta e trattamento dei dati personali degli utenti che visitano il sito web di Luxosa (di seguito "Sito") o usufruiscono dei servizi offerti dalla Maison, in conformità al Regolamento (UE) 2016/679 (GDPR) e al D.Lgs. 196/2003, come modificato dal D.Lgs. 101/2018.
             </p>
-            <p className="mt-5 text-[15px] md:text-[16px] leading-[1.85] text-anthracite/75 font-light">
+            <p className="mt-5 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
               Si invita a leggere attentamente il presente documento prima di fornire qualsiasi dato personale o di continuare la navigazione sul Sito.
             </p>
           </div>

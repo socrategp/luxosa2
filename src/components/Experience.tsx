@@ -41,7 +41,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="text-[15px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light"
+            className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/70 font-light"
           >
             Non le scegli come si sfoglia un menu. Le scopri insieme a noi, nel contesto del percorso che stai costruendo.
           </motion.p>
@@ -57,7 +57,7 @@ export default function Experience() {
               className="border-t border-sand/50 py-8"
             >
               <h3 className="font-serif text-[22px] md:text-[24px] font-light text-charcoal mb-3 tracking-wide">{e.name}</h3>
-              <p className="text-[14px] leading-[1.8] text-anthracite/60 font-light">{e.copy}</p>
+              <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light">{e.copy}</p>
             </motion.div>
           ))}
         </div>

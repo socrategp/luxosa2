@@ -38,7 +38,7 @@ export default function CTAFinal() {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }}
-          className="mt-8 text-[15px] md:text-[17px] leading-[1.8] text-anthracite/65 font-light max-w-xl mx-auto"
+          className="mt-8 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/65 font-light max-w-xl mx-auto"
         >
           La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo.
           È il primo passo di un percorso di cura pensato interamente per Lei.
@@ -71,7 +71,7 @@ export default function CTAFinal() {
           transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }}
           className="mt-16 pt-10 border-t border-sand/50"
         >
-          <p className="font-serif text-[17px] md:text-[19px] italic text-charcoal/50 font-light">
+          <p className="font-serif text-[20px] md:text-[19px] italic text-charcoal/50 font-light">
             Si affidi a un metodo di cura pensato per Lei.
           </p>
         </motion.div>

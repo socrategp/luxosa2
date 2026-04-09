@@ -60,10 +60,10 @@ function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
               </div>
 
               {/* Intro */}
-              <p className="text-[14px] md:text-[15px] leading-[1.85] text-anthracite/65 font-light text-center mb-4">
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light text-center mb-4">
                 Un accesso riservato a una selezione di clienti già parte del mondo Luxosa.
               </p>
-              <p className="text-[14px] md:text-[15px] leading-[1.85] text-anthracite/65 font-light text-center mb-10">
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light text-center mb-10">
                 Il Club nasce per offrire un'esperienza ancora più esclusiva, fatta di priorità, attenzioni dedicate e occasioni selezionate.
               </p>
 
@@ -83,7 +83,7 @@ function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="w-1 h-1 rounded-full bg-brass mt-2.5 shrink-0" />
-                    <span className="text-[13px] md:text-[14px] leading-[1.8] text-anthracite/60 font-light">
+                    <span className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/60 font-light">
                       {item}
                     </span>
                   </li>
@@ -95,10 +95,10 @@ function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
 
               {/* Access restriction */}
               <div className="text-center mb-2">
-                <p className="text-[13px] md:text-[14px] leading-[1.85] text-anthracite/55 font-light mb-1.5">
+                <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/55 font-light mb-1.5">
                   L'accesso non è aperto al pubblico.
                 </p>
-                <p className="text-[13px] md:text-[14px] leading-[1.85] text-anthracite/55 font-light">
+                <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/55 font-light">
                   È consentito esclusivamente alle clienti già attive del salone, solo su invito diretto di Luxosa o su proposta approvata internamente.
                 </p>
               </div>
@@ -131,7 +131,7 @@ export default function Footer() {
                   className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                 />
               </Link>
-              <p className="mt-5 text-[13px] leading-[1.8] font-light text-ivory/40">
+              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/40">
                 Maison di cura e bellezza<br />per cute e capelli.
               </p>
               <div className="mt-6 w-8 h-[1px] bg-brass/40" />
@@ -155,7 +155,7 @@ export default function Footer() {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="text-[13px] font-light text-ivory/45 hover:text-ivory/80 transition-colors duration-400 tracking-wide"
+                    className="text-[16px] font-light text-ivory/45 hover:text-ivory/80 transition-colors duration-400 tracking-wide"
                   >
                     {item.label}
                   </Link>
@@ -166,7 +166,7 @@ export default function Footer() {
             {/* Col 3 — Club Luxosa */}
             <div>
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Club Luxosa</h4>
-              <p className="text-[13px] font-light text-ivory/40 leading-[1.8] mb-6">
+              <p className="text-[16px] font-light text-ivory/40 leading-[1.8] mb-6">
                 Un accesso riservato. Un riconoscimento che si guadagna nel tempo.
               </p>
               <div className="flex gap-2 mb-7">

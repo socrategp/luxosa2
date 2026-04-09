@@ -169,7 +169,7 @@ export default function Header() {
               >
                 <button
                   onClick={() => { setMenuOpen(false); setQuizOpen(true); }}
-                  className="text-[13px] tracking-[0.15em] uppercase text-ivory border border-ivory/30 px-8 py-3 hover:bg-ivory/10 transition-all"
+                  className="text-[16px] tracking-[0.15em] uppercase text-ivory border border-ivory/30 px-8 py-3 hover:bg-ivory/10 transition-all"
                 >
                   La tua soluzione
                 </button>

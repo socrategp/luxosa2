@@ -39,13 +39,13 @@ export default function Identity() {
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }}
               className="mt-8 space-y-5"
             >
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
                 Luxosa nasce dalla convinzione che la bellezza autentica non si impone, si rivela. Ogni donna porta con sé una storia unica, un equilibrio personale, un'espressione che merita di essere compresa prima di essere valorizzata.
               </p>
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
                 Per questo non offriamo trattamenti standardizzati. Offriamo percorsi di cura costruiti su ascolto, analisi e personalizzazione: un approccio che unisce la competenza professionale più rigorosa alla sensibilità più attenta verso la persona.
               </p>
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
                 Luxosa è una maison italiana dove la cura di cute e capelli diventa scienza, metodo e accompagnamento.
               </p>
             </motion.div>

@@ -25,9 +25,9 @@ function HomeIdentity() {
               Non un salone.<br />Una maison.
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.3, ease: premiumEase }} className="mt-8 space-y-5">
-              <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/80 font-light">Esistono luoghi in cui ci si accomoda. E luoghi in cui ci si sente comprese. Luxosa nasce per questo secondo tipo di esperienza.</p>
-              <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/80 font-light">Qui la bellezza non viene trattata come una prestazione rapida o standardizzata. Parte dall'ascolto, dalla comprensione della persona e da una lettura attenta di ciò che il capello racconta.</p>
-              <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/80 font-light">Non improvvisiamo. Non replichiamo la stessa risposta su donne diverse. Costruiamo percorsi che rispettano identità, desideri e tempi reali di trasformazione.</p>
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light">Esistono luoghi in cui ci si accomoda. E luoghi in cui ci si sente comprese. Luxosa nasce per questo secondo tipo di esperienza.</p>
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light">Qui la bellezza non viene trattata come una prestazione rapida o standardizzata. Parte dall'ascolto, dalla comprensione della persona e da una lettura attenta di ciò che il capello racconta.</p>
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light">Non improvvisiamo. Non replichiamo la stessa risposta su donne diverse. Costruiamo percorsi che rispettano identità, desideri e tempi reali di trasformazione.</p>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.45, ease: premiumEase }} className="mt-12">
               <Link to="/il-metodo" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">
@@ -73,7 +73,7 @@ function PerChiE() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
-            className="mt-8 text-[15px] md:text-[16px] leading-[1.85] text-anthracite/65 font-light"
+            className="mt-8 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/65 font-light"
           >
             Per chi sa riconoscere la differenza tra attenzione autentica e routine, tra gesto tecnico e visione, tra un risultato estemporaneo e una bellezza costruita nel tempo.
           </motion.p>
@@ -81,7 +81,7 @@ function PerChiE() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.55 }}
-            className="mt-5 text-[15px] md:text-[16px] leading-[1.85] text-anthracite/65 font-light"
+            className="mt-5 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/65 font-light"
           >
             Per chi desidera qualità, presenza, continuità e un'esperienza capace di riflettersi nel modo in cui si guarda, si sente e si presenta ogni giorno.
           </motion.p>
@@ -127,13 +127,13 @@ function Appartenenza() {
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
             className="mt-8 space-y-5"
           >
-            <p className="text-[15px] md:text-[16px] leading-[1.85] text-ivory/50 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/50 font-light">
               Entrare in Luxosa significa scegliere un modo diverso di prendersi cura di sé. Non più tentativi, non più risposte uguali per tutte, non più la sensazione di dover ricominciare ogni volta da capo.
             </p>
-            <p className="text-[15px] md:text-[16px] leading-[1.85] text-ivory/50 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/50 font-light">
               Qui ogni donna viene accolta con la sua storia, i suoi desideri, il suo tempo, la sua identità. È da lì che nasce il percorso. Ed è da lì che nasce anche la fiducia.
             </p>
-            <p className="text-[15px] md:text-[16px] leading-[1.85] text-ivory/50 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/50 font-light">
               Chi sceglie Luxosa non cambia soltanto luogo. Cambia standard.
             </p>
           </motion.div>
@@ -205,7 +205,7 @@ function CinematicPayoff() {
                   {item.word}.
                 </h3>
                 <div className="h-[1px] w-8 bg-brass-light/40 mb-5" />
-                <p className="text-[14px] leading-[1.85] text-ivory/55 font-light">{item.text}</p>
+                <p className="text-[17px] leading-[1.85] text-ivory/55 font-light">{item.text}</p>
               </motion.div>
             ))}
           </div>
@@ -250,7 +250,7 @@ function CioCheDiventa() {
               className="border-t border-sand/60 pt-7"
             >
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-3 leading-snug tracking-wide">{item.title}</h3>
-              <p className="text-[14px] md:text-[15px] leading-[1.8] text-anthracite/60 font-light">{item.text}</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/60 font-light">{item.text}</p>
             </motion.div>
           ))}
         </div>

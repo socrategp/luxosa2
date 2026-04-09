@@ -203,11 +203,11 @@ export default function LuxosaValuesRing() {
                       textAnchor="middle"
                       dominantBaseline="middle"
                       fontFamily="Jost, sans-serif"
-                      fontWeight="300"
+                      fontWeight={isActive ? '400' : '300'}
                       letterSpacing="0.16em"
-                      fontSize="17"
+                      fontSize="19"
                       animate={{
-                        fillOpacity: isActive ? 1 : 0.3,
+                        fillOpacity: isActive ? 1 : 0.55,
                       }}
                       fill={isActive ? '#B09872' : '#282520'}
                       transition={{ duration: 0.9, ease: premiumEase }}
@@ -264,7 +264,7 @@ export default function LuxosaValuesRing() {
                 <h4 className="font-serif text-[30px] md:text-[36px] font-light text-charcoal mb-5 leading-tight tracking-wide">
                   {valori[activeIndex].title}
                 </h4>
-                <p className="text-[14px] md:text-[15px] leading-[1.9] text-anthracite/65 font-light">
+                <p className="text-[17px] md:text-[18px] leading-[1.9] text-anthracite/65 font-light">
                   {valori[activeIndex].text}
                 </p>
               </motion.div>

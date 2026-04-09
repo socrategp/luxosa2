@@ -17,7 +17,7 @@ function Section({ number, title, children }: SectionProps) {
           {title}
         </h2>
       </div>
-      <div className="pl-10 md:pl-16 space-y-4 text-[14px] md:text-[15px] leading-[1.85] text-anthracite/70 font-light">
+      <div className="pl-10 md:pl-16 space-y-4 text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">
         {children}
       </div>
     </div>
@@ -31,7 +31,7 @@ interface CookieTableProps {
 function CookieTable({ rows }: CookieTableProps) {
   return (
     <div className="overflow-x-auto mt-4">
-      <table className="w-full text-[13px] font-light">
+      <table className="w-full text-[16px] font-light">
         <thead>
           <tr className="border-b border-sand">
             <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/50 font-light">Nome</th>
@@ -87,7 +87,7 @@ export default function CookiePolicyPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease, delay: 0.45 }}
-            className="mt-6 text-[13px] text-stone font-light tracking-wide"
+            className="mt-6 text-[16px] text-stone font-light tracking-wide"
           >
             Ultimo aggiornamento: [data da definire] — Versione 1.0
           </motion.p>
@@ -100,10 +100,10 @@ export default function CookiePolicyPage() {
 
           {/* Intro */}
           <div className="mb-14 pb-10 border-b border-sand/60">
-            <p className="text-[15px] md:text-[16px] leading-[1.85] text-anthracite/75 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
               La presente Cookie Policy descrive le tipologie di cookie e tecnologie di tracciamento utilizzate dal sito web di Luxosa (di seguito "Sito"), con sede in Via Cavour 1, Messina, in conformità alla Direttiva 2009/136/CE (c.d. Cookie Law), al Regolamento (UE) 2016/679 (GDPR) e alle Linee Guida del Garante per la protezione dei dati personali.
             </p>
-            <p className="mt-5 text-[15px] md:text-[16px] leading-[1.85] text-anthracite/75 font-light">
+            <p className="mt-5 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
               Per informazioni più generali sul trattamento dei dati personali, si rimanda alla <strong className="font-normal text-anthracite/85">Privacy Policy</strong>.
             </p>
           </div>
@@ -156,7 +156,7 @@ export default function CookiePolicyPage() {
                   <CookieTable rows={[
                     { nome: '[da completare]', tipo: '—', durata: '—', finalita: 'Da definire — es. Meta Pixel, Google Ads' },
                   ]} />
-                  <p className="mt-3 text-[13px] text-anthracite/50">
+                  <p className="mt-3 text-[16px] text-anthracite/50">
                     [Sezione da completare in base agli strumenti di marketing effettivamente utilizzati]
                   </p>
                 </div>
@@ -170,15 +170,15 @@ export default function CookiePolicyPage() {
               <ul className="list-none space-y-2 text-anthracite/65 pl-4">
                 <li>
                   — <strong className="font-normal text-anthracite/80">Google Analytics</strong> (Google LLC) — Analisi statistica del traffico
-                  <br /><span className="text-[13px]">Privacy Policy: policies.google.com/privacy</span>
+                  <br /><span className="text-[16px]">Privacy Policy: policies.google.com/privacy</span>
                 </li>
                 <li>
                   — <strong className="font-normal text-anthracite/80">Google Maps</strong> (Google LLC) — Visualizzazione mappe nelle pagine Sedi
-                  <br /><span className="text-[13px]">Privacy Policy: policies.google.com/privacy</span>
+                  <br /><span className="text-[16px]">Privacy Policy: policies.google.com/privacy</span>
                 </li>
                 <li>
                   — <strong className="font-normal text-anthracite/80">[Piattaforma di prenotazione — da definire]</strong>
-                  <br /><span className="text-[13px]">Privacy Policy: [da completare]</span>
+                  <br /><span className="text-[16px]">Privacy Policy: [da completare]</span>
                 </li>
                 <li>
                   — <strong className="font-normal text-anthracite/80">[Eventuali altri servizi — da definire]</strong>
@@ -208,7 +208,7 @@ export default function CookiePolicyPage() {
                 <li>— <strong className="font-normal text-anthracite/80">Safari</strong>: support.apple.com/guide/safari/manage-cookies</li>
                 <li>— <strong className="font-normal text-anthracite/80">Microsoft Edge</strong>: support.microsoft.com/microsoft-edge/delete-cookies</li>
               </ul>
-              <p className="mt-2 text-[13px] text-anthracite/50">
+              <p className="mt-2 text-[16px] text-anthracite/50">
                 Nota: la disabilitazione totale dei cookie potrebbe compromettere la corretta fruizione di alcune funzionalità del Sito.
               </p>
             </Section>

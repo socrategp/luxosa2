@@ -59,7 +59,7 @@ function SediPrincipi() {
               transition={{ duration: 1, ease: premiumEase, delay: 0.15 + i * 0.1 }}
             >
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-3 tracking-wide">{p.title}</h3>
-              <p className="text-[13px] md:text-[14px] leading-[1.8] text-anthracite/60 font-light">{p.text}</p>
+              <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/60 font-light">{p.text}</p>
             </motion.div>
           ))}
         </div>
@@ -81,7 +81,7 @@ function MessinaImage() {
         className="relative aspect-[16/7] overflow-hidden"
       >
         <img
-          src="/images/messina-new.jpg"
+          src="/images/messina-new.png"
           alt="Messina — Via Cavour"
           className="w-full h-full object-cover"
         />
@@ -126,8 +126,9 @@ function SedeFlagship() {
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.3 }}
               className="mt-8 space-y-4"
             >
-              <p className="text-[14px] md:text-[15px] leading-[1.85] text-anthracite/70 font-light">
-                La prima sede Luxosa. Situata nel cuore di Messina, lungo la storica Via Cavour, rappresenta l'espressione più completa della visione Luxosa: un luogo dove la cura evoluta di cute e capelli incontra l'eleganza e la tradizione della Sicilia orientale.
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">
+                Luxosa si trova a Messina, in zona Cavour.
+                Abbiamo scelto questo spazio perché riflette il nostro modo di lavorare: raccolto, intenzionale, curato nei dettagli. Non grande per impressionare. Esatto per accogliere.
               </p>
             </motion.div>
             <motion.div
@@ -193,7 +194,7 @@ function VisioneReplicabile() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
-          className="mt-8 text-[15px] leading-[1.85] text-ivory/45 font-light max-w-xl mx-auto"
+          className="mt-8 text-[18px] leading-[1.85] text-ivory/45 font-light max-w-xl mx-auto"
         >
           Luxosa nasce con un sistema replicabile. Ogni nuova sede sarà un'estensione fedele del metodo, della qualità e dell'esperienza. La coerenza è il fondamento della crescita.
         </motion.p>
@@ -215,7 +216,7 @@ export default function SediPage() {
     <>
       <PageHero
         label="Sedi"
-        title="I luoghi della cura."
+        title="Entrare in Luxosa inizia già prima di sedersi."
         subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
         image="/images/space-new.jpg"
       />

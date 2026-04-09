@@ -12,7 +12,7 @@ function MCHero() {
   return (
     <section className="relative h-[75vh] min-h-[550px] max-h-[850px] overflow-hidden">
       <div className="absolute inset-0">
-        <img src="/images/messina-new.jpg" alt="Luxosa Messina Cavour" className="w-full h-full object-cover" />
+        <img src="/images/messina-new.png" alt="Luxosa Messina Cavour" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-deep/55 via-deep/30 to-deep/65" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/30 to-transparent" />
       </div>
@@ -26,7 +26,7 @@ function MCHero() {
           <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[52px] lg:text-[64px] text-white font-light leading-[1.08] tracking-[0.02em] max-w-3xl">
             Luxosa<br />Messina Cavour.
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/60 text-[15px] md:text-[17px] font-light leading-relaxed max-w-xl tracking-wide">
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/60 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">
             La cura evoluta nel cuore della Sicilia orientale. Un luogo dove competenza, metodo e accoglienza si incontrano.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.95 }} className="mt-8 flex flex-col sm:flex-row gap-4">
@@ -70,13 +70,13 @@ function MCAbout() {
               Un punto di riferimento<br />per la cura evoluta.
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
                 Luxosa Messina Cavour è la prima sede della maison. Situata nel cuore di Messina, lungo la storica Via Cavour, rappresenta l'espressione più completa della visione Luxosa: un luogo dove la cura di cute e capelli diventa scienza, metodo e accompagnamento.
               </p>
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
                 Lo spazio è stato progettato per offrire un'esperienza di accoglienza totale: ambienti luminosi, materiali naturali, un'atmosfera che comunica ordine, raffinatezza e protezione. Ogni dettaglio riflette il metodo Luxosa.
               </p>
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
                 Qui, un team altamente formato accoglie ogni cliente con competenza e sensibilità, costruendo percorsi personalizzati fondati sull'ascolto, sull'analisi e sulla continuità della relazione.
               </p>
             </motion.div>
@@ -158,7 +158,7 @@ function MCMethod() {
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
           <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Come lavoriamo<br />nella sede di Messina.</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[15px] md:text-[16px] leading-[1.8] text-anthracite/70 font-light">Il Metodo Luxosa viene applicato con la stessa rigore e la stessa sensibilità in ogni sede.</motion.p>
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[19px] leading-[1.8] text-anthracite/70 font-light">Il Metodo Luxosa viene applicato con la stessa rigore e la stessa sensibilità in ogni sede.</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((s, i) => (
@@ -169,7 +169,7 @@ function MCMethod() {
                 </div>
                 <div>
                   <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-2 tracking-wide">{s.title}</h3>
-                  <p className="text-[14px] leading-[1.75] text-anthracite/60 font-light">{s.text}</p>
+                  <p className="text-[17px] leading-[1.75] text-anthracite/60 font-light">{s.text}</p>
                 </div>
               </div>
             </motion.div>
@@ -180,40 +180,55 @@ function MCMethod() {
   );
 }
 
-// --- Il Team ---
+// --- Master Responsabile ---
 function MCTeam() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-team" className="py-28 md:py-40 lg:py-48 bg-charcoal text-ivory">
+    <section id="mc-master" className="py-28 md:py-40 lg:py-48 bg-charcoal text-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
-            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">Il Team</motion.span>
+            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">Master Responsabile</motion.span>
             <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
             <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-ivory">
-              Professioniste dedicate<br />alla cura.
+              Lucia Cotugno
             </motion.h2>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-2 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full border-2 border-brass flex items-center justify-center flex-shrink-0">
+                <span className="text-[9px] tracking-[0.15em] uppercase text-brass font-light">Cert</span>
+              </div>
+              <p className="text-[16px] md:text-[17px] text-brass-light font-light">Esperto Tecnico Certificato</p>
+            </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-8 space-y-5">
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-ivory/65 font-light">
-                Il team di Luxosa Messina Cavour è composto da professioniste selezionate per competenza, sensibilità e dedizione. Ogni membro del team condivide la visione Luxosa e ne incarna i valori.
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/65 font-light">
+                Lucia guida Luxosa Messina Cavour con competenza clinica, rigore metodologico e dedizione assoluta. La sua visione trasforma ogni appuntamento in un momento di ascolto profondo e trasformazione consapevole.
               </p>
-              <p className="text-[15px] md:text-[16px] leading-[1.8] text-ivory/65 font-light">
-                La formazione è continua e costante: aggiornamento tecnico, approfondimento metodologico, sviluppo della capacità di ascolto e relazione con la cliente.
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/65 font-light">
+                Formazione continua, certificazioni internazionali e 15+ anni di esperienza nel benessere capillare. Non promette risultati. Li costruisce con metodo, attenzione e tempo.
               </p>
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }} className="mt-10 flex flex-wrap gap-6">
-              {['Formazione continua', 'Competenza certificata', 'Ascolto empatico'].map((q) => (
+              {['Consulente Certificata', 'Metodo Rigore', 'Visione Integrata'].map((q) => (
                 <span key={q} className="text-[11px] tracking-[0.2em] uppercase text-brass-light/60 font-light border border-brass/20 px-4 py-2">{q}</span>
               ))}
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/team-new.jpg" alt="Il team Luxosa Messina" className="w-full h-full object-cover" />
+              <img src="/images/team-new.png" alt="Lucia Cotugno — Master Responsabile Luxosa Messina" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -right-4 w-16 h-16 border-t border-r border-brass/25" />
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-deep/80 backdrop-blur-sm px-4 py-3 rounded-sm border border-brass/25">
+              <div className="w-8 h-8 rounded-full border border-brass flex items-center justify-center flex-shrink-0">
+                <span className="text-[8px] tracking-[0.1em] uppercase text-brass font-light">L.C.</span>
+              </div>
+              <div>
+                <p className="text-[11px] tracking-[0.15em] uppercase text-brass-light font-light">Lucia Cotugno</p>
+                <p className="text-[10px] text-brass-light/60">Master Responsabile</p>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -257,7 +272,7 @@ function MCServices() {
                   <h3 className="font-serif text-[20px] md:text-[24px] font-light text-charcoal tracking-wide">{s.title}</h3>
                 </div>
                 <div className="md:col-span-6">
-                  <p className="text-[14px] leading-[1.75] text-anthracite/60 font-light">{s.desc}</p>
+                  <p className="text-[17px] leading-[1.75] text-anthracite/60 font-light">{s.desc}</p>
                 </div>
                 <div className="md:col-span-1 flex justify-end">
                   <ArrowRight size={16} strokeWidth={1.2} className="text-brass/30 group-hover:text-brass group-hover:translate-x-1 transition-all duration-500" />
@@ -294,8 +309,8 @@ function MCTestimonials() {
         <div className="grid md:grid-cols-3 gap-10 md:gap-8">
           {testimonials.map((t, i) => (
             <motion.div key={t.name} initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.25 + i * 0.1 }} className="text-center">
-              <p className="font-serif text-[17px] md:text-[18px] italic font-light leading-[1.7] text-charcoal/60 mb-5">"{t.quote}"</p>
-              <p className="text-[13px] tracking-[0.1em] uppercase text-charcoal/80 font-light">{t.name}</p>
+              <p className="font-serif text-[20px] md:text-[18px] italic font-light leading-[1.7] text-charcoal/60 mb-5">"{t.quote}"</p>
+              <p className="text-[16px] tracking-[0.1em] uppercase text-charcoal/80 font-light">{t.name}</p>
               <p className="text-[11px] tracking-[0.15em] text-stone font-light mt-1">{t.detail}</p>
             </motion.div>
           ))}
@@ -328,23 +343,23 @@ function MCContact() {
               <div className="flex items-start gap-4">
                 <MapPin size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[15px] font-light text-charcoal">Via Cavour</p>
-                  <p className="text-[14px] font-light text-anthracite/60">98122 Messina (ME), Italia</p>
+                  <p className="text-[18px] font-light text-charcoal">Via Cavour, 1</p>
+                  <p className="text-[17px] font-light text-anthracite/60">98122 Messina (ME), Italia</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <Phone size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="tel:+390000000000" className="text-[15px] font-light text-charcoal hover:text-brass-muted transition-colors">+39 000 000 0000</a>
+                <a href="tel:+390902403220" className="text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">+39 090 240 3220</a>
               </div>
               <div className="flex items-center gap-4">
                 <Mail size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="mailto:messina@luxosa.it" className="text-[15px] font-light text-charcoal hover:text-brass-muted transition-colors">messina@luxosa.it</a>
+                <a href="mailto:messinacavour@luxosa.it" className="text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">messinacavour@luxosa.it</a>
               </div>
               <div className="flex items-start gap-4">
                 <Clock size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
-                <div className="text-[15px] font-light text-charcoal">
-                  <p>Martedì — Sabato: 09:00 — 19:00</p>
-                  <p className="text-anthracite/50 text-[13px] mt-1">Domenica e Lunedì chiuso · Su appuntamento</p>
+                <div className="text-[18px] font-light text-charcoal">
+                  <p>Martedì — Venerdì: 09:00 — 18:30</p>
+                  <p>Sabato: 09:00 — 19:00</p>
                 </div>
               </div>
             </motion.div>
@@ -368,12 +383,12 @@ function MCContact() {
           <div className="lg:pt-16">
             <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="bg-charcoal text-ivory p-10 md:p-12 mb-8">
               <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">Prenoti una consulenza</h3>
-              <p className="text-[14px] md:text-[15px] leading-[1.8] text-ivory/55 font-light mb-8">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.8] text-ivory/55 font-light mb-8">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</p>
               <div className="space-y-4">
                 <Link to="/contatti" className="group flex items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-brass-light transition-all duration-500 w-full">
                   Prenota online <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
                 </Link>
-                <a href="tel:+390000000000" className="flex items-center justify-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/70 font-light border border-ivory/20 px-8 py-4 hover:border-ivory/40 hover:text-ivory transition-all duration-500 w-full">
+                <a href="tel:+390902403220" className="flex items-center justify-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/70 font-light border border-ivory/20 px-8 py-4 hover:border-ivory/40 hover:text-ivory transition-all duration-500 w-full">
                   <Phone size={14} strokeWidth={1.5} /> Chiama ora
                 </a>
               </div>
@@ -381,7 +396,7 @@ function MCContact() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="bg-ecru/50 p-8 md:p-10">
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-brass-muted font-light mb-4">Informazioni Utili</h4>
-              <div className="space-y-4 text-[14px] font-light text-anthracite/65">
+              <div className="space-y-4 text-[17px] font-light text-anthracite/65">
                 <p>• La consulenza iniziale ha una durata di circa 30 minuti</p>
                 <p>• Si consiglia di arrivare 5 minuti prima dell'appuntamento</p>
                 <p>• Parcheggio convenzionato nelle vicinanze</p>
@@ -390,7 +405,7 @@ function MCContact() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.6 }} className="mt-8 pt-8 border-t border-sand/50 text-center">
-              <p className="font-serif text-[17px] italic text-charcoal/50 font-light">Si affidi a un metodo di cura pensato per Lei.</p>
+              <p className="font-serif text-[20px] italic text-charcoal/50 font-light">Si affidi a un metodo di cura pensato per Lei.</p>
             </motion.div>
           </div>
         </div>

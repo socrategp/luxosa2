@@ -23,7 +23,7 @@ function ContactMain() {
     setSubmitted(true);
   };
 
-  const inputClass = "w-full bg-transparent border-b border-sand/60 py-3 text-[14px] font-light text-anthracite placeholder:text-anthracite/30 focus:outline-none focus:border-brass/60 transition-colors duration-400";
+  const inputClass = "w-full bg-transparent border-b border-sand/60 py-3 text-[17px] font-light text-anthracite placeholder:text-anthracite/30 focus:outline-none focus:border-brass/60 transition-colors duration-400";
   const labelClass = "block text-[10px] tracking-[0.25em] uppercase text-anthracite/40 font-light mb-2";
 
   return (
@@ -41,7 +41,7 @@ function ContactMain() {
             >
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Modulo di prenotazione</span>
               <div className="h-[1px] w-10 bg-brass mt-4 mb-6" />
-              <p className="text-[14px] leading-[1.8] text-anthracite/60 font-light">Compila i campi qui sotto. Ti risponderemo entro 24 ore.</p>
+              <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light">Compila i campi qui sotto. Ti risponderemo entro 24 ore.</p>
             </motion.div>
 
             {submitted ? (
@@ -53,7 +53,7 @@ function ContactMain() {
               >
                 <div className="h-[1px] w-8 bg-brass mb-6" />
                 <p className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-4">Grazie.</p>
-                <p className="text-[14px] leading-[1.8] text-anthracite/65 font-light">Abbiamo ricevuto la tua richiesta. Ti risponderemo entro 24 ore.</p>
+                <p className="text-[17px] leading-[1.8] text-anthracite/65 font-light">Abbiamo ricevuto la tua richiesta. Ti risponderemo entro 24 ore.</p>
               </motion.div>
             ) : (
               <motion.form
@@ -125,19 +125,9 @@ function ContactMain() {
             <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Canali di contatto</span>
             <div className="h-[1px] w-10 bg-brass mt-4 mb-10" />
 
-            <div className="space-y-6">
-              {[
-                { label: 'Telefono', value: '+39 090 240 3220', href: 'tel:+390902403220' },
-                { label: 'WhatsApp', value: '+39 090 240 3220 — risposta entro 24h nei giorni lavorativi', href: 'https://wa.me/390902403220' },
-                { label: 'Instagram', value: '@luxosa — seguici e contattaci in DM', href: '#' },
-                { label: 'Email', value: 'messinacavour@luxosa.it — per richieste specifiche', href: 'mailto:messinacavour@luxosa.it' },
-              ].map((c) => (
-                <div key={c.label} className="grid grid-cols-[90px_1fr] gap-4 border-t border-sand/30 pt-5">
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-anthracite/35 font-light pt-0.5">{c.label}</span>
-                  <a href={c.href} className="text-[14px] font-light text-anthracite/70 hover:text-anthracite transition-colors duration-400 leading-[1.7]">{c.value}</a>
-                </div>
-              ))}
-            </div>
+            <p className="text-[17px] leading-[1.8] text-anthracite/50 font-light italic">
+              I canali di contatto saranno disponibili a breve.
+            </p>
 
             <div className="mt-12 border-t border-sand/30 pt-8">
               <p className="font-serif text-[18px] md:text-[20px] italic text-anthracite/50 font-light leading-[1.6]">

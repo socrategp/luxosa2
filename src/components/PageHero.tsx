@@ -5,10 +5,11 @@ interface PageHeroProps {
   label: string;
   title: string;
   subtitle?: string;
-  image: string;
+  image?: string;
+  video?: string;
 }
 
-export default function PageHero({ label, title, subtitle, image }: PageHeroProps) {
+export default function PageHero({ label, title, subtitle, image, video }: PageHeroProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -18,8 +19,19 @@ export default function PageHero({ label, title, subtitle, image }: PageHeroProp
 
   return (
     <section ref={ref} className="relative h-[85vh] min-h-[620px] max-h-[900px] overflow-hidden">
-      <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        <img src={image} alt={title} className="w-full h-[120%] -top-[10%] object-cover absolute" />
+      <motion.div className="absolute inset-0" style={{ y: video ? undefined : backgroundY }}>
+        {video ? (
+          <video
+            src={video}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover absolute inset-0"
+          />
+        ) : (
+          <img src={image} alt={title} className="w-full h-[120%] -top-[10%] object-cover absolute" />
+        )}
         <div className="absolute inset-0 bg-gradient-to-b from-deep/40 via-deep/30 to-deep/90" />
       </motion.div>
       <div className="relative h-full flex flex-col justify-end pb-24 md:pb-32 lg:pb-36">

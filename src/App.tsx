@@ -21,12 +21,13 @@ export default function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/il-metodo" element={<IlMetodoPage />} />
             <Route path="/i-percorsi" element={<IPercorsiPage />} />
-            <Route path="/esperienza" element={<EsperienzaPage />} />
+            <Route path="/le-esperienze" element={<EsperienzaPage />} />
             <Route path="/sedi" element={<SediPage />} />
             <Route path="/sedi/messina-cavour" element={<MessinaCavourPage />} />
             <Route path="/contatti" element={<ContattiPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/cookie-policy" element={<CookiePolicyPage />} />
+
           </Route>
         </Routes>
       </Suspense>

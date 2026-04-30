@@ -1,4 +1,4 @@
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+﻿import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 import { premiumEase } from '../lib/animations';
@@ -7,31 +7,31 @@ const fasi = [
   {
     num: '01',
     name: 'Ascolto',
-    accade: 'Raccogliamo storia, abitudini, desideri, aspettative e tutto ciò che conta davvero.',
+    accade: 'Raccogliamo storia, desideri, abitudini e aspettative. Ogni percorso inizia da ciò che conta davvero.',
     sente: 'Finalmente qualcuno che vuole capire davvero.',
   },
   {
     num: '02',
     name: 'Osservazione',
-    accade: 'Leggiamo in modo approfondito cute, capello, struttura e segnali utili a orientare il percorso.',
+    accade: 'Leggiamo cute, capello, struttura, forma, colore e abitudini di gestione per comprendere la situazione di partenza.',
     sente: 'Vedono ciò che io non sapevo di avere.',
   },
   {
     num: '03',
     name: 'Progetto',
-    accade: 'Definiamo insieme un obiettivo, una direzione e i passi necessari per arrivarci.',
+    accade: 'Definiamo una direzione, un obiettivo e un ritmo coerente con la persona e con la sostenibilità del risultato.',
     sente: 'Ho un piano. Non sto improvvisando più.',
   },
   {
     num: '04',
     name: 'Costruzione',
-    accade: 'Ogni seduta diventa parte di un disegno coerente, pensato per generare un risultato concreto.',
+    accade: 'Ogni seduta diventa parte di un disegno più ampio. Nulla è isolato, tutto ha una funzione.',
     sente: 'Ogni volta che torno, c\'è continuità.',
   },
   {
     num: '05',
     name: 'Trasformazione',
-    accade: 'Il risultato emerge nel tempo, si consolida e apre una nuova fase di ascolto e crescita.',
+    accade: 'Il risultato emerge, si consolida e apre una nuova fase di ascolto. Per questo il metodo è vivo.',
     sente: 'Non sono la stessa di quando sono entrata.',
   },
 ];

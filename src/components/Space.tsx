@@ -53,7 +53,7 @@ export default function Space() {
             className="aspect-[4/3] overflow-hidden"
           >
             <img
-              src="/images/space-new.jpg"
+              src="/images/spazio_luxosa.png"
               alt="Lo spazio Luxosa"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
             />
@@ -65,7 +65,7 @@ export default function Space() {
             className="aspect-[4/3] overflow-hidden"
           >
             <img
-              src="/images/space-detail-new.jpg"
+              src="/images/hero_esperienze.png"
               alt="Dettaglio dello spazio"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
             />

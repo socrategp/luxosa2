@@ -41,7 +41,7 @@ function ContactMain() {
             >
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Modulo di prenotazione</span>
               <div className="h-[1px] w-10 bg-brass mt-4 mb-6" />
-              <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light">Compila i campi qui sotto. Ti risponderemo entro 24 ore.</p>
+              <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light">Compila i campi qui sotto. Risponderemo entro 24 ore.</p>
             </motion.div>
 
             {submitted ? (
@@ -53,7 +53,7 @@ function ContactMain() {
               >
                 <div className="h-[1px] w-8 bg-brass mb-6" />
                 <p className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-4">Grazie.</p>
-                <p className="text-[17px] leading-[1.8] text-anthracite/65 font-light">Abbiamo ricevuto la tua richiesta. Ti risponderemo entro 24 ore.</p>
+                <p className="text-[17px] leading-[1.8] text-anthracite/65 font-light">Richiesta ricevuta. Risponderemo entro 24 ore.</p>
               </motion.div>
             ) : (
               <motion.form
@@ -66,27 +66,27 @@ function ContactMain() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label className={labelClass}>Nome</label>
-                    <input type="text" required placeholder="Il tuo nome" className={inputClass} value={form.nome} onChange={e => setForm({ ...form, nome: e.target.value })} />
+                    <input type="text" required placeholder="Nome" className={inputClass} value={form.nome} onChange={e => setForm({ ...form, nome: e.target.value })} />
                   </div>
                   <div>
                     <label className={labelClass}>Cognome</label>
-                    <input type="text" required placeholder="Il tuo cognome" className={inputClass} value={form.cognome} onChange={e => setForm({ ...form, cognome: e.target.value })} />
+                    <input type="text" required placeholder="Cognome" className={inputClass} value={form.cognome} onChange={e => setForm({ ...form, cognome: e.target.value })} />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label className={labelClass}>Telefono</label>
-                    <input type="tel" required placeholder="Il tuo numero" className={inputClass} value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} />
+                    <input type="tel" required placeholder="Numero" className={inputClass} value={form.telefono} onChange={e => setForm({ ...form, telefono: e.target.value })} />
                   </div>
                   <div>
                     <label className={labelClass}>Email</label>
-                    <input type="email" required placeholder="La tua email" className={inputClass} value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
+                    <input type="email" required placeholder="Email" className={inputClass} value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
                   </div>
                 </div>
 
                 <div>
-                  <label className={labelClass}>Qual è la tua richiesta principale?</label>
+                  <label className={labelClass}>Richiesta principale</label>
                   <textarea
                     rows={4}
                     placeholder="Raccontaci in poche righe cosa cerchi..."
@@ -108,7 +108,7 @@ function ContactMain() {
                   >
                     <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
                     <span className="relative z-10 flex items-center gap-3">
-                      Invia la tua richiesta <Send size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
+                      Invia richiesta <Send size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
                     </span>
                   </button>
                 </div>
@@ -131,7 +131,7 @@ function ContactMain() {
 
             <div className="mt-12 border-t border-sand/30 pt-8">
               <p className="font-serif text-[18px] md:text-[20px] italic text-anthracite/50 font-light leading-[1.6]">
-                "La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo."
+                "La prima consulenza è il momento dell'ascolto, dell'osservazione, della comprensione."
               </p>
             </div>
           </motion.div>
@@ -181,8 +181,8 @@ export default function ContattiPage() {
     <>
       <PageHero
         label="Contatti"
-        title="Prenota il tuo incontro."
-        subtitle="La tua prima esperienza Luxosa inizia con un incontro. Non arriviamo con un menu pronto. Arriviamo con attenzione."
+        title="Prenota un incontro."
+        subtitle="La prima esperienza Luxosa nasce da un incontro. Non da un menu pronto. Da ascolto vero."
         image="/images/salon-reception-new.jpg"
       />
       <ContactMain />

@@ -1,4 +1,5 @@
 import PageHero from '../components/PageHero';
+import Space from '../components/Space';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -34,7 +35,7 @@ function SediPrincipi() {
     { title: 'Metodo unico', text: "Ogni sede applica lo stesso Metodo Luxosa in tutto. La coerenza è un valore non negoziabile." },
     { title: 'Standard condivisi', text: "Prodotti, protocolli, formazione e qualità dell'esperienza sono identici in ogni sede." },
     { title: 'Spazio come metodo', text: "Ogni ambiente è progettato seguendo gli stessi principi: ordine, luce, materiali naturali, comfort." },
-    { title: 'Team formato', text: "Ogni professionista condivide le stesse visione, la stessa formazione, lo stesso approccio alla cura." },
+    { title: 'Team formato', text: "Ogni professionista condivide la stessa visione, la stessa formazione, lo stesso approccio alla cura." },
   ];
 
   return (
@@ -68,31 +69,6 @@ function SediPrincipi() {
   );
 }
 
-function MessinaImage() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
-  return (
-    <section ref={ref} className="relative overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 1.2, ease: premiumEase }}
-        className="relative aspect-[16/7] overflow-hidden"
-      >
-        <img
-          src="/images/messina-new.png"
-          alt="Messina — Via Cavour"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-deep/20" />
-        <div className="absolute bottom-6 left-8">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-ivory/50 font-light">© Messina — Via Cavour</span>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
 
 function SedeFlagship() {
   const ref = useRef(null);
@@ -128,7 +104,7 @@ function SedeFlagship() {
             >
               <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">
                 Luxosa si trova a Messina, in zona Cavour.
-                Abbiamo scelto questo spazio perché riflette il nostro modo di lavorare: raccolto, intenzionale, curato nei dettagli. Non grande per impressionare. Esatto per accogliere.
+                Questo spazio è stato scelto perché riflette il metodo Luxosa: raccolto, intenzionale, curato nei dettagli. Non grande per impressionare. Esatto per accogliere.
               </p>
             </motion.div>
             <motion.div
@@ -149,18 +125,20 @@ function SedeFlagship() {
             </motion.div>
           </div>
 
-          {/* Right: photos */}
+          {/* Right: photo sede */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
+            className="relative group overflow-hidden aspect-[4/3]"
           >
-            <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/space-new.jpg" alt="Luxosa Messina" className="w-full h-full object-cover" />
-            </div>
-            <div className="aspect-[3/4] overflow-hidden mt-8">
-              <img src="/images/space-detail-new.jpg" alt="Luxosa Messina dettaglio" className="w-full h-full object-cover" />
+            <img
+              src="/images/messina-new.png"
+              alt="Luxosa Messina — Via Cavour"
+              className="w-full h-full object-cover object-left transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out"
+            />
+            <div className="absolute bottom-4 left-5">
+              <span className="text-[10px] tracking-[0.3em] uppercase text-ivory/50 font-light">© Messina — Via Cavour</span>
             </div>
           </motion.div>
         </div>
@@ -218,11 +196,11 @@ export default function SediPage() {
         label="Sedi"
         title="Entrare in Luxosa inizia già prima di sedersi."
         subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
-        image="/images/space-new.jpg"
+        video="/videos/hero_sedi.mp4"
       />
       <SediManifesto />
       <SediPrincipi />
-      <MessinaImage />
+      <Space />
       <SedeFlagship />
       <VisioneReplicabile />
     </>

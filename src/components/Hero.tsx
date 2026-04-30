@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+﻿import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 
@@ -12,13 +12,17 @@ export default function Hero() {
 
   return (
     <section ref={ref} className="relative h-screen min-h-[700px] max-h-[1100px] overflow-hidden bg-deep">
-      {/* Background image */}
+      {/* Background video */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        <img
-          src="/images/hero-woman-front.jpg"
-          alt="Luxosa"
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
           className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute"
-        />
+        >
+          <source src="/videos/Hero_video_lamaison.mp4" type="video/mp4" />
+        </video>
       </motion.div>
 
       {/* Cinematic overlays */}
@@ -57,7 +61,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
             className="font-serif text-[40px] md:text-[56px] lg:text-[68px] xl:text-[76px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
           >
-            Un luogo in cui<br />riconoscerti.
+            Un luogo in cui<br />riconoscersi.
           </motion.h1>
 
           <motion.p
@@ -66,7 +70,7 @@ export default function Hero() {
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
             className="mt-6 md:mt-8 text-white/70 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
           >
-            Luxosa è la maison italiana dedicata alla cura e alla bellezza dei capelli. Qui la donna viene accolta, ascoltata e accompagnata con metodo, eleganza e attenzione reale.
+            Luxosa è la maison dedicata alla cura evoluta di cute e capelli, dove bellezza, metodo e ascolto si incontrano per accompagnare ogni donna in un percorso personale.
           </motion.p>
 
           <motion.div

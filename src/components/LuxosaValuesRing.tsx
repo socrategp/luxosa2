@@ -1,4 +1,4 @@
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+﻿import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
 import { premiumEase } from '../lib/animations';
@@ -31,10 +31,6 @@ const valori = [
   {
     title: 'Disciplina',
     text: 'Metodo, precisione e dedizione costante. La perfezione si ottiene solo attraverso un approccio rigoroso e misurato.',
-  },
-  {
-    title: 'Obiettivo',
-    text: 'Concretezza nei risultati. Non promettiamo, costruiamo soluzioni su misura attraverso l\'ascolto profondo delle tue necessità.',
   },
 ];
 
@@ -159,7 +155,7 @@ export default function LuxosaValuesRing() {
 
               {/* Active indicator tick on the ring */}
               {inView && (() => {
-                const ang = ((activeIndex * 45) - 90) * Math.PI / 180;
+                const ang = ((activeIndex * (360 / 7)) - 90) * Math.PI / 180;
                 return (
                   <motion.line
                     key={activeIndex}
@@ -180,7 +176,7 @@ export default function LuxosaValuesRing() {
 
               {/* Values labels */}
               {valori.map((v, i) => {
-                const ang = (i * 45 - 90) * Math.PI / 180;
+                const ang = (i * (360 / 7) - 90) * Math.PI / 180;
                 const lx = CX + LABEL_R * Math.cos(ang);
                 const ly = CY + LABEL_R * Math.sin(ang);
                 const isActive = i === activeIndex;

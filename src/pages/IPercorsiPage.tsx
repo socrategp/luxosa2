@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -37,7 +37,7 @@ function PercorsiIntro() {
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
           >
-            C'è una differenza tra ricevere una prestazione e affidarsi a qualcuno che ti prende in carico davvero.
+            C'è una differenza tra ricevere una prestazione e affidarsi a qualcuno che prende davvero in carico.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -73,7 +73,7 @@ function PercorsiCinematic() {
     <section ref={ref} className="relative h-[70vh] min-h-[480px] overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y }}>
         <img
-          src="/images/hair-back-new.jpg"
+          src="/images/sfondo_ipercorsi_scritta.png"
           alt=""
           className="w-full h-[120%] -top-[10%] absolute object-cover object-center"
         />
@@ -182,27 +182,21 @@ function LaTuaSoluzione({ onQuizOpen }: { onQuizOpen: () => void }) {
   );
 }
 
-function EsperienzeSelezionate() {
+function IlPrimoPasso() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
-  const esperienze = [
-    { num: '01', name: 'Rituale Rigenerante Profondo', desc: 'Un percorso completo che combina cura della cute, trattamento della fibra e piega. Per quando vuoi affidarti completamente.' },
-    { num: '02', name: 'Consulenza Diagnostica Avanzata', desc: 'Il primo incontro dedicato esclusivamente alla comprensione approfondita della tua cute e del tuo capello.' },
-    { num: '03', name: 'Armonia Colore & Struttura', desc: 'Colore, trattamento e forma in un unico appuntamento progettato per durare e valorizzarti.' },
-  ];
-
   return (
-    <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
+    <section className="py-32 md:py-48 lg:py-56 bg-ecru" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="max-w-2xl mb-16 md:mb-20">
+        <div className="max-w-2xl">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
           >
-            Le esperienze
+            Il Primo Passo
           </motion.span>
           <motion.div
             initial={{ width: 0 }}
@@ -210,50 +204,28 @@ function EsperienzeSelezionate() {
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }}
             className="h-[1px] bg-brass mt-4 mb-8"
           />
-          <motion.h2
+          <motion.p
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal"
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
+            className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
           >
-            Esperienze selezionate,<br />pensate per eccellere.
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, ease: premiumEase, delay: 0.35 }}
-            className="mt-6 text-[18px] leading-[1.8] text-anthracite/65 font-light"
-          >
-            Ogni esperienza Luxosa rappresenta l'incontro tra metodo e attenzione. Sono i gesti attraverso cui il percorso prende forma, ciascuno con la sua intenzione precisa.
+            Le Esperienze Luxosa sono il primo ingresso possibile per chi desidera avvicinarsi al mondo Luxosa attraverso un gesto singolo, costruito con la stessa attenzione.
           </motion.p>
-        </div>
-
-        <div className="space-y-0">
-          {esperienze.map((e, i) => (
-            <motion.div
-              key={e.num}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, ease: premiumEase, delay: 0.3 + i * 0.1 }}
-              className="grid md:grid-cols-[80px_1fr_1fr] gap-8 py-8 border-b border-sand/40 last:border-b-0 items-start"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: premiumEase, delay: 0.45 }}
+            className="mt-10"
+          >
+            <Link
+              to="/le-esperienze"
+              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500"
             >
-              <div className="text-[11px] tracking-[0.2em] uppercase text-brass-muted/50 font-light pt-1">{e.num}</div>
-              <h3 className="font-serif text-[22px] md:text-[24px] font-light text-charcoal leading-snug tracking-wide">{e.name}</h3>
-              <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/60 font-light">{e.desc}</p>
-            </motion.div>
-          ))}
+              Scopri le Esperienze <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+            </Link>
+          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1, ease: premiumEase, delay: 0.7 }}
-          className="mt-16"
-        >
-          <Link to="/esperienza" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">
-            Tutte le esperienze <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
@@ -267,14 +239,14 @@ export default function IPercorsiPage() {
       <PageHero
         label="I Percorsi"
         title="Non servizi. Percorsi."
-        subtitle="C'è una differenza tra ricevere una prestazione e affidarsi a qualcuno che ti prende in carico davvero."
-        image="/images/hair-back-new.jpg"
+        subtitle="Dove la relazione diventa metodo, continuità e trasformazione."
+        image="/images/hero_ipercorsi.png"
       />
       <PercorsiIntro />
       <Percorsi />
       <PercorsiCinematic />
+      <IlPrimoPasso />
       <LaTuaSoluzione onQuizOpen={() => setQuizOpen(true)} />
-      <EsperienzeSelezionate />
 
       <AnimatePresence>
         {quizOpen && (

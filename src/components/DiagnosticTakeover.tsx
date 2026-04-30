@@ -63,17 +63,17 @@ const MAX_SCORES: Scores = {
 
 const OPTION_IMAGES: Record<string, string> = {
   // D1 — Tipo di capello
-  d1_lisci: '/images/quiz/options/d1_lisci.jpg',
-  d1_mossi: '/images/quiz/options/d1_mossi.jpg',
-  d1_ricci: '/images/quiz/options/d1_ricci.jpg',
-  d1_molto_ricci: '/images/quiz/options/d1_molto_ricci.jpg',
+  d1_lisci: '/images/quiz/options/d1_lisci.png',
+  d1_mossi: '/images/quiz/options/d1_mossi.png',
+  d1_ricci: '/images/quiz/options/d1_ricci.png',
+  d1_molto_ricci: '/images/quiz/options/d1_molto_ricci.png',
   // D2 — Stato attuale
-  d2_fragili: '/images/quiz/options/d2_fragili.jpg',
-  d2_crespi: '/images/quiz/options/d2_crespi.jpg',
-  d2_sottili: '/images/quiz/options/d2_sottili.jpg',
-  d2_grassi: '/images/quiz/options/d2_grassi.jpg',
-  d2_secchi: '/images/quiz/options/d2_secchi.jpg',
-  d2_sani: '/images/quiz/options/d2_sani.jpg',
+  d2_fragili: '/images/quiz/options/d2_fragili.png',
+  d2_crespi: '/images/quiz/options/d2_crespi.png',
+  d2_sottili: '/images/quiz/options/d2_sottili.png',
+  d2_grassi: '/images/quiz/options/d2_grassi.png',
+  d2_secchi: '/images/quiz/options/d2_secchi.png',
+  d2_sani: '/images/quiz/options/d2_senzacarattere.png',
   // D3 — Priorità
   d3_cute: '/images/quiz/options/d3_cute.jpg',
   d3_rovinato: '/images/quiz/options/d3_rovinato.jpg',
@@ -81,11 +81,11 @@ const OPTION_IMAGES: Record<string, string> = {
   d3_forma: '/images/quiz/options/d3_forma.jpg',
   d3_tutto: '/images/quiz/options/d3_tutto.jpg',
   // D4a–D7a — Cute
-  d4a_prurito: '/images/quiz/options/d4a_prurito.jpg',
-  d4a_desquamazione: '/images/quiz/options/d4a_desquamazione.jpg',
-  d4a_grassa: '/images/quiz/options/d4a_grassa.jpg',
-  d4a_rossori: '/images/quiz/options/d4a_rossori.jpg',
-  d4a_tira: '/images/quiz/options/d4a_tira.jpg',
+  d4a_prurito: '/images/quiz/options/prurito.png',
+  d4a_desquamazione: '/images/quiz/options/desquamazione-forfora.png',
+  d4a_grassa: '/images/quiz/options/cute grassa.png',
+  d4a_rossori: '/images/quiz/options/irritazioni.png',
+  d4a_tira: '/images/quiz/options/cute che tira.png',
   d5a_settimane: '/images/quiz/options/d5a_settimane.jpg',
   d5a_mesi: '/images/quiz/options/d5a_mesi.jpg',
   d5a_anno: '/images/quiz/options/d5a_anno.jpg',
@@ -94,9 +94,9 @@ const OPTION_IMAGES: Record<string, string> = {
   d6a_prodotti: '/images/quiz/options/d6a_prodotti.jpg',
   d6a_salone: '/images/quiz/options/d6a_salone.jpg',
   d6a_dermatologo: '/images/quiz/options/d6a_dermatologo.jpg',
-  d7a_no: '/images/quiz/options/d7a_no.jpg',
-  d7a_lieve: '/images/quiz/options/d7a_lieve.jpg',
-  d7a_evidente: '/images/quiz/options/d7a_evidente.jpg',
+  d7a_no: '/images/quiz/options/diradamento no.png',
+  d7a_lieve: '/images/quiz/options/diradamento poco.png',
+  d7a_evidente: '/images/quiz/options/diradamento alto.png',
   // D4b–D7b — Struttura
   d4b_colorazioni: '/images/quiz/options/d4b_colorazioni.jpg',
   d4b_decolorazioni: '/images/quiz/options/d4b_decolorazioni.jpg',
@@ -173,6 +173,27 @@ const OPTION_IMAGES: Record<string, string> = {
   d9_non_piacciono: '/images/quiz/options/d9_non_piacciono.jpg',
   d9_trascuro: '/images/quiz/options/d9_trascuro.jpg',
   d9_ci_lavoro: '/images/quiz/options/d9_ci_lavoro.jpg',
+};
+
+const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> = {
+  d1_lisci:       { aspect: 'aspect-square', position: 'object-center' },
+  d1_mossi:       { aspect: 'aspect-square', position: 'object-center' },
+  d1_ricci:       { aspect: 'aspect-square', position: 'object-center' },
+  d1_molto_ricci: { aspect: 'aspect-square', position: 'object-center' },
+  d2_fragili:       { aspect: 'aspect-square', position: 'object-center' },
+  d2_crespi:        { aspect: 'aspect-square', position: 'object-center' },
+  d2_sottili:       { aspect: 'aspect-square', position: 'object-center' },
+  d2_grassi:        { aspect: 'aspect-square', position: 'object-center' },
+  d2_secchi:        { aspect: 'aspect-square', position: 'object-center' },
+  d2_sani:          { aspect: 'aspect-square', position: 'object-center' },
+  d4a_prurito:      { aspect: 'aspect-square', position: 'object-center' },
+  d4a_desquamazione:{ aspect: 'aspect-square', position: 'object-center' },
+  d4a_grassa:       { aspect: 'aspect-square', position: 'object-center' },
+  d4a_rossori:      { aspect: 'aspect-square', position: 'object-center' },
+  d4a_tira:         { aspect: 'aspect-square', position: 'object-center' },
+  d7a_no:           { aspect: 'aspect-square', position: 'object-center' },
+  d7a_lieve:        { aspect: 'aspect-square', position: 'object-center' },
+  d7a_evidente:     { aspect: 'aspect-square', position: 'object-center' },
 };
 
 // ── FASE 1: CONOSCENZA (comuni a tutte) ────────────────────────
@@ -891,12 +912,65 @@ function QuizContent({
         </div>
       )}
 
+      {/* D3 / D5a — text-only cards */}
+      {!isText && (q.id === 'd3' || q.id === 'd5a' || q.id === 'd6a' || q.id === 'd8' || q.id === 'd9') && (
+        <div className={`grid gap-3 md:gap-4 ${q.id === 'd3' ? 'grid-cols-6' : 'grid-cols-2 sm:grid-cols-4'}`}>
+          {q.options.map((opt, i) => {
+            const isSelected = selectedIds.includes(opt.id);
+            const colClass = q.id === 'd3'
+              ? (i === 3 ? 'col-span-2 col-start-2' : i === 4 ? 'col-span-2 col-start-4' : 'col-span-2')
+              : '';
+            return (
+              <motion.button
+                key={opt.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05 + i * 0.06, duration: 0.4, ease: premiumEase }}
+                onClick={() => onSingleSelect(q.id, opt.id)}
+                className={`${colClass} group relative text-left overflow-hidden border transition-all duration-500 ${
+                  isSelected
+                    ? 'border-brass shadow-md ring-1 ring-brass/20'
+                    : 'border-sand/40 bg-white/60 hover:border-brass/35 hover:shadow-md'
+                }`}
+              >
+                <div className="aspect-square flex flex-col items-center justify-center px-4 text-center">
+                  <p className={`font-serif text-[17px] md:text-[20px] font-light leading-snug transition-colors duration-300 ${
+                    isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
+                  }`}>
+                    {opt.text}
+                  </p>
+                  {opt.subtext && (
+                    <p className="mt-2 text-[10px] md:text-[12px] leading-[1.5] text-anthracite/40 font-light">{opt.subtext}</p>
+                  )}
+                </div>
+                <div className={`absolute bottom-0 left-0 right-0 h-[2px] transition-all duration-500 ${
+                  isSelected ? 'bg-brass' : 'bg-transparent group-hover:bg-brass/20'
+                }`} />
+                {isSelected && (
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute top-2.5 right-2.5 w-6 h-6 bg-brass flex items-center justify-center"
+                  >
+                    <Check size={12} strokeWidth={2.5} className="text-ivory" />
+                  </motion.div>
+                )}
+              </motion.button>
+            );
+          })}
+        </div>
+      )}
+
       {/* Option cards with images */}
-      {!isText && (
+      {!isText && q.id !== 'd3' && q.id !== 'd5a' && q.id !== 'd6a' && q.id !== 'd8' && q.id !== 'd9' && (
         <>
-          <div className={`grid grid-cols-2 gap-3 md:gap-4 ${
-            q.options.length === 3 ? 'sm:grid-cols-3' :
-            q.options.length >= 5 ? 'lg:grid-cols-3' : ''
+          <div className={`grid gap-3 md:gap-4 ${
+            q.id === 'd1' ? 'grid-cols-2 sm:grid-cols-4' :
+            q.id === 'd2' ? 'grid-cols-2 sm:grid-cols-3' :
+            q.id === 'd4a' ? 'grid-cols-2 sm:grid-cols-3' :
+            q.id === 'd7a' ? 'grid-cols-2 sm:grid-cols-3' :
+            q.options.length === 3 ? 'grid-cols-2 sm:grid-cols-3' :
+            q.options.length >= 5 ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-2'
           }`}>
             {q.options.map((opt, i) => {
               const isSelected = selectedIds.includes(opt.id);
@@ -919,12 +993,12 @@ function QuizContent({
                   }`}
                 >
                   {/* Image area */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-ecru via-sand/30 to-tortora/20">
+                  <div className={`relative overflow-hidden bg-gradient-to-br from-ecru via-sand/30 to-tortora/20 ${OPTION_IMAGE_STYLE[opt.id]?.aspect ?? 'aspect-[4/3]'}`}>
                     {imgSrc && (
                       <img
                         src={imgSrc}
                         alt={opt.text}
-                        className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
+                        className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04] ${OPTION_IMAGE_STYLE[opt.id]?.position ?? 'object-center'}`}
                         loading="lazy"
                         onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                       />
@@ -1104,15 +1178,9 @@ function ResultScreen({
   const d3 = answers['d3'] as string | undefined;
   const sequence = buildQuestionSequence(d3);
   const scores = computeScores(answers, sequence);
-  const { primary, secondary, primaryPct, secondaryPct } = getPercorsoResult(scores);
+  const { primary, secondary, primaryPct: _primaryPct, secondaryPct } = getPercorsoResult(scores);
   const content = RESULT_CONTENT[primary];
   const esperienze = getEsperienze(primary, answers);
-
-  const [barAnimated, setBarAnimated] = useState(false);
-  useEffect(() => {
-    const t = setTimeout(() => setBarAnimated(true), 500);
-    return () => clearTimeout(t);
-  }, []);
 
   return (
     <motion.div
@@ -1149,22 +1217,6 @@ function ResultScreen({
             <p className="font-serif text-[19px] md:text-[18px] italic text-anthracite/40 font-light">
               {content.sottotitolo}
             </p>
-          </div>
-
-          {/* Barra compatibilità */}
-          <div className="mb-8">
-            <div className="flex justify-between items-end mb-2">
-              <span className="text-[10px] tracking-[0.35em] uppercase text-anthracite/45 font-light">Compatibilità con il tuo profilo</span>
-              <span className="font-serif text-[30px] text-brass font-light leading-none">{primaryPct}%</span>
-            </div>
-            <div className="h-[2px] bg-sand/35 w-full">
-              <motion.div
-                className="h-full bg-brass"
-                initial={{ width: '0%' }}
-                animate={{ width: barAnimated ? `${primaryPct}%` : '0%' }}
-                transition={{ duration: 0.9, ease: premiumEase, delay: 0.1 }}
-              />
-            </div>
           </div>
 
           {/* Copy */}

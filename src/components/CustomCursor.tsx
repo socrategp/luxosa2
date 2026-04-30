@@ -37,6 +37,10 @@ export default function CustomCursor() {
 
     let target: Element | null = el;
     while (target && target !== document.documentElement) {
+      if ((target as HTMLElement).dataset?.cursorDark !== undefined) {
+        setOnDark(true);
+        return;
+      }
       const bg = getComputedStyle(target).backgroundColor;
       if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
         const match = bg.match(/\d+/g);

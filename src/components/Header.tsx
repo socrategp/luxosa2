@@ -10,7 +10,7 @@ const navItems = [
   { label: 'La Maison', href: '/' },
   { label: 'Il Metodo', href: '/il-metodo' },
   { label: 'I Percorsi', href: '/i-percorsi' },
-  { label: "L'Esperienza", href: '/esperienza' },
+  { label: 'Le Esperienze', href: '/le-esperienze' },
   { label: 'Sedi', href: '/sedi' },
   { label: 'Contatti', href: '/contatti' },
 ];

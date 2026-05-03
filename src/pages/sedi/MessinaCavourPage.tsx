@@ -208,7 +208,7 @@ function MCTeam() {
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/team-new.png" alt="Lucia Cotugno — Master Responsabile Luxosa Messina" className="w-full h-full object-cover" />
+              <img src="/images/team-master.png" alt="Lucia Cotugno — Master Responsabile Luxosa Messina" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -right-4 w-16 h-16 border-t border-r border-brass/25" />
             <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-deep/80 backdrop-blur-sm px-4 py-3 rounded-sm border border-brass/25">

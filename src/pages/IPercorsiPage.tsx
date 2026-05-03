@@ -1,11 +1,10 @@
-﻿import { useState } from 'react';
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+﻿import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import Percorsi from '../components/Percorsi';
-import { DiagnosticTakeover } from '../components/DiagnosticTakeover';
+import { useQuiz } from '../context/QuizContext';
 
 import { premiumEase } from '../lib/animations';
 
@@ -122,7 +121,7 @@ function LaTuaSoluzione({ onQuizOpen }: { onQuizOpen: () => void }) {
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
           >
-            La tua soluzione
+            Luxosa Test
           </motion.span>
           <motion.div
             initial={{ width: 0 }}
@@ -166,7 +165,7 @@ function LaTuaSoluzione({ onQuizOpen }: { onQuizOpen: () => void }) {
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
               <span className="relative z-10 flex items-center gap-3">
-                Inizia da qui <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+                Scopri il tuo percorso <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </span>
             </button>
             <Link
@@ -232,7 +231,7 @@ function IlPrimoPasso() {
 }
 
 export default function IPercorsiPage() {
-  const [quizOpen, setQuizOpen] = useState(false);
+  const { openQuiz } = useQuiz();
 
   return (
     <>
@@ -246,13 +245,7 @@ export default function IPercorsiPage() {
       <Percorsi />
       <PercorsiCinematic />
       <IlPrimoPasso />
-      <LaTuaSoluzione onQuizOpen={() => setQuizOpen(true)} />
-
-      <AnimatePresence>
-        {quizOpen && (
-          <DiagnosticTakeover onReset={() => setQuizOpen(false)} />
-        )}
-      </AnimatePresence>
+      <LaTuaSoluzione onQuizOpen={openQuiz} />
     </>
   );
 }

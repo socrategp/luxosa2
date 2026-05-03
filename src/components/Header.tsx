@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { DiagnosticTakeover } from './DiagnosticTakeover';
+import { useQuiz } from '../context/QuizContext';
 
 const LIGHT_TOP_PAGES = ['/privacy-policy', '/cookie-policy'];
 
@@ -21,7 +21,7 @@ export default function Header() {
   const [scrollY, setScrollY] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [quizOpen, setQuizOpen] = useState(false);
+  const { quizOpen, openQuiz } = useQuiz();
   const location = useLocation();
   const lastScrollY = useRef(0);
 
@@ -47,8 +47,8 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = (menuOpen || quizOpen) ? 'hidden' : '';
-  }, [menuOpen, quizOpen]);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }, [menuOpen]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -108,14 +108,14 @@ export default function Header() {
 
             <div className="hidden lg:flex items-center">
               <button
-                onClick={() => setQuizOpen(true)}
+                onClick={openQuiz}
                 className={`text-[12px] tracking-[0.12em] uppercase font-light px-6 py-2.5 border transition-all duration-500 ${
                   onLight
                     ? 'border-anthracite/25 text-anthracite hover:bg-anthracite hover:text-ivory'
                     : 'border-white/40 text-white hover:bg-white/15'
                 }`}
               >
-                La tua soluzione
+                Luxosa Test
               </button>
             </div>
 
@@ -168,10 +168,10 @@ export default function Header() {
                 className="mt-8"
               >
                 <button
-                  onClick={() => { setMenuOpen(false); setQuizOpen(true); }}
+                  onClick={() => { setMenuOpen(false); openQuiz(); }}
                   className="text-[16px] tracking-[0.15em] uppercase text-ivory border border-ivory/30 px-8 py-3 hover:bg-ivory/10 transition-all"
                 >
-                  La tua soluzione
+                  Luxosa Test
                 </button>
               </motion.div>
             </nav>
@@ -179,11 +179,6 @@ export default function Header() {
         )}
       </AnimatePresence>
 
-      <AnimatePresence>
-        {quizOpen && (
-          <DiagnosticTakeover onReset={() => setQuizOpen(false)} />
-        )}
-      </AnimatePresence>
     </>
   );
 }

@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-// LUXOSA — LA TUA SOLUZIONE v1.0
+// LUXOSA — LUXOSA TEST v2.0
 // Quiz orientativo fullscreen — 10-12 domande con ramificazione
 // ═══════════════════════════════════════════════════════════════
 
@@ -15,6 +15,8 @@ type Scores = Record<Percorso, number>;
 type Screen = 'disclaimer' | 'quiz' | 'form' | 'result';
 type BranchKey = 'cute' | 'struttura' | 'colore' | 'forma' | 'completo';
 type Answers = Record<string, string | string[]>;
+type PublicPercorso = 'benessere' | 'colorlux' | 'rituale';
+type AttentionLevel = 'ordinaria' | 'mirata' | 'prioritaria';
 
 interface OptionDef {
   id: string;
@@ -63,137 +65,65 @@ const MAX_SCORES: Scores = {
 
 const OPTION_IMAGES: Record<string, string> = {
   // D1 — Tipo di capello
-  d1_lisci: '/images/quiz/options/d1_lisci.png',
-  d1_mossi: '/images/quiz/options/d1_mossi.png',
-  d1_ricci: '/images/quiz/options/d1_ricci.png',
-  d1_molto_ricci: '/images/quiz/options/d1_molto_ricci.png',
+  d1_lisci: '/images/quiz/options/d1_lisci.webp',
+  d1_mossi: '/images/quiz/options/d1_mossi.webp',
+  d1_ricci: '/images/quiz/options/d1_ricci.webp',
+  d1_molto_ricci: '/images/quiz/options/d1_molto_ricci.webp',
   // D2 — Stato attuale
-  d2_fragili: '/images/quiz/options/d2_fragili.png',
-  d2_crespi: '/images/quiz/options/d2_crespi.png',
-  d2_sottili: '/images/quiz/options/d2_sottili.png',
-  d2_grassi: '/images/quiz/options/d2_grassi.png',
-  d2_secchi: '/images/quiz/options/d2_secchi.png',
-  d2_sani: '/images/quiz/options/d2_senzacarattere.png',
-  // D3 — Priorità
-  d3_cute: '/images/quiz/options/d3_cute.jpg',
-  d3_rovinato: '/images/quiz/options/d3_rovinato.jpg',
-  d3_colore: '/images/quiz/options/d3_colore.jpg',
-  d3_forma: '/images/quiz/options/d3_forma.jpg',
-  d3_tutto: '/images/quiz/options/d3_tutto.jpg',
-  // D4a–D7a — Cute
-  d4a_prurito: '/images/quiz/options/prurito.png',
-  d4a_desquamazione: '/images/quiz/options/desquamazione-forfora.png',
-  d4a_grassa: '/images/quiz/options/cute grassa.png',
-  d4a_rossori: '/images/quiz/options/irritazioni.png',
-  d4a_tira: '/images/quiz/options/cute che tira.png',
-  d5a_settimane: '/images/quiz/options/d5a_settimane.jpg',
-  d5a_mesi: '/images/quiz/options/d5a_mesi.jpg',
-  d5a_anno: '/images/quiz/options/d5a_anno.jpg',
-  d5a_sempre: '/images/quiz/options/d5a_sempre.jpg',
-  d6a_mai: '/images/quiz/options/d6a_mai.jpg',
-  d6a_prodotti: '/images/quiz/options/d6a_prodotti.jpg',
-  d6a_salone: '/images/quiz/options/d6a_salone.jpg',
-  d6a_dermatologo: '/images/quiz/options/d6a_dermatologo.jpg',
-  d7a_no: '/images/quiz/options/diradamento no.png',
-  d7a_lieve: '/images/quiz/options/diradamento poco.png',
-  d7a_evidente: '/images/quiz/options/diradamento alto.png',
-  // D4b–D7b — Struttura
-  d4b_colorazioni: '/images/quiz/options/d4b_colorazioni.jpg',
-  d4b_decolorazioni: '/images/quiz/options/d4b_decolorazioni.jpg',
-  d4b_stiratura: '/images/quiz/options/d4b_stiratura.jpg',
-  d4b_calore: '/images/quiz/options/d4b_calore.jpg',
-  d4b_aggressivi: '/images/quiz/options/d4b_aggressivi.jpg',
-  d5b_sane: '/images/quiz/options/d5b_sane.jpg',
-  d5b_aperte: '/images/quiz/options/d5b_aperte.jpg',
-  d5b_spezzano: '/images/quiz/options/d5b_spezzano.jpg',
-  d6b_morbido: '/images/quiz/options/d6b_morbido.jpg',
-  d6b_ruvido: '/images/quiz/options/d6b_ruvido.jpg',
-  d6b_secco: '/images/quiz/options/d6b_secco.jpg',
-  d6b_paglia: '/images/quiz/options/d6b_paglia.jpg',
-  d7b_morbidezza: '/images/quiz/options/d7b_morbidezza.jpg',
-  d7b_rinforzare: '/images/quiz/options/d7b_rinforzare.jpg',
-  d7b_ricominciare: '/images/quiz/options/d7b_ricominciare.jpg',
-  // D4c–D7c — Colore
-  d4c_naturale: '/images/quiz/options/d4c_naturale.jpg',
-  d4c_tinta: '/images/quiz/options/d4c_tinta.jpg',
-  d4c_decolorazioni: '/images/quiz/options/d4c_decolorazioni.jpg',
-  d4c_grigi_coprire: '/images/quiz/options/d4c_grigi_coprire.jpg',
-  d4c_grigi_valorizzare: '/images/quiz/options/d4c_grigi_valorizzare.jpg',
-  d5c_spegne: '/images/quiz/options/d5c_spegne.jpg',
-  d5c_luminoso: '/images/quiz/options/d5c_luminoso.jpg',
-  d5c_uniforme: '/images/quiz/options/d5c_uniforme.jpg',
-  d5c_viso: '/images/quiz/options/d5c_viso.jpg',
-  d5c_danneggia: '/images/quiz/options/d5c_danneggia.jpg',
-  d6c_frequente: '/images/quiz/options/d6c_frequente.jpg',
-  d6c_normale: '/images/quiz/options/d6c_normale.jpg',
-  d6c_raro: '/images/quiz/options/d6c_raro.jpg',
-  d6c_mai: '/images/quiz/options/d6c_mai.jpg',
-  d7c_naturalezza: '/images/quiz/options/d7c_naturalezza.jpg',
-  d7c_luminosita: '/images/quiz/options/d7c_luminosita.jpg',
-  d7c_copertura: '/images/quiz/options/d7c_copertura.jpg',
-  d7c_cambiamento: '/images/quiz/options/d7c_cambiamento.jpg',
-  // D4d–D7d — Forma
-  d4d_volume: '/images/quiz/options/d4d_volume.jpg',
-  d4d_ricci: '/images/quiz/options/d4d_ricci.jpg',
-  d4d_piega: '/images/quiz/options/d4d_piega.jpg',
-  d4d_taglio: '/images/quiz/options/d4d_taglio.jpg',
-  d5d_poco: '/images/quiz/options/d5d_poco.jpg',
-  d5d_medio: '/images/quiz/options/d5d_medio.jpg',
-  d5d_molto: '/images/quiz/options/d5d_molto.jpg',
-  d5d_troppo: '/images/quiz/options/d5d_troppo.jpg',
-  d6d_mai: '/images/quiz/options/d6d_mai.jpg',
-  d6d_qualche: '/images/quiz/options/d6d_qualche.jpg',
-  d6d_sempre: '/images/quiz/options/d6d_sempre.jpg',
-  d7d_liberi: '/images/quiz/options/d7d_liberi.jpg',
-  d7d_disciplinati: '/images/quiz/options/d7d_disciplinati.jpg',
-  d7d_voluminosi: '/images/quiz/options/d7d_voluminosi.jpg',
-  d7d_scoprire: '/images/quiz/options/d7d_scoprire.jpg',
-  // D4e–D7e — Completo
-  d4e_cute: '/images/quiz/options/d4e_cute.jpg',
-  d4e_capello: '/images/quiz/options/d4e_capello.jpg',
-  d4e_colore: '/images/quiz/options/d4e_colore.jpg',
-  d4e_forma: '/images/quiz/options/d4e_forma.jpg',
-  d4e_nonso: '/images/quiz/options/d4e_nonso.jpg',
-  d5e_cercando: '/images/quiz/options/d5e_cercando.jpg',
-  d5e_insoddisfatta: '/images/quiz/options/d5e_insoddisfatta.jpg',
-  d5e_prima: '/images/quiz/options/d5e_prima.jpg',
-  d6e_risultati: '/images/quiz/options/d6e_risultati.jpg',
-  d6e_presa: '/images/quiz/options/d6e_presa.jpg',
-  d6e_capire: '/images/quiz/options/d6e_capire.jpg',
-  d6e_tutto: '/images/quiz/options/d6e_tutto.jpg',
-  d7e_se_funziona: '/images/quiz/options/d7e_se_funziona.jpg',
-  d7e_continuita: '/images/quiz/options/d7e_continuita.jpg',
-  d7e_valutare: '/images/quiz/options/d7e_valutare.jpg',
-  // D8–D9 — Stile di vita
-  d8_ogni_giorno: '/images/quiz/options/d8_ogni_giorno.jpg',
-  d8_2_3: '/images/quiz/options/d8_2_3.jpg',
-  d8_settimana: '/images/quiz/options/d8_settimana.jpg',
-  d8_meno: '/images/quiz/options/d8_meno.jpg',
-  d9_amo: '/images/quiz/options/d9_amo.jpg',
-  d9_non_piacciono: '/images/quiz/options/d9_non_piacciono.jpg',
-  d9_trascuro: '/images/quiz/options/d9_trascuro.jpg',
-  d9_ci_lavoro: '/images/quiz/options/d9_ci_lavoro.jpg',
+  d2_fragili: '/images/quiz/options/d2_fragili.webp',
+  d2_crespi: '/images/quiz/options/d2_crespi.webp',
+  d2_sottili: '/images/quiz/options/d2_sottili.webp',
+  d2_grassi: '/images/quiz/options/d2_grassi.webp',
+  d2_secchi: '/images/quiz/options/d2_secchi.webp',
+  d2_sani: '/images/quiz/options/d2_senzaforma.webp',
+  // D4a–D7a — Cute (D3: fallback premium — immagini da produrre)
+  d4a_prurito: '/images/quiz/options/prurito.webp',
+  d4a_desquamazione: '/images/quiz/options/desquamazione-forfora.webp',
+  d4a_grassa: '/images/quiz/options/cute_grassa.webp',
+  d4a_rossori: '/images/quiz/options/irritazioni.webp',
+  d4a_tira: '/images/quiz/options/cute_che_tira.webp',
+  d7a_no: '/images/quiz/options/diradamento_no.webp',
+  d7a_lieve: '/images/quiz/options/diradamento_poco.webp',
+  d7a_evidente: '/images/quiz/options/diradamento_alto.webp',
+  // D4b–D5b — Struttura (D6b/D7b: fallback premium — immagini da produrre)
+  d4b_colorazioni: '/images/quiz/options/danni_colorazioni.webp',
+  d4b_decolorazioni: '/images/quiz/options/danni_decolorazione.webp',
+  d4b_stiratura: '/images/quiz/options/danni_stiratura.webp',
+  d4b_calore: '/images/quiz/options/danni_piastra_calore.webp',
+  d4b_aggressivi: '/images/quiz/options/danni_trattamenti_aggressivi.webp',
+  d5b_sane: '/images/quiz/options/punte_sane.webp',
+  d5b_aperte: '/images/quiz/options/punte_mediodanno.webp',
+  d5b_spezzano: '/images/quiz/options/punte_alto_danno.webp',
 };
 
+const SQ = { aspect: 'aspect-square', position: 'object-center' } as const;
+
 const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> = {
-  d1_lisci:       { aspect: 'aspect-square', position: 'object-center' },
-  d1_mossi:       { aspect: 'aspect-square', position: 'object-center' },
-  d1_ricci:       { aspect: 'aspect-square', position: 'object-center' },
-  d1_molto_ricci: { aspect: 'aspect-square', position: 'object-center' },
-  d2_fragili:       { aspect: 'aspect-square', position: 'object-center' },
-  d2_crespi:        { aspect: 'aspect-square', position: 'object-center' },
-  d2_sottili:       { aspect: 'aspect-square', position: 'object-center' },
-  d2_grassi:        { aspect: 'aspect-square', position: 'object-center' },
-  d2_secchi:        { aspect: 'aspect-square', position: 'object-center' },
-  d2_sani:          { aspect: 'aspect-square', position: 'object-center' },
-  d4a_prurito:      { aspect: 'aspect-square', position: 'object-center' },
-  d4a_desquamazione:{ aspect: 'aspect-square', position: 'object-center' },
-  d4a_grassa:       { aspect: 'aspect-square', position: 'object-center' },
-  d4a_rossori:      { aspect: 'aspect-square', position: 'object-center' },
-  d4a_tira:         { aspect: 'aspect-square', position: 'object-center' },
-  d7a_no:           { aspect: 'aspect-square', position: 'object-center' },
-  d7a_lieve:        { aspect: 'aspect-square', position: 'object-center' },
-  d7a_evidente:     { aspect: 'aspect-square', position: 'object-center' },
+  d1_lisci: SQ, d1_mossi: SQ, d1_ricci: SQ, d1_molto_ricci: SQ,
+  d2_fragili: SQ, d2_crespi: SQ, d2_sottili: SQ, d2_grassi: SQ, d2_secchi: SQ, d2_sani: SQ,
+  d3_cute: SQ, d3_rovinato: SQ, d3_colore: SQ, d3_forma: SQ, d3_tutto: SQ,
+  d4a_prurito: SQ, d4a_desquamazione: SQ, d4a_grassa: SQ, d4a_rossori: SQ, d4a_tira: SQ,
+  d5a_settimane: SQ, d5a_mesi: SQ, d5a_anno: SQ, d5a_sempre: SQ,
+  d6a_mai: SQ, d6a_prodotti: SQ, d6a_salone: SQ, d6a_dermatologo: SQ,
+  d7a_no: SQ, d7a_lieve: SQ, d7a_evidente: SQ,
+  d4b_colorazioni: SQ, d4b_decolorazioni: SQ, d4b_stiratura: SQ, d4b_calore: SQ, d4b_aggressivi: SQ,
+  d5b_sane: SQ, d5b_aperte: SQ, d5b_spezzano: SQ,
+  d6b_morbido: SQ, d6b_ruvido: SQ, d6b_secco: SQ, d6b_paglia: SQ,
+  d7b_morbidezza: SQ, d7b_rinforzare: SQ, d7b_ricominciare: SQ,
+  d4c_naturale: SQ, d4c_tinta: SQ, d4c_decolorazioni: SQ, d4c_grigi_coprire: SQ, d4c_grigi_valorizzare: SQ,
+  d5c_spegne: SQ, d5c_luminoso: SQ, d5c_uniforme: SQ, d5c_viso: SQ, d5c_danneggia: SQ,
+  d6c_frequente: SQ, d6c_normale: SQ, d6c_raro: SQ, d6c_mai: SQ,
+  d7c_naturalezza: SQ, d7c_luminosita: SQ, d7c_copertura: SQ, d7c_cambiamento: SQ,
+  d4d_volume: SQ, d4d_ricci: SQ, d4d_piega: SQ, d4d_taglio: SQ,
+  d5d_poco: SQ, d5d_medio: SQ, d5d_molto: SQ, d5d_troppo: SQ,
+  d6d_mai: SQ, d6d_qualche: SQ, d6d_sempre: SQ,
+  d7d_liberi: SQ, d7d_disciplinati: SQ, d7d_voluminosi: SQ, d7d_scoprire: SQ,
+  d4e_cute: SQ, d4e_capello: SQ, d4e_colore: SQ, d4e_forma: SQ, d4e_nonso: SQ,
+  d5e_cercando: SQ, d5e_insoddisfatta: SQ, d5e_prima: SQ,
+  d6e_risultati: SQ, d6e_presa: SQ, d6e_capire: SQ, d6e_tutto: SQ,
+  d7e_se_funziona: SQ, d7e_continuita: SQ, d7e_valutare: SQ,
+  d8_ogni_giorno: SQ, d8_2_3: SQ, d8_settimana: SQ, d8_meno: SQ,
+  d9_amo: SQ, d9_non_piacciono: SQ, d9_trascuro: SQ, d9_ci_lavoro: SQ,
 };
 
 // ── FASE 1: CONOSCENZA (comuni a tutte) ────────────────────────
@@ -624,144 +554,728 @@ function getPercorsoResult(scores: Scores): {
   return { primary, secondary, primaryPct, secondaryPct };
 }
 
-// ── ESPERIENZE ─────────────────────────────────────────────────
+// ── ESPERIENZE UFFICIALI (9) ────────────────────────────────────
 
 const ES: Record<string, EsperienzaDef> = {
-  piegaLux: { nome: 'Piega Lux', sottotitolo: 'Il gesto che conclude ogni percorso.' },
-  taglioSignature: { nome: 'Taglio Signature', sottotitolo: 'Un taglio costruito sulla tua morfologia.' },
+  consulenzeSpecialistiche: { nome: 'Consulenze Specialistiche', sottotitolo: 'Il primo incontro — ascolto, lettura, direzione.' },
+  areaBenessere: { nome: 'Area Benessere', sottotitolo: 'Quando la cura della cute diventa un rituale.' },
+  cheratinaNutrizionePro: { nome: 'Cheratina Nutrizione Pro', sottotitolo: 'Ordine, morbidezza e resistenza duratura.' },
+  piegaLux: { nome: 'PiegaLux', sottotitolo: 'Il gesto che conclude ogni percorso.' },
+  taglioSignature: { nome: 'Taglio Signature', sottotitolo: 'Un taglio costruito sulla morfologia, non su una formula.' },
   nuances: { nome: 'Nuances', sottotitolo: 'Il colore nella sua espressione più raffinata.' },
-  luceSignature: { nome: 'Luce Signature', sottotitolo: 'Schiariture costruite con precisione e cura della fibra.' },
-  ricciOsa: { nome: 'RicciOsa', sottotitolo: 'Il gesto dedicato al capello riccio autentico.' },
-  ricciOso: { nome: 'RicciOso', sottotitolo: 'Per mossi e wavy che cercano equilibrio e definizione.' },
-  cheratinaPro: { nome: 'Cheratina Pro', sottotitolo: 'Ordine, morbidezza e controllo duraturo.' },
-  areaCura: { nome: 'Area Cura', sottotitolo: 'Quando la salute del capello torna ad essere il primo obiettivo.' },
-  consulenzaColorLux: { nome: 'Consulenza ColorLux', sottotitolo: 'Un momento esclusivamente dedicato al tuo colore.' },
-  protezioneLibra: { nome: 'Protezione Fibra', sottotitolo: 'Scudo attivo per la fibra capillare trattata.' },
-  tonalizzante: { nome: 'Tonalizzante', sottotitolo: 'Luminosità e tonalità su misura.' },
-  softRefining: { nome: 'Soft Refining', sottotitolo: 'Definizione morbida per mossi e onde naturali.' },
+  luceSignature: { nome: 'Luce Signature', sottotitolo: 'Schiariture costruite con precisione e rispetto della fibra.' },
+  ricciOsa: { nome: 'RicciOsa', sottotitolo: "L'esperienza dedicata al capello riccio autentico." },
+  ricciOso: { nome: 'RicciOso', sottotitolo: 'Il taglio costruito sulla morfologia del capello riccio.' },
 };
 
-function getEsperienze(percorso: Percorso, answers: Answers): EsperienzaDef[] {
-  const d1 = answers['d1'] as string | undefined;
-  const d4b = answers['d4b'];
-  const d4c = answers['d4c'] as string | undefined;
-  const d4e = answers['d4e'] as string | undefined;
-  const d5c = answers['d5c'];
+// ── MAPPING PUBBLICO ────────────────────────────────────────────
 
-  switch (percorso) {
-    case 'cute':
-      return [ES.areaCura, ES.protezioneLibra, ES.piegaLux];
-
-    case 'rinascita': {
-      const list: EsperienzaDef[] = [ES.areaCura, ES.cheratinaPro, ES.protezioneLibra];
-      if (Array.isArray(d4b) && d4b.includes('d4b_decolorazioni')) list[2] = ES.consulenzaColorLux;
-      return list;
-    }
-
-    case 'colore': {
-      const list: EsperienzaDef[] = [ES.consulenzaColorLux];
-      list.push(d4c === 'd4c_decolorazioni' || d4c === 'd4c_tinta' ? ES.luceSignature : ES.nuances);
-      list.push(Array.isArray(d5c) && d5c.includes('d5c_danneggia') ? ES.protezioneLibra : ES.tonalizzante);
-      return list;
-    }
-
-    case 'armonia': {
-      if (d1 === 'd1_ricci' || d1 === 'd1_molto_ricci') return [ES.ricciOsa, ES.taglioSignature, ES.piegaLux];
-      if (d1 === 'd1_mossi') return [ES.ricciOso, ES.softRefining, ES.piegaLux];
-      return [ES.taglioSignature, ES.softRefining, ES.piegaLux];
-    }
-
-    case 'rituale': {
-      const list: EsperienzaDef[] = [ES.taglioSignature, ES.piegaLux];
-      if (d4e === 'd4e_cute') list.push(ES.areaCura);
-      else if (d4e === 'd4e_capello') list.push(ES.cheratinaPro);
-      else if (d4e === 'd4e_colore') list.push(ES.consulenzaColorLux);
-      else if (d4e === 'd4e_forma') list.push(ES.ricciOsa);
-      else list.push(ES.areaCura);
-      return list;
-    }
-  }
-}
-
-// ── COPY RISULTATO ─────────────────────────────────────────────
-
-const RESULT_CONTENT: Record<Percorso, { nome: string; sottotitolo: string; cosaRisolve: string; percheTe: string }> = {
-  cute: {
-    nome: 'Equilibrio della Cute',
-    sottotitolo: 'La bellezza parte da qui.',
-    cosaRisolve: 'Il percorso Equilibrio della Cute lavora là dove tutto inizia: il cuoio capelluto. Affronta fastidi come prurito, desquamazione, eccesso di sebo e sensibilità, riportando la cute a una condizione di equilibrio reale e duraturo.',
-    percheTe: 'Dalle tue risposte emerge che la tua cute ha bisogno di attenzione. Non è un problema da nascondere: è il punto da cui partire per avere capelli sani e belli. In Luxosa partiamo proprio da qui.',
-  },
-  rinascita: {
-    nome: 'Rinascita del Capello',
-    sottotitolo: 'Restituire ciò che il tempo ha tolto.',
-    cosaRisolve: 'Il percorso Rinascita del Capello è pensato per restituire al capello ciò che trattamenti, calore e tempo gli hanno tolto. Lavora sulla struttura interna della fibra: idratazione profonda, ricostruzione, elasticità e lucentezza.',
-    percheTe: 'Il tuo capello ha attraversato molto. Le tue risposte ci dicono che ha bisogno di essere ricostruito con cura, non con una soluzione rapida. Rinascita è il percorso che ti ridà una base solida su cui costruire tutto il resto.',
-  },
-  colore: {
-    nome: 'Armonia del Colore',
-    sottotitolo: 'Il colore giusto non si sceglie. Si comprende.',
-    cosaRisolve: 'Il percorso Armonia del Colore è dedicato a chi cerca un colore che non sia solo bello il primo giorno, ma che duri, evolva e valorizzi. Sfumature, profondità, luminosità — con la protezione della fibra al centro di ogni scelta.',
-    percheTe: "Il colore è una delle cose che senti di più, e dalle tue risposte emerge che non hai ancora trovato l'armonia giusta. In Luxosa il colore non si applica: si progetta. E si progetta su di te.",
-  },
-  armonia: {
-    nome: 'Armonia',
-    sottotitolo: 'La forma che ti appartiene.',
-    cosaRisolve: 'Il percorso Armonia lavora sulla forma naturale del tuo capello: volume, definizione, movimento. Non cerca di domare il capello, ma di lasciarlo esprimere al meglio — con il taglio giusto, il trattamento giusto e la gestione quotidiana giusta.',
-    percheTe: 'Le tue risposte ci dicono che la forma del tuo capello è al centro delle tue esigenze. Che tu lo voglia più libero, più definito o più voluminoso, il percorso Armonia è pensato per trovare insieme la forma che ti rappresenta.',
-  },
-  rituale: {
-    nome: 'Rituale Luxosa',
-    sottotitolo: 'La cura più completa.',
-    cosaRisolve: "Il Rituale Luxosa è il percorso più completo: abbraccia cute, struttura, colore e forma in un unico progetto di cura integrato. Non è la somma di più servizi: è un percorso progettato dall'inizio per prendersi cura di ogni aspetto del tuo capello.",
-    percheTe: "Dalle tue risposte emerge che il tuo desiderio non riguarda un singolo aspetto, ma una trasformazione complessiva. Vuoi essere presa in carico davvero, dall'inizio alla fine. Il Rituale Luxosa è esattamente questo.",
-  },
-};
-
-const PERCORSO_LABELS: Record<Percorso, string> = {
-  cute: 'Equilibrio della Cute',
-  rinascita: 'Rinascita del Capello',
-  colore: 'Armonia del Colore',
-  armonia: 'Armonia',
+const PUBLIC_PERCORSO_NAMES: Record<PublicPercorso, string> = {
+  benessere: 'BenEssere',
+  colorlux: 'ColorLux',
   rituale: 'Rituale Luxosa',
 };
 
-// ═══════════════════════════════════════════════════════════════
-// QUIZ IMAGES — Unsplash (royalty-free, no attribution required)
-// ═══════════════════════════════════════════════════════════════
-
-const QUIZ_IMAGES: Record<string, string> = {
-  d1: '/images/quiz/quiz-hair-type.jpg',
-  d2: '/images/quiz/quiz-hair-care.jpg',
-  d3: '/images/quiz/quiz-consultation.jpg',
-  d4a: '/images/quiz/quiz-scalp.jpg',
-  d5a: '/images/quiz/quiz-scalp.jpg',
-  d6a: '/images/quiz/quiz-scalp.jpg',
-  d7a: '/images/quiz/quiz-scalp.jpg',
-  d4b: '/images/quiz/quiz-structure.jpg',
-  d5b: '/images/quiz/quiz-structure.jpg',
-  d6b: '/images/quiz/quiz-structure.jpg',
-  d7b: '/images/quiz/quiz-structure.jpg',
-  d4c: '/images/quiz/quiz-color.jpg',
-  d5c: '/images/quiz/quiz-color.jpg',
-  d6c: '/images/quiz/quiz-color.jpg',
-  d7c: '/images/quiz/quiz-color.jpg',
-  d4d: '/images/quiz/quiz-form.jpg',
-  d5d: '/images/quiz/quiz-form.jpg',
-  d6d: '/images/quiz/quiz-form.jpg',
-  d7d: '/images/quiz/quiz-form.jpg',
-  d4e: '/images/quiz/quiz-complete.jpg',
-  d5e: '/images/quiz/quiz-complete.jpg',
-  d6e: '/images/quiz/quiz-complete.jpg',
-  d7e: '/images/quiz/quiz-complete.jpg',
-  d8: '/images/quiz/quiz-lifestyle.jpg',
-  d9: '/images/quiz/quiz-lifestyle.jpg',
-  d10: '/images/quiz/quiz-freetext.jpg',
-};
-
-function getQuizImage(questionId: string): string {
-  return QUIZ_IMAGES[questionId] ?? '/images/quiz/quiz-consultation.jpg';
+function getPublicPercorso(primary: Percorso, scores: Scores): PublicPercorso {
+  if (primary === 'cute' || primary === 'rinascita') return 'benessere';
+  if (primary === 'colore') return 'colorlux';
+  if (primary === 'rituale') return 'rituale';
+  // primary === 'armonia': default BenEssere; Rituale solo se segnali di complessità multi-area forti
+  if (scores.rituale >= 4) return 'rituale';
+  return 'benessere';
 }
+
+function getSecondaryPublic(primary: Percorso, secondary: Percorso | null, scores: Scores): PublicPercorso | null {
+  if (!secondary) return null;
+  const primaryPub = getPublicPercorso(primary, scores);
+  const secondPub = getPublicPercorso(secondary, scores);
+  if (secondPub === primaryPub) return null;
+  return secondPub;
+}
+
+// ── LIVELLO DI ATTENZIONE ───────────────────────────────────────
+
+function getAttentionLevel(answers: Answers, primary: Percorso): AttentionLevel {
+  let score = 0;
+  const d3 = answers['d3'] as string | undefined;
+  const branch = d3 ? getBranchKey(d3) : 'completo';
+
+  if (branch === 'cute') {
+    const d5a = answers['d5a'] as string | undefined;
+    if (d5a === 'd5a_sempre' || d5a === 'd5a_anno') score += 2;
+    else if (d5a === 'd5a_mesi') score += 1;
+    const d4a = answers['d4a'];
+    if (Array.isArray(d4a) && d4a.length >= 2) score += 1;
+  } else if (branch === 'struttura') {
+    const d5b = answers['d5b'] as string | undefined;
+    if (d5b === 'd5b_spezzano') score += 2;
+    else if (d5b === 'd5b_aperte') score += 1;
+    const d7b = answers['d7b'] as string | undefined;
+    if (d7b === 'd7b_ricominciare') score += 1;
+    const d4b = answers['d4b'];
+    if (Array.isArray(d4b) && d4b.length >= 3) score += 1;
+  } else if (branch === 'colore') {
+    const d6c = answers['d6c'] as string | undefined;
+    if (d6c === 'd6c_frequente') score += 1;
+    const d5c = answers['d5c'];
+    if (Array.isArray(d5c) && d5c.includes('d5c_danneggia')) score += 1;
+  } else if (branch === 'forma') {
+    const d5d = answers['d5d'] as string | undefined;
+    if (d5d === 'd5d_troppo') score += 1;
+    const d6d = answers['d6d'] as string | undefined;
+    if (d6d === 'd6d_sempre') score += 1;
+  } else {
+    const d5e = answers['d5e'] as string | undefined;
+    if (d5e === 'd5e_insoddisfatta' || d5e === 'd5e_prima') score += 2;
+    const d6e = answers['d6e'] as string | undefined;
+    if (d6e === 'd6e_tutto') score += 1;
+    score += 1;
+  }
+
+  const d9 = answers['d9'] as string | undefined;
+  if (d9 === 'd9_non_piacciono') score += 2;
+  else if (d9 === 'd9_trascuro') score += 1;
+
+  const d10 = answers['d10'] as string | undefined;
+  if (d10 && d10.trim().length > 30) score += 1;
+  if (d10 && d10.trim().length > 100) score += 1;
+
+  if (primary === 'rituale') score += 1;
+
+  if (score >= 4) return 'prioritaria';
+  if (score >= 2) return 'mirata';
+  return 'ordinaria';
+}
+
+// ── CONDIZIONE DI PARTENZA ──────────────────────────────────────
+
+function buildConditionSummary(answers: Answers, _primary: Percorso): string {
+  const d1 = answers['d1'] as string | undefined;
+  const d2 = answers['d2'];
+  const d3 = answers['d3'] as string | undefined;
+  const d8 = answers['d8'] as string | undefined;
+  const d9 = answers['d9'] as string | undefined;
+
+  const tipoMap: Record<string, string> = {
+    d1_lisci: 'lisci', d1_mossi: 'mossi',
+    d1_ricci: 'ricci', d1_molto_ricci: 'molto ricci',
+  };
+  const tipo = d1 ? (tipoMap[d1] ?? 'nella loro struttura naturale') : 'nella loro struttura naturale';
+
+  const statoLabels: Record<string, string> = {
+    d2_fragili: 'fragili e con scarsa resistenza',
+    d2_crespi: 'difficili da gestire per via della crespa',
+    d2_sottili: 'sottili e con poco volume',
+    d2_grassi: 'con tendenza alla radice grassa',
+    d2_secchi: 'secchi e opachi',
+    d2_sani: 'in buona salute, ma con margine di miglioramento',
+  };
+  const d2arr = Array.isArray(d2) ? d2 : d2 ? [d2] : [];
+  let statoDesc = d2arr.map(id => statoLabels[id] ?? '').filter(Boolean).join(' e ');
+  // Evita contraddizione: "in buona salute" + danno da colore rilevato in d5c
+  const d5cForCond = answers['d5c'];
+  const d5cArrForCond = Array.isArray(d5cForCond) ? (d5cForCond as string[]) : d5cForCond ? [d5cForCond as string] : [];
+  if (d3 && getBranchKey(d3) === 'colore' && d5cArrForCond.includes('d5c_danneggia') && d2arr.includes('d2_sani')) {
+    statoDesc = 'con una base ancora ordinata, ma con attenzione alla fibra dalla storia colore';
+  }
+
+  const lavaggio: Record<string, string> = {
+    d8_ogni_giorno: 'ogni giorno', d8_2_3: 'ogni 2–3 giorni',
+    d8_settimana: 'una volta a settimana', d8_meno: 'meno di una volta a settimana',
+  };
+  const lavaggioDesc = d8 ? (lavaggio[d8] ?? '') : '';
+
+  const branch = d3 ? getBranchKey(d3) : 'completo';
+  let specificPart = '';
+
+  if (branch === 'cute') {
+    const d4a = answers['d4a'];
+    const d4aArr = Array.isArray(d4a) ? d4a : d4a ? [d4a] : [];
+    const sintoMap: Record<string, string> = {
+      d4a_prurito: 'prurito', d4a_desquamazione: 'desquamazione',
+      d4a_grassa: 'eccesso di sebo', d4a_rossori: 'rossori', d4a_tira: 'cute che tira',
+    };
+    const sintomi = d4aArr.map(id => sintoMap[id] ?? '').filter(Boolean).join(', ');
+    const d5a = answers['d5a'] as string | undefined;
+    const durataMap: Record<string, string> = {
+      d5a_settimane: 'da poche settimane', d5a_mesi: 'da qualche mese',
+      d5a_anno: 'da più di un anno', d5a_sempre: 'da sempre',
+    };
+    const durata = d5a ? (durataMap[d5a] ?? '') : '';
+    specificPart = `La priorità dichiarata è la cute${sintomi ? ` — ${sintomi}` : ''}${durata ? `, presenti ${durata}` : ''}.`;
+  } else if (branch === 'struttura') {
+    const d4b = answers['d4b'];
+    const d4bArr = Array.isArray(d4b) ? d4b : d4b ? [d4b] : [];
+    const trattMap: Record<string, string> = {
+      d4b_colorazioni: 'colorazioni', d4b_decolorazioni: 'decolorazioni',
+      d4b_stiratura: 'stirature', d4b_calore: 'calore frequente', d4b_aggressivi: 'prodotti aggressivi',
+    };
+    const trattamenti = d4bArr.map(id => trattMap[id] ?? '').filter(Boolean).join(', ');
+    const d5b = answers['d5b'] as string | undefined;
+    const condMap: Record<string, string> = {
+      d5b_sane: 'le punte sono ancora integre', d5b_aperte: 'le punte tendono ad aprirsi',
+      d5b_spezzano: 'il capello si spezza lungo la lunghezza',
+    };
+    const cond = d5b ? (condMap[d5b] ?? '') : '';
+    specificPart = `${trattamenti ? `Il capello ha subito nel tempo: ${trattamenti}.` : 'La fibra è stata sollecitata nel tempo.'} ${cond ? `Oggi ${cond}.` : ''}`.trim();
+  } else if (branch === 'colore') {
+    const d4c = answers['d4c'] as string | undefined;
+    const colorMap: Record<string, string> = {
+      d4c_naturale: 'il colore naturale', d4c_tinta: 'una tinta',
+      d4c_decolorazioni: 'decolorazioni', d4c_grigi_coprire: 'grigi da coprire',
+      d4c_grigi_valorizzare: 'grigi da valorizzare',
+    };
+    const colorDesc = d4c ? (colorMap[d4c] ?? 'il colore attuale') : 'il colore attuale';
+    const d5c = answers['d5c'];
+    const d5cArr = Array.isArray(d5c) ? d5c : d5c ? [d5c] : [];
+    const preoMap: Record<string, string> = {
+      d5c_spegne: 'si spegne rapidamente', d5c_luminoso: 'manca di luminosità',
+      d5c_uniforme: 'non risulta uniforme', d5c_viso: 'non valorizza il viso come vorresti',
+      d5c_danneggia: 'preoccupa per i possibili danni alla fibra',
+    };
+    const preoc = d5cArr.map(id => preoMap[id] ?? '').filter(Boolean).join(' e ');
+    specificPart = `Il punto di partenza è ${colorDesc}.${preoc ? ` Il colore ${preoc}.` : ''}`;
+  } else if (branch === 'forma') {
+    const d4d = answers['d4d'];
+    const d4dArr = Array.isArray(d4d) ? d4d : d4d ? [d4d] : [];
+    const formaMap: Record<string, string> = {
+      d4d_volume: 'il volume', d4d_ricci: 'la gestione del riccio',
+      d4d_piega: 'la tenuta della piega', d4d_taglio: 'la forma del taglio',
+    };
+    const formaDesc = d4dArr.map(id => formaMap[id] ?? '').filter(Boolean).join(', ');
+    const d5d = answers['d5d'] as string | undefined;
+    const volumeMap: Record<string, string> = {
+      d5d_poco: 'non abbastanza', d5d_medio: 'nella media',
+      d5d_molto: 'abbastanza voluminosi', d5d_troppo: 'eccessivo e difficile da gestire',
+    };
+    const volumeDesc = d5d ? (volumeMap[d5d] ?? '') : '';
+    specificPart = `Le esigenze principali riguardano ${formaDesc || 'la forma e il movimento'}${volumeDesc ? ` — il volume attuale risulta ${volumeDesc}` : ''}.`;
+  } else {
+    const d5e = answers['d5e'] as string | undefined;
+    const d6e = answers['d6e'] as string | undefined;
+    const satMap: Record<string, string> = {
+      d5e_cercando: 'stai cercando ancora la direzione giusta',
+      d5e_insoddisfatta: 'hai provato soluzioni che non hanno risposto davvero',
+      d5e_prima: 'è la prima volta che cerchi un percorso strutturato',
+    };
+    const d6eMap: Record<string, string> = {
+      d6e_risultati: 'cerchi risultati concreti e misurabili',
+      d6e_presa: 'vuoi essere presa davvero in carico',
+      d6e_capire: 'prima di tutto vuoi capire',
+      d6e_tutto: 'vuoi prenderti cura di tutto in modo integrato',
+    };
+    const satDesc = d5e ? (satMap[d5e] ?? '') : '';
+    const aspDesc = d6e ? (d6eMap[d6e] ?? '') : '';
+    specificPart = `Dalla lettura del profilo emerge una situazione articolata${satDesc ? `: ${satDesc}` : ''}. ${aspDesc ? `In questo momento ${aspDesc}.` : ''}`.trim();
+  }
+
+  const d9Ctx: Record<string, string> = {
+    d9_amo: 'Tieni molto ai tuoi capelli e vorresti valorizzarli di più.',
+    d9_non_piacciono: 'Il rapporto con i tuoi capelli è complicato — li sopporti più che amarli.',
+    d9_trascuro: 'Ammetti di trascurarli, spesso per mancanza di strumenti o punti di riferimento.',
+    d9_ci_lavoro: 'Ci stai lavorando attivamente, ma senti di avere bisogno di un supporto più esperto.',
+  };
+  const d9Phrase = d9 ? (d9Ctx[d9] ?? '') : '';
+
+  const parts = [
+    `Capelli ${tipo}${statoDesc ? `, che descrivi come ${statoDesc}` : ''}.`,
+    specificPart,
+    d9Phrase,
+    lavaggioDesc ? `Frequenza di lavaggio: ${lavaggioDesc}.` : '',
+  ].filter(Boolean);
+
+  return parts.join(' ');
+}
+
+// ── SEGNALI PRINCIPALI ──────────────────────────────────────────
+
+function buildMainSignals(answers: Answers, _primary: Percorso): string[] {
+  const d3 = answers['d3'] as string | undefined;
+  const branch = d3 ? getBranchKey(d3) : 'completo';
+  const d9 = answers['d9'] as string | undefined;
+  const d2 = answers['d2'];
+  const d2arr = Array.isArray(d2) ? (d2 as string[]) : d2 ? [d2 as string] : [];
+  const signals: string[] = [];
+
+  if (branch === 'cute') {
+    const d4a = answers['d4a'];
+    const d4aArr = Array.isArray(d4a) ? d4a : d4a ? [d4a] : [];
+    if (d4aArr.includes('d4a_prurito')) signals.push('Prurito ricorrente — segnale di squilibrio del cuoio capelluto');
+    if (d4aArr.includes('d4a_desquamazione')) signals.push('Desquamazione presente — risposta della cute da esaminare in presenza');
+    if (d4aArr.includes('d4a_grassa')) signals.push('Eccesso di sebo alla radice — pattern che influenza anche il capello');
+    if (d4aArr.includes('d4a_rossori')) signals.push('Rossori o irritazione — cute in condizione di reattività');
+    if (d4aArr.includes('d4a_tira')) signals.push('Sensazione di cute che tira — mancanza di equilibrio da valutare');
+    const d7a = answers['d7a'] as string | undefined;
+    if (d7a === 'd7a_evidente') signals.push('Diradamento evidente — aspetto da approfondire in consulenza');
+    else if (d7a === 'd7a_lieve') signals.push('Lieve diradamento in alcune zone — da monitorare');
+  } else if (branch === 'struttura') {
+    const d5b = answers['d5b'] as string | undefined;
+    if (d5b === 'd5b_spezzano') signals.push('Capello che si spezza — fibra strutturalmente indebolita');
+    else if (d5b === 'd5b_aperte') signals.push('Punte aperte — fibra che necessita di rinforzo');
+    const d6b = answers['d6b'] as string | undefined;
+    if (d6b === 'd6b_paglia') signals.push('Texture simile alla paglia — segnale di disidratazione profonda');
+    else if (d6b === 'd6b_secco') signals.push('Capello secco al tatto — fibra povera di idratazione');
+    else if (d6b === 'd6b_ruvido') signals.push('Superficie ruvida — cuticole alterate');
+    const d7b = answers['d7b'] as string | undefined;
+    if (d7b === 'd7b_ricominciare') signals.push('Desiderio di ricominciare — non solo migliorare, ma ricostruire su basi solide');
+    const d4b = answers['d4b'];
+    const d4bArr = Array.isArray(d4b) ? d4b : d4b ? [d4b] : [];
+    if (d4bArr.includes('d4b_decolorazioni') && d4bArr.includes('d4b_stiratura')) {
+      signals.push('Combinazione di decolorazioni e stirature — stress multiplo sulla stessa fibra');
+    } else if (d4bArr.includes('d4b_decolorazioni')) {
+      signals.push('Decolorazioni nel tempo — impatto diretto sulla struttura della fibra');
+    }
+  } else if (branch === 'colore') {
+    const d5c = answers['d5c'];
+    const d5cArr = Array.isArray(d5c) ? d5c : d5c ? [d5c] : [];
+    if (d5cArr.includes('d5c_spegne')) signals.push('Colore che si spegne rapidamente — ossidazione precoce da gestire');
+    if (d5cArr.includes('d5c_luminoso')) signals.push('Mancanza di luminosità — colore che non riflette come dovrebbe');
+    if (d5cArr.includes('d5c_uniforme')) signals.push('Disuniformità cromatica — da leggere e progettare in consulenza');
+    if (d5cArr.includes('d5c_danneggia')) signals.push('Attenzione alla fibra — la protezione entra nella progettazione del colore');
+    const d6c = answers['d6c'] as string | undefined;
+    if (d6c === 'd6c_frequente') signals.push('Frequenza alta delle colorazioni — ciclo da ottimizzare per fibra e risultato');
+    const d7c = answers['d7c'] as string | undefined;
+    if (d7c === 'd7c_luminosita') signals.push('Obiettivo luminosità — direzione cromatica da costruire con precisione');
+    else if (d7c === 'd7c_naturalezza') signals.push('Obiettivo naturalezza — colore che si integra, non che si impone');
+    else if (d7c === 'd7c_copertura') signals.push('Obiettivo copertura — tecnica da valutare in base alla fibra e al viso');
+    else if (d7c === 'd7c_cambiamento') signals.push('Desiderio di cambiamento cromatico — da progettare con gradualità');
+  } else if (branch === 'forma') {
+    const d1 = answers['d1'] as string | undefined;
+    if (d1 === 'd1_ricci' || d1 === 'd1_molto_ricci') signals.push('Capello riccio — morfologia che richiede lettura e approccio specifici');
+    else if (d1 === 'd1_mossi') signals.push('Capello mosso — texture con gestione propria tra liscio e riccio');
+    // Relational signal — alta priorità, prima dei segnali tecnici
+    if (d9 === 'd9_non_piacciono') signals.push('Relazione con i capelli da ricostruire — dimensione personale da tenere presente nel percorso');
+    else if (d9 === 'd9_trascuro') signals.push('Una cura ancora da costruire — punto di partenza pulito, senza giudizio');
+    // Condizione della fibra — segnali da d2, rilevanti anche in percorso forma
+    if (d2arr.includes('d2_fragili')) signals.push('Fibra fragile — resistenza ridotta da considerare anche nel progetto di forma');
+    if (d2arr.includes('d2_secchi')) signals.push('Capello secco e opaco — idratazione da integrare nel percorso');
+    if (d2arr.includes('d2_crespi')) signals.push('Crespo strutturale — elemento da leggere insieme alla morfologia del capello');
+    if (d2arr.includes('d2_grassi')) signals.push('Tendenza alla radice grassa — comfort cute da valutare nel percorso');
+    const d4d = answers['d4d'];
+    const d4dArr = Array.isArray(d4d) ? d4d : d4d ? [d4d] : [];
+    if (d4dArr.includes('d4d_volume')) signals.push('Volume da gestire — obiettivo forma e leggerezza');
+    if (d4dArr.includes('d4d_ricci')) signals.push('Definizione del riccio da migliorare — potenziale da esprimere');
+    if (d4dArr.includes('d4d_piega')) signals.push('Piega che non regge — tecnica e prodotto da rivedere');
+    if (d4dArr.includes('d4d_taglio')) signals.push('Taglio che non valorizza — costruzione sulla morfologia reale');
+    const d7d = answers['d7d'] as string | undefined;
+    if (d7d === 'd7d_liberi') signals.push('Desiderio di capelli liberi e naturali — meno intervento, più identità');
+    else if (d7d === 'd7d_disciplinati') signals.push('Desiderio di più ordine e forma definita');
+  } else {
+    signals.push('Situazione articolata che tocca più aspetti contemporaneamente');
+    const d4e = answers['d4e'] as string | undefined;
+    if (d4e === 'd4e_cute') signals.push('Salute della cute — parte integrante della presa in carico');
+    if (d4e === 'd4e_capello') signals.push('Struttura della fibra — aspetto centrale del percorso');
+    if (d4e === 'd4e_colore') signals.push('Colore e cromatica — da integrare nel progetto complessivo');
+    if (d4e === 'd4e_forma') signals.push('Forma e movimento — da leggere insieme agli altri elementi');
+    const d7e = answers['d7e'] as string | undefined;
+    if (d7e === 'd7e_continuita') signals.push('Ricerca di continuità — non un episodio, ma una relazione professionale nel tempo');
+  }
+
+  // Per forma branch i segnali d9 sono già stati inseriti con priorità alta sopra
+  if (branch !== 'forma') {
+    if (d9 === 'd9_non_piacciono') signals.push('Relazione con i capelli da ricostruire — dimensione personale da tenere presente nel percorso');
+    if (d9 === 'd9_trascuro') signals.push('Una cura ancora da costruire — punto di partenza pulito, senza giudizio');
+  }
+
+  return signals.slice(0, 5);
+}
+
+// ── CONDIZIONE DESIDERATA ───────────────────────────────────────
+
+function buildDesiredOutcome(pub: PublicPercorso, primary: Percorso, answers: Answers): string {
+  if (pub === 'benessere' && primary === 'cute') {
+    return 'La direzione consigliata è verso un maggiore equilibrio del cuoio capelluto — meno fastidi, meno necessità di intervento quotidiano, più leggerezza e risposta sana.';
+  }
+  if (pub === 'benessere' && primary === 'rinascita') {
+    return 'La direzione consigliata è verso una fibra più forte e più morbida — restituire al capello la struttura che i trattamenti o il tempo hanno ridotto, con continuità e metodo.';
+  }
+  if (pub === 'benessere' && primary === 'armonia') {
+    const d9 = answers['d9'] as string | undefined;
+    const d2 = answers['d2'];
+    const d2arr = Array.isArray(d2) ? (d2 as string[]) : d2 ? [d2 as string] : [];
+    const hasFibraFragile = d2arr.includes('d2_fragili') || d2arr.includes('d2_secchi');
+    const hasRelational = d9 === 'd9_non_piacciono' || d9 === 'd9_trascuro';
+    if (hasFibraFragile && hasRelational) {
+      return 'La direzione consigliata abbraccia più di un aspetto: struttura della fibra, morfologia del capello, e il rapporto con entrambi. Il punto di partenza è la lettura reale — senza preconcetti, senza semplificazioni.';
+    }
+    if (hasFibraFragile) {
+      return 'La direzione consigliata è verso una forma più autentica, costruita anche su una fibra più solida. Morfologia e struttura si leggono insieme — quando la fibra risponde, la forma può esprimersi al meglio.';
+    }
+    if (hasRelational) {
+      return 'La direzione consigliata è verso un capello che smette di essere un problema e diventa un\'espressione più coerente di sé. La forma giusta è quella che si comprende — non quella che si sopporta.';
+    }
+    return 'La direzione consigliata è verso una forma più coerente con la propria natura — meno gestione quotidiana, più identità. Un capello che si lascia leggere nella sua morfologia e poi esprimere al meglio.';
+  }
+  if (pub === 'colorlux') {
+    const d5c = answers['d5c'];
+    const d5cArr = Array.isArray(d5c) ? (d5c as string[]) : d5c ? [d5c as string] : [];
+    if (d5cArr.includes('d5c_danneggia')) {
+      return 'La direzione consigliata è verso un colore che valorizza senza costo per la fibra — luminosità costruita con metodo, continuità cromatica nel tempo, struttura rispettata a ogni incontro.';
+    }
+    return 'La direzione consigliata è verso un colore più luminoso e coerente — riflessi costruiti sul viso, continuità cromatica nel tempo, risultato leggibile e raffinato senza sforzo quotidiano.';
+  }
+  if (pub === 'rituale' && primary === 'armonia') {
+    return 'La direzione consigliata è verso una forma più coerente con la propria natura — meno gestione quotidiana, più identità. Un capello che si lascia leggere nella sua morfologia e poi esprimere al meglio.';
+  }
+  return 'La direzione consigliata è verso una presa in carico integrata — cute, struttura, colore e forma letti insieme, in un progetto costruito nel tempo e adattato alle esigenze reali.';
+}
+
+// ── RATIONALE DEL PERCORSO ──────────────────────────────────────
+
+function buildPercorsoRationale(pub: PublicPercorso, primary: Percorso, answers: Answers, attention: AttentionLevel): string {
+  if (pub === 'benessere' && primary === 'cute') {
+    const d6a = answers['d6a'] as string | undefined;
+    const mai = d6a === 'd6a_mai';
+    return `Il percorso BenEssere parte dalla cute e la legge nel tempo, con metodo. Non un singolo intervento, ma una sequenza costruita per restituire equilibrio reale${mai ? ' — in un contesto mai affrontato in modo professionale' : ''}. La lettura in presenza permetterà di valutare la condizione reale e definire i passi più adatti.`;
+  }
+  if (pub === 'benessere' && primary === 'rinascita') {
+    return 'Il percorso BenEssere, nella declinazione orientata alla fibra, è pensato per restituire al capello una base solida da cui ripartire. Non una copertura superficiale, ma un lavoro in profondità, seduta dopo seduta. La consulenza in presenza definirà la sequenza più adatta alla situazione reale.';
+  }
+  if (pub === 'benessere' && primary === 'armonia') {
+    const d4d = answers['d4d'] as string | undefined;
+    const d2rat = answers['d2'];
+    const d2ratArr = Array.isArray(d2rat) ? (d2rat as string[]) : d2rat ? [d2rat as string] : [];
+    const hasFibraFragileRat = d2ratArr.includes('d2_fragili') || d2ratArr.includes('d2_secchi');
+    const d9rat = answers['d9'] as string | undefined;
+    const hasRelationalRat = d9rat === 'd9_non_piacciono' || d9rat === 'd9_trascuro';
+    const isComplexRat = hasFibraFragileRat || hasRelationalRat;
+    if (isComplexRat && d4d === 'd4d_taglio') {
+      return 'Il percorso BenEssere, orientato verso la forma, affronta anche le condizioni della fibra — perché un taglio costruito sulla morfologia reale richiede una base su cui poggiare. La consulenza in presenza definirà la priorità giusta e la sequenza più efficace.';
+    }
+    if (isComplexRat) {
+      return "Il percorso BenEssere, orientato verso la forma, tiene conto anche delle condizioni della fibra e del rapporto quotidiano con il proprio capello. La consulenza in presenza inizierà da una lettura senza preconcetti — morfologia, resistenza, routine — per costruire un punto di partenza coerente con la situazione reale.";
+    }
+    if (d4d === 'd4d_taglio') {
+      return 'Il percorso BenEssere, orientato verso la forma, porta le prime Esperienze direttamente sulla morfologia — un taglio costruito sul capello reale e un ascolto della gestione quotidiana. La consulenza in presenza definirà il punto di partenza e la direzione più adatta.';
+    }
+    return "Il percorso BenEssere, orientato verso la forma e l'espressione del capello, offre già dai primi incontri Esperienze calibrate sulla morfologia specifica — piega, definizione, o cura del riccio. La consulenza in presenza valuterà insieme qual è il gesto più coerente da cui partire.";
+  }
+  if (pub === 'colorlux') {
+    return "Il percorso ColorLux è costruito per chi desidera che il colore smetta di essere un'urgenza ripetuta e possa diventare un progetto di lungo periodo — pensato per la fibra, non solo per l'estetica immediata. La consulenza in presenza permetterà di progettare insieme la direzione cromatica più adatta.";
+  }
+  if (pub === 'rituale' && primary === 'armonia') {
+    if (attention === 'prioritaria') {
+      return 'La forma e il movimento del capello si leggono meglio all\'interno di una valutazione più ampia — struttura della fibra, morfologia, routine quotidiana. Il Rituale Luxosa è il contesto più adatto per iniziare questa lettura, con prime Esperienze già molto mirate sulla forma specifica. La consulenza in presenza confermerà la direzione più coerente.';
+    }
+    return 'La forma e il movimento del capello si leggono meglio all\'interno di una valutazione complessiva. Il Rituale Luxosa è l\'orientamento consigliato come cornice di partenza — da confermare in consulenza, con prime Esperienze già calibrate sulla morfologia specifica e sull\'obiettivo dichiarato.';
+  }
+  return 'Il Rituale Luxosa è il percorso più completo: abbraccia cute, struttura, colore e forma in un progetto di cura integrata. Non la somma di più interventi, ma un percorso pensato per prendere in carico ogni aspetto in modo coerente. La consulenza in presenza definirà le priorità e la sequenza delle Esperienze.';
+}
+
+// ── ESPERIENZE SUGGERITE ────────────────────────────────────────
+
+function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answers): { es: EsperienzaDef; perche: string }[] {
+  const d1 = answers['d1'] as string | undefined;
+  const d2 = answers['d2'];
+  const d4b = answers['d4b'];
+  const d4c = answers['d4c'] as string | undefined;
+  const d4d = answers['d4d'] as string | undefined;
+  const d4e = answers['d4e'] as string | undefined;
+  const d5b = answers['d5b'] as string | undefined;
+  const d5c = answers['d5c'];
+  const d6b = answers['d6b'] as string | undefined;
+  const d7c = answers['d7c'] as string | undefined;
+
+  const d2arr = Array.isArray(d2) ? (d2 as string[]) : d2 ? [d2 as string] : [];
+  const d4barr = Array.isArray(d4b) ? (d4b as string[]) : [];
+  const d5carr = Array.isArray(d5c) ? (d5c as string[]) : [];
+
+  const isRicci = d1 === 'd1_ricci' || d1 === 'd1_molto_ricci';
+  const isMossi = d1 === 'd1_mossi';
+
+  // Signal flags for slot-3 selection
+  const hasFibraFragile = d2arr.includes('d2_fragili') || d2arr.includes('d2_secchi')
+    || d5b === 'd5b_spezzano' || d6b === 'd6b_secco' || d6b === 'd6b_paglia';
+  const hasCrespo = d2arr.includes('d2_crespi');
+  const hasRadiceGrassa = d2arr.includes('d2_grassi');
+
+  // In forma branch: d4d_taglio = client needs taglio; everything else = piega/gestione
+  const needsTaglioForma = d4d === 'd4d_taglio';
+
+  const result: { es: EsperienzaDef; perche: string }[] = [];
+
+  // ── Slot 1: sempre Consulenze Specialistiche ──────────────────
+  result.push({
+    es: ES.consulenzeSpecialistiche,
+    perche: 'Il primo gesto è la lettura — del capello, della cute, della persona. Il punto di partenza per qualsiasi percorso.',
+  });
+
+  if (pub === 'benessere' && primary === 'cute') {
+    // Slot 2: cura cute
+    result.push({
+      es: ES.areaBenessere,
+      perche: "Trasforma la cura della cute da urgenza a rituale — l'esperienza più mirata per questa condizione.",
+    });
+    // Slot 3: complement styling
+    if (isRicci) {
+      result.push({ es: ES.ricciOsa, perche: 'Definizione e gestione del capello riccio — per valorizzare ogni incontro.' });
+    } else {
+      result.push({ es: ES.piegaLux, perche: 'Il gesto che valorizza il risultato di ogni incontro.' });
+    }
+
+  } else if (pub === 'benessere' && primary === 'rinascita') {
+    // Slot 2: fibra
+    result.push({
+      es: ES.cheratinaNutrizionePro,
+      perche: 'Restituisce ordine, morbidezza e resistenza a una fibra che ha subito trattamenti intensi nel tempo.',
+    });
+    // Slot 3
+    if (d4barr.includes('d4b_decolorazioni')) {
+      result.push({ es: ES.areaBenessere, perche: 'La fibra decolorata beneficia di un approccio integrato alla salute del capello.' });
+    } else if (isRicci) {
+      result.push({ es: ES.ricciOsa, perche: 'Dopo aver ristabilito la salute della fibra, la gestione del riccio trova il suo spazio naturale.' });
+    } else {
+      result.push({ es: ES.piegaLux, perche: 'Per vedere la fibra nella sua versione valorizzata già dal primo incontro.' });
+    }
+
+  } else if (pub === 'benessere' && primary === 'armonia') {
+    // Slot 2: servizio styling principale sulla morfologia
+    if (isRicci) {
+      if (needsTaglioForma) {
+        result.push({ es: ES.ricciOso, perche: 'Il taglio costruito sulla morfologia del riccio — la base strutturale da cui tutto parte.' });
+      } else {
+        result.push({ es: ES.ricciOsa, perche: "Definizione, gestione e piega del capello riccio — l'esperienza dedicata alla morfologia riccio autentica." });
+      }
+    } else if (isMossi) {
+      if (needsTaglioForma) {
+        result.push({ es: ES.taglioSignature, perche: 'Un taglio costruito sulla morfologia mosso porta armonia e gestibilità duratura.' });
+      } else {
+        result.push({ es: ES.piegaLux, perche: 'Il finish che valorizza il mosso nella sua forma più naturale e definita.' });
+      }
+    } else {
+      // lisci / senzaforma
+      if (needsTaglioForma) {
+        result.push({ es: ES.taglioSignature, perche: 'Un taglio costruito sulla morfologia specifica può cambiare la gestione quotidiana in modo duraturo.' });
+      } else {
+        result.push({ es: ES.piegaLux, perche: 'Il gesto che rivela il potenziale del capello nella sua versione più valorizzata.' });
+      }
+    }
+    // Slot 3: complementare intelligente
+    if (isRicci && needsTaglioForma) {
+      // RicciOso in slot 2 → RicciOsa o Cheratina come complemento
+      if (hasFibraFragile || hasCrespo) {
+        result.push({ es: ES.cheratinaNutrizionePro, perche: 'Ordine e morbidezza della fibra riccio — la base per un taglio che esprima tutta la morfologia.' });
+      } else {
+        result.push({ es: ES.ricciOsa, perche: 'Gestione e definizione del riccio — il gesto che valorizza il risultato del taglio morfologico.' });
+      }
+    } else if (hasFibraFragile) {
+      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Restituisce morbidezza e struttura alla fibra — il complemento ideale alla cura della forma.' });
+    } else if (hasCrespo && !isRicci) {
+      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Disciplina il crespo strutturalmente — la base per una forma più definita e gestibile.' });
+    } else if (hasRadiceGrassa) {
+      result.push({ es: ES.areaBenessere, perche: 'Quando la radice grassa condiziona la piega e la gestione quotidiana, la cute entra nel progetto.' });
+    }
+    // else: 2 esperienze — Consulenza + styling (nel range "2-3")
+
+  } else if (pub === 'colorlux') {
+    // Slot 2: servizio colore
+    if (d4c === 'd4c_decolorazioni' || d4c === 'd4c_grigi_coprire') {
+      const lucePerche = d4c === 'd4c_grigi_coprire'
+        ? 'Copertura e continuità cromatica costruite con metodo — per una ricrescita gestita e un colore sempre coerente nel tempo.'
+        : 'Schiariture costruite con precisione — luce, profondità e rispetto della fibra a ogni incontro.';
+      result.push({ es: ES.luceSignature, perche: lucePerche });
+    } else if (d4c === 'd4c_naturale' || d4c === 'd4c_grigi_valorizzare') {
+      result.push({ es: ES.nuances, perche: 'Valorizza il colore nella sua espressione più raffinata, senza stravolgere.' });
+    } else if (d4c === 'd4c_tinta') {
+      if (d7c === 'd7c_cambiamento' || d7c === 'd7c_luminosita') {
+        result.push({ es: ES.luceSignature, perche: d7c === 'd7c_cambiamento' ? 'Schiariture e tecniche di luce per un cambiamento costruito con metodo — non una svolta, ma una direzione.' : 'Luce e dimensione costruite con precisione — per un colore che valorizza senza appesantire.' });
+      } else {
+        result.push({ es: ES.nuances, perche: 'Il colore nella sua versione più raffinata e duratura.' });
+      }
+    } else {
+      result.push({ es: ES.nuances, perche: 'Il colore nella sua espressione più raffinata.' });
+    }
+    // Slot 3
+    if (d5carr.includes('d5c_danneggia')) {
+      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Quando il colore impatta sulla fibra, la cura strutturale entra nel progetto cromatico.' });
+    } else if (isRicci) {
+      result.push({ es: ES.ricciOsa, perche: 'Il colore valorizzato nella sua forma più autentica — riccio, definito, luminoso.' });
+    } else {
+      result.push({ es: ES.piegaLux, perche: 'Per valorizzare subito il risultato colore con il gesto giusto.' });
+    }
+
+  } else {
+    // pub === 'rituale' (primary rituale o armonia escalata a complessità multi-area)
+    // Slot 2: styling principale per morfologia
+    if (isRicci) {
+      if (d4e === 'd4e_forma' || needsTaglioForma) {
+        result.push({ es: ES.ricciOso, perche: 'Il taglio costruito sulla morfologia del riccio — la base strutturale del percorso integrato.' });
+      } else {
+        result.push({ es: ES.ricciOsa, perche: 'Gestione, definizione e piega del riccio — il gesto fondante per un percorso che parte dalla morfologia.' });
+      }
+    } else {
+      // mossi o lisci → Taglio Signature (mai RicciOso)
+      result.push({ es: ES.taglioSignature, perche: 'Il taglio costruito sulla morfologia è il gesto fondante di ogni percorso integrato.' });
+    }
+    // Slot 3: concern primario del percorso completo
+    if (d4e === 'd4e_cute') {
+      result.push({ es: ES.areaBenessere, perche: 'La cute è parte integrante del percorso — la sua salute è il punto di partenza.' });
+    } else if (d4e === 'd4e_capello') {
+      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Restituisce morbidezza e struttura alla fibra — base per tutto il resto.' });
+    } else if (d4e === 'd4e_colore') {
+      result.push({ es: ES.nuances, perche: 'Il colore entra nel percorso come elemento di valorizzazione, progettato insieme.' });
+    } else if (d4e === 'd4e_forma') {
+      // forma già in slot 2; se ricci con RicciOso, RicciOsa come complemento
+      if (isRicci && result.some(r => r.es.nome === ES.ricciOso.nome)) {
+        result.push({ es: ES.ricciOsa, perche: 'Gestione e definizione del riccio — il gesto che valorizza il risultato del taglio morfologico.' });
+      } else if (hasFibraFragile) {
+        result.push({ es: ES.cheratinaNutrizionePro, perche: 'Fibra e forma si sostengono — la struttura sana è la base di ogni risultato duraturo.' });
+      } else {
+        result.push({ es: ES.piegaLux, perche: 'Il gesto che rende visibile la direzione del percorso.' });
+      }
+    } else {
+      // d4e_nonso o non definito
+      if (hasFibraFragile) {
+        result.push({ es: ES.cheratinaNutrizionePro, perche: 'Restituisce morbidezza, corpo e resistenza — la base per qualsiasi percorso integrato.' });
+      } else {
+        result.push({ es: ES.areaBenessere, perche: "Benessere e struttura — le fondamenta di ogni percorso che parte dall'inizio." });
+      }
+    }
+  }
+
+  // Dedup safety net (la logica sopra non genera duplicati, ma per sicurezza)
+  const seen = new Set<string>();
+  return result.filter(item => {
+    if (seen.has(item.es.nome)) return false;
+    seen.add(item.es.nome);
+    return true;
+  });
+}
+
+// ── COSA APPROFONDIRE IN CONSULENZA ────────────────────────────
+
+function buildConsultationFocus(primary: Percorso, answers: Answers, esperienzaNames: Set<string>): string[] {
+  const d9 = answers['d9'] as string | undefined;
+  const d6a = answers['d6a'] as string | undefined;
+  const d4b = answers['d4b'];
+
+  if (primary === 'cute') {
+    const points = [
+      'Lo stato reale del cuoio capelluto — equilibrio sebaceo, sensibilità, reattività',
+      'La routine domestica attuale — prodotti usati, frequenza di lavaggio, esposizione al calore',
+    ];
+    points.push(d6a === 'd6a_mai'
+      ? 'La storia della cute — un aspetto mai affrontato in modo professionale, che sarà osservato senza preconcetti'
+      : 'Le soluzioni già provate — cosa ha funzionato, cosa no, e perché');
+    return points;
+  }
+
+  if (primary === 'rinascita') {
+    const d4bArr = Array.isArray(d4b) ? d4b : d4b ? [d4b] : [];
+    return [
+      'Lo stato reale della fibra — elasticità, coesione, punti critici lungo la lunghezza',
+      'La storia dei trattamenti — frequenza, prodotti, data dell\'ultimo intervento chimico o termico',
+      d4bArr.includes('d4b_decolorazioni')
+        ? 'Il rapporto tra colore e struttura — attenzione tecnica da valutare in presenza con cura'
+        : "L'aspettativa rispetto ai tempi — i risultati solidi si costruiscono con continuità",
+    ];
+  }
+
+  if (primary === 'colore') {
+    const points = [
+      'La storia cromatica — prodotti usati, frequenza, tecnica degli interventi precedenti',
+      'Lo stato attuale della fibra colorata — porosità e risposta al calore',
+      'La direzione cromatica desiderata — luminosità, profondità, uniformità o cambiamento',
+    ];
+    const d5cFocus = answers['d5c'];
+    const d5cFocusArr = Array.isArray(d5cFocus) ? (d5cFocus as string[]) : d5cFocus ? [d5cFocus as string] : [];
+    if (d5cFocusArr.includes('d5c_danneggia') && !esperienzaNames.has('Cheratina Nutrizione Pro')) {
+      points.push('La protezione strutturale durante il percorso colore — da valutare se integrare Cheratina Nutrizione Pro');
+    }
+    return points;
+  }
+
+  if (primary === 'armonia') {
+    const points = [
+      'La morfologia reale del capello — tipo di riccio o mosso, diametro, porosità, movimento naturale',
+      'La routine quotidiana — prodotti, tecnica di asciugatura, tempo e difficoltà di gestione',
+      "L'aspettativa sulla forma — riccio libero e naturale, definito, o strutturato con il taglio",
+    ];
+    const d2arm = answers['d2'];
+    const d2armArr = Array.isArray(d2arm) ? (d2arm as string[]) : d2arm ? [d2arm as string] : [];
+    if (d2armArr.includes('d2_grassi') && !esperienzaNames.has('Area Benessere')) {
+      points.push('Il comfort della cute e la tendenza alla radice grassa — da valutare se integrare Area Benessere nel percorso');
+    }
+    if ((d2armArr.includes('d2_fragili') || d2armArr.includes('d2_secchi')) && !esperienzaNames.has('Cheratina Nutrizione Pro')) {
+      points.push('La resistenza della fibra — fragile o secca, aspetto da considerare nella sequenza delle Esperienze');
+    }
+    return points;
+  }
+
+  const d7e = answers['d7e'] as string | undefined;
+  return [
+    'Lo stato complessivo — cute, fibra, colore e forma osservati insieme in presenza',
+    'La storia professionale passata — cosa è stato provato e perché non ha soddisfatto',
+    d7e === 'd7e_continuita' || d9 === 'd9_non_piacciono'
+      ? "La continuità — come costruire un percorso che abbia senso nel tempo e risponda davvero"
+      : "Le aspettative — cosa è realistico fare nel breve e cosa richiede più sedute",
+  ];
+}
+
+// ── CHIUSURA ────────────────────────────────────────────────────
+
+function buildClosing(pub: PublicPercorso, attention: AttentionLevel, primary: Percorso, answers: Answers): string {
+  if (pub === 'benessere' && primary === 'cute') {
+    if (attention === 'prioritaria') {
+      return 'La cute è il terreno — e un terreno in difficoltà ha bisogno di ascolto prima di qualsiasi intervento. Il percorso BenEssere inizia da questa lettura, concreta e metodica.';
+    }
+    return 'La cute è il terreno. Quando è in equilibrio, il capello può rispondere meglio. Il percorso BenEssere inizia da questa lettura — senza fretta, con metodo.';
+  }
+  if (pub === 'benessere' && primary === 'rinascita') {
+    if (attention === 'prioritaria') {
+      return "Quando la fibra ha attraversato molto, il punto di partenza non può essere una soluzione rapida. Può essere la lettura onesta di quello che c'è — e da lì, la costruzione di una base reale.";
+    }
+    return 'La fibra si ricostruisce con metodo e continuità. Il percorso BenEssere è la risposta consigliata — non per coprire, ma per restituire.';
+  }
+  if (pub === 'benessere' && primary === 'armonia') {
+    const d9cl = answers['d9'] as string | undefined;
+    const d2cl = answers['d2'];
+    const d2clArr = Array.isArray(d2cl) ? (d2cl as string[]) : d2cl ? [d2cl as string] : [];
+    const hasFibraFragileCl = d2clArr.includes('d2_fragili') || d2clArr.includes('d2_secchi');
+    const hasRelationalCl = d9cl === 'd9_non_piacciono' || d9cl === 'd9_trascuro';
+    const d1cl = answers['d1'] as string | undefined;
+    const isRicciCl = d1cl === 'd1_ricci' || d1cl === 'd1_molto_ricci';
+    if (hasFibraFragileCl && hasRelationalCl) {
+      return 'Quando fibra, forma e rapporto con il proprio capello si intrecciano, la risposta non può essere un gesto singolo. Il percorso BenEssere è il contesto in cui questa complessità viene accolta e trasformata in una direzione concreta.';
+    }
+    if (hasFibraFragileCl) {
+      return 'Forma e struttura si leggono insieme. Quando la fibra è indebolita, la morfologia non può esprimersi al meglio — il percorso BenEssere inizia da questa lettura integrata, per costruire un risultato che regge nel tempo.';
+    }
+    if (hasRelationalCl) {
+      return 'Un capello che non piace ancora merita di essere compreso prima di essere trasformato. Il percorso BenEssere inizia da questo ascolto — senza giudizio, con metodo.';
+    }
+    if (isRicciCl) {
+      return "La forma del capello riccio può diventare più coerente con la propria natura. Il percorso BenEssere porta le prime Esperienze direttamente sulla morfologia — costruite sull'osservazione in presenza, non su una formula.";
+    }
+    return "Il momento in cui il capello trova la sua forma giusta è quello in cui la gestione smette di essere un problema. Il percorso BenEssere porta a quel momento con metodo — osservazione, morfologia, gesto calibrato.";
+  }
+  if (pub === 'colorlux') {
+    const d5ccl = answers['d5c'];
+    const d5cclArr = Array.isArray(d5ccl) ? (d5ccl as string[]) : d5ccl ? [d5ccl as string] : [];
+    if (d5cclArr.includes('d5c_danneggia')) {
+      return 'Un colore che valorizza e rispetta la fibra è un progetto — non un prodotto. Il percorso ColorLux inizia dalla lettura integrata di colore e struttura, per trovare la direzione cromatica che dura senza costo per il capello.';
+    }
+    if (attention === 'prioritaria') {
+      return "Il colore che dura e valorizza non si trova per caso — si progetta. Il percorso ColorLux può trasformare la colorazione da urgenza ripetuta a scelta consapevole e duratura.";
+    }
+    return "Il colore giusto non si sceglie a scaffale — si comprende. Il percorso ColorLux è il contesto in cui questa comprensione può diventare un risultato reale.";
+  }
+  if (pub === 'rituale' && primary === 'armonia') {
+    return 'La forma del capello può diventare più coerente con la propria natura. Il primo passo è comprenderla davvero — con la lettura giusta e le Esperienze più adatte alla morfologia specifica.';
+  }
+  if (attention === 'prioritaria') {
+    return "Quando la complessità viene accolta invece di semplificata, il percorso può diventare reale. Il Rituale Luxosa inizia da una cosa sola: capire davvero.";
+  }
+  return 'La presa in carico integrata è la risposta più coerente per chi sente che un singolo gesto non basta. Il Rituale Luxosa è il contesto in cui questa risposta può prendere forma.';
+}
+
+// ── NOTA D10 ────────────────────────────────────────────────────
+
+function buildD10Note(d10: string | undefined): string | null {
+  if (!d10 || d10.trim().length <= 10) return null;
+  return d10.trim();
+}
+
 
 // ═══════════════════════════════════════════════════════════════
 // SUB-COMPONENTS
@@ -832,7 +1346,7 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
           <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
         )}
         <span className={`flex items-center gap-3 ${accepted ? 'relative z-10' : ''}`}>
-          Inizia il quiz
+          Inizia il Luxosa Test
           <ArrowRight size={14} strokeWidth={1.5} />
         </span>
       </button>
@@ -841,6 +1355,89 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
 }
 
 // ── QUIZ CONTENT ───────────────────────────────────────────────
+
+function OptionCard({
+  opt,
+  isSelected,
+  isMulti,
+  onSelect,
+  index,
+}: {
+  opt: OptionDef;
+  isSelected: boolean;
+  isMulti: boolean;
+  onSelect: () => void;
+  index: number;
+}) {
+  const [imgError, setImgError] = useState(false);
+  const imgSrc = OPTION_IMAGES[opt.id];
+  const hasImage = !!(imgSrc && !imgError);
+  const style = OPTION_IMAGE_STYLE[opt.id];
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.05 + index * 0.06, duration: 0.4, ease: premiumEase }}
+      onClick={onSelect}
+      className={`group relative text-left overflow-hidden border transition-all duration-500 ${
+        isSelected
+          ? 'border-brass shadow-md ring-1 ring-brass/20'
+          : 'border-sand/40 hover:border-brass/35 hover:shadow-md'
+      }`}
+    >
+      <div className={`relative overflow-hidden ${style?.aspect ?? 'aspect-square'}`}>
+        {hasImage ? (
+          <>
+            <img
+              src={imgSrc}
+              alt={opt.text}
+              className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04] ${style?.position ?? 'object-center'}`}
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+            <div className={`absolute bottom-0 left-0 right-0 px-3 py-2.5 transition-colors duration-300 ${
+              isSelected ? 'bg-ivory' : 'bg-ivory/95'
+            }`}>
+              <p className={`text-[12px] md:text-[14px] font-light leading-snug transition-colors duration-300 ${
+                isSelected ? 'text-brass-muted' : 'text-charcoal'
+              }`}>
+                {opt.text}
+              </p>
+              {opt.subtext && (
+                <p className="mt-0.5 text-[10px] text-anthracite/50 font-light leading-snug">{opt.subtext}</p>
+              )}
+            </div>
+          </>
+        ) : (
+          <div className={`w-full h-full flex flex-col items-center justify-center px-4 text-center transition-colors duration-500 ${
+            isSelected ? 'bg-ecru/35' : 'bg-ecru/20 group-hover:bg-ecru/40'
+          }`}>
+            <p className={`font-serif text-[20px] md:text-[23px] font-light leading-snug transition-colors duration-300 ${
+              isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
+            }`}>
+              {opt.text}
+            </p>
+            {opt.subtext && (
+              <p className="mt-2 text-[10px] md:text-[12px] leading-[1.5] text-anthracite/40 font-light">{opt.subtext}</p>
+            )}
+          </div>
+        )}
+        {isSelected && (
+          <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute top-2.5 right-2.5 w-6 h-6 bg-brass flex items-center justify-center">
+            <Check size={12} strokeWidth={2.5} className="text-ivory" />
+          </motion.div>
+        )}
+        {isMulti && !isSelected && (
+          <div className="absolute top-2.5 right-2.5 w-5 h-5 border border-ivory/60 bg-deep/20 backdrop-blur-sm" />
+        )}
+      </div>
+      <div className={`absolute bottom-0 left-0 right-0 h-[2px] transition-all duration-500 ${
+        isSelected ? 'bg-brass' : 'bg-transparent group-hover:bg-brass/20'
+      }`} />
+    </motion.button>
+  );
+}
 
 function QuizContent({
   q,
@@ -864,23 +1461,15 @@ function QuizContent({
   const selectedIds = Array.isArray(currentAnswer) ? currentAnswer : currentAnswer ? [currentAnswer as string] : [];
   const textValue = (answers[q.id] as string | undefined) ?? '';
 
-  const quizImage = getQuizImage(q.id);
-
   return (
     <motion.div
       initial={{ opacity: 0, x: 30 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: -30 }}
       transition={{ duration: 0.4, ease: premiumEase }}
-      className="relative w-full"
+      className="w-full"
     >
-      {/* Atmospheric background image */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img src={quizImage} alt="" className="w-full h-full object-cover opacity-[0.05] lg:opacity-[0.08]" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-b from-ivory/60 via-ivory/85 to-ivory" />
-      </div>
-
-      <div className="relative z-10 max-w-[960px] mx-auto px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-14">
+      <div className="max-w-[960px] mx-auto px-4 sm:px-6 md:px-10 py-8 md:py-12 lg:py-14">
       {/* Question header */}
       <div className="text-center mb-8 md:mb-10">
         <span className="text-[10px] tracking-[0.45em] uppercase text-brass-muted mb-3 block font-light">{q.label}</span>
@@ -912,13 +1501,17 @@ function QuizContent({
         </div>
       )}
 
-      {/* D3 / D5a — text-only cards */}
-      {!isText && (q.id === 'd3' || q.id === 'd5a' || q.id === 'd6a' || q.id === 'd8' || q.id === 'd9') && (
-        <div className={`grid gap-3 md:gap-4 ${q.id === 'd3' ? 'grid-cols-6' : 'grid-cols-2 sm:grid-cols-4'}`}>
+      {/* D3, D6b, D7b, D8, D9 — text-only large box layout (prominent serif text, no image) */}
+      {!isText && (q.id === 'd3' || q.id === 'd6b' || q.id === 'd7b' || q.id === 'd8' || q.id === 'd9') && (
+        <div className={`grid gap-3 md:gap-4 ${
+          q.id === 'd3' ? 'grid-cols-6' :
+          q.options.length === 3 ? 'grid-cols-2 sm:grid-cols-3' :
+          'grid-cols-2 sm:grid-cols-4'
+        }`}>
           {q.options.map((opt, i) => {
             const isSelected = selectedIds.includes(opt.id);
             const colClass = q.id === 'd3'
-              ? (i === 3 ? 'col-span-2 col-start-2' : i === 4 ? 'col-span-2 col-start-4' : 'col-span-2')
+              ? i < 3 ? 'col-span-2' : i === 3 ? 'col-span-2 col-start-2' : 'col-span-2 col-start-4'
               : '';
             return (
               <motion.button
@@ -930,11 +1523,11 @@ function QuizContent({
                 className={`${colClass} group relative text-left overflow-hidden border transition-all duration-500 ${
                   isSelected
                     ? 'border-brass shadow-md ring-1 ring-brass/20'
-                    : 'border-sand/40 bg-white/60 hover:border-brass/35 hover:shadow-md'
+                    : 'border-sand/40 bg-ecru/20 hover:bg-ecru/40 hover:border-brass/35 hover:shadow-md'
                 }`}
               >
-                <div className="aspect-square flex flex-col items-center justify-center px-4 text-center">
-                  <p className={`font-serif text-[17px] md:text-[20px] font-light leading-snug transition-colors duration-300 ${
+                <div className={`${q.id === 'd3' ? 'aspect-[3/2]' : 'aspect-square'} flex flex-col items-center justify-center px-4 text-center`}>
+                  <p className={`font-serif ${q.id === 'd3' ? 'text-[23px] md:text-[26px]' : 'text-[20px] md:text-[23px]'} font-light leading-snug transition-colors duration-300 ${
                     isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
                   }`}>
                     {opt.text}
@@ -961,91 +1554,40 @@ function QuizContent({
         </div>
       )}
 
-      {/* Option cards with images */}
-      {!isText && q.id !== 'd3' && q.id !== 'd5a' && q.id !== 'd6a' && q.id !== 'd8' && q.id !== 'd9' && (
+      {/* All other questions — OptionCard (image or premium fallback) */}
+      {!isText && q.id !== 'd3' && q.id !== 'd6b' && q.id !== 'd7b' && q.id !== 'd8' && q.id !== 'd9' && (
         <>
           <div className={`grid gap-3 md:gap-4 ${
-            q.id === 'd1' ? 'grid-cols-2 sm:grid-cols-4' :
-            q.id === 'd2' ? 'grid-cols-2 sm:grid-cols-3' :
-            q.id === 'd4a' ? 'grid-cols-2 sm:grid-cols-3' :
-            q.id === 'd7a' ? 'grid-cols-2 sm:grid-cols-3' :
-            q.options.length === 3 ? 'grid-cols-2 sm:grid-cols-3' :
-            q.options.length >= 5 ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-2'
+            (() => {
+              const optCount = q.options.length;
+              if (q.id === 'd2' || q.id === 'd6d') return 'grid-cols-2 sm:grid-cols-4';
+              return optCount === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4';
+            })()
           }`}>
             {q.options.map((opt, i) => {
-              const isSelected = selectedIds.includes(opt.id);
-              const imgSrc = OPTION_IMAGES[opt.id];
+              const colClass = (() => {
+                const optCount = q.options.length;
+                if (optCount === 5 && (i === 3 || i === 4)) return i === 3 ? 'sm:col-start-2' : 'sm:col-start-3';
+                if (q.id === 'd2' && (i === 4 || i === 5)) return i === 4 ? 'sm:col-start-2' : 'sm:col-start-3';
+                return '';
+              })();
               return (
-                <motion.button
-                  key={opt.id}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.06, duration: 0.4, ease: premiumEase }}
-                  onClick={() =>
-                    isMulti
-                      ? onMultiToggle(q.id, opt.id, maxSel)
-                      : onSingleSelect(q.id, opt.id)
-                  }
-                  className={`group relative text-left overflow-hidden border transition-all duration-500 ${
-                    isSelected
-                      ? 'border-brass shadow-md ring-1 ring-brass/20'
-                      : 'border-sand/40 bg-white/60 hover:border-brass/35 hover:shadow-md'
-                  }`}
-                >
-                  {/* Image area */}
-                  <div className={`relative overflow-hidden bg-gradient-to-br from-ecru via-sand/30 to-tortora/20 ${OPTION_IMAGE_STYLE[opt.id]?.aspect ?? 'aspect-[4/3]'}`}>
-                    {imgSrc && (
-                      <img
-                        src={imgSrc}
-                        alt={opt.text}
-                        className={`w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04] ${OPTION_IMAGE_STYLE[opt.id]?.position ?? 'object-center'}`}
-                        loading="lazy"
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                      />
-                    )}
-                    {/* Gradient overlay for readability */}
-                    <div className={`absolute inset-0 transition-opacity duration-500 ${
-                      isSelected
-                        ? 'bg-gradient-to-t from-brass/20 via-transparent to-brass/5'
-                        : 'bg-gradient-to-t from-deep/10 via-transparent to-transparent'
-                    }`} />
-                    {/* Selected check badge */}
-                    {isSelected && (
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="absolute top-2.5 right-2.5 w-6 h-6 bg-brass flex items-center justify-center"
-                      >
-                        <Check size={12} strokeWidth={2.5} className="text-ivory" />
-                      </motion.div>
-                    )}
-                    {/* Multi-select checkbox */}
-                    {isMulti && !isSelected && (
-                      <div className="absolute top-2.5 right-2.5 w-5 h-5 border border-ivory/60 bg-deep/20 backdrop-blur-sm" />
-                    )}
-                  </div>
-
-                  {/* Text area */}
-                  <div className="px-3 py-3 md:px-4 md:py-3.5">
-                    <p className={`text-[12px] md:text-[16px] font-light leading-[1.4] transition-colors duration-300 ${
-                      isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
-                    }`}>
-                      {opt.text}
-                    </p>
-                    {opt.subtext && (
-                      <p className="mt-1 text-[10px] md:text-[11px] leading-[1.5] text-anthracite/35 font-light line-clamp-2">{opt.subtext}</p>
-                    )}
-                  </div>
-
-                  {/* Bottom accent line */}
-                  <div className={`absolute bottom-0 left-0 right-0 h-[2px] transition-all duration-500 ${
-                    isSelected ? 'bg-brass' : 'bg-transparent group-hover:bg-brass/20'
-                  }`} />
-                </motion.button>
+                <div key={opt.id} className={colClass}>
+                  <OptionCard
+                    opt={opt}
+                    isSelected={selectedIds.includes(opt.id)}
+                    isMulti={isMulti}
+                    onSelect={() =>
+                      isMulti
+                        ? onMultiToggle(q.id, opt.id, maxSel)
+                        : onSingleSelect(q.id, opt.id)
+                    }
+                    index={i}
+                  />
+                </div>
               );
             })}
           </div>
-
           {isMulti && (
             <div className="mt-8 text-center">
               <ContinuaButton onClick={onContinue} enabled />
@@ -1106,7 +1648,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
     >
       {/* Atmospheric background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img src="/images/quiz/quiz-form.jpg" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.06]" loading="lazy" />
+        <img src="/images/zona-consulenza.png" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.06]" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-b from-ivory/50 via-ivory/85 to-ivory" />
       </div>
 
@@ -1153,7 +1695,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
           >
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
             <span className="relative z-10 flex items-center gap-3">
-              Scopri la tua soluzione
+              Ricevi il tuo orientamento
               <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>
@@ -1178,9 +1720,28 @@ function ResultScreen({
   const d3 = answers['d3'] as string | undefined;
   const sequence = buildQuestionSequence(d3);
   const scores = computeScores(answers, sequence);
-  const { primary, secondary, primaryPct: _primaryPct, secondaryPct } = getPercorsoResult(scores);
-  const content = RESULT_CONTENT[primary];
-  const esperienze = getEsperienze(primary, answers);
+  const { primary, secondary } = getPercorsoResult(scores);
+
+  const pub = getPublicPercorso(primary, scores);
+  const secondPub = getSecondaryPublic(primary, secondary, scores);
+  const attention = getAttentionLevel(answers, primary);
+  const percorsoName = PUBLIC_PERCORSO_NAMES[pub];
+
+  const conditionSummary = buildConditionSummary(answers, primary);
+  const mainSignals = buildMainSignals(answers, primary);
+  const desiredOutcome = buildDesiredOutcome(pub, primary, answers);
+  const percorsoRationale = buildPercorsoRationale(pub, primary, answers, attention);
+  const esperienze = getNewEsperienze(pub, primary, answers);
+  const esperienzaNames = new Set(esperienze.map(e => e.es.nome));
+  const consultationFocus = buildConsultationFocus(primary, answers, esperienzaNames);
+  const d10Note = buildD10Note(answers['d10'] as string | undefined);
+  const closing = buildClosing(pub, attention, primary, answers);
+
+  const attentionLabels: Record<AttentionLevel, string> = {
+    ordinaria: 'In fase di ascolto',
+    mirata: 'Attenzione mirata consigliata',
+    prioritaria: "Richiede un'attenzione dedicata",
+  };
 
   return (
     <motion.div
@@ -1190,114 +1751,174 @@ function ResultScreen({
       transition={{ duration: 0.7, ease: premiumEase }}
       className="relative w-full"
     >
-      {/* Atmospheric background image */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img src="/images/quiz/quiz-result.jpg" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.07]" loading="lazy" />
+        <img src="/images/prima_consulenza.png" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.07]" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-b from-ivory/50 via-ivory/85 to-ivory" />
       </div>
 
-      <div className="relative z-10 max-w-[1100px] mx-auto px-6 md:px-10 lg:px-12 py-10 md:py-14">
-      {/* Titolo personalizzato */}
-      <div className="mb-10 md:mb-14">
-        <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">La tua analisi</span>
-        <h2 className="font-serif text-[24px] md:text-[34px] font-light leading-[1.15] text-charcoal">
-          {nome ? `${nome}, il percorso che fa per te è…` : 'Il percorso che fa per te è…'}
-        </h2>
-      </div>
+      <div className="relative z-10 max-w-[800px] mx-auto px-6 md:px-10 py-10 md:py-14">
 
-      {/* Grid principale */}
-      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 mb-14">
-
-        {/* Colonna sinistra: percorso */}
-        <div>
-          <div className="border-l-[3px] border-brass pl-6 mb-8">
-            <h3 className="font-serif text-[32px] md:text-[42px] font-light leading-[1.1] text-charcoal mb-2">
-              {content.nome}
-            </h3>
-            <p className="font-serif text-[19px] md:text-[18px] italic text-anthracite/40 font-light">
-              {content.sottotitolo}
-            </p>
-          </div>
-
-          {/* Copy */}
-          <div className="space-y-6">
-            <div>
-              <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-2">Cosa risolve</span>
-              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light">{content.cosaRisolve}</p>
-            </div>
-            <div className="border-t border-sand/35 pt-5">
-              <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-2">Perché è giusto per te</span>
-              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light italic">{content.percheTe}</p>
-            </div>
+        {/* 1 — Apertura personalizzata */}
+        <div className="mb-12 md:mb-16">
+          <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Il tuo orientamento Luxosa</span>
+          <h2 className="font-serif text-[24px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-6">
+            {nome ? `${nome}, il percorso pensato per te è…` : 'Il percorso pensato per te è…'}
+          </h2>
+          <div className="border-l-[3px] border-brass pl-6">
+            <p className="font-serif text-[38px] md:text-[50px] font-light leading-[1.05] text-charcoal">{percorsoName}</p>
           </div>
         </div>
 
-        {/* Colonna destra: esperienze */}
-        <div>
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-6">Esperienze consigliate</span>
-          <div className="space-y-3">
-            {esperienze.map((es, i) => (
+        {/* 2 — Condizione di partenza */}
+        <div className="mb-10 border-t border-sand/35 pt-8">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Condizione di partenza</span>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light">{conditionSummary}</p>
+        </div>
+
+        {/* 3 — Segnali principali */}
+        <div className="mb-10 border-t border-sand/35 pt-8">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-5">Segnali principali</span>
+          <ul className="space-y-3">
+            {mainSignals.map((signal, i) => (
+              <motion.li
+                key={i}
+                initial={{ opacity: 0, x: 12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 + i * 0.1, duration: 0.5, ease: premiumEase }}
+                className="flex items-start gap-3"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[9px] flex-shrink-0" />
+                <p className="text-[16px] md:text-[17px] leading-[1.75] text-anthracite/65 font-light">{signal}</p>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+
+        {/* 4 — Livello di attenzione */}
+        <div className="mb-10 border-t border-sand/35 pt-8">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Livello di attenzione</span>
+          <span className={`inline-flex items-center px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-light ${
+            attention === 'prioritaria'
+              ? 'bg-brass/10 text-brass-muted border border-brass/30'
+              : attention === 'mirata'
+              ? 'bg-ecru text-anthracite/55 border border-sand/50'
+              : 'bg-ecru/40 text-anthracite/40 border border-sand/30'
+          }`}>
+            {attentionLabels[attention]}
+          </span>
+        </div>
+
+        {/* 5 — La direzione */}
+        <div className="mb-10 border-t border-sand/35 pt-8">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">La direzione</span>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light">{desiredOutcome}</p>
+        </div>
+
+        {/* 6 — Perché questo percorso */}
+        <div className="mb-10 -mx-6 md:-mx-10 px-6 md:px-10 py-8 md:py-10 bg-ecru/25 border-t border-b border-sand/30">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Perché questo percorso</span>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">{percorsoRationale}</p>
+        </div>
+
+        {/* 7 — Esperienze suggerite */}
+        <div className="mb-10 pt-4">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-6">Esperienze suggerite</span>
+          <div className="space-y-4">
+            {esperienze.map((item, i) => (
               <motion.div
-                key={es.nome}
+                key={item.es.nome}
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.35 + i * 0.15, duration: 0.55, ease: premiumEase }}
-                className="border border-sand/40 p-5 bg-ecru/15"
+                transition={{ delay: 0.2 + i * 0.15, duration: 0.55, ease: premiumEase }}
+                className="border border-sand/40 p-5 md:p-6 bg-white/40"
               >
-                <div className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[6px] flex-shrink-0" />
+                <div className="flex items-start gap-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[8px] flex-shrink-0" />
                   <div>
-                    <h4 className="font-serif text-[20px] font-light text-charcoal mb-1">{es.nome}</h4>
-                    <p className="text-[12px] leading-[1.7] text-anthracite/45 font-light">{es.sottotitolo}</p>
+                    <h4 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-1">{item.es.nome}</h4>
+                    <p className="text-[12px] leading-[1.6] text-anthracite/40 font-light mb-3">{item.es.sottotitolo}</p>
+                    <p className="text-[15px] md:text-[16px] leading-[1.75] text-anthracite/60 font-light italic">{item.perche}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-
-          {/* Percorso secondario */}
-          {secondary && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.5 }}
-              className="mt-5 p-4 border border-brass/20 bg-brass/5"
-            >
-              <p className="text-[12px] leading-[1.75] text-anthracite/55 font-light">
-                Potresti anche valutare:{' '}
-                <strong className="text-charcoal/80 font-normal">{PERCORSO_LABELS[secondary]}</strong>{' '}
-                ({secondaryPct}% compatibile). La consulenza in sede ti aiuterà a scegliere il percorso più adatto.
-              </p>
-            </motion.div>
-          )}
         </div>
-      </div>
 
-      {/* CTA + Ricomincia */}
-      <div className="border-t border-sand/35 pt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-        <Link
-          to="/contatti"
-          onClick={() => window.scrollTo(0, 0)}
-          className="relative overflow-hidden group inline-flex items-center gap-4 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
-        >
-          <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-          <span className="relative z-10 flex items-center gap-4">
-            Prenota la tua consulenza gratuita
-            <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
-          </span>
-        </Link>
-        <button
-          onClick={onReset}
-          className="text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 border border-anthracite/15 px-8 py-5 hover:text-anthracite/70 hover:border-anthracite/25 transition-all duration-300"
-        >
-          Ricomincia
-        </button>
-      </div>
+        {/* 8 — Cosa approfondire in consulenza */}
+        <div className="mb-10 border-t border-sand/35 pt-8">
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-5">Cosa approfondire in consulenza</span>
+          <ul className="space-y-3">
+            {consultationFocus.map((point, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-sand mt-[9px] flex-shrink-0" />
+                <p className="text-[15px] md:text-[16px] leading-[1.75] text-anthracite/60 font-light">{point}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      {/* Disclaimer */}
-      <p className="mt-10 text-[11px] leading-[1.7] text-anthracite/28 font-light italic text-center max-w-xl mx-auto">
-        Questo risultato ha valore esclusivamente orientativo. La valutazione definitiva del tuo capello e della tua cute avviene in sede, durante la consulenza professionale con la tua professionista Luxosa.
-      </p>
+        {/* 9 — Dal racconto (solo se D10 > 10 char) */}
+        {d10Note && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6, ease: premiumEase }}
+            className="mb-10 border-t border-sand/35 pt-8"
+          >
+            <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Dal tuo racconto</span>
+            <blockquote className="border-l-[2px] border-brass/30 pl-5">
+              <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/55 font-light italic">«{d10Note}»</p>
+            </blockquote>
+          </motion.div>
+        )}
+
+        {/* 10 — Chiusura */}
+        <div className="mb-12 border-t border-sand/35 pt-8">
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">{closing}</p>
+        </div>
+
+        {/* Percorso secondario */}
+        {secondPub && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="mb-10 p-5 border border-brass/20 bg-brass/5"
+          >
+            <p className="text-[13px] leading-[1.75] text-anthracite/55 font-light">
+              La consulenza potrebbe rivelare un'affinità anche con{' '}
+              <strong className="text-charcoal/75 font-normal">{PUBLIC_PERCORSO_NAMES[secondPub]}</strong>
+              . La lettura in presenza definirà la direzione più coerente.
+            </p>
+          </motion.div>
+        )}
+
+        {/* CTA */}
+        <div className="border-t border-sand/35 pt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            to="/contatti"
+            onClick={() => window.scrollTo(0, 0)}
+            className="relative overflow-hidden group inline-flex items-center gap-4 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
+          >
+            <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
+            <span className="relative z-10 flex items-center gap-4">
+              Richiedi la tua consulenza Luxosa
+              <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+            </span>
+          </Link>
+          <button
+            onClick={onReset}
+            className="text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 border border-anthracite/15 px-8 py-5 hover:text-anthracite/70 hover:border-anthracite/25 transition-all duration-300"
+          >
+            Ricomincia
+          </button>
+        </div>
+
+        {/* Disclaimer */}
+        <p className="mt-10 text-[11px] leading-[1.7] text-anthracite/28 font-light italic text-center max-w-xl mx-auto">
+          Questo risultato ha valore esclusivamente orientativo. La valutazione definitiva avviene in sede, durante la consulenza professionale con la tua professionista Luxosa.
+        </p>
       </div>
     </motion.div>
   );
@@ -1412,7 +2033,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
               </div>
             ) : (
               <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/35">
-                {screen === 'result' ? 'Luxosa Test — Risultato' : screen === 'form' ? 'Ultimo passo' : ''}
+                {screen === 'result' ? 'Luxosa Test · Orientamento personalizzato' : screen === 'form' ? 'Ultimo passo' : ''}
               </span>
             )}
           </div>

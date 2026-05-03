@@ -1380,7 +1380,7 @@ function OptionCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.05 + index * 0.06, duration: 0.4, ease: premiumEase }}
       onClick={onSelect}
-      className={`group relative text-left overflow-hidden border-2 transition-all duration-500 ${
+      className={`group relative text-left overflow-hidden border-2 h-full transition-all duration-500 ${
         isSelected
           ? 'border-brass shadow-md ring-1 ring-brass/20'
           : 'border-anthracite/20 hover:border-brass/35 hover:shadow-md'

@@ -98,6 +98,8 @@ const OPTION_IMAGES: Record<string, string> = {
 
 const SQ = { aspect: 'aspect-square', position: 'object-center' } as const;
 
+const REPORT_DISCLAIMER = "Questo orientamento ha valore preliminare e personalizzato sulla base delle risposte fornite. Il percorso, le Esperienze suggerite e le eventuali priorità saranno confermati solo durante la Consulenza Luxosa in presenza, dopo l'osservazione diretta di cute, fibra, colore, forma e obiettivi personali.";
+
 const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> = {
   d1_lisci: SQ, d1_mossi: SQ, d1_ricci: SQ, d1_molto_ricci: SQ,
   d2_fragili: SQ, d2_crespi: SQ, d2_sottili: SQ, d2_grassi: SQ, d2_secchi: SQ, d2_sani: SQ,
@@ -113,7 +115,7 @@ const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> =
   d4c_naturale: SQ, d4c_tinta: SQ, d4c_decolorazioni: SQ, d4c_grigi_coprire: SQ, d4c_grigi_valorizzare: SQ,
   d5c_spegne: SQ, d5c_luminoso: SQ, d5c_uniforme: SQ, d5c_viso: SQ, d5c_danneggia: SQ,
   d6c_frequente: SQ, d6c_normale: SQ, d6c_raro: SQ, d6c_mai: SQ,
-  d7c_naturalezza: SQ, d7c_luminosita: SQ, d7c_copertura: SQ, d7c_cambiamento: SQ,
+  d7c_naturalezza: SQ, d7c_luminosita: SQ, d7c_copertura: SQ, d7c_cambiamento: SQ, d7c_bianco: SQ,
   d4d_volume: SQ, d4d_ricci: SQ, d4d_piega: SQ, d4d_taglio: SQ,
   d5d_poco: SQ, d5d_medio: SQ, d5d_molto: SQ, d5d_troppo: SQ,
   d6d_mai: SQ, d6d_qualche: SQ, d6d_sempre: SQ,
@@ -332,6 +334,7 @@ const questionBranches: Record<BranchKey, QuestionDef[]> = {
         { id: 'd7c_luminosita', text: 'Luminosità e dimensione', scores: { colore: 2 } },
         { id: 'd7c_copertura', text: 'Copertura perfetta dei grigi', scores: { colore: 1 } },
         { id: 'd7c_cambiamento', text: 'Un cambiamento deciso', scores: { colore: 1, rituale: 1 } },
+        { id: 'd7c_bianco', text: 'Accompagnare il passaggio al bianco o rendere la ricrescita meno visibile', scores: { colore: 2 } },
       ],
     },
   ],
@@ -542,14 +545,20 @@ function getPercorsoResult(scores: Scores): {
   const primary = first[0];
   const primaryPct = first[1] > 0 ? Math.min(Math.round((first[1] / MAX_SCORES[primary]) * 100), 99) : 0;
 
+  // Soglie qualitative per il percorso secondario — basate su segnali reali dell'area
+  const SECONDARY_THRESHOLDS: Record<Percorso, number> = {
+    cute: 3,
+    rinascita: 3,
+    colore: 3,
+    armonia: 3,
+    rituale: 4,
+  };
+
   let secondary: Percorso | null = null;
   let secondaryPct = 0;
-  if (second && first[1] > 0 && second[0] !== primary) {
-    const raw = Math.min(Math.round((second[1] / MAX_SCORES[second[0]]) * 100), 99);
-    if (raw >= primaryPct * 0.6) {
-      secondary = second[0];
-      secondaryPct = raw;
-    }
+  if (second && second[0] !== primary && second[1] >= SECONDARY_THRESHOLDS[second[0]]) {
+    secondary = second[0];
+    secondaryPct = Math.min(Math.round((second[1] / MAX_SCORES[second[0]]) * 100), 99);
   }
   return { primary, secondary, primaryPct, secondaryPct };
 }
@@ -839,6 +848,7 @@ function buildMainSignals(answers: Answers, _primary: Percorso): string[] {
     else if (d7c === 'd7c_naturalezza') signals.push('Obiettivo naturalezza — colore che si integra, non che si impone');
     else if (d7c === 'd7c_copertura') signals.push('Obiettivo copertura — tecnica da valutare in base alla fibra e al viso');
     else if (d7c === 'd7c_cambiamento') signals.push('Desiderio di cambiamento cromatico — da progettare con gradualità');
+    else if (d7c === 'd7c_bianco') signals.push('Strategia cromatica evolutiva — gestione del passaggio al bianco o morbidezza visiva sulla ricrescita');
   } else if (branch === 'forma') {
     const d1 = answers['d1'] as string | undefined;
     if (d1 === 'd1_ricci' || d1 === 'd1_molto_ricci') signals.push('Capello riccio — morfologia che richiede lettura e approccio specifici');
@@ -1069,7 +1079,10 @@ function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answe
 
   } else if (pub === 'colorlux') {
     // Slot 2: servizio colore
-    if (d4c === 'd4c_decolorazioni' || d4c === 'd4c_grigi_coprire') {
+    if (d7c === 'd7c_bianco') {
+      // d7c_bianco override: sempre Luce Signature con copy specifico, mai Nuances
+      result.push({ es: ES.luceSignature, perche: 'Una strategia cromatica evolutiva — pensata per accompagnare la ricrescita, il passaggio al bianco o una maggiore morbidezza visiva tra base naturale e lunghezze. La direzione specifica sarà definita durante la consulenza in presenza.' });
+    } else if (d4c === 'd4c_decolorazioni' || d4c === 'd4c_grigi_coprire') {
       const lucePerche = d4c === 'd4c_grigi_coprire'
         ? 'Copertura e continuità cromatica costruite con metodo — per una ricrescita gestita e un colore sempre coerente nel tempo.'
         : 'Schiariture costruite con precisione — luce, profondità e rispetto della fibra a ogni incontro.';
@@ -1172,10 +1185,13 @@ function buildConsultationFocus(primary: Percorso, answers: Answers, esperienzaN
   }
 
   if (primary === 'colore') {
+    const d7cFocus = answers['d7c'] as string | undefined;
     const points = [
       'La storia cromatica — prodotti usati, frequenza, tecnica degli interventi precedenti',
       'Lo stato attuale della fibra colorata — porosità e risposta al calore',
-      'La direzione cromatica desiderata — luminosità, profondità, uniformità o cambiamento',
+      d7cFocus === 'd7c_bianco'
+        ? 'La strategia evolutiva sulla ricrescita — ritmo degli incontri, tecniche più adatte (airtouch, babylight, degradé) e gradualità del percorso: da valutare in consulenza'
+        : 'La direzione cromatica desiderata — luminosità, profondità, uniformità o cambiamento',
     ];
     const d5cFocus = answers['d5c'];
     const d5cFocusArr = Array.isArray(d5cFocus) ? (d5cFocus as string[]) : d5cFocus ? [d5cFocus as string] : [];
@@ -1918,7 +1934,7 @@ function ResultScreen({
 
         {/* Disclaimer */}
         <p className="mt-10 text-[11px] leading-[1.7] text-anthracite/28 font-light italic text-center max-w-xl mx-auto">
-          Questo risultato ha valore esclusivamente orientativo. La valutazione definitiva avviene in sede, durante la consulenza professionale con la tua professionista Luxosa.
+          {REPORT_DISCLAIMER}
         </p>
       </div>
     </motion.div>

@@ -1555,7 +1555,7 @@ function QuizContent({
       {/* All other questions — OptionCard (image or premium fallback) */}
       {!isText && q.id !== 'd3' && q.id !== 'd6b' && q.id !== 'd7b' && q.id !== 'd8' && q.id !== 'd9' && (
         <>
-          <div className={`grid gap-3 md:gap-4 justify-center ${
+          <div className={`grid gap-3 md:gap-4 justify-center mx-auto ${
             (() => {
               const optCount = q.options.length;
               if (q.id === 'd2') return 'grid-cols-3';

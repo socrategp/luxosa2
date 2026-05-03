@@ -1504,15 +1504,13 @@ function QuizContent({
       {/* D3, D6b, D7b, D8, D9 — text-only large box layout (prominent serif text, no image) */}
       {!isText && (q.id === 'd3' || q.id === 'd6b' || q.id === 'd7b' || q.id === 'd8' || q.id === 'd9') && (
         <div className={`grid gap-3 md:gap-4 ${
-          q.id === 'd3' ? 'grid-cols-6' :
+          q.id === 'd3' ? 'grid-cols-5' :
           q.options.length === 3 ? 'grid-cols-2 sm:grid-cols-3' :
           'grid-cols-2 sm:grid-cols-4'
         }`}>
           {q.options.map((opt, i) => {
             const isSelected = selectedIds.includes(opt.id);
-            const colClass = q.id === 'd3'
-              ? i < 3 ? 'col-span-2' : i === 3 ? 'col-span-2 col-start-2' : 'col-span-2 col-start-4'
-              : '';
+            const colClass = '';
             return (
               <motion.button
                 key={opt.id}
@@ -1526,7 +1524,7 @@ function QuizContent({
                     : 'border-sand/40 bg-ecru/20 hover:bg-ecru/40 hover:border-brass/35 hover:shadow-md'
                 }`}
               >
-                <div className={`${q.id === 'd3' ? 'aspect-[3/2]' : 'aspect-square'} flex flex-col items-center justify-center px-4 text-center`}>
+                <div className="aspect-square flex flex-col items-center justify-center px-4 text-center">
                   <p className={`font-serif ${q.id === 'd3' ? 'text-[23px] md:text-[26px]' : 'text-[20px] md:text-[23px]'} font-light leading-snug transition-colors duration-300 ${
                     isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
                   }`}>
@@ -1560,10 +1558,10 @@ function QuizContent({
           <div className={`grid gap-3 md:gap-4 justify-center ${
             (() => {
               const optCount = q.options.length;
-              if (q.id === 'd2') return 'grid-cols-2 sm:grid-cols-4';
+              if (q.id === 'd2') return 'grid-cols-3';
               if (q.id === 'd6d') return 'grid-cols-3';
               if (q.id === 'd5d') return 'grid-cols-2 sm:grid-cols-4 max-w-md';
-              if (q.id === 'd4e') return 'grid-cols-2 sm:grid-cols-5 max-w-2xl';
+              if (q.id === 'd4e') return 'grid-cols-5 max-w-2xl';
               if (q.id === 'd4b') return 'grid-cols-3 sm:grid-cols-5 max-w-2xl';
               return optCount === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4';
             })()

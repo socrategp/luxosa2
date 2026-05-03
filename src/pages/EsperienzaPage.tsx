@@ -203,8 +203,8 @@ export default function EsperienzaPage() {
       />
       <EsperienzaIntro />
       <Experience />
-      <EsperienzeFAQ />
       <PricingNote />
+      <EsperienzeFAQ />
       <EsperienzaCTA />
     </>
   );

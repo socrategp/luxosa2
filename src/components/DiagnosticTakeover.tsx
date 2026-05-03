@@ -1293,6 +1293,90 @@ function buildD10Note(d10: string | undefined): string | null {
 }
 
 
+// ── WHATSAPP MESSAGE BUILDER ─────────────────────────────────────
+
+function buildWhatsAppMessage(
+  nome: string,
+  email: string,
+  whatsapp: string,
+  fascia: string,
+  answers: Answers
+): string {
+  const d3 = answers['d3'] as string | undefined;
+  const sequence = buildQuestionSequence(d3);
+  const scores = computeScores(answers, sequence);
+  const { primary, secondary } = getPercorsoResult(scores);
+  const pub = getPublicPercorso(primary, scores);
+  const secondPub = getSecondaryPublic(primary, secondary, scores);
+  const attention = getAttentionLevel(answers, primary);
+  const percorsoName = PUBLIC_PERCORSO_NAMES[pub];
+  const attentionLabels: Record<AttentionLevel, string> = {
+    ordinaria: 'In fase di ascolto',
+    mirata: 'Attenzione mirata consigliata',
+    prioritaria: "Richiede un'attenzione dedicata",
+  };
+  const conditionSummary = buildConditionSummary(answers, primary);
+  const mainSignals = buildMainSignals(answers, primary);
+  const desiredOutcome = buildDesiredOutcome(pub, primary, answers);
+  const percorsoRationale = buildPercorsoRationale(pub, primary, answers, attention);
+  const esperienze = getNewEsperienze(pub, primary, answers);
+  const esperienzaNames = new Set(esperienze.map(e => e.es.nome));
+  const consultationFocus = buildConsultationFocus(primary, answers, esperienzaNames);
+  const d10Note = buildD10Note(answers['d10'] as string | undefined);
+  const closing = buildClosing(pub, attention, primary, answers);
+
+  const lines: string[] = [];
+  lines.push('Buongiorno, vorrei maggiori informazioni circa la mia condizione, e chiedo il ricontatto da parte di un vostro consulente.');
+  lines.push('');
+  lines.push(`Fascia oraria preferita: ${fascia}`);
+  lines.push('');
+  lines.push('DATI DI CONTATTO');
+  lines.push(`Nome: ${nome}`);
+  lines.push(`Email: ${email}`);
+  lines.push(`WhatsApp: ${whatsapp}`);
+  lines.push('');
+  lines.push('--- REPORT LUXOSA TEST ---');
+  lines.push('');
+  lines.push(`PERCORSO: ${percorsoName}`);
+  lines.push(`Attenzione: ${attentionLabels[attention]}`);
+  lines.push('');
+  lines.push('CONDIZIONE DI PARTENZA');
+  lines.push(conditionSummary);
+  lines.push('');
+  lines.push('SEGNALI PRINCIPALI');
+  mainSignals.forEach(s => lines.push(`- ${s}`));
+  lines.push('');
+  lines.push('DIREZIONE DEL PERCORSO');
+  lines.push(desiredOutcome);
+  lines.push('');
+  lines.push("PERCHE' QUESTO PERCORSO");
+  lines.push(percorsoRationale);
+  lines.push('');
+  lines.push('ESPERIENZE SUGGERITE');
+  esperienze.forEach(e => {
+    lines.push(`- ${e.es.nome}`);
+    lines.push(`  ${e.perche}`);
+  });
+  if (secondPub) {
+    lines.push('');
+    lines.push(`PERCORSO SECONDARIO: ${PUBLIC_PERCORSO_NAMES[secondPub]}`);
+  }
+  lines.push('');
+  lines.push('COSA APPROFONDIRE IN CONSULENZA');
+  consultationFocus.forEach(f => lines.push(`- ${f}`));
+  if (d10Note) {
+    lines.push('');
+    lines.push('NOTE AGGIUNTIVE');
+    lines.push(d10Note);
+  }
+  lines.push('');
+  lines.push(closing);
+  lines.push('');
+  lines.push('---');
+  lines.push(REPORT_DISCLAIMER);
+  return lines.join('\n');
+}
+
 // ═══════════════════════════════════════════════════════════════
 // SUB-COMPONENTS
 // ═══════════════════════════════════════════════════════════════
@@ -1506,7 +1590,7 @@ function QuizContent({
             onChange={e => onTextChange(q.id, e.target.value)}
             maxLength={500}
             placeholder="Scrivi qui liberamente…"
-            className="w-full h-36 md:h-44 bg-white/60 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/25"
+            className="w-full h-36 md:h-44 bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/25"
           />
           <div className="text-right mt-1.5">
             <span className="text-[11px] text-anthracite/25 font-light">{textValue.length}/500</span>
@@ -1653,7 +1737,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
     onSubmit({ nome: nome.trim(), email: email.trim(), whatsapp: whatsapp.trim() });
   };
 
-  const inputClass = 'w-full bg-white/60 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/28';
+  const inputClass = 'w-full bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/28';
 
   return (
     <motion.div
@@ -1727,13 +1811,18 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 
 function ResultScreen({
   nome,
+  email,
+  whatsapp,
   answers,
   onReset,
 }: {
   nome: string;
+  email: string;
+  whatsapp: string;
   answers: Answers;
   onReset: () => void;
 }) {
+  const [showTimePicker, setShowTimePicker] = useState(false);
   const d3 = answers['d3'] as string | undefined;
   const sequence = buildQuestionSequence(d3);
   const scores = computeScores(answers, sequence);
@@ -1847,7 +1936,7 @@ function ResultScreen({
                 initial={{ opacity: 0, x: 16 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2 + i * 0.15, duration: 0.55, ease: premiumEase }}
-                className="border border-sand/40 p-5 md:p-6 bg-white/40"
+                className="border border-sand/40 p-5 md:p-6 bg-ivory/60"
               >
                 <div className="flex items-start gap-4">
                   <span className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[8px] flex-shrink-0" />
@@ -1913,9 +2002,8 @@ function ResultScreen({
 
         {/* CTA */}
         <div className="border-t border-sand/35 pt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            to="/contatti"
-            onClick={() => window.scrollTo(0, 0)}
+          <button
+            onClick={() => setShowTimePicker(true)}
             className="relative overflow-hidden group inline-flex items-center gap-4 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
           >
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
@@ -1923,7 +2011,7 @@ function ResultScreen({
               Richiedi la tua consulenza Luxosa
               <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
             </span>
-          </Link>
+          </button>
           <button
             onClick={onReset}
             className="text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 border border-anthracite/15 px-8 py-5 hover:text-anthracite/70 hover:border-anthracite/25 transition-all duration-300"
@@ -1937,6 +2025,53 @@ function ResultScreen({
           {REPORT_DISCLAIMER}
         </p>
       </div>
+
+      {/* Time picker modal */}
+      {showTimePicker && (
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center px-4">
+          <div
+            className="absolute inset-0 bg-deep/70 backdrop-blur-sm"
+            onClick={() => setShowTimePicker(false)}
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.25, 0.1, 0, 1] }}
+            className="relative bg-ivory max-w-sm w-full px-8 py-10 shadow-2xl"
+          >
+            <p className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">
+              Luxosa · Consulenza
+            </p>
+            <h3 className="font-serif text-[22px] font-light text-charcoal leading-snug mb-2">
+              In quale fascia oraria preferisci essere ricontattata?
+            </h3>
+            <div className="h-[1px] bg-sand/60 mb-8" />
+            <div className="flex flex-col gap-3">
+              {['09:00 – 11:00', '11:00 – 13:00', '13:00 – 15:00', '15:00 – 18:00', 'Indifferente'].map(fascia => (
+                <button
+                  key={fascia}
+                  onClick={() => {
+                    const msg = buildWhatsAppMessage(nome, email, whatsapp, fascia, answers);
+                    const url = `https://wa.me/390902403220?text=${encodeURIComponent(msg)}`;
+                    const opened = window.open(url, '_blank', 'noopener,noreferrer');
+                    if (!opened) window.location.href = url;
+                    setShowTimePicker(false);
+                  }}
+                  className="w-full text-left px-5 py-4 border border-sand/60 text-[15px] font-light text-anthracite/80 hover:border-brass/40 hover:bg-ecru/50 transition-all duration-300"
+                >
+                  {fascia}
+                </button>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowTimePicker(false)}
+              className="mt-6 w-full text-center text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 hover:text-anthracite/60 transition-colors duration-300"
+            >
+              Annulla
+            </button>
+          </motion.div>
+        </div>
+      )}
     </motion.div>
   );
 }
@@ -2099,6 +2234,8 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
             <ResultScreen
               key="result"
               nome={contactData.nome}
+              email={contactData.email}
+              whatsapp={contactData.whatsapp}
               answers={answers}
               onReset={onReset}
             />

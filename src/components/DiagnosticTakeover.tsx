@@ -1380,10 +1380,10 @@ function OptionCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.05 + index * 0.06, duration: 0.4, ease: premiumEase }}
       onClick={onSelect}
-      className={`group relative text-left overflow-hidden border transition-all duration-500 ${
+      className={`group relative text-left overflow-hidden border-2 transition-all duration-500 ${
         isSelected
           ? 'border-brass shadow-md ring-1 ring-brass/20'
-          : 'border-sand/40 hover:border-brass/35 hover:shadow-md'
+          : 'border-anthracite/20 hover:border-brass/35 hover:shadow-md'
       }`}
     >
       <div className={`relative overflow-hidden ${style?.aspect ?? 'aspect-square'}`}>
@@ -1557,17 +1557,19 @@ function QuizContent({
       {/* All other questions — OptionCard (image or premium fallback) */}
       {!isText && q.id !== 'd3' && q.id !== 'd6b' && q.id !== 'd7b' && q.id !== 'd8' && q.id !== 'd9' && (
         <>
-          <div className={`grid gap-3 md:gap-4 ${
+          <div className={`grid gap-3 md:gap-4 justify-center ${
             (() => {
               const optCount = q.options.length;
-              if (q.id === 'd2' || q.id === 'd6d') return 'grid-cols-2 sm:grid-cols-4';
+              if (q.id === 'd2') return 'grid-cols-2 sm:grid-cols-4';
+              if (q.id === 'd6d') return 'grid-cols-3';
+              if (q.id === 'd5d') return 'grid-cols-2 sm:grid-cols-4 max-w-md';
+              if (q.id === 'd4e') return 'grid-cols-2 sm:grid-cols-5 max-w-2xl';
+              if (q.id === 'd4b') return 'grid-cols-3 sm:grid-cols-5 max-w-2xl';
               return optCount === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4';
             })()
           }`}>
             {q.options.map((opt, i) => {
               const colClass = (() => {
-                const optCount = q.options.length;
-                if (optCount === 5 && (i === 3 || i === 4)) return i === 3 ? 'sm:col-start-2' : 'sm:col-start-3';
                 if (q.id === 'd2' && (i === 4 || i === 5)) return i === 4 ? 'sm:col-start-2' : 'sm:col-start-3';
                 return '';
               })();
@@ -1590,7 +1592,7 @@ function QuizContent({
           </div>
           {isMulti && (
             <div className="mt-8 text-center">
-              <ContinuaButton onClick={onContinue} enabled />
+              <ContinuaButton onClick={onContinue} enabled={selectedIds.length > 0} />
             </div>
           )}
         </>

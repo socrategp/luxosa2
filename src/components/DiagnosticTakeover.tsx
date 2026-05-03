@@ -1561,7 +1561,7 @@ function QuizContent({
               if (q.id === 'd2') return 'grid-cols-3';
               if (q.id === 'd6d') return 'grid-cols-3';
               if (q.id === 'd5d') return 'grid-cols-2 sm:grid-cols-4 max-w-md';
-              if (q.id === 'd4e') return 'grid-cols-5 max-w-2xl';
+              if (q.id === 'd4e') return 'grid-cols-3 max-w-md';
               if (q.id === 'd4b') return 'grid-cols-3 sm:grid-cols-5 max-w-2xl';
               return optCount === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4';
             })()
@@ -1569,6 +1569,7 @@ function QuizContent({
             {q.options.map((opt, i) => {
               const colClass = (() => {
                 if (q.id === 'd2' && (i === 4 || i === 5)) return i === 4 ? 'sm:col-start-2' : 'sm:col-start-3';
+                if (q.id === 'd4e' && (i === 3 || i === 4)) return i === 3 ? 'col-start-2' : 'col-start-3';
                 return '';
               })();
               return (

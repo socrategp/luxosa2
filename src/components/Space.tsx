@@ -55,6 +55,8 @@ export default function Space() {
             <img
               src="/images/spazio_luxosa.png"
               alt="Lo spazio Luxosa"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
             />
           </motion.div>
@@ -67,6 +69,8 @@ export default function Space() {
             <img
               src="/images/hero_esperienze.png"
               alt="Dettaglio dello spazio"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
             />
           </motion.div>

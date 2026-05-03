@@ -3,7 +3,7 @@ import { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import MainLayout from './layouts/MainLayout';
 import { QuizProvider, useQuiz } from './context/QuizContext';
-import { DiagnosticTakeover } from './components/DiagnosticTakeover';
+const DiagnosticTakeover = lazy(() => import('./components/DiagnosticTakeover').then(m => ({ default: m.DiagnosticTakeover })));
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const IlMetodoPage = lazy(() => import('./pages/IlMetodoPage'));
@@ -18,9 +18,11 @@ const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 function QuizOverlay() {
   const { quizOpen, closeQuiz } = useQuiz();
   return (
-    <AnimatePresence>
-      {quizOpen && <DiagnosticTakeover onReset={closeQuiz} />}
-    </AnimatePresence>
+    <Suspense fallback={null}>
+      <AnimatePresence>
+        {quizOpen && <DiagnosticTakeover onReset={closeQuiz} />}
+      </AnimatePresence>
+    </Suspense>
   );
 }
 

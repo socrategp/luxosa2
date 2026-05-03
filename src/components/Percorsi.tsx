@@ -69,6 +69,8 @@ function PercorsoRow({ percorso, index }: { percorso: typeof percorsi[0]; index:
           <img
             src={percorso.image}
             alt={percorso.name}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover transition-transform duration-[15000ms] hover:scale-[1.04] ease-out"
           />
           <div className="absolute inset-0 bg-deep/5" />

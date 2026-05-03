@@ -242,7 +242,7 @@ function TestimonialsCarousel() {
                     style={{ width: containerWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%`, flexShrink: 0 }}
                     animate={{ opacity, scale }}
                     transition={{ duration: 0.7, ease: premiumEase }}
-                    className="py-12 md:py-16 px-8 md:px-12 border border-ivory/8 cursor-pointer select-none"
+                    className="py-12 md:py-16 px-8 md:px-12 border border-ivory/10 cursor-pointer select-none"
                     onClick={() => !isActive && goTo(i)}
                   >
                     {/* Percorso tag */}
@@ -250,7 +250,7 @@ function TestimonialsCarousel() {
                       <span className="text-[9px] tracking-[0.35em] uppercase text-brass-light/50 font-light">
                         {t.percorso}
                       </span>
-                      <div className="h-[1px] flex-1 bg-ivory/8" />
+                      <div className="h-[1px] flex-1 bg-ivory/10" />
                       <span className="text-[9px] tracking-[0.25em] uppercase text-ivory/20 font-light">
                         {t.valore}
                       </span>

@@ -11,7 +11,7 @@ export default function Hero() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] max-h-[1100px] overflow-hidden bg-deep">
+    <section ref={ref} className="relative h-[100svh] min-h-[700px] max-h-[1100px] overflow-hidden bg-deep">
       {/* Background video */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
         <video
@@ -19,6 +19,7 @@ export default function Hero() {
           loop
           muted
           playsInline
+          preload="metadata"
           className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute"
         >
           <source src="/videos/Hero_video_lamaison.mp4" type="video/mp4" />
@@ -81,7 +82,7 @@ export default function Hero() {
           >
             <Link
               to="/il-metodo"
-              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-white px-8 py-4 transition-all duration-500"
+              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-ecru px-8 py-4 transition-all duration-500"
             >
               Scopri il Metodo
             </Link>

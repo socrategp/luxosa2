@@ -74,6 +74,8 @@ function PercorsiCinematic() {
         <img
           src="/images/sfondo_ipercorsi_scritta.png"
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-[120%] -top-[10%] absolute object-cover object-center"
         />
       </motion.div>

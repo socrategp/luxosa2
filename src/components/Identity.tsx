@@ -73,6 +73,8 @@ export default function Identity() {
               <img
                 src="/images/woman-portrait-new.jpg"
                 alt="La visione Luxosa"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
             </div>

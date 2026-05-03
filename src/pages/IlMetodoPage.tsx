@@ -71,8 +71,10 @@ function MethodCinematic() {
     <section ref={ref} className="relative h-[70vh] min-h-[480px] overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y }}>
         <img
-          src="/images/banner_metodo.jpg"
+          src="/images/banner_metodo.webp"
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-[120%] -top-[10%] absolute object-cover object-center"
         />
       </motion.div>
@@ -124,6 +126,8 @@ function PrimoIncontro() {
               <img
                 src="/images/prima_consulenza.png"
                 alt="Il primo incontro"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover object-center transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out"
               />
             </div>

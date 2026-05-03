@@ -27,6 +27,7 @@ export default function PageHero({ label, title, subtitle, image, video }: PageH
             muted
             loop
             playsInline
+            preload="metadata"
             className="w-full h-full object-cover absolute inset-0"
           />
         ) : (

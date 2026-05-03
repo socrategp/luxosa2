@@ -32,7 +32,7 @@ function HomeIdentity() {
           </div>
           <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.5, delay: 0.2 }} className="relative group">
             <motion.div initial={{ scale: 1.15 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 1.8, ease: premiumEase }} className="aspect-[3/4] overflow-hidden">
-              <img src="/images/nosalone_unamaison.png" alt="La visione Luxosa" className="w-full h-full object-cover object-center transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out" />
+              <img src="/images/nosalone_unamaison.png" alt="La visione Luxosa" loading="lazy" decoding="async" className="w-full h-full object-cover object-center transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out" />
             </motion.div>
             <div className="absolute -bottom-6 -left-6 w-24 h-24 border-l border-b border-brass/30" />
           </motion.div>
@@ -209,6 +209,8 @@ function CinematicPayoff() {
         <img
           src="/images/triade_femminile_sfondo.png"
           alt=""
+          loading="lazy"
+          decoding="async"
           className="w-full h-[120%] -top-[10%] absolute object-cover object-center"
         />
       </motion.div>

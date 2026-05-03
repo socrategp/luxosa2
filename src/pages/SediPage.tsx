@@ -135,6 +135,8 @@ function SedeFlagship() {
             <img
               src="/images/messina-new.png"
               alt="Luxosa Messina — Via Cavour"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover object-left transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out"
             />
             <div className="absolute bottom-4 left-5">

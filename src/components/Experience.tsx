@@ -8,7 +8,7 @@ const esperienze = [
   { code: 'EX·03', name: 'Nuances', copy: 'Il colore nella sua espressione più raffinata: luce, profondità e naturalezza.' },
   { code: 'EX·04', name: 'Luce Signature', copy: 'Schiariture costruite con precisione, per un risultato sofisticato e mai forzato.' },
   { code: 'EX·05', name: 'RicciOsa', copy: 'Il gesto dedicato al capello riccio quando definizione, elasticità e rispetto diventano una priorità.' },
-  { code: 'EX·06', name: 'RicciOso', copy: 'Un taglio sartoriale per capelli mossi e wavy. Ogni movimento naturale viene letto e rispettato, per una forma che non forza la struttura ma la valorizza.' },
+  { code: 'EX·06', name: 'RicciOso', copy: 'Il taglio sartoriale per capelli ricci, eseguito a capello asciutto per garantire la tenuta del riccio e il rispetto della forma. Un progetto che legge e valorizza ogni movimento naturale.' },
   { code: 'EX·07', name: 'Cheratina Nutrizione Pro', copy: 'Un trattamento che restituisce ordine, morbidezza e vitalità al capello — senza sacrificare il movimento naturale.' },
   { code: 'EX·08', name: 'Area Benessere', copy: 'Trattamenti mirati dedicati a cute, fibra e riequilibrio del capello. Un inizio mirato e professionale che pone le basi per la salute autentica dei capelli.' },
   { code: 'EX·09', name: 'Consulenze Specialistiche', copy: "Prima di ogni scelta, c'è una lettura. Consulenze dedicate all'estetica del colore e dell'immagine, al benessere di cute e capello, o a entrambe le dimensioni insieme — per costruire una direzione reale prima di procedere." },

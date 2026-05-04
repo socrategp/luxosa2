@@ -1836,6 +1836,7 @@ function ResultScreen({
 }) {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [selectedLocationId, setSelectedLocationId] = useState<typeof LUXOSA_LOCATIONS[number]['id']>('messina-cavour');
+  const [selectedFascia, setSelectedFascia] = useState<string | null>(null);
   const d3 = answers['d3'] as string | undefined;
   const sequence = buildQuestionSequence(d3);
   const scores = computeScores(answers, sequence);
@@ -2044,7 +2045,7 @@ function ResultScreen({
         <div className="fixed inset-0 z-[10000] flex items-center justify-center px-4">
           <div
             className="absolute inset-0 bg-deep/70 backdrop-blur-sm"
-            onClick={() => setShowTimePicker(false)}
+            onClick={() => { setShowTimePicker(false); setSelectedFascia(null); }}
           />
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -2081,22 +2082,41 @@ function ResultScreen({
               {['09:00 – 11:00', '11:00 – 13:00', '13:00 – 15:00', '15:00 – 18:00', 'Indifferente'].map(fascia => (
                 <button
                   key={fascia}
-                  onClick={() => {
-                    const location = LUXOSA_LOCATIONS.find(l => l.id === selectedLocationId)!;
-                    const msg = buildWhatsAppMessage(nome, email, whatsapp, fascia, location.label, answers);
-                    const url = `https://wa.me/${location.whatsapp}?text=${encodeURIComponent(msg)}`;
-                    window.open(url, '_blank', 'noopener,noreferrer');
-                    setShowTimePicker(false);
-                  }}
-                  className="w-full text-left px-5 py-4 border border-sand/60 text-[15px] font-light text-anthracite/80 hover:border-brass/40 hover:bg-ecru/50 transition-all duration-300"
+                  onClick={() => setSelectedFascia(fascia)}
+                  className={`w-full text-left px-5 py-4 border text-[15px] font-light transition-all duration-300 ${
+                    selectedFascia === fascia
+                      ? 'border-brass/60 bg-ecru text-anthracite'
+                      : 'border-sand/60 text-anthracite/70 hover:border-brass/40 hover:bg-ecru/40'
+                  }`}
                 >
                   {fascia}
                 </button>
               ))}
             </div>
+
             <button
-              onClick={() => setShowTimePicker(false)}
-              className="mt-6 w-full text-center text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 hover:text-anthracite/60 transition-colors duration-300"
+              disabled={!selectedFascia}
+              onClick={() => {
+                if (!selectedFascia) return;
+                const location = LUXOSA_LOCATIONS.find(l => l.id === selectedLocationId)!;
+                const msg = buildWhatsAppMessage(nome, email, whatsapp, selectedFascia, location.label, answers);
+                const url = `https://wa.me/${location.whatsapp}?text=${encodeURIComponent(msg)}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                setShowTimePicker(false);
+                setSelectedFascia(null);
+              }}
+              className={`mt-6 w-full py-4 text-[12px] tracking-[0.2em] uppercase font-light transition-all duration-300 ${
+                selectedFascia
+                  ? 'bg-charcoal text-ivory hover:bg-deep cursor-pointer'
+                  : 'bg-sand/40 text-anthracite/30 cursor-not-allowed'
+              }`}
+            >
+              Invia
+            </button>
+
+            <button
+              onClick={() => { setShowTimePicker(false); setSelectedFascia(null); }}
+              className="mt-3 w-full text-center text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 hover:text-anthracite/60 transition-colors duration-300"
             >
               Annulla
             </button>

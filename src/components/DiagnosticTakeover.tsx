@@ -7,6 +7,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, X, Check } from 'lucide-react';
+import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
+import type { Value as PhoneValue } from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
 
 // ── TYPES ──────────────────────────────────────────────────────
 
@@ -1342,7 +1345,7 @@ function buildWhatsAppMessage(
   lines.push(`Fascia oraria preferita: ${fascia}`);
   lines.push(`Sede selezionata: ${sede}`);
   lines.push('');
-  lines.push('DATI DI CONTATTO');
+  lines.push('DATI INSERITI NEL LUXOSA TEST');
   lines.push(`Nome: ${nome}`);
   lines.push(`Email: ${email}`);
   lines.push(`WhatsApp: ${whatsapp}`);
@@ -1477,10 +1480,12 @@ function getColCount(n: number): number {
 }
 
 function cardWidthClass(cols: number): string {
+  // Mobile: sempre 2 colonne, gap-3 (0.75rem)
+  // md+: desktop cols, gap-4 (1rem)
   const m = 'w-[calc(50%-0.375rem)]';
-  if (cols <= 2) return m;
-  if (cols === 3) return `${m} sm:w-[calc(33.333%-0.5rem)]`;
-  return `${m} sm:w-[calc(25%-0.5625rem)]`;
+  if (cols <= 2) return `${m} md:w-[calc(50%-0.5rem)]`;
+  if (cols === 3) return `${m} md:w-[calc(33.333%-0.667rem)]`;
+  return `${m} md:w-[calc(25%-0.75rem)]`;
 }
 
 function renderOptionGrid(
@@ -1704,15 +1709,19 @@ function ContinuaButton({ onClick, enabled }: { onClick: () => void; enabled: bo
 function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void }) {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
-  const [whatsapp, setWhatsapp] = useState('');
+  const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [error, setError] = useState('');
 
   const handleSubmit = () => {
-    if (!nome.trim() || !email.trim() || !whatsapp.trim()) {
+    if (!nome.trim() || !email.trim()) {
       setError('Completa tutti i campi per scoprire la tua soluzione.');
       return;
     }
-    onSubmit({ nome: nome.trim(), email: email.trim(), whatsapp: whatsapp.trim() });
+    if (!phone || !isPossiblePhoneNumber(phone)) {
+      setError('Controlla il numero inserito: sembra incompleto o non corretto.');
+      return;
+    }
+    onSubmit({ nome: nome.trim(), email: email.trim(), whatsapp: phone });
   };
 
   const inputClass = 'w-full bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/28';
@@ -1732,54 +1741,59 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
       </div>
 
       <div className="relative z-10 max-w-[580px] mx-auto px-6 md:px-10 py-10 md:py-14">
-      <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Quasi pronta</span>
-      <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">
-        Ricevi il tuo risultato.
-      </h2>
-      <p className="text-[17px] leading-[1.8] text-anthracite/55 font-light mb-10">
-        Per ricevere il tuo risultato personalizzato e permetterci di contattarti per la consulenza gratuita in sede, lasciaci i tuoi dati.
-      </p>
+        <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Quasi pronta</span>
+        <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">
+          Ricevi il tuo risultato.
+        </h2>
+        <p className="text-[17px] leading-[1.8] text-anthracite/55 font-light mb-10">
+          Per ricevere il tuo risultato personalizzato e permetterci di contattarti per la consulenza gratuita in sede, lasciaci i tuoi dati.
+        </p>
 
-      <div className="space-y-4">
-        <input
-          type="text"
-          placeholder="Il tuo nome *"
-          value={nome}
-          onChange={e => { setNome(e.target.value); setError(''); }}
-          className={inputClass}
-        />
-        <input
-          type="email"
-          placeholder="Il tuo indirizzo email *"
-          value={email}
-          onChange={e => { setEmail(e.target.value); setError(''); }}
-          className={inputClass}
-        />
-        <input
-          type="tel"
-          placeholder="Il tuo numero WhatsApp *"
-          value={whatsapp}
-          onChange={e => { setWhatsapp(e.target.value); setError(''); }}
-          className={inputClass}
-        />
+        <div className="space-y-4">
+          <input
+            type="text"
+            placeholder="Il tuo nome *"
+            value={nome}
+            onChange={e => { setNome(e.target.value); setError(''); }}
+            className={inputClass}
+          />
+          <input
+            type="email"
+            placeholder="Il tuo indirizzo email *"
+            value={email}
+            onChange={e => { setEmail(e.target.value); setError(''); }}
+            className={inputClass}
+          />
 
-        {error && (
-          <p className="text-[12px] text-brass-muted font-light italic pt-1">{error}</p>
-        )}
+          {/* Phone input con selezione Paese */}
+          <div className="luxosa-phone-input">
+            <PhoneInput
+              defaultCountry="IT"
+              value={phone}
+              onChange={(val) => { setPhone(val); setError(''); }}
+              placeholder="Il tuo numero WhatsApp *"
+              international
+              countryCallingCodeEditable={false}
+            />
+          </div>
 
-        <div className="pt-2">
-          <button
-            onClick={handleSubmit}
-            className="relative overflow-hidden group w-full inline-flex items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light py-5"
-          >
-            <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-            <span className="relative z-10 flex items-center gap-3">
-              Scopri il tuo orientamento
-              <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
-            </span>
-          </button>
+          {error && (
+            <p className="text-[12px] text-brass-muted font-light italic pt-1">{error}</p>
+          )}
+
+          <div className="pt-2">
+            <button
+              onClick={handleSubmit}
+              className="relative overflow-hidden group w-full inline-flex items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light py-5"
+            >
+              <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
+              <span className="relative z-10 flex items-center gap-3">
+                Scopri il tuo orientamento
+                <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+              </span>
+            </button>
+          </div>
         </div>
-      </div>
       </div>
     </motion.div>
   );

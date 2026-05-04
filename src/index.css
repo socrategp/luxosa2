@@ -95,3 +95,76 @@ html {
   scrollbar-width: thin;
   scrollbar-color: var(--color-stone) var(--color-ecru);
 }
+
+/* ══ LUXOSA PHONE INPUT ═════════════════════════════════════════
+ * Stile per react-phone-number-input nel FormScreen
+ * ══════════════════════════════════════════════════════════════ */
+
+.luxosa-phone-input .PhoneInput {
+  display: flex;
+  align-items: stretch;
+  background: rgba(249, 246, 241, 0.8); /* ivory/80 */
+  border: 1px solid #DED7CB; /* sand/50 */
+  transition: border-color 0.3s ease;
+}
+
+.luxosa-phone-input .PhoneInput:focus-within {
+  border-color: rgba(176, 152, 114, 0.5); /* brass/50 */
+}
+
+.luxosa-phone-input .PhoneInputCountry {
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem 0 1.25rem;
+  border-right: 1px solid #DED7CB;
+  gap: 0.375rem;
+  flex-shrink: 0;
+}
+
+.luxosa-phone-input .PhoneInputCountryFlag {
+  width: 1.25rem;
+  height: auto;
+}
+
+.luxosa-phone-input .PhoneInputCountrySelect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.luxosa-phone-input .PhoneInputCountrySelectArrow {
+  width: 0.35em;
+  height: 0.35em;
+  border-style: solid;
+  border-color: #9E8868; /* brass-muted */
+  border-top-width: 0;
+  border-bottom-width: 1px;
+  border-left-width: 0;
+  border-right-width: 1px;
+  transform: rotate(45deg);
+  margin-left: 0.25rem;
+  opacity: 0.7;
+}
+
+.luxosa-phone-input .PhoneInputInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 1rem 1.25rem;
+  font-size: 1.0625rem; /* 17px */
+  font-weight: 300;
+  color: rgba(56, 52, 47, 0.8); /* anthracite/80 */
+  font-family: 'Jost', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+}
+
+.luxosa-phone-input .PhoneInputInput::placeholder {
+  color: rgba(56, 52, 47, 0.28);
+}

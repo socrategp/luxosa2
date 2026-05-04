@@ -29,13 +29,11 @@ export default function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
-  // true = mobile/tablet (<1024px), modal attivo; false = desktop, solo hover
   const [isTouchLayout, setIsTouchLayout] = useState<boolean>(() =>
     typeof window !== 'undefined' ? window.matchMedia('(max-width: 1023px)').matches : false
   );
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  // Aggiorna isTouchLayout al resize e chiude il modal se si passa a desktop
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 1023px)');
     const handler = (e: MediaQueryListEvent) => {
@@ -46,7 +44,6 @@ export default function Experience() {
     return () => mq.removeEventListener('change', handler);
   }, []);
 
-  // ESC + body scroll lock — solo quando modal mobile/tablet è aperto
   useEffect(() => {
     if (!isTouchLayout || activeIndex === null) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActiveIndex(null); };
@@ -103,7 +100,6 @@ export default function Experience() {
                 role={isTouchLayout ? 'button' : undefined}
                 tabIndex={isTouchLayout ? 0 : undefined}
                 aria-label={isTouchLayout ? `${e.name} — leggi la descrizione` : undefined}
-                aria-expanded={isTouchLayout ? activeIndex === i : undefined}
                 onClick={() => { if (isTouchLayout) setActiveIndex(i); }}
                 onKeyDown={(ev) => { if (isTouchLayout && (ev.key === 'Enter' || ev.key === ' ')) setActiveIndex(i); }}
                 style={{
@@ -113,15 +109,12 @@ export default function Experience() {
                   backgroundRepeat: 'no-repeat',
                 }}
               >
-                {/* Overlay */}
                 <div className="absolute inset-0 bg-deep/80 group-hover:bg-deep/20 transition-colors duration-700 ease-[cubic-bezier(0.25,0.1,0,1)]" />
 
-                {/* Code — top left, fixed */}
                 <span className="absolute top-6 md:top-8 left-6 md:left-8 text-[10px] tracking-[0.25em] uppercase text-brass-light/50 font-light z-10">
                   {e.code}
                 </span>
 
-                {/* Title block — fixed vertical anchor so all titles align */}
                 <div className="absolute left-6 md:left-8 right-6 md:right-8 z-10" style={{ top: '52%' }}>
                   <h3 className="font-serif text-[18px] md:text-[21px] font-light text-ivory leading-snug tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                     {e.name}
@@ -129,7 +122,7 @@ export default function Experience() {
                   <div className="h-[1px] w-0 bg-brass-light group-hover:w-6 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] mt-3" />
                 </div>
 
-                {/* Description — desktop hover only; hidden on mobile+tablet (modal handles it) */}
+                {/* Descrizione visibile solo su desktop con hover */}
                 <p className="hidden lg:block absolute bottom-8 left-8 right-8 text-[15px] leading-[1.75] text-ivory/80 font-light opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] z-10">
                   {e.copy}
                 </p>
@@ -139,57 +132,75 @@ export default function Experience() {
         </div>
       </div>
 
-      {/* Modal mobile/tablet — portato su document.body per evitare stacking context della section */}
+      {/* Modal mobile/tablet — singolo wrapper fixed che contiene backdrop + panel */}
       {isTouchLayout && createPortal(
         <AnimatePresence>
           {activeIndex !== null && (
-            <>
-              {/* Backdrop */}
+            <motion.div
+              key="exp-modal"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 9999,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                background: 'rgba(28,26,23,0.75)',
+              }}
+              onClick={close}
+            >
+              {/* Panel — absolute bottom, stopPropagation evita chiusura al tap sul contenuto */}
               <motion.div
-                key="exp-backdrop"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(28,26,23,0.75)' }}
-                onClick={close}
-                aria-hidden="true"
-              />
-              {/* Panel — bottom sheet, sempre visibile su mobile e tablet */}
-              <motion.div
-                key="exp-panel"
-                initial={{ opacity: 0, y: 48 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 48 }}
-                transition={{ duration: 0.4, ease: premiumEase }}
-                style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 10000 }}
-                className="bg-charcoal px-8 pt-10 pb-12"
+                initial={{ y: '100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '100%' }}
+                transition={{ duration: 0.35, ease: premiumEase }}
+                style={{
+                  background: '#282520',
+                  padding: '2.5rem 2rem 3rem',
+                  position: 'relative',
+                  zIndex: 1,
+                }}
                 onClick={(ev) => ev.stopPropagation()}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="exp-modal-title"
               >
-                <span className="text-[10px] tracking-[0.25em] uppercase text-brass-light/50 font-light block mb-4">
+                <span style={{ display: 'block', fontSize: '10px', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(196,174,140,0.5)', fontWeight: 300, marginBottom: '1rem' }}>
                   {esperienze[activeIndex].code}
                 </span>
                 <h3
                   id="exp-modal-title"
-                  className="font-serif text-[22px] font-light text-ivory leading-snug mb-5"
+                  style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '22px', fontWeight: 300, color: '#F9F6F1', lineHeight: 1.25, marginBottom: '1.25rem' }}
                 >
                   {esperienze[activeIndex].name}
                 </h3>
-                <div className="h-[1px] w-8 bg-brass-light/40 mb-6" />
-                <p className="text-[15px] leading-[1.8] text-ivory/70 font-light mb-10">
+                <div style={{ height: '1px', width: '2rem', background: 'rgba(196,174,140,0.4)', marginBottom: '1.5rem' }} />
+                <p style={{ fontSize: '15px', lineHeight: 1.8, color: 'rgba(249,246,241,0.7)', fontWeight: 300, marginBottom: '2.5rem' }}>
                   {esperienze[activeIndex].copy}
                 </p>
                 <button
                   onClick={close}
-                  className="text-[11px] tracking-[0.25em] uppercase text-brass-light/70 font-light border border-brass-light/30 px-6 py-3 hover:border-brass-light/60 transition-colors duration-300"
+                  style={{
+                    fontSize: '11px',
+                    letterSpacing: '0.25em',
+                    textTransform: 'uppercase',
+                    color: 'rgba(196,174,140,0.7)',
+                    fontWeight: 300,
+                    border: '1px solid rgba(196,174,140,0.3)',
+                    padding: '0.75rem 1.5rem',
+                    background: 'transparent',
+                    cursor: 'pointer',
+                  }}
                 >
                   Chiudi
                 </button>
               </motion.div>
-            </>
+            </motion.div>
           )}
         </AnimatePresence>,
         document.body

@@ -20,6 +20,7 @@ export default function Hero() {
           muted
           playsInline
           preload="metadata"
+          poster="/images/hero-woman-front.jpg"
           className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute"
         >
           <source src="/videos/Hero_video_lamaison.mp4" type="video/mp4" />

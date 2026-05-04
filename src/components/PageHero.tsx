@@ -31,7 +31,7 @@ export default function PageHero({ label, title, subtitle, image, video }: PageH
             className="w-full h-full object-cover absolute inset-0"
           />
         ) : (
-          <img src={image} alt={title} className="w-full h-[120%] -top-[10%] object-cover absolute" />
+          <img src={image} alt={title} fetchPriority="high" decoding="sync" className="w-full h-[120%] -top-[10%] object-cover absolute" />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-deep/40 via-deep/30 to-deep/90" />
       </motion.div>

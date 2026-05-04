@@ -41,7 +41,7 @@ function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
             {/* Close */}
             <button
               onClick={onClose}
-              className="absolute top-5 right-5 text-anthracite/30 hover:text-anthracite/60 transition-colors"
+              className="absolute top-5 right-5 text-anthracite/30 hover:text-anthracite/60 transition-colors duration-300"
             >
               <X size={18} strokeWidth={1.2} />
             </button>
@@ -128,10 +128,12 @@ export default function Footer() {
                 <img
                   src="/images/luxosa-logo-orizzontale-bianco-tras.png"
                   alt="Luxosa"
+                  width="200"
+                  height="36"
                   className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                 />
               </Link>
-              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/40">
+              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/60">
                 Maison di cura e bellezza<br />per cute e capelli.
               </p>
               <div className="mt-6 w-8 h-[1px] bg-brass/40" />
@@ -166,7 +168,7 @@ export default function Footer() {
             {/* Col 3 — Club Luxosa */}
             <div>
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/50 font-light mb-6">Club Luxosa</h4>
-              <p className="text-[16px] font-light text-ivory/40 leading-[1.8] mb-6">
+              <p className="text-[16px] font-light text-ivory/60 leading-[1.8] mb-6">
                 Un accesso riservato. Un riconoscimento che si guadagna nel tempo.
               </p>
               <div className="flex gap-2 mb-7">
@@ -181,7 +183,7 @@ export default function Footer() {
               </div>
               <button
                 onClick={() => setClubOpen(true)}
-                className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/40 hover:text-ivory/70 transition-colors duration-400 inline-flex items-center gap-2"
+                className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/55 hover:text-ivory/80 transition-colors duration-400 inline-flex items-center gap-2"
               >
                 Scopri il Club →
               </button>
@@ -194,8 +196,8 @@ export default function Footer() {
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[11px] tracking-[0.15em] text-ivory/25 font-light">© 2026 Luxosa. Tutti i diritti riservati.</p>
             <div className="flex gap-6">
-              <Link to="/privacy-policy" className="text-[11px] tracking-[0.1em] text-ivory/25 hover:text-ivory/50 font-light transition-colors">Privacy Policy</Link>
-              <Link to="/cookie-policy" className="text-[11px] tracking-[0.1em] text-ivory/25 hover:text-ivory/50 font-light transition-colors">Cookie Policy</Link>
+              <Link to="/privacy-policy" className="text-[11px] tracking-[0.1em] text-ivory/40 hover:text-ivory/60 font-light transition-colors duration-300">Privacy Policy</Link>
+              <Link to="/cookie-policy" className="text-[11px] tracking-[0.1em] text-ivory/40 hover:text-ivory/60 font-light transition-colors duration-300">Cookie Policy</Link>
             </div>
           </div>
         </div>

@@ -268,7 +268,7 @@ function TestimonialsCarousel() {
                         <p className="text-[12px] tracking-[0.18em] uppercase text-ivory/70 font-light">
                           {t.name}
                         </p>
-                        <p className="text-[11px] text-ivory/30 font-light mt-0.5 tracking-wide">
+                        <p className="text-[11px] text-ivory/50 font-light mt-0.5 tracking-wide">
                           {t.role}
                         </p>
                       </div>

@@ -153,7 +153,7 @@ export default function Header() {
                   <Link
                     to={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className={`font-serif text-3xl tracking-[0.1em] font-light transition-colors ${
+                    className={`font-serif text-3xl tracking-[0.1em] font-light transition-colors duration-300 ${
                       location.pathname === item.href ? 'text-brass-light' : 'text-ivory/90 hover:text-brass-light'
                     }`}
                   >
@@ -169,7 +169,7 @@ export default function Header() {
               >
                 <button
                   onClick={() => { setMenuOpen(false); openQuiz(); }}
-                  className="text-[16px] tracking-[0.15em] uppercase text-ivory border border-ivory/30 px-8 py-3 hover:bg-ivory/10 transition-all"
+                  className="text-[16px] tracking-[0.15em] uppercase text-ivory border border-ivory/30 px-8 py-3 hover:bg-ivory/10 transition-all duration-300"
                 >
                   Luxosa Test
                 </button>

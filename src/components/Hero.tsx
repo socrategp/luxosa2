@@ -20,11 +20,12 @@ export default function Hero() {
           muted
           playsInline
           preload="metadata"
+          poster="/images/hero_lamaison_poster.webp"
           onCanPlay={(e) => { (e.currentTarget as HTMLVideoElement).style.opacity = '1'; }}
           style={{ opacity: 0, transition: 'opacity 1s ease' }}
           className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute"
         >
-          <source src="/videos/Hero_video_lamaison.mp4" type="video/mp4" />
+          <source src="/videos/Hero_video_lamaison_opt.mp4" type="video/mp4" />
         </video>
       </motion.div>
 

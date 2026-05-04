@@ -198,7 +198,7 @@ export default function SediPage() {
         label="Sedi"
         title="Entrare in Luxosa inizia già prima di sedersi."
         subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
-        video="/videos/hero_sedi.mp4"
+        video="/videos/hero_sedi_opt.mp4"
       />
       <SediManifesto />
       <SediPrincipi />

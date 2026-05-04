@@ -12,7 +12,7 @@ function MCHero() {
   return (
     <section className="relative h-[75vh] min-h-[550px] max-h-[850px] overflow-hidden">
       <div className="absolute inset-0">
-        <img src="/images/messina-new.png" alt="Luxosa Messina Cavour" className="w-full h-full object-cover" />
+        <img src="/images/messina-new.webp" alt="Luxosa Messina Cavour" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-deep/55 via-deep/30 to-deep/65" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/30 to-transparent" />
       </div>
@@ -83,7 +83,7 @@ function MCAbout() {
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/reception.png" alt="Interno Luxosa Messina Cavour" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <img src="/images/reception.webp" alt="Interno Luxosa Messina Cavour" loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-4 -left-4 w-20 h-20 border-l border-b border-brass/30" />
           </motion.div>
@@ -111,19 +111,19 @@ function MCSpace() {
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="aspect-[3/4] md:aspect-auto md:row-span-2 overflow-hidden">
-            <img src="/images/zona-consulenza.png" alt="Zona consulenza" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/zona-consulenza.webp" alt="Zona consulenza" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/zona-tecnica.png" alt="Zona tecnica" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/zona-tecnica.webp" alt="Zona tecnica" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/lavaggi.png" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/lavaggi.webp" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.55 }} className="aspect-[4/3] overflow-hidden">
             <img src="/images/zona-tecnica2.jpg" alt="Zona tecnica" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.65 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/lavaggio2.png" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/lavaggio2.webp" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
         </div>
 
@@ -208,7 +208,7 @@ function MCTeam() {
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/team-master.png" alt="Lucia Cotugno — Master Responsabile Luxosa Messina" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <img src="/images/team-master.webp" alt="Lucia Cotugno — Master Responsabile Luxosa Messina" loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -right-4 w-16 h-16 border-t border-r border-brass/25" />
             <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-deep/80 backdrop-blur-sm px-4 py-3 rounded-sm border border-brass/25">

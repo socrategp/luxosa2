@@ -14,15 +14,6 @@ export default function Hero() {
     <section ref={ref} className="relative h-[100svh] min-h-[700px] max-h-[1100px] overflow-hidden bg-deep">
       {/* Background video */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        <img
-          src="/images/hero-woman-front.jpg"
-          alt=""
-          fetchPriority="high"
-          decoding="sync"
-          aria-hidden="true"
-          style={{ opacity: 0 }}
-          className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute"
-        />
         <video
           autoPlay
           loop

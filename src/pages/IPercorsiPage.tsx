@@ -72,7 +72,7 @@ function PercorsiCinematic() {
     <section ref={ref} className="relative h-[70vh] min-h-[480px] overflow-hidden">
       <motion.div className="absolute inset-0" style={{ y }}>
         <img
-          src="/images/sfondo_ipercorsi_scritta.png"
+          src="/images/sfondo_ipercorsi_scritta.webp"
           alt=""
           loading="lazy"
           decoding="async"
@@ -241,7 +241,7 @@ export default function IPercorsiPage() {
         label="I Percorsi"
         title="Non servizi. Percorsi."
         subtitle="Dove la relazione diventa metodo, continuità e trasformazione."
-        image="/images/hero_ipercorsi.png"
+        image="/images/hero_ipercorsi.webp"
       />
       <PercorsiIntro />
       <Percorsi />

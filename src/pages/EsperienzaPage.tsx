@@ -248,7 +248,7 @@ export default function EsperienzaPage() {
         label="Le Esperienze"
         title="In Luxosa ogni gesto ha un nome."
         subtitle="Le Esperienze Luxosa sono gesti di cura distinti, pensati per avvicinare al metodo e valorizzare ciò che il capello chiede davvero."
-        image="/images/hero_esperienze.png"
+        image="/images/hero_esperienze.webp"
       />
       <EsperienzaIntro />
       <Experience />

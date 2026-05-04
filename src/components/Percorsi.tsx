@@ -13,7 +13,7 @@ const percorsi = [
       "Dietro ogni frustrazione c'è quasi sempre lo stesso desiderio: non semplicemente capelli più sani, ma ritrovare — o ottenere per la prima volta — capelli di cui fidarsi davvero. Forti, stabili, pieni: capelli che non richiedano di essere nascosti o continuamente gestiti, e che restituiscano la sensazione di avere finalmente una base solida su cui costruire.",
     ],
     desc: "BenEssere parte dall'analisi approfondita di cute e fibra; individua il problema specifico, comprende la storia del capello e definisce il piano più adatto al profilo reale della persona, prima di avviare qualsiasi intervento. Con rigore, cura costante e la stabilità che ogni recupero autentico richiede.",
-    image: '/images/BenEssere.png',
+    image: '/images/BenEssere.webp',
   },
   {
     num: 'PC·02',
@@ -24,7 +24,7 @@ const percorsi = [
       "Dietro ogni frustrazione cromatica c'è quasi sempre lo stesso desiderio: non semplicemente un colore più bello, ma un colore in cui riconoscersi davvero — capace di valorizzare il viso, creare armonia e restituire la sensazione di essere finalmente giusta. Un risultato che non si perda dopo pochi lavaggi e che non lasci, ogni volta, la percezione che manchi ancora qualcosa.",
     ],
     desc: "ColorLux parte dall'analisi del tono naturale, dell'incarnato e dell'armocromia personale; individua il problema specifico, comprende il desiderio autentico e definisce il risultato realmente ottenibile prima di costruire il percorso più adatto. Con sensibilità, intenzione e la precisione di chi costruisce un'identità cromatica coerente nel tempo.",
-    image: '/images/colorlux.png',
+    image: '/images/colorlux.webp',
   },
   {
     num: 'RL·01',
@@ -35,7 +35,7 @@ const percorsi = [
       "Dietro ogni tentativo frammentato c'è quasi sempre lo stesso desiderio: non correggere qualcosa, ma trasformarsi davvero. Sentirsi presa in carico nella propria interezza — cute, capello, forma, colore, armonia — con la certezza che ogni scelta sia coerente con le altre e che il risultato sia costruito per durare.",
     ],
     desc: "Il Rituale Luxosa nasce da una lettura professionale completa e integrata; individua le priorità reali, comprende il desiderio autentico e costruisce un progetto bespoke — prescritto su misura, senza livelli predefiniti, con un numero di sedute stabilito dalla stilista dopo la lettura. Con visione integrata, guida completa e la coerenza profonda di un progetto costruito per durare.",
-    image: '/images/rituale_luxosa.png',
+    image: '/images/rituale_luxosa.webp',
   },
 ];
 

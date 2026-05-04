@@ -124,7 +124,7 @@ function PrimoIncontro() {
           >
             <div className="aspect-[4/3] overflow-hidden">
               <img
-                src="/images/prima_consulenza.png"
+                src="/images/prima_consulenza.webp"
                 alt="Il primo incontro"
                 loading="lazy"
                 decoding="async"
@@ -221,7 +221,7 @@ export default function IlMetodoPage() {
         label="Il Metodo"
         title="Ogni scelta nasce da una visione."
         subtitle="In Luxosa il risultato non nasce dall'intuizione del momento, ma da un metodo chiaro: ascoltare, osservare, progettare e accompagnare ogni donna nel tempo."
-        image="/images/hero_ilmetodo.png"
+        image="/images/hero_ilmetodo.webp"
       />
       <MethodIntro />
       <Method />

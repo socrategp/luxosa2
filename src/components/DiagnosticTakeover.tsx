@@ -1742,7 +1742,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
     >
       {/* Atmospheric background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img src="/images/zona-consulenza.png" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.06]" loading="lazy" />
+        <img src="/images/zona-consulenza.webp" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.06]" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-b from-ivory/50 via-ivory/85 to-ivory" />
       </div>
 
@@ -1858,7 +1858,7 @@ function ResultScreen({
       className="relative w-full"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <img src="/images/prima_consulenza.png" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.07]" loading="lazy" />
+        <img src="/images/prima_consulenza.webp" alt="" className="w-full h-full object-cover opacity-[0.04] lg:opacity-[0.07]" loading="lazy" />
         <div className="absolute inset-0 bg-gradient-to-b from-ivory/50 via-ivory/85 to-ivory" />
       </div>
 

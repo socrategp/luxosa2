@@ -15,7 +15,7 @@ const esperienze = [
   { code: 'EX·09', name: 'Consulenze Specialistiche', copy: "Prima di ogni scelta, c'è una lettura. Consulenze dedicate all'estetica del colore e dell'immagine, al benessere di cute e capello, o a entrambe le dimensioni insieme — per costruire una direzione reale prima di procedere." },
 ];
 
-const IMAGE = '/images/esperienze-puzzle.png';
+const IMAGE = '/images/esperienze-puzzle.webp';
 const COLS = 3;
 const ROWS = 3;
 

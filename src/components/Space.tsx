@@ -53,7 +53,7 @@ export default function Space() {
             className="aspect-[4/3] overflow-hidden"
           >
             <img
-              src="/images/spazio_luxosa.png"
+              src="/images/spazio_luxosa.webp"
               alt="Lo spazio Luxosa"
               loading="lazy"
               decoding="async"
@@ -67,7 +67,7 @@ export default function Space() {
             className="aspect-[4/3] overflow-hidden"
           >
             <img
-              src="/images/hero_esperienze.png"
+              src="/images/hero_esperienze.webp"
               alt="Dettaglio dello spazio"
               loading="lazy"
               decoding="async"

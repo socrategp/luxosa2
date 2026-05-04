@@ -133,7 +133,7 @@ function SedeFlagship() {
             className="relative group overflow-hidden aspect-[4/3]"
           >
             <img
-              src="/images/messina-new.png"
+              src="/images/messina-new.webp"
               alt="Luxosa Messina — Via Cavour"
               loading="lazy"
               decoding="async"

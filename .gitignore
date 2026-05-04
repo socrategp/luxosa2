@@ -5,3 +5,4 @@ dist
 *.local
 **/test immagini/
 **/test*/
+public_original/

@@ -1468,6 +1468,44 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
 
 // ── QUIZ CONTENT ───────────────────────────────────────────────
 
+// ── LAYOUT HELPERS (count-based, no per-question overrides) ────
+
+function getColCount(n: number): number {
+  if (n <= 4) return n;
+  if (n <= 6) return 3;
+  return 4;
+}
+
+function cardWidthClass(cols: number): string {
+  const m = 'w-[calc(50%-0.375rem)]';
+  if (cols <= 2) return m;
+  if (cols === 3) return `${m} sm:w-[calc(33.333%-0.5rem)]`;
+  return `${m} sm:w-[calc(25%-0.5625rem)]`;
+}
+
+function renderOptionGrid(
+  opts: OptionDef[],
+  renderItem: (opt: OptionDef, globalIndex: number) => React.ReactNode
+): React.ReactNode {
+  const cols = getColCount(opts.length);
+  const wClass = cardWidthClass(cols);
+  const rows: OptionDef[][] = [];
+  for (let i = 0; i < opts.length; i += cols) rows.push(opts.slice(i, i + cols));
+  return (
+    <div className="space-y-3 md:space-y-4">
+      {rows.map((row, ri) => (
+        <div key={ri} className="flex flex-wrap justify-center gap-3 md:gap-4">
+          {row.map((opt, ci) => (
+            <div key={opt.id} className={wClass}>
+              {renderItem(opt, ri * cols + ci)}
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function OptionCard({
   opt,
   isSelected,
@@ -1492,7 +1530,7 @@ function OptionCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.05 + index * 0.06, duration: 0.4, ease: premiumEase }}
       onClick={onSelect}
-      className={`group relative text-left overflow-hidden border-2 h-full transition-all duration-500 ${
+      className={`w-full group relative text-left overflow-hidden border-2 h-full transition-all duration-500 ${
         isSelected
           ? 'border-brass shadow-md ring-1 ring-brass/20'
           : 'border-anthracite/20 hover:border-brass/35 hover:shadow-md'
@@ -1613,94 +1651,22 @@ function QuizContent({
         </div>
       )}
 
-      {/* D3, D6b, D7b, D8, D9 — text-only large box layout (prominent serif text, no image) */}
-      {!isText && (q.id === 'd3' || q.id === 'd6b' || q.id === 'd7b' || q.id === 'd8' || q.id === 'd9') && (
-        <div className={`grid gap-3 md:gap-4 ${
-          q.id === 'd3' ? 'grid-cols-5' :
-          q.options.length === 3 ? 'grid-cols-2 sm:grid-cols-3' :
-          'grid-cols-2 sm:grid-cols-4'
-        }`}>
-          {q.options.map((opt, i) => {
-            const isSelected = selectedIds.includes(opt.id);
-            const colClass = '';
-            return (
-              <motion.button
-                key={opt.id}
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 + i * 0.06, duration: 0.4, ease: premiumEase }}
-                onClick={() => onSingleSelect(q.id, opt.id)}
-                className={`${colClass} group relative text-left overflow-hidden border transition-all duration-500 ${
-                  isSelected
-                    ? 'border-brass shadow-md ring-1 ring-brass/20'
-                    : 'border-sand/40 bg-ecru/20 hover:bg-ecru/40 hover:border-brass/35 hover:shadow-md'
-                }`}
-              >
-                <div className="aspect-square flex flex-col items-center justify-center px-4 text-center">
-                  <p className={`font-serif ${q.id === 'd3' ? 'text-[23px] md:text-[26px]' : 'text-[20px] md:text-[23px]'} font-light leading-snug transition-colors duration-300 ${
-                    isSelected ? 'text-brass-muted' : 'text-charcoal group-hover:text-brass-muted'
-                  }`}>
-                    {opt.text}
-                  </p>
-                  {opt.subtext && (
-                    <p className="mt-2 text-[10px] md:text-[12px] leading-[1.5] text-anthracite/40 font-light">{opt.subtext}</p>
-                  )}
-                </div>
-                <div className={`absolute bottom-0 left-0 right-0 h-[2px] transition-all duration-500 ${
-                  isSelected ? 'bg-brass' : 'bg-transparent group-hover:bg-brass/20'
-                }`} />
-                {isSelected && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute top-2.5 right-2.5 w-6 h-6 bg-brass flex items-center justify-center"
-                  >
-                    <Check size={12} strokeWidth={2.5} className="text-ivory" />
-                  </motion.div>
-                )}
-              </motion.button>
-            );
-          })}
-        </div>
-      )}
-
-      {/* All other questions — OptionCard (image or premium fallback) */}
-      {!isText && q.id !== 'd3' && q.id !== 'd6b' && q.id !== 'd7b' && q.id !== 'd8' && q.id !== 'd9' && (
+      {/* All questions — unified count-based grid via renderOptionGrid */}
+      {!isText && (
         <>
-          <div className={`grid gap-3 md:gap-4 justify-center mx-auto ${
-            (() => {
-              const optCount = q.options.length;
-              if (q.id === 'd2') return 'grid-cols-3';
-              if (q.id === 'd6d') return 'grid-cols-3';
-              if (q.id === 'd5d') return 'grid-cols-2 sm:grid-cols-4 max-w-md';
-              if (q.id === 'd4e') return 'grid-cols-3 max-w-md';
-              if (q.id === 'd4b') return 'grid-cols-3 sm:grid-cols-5 max-w-2xl';
-              return optCount === 3 ? 'grid-cols-2 sm:grid-cols-3' : 'grid-cols-2 sm:grid-cols-4';
-            })()
-          }`}>
-            {q.options.map((opt, i) => {
-              const colClass = (() => {
-                if (q.id === 'd2' && (i === 4 || i === 5)) return i === 4 ? 'sm:col-start-2' : 'sm:col-start-3';
-                if (q.id === 'd4e' && (i === 3 || i === 4)) return i === 3 ? 'col-start-2' : 'col-start-3';
-                return '';
-              })();
-              return (
-                <div key={opt.id} className={colClass}>
-                  <OptionCard
-                    opt={opt}
-                    isSelected={selectedIds.includes(opt.id)}
-                    isMulti={isMulti}
-                    onSelect={() =>
-                      isMulti
-                        ? onMultiToggle(q.id, opt.id, maxSel)
-                        : onSingleSelect(q.id, opt.id)
-                    }
-                    index={i}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          {renderOptionGrid(q.options, (opt, i) => (
+            <OptionCard
+              opt={opt}
+              isSelected={selectedIds.includes(opt.id)}
+              isMulti={isMulti}
+              onSelect={() =>
+                isMulti
+                  ? onMultiToggle(q.id, opt.id, maxSel)
+                  : onSingleSelect(q.id, opt.id)
+              }
+              index={i}
+            />
+          ))}
           {isMulti && (
             <div className="mt-8 text-center">
               <ContinuaButton onClick={onContinue} enabled={selectedIds.length > 0} />

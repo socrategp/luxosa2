@@ -2085,8 +2085,7 @@ function ResultScreen({
                     const location = LUXOSA_LOCATIONS.find(l => l.id === selectedLocationId)!;
                     const msg = buildWhatsAppMessage(nome, email, whatsapp, fascia, location.label, answers);
                     const url = `https://wa.me/${location.whatsapp}?text=${encodeURIComponent(msg)}`;
-                    const opened = window.open(url, '_blank', 'noopener,noreferrer');
-                    if (!opened) window.location.href = url;
+                    window.open(url, '_blank', 'noopener,noreferrer');
                     setShowTimePicker(false);
                   }}
                   className="w-full text-left px-5 py-4 border border-sand/60 text-[15px] font-light text-anthracite/80 hover:border-brass/40 hover:bg-ecru/50 transition-all duration-300"

@@ -1293,6 +1293,16 @@ function buildD10Note(d10: string | undefined): string | null {
 }
 
 
+// ── SEDI ──────────────────────────────────────────────────────────
+
+const LUXOSA_LOCATIONS = [
+  {
+    id: 'messina-cavour',
+    label: 'Messina Cavour',
+    whatsapp: '390902403220',
+  },
+] as const;
+
 // ── WHATSAPP MESSAGE BUILDER ─────────────────────────────────────
 
 function buildWhatsAppMessage(
@@ -1300,6 +1310,7 @@ function buildWhatsAppMessage(
   email: string,
   whatsapp: string,
   fascia: string,
+  sede: string,
   answers: Answers
 ): string {
   const d3 = answers['d3'] as string | undefined;
@@ -1329,6 +1340,7 @@ function buildWhatsAppMessage(
   lines.push('Buongiorno, vorrei maggiori informazioni circa la mia condizione, e chiedo il ricontatto da parte di un vostro consulente.');
   lines.push('');
   lines.push(`Fascia oraria preferita: ${fascia}`);
+  lines.push(`Sede selezionata: ${sede}`);
   lines.push('');
   lines.push('DATI DI CONTATTO');
   lines.push(`Nome: ${nome}`);
@@ -1796,7 +1808,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
           >
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
             <span className="relative z-10 flex items-center gap-3">
-              Ricevi il tuo orientamento
+              Scopri il tuo orientamento
               <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>
@@ -1823,6 +1835,7 @@ function ResultScreen({
   onReset: () => void;
 }) {
   const [showTimePicker, setShowTimePicker] = useState(false);
+  const [selectedLocationId, setSelectedLocationId] = useState<typeof LUXOSA_LOCATIONS[number]['id']>('messina-cavour');
   const d3 = answers['d3'] as string | undefined;
   const sequence = buildQuestionSequence(d3);
   const scores = computeScores(answers, sequence);
@@ -2008,7 +2021,7 @@ function ResultScreen({
           >
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
             <span className="relative z-10 flex items-center gap-4">
-              Richiedi la tua consulenza Luxosa
+              Voglio essere contattata per maggiori informazioni
               <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>
@@ -2042,6 +2055,24 @@ function ResultScreen({
             <p className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">
               Luxosa · Consulenza
             </p>
+
+            {/* Sede */}
+            <p className="text-[11px] tracking-[0.2em] uppercase text-anthracite/50 font-light mb-2">
+              Scegli la sede
+            </p>
+            <div className="relative mb-8">
+              <select
+                value={selectedLocationId}
+                onChange={(e) => setSelectedLocationId(e.target.value as typeof LUXOSA_LOCATIONS[number]['id'])}
+                className="w-full appearance-none px-5 py-3 border border-sand/60 bg-ivory text-[15px] font-light text-anthracite/80 focus:outline-none focus:border-brass/50 cursor-pointer"
+              >
+                {LUXOSA_LOCATIONS.map(l => (
+                  <option key={l.id} value={l.id}>{l.label}</option>
+                ))}
+              </select>
+              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brass-muted text-[10px]">▾</span>
+            </div>
+
             <h3 className="font-serif text-[22px] font-light text-charcoal leading-snug mb-2">
               In quale fascia oraria preferisci essere ricontattata?
             </h3>
@@ -2051,8 +2082,9 @@ function ResultScreen({
                 <button
                   key={fascia}
                   onClick={() => {
-                    const msg = buildWhatsAppMessage(nome, email, whatsapp, fascia, answers);
-                    const url = `https://wa.me/390902403220?text=${encodeURIComponent(msg)}`;
+                    const location = LUXOSA_LOCATIONS.find(l => l.id === selectedLocationId)!;
+                    const msg = buildWhatsAppMessage(nome, email, whatsapp, fascia, location.label, answers);
+                    const url = `https://wa.me/${location.whatsapp}?text=${encodeURIComponent(msg)}`;
                     const opened = window.open(url, '_blank', 'noopener,noreferrer');
                     if (!opened) window.location.href = url;
                     setShowTimePicker(false);

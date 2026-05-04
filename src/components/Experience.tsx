@@ -1,4 +1,4 @@
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { premiumEase } from '../lib/animations';
@@ -28,24 +28,10 @@ function getPos(col: number, row: number) {
 export default function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
-
-  const [isTouchLayout, setIsTouchLayout] = useState<boolean>(() =>
-    typeof window !== 'undefined' ? window.matchMedia('(max-width: 1023px)').matches : false
-  );
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 1023px)');
-    const handler = (e: MediaQueryListEvent) => {
-      setIsTouchLayout(e.matches);
-      if (!e.matches) setActiveIndex(null);
-    };
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
-  }, []);
-
-  useEffect(() => {
-    if (!isTouchLayout || activeIndex === null) return;
+    if (activeIndex === null) return;
     const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActiveIndex(null); };
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', onKey);
@@ -53,7 +39,7 @@ export default function Experience() {
       document.body.style.overflow = '';
       document.removeEventListener('keydown', onKey);
     };
-  }, [activeIndex, isTouchLayout]);
+  }, [activeIndex]);
 
   const close = () => setActiveIndex(null);
 
@@ -89,19 +75,14 @@ export default function Experience() {
           {esperienze.map((e, i) => {
             const col = i % COLS;
             const row = Math.floor(i / COLS);
-
             return (
               <motion.div
                 key={e.name}
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{ duration: 1.2, ease: premiumEase, delay: 0.1 + i * 0.07 }}
-                className={`group relative aspect-[4/5] overflow-hidden ${isTouchLayout ? 'cursor-pointer' : 'cursor-default'}`}
-                role={isTouchLayout ? 'button' : undefined}
-                tabIndex={isTouchLayout ? 0 : undefined}
-                aria-label={isTouchLayout ? `${e.name} — leggi la descrizione` : undefined}
-                onClick={() => { if (isTouchLayout) setActiveIndex(i); }}
-                onKeyDown={(ev) => { if (isTouchLayout && (ev.key === 'Enter' || ev.key === ' ')) setActiveIndex(i); }}
+                className="group relative aspect-[4/5] overflow-hidden cursor-pointer"
+                onClick={() => setActiveIndex(i)}
                 style={{
                   backgroundImage: `url(${IMAGE})`,
                   backgroundSize: `${COLS * 100}% ${ROWS * 100}%`,
@@ -122,7 +103,6 @@ export default function Experience() {
                   <div className="h-[1px] w-0 bg-brass-light group-hover:w-6 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] mt-3" />
                 </div>
 
-                {/* Descrizione visibile solo su desktop con hover */}
                 <p className="hidden lg:block absolute bottom-8 left-8 right-8 text-[15px] leading-[1.75] text-ivory/80 font-light opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] z-10">
                   {e.copy}
                 </p>
@@ -132,77 +112,90 @@ export default function Experience() {
         </div>
       </div>
 
-      {/* Modal mobile/tablet — singolo wrapper fixed che contiene backdrop + panel */}
-      {isTouchLayout && createPortal(
-        <AnimatePresence>
-          {activeIndex !== null && (
-            <motion.div
-              key="exp-modal"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              style={{
-                position: 'fixed',
-                inset: 0,
-                zIndex: 9999,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                background: 'rgba(28,26,23,0.75)',
-              }}
+      {activeIndex !== null && createPortal(
+        <div
+          onClick={close}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            backgroundColor: 'rgba(28,26,23,0.82)',
+            display: 'flex',
+            alignItems: 'flex-end',
+            WebkitTapHighlightColor: 'transparent',
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#282520',
+              width: '100%',
+              maxHeight: '80vh',
+              overflowY: 'auto',
+              padding: '2.5rem 2rem 3rem',
+              boxSizing: 'border-box',
+            }}
+          >
+            <p style={{
+              fontSize: '10px',
+              letterSpacing: '0.25em',
+              textTransform: 'uppercase',
+              color: 'rgba(196,174,140,0.55)',
+              fontWeight: 300,
+              marginBottom: '1rem',
+              fontFamily: 'Jost, sans-serif',
+            }}>
+              {esperienze[activeIndex].code}
+            </p>
+            <h3 style={{
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: '22px',
+              fontWeight: 300,
+              color: '#F9F6F1',
+              lineHeight: 1.25,
+              marginBottom: '1.25rem',
+            }}>
+              {esperienze[activeIndex].name}
+            </h3>
+            <div style={{
+              height: '1px',
+              width: '2rem',
+              backgroundColor: 'rgba(196,174,140,0.4)',
+              marginBottom: '1.5rem',
+            }} />
+            <p style={{
+              fontSize: '15px',
+              lineHeight: 1.8,
+              color: 'rgba(249,246,241,0.72)',
+              fontWeight: 300,
+              marginBottom: '2.5rem',
+              fontFamily: 'Jost, sans-serif',
+            }}>
+              {esperienze[activeIndex].copy}
+            </p>
+            <button
               onClick={close}
+              style={{
+                fontSize: '11px',
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: 'rgba(196,174,140,0.7)',
+                fontWeight: 300,
+                border: '1px solid rgba(196,174,140,0.35)',
+                padding: '0.75rem 1.5rem',
+                backgroundColor: 'transparent',
+                cursor: 'pointer',
+                fontFamily: 'Jost, sans-serif',
+                WebkitAppearance: 'none',
+              }}
             >
-              {/* Panel — absolute bottom, stopPropagation evita chiusura al tap sul contenuto */}
-              <motion.div
-                initial={{ y: '100%' }}
-                animate={{ y: 0 }}
-                exit={{ y: '100%' }}
-                transition={{ duration: 0.35, ease: premiumEase }}
-                style={{
-                  background: '#282520',
-                  padding: '2.5rem 2rem 3rem',
-                  position: 'relative',
-                  zIndex: 1,
-                }}
-                onClick={(ev) => ev.stopPropagation()}
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby="exp-modal-title"
-              >
-                <span style={{ display: 'block', fontSize: '10px', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'rgba(196,174,140,0.5)', fontWeight: 300, marginBottom: '1rem' }}>
-                  {esperienze[activeIndex].code}
-                </span>
-                <h3
-                  id="exp-modal-title"
-                  style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '22px', fontWeight: 300, color: '#F9F6F1', lineHeight: 1.25, marginBottom: '1.25rem' }}
-                >
-                  {esperienze[activeIndex].name}
-                </h3>
-                <div style={{ height: '1px', width: '2rem', background: 'rgba(196,174,140,0.4)', marginBottom: '1.5rem' }} />
-                <p style={{ fontSize: '15px', lineHeight: 1.8, color: 'rgba(249,246,241,0.7)', fontWeight: 300, marginBottom: '2.5rem' }}>
-                  {esperienze[activeIndex].copy}
-                </p>
-                <button
-                  onClick={close}
-                  style={{
-                    fontSize: '11px',
-                    letterSpacing: '0.25em',
-                    textTransform: 'uppercase',
-                    color: 'rgba(196,174,140,0.7)',
-                    fontWeight: 300,
-                    border: '1px solid rgba(196,174,140,0.3)',
-                    padding: '0.75rem 1.5rem',
-                    background: 'transparent',
-                    cursor: 'pointer',
-                  }}
-                >
-                  Chiudi
-                </button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>,
+              Chiudi
+            </button>
+          </div>
+        </div>,
         document.body
       )}
     </section>

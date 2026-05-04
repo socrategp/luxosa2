@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import Experience from '../components/Experience';
+import { useQuiz } from '../context/QuizContext';
 
 import { premiumEase } from '../lib/animations';
 
@@ -167,26 +168,74 @@ function PricingNote() {
 
 function EsperienzaCTA() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+  const { openQuiz } = useQuiz();
 
   return (
-    <section className="py-32 md:py-48 lg:py-64 bg-ivory-warm" ref={ref}>
-      <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center">
-        <motion.div initial={{ width: 0 }} animate={inView ? { width: 60 } : {}} transition={{ duration: 1.2, ease: premiumEase }} className="h-[1px] bg-brass mx-auto mb-12" />
-        <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
-          Prenota il primo<br />incontro.
-        </motion.h2>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.4 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
-          <Link to="/contatti" className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5">
-            <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-            <span className="relative z-10 flex items-center gap-3">
-              Prenota ora <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-            </span>
-          </Link>
-          <Link to="/sedi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/50 font-light hover:text-anthracite transition-colors duration-500">
-            Scopri dove trovarci <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-          </Link>
-        </motion.div>
+    <section className="py-32 md:py-48 lg:py-56 bg-ecru/30" ref={ref}>
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
+        <div className="max-w-2xl">
+          <motion.span
+            initial={{ opacity: 0, y: 15 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: premiumEase }}
+            className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
+          >
+            Luxosa Test
+          </motion.span>
+          <motion.div
+            initial={{ width: 0 }}
+            animate={inView ? { width: 40 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }}
+            className="h-[1px] bg-brass mt-4 mb-8"
+          />
+          <motion.h2
+            initial={{ opacity: 0, y: 25 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
+            className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal"
+          >
+            Non sai da dove iniziare?
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
+            className="mt-8 space-y-4"
+          >
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/70 font-light">
+              Rispondi a poche domande sulla tua cute, il tuo capello, la tua storia e i tuoi obiettivi.
+            </p>
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/70 font-light">
+              In pochi minuti ti orienteremo verso il percorso Luxosa più adatto a te.
+            </p>
+            <p className="text-[17px] leading-[1.8] text-anthracite/45 font-light italic">
+              Il quiz non sostituisce la consulenza: la prepara.
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: premiumEase, delay: 0.55 }}
+            className="mt-12 flex flex-col sm:flex-row gap-5"
+          >
+            <button
+              onClick={openQuiz}
+              className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
+            >
+              <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
+              <span className="relative z-10 flex items-center gap-3">
+                Scopri il tuo percorso <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+              </span>
+            </button>
+            <Link
+              to="/contatti"
+              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/50 font-light hover:text-anthracite transition-colors duration-500 px-2 py-5"
+            >
+              Prenota il tuo primo incontro <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -20,6 +20,7 @@ export default function Hero() {
           fetchPriority="high"
           decoding="sync"
           aria-hidden="true"
+          style={{ opacity: 0 }}
           className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute"
         />
         <video

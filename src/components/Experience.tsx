@@ -1,5 +1,5 @@
-﻿import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+﻿import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { premiumEase } from '../lib/animations';
 
 const esperienze = [
@@ -27,6 +27,19 @@ function getPos(col: number, row: number) {
 export default function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setActiveIndex(null); };
+    if (activeIndex !== null) {
+      document.body.style.overflow = 'hidden';
+      document.addEventListener('keydown', onKey);
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [activeIndex]);
 
   return (
     <section ref={ref} className="py-32 md:py-48 lg:py-56 bg-deep">
@@ -67,7 +80,13 @@ export default function Experience() {
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: 1 } : {}}
                 transition={{ duration: 1.2, ease: premiumEase, delay: 0.1 + i * 0.07 }}
-                className="group relative aspect-[4/5] overflow-hidden cursor-default"
+                className="group relative aspect-[4/5] overflow-hidden cursor-pointer"
+                role="button"
+                tabIndex={0}
+                aria-label={`${e.name} — leggi la descrizione`}
+                aria-expanded={activeIndex === i}
+                onClick={() => setActiveIndex(i)}
+                onKeyDown={(ev) => { if (ev.key === 'Enter' || ev.key === ' ') setActiveIndex(i); }}
                 style={{
                   backgroundImage: `url(${IMAGE})`,
                   backgroundSize: `${COLS * 100}% ${ROWS * 100}%`,
@@ -91,8 +110,8 @@ export default function Experience() {
                   <div className="h-[1px] w-0 bg-brass-light group-hover:w-6 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] mt-3" />
                 </div>
 
-                {/* Description — absolute at bottom, never affects title position */}
-                <p className="absolute bottom-6 md:bottom-8 left-6 md:left-8 right-6 md:right-8 text-[14px] md:text-[15px] leading-[1.75] text-ivory/80 font-light opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] z-10">
+                {/* Description — large desktop hover only; hidden on mobile+tablet to prevent overlap */}
+                <p className="hidden lg:block absolute bottom-6 lg:bottom-8 left-6 lg:left-8 right-6 lg:right-8 text-[14px] lg:text-[15px] leading-[1.75] text-ivory/80 font-light opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] z-10">
                   {e.copy}
                 </p>
               </motion.div>
@@ -100,6 +119,53 @@ export default function Experience() {
           })}
         </div>
       </div>
+
+      {/* Modal — bottom sheet mobile, centered panel md+ */}
+      <AnimatePresence>
+        {activeIndex !== null && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[1000] bg-deep/70"
+              onClick={() => setActiveIndex(null)}
+              aria-hidden="true"
+            />
+            <motion.div
+              initial={{ opacity: 0, y: 48 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 48 }}
+              transition={{ duration: 0.4, ease: premiumEase }}
+              className="fixed bottom-0 left-0 right-0 z-[1001] bg-charcoal px-8 pt-10 pb-12 lg:bottom-auto lg:top-1/2 lg:left-1/2 lg:right-auto lg:-translate-x-1/2 lg:-translate-y-1/2 lg:w-[520px]"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="exp-modal-title"
+            >
+              <span className="text-[10px] tracking-[0.25em] uppercase text-brass-light/50 font-light block mb-4">
+                {esperienze[activeIndex].code}
+              </span>
+              <h3
+                id="exp-modal-title"
+                className="font-serif text-[22px] md:text-[26px] font-light text-ivory leading-snug mb-5"
+              >
+                {esperienze[activeIndex].name}
+              </h3>
+              <div className="h-[1px] w-8 bg-brass-light/40 mb-6" />
+              <p className="text-[15px] md:text-[16px] leading-[1.8] text-ivory/70 font-light mb-10">
+                {esperienze[activeIndex].copy}
+              </p>
+              <button
+                onClick={() => setActiveIndex(null)}
+                className="text-[11px] tracking-[0.25em] uppercase text-brass-light/70 font-light border border-brass-light/30 px-6 py-3 hover:border-brass-light/60 transition-colors duration-300"
+              >
+                Chiudi
+              </button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

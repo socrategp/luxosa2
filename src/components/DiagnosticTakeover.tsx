@@ -1712,9 +1712,15 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [error, setError] = useState('');
 
+  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+
   const handleSubmit = () => {
-    if (!nome.trim() || !email.trim()) {
+    if (!nome.trim()) {
       setError('Completa tutti i campi per scoprire la tua soluzione.');
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError('Controlla l\'indirizzo email inserito: sembra incompleto o non corretto.');
       return;
     }
     if (!phone || !isPossiblePhoneNumber(phone)) {

@@ -18,7 +18,7 @@ export default function PageHero({ label, title, subtitle, image, video }: PageH
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   return (
-    <section ref={ref} className="relative h-[85vh] min-h-[620px] max-h-[900px] overflow-hidden">
+    <section ref={ref} className="relative h-[85vh] min-h-[620px] max-h-[900px] overflow-hidden bg-deep">
       <motion.div className="absolute inset-0" style={{ y: video ? undefined : backgroundY }}>
         {video ? (
           <video
@@ -30,9 +30,9 @@ export default function PageHero({ label, title, subtitle, image, video }: PageH
             preload="metadata"
             className="w-full h-full object-cover absolute inset-0"
           />
-        ) : (
+        ) : image ? (
           <img src={image} alt={title} fetchPriority="high" decoding="sync" className="w-full h-[120%] -top-[10%] object-cover absolute" />
-        )}
+        ) : null}
         <div className="absolute inset-0 bg-gradient-to-b from-deep/40 via-deep/30 to-deep/90" />
       </motion.div>
       <div className="relative h-full flex flex-col justify-end pb-24 md:pb-32 lg:pb-36">

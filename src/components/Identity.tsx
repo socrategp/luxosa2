@@ -71,7 +71,7 @@ export default function Identity() {
           >
             <div className="aspect-[3/4] overflow-hidden">
               <img
-                src="/images/woman-portrait-new.jpg"
+                src="/images/nosalone_unamaison.webp"
                 alt="La visione Luxosa"
                 loading="lazy"
                 decoding="async"

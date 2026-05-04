@@ -120,7 +120,7 @@ function MCSpace() {
             <img src="/images/lavaggi.webp" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.55 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/zona-tecnica2.jpg" alt="Zona tecnica" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/zona-tecnica2.webp" alt="Zona tecnica" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.65 }} className="aspect-[4/3] overflow-hidden">
             <img src="/images/lavaggio2.webp" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />

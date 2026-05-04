@@ -183,7 +183,6 @@ export default function ContattiPage() {
         label="Contatti"
         title="Prenota un incontro."
         subtitle="La prima esperienza Luxosa nasce da un incontro. Non da un menu pronto. Da ascolto vero."
-        image="/images/salon-reception-new.jpg"
       />
       <ContactMain />
       <ContactClose />

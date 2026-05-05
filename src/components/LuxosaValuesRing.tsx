@@ -260,7 +260,7 @@ export default function LuxosaValuesRing() {
                 <h4 className="font-serif text-[30px] md:text-[36px] font-light text-charcoal mb-5 leading-tight tracking-wide">
                   {valori[activeIndex].title}
                 </h4>
-                <p className="text-[17px] md:text-[18px] leading-[1.9] text-anthracite/65 font-light">
+                <p className="text-[17px] md:text-[18px] leading-[1.9] text-anthracite/80 font-light">
                   {valori[activeIndex].text}
                 </p>
               </motion.div>

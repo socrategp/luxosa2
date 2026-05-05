@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
@@ -67,8 +67,8 @@ export default function Header() {
 
   const logoFilter = onLight ? 'brightness-0' : 'brightness-0 invert';
   const navColor = onLight ? 'text-anthracite' : 'text-white';
-  const navHoverColor = onLight ? 'text-anthracite/90' : 'text-white/90';
-  const navMutedColor = onLight ? 'text-anthracite/60' : 'text-white/60';
+  const navHoverColor = onLight ? 'text-anthracite/95' : 'text-white/95';
+  const navMutedColor = onLight ? 'text-anthracite/75' : 'text-white/75';
 
   return (
     <>
@@ -154,7 +154,7 @@ export default function Header() {
                     to={item.href}
                     onClick={() => setMenuOpen(false)}
                     className={`font-serif text-3xl tracking-[0.1em] font-light transition-colors duration-300 ${
-                      location.pathname === item.href ? 'text-brass-light' : 'text-ivory/90 hover:text-brass-light'
+                      location.pathname === item.href ? 'text-brass-light' : 'text-ivory/95 hover:text-brass-light'
                     }`}
                   >
                     {item.label}

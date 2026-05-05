@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+﻿import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 
@@ -38,7 +38,7 @@ export default function CTAFinal() {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }}
-          className="mt-8 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/65 font-light max-w-xl mx-auto"
+          className="mt-8 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/80 font-light max-w-xl mx-auto"
         >
           La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo.
           È il primo passo di un percorso di cura pensato interamente per Lei.
@@ -59,7 +59,7 @@ export default function CTAFinal() {
           </a>
           <a
             href="#"
-            className="inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/70 font-light border border-anthracite/20 px-10 py-4.5 hover:border-anthracite/40 hover:text-anthracite transition-all duration-500"
+            className="inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/85 font-light border border-anthracite/20 px-10 py-4.5 hover:border-anthracite/40 hover:text-anthracite transition-all duration-500"
           >
             Richiedi informazioni
           </a>

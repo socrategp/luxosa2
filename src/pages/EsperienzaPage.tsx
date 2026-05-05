@@ -34,7 +34,7 @@ function EsperienzaIntro() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
-            className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/75 font-light"
+            className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light"
           >
             Le esperienze Luxosa non sono voci di un listino. Sono i gesti attraverso cui il metodo prende forma, ciascuno con una propria identità, una propria intenzione, un proprio modo di prendersi cura.
           </motion.p>
@@ -42,7 +42,7 @@ function EsperienzaIntro() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
-            className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/75 font-light"
+            className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light"
           >
             Qui il mondo Luxosa si presenta come mappa di possibilità, non come catalogo.
           </motion.p>
@@ -130,7 +130,7 @@ function EsperienzeFAQ() {
                         transition={{ duration: 0.4, ease: premiumEase }}
                         className="overflow-hidden"
                       >
-                        <p className="pb-6 text-[16px] md:text-[17px] leading-[1.85] text-anthracite/60 font-light">
+                        <p className="pb-6 text-[16px] md:text-[17px] leading-[1.85] text-anthracite/75 font-light">
                           {faq.a}
                         </p>
                       </motion.div>
@@ -157,7 +157,7 @@ function PricingNote() {
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: premiumEase }}
-          className="text-[17px] md:text-[18px] font-light italic text-anthracite/45 text-center max-w-2xl mx-auto leading-[1.8] border-t border-sand/50 pt-10"
+          className="text-[17px] md:text-[18px] font-light italic text-anthracite/60 text-center max-w-2xl mx-auto leading-[1.8] border-t border-sand/50 pt-10"
         >
           I prezzi delle esperienze Luxosa sono disponibili su richiesta in sede. Ogni preventivo è personalizzato, perché ogni capello è diverso.
         </motion.p>
@@ -203,13 +203,13 @@ function EsperienzaCTA() {
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
             className="mt-8 space-y-4"
           >
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/70 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/85 font-light">
               Rispondi a poche domande sulla tua cute, il tuo capello, la tua storia e i tuoi obiettivi.
             </p>
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/70 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/85 font-light">
               In pochi minuti ti orienteremo verso il percorso Luxosa più adatto a te.
             </p>
-            <p className="text-[17px] leading-[1.8] text-anthracite/45 font-light italic">
+            <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">
               Il quiz non sostituisce la consulenza: la prepara.
             </p>
           </motion.div>
@@ -230,7 +230,7 @@ function EsperienzaCTA() {
             </button>
             <Link
               to="/contatti"
-              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/50 font-light hover:text-anthracite transition-colors duration-500 px-2 py-5"
+              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/65 font-light hover:text-anthracite transition-colors duration-500 px-2 py-5"
             >
               Prenota il tuo primo incontro <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </Link>

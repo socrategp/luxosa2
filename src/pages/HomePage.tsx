@@ -21,13 +21,13 @@ function HomeIdentity() {
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">La Maison</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.15, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">
+            <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.15, ease: premiumEase }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.2] text-charcoal tracking-[0.01em]">
               Non un salone.<br />Una maison.
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.3, ease: premiumEase }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light">Luxosa nasce per offrire un modo diverso di vivere la cura dei capelli.</p>
-              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light">Non un servizio isolato, non una scelta veloce, non una risposta standard. Un luogo in cui ogni donna viene accolta, ascoltata e accompagnata con attenzione.</p>
-              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light">Ogni gesto, ogni consulenza, ogni percorso nasce da una visione precisa: valorizzare la persona, proteggere la qualità del capello e costruire risultati coerenti nel tempo.</p>
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/95 font-light">Luxosa nasce per offrire un modo diverso di vivere la cura dei capelli.</p>
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/95 font-light">Non un servizio isolato, non una scelta veloce, non una risposta standard. Un luogo in cui ogni donna viene accolta, ascoltata e accompagnata con attenzione.</p>
+              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/95 font-light">Ogni gesto, ogni consulenza, ogni percorso nasce da una visione precisa: valorizzare la persona, proteggere la qualità del capello e costruire risultati coerenti nel tempo.</p>
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.5, delay: 0.2 }} className="relative group">
@@ -60,7 +60,7 @@ function PerChiE() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="font-serif text-[26px] md:text-[32px] lg:text-[38px] font-light leading-[1.3] text-charcoal tracking-[0.01em] mb-10"
+            className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.2] text-charcoal tracking-[0.01em] mb-10"
           >
             Forse non si cerca un altro salone.
           </motion.h2>
@@ -68,7 +68,7 @@ function PerChiE() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
-            className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/65 font-light"
+            className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light"
           >
             Si cerca un luogo in cui non dover ricominciare ogni volta da zero. In cui il colore non sia un tentativo. In cui il taglio non perda senso dopo pochi giorni. In cui la cute venga ascoltata prima di essere trattata. In cui nessuno proponga quello che va di moda, ma ciò che ha davvero senso.
           </motion.p>
@@ -76,7 +76,7 @@ function PerChiE() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.5 }}
-            className="mt-6 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/65 font-light"
+            className="mt-6 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light"
           >
             Una cura che non si limiti all&apos;apparenza. Un luogo in cui il capello venga osservato con attenzione, il desiderio ascoltato con rispetto, ogni scelta costruita con metodo.
           </motion.p>
@@ -84,7 +84,7 @@ function PerChiE() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.65 }}
-            className="mt-6 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/65 font-light"
+            className="mt-6 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light"
           >
             Luxosa nasce per questo.
           </motion.p>
@@ -120,7 +120,7 @@ function Appartenenza() {
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
-            className="font-serif text-[26px] md:text-[32px] lg:text-[38px] font-light leading-[1.4] text-ivory/80 tracking-[0.01em]"
+            className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.3] text-ivory/95 tracking-[0.01em]"
           >
             Ci sono luoghi che frequenti. E luoghi a cui senti di appartenere.
           </motion.p>
@@ -130,11 +130,11 @@ function Appartenenza() {
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
             className="mt-8 space-y-5"
           >
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/50 font-light">              Il vero potere è decidere di prendersi cura di sé. Non più tentativi, non più risposte uguali per tutte, non più la sensazione di dover ricominciare ogni volta da capo.</p>
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/50 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/65 font-light">              Il vero potere è decidere di prendersi cura di sé. Non più tentativi, non più risposte uguali per tutte, non più la sensazione di dover ricominciare ogni volta da capo.</p>
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/65 font-light">
               Qui ogni donna viene accolta con la sua storia, i suoi desideri, il suo tempo, la sua identità. È da lì che nasce il percorso. Ed è da lì che nasce anche la fiducia.
             </p>
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/50 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-ivory/65 font-light">
               Chi sceglie Luxosa non cambia soltanto luogo. Cambia standard.
             </p>
           </motion.div>
@@ -257,7 +257,7 @@ function CinematicPayoff() {
                 />
 
                 <motion.p
-                  className="text-[15px] md:text-[16px] leading-[1.85] text-ivory/70 font-light max-w-[260px]"
+                  className="text-[15px] md:text-[16px] leading-[1.85] text-ivory/85 font-light max-w-[260px]"
                   animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 16 }}
                   transition={{ duration: 1.2, ease: premiumEase, delay: 0.4 }}
                 >
@@ -301,7 +301,7 @@ function CioCheDiventa() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
-          className="mt-0 mb-16 md:mb-20 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/65 font-light max-w-2xl"
+          className="mt-0 mb-16 md:mb-20 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/80 font-light max-w-2xl"
         >
           In Luxosa ogni risultato nasce da un processo: ascolto, osservazione, progettazione e cura. Non si chiede di scegliere da soli davanti a un menu. Si viene accompagnati verso la direzione più coerente con il proprio capello, il proprio stile di vita e il risultato desiderato.
         </motion.p>
@@ -315,7 +315,7 @@ function CioCheDiventa() {
               className="border-t border-sand/60 pt-7"
             >
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-3 leading-snug tracking-wide">{item.title}</h3>
-              <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/60 font-light">{item.text}</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/75 font-light">{item.text}</p>
             </motion.div>
           ))}
         </div>
@@ -341,7 +341,7 @@ function HomeCTA() {
         <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.3, ease: premiumEase }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">
           Dopo aver conosciuto Luxosa,<br />il passo successivo è entrare nel metodo.
         </motion.h2>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.45 }} className="mt-6 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/60 font-light max-w-xl mx-auto">
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.45 }} className="mt-6 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light max-w-xl mx-auto">
           Il primo incontro è il punto di partenza per conoscere il mondo Luxosa e comprendere quale direzione può essere più adatta.
         </motion.p>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.5, ease: premiumEase }} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
@@ -351,7 +351,7 @@ function HomeCTA() {
               Scopri il Metodo <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </span>
           </Link>
-          <Link to="/i-percorsi" className="group relative overflow-hidden inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/70 font-light border border-anthracite/20 px-10 py-5 bg-transparent transition-colors duration-300">
+          <Link to="/i-percorsi" className="group relative overflow-hidden inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/85 font-light border border-anthracite/20 px-10 py-5 bg-transparent transition-colors duration-300">
             <span className="absolute inset-0 bg-charcoal translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
             <span className="relative z-10 group-hover:text-ivory transition-colors duration-300">Esplora i Percorsi</span>
           </Link>

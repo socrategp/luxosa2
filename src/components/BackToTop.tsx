@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function BackToTop() {
@@ -41,7 +41,7 @@ export default function BackToTop() {
               height="14"
               viewBox="0 0 14 14"
               fill="none"
-              className="relative z-10 text-anthracite/40 group-hover:text-brass-muted transition-all duration-500 group-hover:-translate-y-[2px]"
+              className="relative z-10 text-anthracite/55 group-hover:text-brass-muted transition-all duration-500 group-hover:-translate-y-[2px]"
             >
               <path
                 d="M7 12V2M7 2L2.5 6.5M7 2L11.5 6.5"
@@ -54,7 +54,7 @@ export default function BackToTop() {
           </div>
 
           {/* Label */}
-          <span className="block mt-2 text-[9px] tracking-[0.3em] uppercase text-anthracite/30 font-light text-center group-hover:text-anthracite/55 transition-colors duration-500">
+          <span className="block mt-2 text-[9px] tracking-[0.3em] uppercase text-anthracite/45 font-light text-center group-hover:text-anthracite/70 transition-colors duration-500">
             Top
           </span>
         </motion.button>

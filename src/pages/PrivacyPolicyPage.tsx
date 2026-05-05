@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 
 const ease = [0.25, 0.1, 0, 1] as const;
 
@@ -17,7 +17,7 @@ function Section({ number, title, children }: SectionProps) {
           {title}
         </h2>
       </div>
-      <div className="pl-10 md:pl-16 space-y-4 text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">
+      <div className="pl-10 md:pl-16 space-y-4 text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">
         {children}
       </div>
     </div>
@@ -69,10 +69,10 @@ export default function PrivacyPolicyPage() {
 
           {/* Intro */}
           <div className="mb-14 pb-10 border-b border-sand/60">
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
+            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/90 font-light">
               La presente informativa descrive le modalità di raccolta e trattamento dei dati personali degli utenti che visitano il sito web di Luxosa (di seguito "Sito") o usufruiscono dei servizi offerti dalla Maison, in conformità al Regolamento (UE) 2016/679 (GDPR) e al D.Lgs. 196/2003, come modificato dal D.Lgs. 101/2018.
             </p>
-            <p className="mt-5 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/75 font-light">
+            <p className="mt-5 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/90 font-light">
               Si invita a leggere attentamente il presente documento prima di fornire qualsiasi dato personale o di continuare la navigazione sul Sito.
             </p>
           </div>
@@ -86,24 +86,24 @@ export default function PrivacyPolicyPage() {
               <p>
                 Per qualsiasi comunicazione relativa al trattamento dei dati personali è possibile contattare il Titolare ai seguenti recapiti:
               </p>
-              <ul className="list-none space-y-1 text-anthracite/65">
-                <li>— E-mail: <span className="text-anthracite/80">[privacy@luxosa.it — da definire]</span></li>
+              <ul className="list-none space-y-1 text-anthracite/80">
+                <li>— E-mail: <span className="text-anthracite/95">[privacy@luxosa.it — da definire]</span></li>
                 <li>— Telefono: +39 090 240 3220</li>
-                <li>— PEC: <span className="text-anthracite/80">[indirizzo PEC — da definire]</span></li>
+                <li>— PEC: <span className="text-anthracite/95">[indirizzo PEC — da definire]</span></li>
               </ul>
             </Section>
 
             <Section number="02" title="Tipologie di Dati Raccolti">
               <p>Il Titolare raccoglie e tratta le seguenti categorie di dati personali:</p>
-              <p><em className="not-italic font-normal text-anthracite/80">Dati forniti volontariamente dall'utente:</em></p>
-              <ul className="list-none space-y-1 text-anthracite/65 pl-4">
+              <p><em className="not-italic font-normal text-anthracite/95">Dati forniti volontariamente dall'utente:</em></p>
+              <ul className="list-none space-y-1 text-anthracite/80 pl-4">
                 <li>— Nome, cognome e dati anagrafici</li>
                 <li>— Indirizzo e-mail e numero di telefono</li>
                 <li>— Dati relativi allo stato di salute di cute e capelli, forniti nell'ambito della consulenza (dati particolari ex art. 9 GDPR)</li>
                 <li>— Messaggi e comunicazioni inviate tramite il modulo di contatto</li>
               </ul>
-              <p className="mt-3"><em className="not-italic font-normal text-anthracite/80">Dati raccolti automaticamente durante la navigazione:</em></p>
-              <ul className="list-none space-y-1 text-anthracite/65 pl-4">
+              <p className="mt-3"><em className="not-italic font-normal text-anthracite/95">Dati raccolti automaticamente durante la navigazione:</em></p>
+              <ul className="list-none space-y-1 text-anthracite/80 pl-4">
                 <li>— Indirizzo IP e dati di accesso</li>
                 <li>— Informazioni sul browser e dispositivo utilizzato</li>
                 <li>— Pagine visitate e durata della navigazione</li>
@@ -115,19 +115,19 @@ export default function PrivacyPolicyPage() {
               <p>I dati personali vengono trattati per le seguenti finalità:</p>
               <div className="space-y-5">
                 <div>
-                  <p className="text-anthracite/85 font-normal mb-1">Gestione delle prenotazioni e consulenze</p>
+                  <p className="text-anthracite/95 font-normal mb-1">Gestione delle prenotazioni e consulenze</p>
                   <p>Trattamento necessario per l'esecuzione di un contratto o per adempiere a obblighi precontrattuali (art. 6, par. 1, lett. b, GDPR).</p>
                 </div>
                 <div>
-                  <p className="text-anthracite/85 font-normal mb-1">Adempimenti fiscali e contabili</p>
+                  <p className="text-anthracite/95 font-normal mb-1">Adempimenti fiscali e contabili</p>
                   <p>Trattamento necessario per adempiere a obblighi di legge (art. 6, par. 1, lett. c, GDPR).</p>
                 </div>
                 <div>
-                  <p className="text-anthracite/85 font-normal mb-1">Comunicazioni di marketing e newsletter</p>
+                  <p className="text-anthracite/95 font-normal mb-1">Comunicazioni di marketing e newsletter</p>
                   <p>Basato sul consenso espresso dell'interessato (art. 6, par. 1, lett. a, GDPR), liberamente revocabile in qualsiasi momento.</p>
                 </div>
                 <div>
-                  <p className="text-anthracite/85 font-normal mb-1">Miglioramento del Sito e analisi statistica</p>
+                  <p className="text-anthracite/95 font-normal mb-1">Miglioramento del Sito e analisi statistica</p>
                   <p>Basato sul legittimo interesse del Titolare (art. 6, par. 1, lett. f, GDPR), nel rispetto dei diritti e libertà fondamentali degli utenti.</p>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export default function PrivacyPolicyPage() {
               <p>
                 I dati saranno conservati per il tempo strettamente necessario al conseguimento delle finalità per cui sono stati raccolti, e comunque:
               </p>
-              <ul className="list-none space-y-1 text-anthracite/65 pl-4">
+              <ul className="list-none space-y-1 text-anthracite/80 pl-4">
                 <li>— Dati contrattuali e fiscali: <strong className="font-normal">10 anni</strong> dalla cessazione del rapporto</li>
                 <li>— Dati di contatto e consulenza: <strong className="font-normal">3 anni</strong> dall'ultimo contatto</li>
                 <li>— Dati di navigazione: <strong className="font-normal">12 mesi</strong></li>
@@ -155,7 +155,7 @@ export default function PrivacyPolicyPage() {
               <p>
                 I dati potranno essere comunicati a:
               </p>
-              <ul className="list-none space-y-1 text-anthracite/65 pl-4">
+              <ul className="list-none space-y-1 text-anthracite/80 pl-4">
                 <li>— Soggetti che svolgono attività in outsourcing per conto del Titolare (es. fornitori di servizi informatici, piattaforme di prenotazione)</li>
                 <li>— Autorità pubbliche e organi di vigilanza, nei casi previsti dalla legge</li>
                 <li>— Professionisti e consulenti del Titolare (dottori commercialisti, avvocati) vincolati da obblighi di riservatezza</li>
@@ -169,23 +169,23 @@ export default function PrivacyPolicyPage() {
               <p>
                 In qualità di interessato, l'utente ha il diritto di esercitare in qualsiasi momento i seguenti diritti nei confronti del Titolare, ai sensi degli artt. 15-22 del GDPR:
               </p>
-              <ul className="list-none space-y-1.5 text-anthracite/65 pl-4">
-                <li>— <strong className="font-normal text-anthracite/80">Accesso</strong>: ottenere conferma del trattamento e copia dei dati personali</li>
-                <li>— <strong className="font-normal text-anthracite/80">Rettifica</strong>: correggere dati inesatti o incompleti</li>
-                <li>— <strong className="font-normal text-anthracite/80">Cancellazione</strong>: ottenere la cancellazione dei dati ("diritto all'oblio")</li>
-                <li>— <strong className="font-normal text-anthracite/80">Limitazione</strong>: richiedere la sospensione del trattamento in determinati casi</li>
-                <li>— <strong className="font-normal text-anthracite/80">Portabilità</strong>: ricevere i dati in formato strutturato e leggibile</li>
-                <li>— <strong className="font-normal text-anthracite/80">Opposizione</strong>: opporsi al trattamento per motivi legittimi</li>
-                <li>— <strong className="font-normal text-anthracite/80">Revoca del consenso</strong>: senza pregiudizio per la liceità del trattamento basato sul consenso prestato prima della revoca</li>
+              <ul className="list-none space-y-1.5 text-anthracite/80 pl-4">
+                <li>— <strong className="font-normal text-anthracite/95">Accesso</strong>: ottenere conferma del trattamento e copia dei dati personali</li>
+                <li>— <strong className="font-normal text-anthracite/95">Rettifica</strong>: correggere dati inesatti o incompleti</li>
+                <li>— <strong className="font-normal text-anthracite/95">Cancellazione</strong>: ottenere la cancellazione dei dati ("diritto all'oblio")</li>
+                <li>— <strong className="font-normal text-anthracite/95">Limitazione</strong>: richiedere la sospensione del trattamento in determinati casi</li>
+                <li>— <strong className="font-normal text-anthracite/95">Portabilità</strong>: ricevere i dati in formato strutturato e leggibile</li>
+                <li>— <strong className="font-normal text-anthracite/95">Opposizione</strong>: opporsi al trattamento per motivi legittimi</li>
+                <li>— <strong className="font-normal text-anthracite/95">Revoca del consenso</strong>: senza pregiudizio per la liceità del trattamento basato sul consenso prestato prima della revoca</li>
               </ul>
               <p>
-                Le richieste possono essere inviate a <span className="text-anthracite/80">[privacy@luxosa.it — da definire]</span>. Il Titolare risponderà entro 30 giorni dalla ricezione. È altresì riconosciuto il diritto di proporre reclamo all'Autorità Garante per la protezione dei dati personali (www.garanteprivacy.it).
+                Le richieste possono essere inviate a <span className="text-anthracite/95">[privacy@luxosa.it — da definire]</span>. Il Titolare risponderà entro 30 giorni dalla ricezione. È altresì riconosciuto il diritto di proporre reclamo all'Autorità Garante per la protezione dei dati personali (www.garanteprivacy.it).
               </p>
             </Section>
 
             <Section number="07" title="Cookie">
               <p>
-                Il Sito utilizza cookie e tecnologie di tracciamento analoghe. Per informazioni dettagliate sulle tipologie di cookie utilizzati, sulle finalità e sulle modalità di gestione delle preferenze, si rimanda alla <strong className="font-normal text-anthracite/85">Cookie Policy</strong>.
+                Il Sito utilizza cookie e tecnologie di tracciamento analoghe. Per informazioni dettagliate sulle tipologie di cookie utilizzati, sulle finalità e sulle modalità di gestione delle preferenze, si rimanda alla <strong className="font-normal text-anthracite/95">Cookie Policy</strong>.
               </p>
             </Section>
 
@@ -218,7 +218,7 @@ export default function PrivacyPolicyPage() {
           {/* Bottom note */}
           <div className="mt-16 pt-10 border-t border-sand/60">
             <p className="text-[12px] tracking-[0.15em] text-stone/60 font-light text-center">
-              Luxosa — Via Cavour 1, Messina — <span className="text-anthracite/40">[privacy@luxosa.it — da definire]</span>
+              Luxosa — Via Cavour 1, Messina — <span className="text-anthracite/55">[privacy@luxosa.it — da definire]</span>
             </p>
           </div>
         </div>

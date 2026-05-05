@@ -105,14 +105,14 @@ function PercorsoRow({ percorso, index }: { percorso: typeof percorsi[0]; index:
             {/* Intro paragraphs */}
             <div className="space-y-4">
               {percorso.intro.map((p, i) => (
-                <p key={i} className="text-[16px] md:text-[17px] leading-[1.9] text-anthracite/80 font-light">
+                <p key={i} className="text-[16px] md:text-[17px] leading-[1.9] text-anthracite/95 font-light">
                   {p}
                 </p>
               ))}
             </div>
 
             {/* Desc */}
-            <p className="text-[15px] leading-[1.85] text-anthracite/60 font-light mt-6 italic">
+            <p className="text-[15px] leading-[1.85] text-anthracite/75 font-light mt-6 italic">
               {percorso.desc}
             </p>
           </div>

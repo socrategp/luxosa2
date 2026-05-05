@@ -117,7 +117,7 @@ function PillarSection() {
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-4 leading-snug tracking-wide">
                 {p.title}
               </h3>
-              <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/60 font-light">
+              <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/75 font-light">
                 {p.text}
               </p>
             </motion.div>
@@ -197,14 +197,14 @@ function TestimonialsCarousel() {
             <button
               onClick={prev}
               aria-label="Precedente"
-              className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/40 hover:text-ivory/80 hover:border-ivory/30 transition-colors duration-400"
+              className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400"
             >
               <ChevronLeft size={16} strokeWidth={1.2} />
             </button>
             <button
               onClick={next}
               aria-label="Successiva"
-              className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/40 hover:text-ivory/80 hover:border-ivory/30 transition-colors duration-400"
+              className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400"
             >
               <ChevronRight size={16} strokeWidth={1.2} />
             </button>
@@ -251,13 +251,13 @@ function TestimonialsCarousel() {
                         {t.percorso}
                       </span>
                       <div className="h-[1px] flex-1 bg-ivory/10" />
-                      <span className="text-[9px] tracking-[0.25em] uppercase text-ivory/20 font-light">
+                      <span className="text-[9px] tracking-[0.25em] uppercase text-ivory/35 font-light">
                         {t.valore}
                       </span>
                     </div>
 
                     {/* Quote */}
-                    <p className="font-serif text-[18px] md:text-[20px] lg:text-[21px] italic font-light leading-[1.8] text-ivory/70 mb-10">
+                    <p className="font-serif text-[18px] md:text-[20px] lg:text-[21px] italic font-light leading-[1.8] text-ivory/85 mb-10">
                       "{t.quote}"
                     </p>
 
@@ -265,10 +265,10 @@ function TestimonialsCarousel() {
                     <div className="flex items-center gap-4">
                       <div className="h-[1px] w-6 bg-brass-light/30 flex-shrink-0" />
                       <div>
-                        <p className="text-[12px] tracking-[0.18em] uppercase text-ivory/70 font-light">
+                        <p className="text-[12px] tracking-[0.18em] uppercase text-ivory/85 font-light">
                           {t.name}
                         </p>
-                        <p className="text-[11px] text-ivory/50 font-light mt-0.5 tracking-wide">
+                        <p className="text-[11px] text-ivory/65 font-light mt-0.5 tracking-wide">
                           {t.role}
                         </p>
                       </div>

@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+﻿import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 interface PageHeroProps {
@@ -64,7 +64,7 @@ export default function PageHero({ label, title, subtitle, image, video }: PageH
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.65 }}
-              className="mt-5 text-white/60 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
+              className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
             >
               {subtitle}
             </motion.p>

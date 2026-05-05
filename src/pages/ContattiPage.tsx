@@ -1,4 +1,4 @@
-import PageHero from '../components/PageHero';
+﻿import PageHero from '../components/PageHero';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Send } from 'lucide-react';
@@ -23,8 +23,8 @@ function ContactMain() {
     setSubmitted(true);
   };
 
-  const inputClass = "w-full bg-transparent border-b border-sand/60 py-3 text-[17px] font-light text-anthracite placeholder:text-anthracite/30 focus:outline-none focus:border-brass/60 transition-colors duration-400";
-  const labelClass = "block text-[10px] tracking-[0.25em] uppercase text-anthracite/40 font-light mb-2";
+  const inputClass = "w-full bg-transparent border-b border-sand/60 py-3 text-[17px] font-light text-anthracite placeholder:text-anthracite/45 focus:outline-none focus:border-brass/60 transition-colors duration-400";
+  const labelClass = "block text-[10px] tracking-[0.25em] uppercase text-anthracite/55 font-light mb-2";
 
   return (
     <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
@@ -41,7 +41,7 @@ function ContactMain() {
             >
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Modulo di prenotazione</span>
               <div className="h-[1px] w-10 bg-brass mt-4 mb-6" />
-              <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light">Compila i campi qui sotto. Risponderemo entro 24 ore.</p>
+              <p className="text-[17px] leading-[1.8] text-anthracite/75 font-light">Compila i campi qui sotto. Risponderemo entro 24 ore.</p>
             </motion.div>
 
             {submitted ? (
@@ -53,7 +53,7 @@ function ContactMain() {
               >
                 <div className="h-[1px] w-8 bg-brass mb-6" />
                 <p className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-4">Grazie.</p>
-                <p className="text-[17px] leading-[1.8] text-anthracite/65 font-light">Richiesta ricevuta. Risponderemo entro 24 ore.</p>
+                <p className="text-[17px] leading-[1.8] text-anthracite/80 font-light">Richiesta ricevuta. Risponderemo entro 24 ore.</p>
               </motion.div>
             ) : (
               <motion.form
@@ -97,7 +97,7 @@ function ContactMain() {
                 </div>
 
                 <div>
-                  <label className={labelClass}>Preferenza giorno/orario <span className="normal-case text-anthracite/30">(non vincolante)</span></label>
+                  <label className={labelClass}>Preferenza giorno/orario <span className="normal-case text-anthracite/45">(non vincolante)</span></label>
                   <input type="text" placeholder="Es. martedì mattina, venerdì pomeriggio" className={inputClass} value={form.preferenza} onChange={e => setForm({ ...form, preferenza: e.target.value })} />
                 </div>
 
@@ -125,12 +125,12 @@ function ContactMain() {
             <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Canali di contatto</span>
             <div className="h-[1px] w-10 bg-brass mt-4 mb-10" />
 
-            <p className="text-[17px] leading-[1.8] text-anthracite/50 font-light italic">
+            <p className="text-[17px] leading-[1.8] text-anthracite/65 font-light italic">
               I canali di contatto saranno disponibili a breve.
             </p>
 
             <div className="mt-12 border-t border-sand/30 pt-8">
-              <p className="font-serif text-[18px] md:text-[20px] italic text-anthracite/50 font-light leading-[1.6]">
+              <p className="font-serif text-[18px] md:text-[20px] italic text-anthracite/65 font-light leading-[1.6]">
                 "La prima consulenza è il momento dell'ascolto, dell'osservazione, della comprensione."
               </p>
             </div>
@@ -158,7 +158,7 @@ function ContactClose() {
           initial={{ opacity: 0, y: 25 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-          className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light text-ivory/85 leading-[1.2]"
+          className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light text-ivory/95 leading-[1.2]"
         >
           Non sei una prenotazione.<br />
           Sei l'inizio di un percorso.

@@ -1,4 +1,4 @@
-// ═══════════════════════════════════════════════════════════════
+﻿// ═══════════════════════════════════════════════════════════════
 // LUXOSA — LUXOSA TEST v2.0
 // Quiz orientativo fullscreen — 10-12 domande con ramificazione
 // ═══════════════════════════════════════════════════════════════
@@ -1413,11 +1413,11 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
       <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-2">
         Scopri il tuo percorso ideale
       </h2>
-      <p className="text-[17px] leading-[1.8] text-anthracite/55 font-light mb-8">
+      <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-8">
         Rispondi a poche domande sul tuo capello, sulla tua cute e sulle tue abitudini. In pochi minuti riceverai un suggerimento personalizzato.
       </p>
 
-      <div className="border border-sand/50 p-6 md:p-8 bg-ecru/20 mb-8 space-y-4 text-[16px] leading-[1.85] text-anthracite/65 font-light">
+      <div className="border border-sand/50 p-6 md:p-8 bg-ecru/20 mb-8 space-y-4 text-[16px] leading-[1.85] text-anthracite/80 font-light">
         <p>
           <strong className="text-charcoal/80 font-normal">IMPORTANTE:</strong> Il risultato di questo test ha valore esclusivamente orientativo e non costituisce in alcun modo una diagnosi medica, tricologica o dermatologica. La valutazione definitiva avviene esclusivamente in sede, durante la consulenza professionale con la tua professionista Luxosa.
         </p>
@@ -1443,7 +1443,7 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
         }`}>
           {accepted && <Check size={11} strokeWidth={2.5} className="text-ivory" />}
         </div>
-        <span className="text-[16px] leading-[1.7] text-anthracite/65 font-light">
+        <span className="text-[16px] leading-[1.7] text-anthracite/80 font-light">
           Ho letto e accetto le condizioni sopra indicate. *
         </span>
       </button>
@@ -1454,7 +1454,7 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
         className={`inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase font-light px-10 py-4 transition-all duration-500 ${
           accepted
             ? 'relative overflow-hidden group bg-charcoal text-ivory cursor-pointer'
-            : 'bg-anthracite/10 text-anthracite/25 cursor-not-allowed'
+            : 'bg-anthracite/10 text-anthracite/40 cursor-not-allowed'
         }`}
       >
         {accepted && (
@@ -1560,7 +1560,7 @@ function OptionCard({
                 {opt.text}
               </p>
               {opt.subtext && (
-                <p className="mt-0.5 text-[10px] text-anthracite/50 font-light leading-snug">{opt.subtext}</p>
+                <p className="mt-0.5 text-[10px] text-anthracite/65 font-light leading-snug">{opt.subtext}</p>
               )}
             </div>
           </>
@@ -1574,7 +1574,7 @@ function OptionCard({
               {opt.text}
             </p>
             {opt.subtext && (
-              <p className="mt-2 text-[10px] md:text-[12px] leading-[1.5] text-anthracite/40 font-light">{opt.subtext}</p>
+              <p className="mt-2 text-[10px] md:text-[12px] leading-[1.5] text-anthracite/55 font-light">{opt.subtext}</p>
             )}
           </div>
         )}
@@ -1632,7 +1632,7 @@ function QuizContent({
           {q.question}
         </h2>
         {q.subtitle && (
-          <p className="text-[12px] md:text-[16px] text-anthracite/40 font-light italic">{q.subtitle}</p>
+          <p className="text-[12px] md:text-[16px] text-anthracite/55 font-light italic">{q.subtitle}</p>
         )}
         <div className="w-8 h-[1px] bg-brass/30 mx-auto mt-5" />
       </div>
@@ -1645,10 +1645,10 @@ function QuizContent({
             onChange={e => onTextChange(q.id, e.target.value)}
             maxLength={500}
             placeholder="Scrivi qui liberamente…"
-            className="w-full h-36 md:h-44 bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/25"
+            className="w-full h-36 md:h-44 bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/95 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/40"
           />
           <div className="text-right mt-1.5">
-            <span className="text-[11px] text-anthracite/25 font-light">{textValue.length}/500</span>
+            <span className="text-[11px] text-anthracite/40 font-light">{textValue.length}/500</span>
           </div>
           <div className="mt-8 text-center">
             <ContinuaButton onClick={onContinue} enabled />
@@ -1690,7 +1690,7 @@ function ContinuaButton({ onClick, enabled }: { onClick: () => void; enabled: bo
       onClick={enabled ? onClick : undefined}
       disabled={!enabled}
       className={`relative overflow-hidden group inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase font-light px-10 py-4 transition-all duration-500 ${
-        enabled ? 'bg-charcoal text-ivory cursor-pointer' : 'bg-anthracite/10 text-anthracite/25 cursor-not-allowed'
+        enabled ? 'bg-charcoal text-ivory cursor-pointer' : 'bg-anthracite/10 text-anthracite/40 cursor-not-allowed'
       }`}
     >
       {enabled && (
@@ -1730,7 +1730,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
     onSubmit({ nome: nome.trim(), email: email.trim(), whatsapp: phone });
   };
 
-  const inputClass = 'w-full bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/80 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/28';
+  const inputClass = 'w-full bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/95 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/43';
 
   return (
     <motion.div
@@ -1751,7 +1751,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
         <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">
           Ricevi il tuo risultato.
         </h2>
-        <p className="text-[17px] leading-[1.8] text-anthracite/55 font-light mb-10">
+        <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-10">
           Per ricevere il tuo risultato personalizzato e permetterci di contattarti per la consulenza gratuita in sede, lasciaci i tuoi dati.
         </p>
 
@@ -1878,7 +1878,7 @@ function ResultScreen({
         {/* 2 — Condizione di partenza */}
         <div className="mb-10 border-t border-sand/35 pt-8">
           <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Condizione di partenza</span>
-          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light">{conditionSummary}</p>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light">{conditionSummary}</p>
         </div>
 
         {/* 3 — Segnali principali */}
@@ -1894,7 +1894,7 @@ function ResultScreen({
                 className="flex items-start gap-3"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[9px] flex-shrink-0" />
-                <p className="text-[16px] md:text-[17px] leading-[1.75] text-anthracite/65 font-light">{signal}</p>
+                <p className="text-[16px] md:text-[17px] leading-[1.75] text-anthracite/80 font-light">{signal}</p>
               </motion.li>
             ))}
           </ul>
@@ -1907,8 +1907,8 @@ function ResultScreen({
             attention === 'prioritaria'
               ? 'bg-brass/10 text-brass-muted border border-brass/30'
               : attention === 'mirata'
-              ? 'bg-ecru text-anthracite/55 border border-sand/50'
-              : 'bg-ecru/40 text-anthracite/40 border border-sand/30'
+              ? 'bg-ecru text-anthracite/70 border border-sand/50'
+              : 'bg-ecru/40 text-anthracite/55 border border-sand/30'
           }`}>
             {attentionLabels[attention]}
           </span>
@@ -1917,13 +1917,13 @@ function ResultScreen({
         {/* 5 — La direzione */}
         <div className="mb-10 border-t border-sand/35 pt-8">
           <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">La direzione</span>
-          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/65 font-light">{desiredOutcome}</p>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light">{desiredOutcome}</p>
         </div>
 
         {/* 6 — Perché questo percorso */}
         <div className="mb-10 -mx-6 md:-mx-10 px-6 md:px-10 py-8 md:py-10 bg-ecru/25 border-t border-b border-sand/30">
           <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Perché questo percorso</span>
-          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">{percorsoRationale}</p>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">{percorsoRationale}</p>
         </div>
 
         {/* 7 — Esperienze suggerite */}
@@ -1942,8 +1942,8 @@ function ResultScreen({
                   <span className="w-1.5 h-1.5 rounded-full bg-brass/60 mt-[8px] flex-shrink-0" />
                   <div>
                     <h4 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-1">{item.es.nome}</h4>
-                    <p className="text-[12px] leading-[1.6] text-anthracite/40 font-light mb-3">{item.es.sottotitolo}</p>
-                    <p className="text-[15px] md:text-[16px] leading-[1.75] text-anthracite/60 font-light italic">{item.perche}</p>
+                    <p className="text-[12px] leading-[1.6] text-anthracite/55 font-light mb-3">{item.es.sottotitolo}</p>
+                    <p className="text-[15px] md:text-[16px] leading-[1.75] text-anthracite/75 font-light italic">{item.perche}</p>
                   </div>
                 </div>
               </motion.div>
@@ -1958,7 +1958,7 @@ function ResultScreen({
             {consultationFocus.map((point, i) => (
               <li key={i} className="flex items-start gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-sand mt-[9px] flex-shrink-0" />
-                <p className="text-[15px] md:text-[16px] leading-[1.75] text-anthracite/60 font-light">{point}</p>
+                <p className="text-[15px] md:text-[16px] leading-[1.75] text-anthracite/75 font-light">{point}</p>
               </li>
             ))}
           </ul>
@@ -1974,14 +1974,14 @@ function ResultScreen({
           >
             <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Dal tuo racconto</span>
             <blockquote className="border-l-[2px] border-brass/30 pl-5">
-              <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/55 font-light italic">«{d10Note}»</p>
+              <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light italic">«{d10Note}»</p>
             </blockquote>
           </motion.div>
         )}
 
         {/* 10 — Chiusura */}
         <div className="mb-12 border-t border-sand/35 pt-8">
-          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">{closing}</p>
+          <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">{closing}</p>
         </div>
 
         {/* Percorso secondario */}
@@ -1992,7 +1992,7 @@ function ResultScreen({
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mb-10 p-5 border border-brass/20 bg-brass/5"
           >
-            <p className="text-[13px] leading-[1.75] text-anthracite/55 font-light">
+            <p className="text-[13px] leading-[1.75] text-anthracite/70 font-light">
               La consulenza potrebbe rivelare un'affinità anche con{' '}
               <strong className="text-charcoal/75 font-normal">{PUBLIC_PERCORSO_NAMES[secondPub]}</strong>
               . La lettura in presenza definirà la direzione più coerente.
@@ -2014,14 +2014,14 @@ function ResultScreen({
           </button>
           <button
             onClick={onReset}
-            className="text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 border border-anthracite/15 px-8 py-5 hover:text-anthracite/70 hover:border-anthracite/25 transition-all duration-300"
+            className="text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/50 border border-anthracite/15 px-8 py-5 hover:text-anthracite/85 hover:border-anthracite/25 transition-all duration-300"
           >
             Ricomincia
           </button>
         </div>
 
         {/* Disclaimer */}
-        <p className="mt-10 text-[11px] leading-[1.7] text-anthracite/28 font-light italic text-center max-w-xl mx-auto">
+        <p className="mt-10 text-[11px] leading-[1.7] text-anthracite/43 font-light italic text-center max-w-xl mx-auto">
           {REPORT_DISCLAIMER}
         </p>
       </div>
@@ -2044,14 +2044,14 @@ function ResultScreen({
             </p>
 
             {/* Sede */}
-            <p className="text-[11px] tracking-[0.2em] uppercase text-anthracite/50 font-light mb-2">
+            <p className="text-[11px] tracking-[0.2em] uppercase text-anthracite/65 font-light mb-2">
               Scegli la sede
             </p>
             <div className="relative mb-8">
               <select
                 value={selectedLocationId}
                 onChange={(e) => setSelectedLocationId(e.target.value as typeof LUXOSA_LOCATIONS[number]['id'])}
-                className="w-full appearance-none px-5 py-3 border border-sand/60 bg-ivory text-[15px] font-light text-anthracite/80 focus:outline-none focus:border-brass/50 cursor-pointer"
+                className="w-full appearance-none px-5 py-3 border border-sand/60 bg-ivory text-[15px] font-light text-anthracite/95 focus:outline-none focus:border-brass/50 cursor-pointer"
               >
                 {LUXOSA_LOCATIONS.map(l => (
                   <option key={l.id} value={l.id}>{l.label}</option>
@@ -2072,7 +2072,7 @@ function ResultScreen({
                   className={`w-full text-left px-5 py-4 border text-[15px] font-light transition-all duration-300 ${
                     selectedFascia === fascia
                       ? 'border-brass/60 bg-ecru text-anthracite'
-                      : 'border-sand/60 text-anthracite/70 hover:border-brass/40 hover:bg-ecru/40'
+                      : 'border-sand/60 text-anthracite/85 hover:border-brass/40 hover:bg-ecru/40'
                   }`}
                 >
                   {fascia}
@@ -2094,7 +2094,7 @@ function ResultScreen({
               className={`mt-6 w-full py-4 text-[12px] tracking-[0.2em] uppercase font-light transition-all duration-300 ${
                 selectedFascia
                   ? 'bg-charcoal text-ivory hover:bg-deep cursor-pointer'
-                  : 'bg-sand/40 text-anthracite/30 cursor-not-allowed'
+                  : 'bg-sand/40 text-anthracite/45 cursor-not-allowed'
               }`}
             >
               Invia
@@ -2102,7 +2102,7 @@ function ResultScreen({
 
             <button
               onClick={() => { setShowTimePicker(false); setSelectedFascia(null); }}
-              className="mt-3 w-full text-center text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/35 hover:text-anthracite/60 transition-colors duration-300"
+              className="mt-3 w-full text-center text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/50 hover:text-anthracite/75 transition-colors duration-300"
             >
               Annulla
             </button>
@@ -2218,10 +2218,10 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
                     transition={{ duration: 0.6, ease: premiumEase }}
                   />
                 </div>
-                <p className="text-[8px] text-anthracite/25 font-light mt-1">{step + 1} di {totalSteps}</p>
+                <p className="text-[8px] text-anthracite/40 font-light mt-1">{step + 1} di {totalSteps}</p>
               </div>
             ) : (
-              <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/35">
+              <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/50">
                 {screen === 'result' ? 'Luxosa Test · Orientamento personalizzato' : screen === 'form' ? 'Ultimo passo' : ''}
               </span>
             )}
@@ -2232,7 +2232,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
             <button
               onClick={onReset}
               aria-label="Chiudi"
-              className="group flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-anthracite/30 hover:text-anthracite transition-colors duration-300 outline-none"
+              className="group flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-anthracite/45 hover:text-anthracite transition-colors duration-300 outline-none"
             >
               <span className="hidden sm:inline font-light">Chiudi</span>
               <div className="w-8 h-8 border border-sand/60 rounded-full flex items-center justify-center group-hover:border-charcoal group-hover:bg-charcoal group-hover:text-ivory transition-all duration-400">

@@ -1,4 +1,4 @@
-import PageHero from '../components/PageHero';
+﻿import PageHero from '../components/PageHero';
 import Space from '../components/Space';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
@@ -60,7 +60,7 @@ function SediPrincipi() {
               transition={{ duration: 1, ease: premiumEase, delay: 0.15 + i * 0.1 }}
             >
               <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-3 tracking-wide">{p.title}</h3>
-              <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/60 font-light">{p.text}</p>
+              <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/75 font-light">{p.text}</p>
             </motion.div>
           ))}
         </div>
@@ -102,7 +102,7 @@ function SedeFlagship() {
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.3 }}
               className="mt-8 space-y-4"
             >
-              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/70 font-light">
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">
                 Luxosa si trova a Messina, in zona Cavour.
                 Questo spazio è stato scelto perché riflette il metodo Luxosa: raccolto, intenzionale, curato nei dettagli. Non grande per impressionare. Esatto per accogliere.
               </p>
@@ -140,7 +140,7 @@ function SedeFlagship() {
               className="w-full h-full object-cover object-left transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out"
             />
             <div className="absolute bottom-4 left-5">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-ivory/50 font-light">© Messina — Via Cavour</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase text-ivory/65 font-light">© Messina — Via Cavour</span>
             </div>
           </motion.div>
         </div>
@@ -166,7 +166,7 @@ function VisioneReplicabile() {
           initial={{ opacity: 0, y: 25 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-          className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light text-ivory/85 leading-[1.12]"
+          className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light text-ivory/95 leading-[1.12]"
         >
           Una visione pensata<br />per crescere.
         </motion.h2>
@@ -174,7 +174,7 @@ function VisioneReplicabile() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
-          className="mt-8 text-[18px] leading-[1.85] text-ivory/45 font-light max-w-xl mx-auto"
+          className="mt-8 text-[18px] leading-[1.85] text-ivory/60 font-light max-w-xl mx-auto"
         >
           Luxosa nasce con un sistema replicabile. Ogni nuova sede sarà un'estensione fedele del metodo, della qualità e dell'esperienza. La coerenza è il fondamento della crescita.
         </motion.p>

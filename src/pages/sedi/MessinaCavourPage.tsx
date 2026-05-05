@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+﻿import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, ArrowRight, ArrowLeft, Ear, Search, Fingerprint, Shield, Sparkles, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -23,10 +23,10 @@ function MCHero() {
             <MapPin size={14} strokeWidth={1.3} className="text-brass-light" />
             <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">Messina — Via Cavour</span>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[52px] lg:text-[64px] text-white font-light leading-[1.08] tracking-[0.02em] max-w-3xl">
+          <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
             Luxosa<br />Messina Cavour.
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/60 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">
             Un luogo esclusivo nel cuore della città in cui competenza, metodo e accoglienza si incontrano.
           </motion.p>
         </div>
@@ -66,13 +66,13 @@ function MCAbout() {
               Un punto di riferimento<br />per la cura evoluta.
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/95 font-light">
                 A Messina Cavour, Luxosa prende forma nella sua espressione più fedele. Non come un salone costruito per impressionare, ma come uno spazio pensato per lavorare bene: accogliere con misura, osservare con attenzione, curare con metodo.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/95 font-light">
                 Qui ogni dettaglio nasce da una scelta precisa. La luce, i materiali, il ritmo, l'ordine, il comfort. Tutto è progettato per creare le condizioni giuste alla consulenza, alla lettura, al trattamento e alla continuità.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/80 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/95 font-light">
                 Messina Cavour non è solo un indirizzo. È il luogo in cui una donna entra e comprende, fin dai primi minuti, che non sarà trattata come una cliente tra tante.
               </p>
             </motion.div>
@@ -152,8 +152,8 @@ function MCMethod() {
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Il Metodo Luxosa<br />a Messina.</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[19px] leading-[1.8] text-anthracite/70 font-light">Il Metodo Luxosa viene applicato con lo stesso rigore e la stessa sensibilità in ogni sede.</motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Il Metodo Luxosa a Messina.</motion.h2>
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[19px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">Il Metodo Luxosa viene applicato con lo stesso rigore e la stessa sensibilità in ogni sede.</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((s, i) => (
@@ -164,7 +164,7 @@ function MCMethod() {
                 </div>
                 <div>
                   <h3 className="font-serif text-[20px] md:text-[22px] font-light text-charcoal mb-2 tracking-wide">{s.title}</h3>
-                  <p className="text-[17px] leading-[1.75] text-anthracite/60 font-light">{s.text}</p>
+                  <p className="text-[17px] leading-[1.75] text-anthracite/75 font-light">{s.text}</p>
                 </div>
               </div>
             </motion.div>
@@ -191,10 +191,10 @@ function MCTeam() {
               Lucia Cotugno
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/65 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/80 font-light">
                 Lucia Cotugno guida la sede Luxosa di Messina Cavour custodendone il metodo, la qualità dell'esperienza e la coerenza operativa. Il suo ruolo è garantire che ogni donna trovi non soltanto accoglienza e competenza, ma una presa in carico reale, ordinata e continua nel tempo.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/65 font-light">
+              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/80 font-light">
                 Nella sede supervisiona l'esperienza, sostiene il percorso della cliente e presidia gli standard che rendono Luxosa riconoscibile: ascolto autentico, metodo, misura, attenzione al dettaglio e cura responsabile.
               </p>
             </motion.div>
@@ -234,14 +234,14 @@ function MCServices() {
         <div className="max-w-2xl">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Percorsi ed Esperienze</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/70 font-light">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/85 font-light">
             Tutti i percorsi e le esperienze disponibili presso questa sede sono illustrati nelle sezioni dedicate.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }} className="mt-10 flex flex-col sm:flex-row gap-8">
-            <Link to="/i-percorsi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/60 font-light hover:text-anthracite transition-colors duration-500">
+            <Link to="/i-percorsi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/75 font-light hover:text-anthracite transition-colors duration-500">
               I Percorsi <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </Link>
-            <Link to="/esperienza" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/60 font-light hover:text-anthracite transition-colors duration-500">
+            <Link to="/esperienza" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/75 font-light hover:text-anthracite transition-colors duration-500">
               Le Esperienze <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </Link>
           </motion.div>
@@ -363,10 +363,10 @@ function MCTestimonials() {
             <div className="h-[1px] w-10 bg-brass-light/30 mt-4" />
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <button onClick={prev} aria-label="Precedente" className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/40 hover:text-ivory/80 hover:border-ivory/30 transition-colors duration-400">
+            <button onClick={prev} aria-label="Precedente" className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400">
               <ChevronLeft size={16} strokeWidth={1.2} />
             </button>
-            <button onClick={next} aria-label="Successiva" className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/40 hover:text-ivory/80 hover:border-ivory/30 transition-colors duration-400">
+            <button onClick={next} aria-label="Successiva" className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400">
               <ChevronRight size={16} strokeWidth={1.2} />
             </button>
           </div>
@@ -400,14 +400,14 @@ function MCTestimonials() {
                     <div className="flex items-center gap-3 mb-8">
                       <span className="text-[9px] tracking-[0.35em] uppercase text-brass-light/50 font-light">{t.percorso}</span>
                       <div className="h-[1px] flex-1 bg-ivory/10" />
-                      <span className="text-[9px] tracking-[0.25em] uppercase text-ivory/20 font-light">{t.valore}</span>
+                      <span className="text-[9px] tracking-[0.25em] uppercase text-ivory/35 font-light">{t.valore}</span>
                     </div>
-                    <p className="font-serif text-[18px] md:text-[20px] lg:text-[21px] italic font-light leading-[1.8] text-ivory/70 mb-10">"{t.quote}"</p>
+                    <p className="font-serif text-[18px] md:text-[20px] lg:text-[21px] italic font-light leading-[1.8] text-ivory/85 mb-10">"{t.quote}"</p>
                     <div className="flex items-center gap-4">
                       <div className="h-[1px] w-6 bg-brass-light/30 flex-shrink-0" />
                       <div>
-                        <p className="text-[12px] tracking-[0.18em] uppercase text-ivory/70 font-light">{t.name}</p>
-                        <p className="text-[11px] text-ivory/30 font-light mt-0.5 tracking-wide">{t.role}</p>
+                        <p className="text-[12px] tracking-[0.18em] uppercase text-ivory/85 font-light">{t.name}</p>
+                        <p className="text-[11px] text-ivory/45 font-light mt-0.5 tracking-wide">{t.role}</p>
                       </div>
                     </div>
                   </motion.div>
@@ -464,7 +464,7 @@ function MCContact() {
                 <MapPin size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="text-[18px] font-light text-charcoal">Via Cavour, 1</p>
-                  <p className="text-[17px] font-light text-anthracite/60">98122 Messina (ME), Italia</p>
+                  <p className="text-[17px] font-light text-anthracite/75">98122 Messina (ME), Italia</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -503,12 +503,12 @@ function MCContact() {
           <div className="lg:pt-16">
             <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="bg-charcoal text-ivory p-10 md:p-12 mb-8">
               <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">Prenoti una consulenza</h3>
-              <p className="text-[17px] md:text-[18px] leading-[1.8] text-ivory/55 font-light mb-8">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.8] text-ivory/70 font-light mb-8">La prima consulenza è il momento in cui ascoltiamo, osserviamo e comprendiamo. È il primo passo di un percorso di cura pensato interamente per Lei.</p>
               <div className="space-y-4">
                 <Link to="/contatti" className="group flex items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-brass-light transition-all duration-500 w-full">
                   Prenota online <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
                 </Link>
-                <a href="tel:+390902403220" className="flex items-center justify-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/70 font-light border border-ivory/20 px-8 py-4 hover:border-ivory/40 hover:text-ivory transition-all duration-500 w-full">
+                <a href="tel:+390902403220" className="flex items-center justify-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/85 font-light border border-ivory/20 px-8 py-4 hover:border-ivory/40 hover:text-ivory transition-all duration-500 w-full">
                   <Phone size={14} strokeWidth={1.5} /> Chiama ora
                 </a>
               </div>
@@ -516,7 +516,7 @@ function MCContact() {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="bg-ecru/50 p-8 md:p-10">
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-brass-muted font-light mb-4">Informazioni Utili</h4>
-              <div className="space-y-4 text-[17px] font-light text-anthracite/65">
+              <div className="space-y-4 text-[17px] font-light text-anthracite/80">
                 <p>• La consulenza iniziale base ha una durata di circa 15/20 minuti</p>
                 <p>• Si consiglia di arrivare 5 minuti prima dell'appuntamento</p>
                 <p>• Accessibilità garantita per persone con mobilità ridotta</p>

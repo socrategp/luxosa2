@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion';
+﻿import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { premiumEase } from '../lib/animations';
@@ -65,7 +65,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/55 font-light"
+            className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/70 font-light"
           >
             Non le scegli come si sfoglia un menu. Le scopri insieme a noi, nel contesto del percorso che stai costruendo.
           </motion.p>
@@ -103,7 +103,7 @@ export default function Experience() {
                   <div className="h-[1px] w-0 bg-brass-light group-hover:w-6 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] mt-3" />
                 </div>
 
-                <p className="hidden lg:block absolute bottom-8 left-8 right-8 text-[15px] leading-[1.75] text-ivory/80 font-light opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] z-10">
+                <p className="hidden lg:block absolute bottom-8 left-8 right-8 text-[15px] leading-[1.75] text-ivory/95 font-light opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0,1)] z-10">
                   {e.copy}
                 </p>
               </motion.div>

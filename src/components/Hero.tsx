@@ -54,7 +54,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
-            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-light mb-6 drop-shadow-md"
+            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-bold mb-6 drop-shadow-md"
           >
             La Maison
           </motion.p>
@@ -63,7 +63,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
-            className="font-serif text-[40px] md:text-[56px] lg:text-[68px] xl:text-[76px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
+            className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
           >
             Un luogo in cui<br />riconoscersi.
           </motion.h1>
@@ -72,7 +72,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
-            className="mt-6 md:mt-8 text-white/70 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
+            className="mt-6 md:mt-8 text-white/85 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
           >
             Luxosa è la maison dedicata alla cura evoluta di cute e capelli, dove bellezza, metodo e ascolto si incontrano per accompagnare ogni donna in un percorso personale.
           </motion.p>
@@ -91,7 +91,7 @@ export default function Hero() {
             </Link>
             <Link
               to="/i-percorsi"
-              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/80 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500"
+              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/95 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500"
             >
               Esplora i Percorsi
             </Link>

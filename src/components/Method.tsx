@@ -301,7 +301,7 @@ export default function Method() {
 
                 {/* Phase description */}
                 <div className="space-y-5">
-                  <p className="text-[16px] md:text-[17px] lg:text-[17px] leading-[1.8] text-ivory/65 font-light">
+                  <p className="text-[16px] md:text-[17px] lg:text-[17px] leading-[1.8] text-ivory/80 font-light">
                     {fasi[phase].accade}
                   </p>
 
@@ -321,7 +321,7 @@ export default function Method() {
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.9 }}
           className="mt-20 md:mt-28 border-t border-brass-light/20 pt-10"
         >
-          <p className="font-serif text-[18px] md:text-[22px] italic text-ivory/50 font-light leading-[1.6] max-w-2xl">
+          <p className="font-serif text-[18px] md:text-[22px] italic text-ivory/65 font-light leading-[1.6] max-w-2xl">
             "Trasformazione non è un punto finale. È una soglia. Per questo Luxosa costruisce relazioni nel tempo, non appuntamenti isolati."
           </p>
         </motion.div>

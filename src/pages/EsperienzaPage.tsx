@@ -193,7 +193,7 @@ function EsperienzaCTA() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal"
+            className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal"
           >
             Non sai da dove iniziare?
           </motion.h2>
@@ -203,10 +203,10 @@ function EsperienzaCTA() {
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
             className="mt-8 space-y-4"
           >
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/85 font-light">
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
               Rispondi a poche domande sulla tua cute, il tuo capello, la tua storia e i tuoi obiettivi.
             </p>
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/85 font-light">
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
               In pochi minuti ti orienteremo verso il percorso Luxosa più adatto a te.
             </p>
             <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">

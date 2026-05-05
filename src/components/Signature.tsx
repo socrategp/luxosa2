@@ -59,7 +59,7 @@ export default function Signature() {
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
-            className="mt-6 text-[18px] md:text-[19px] leading-[1.8] text-anthracite/85 font-light"
+            className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light"
           >
             Pochi momenti, selezionati con cura. Ogni esperienza signature rappresenta l'espressione più alta del nostro metodo.
           </motion.p>

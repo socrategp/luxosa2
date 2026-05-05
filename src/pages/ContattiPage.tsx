@@ -158,7 +158,7 @@ function ContactClose() {
           initial={{ opacity: 0, y: 25 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-          className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light text-ivory/95 leading-[1.2]"
+          className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light text-ivory/95 leading-[1.2]"
         >
           Non sei una prenotazione.<br />
           Sei l'inizio di un percorso.

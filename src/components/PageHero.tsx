@@ -1,5 +1,6 @@
 ﻿import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import React from 'react';
 
 interface PageHeroProps {
   label: string;
@@ -7,9 +8,10 @@ interface PageHeroProps {
   subtitle?: string;
   image?: string;
   video?: string;
+  children?: React.ReactNode;
 }
 
-export default function PageHero({ label, title, subtitle, image, video }: PageHeroProps) {
+export default function PageHero({ label, title, subtitle, image, video, children }: PageHeroProps) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -68,6 +70,16 @@ export default function PageHero({ label, title, subtitle, image, video }: PageH
             >
               {subtitle}
             </motion.p>
+          )}
+          {children && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.85 }}
+              className="mt-8"
+            >
+              {children}
+            </motion.div>
           )}
         </div>
       </div>

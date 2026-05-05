@@ -62,17 +62,17 @@ function MCAbout() {
               <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">La Sede</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
               Un punto di riferimento<br />per la cura evoluta.
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/95 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
                 A Messina Cavour, Luxosa prende forma nella sua espressione più fedele. Non come un salone costruito per impressionare, ma come uno spazio pensato per lavorare bene: accogliere con misura, osservare con attenzione, curare con metodo.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/95 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
                 Qui ogni dettaglio nasce da una scelta precisa. La luce, i materiali, il ritmo, l'ordine, il comfort. Tutto è progettato per creare le condizioni giuste alla consulenza, alla lettura, al trattamento e alla continuità.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-anthracite/95 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
                 Messina Cavour non è solo un indirizzo. È il luogo in cui una donna entra e comprende, fin dai primi minuti, che non sarà trattata come una cliente tra tante.
               </p>
             </motion.div>
@@ -100,7 +100,7 @@ function MCSpace() {
         <div className="text-center max-w-2xl mx-auto mb-14 md:mb-20">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Lo Spazio</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">
             Progettato per accogliere,<br />proteggere, rigenerare.
           </motion.h2>
         </div>
@@ -152,8 +152,8 @@ function MCMethod() {
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-charcoal">Il Metodo Luxosa a Messina.</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[19px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">Il Metodo Luxosa viene applicato con lo stesso rigore e la stessa sensibilità in ogni sede.</motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">Il Metodo Luxosa a Messina.</motion.h2>
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">Il Metodo Luxosa viene applicato con lo stesso rigore e la stessa sensibilità in ogni sede.</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((s, i) => (
@@ -187,14 +187,14 @@ function MCTeam() {
           <div>
             <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">Master Responsabile</motion.span>
             <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.1] text-ivory">
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-ivory">
               Lucia Cotugno
             </motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/80 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">
                 Lucia Cotugno guida la sede Luxosa di Messina Cavour custodendone il metodo, la qualità dell'esperienza e la coerenza operativa. Il suo ruolo è garantire che ogni donna trovi non soltanto accoglienza e competenza, ma una presa in carico reale, ordinata e continua nel tempo.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.8] text-ivory/80 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">
                 Nella sede supervisiona l'esperienza, sostiene il percorso della cliente e presidia gli standard che rendono Luxosa riconoscibile: ascolto autentico, metodo, misura, attenzione al dettaglio e cura responsabile.
               </p>
             </motion.div>
@@ -234,7 +234,7 @@ function MCServices() {
         <div className="max-w-2xl">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Percorsi ed Esperienze</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/85 font-light">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
             Tutti i percorsi e le esperienze disponibili presso questa sede sono illustrati nelle sezioni dedicate.
           </motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.4 }} className="mt-10 flex flex-col sm:flex-row gap-8">

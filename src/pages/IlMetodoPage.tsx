@@ -153,7 +153,7 @@ function PrimoIncontro() {
               initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-              className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
+              className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
             >
               Il primo incontro.
             </motion.h2>
@@ -163,10 +163,10 @@ function PrimoIncontro() {
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
               className="mt-8 space-y-5"
             >
-              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/90 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
                 Il primo incontro in Luxosa è un momento di conoscenza approfondita. Non una valutazione rapida, ma il tempo necessario per ascoltare la storia, osservare il capello, capire le abitudini e chiarire dove si desidera arrivare.
               </p>
-              <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/90 font-light">
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
                 Da qui nasce la direzione del percorso. Ogni informazione rilevante viene custodita e aggiornata nel tempo, così che ogni seduta sia una continuazione, non un nuovo inizio.
               </p>
             </motion.div>
@@ -198,7 +198,7 @@ function MetodoCTA() {
     <section className="py-32 md:py-48 lg:py-64 bg-ivory-warm" ref={ref}>
       <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center">
         <motion.div initial={{ width: 0 }} animate={inView ? { width: 60 } : {}} transition={{ duration: 1.2, ease: premiumEase }} className="h-[1px] bg-brass mx-auto mb-12" />
-        <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal">
+        <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
           Prenota il primo<br />incontro.
         </motion.h2>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.4 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">

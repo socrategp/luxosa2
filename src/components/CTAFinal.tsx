@@ -71,7 +71,7 @@ export default function CTAFinal() {
           transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }}
           className="mt-16 pt-10 border-t border-sand/50"
         >
-          <p className="font-serif text-[20px] md:text-[19px] italic text-charcoal/50 font-light">
+          <p className="font-serif text-[20px] md:text-[20px] italic text-charcoal/50 font-light">
             Si affidi a un metodo di cura pensato per Lei.
           </p>
         </motion.div>

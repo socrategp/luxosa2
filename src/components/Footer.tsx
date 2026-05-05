@@ -118,7 +118,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-deep text-ivory/85 pt-20 pb-10">
+      <footer className="bg-deep text-ivory/60 pt-20 pb-10">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-16 border-b border-ivory/10">
 
@@ -133,7 +133,7 @@ export default function Footer() {
                   className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                 />
               </Link>
-              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/75">
+              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/60">
                 Maison di cura e bellezza<br />per cute e capelli.
               </p>
               <div className="mt-6 w-8 h-[1px] bg-brass/40" />
@@ -144,7 +144,7 @@ export default function Footer() {
 
             {/* Col 2 — Navigazione */}
             <div>
-              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/65 font-light mb-6">Navigazione</h4>
+              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">Navigazione</h4>
               <nav className="flex flex-col gap-3">
                 {[
                   { label: 'La Maison', href: '/' },
@@ -157,7 +157,7 @@ export default function Footer() {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="text-[16px] font-light text-ivory/60 hover:text-ivory/95 transition-colors duration-400 tracking-wide"
+                    className="text-[16px] font-light text-ivory/55 hover:text-ivory/90 transition-colors duration-400 tracking-wide"
                   >
                     {item.label}
                   </Link>
@@ -167,8 +167,8 @@ export default function Footer() {
 
             {/* Col 3 — Club Luxosa */}
             <div>
-              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/65 font-light mb-6">Club Luxosa</h4>
-              <p className="text-[16px] font-light text-ivory/75 leading-[1.8] mb-6">
+              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">Club Luxosa</h4>
+              <p className="text-[16px] font-light text-ivory/60 leading-[1.8] mb-6">
                 Un accesso riservato. Un riconoscimento che si guadagna nel tempo.
               </p>
               <div className="flex gap-2 mb-7">
@@ -183,7 +183,7 @@ export default function Footer() {
               </div>
               <button
                 onClick={() => setClubOpen(true)}
-                className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/70 hover:text-ivory/95 transition-colors duration-400 inline-flex items-center gap-2"
+                className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/55 hover:text-ivory/85 transition-colors duration-400 inline-flex items-center gap-2"
               >
                 Scopri il Club →
               </button>
@@ -194,10 +194,10 @@ export default function Footer() {
           </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] tracking-[0.15em] text-ivory/40 font-light">© 2026 Luxosa. Tutti i diritti riservati.</p>
+            <p className="text-[11px] tracking-[0.15em] text-ivory/35 font-light">© 2026 Luxosa. Tutti i diritti riservati.</p>
             <div className="flex gap-6">
-              <Link to="/privacy-policy" className="text-[11px] tracking-[0.1em] text-ivory/55 hover:text-ivory/75 font-light transition-colors duration-300">Privacy Policy</Link>
-              <Link to="/cookie-policy" className="text-[11px] tracking-[0.1em] text-ivory/55 hover:text-ivory/75 font-light transition-colors duration-300">Cookie Policy</Link>
+              <Link to="/privacy-policy" className="text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/75 font-light transition-colors duration-300">Privacy Policy</Link>
+              <Link to="/cookie-policy" className="text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/75 font-light transition-colors duration-300">Cookie Policy</Link>
             </div>
           </div>
         </div>

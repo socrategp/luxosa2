@@ -3,9 +3,34 @@ import Space from '../components/Space';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, MapPin } from 'lucide-react';
 
 import { premiumEase } from '../lib/animations';
+
+const SEDI = [
+  { label: 'Messina Cavour', to: '/sedi/messina-cavour', attiva: true },
+];
+
+function SediHeroCTA() {
+  return (
+    <div className="flex flex-col sm:flex-row items-start gap-3">
+      <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-light self-center sm:mr-2">
+        Sedi attive
+      </p>
+      {SEDI.filter(s => s.attiva).map(sede => (
+        <Link
+          key={sede.to}
+          to={sede.to}
+          className="group inline-flex items-center gap-2.5 border border-white/25 hover:border-brass-light/70 text-white/90 hover:text-white text-[11px] tracking-[0.2em] uppercase font-light px-6 py-3 transition-all duration-500"
+        >
+          <MapPin size={11} strokeWidth={1.5} className="text-brass-light/70 group-hover:text-brass-light transition-colors duration-500" />
+          {sede.label}
+          <ArrowRight size={11} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
+        </Link>
+      ))}
+    </div>
+  );
+}
 
 function SediManifesto() {
   const ref = useRef(null);
@@ -92,7 +117,7 @@ function SedeFlagship() {
               initial={{ opacity: 0, y: 25 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }}
-              className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-charcoal"
+              className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal"
             >
               Luxosa Messina Cavour
             </motion.h2>
@@ -166,7 +191,7 @@ function VisioneReplicabile() {
           initial={{ opacity: 0, y: 25 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-          className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light text-ivory/95 leading-[1.12]"
+          className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light text-ivory/95 leading-[1.12]"
         >
           Una visione pensata<br />per crescere.
         </motion.h2>
@@ -199,7 +224,9 @@ export default function SediPage() {
         title="Entrare in Luxosa inizia già prima di sedersi."
         subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
         video="/videos/hero_sedi_opt.mp4"
-      />
+      >
+        <SediHeroCTA />
+      </PageHero>
       <SediManifesto />
       <SediPrincipi />
       <Space />

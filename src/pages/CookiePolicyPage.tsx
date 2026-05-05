@@ -100,10 +100,10 @@ export default function CookiePolicyPage() {
 
           {/* Intro */}
           <div className="mb-14 pb-10 border-b border-sand/60">
-            <p className="text-[18px] md:text-[19px] leading-[1.85] text-anthracite/90 font-light">
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
               La presente Cookie Policy descrive le tipologie di cookie e tecnologie di tracciamento utilizzate dal sito web di Luxosa (di seguito "Sito"), con sede in Via Cavour 1, Messina, in conformità alla Direttiva 2009/136/CE (c.d. Cookie Law), al Regolamento (UE) 2016/679 (GDPR) e alle Linee Guida del Garante per la protezione dei dati personali.
             </p>
-            <p className="mt-5 text-[18px] md:text-[19px] leading-[1.85] text-anthracite/90 font-light">
+            <p className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
               Per informazioni più generali sul trattamento dei dati personali, si rimanda alla <strong className="font-normal text-anthracite/95">Privacy Policy</strong>.
             </p>
           </div>

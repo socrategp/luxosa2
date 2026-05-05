@@ -99,7 +99,7 @@ export default function LuxosaValuesRing() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
-            className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.08] text-charcoal"
+            className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.08] text-charcoal"
           >
             I valori che guidano<br />ogni nostro passo.
           </motion.h2>

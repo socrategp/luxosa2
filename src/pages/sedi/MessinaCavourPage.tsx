@@ -16,7 +16,7 @@ function MCHero() {
         <div className="absolute inset-0 bg-gradient-to-b from-deep/55 via-deep/30 to-deep/65" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/30 to-transparent" />
       </div>
-      <div className="relative h-full flex flex-col justify-end pb-20 md:pb-28">
+      <div className="relative h-full flex flex-col justify-end pb-20 md:pb-28 lg:pb-32">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
           <motion.div initial={{ width: 0 }} animate={{ width: 50 }} transition={{ duration: 1, delay: 0.2 }} className="h-[1px] bg-brass-light mb-6" />
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="flex items-center gap-2 mb-4">
@@ -29,10 +29,6 @@ function MCHero() {
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/60 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">
             Un luogo esclusivo nel cuore della città in cui competenza, metodo e accoglienza si incontrano.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.95 }} className="mt-8 flex flex-col sm:flex-row gap-4">
-            <a href="#mc-contatti" className="inline-flex items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-ecru px-8 py-4 transition-all duration-500">Prenota una consulenza</a>
-            <a href="#mc-metodo" className="inline-flex items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/80 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500">Scopri la sede</a>
-          </motion.div>
         </div>
       </div>
     </section>
@@ -263,56 +259,56 @@ const mcTestimonials = [
   {
     quote: 'Ho cambiato quattro saloni in cinque anni. Nessuno si ricordava che colore avevo fatto la volta prima, figuriamoci la mia storia. Da Luxosa la mia professionista conosce ogni centimetro della mia testa. Sa che il mio colore tende a ossidarsi sulle punte, sa che ho capelli misti, più porosi in alcune parti. Non devo rispiegare nulla ogni volta. Questa continuità per me vale più di qualsiasi tecnica o scena da tiktok.',
     name: 'Francesca M.',
-    role: 'Avvocato, Messina — 44 anni',
+    role: '44 anni',
     percorso: 'ColorLux',
     valore: 'Continuità professionale',
   },
   {
     quote: 'Gestisco un team di trenta persone. Non ho tempo da perdere, e non ho pazienza per chi improvvisa. Quando sono entrata da Luxosa la prima volta, mi hanno fatto un\'analisi che è durata venticinque minuti. Nessuno mi aveva mai fatto sedere così a lungo prima di toccarmi i capelli. Quel giorno ho capito la differenza tra un parrucchiere e un posto serio. Due percorsi dopo, il mio capello è un altro. Ma soprattutto io sono un\'altra quando mi guardo allo specchio la mattina.',
     name: 'Claudia T.',
-    role: 'Direttrice commerciale, Messina — 41 anni',
+    role: '41 anni',
     percorso: 'Rituale Luxosa',
     valore: 'Il Metodo',
   },
   {
     quote: 'Sono arrivata da Luxosa con i capelli distrutti. Decolorazioni fatte in casa, tinte da supermercato, una lisciatura che mi aveva bruciato le punte. Mi vergognavo. La prima cosa che mi hanno detto è stata: non ti preoccupare, ci lavoriamo. Nessun rimprovero, nessuno sguardo. Solo un piano chiaro per ricostruire quello che avevo rovinato. Ci sono voluti cinque mesi. Oggi ho i capelli più sani della mia vita adulta.',
     name: 'Serena R.',
-    role: 'Designer, Messina — 32 anni',
+    role: '32 anni',
     percorso: 'BenEssere',
     valore: 'Nessun giudizio',
   },
   {
     quote: 'Ho i ricci. Una vita a sentirmi dire di lisciarli, di domarli, di tenerli legati. Poi sono entrata da Luxosa e per la prima volta qualcuno mi ha detto: i tuoi ricci sono belli, ma lavorano contro la tua cute. Costruiamo un percorso che li valorizzi senza stressare niente. Non mi avevano mai parlato così dei miei capelli. Come se fossero una cosa seria. Perché lo sono.',
     name: 'Giulia S.',
-    role: 'Architetto, Messina — 29 anni',
+    role: '29 anni',
     percorso: 'EX·05 RicciOsa',
     valore: 'Progetto personale',
   },
   {
     quote: 'Ho capito la differenza tra salone e Luxosa quando mi hanno detto: il colore che vuoi richiede tre passaggi in due mesi. In qualsiasi altro posto me lo avrebbero fatto subito, in una seduta, bruciando tutto per accontentarmi. Qui hanno avuto il coraggio di dirmi no, non oggi. E quel no mi ha fatto più fiducia di mille sì.',
     name: 'Roberta I.',
-    role: "Architetto d'interni, Messina — 48 anni",
+    role: '48 anni',
     percorso: 'ColorLux',
     valore: 'Percorso, non appuntamento',
   },
   {
     quote: 'Come medico so che i risultati si ottengono con la costanza, non con l\'intervento singolo. Il metodo di Luxosa funziona esattamente così: non promette il miracolo in una seduta. Propone un percorso serio, con tappe, verifiche, adattamenti. In un anno i miei capelli si sono trasformati. Non per una singola cosa che hanno fatto. Per la somma di tutte le cose fatte bene, nel tempo.',
     name: 'Teresa P.',
-    role: 'Medico di base, Messina — 52 anni',
+    role: '52 anni',
     percorso: 'Rituale Luxosa',
     valore: 'Disciplina e costanza',
   },
   {
     quote: 'Sono una che vuole i numeri. Non mi basta che mi dicano sta migliorando. Quando da Luxosa mi hanno mostrato le immagini della mia cute prima e dopo quattro sedute, ho visto la differenza con i miei occhi. Non opinioni. Fatti. Per una come me abituata ai bilanci, questo approccio è stato decisivo. So esattamente a che punto sono e dove sto andando.',
     name: 'Giuseppina R.',
-    role: 'Commercialista, Messina — 53 anni',
+    role: '53 anni',
     percorso: 'BenEssere',
     valore: 'Risultato verificato',
   },
   {
     quote: 'Ho completato il mio primo percorso l\'anno scorso. Ero tentata di fermarmi, come faccio sempre: ottengo il risultato e poi smetto. La mia professionista mi ha spiegato con calma perché la continuità fa la differenza. Nessuna pressione. Solo chiarezza. Ho continuato, e sei mesi dopo i miei capelli sono migliori di quanto siano mai stati. Ho capito che la bellezza non si raggiunge. Si mantiene.',
     name: 'Concetta M.',
-    role: 'Ex dirigente scolastica, Messina — 58 anni',
+    role: '58 anni',
     percorso: 'Rituale Luxosa',
     valore: 'Costanza che trasforma',
   },
@@ -521,9 +517,8 @@ function MCContact() {
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="bg-ecru/50 p-8 md:p-10">
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-brass-muted font-light mb-4">Informazioni Utili</h4>
               <div className="space-y-4 text-[17px] font-light text-anthracite/65">
-                <p>• La consulenza iniziale ha una durata di circa 30 minuti</p>
+                <p>• La consulenza iniziale base ha una durata di circa 15/20 minuti</p>
                 <p>• Si consiglia di arrivare 5 minuti prima dell'appuntamento</p>
-                <p>• Parcheggio convenzionato nelle vicinanze</p>
                 <p>• Accessibilità garantita per persone con mobilità ridotta</p>
               </div>
             </motion.div>

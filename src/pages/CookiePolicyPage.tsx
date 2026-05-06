@@ -59,7 +59,7 @@ export default function CookiePolicyPage() {
   return (
     <>
       {/* Page header */}
-      <section className="bg-ecru/40 pt-40 pb-20 md:pt-48 md:pb-24">
+      <section className="bg-ivory-warm pt-40 pb-20 md:pt-48 md:pb-24">
         <div className="max-w-[800px] mx-auto px-6 md:px-10 lg:px-16">
           <motion.div
             initial={{ width: 0 }}

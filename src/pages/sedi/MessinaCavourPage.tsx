@@ -95,7 +95,7 @@ function MCSpace() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-spazio" className="py-28 md:py-40 lg:py-48 bg-ecru/50">
+    <section id="mc-spazio" className="py-28 md:py-40 lg:py-48 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-14 md:mb-20">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Lo Spazio</motion.span>
@@ -229,7 +229,7 @@ function MCServices() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-servizi" className="py-28 md:py-40 lg:py-48 bg-ivory-warm">
+    <section id="mc-servizi" className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="max-w-2xl">
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Percorsi ed Esperienze</motion.span>

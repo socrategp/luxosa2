@@ -172,7 +172,7 @@ function EsperienzaCTA() {
   const { openQuiz } = useQuiz();
 
   return (
-    <section className="py-32 md:py-48 lg:py-56 bg-ecru/30" ref={ref}>
+    <section className="py-32 md:py-48 lg:py-56 bg-ivory-warm" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="max-w-2xl">
           <motion.span

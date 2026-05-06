@@ -47,7 +47,7 @@ function PerChiE() {
   const inView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section className="py-32 md:py-48 lg:py-56 bg-ecru/40" ref={ref}>
+    <section className="py-32 md:py-48 lg:py-56 bg-ivory-warm" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <motion.div

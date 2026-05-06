@@ -1,5 +1,12 @@
 # React + TypeScript + Vite
 
+## Luxosa update note — 2026-05-07
+
+- Refined the authorized Luxosa page and section background colors.
+- Kept Luxosa Test logic, scoring, questions, results, and report unchanged.
+- Production build completed successfully after the background updates.
+- Lint was not addressed in this pass because the remaining lint issues are pre-existing and outside the scope of this intervention.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

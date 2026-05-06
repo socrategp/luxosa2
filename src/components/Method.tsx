@@ -321,7 +321,7 @@ export default function Method() {
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.9 }}
           className="mt-20 md:mt-28 border-t border-brass-light/20 pt-10"
         >
-          <p className="font-serif text-[18px] md:text-[22px] italic text-ivory/65 font-light leading-[1.6] max-w-2xl">
+          <p className="font-serif text-[19px] md:text-[23px] italic text-ivory/65 font-light leading-[1.6] text-center max-w-none">
             "Trasformazione non è un punto finale. È una soglia. Per questo Luxosa costruisce relazioni nel tempo, non appuntamenti isolati."
           </p>
         </motion.div>

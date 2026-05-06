@@ -3,34 +3,9 @@ import Space from '../components/Space';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 import { premiumEase } from '../lib/animations';
-
-const SEDI = [
-  { label: 'Messina Cavour', to: '/sedi/messina-cavour', attiva: true },
-];
-
-function SediHeroCTA() {
-  return (
-    <div className="flex flex-col sm:flex-row items-start gap-3">
-      <p className="text-[10px] tracking-[0.3em] uppercase text-white/50 font-light self-center sm:mr-2">
-        Sedi attive
-      </p>
-      {SEDI.filter(s => s.attiva).map(sede => (
-        <Link
-          key={sede.to}
-          to={sede.to}
-          className="group inline-flex items-center gap-2.5 border border-white/25 hover:border-brass-light/70 text-white/90 hover:text-white text-[11px] tracking-[0.2em] uppercase font-light px-6 py-3 transition-all duration-500"
-        >
-          <MapPin size={11} strokeWidth={1.5} className="text-brass-light/70 group-hover:text-brass-light transition-colors duration-500" />
-          {sede.label}
-          <ArrowRight size={11} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
-        </Link>
-      ))}
-    </div>
-  );
-}
 
 function SediManifesto() {
   const ref = useRef(null);
@@ -64,7 +39,7 @@ function SediPrincipi() {
   ];
 
   return (
-    <section className="py-20 md:py-28 lg:py-32 bg-ecru/30" ref={ref}>
+    <section className="py-20 md:py-28 lg:py-32 bg-ivory-warm" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -224,9 +199,7 @@ export default function SediPage() {
         title="Entrare in Luxosa inizia già prima di sedersi."
         subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
         video="/videos/hero_sedi_opt.mp4"
-      >
-        <SediHeroCTA />
-      </PageHero>
+      />
       <SediManifesto />
       <SediPrincipi />
       <Space />

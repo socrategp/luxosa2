@@ -82,7 +82,7 @@ function PillarSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section className="py-32 md:py-48 lg:py-56 bg-neutral-100" ref={ref}>
+    <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
 
         {/* Header */}

@@ -44,16 +44,16 @@ export default function Hero() {
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
           <motion.div
             initial={{ width: 0 }}
-            animate={{ width: 60 }}
-            transition={{ duration: 1.2, delay: 0.3, ease: [0.25, 0.1, 0, 1] }}
-            className="h-[1px] bg-brass-light mb-8"
+            animate={{ width: 50 }}
+            transition={{ duration: 1, delay: 0.2, ease: [0.25, 0.1, 0, 1] }}
+            className="h-[1px] bg-brass-light mb-6 shadow-md"
           />
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
-            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-bold mb-6 drop-shadow-md"
+            className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-medium mb-4 drop-shadow-md"
           >
             La Maison
           </motion.p>

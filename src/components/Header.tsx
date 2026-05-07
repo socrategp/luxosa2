@@ -81,6 +81,8 @@ export default function Header() {
               <img
                 src="/images/luxosa-logo-orizzontale-bianco-tras.png"
                 alt="Luxosa"
+                width={1000}
+                height={300}
                 className={`h-7 md:h-9 w-auto object-contain transition-all duration-500 ${menuOpen ? 'brightness-0 invert' : logoFilter}`}
               />
             </Link>

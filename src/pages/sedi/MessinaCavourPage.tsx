@@ -112,7 +112,7 @@ function MCSpace() {
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Lo Spazio</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
           <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">
-            Progettato per accogliere,<br />proteggere, rigenerare.
+  Progettato per accogliere,<br />proteggere, rigenerare.
           </motion.h2>
         </div>
 

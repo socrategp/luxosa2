@@ -5,7 +5,6 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowLeft, X, Check } from 'lucide-react';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
@@ -1426,10 +1425,7 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
           <a href="mailto:privacy@luxosa.it" className="text-brass hover:underline underline-offset-2">
             privacy@luxosa.it
           </a>
-          . Consulta la nostra{' '}
-          <Link to="/privacy-policy" target="_blank" className="text-brass hover:underline underline-offset-2">
-            Privacy Policy
-          </Link>
+          . Consulta la nostra <span className="text-brass">Privacy Policy</span>
           .
         </p>
       </div>

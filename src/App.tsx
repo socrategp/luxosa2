@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import MainLayout from './layouts/MainLayout';
 import { QuizProvider, useQuiz } from './context/QuizContext';
+import CookieConsentBanner from './components/CookieConsentBanner';
 const DiagnosticTakeover = lazy(() => import('./components/DiagnosticTakeover').then(m => ({ default: m.DiagnosticTakeover })));
 
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -44,6 +45,7 @@ export default function App() {
           </Routes>
         </Suspense>
         <QuizOverlay />
+        <CookieConsentBanner />
       </QuizProvider>
     </BrowserRouter>
   );

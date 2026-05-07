@@ -152,7 +152,6 @@ export default function Footer() {
                   { label: 'I Percorsi', href: '/i-percorsi' },
                   { label: 'Le Esperienze', href: '/le-esperienze' },
                   { label: 'Sedi', href: '/sedi' },
-                  { label: 'Contatti', href: '/contatti' },
                 ].map((item) => (
                   <Link
                     key={item.label}
@@ -196,8 +195,8 @@ export default function Footer() {
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-[11px] tracking-[0.15em] text-ivory/35 font-light">© 2026 Luxosa. Tutti i diritti riservati.</p>
             <div className="flex gap-6">
-              <Link to="/privacy-policy" className="text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/75 font-light transition-colors duration-300">Privacy Policy</Link>
-              <Link to="/cookie-policy" className="text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/75 font-light transition-colors duration-300">Cookie Policy</Link>
+              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">Privacy Policy</span>
+              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">Cookie Policy</span>
             </div>
           </div>
         </div>

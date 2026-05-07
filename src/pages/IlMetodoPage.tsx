@@ -14,7 +14,7 @@ function MethodIntro() {
   return (
     <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="max-w-2xl">
+        <div className="max-w-3xl">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -179,36 +179,9 @@ function PrimoIncontro() {
               <Link to="/i-percorsi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">
                 Scopri i Percorsi <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </Link>
-              <Link to="/contatti" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/65 font-light hover:text-anthracite transition-colors duration-500">
-                Prenota il primo incontro <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-              </Link>
             </motion.div>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-function MetodoCTA() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-100px' });
-
-  return (
-    <section className="py-32 md:py-48 lg:py-64 bg-ivory-warm" ref={ref}>
-      <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center">
-        <motion.div initial={{ width: 0 }} animate={inView ? { width: 60 } : {}} transition={{ duration: 1.2, ease: premiumEase }} className="h-[1px] bg-brass mx-auto mb-12" />
-        <motion.h2 initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
-          Prenota il primo<br />incontro.
-        </motion.h2>
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.4 }} className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
-          <Link to="/contatti" className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5">
-            <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-            <span className="relative z-10 flex items-center gap-3">
-              Prenota ora <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-            </span>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );
@@ -227,7 +200,6 @@ export default function IlMetodoPage() {
       <Method />
       <MethodCinematic />
       <PrimoIncontro />
-      <MetodoCTA />
     </>
   );
 }

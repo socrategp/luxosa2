@@ -1,6 +1,5 @@
 ﻿import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import PageHero from '../components/PageHero';
 import Experience from '../components/Experience';
@@ -195,7 +194,7 @@ function EsperienzaCTA() {
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
             className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal"
           >
-            Non sai da dove iniziare?
+            Vuoi capire qual è il tuo percorso?
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -204,20 +203,20 @@ function EsperienzaCTA() {
             className="mt-8 space-y-4"
           >
             <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
-              Rispondi a poche domande sulla tua cute, il tuo capello, la tua storia e i tuoi obiettivi.
+              Rispondi a qualche domanda su cute, capello e obiettivi.
             </p>
             <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
-              In pochi minuti ti orienteremo verso il percorso Luxosa più adatto a te.
+              In pochi minuti ricevi un orientamento sul percorso Luxosa più adatto.
             </p>
             <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">
-              Il quiz non sostituisce la consulenza: la prepara.
+              Il test non sostituisce la consulenza: la introduce.
             </p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase, delay: 0.55 }}
-            className="mt-12 flex flex-col sm:flex-row gap-5"
+            className="mt-12"
           >
             <button
               onClick={openQuiz}
@@ -228,12 +227,6 @@ function EsperienzaCTA() {
                 Scopri il tuo percorso <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </span>
             </button>
-            <Link
-              to="/contatti"
-              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-anthracite/65 font-light hover:text-anthracite transition-colors duration-500 px-2 py-5"
-            >
-              Prenota il tuo primo incontro <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
-            </Link>
           </motion.div>
         </div>
       </div>

@@ -2128,6 +2128,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const questionSequence = useMemo(() => buildQuestionSequence(d3Answer), [d3Answer]);
   const currentQ = questionSequence[step] as QuestionDef | undefined;
   const totalSteps = questionSequence.length;
+  const progressTotalSteps = 10;
 
   // Lock body scroll + scroll to top
   useEffect(() => {
@@ -2214,11 +2215,11 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
                 <div className="h-[2px] bg-sand/30 w-full">
                   <motion.div
                     className="h-full bg-brass"
-                    animate={{ width: `${((step + 1) / totalSteps) * 100}%` }}
+                    animate={{ width: `${((step + 1) / progressTotalSteps) * 100}%` }}
                     transition={{ duration: 0.6, ease: premiumEase }}
                   />
                 </div>
-                <p className="text-[8px] text-anthracite/40 font-light mt-1">{step + 1} di {totalSteps}</p>
+                <p className="text-[8px] text-anthracite/40 font-light mt-1">{step + 1} di {progressTotalSteps}</p>
               </div>
             ) : (
               <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/50">

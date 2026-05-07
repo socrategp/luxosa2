@@ -12,7 +12,6 @@ const navItems = [
   { label: 'I Percorsi', href: '/i-percorsi' },
   { label: 'Le Esperienze', href: '/le-esperienze' },
   { label: 'Sedi', href: '/sedi' },
-  { label: 'Contatti', href: '/contatti' },
 ];
 
 import { premiumEase } from '../lib/animations';

@@ -1,5 +1,4 @@
 ﻿import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 
 export default function Hero() {
@@ -76,26 +75,6 @@ export default function Hero() {
           >
             Luxosa è la maison dedicata alla cura evoluta di cute e capelli, dove bellezza, metodo e ascolto si incontrano per accompagnare ogni donna in un percorso personale.
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1.3 }}
-            className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4"
-          >
-            <Link
-              to="/il-metodo"
-              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-deep bg-ivory hover:bg-ecru px-8 py-4 transition-all duration-500"
-            >
-              Scopri il Metodo
-            </Link>
-            <Link
-              to="/i-percorsi"
-              className="inline-flex w-full sm:w-auto items-center justify-center text-[12px] tracking-[0.2em] uppercase font-light text-white/95 border border-white/25 hover:border-white/50 hover:text-white px-8 py-4 transition-all duration-500"
-            >
-              Esplora i Percorsi
-            </Link>
-          </motion.div>
         </div>
       </div>
 

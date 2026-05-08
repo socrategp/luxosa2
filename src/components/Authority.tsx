@@ -28,7 +28,7 @@ const pillars = [
 
 const testimonials: TestimonialItem[] = [
   {
-    quote: 'La cosa che mi ha colpito è che nessuno mi ha mai venduto niente. Ero abituata a saloni dove a ogni appuntamento ti propongono un trattamento, un prodotto, un extra. Qui è diverso: mi hanno detto chiaramente che la mia fibra era compromessa dalle decolorazioni e che prima di fare qualsiasi cosa serviva ricostruire. Tre mesi. Niente colore, solo cura. In nessun altro posto avrebbero rinunciato a un servizio per dirti la verità.',
+    quote: 'La cosa che mi ha colpito è che nessuno mi ha mai venduto niente. Ero abituata a saloni dove a ogni appuntamento ti propongono un trattamento, un prodotto, un extra. Qui è diverso: mi hanno detto chiaramente che la mia fibra era compromessa dalle decolorazioni e che prima di fare qualsiasi cosa serviva far tornare capelli in salute. Tre mesi. Niente colore, solo cura.',
     name: 'Alessandra P.',
     role: '39 anni',
     percorso: 'BenEssere',
@@ -49,14 +49,14 @@ const testimonials: TestimonialItem[] = [
     valore: 'Ascolto',
   },
   {
-    quote: 'Il diradamento è una cosa di cui non si parla volentieri. Io l\'ho nascosto per anni con il colore, con le pieghe più voluminose, con le fasce. Poi un\'amica mi ha detto: vai da Luxosa. Mi hanno fatto una lettura della cute che nessun salone mi aveva mai proposto. Per la prima volta qualcuno mi ha detto: possiamo lavorarci. Non possiamo fare miracoli, ma possiamo lavorarci. Quella onestà mi ha fatto piangere. E i risultati dopo quattro mesi mi hanno fatto sorridere.',
+    quote: 'Il diradamento è una cosa di cui non si parla volentieri. Io l\'ho nascosto per anni con il colore, con le pieghe più voluminose, con le fasce. Poi un\'amica mi ha detto: vai da Luxosa. Mi hanno fatto una lettura della cute che nessun salone mi aveva mai proposto. Per la prima volta qualcuno mi ha detto: possiamo ottenere un buon risultato. Non possiamo fare miracoli, ma possiamo lavorarci. Quella onestà mi ha rassicurata. E i risultati dopo quattro mesi mi hanno fatto sorridere.',
     name: 'Carmela V.',
     role: '57 anni',
     percorso: 'BenEssere',
     valore: 'Presa in carico',
   },
   {
-    quote: 'A sessant\'anni pensavo che certe cose non si potessero più cambiare. Che i capelli sottili e spenti fossero il mio destino. Mia figlia mi ha regalato una consulenza da Luxosa per il compleanno. Non sapevo cosa aspettarmi. Oggi, otto mesi dopo, mia figlia mi dice che sembro più giovane. Ma non è questione di apparenza. È che mi sento di nuovo me stessa.',
+    quote: 'A sessant\'anni pensavo che certe cose non si potessero più cambiare. Che i capelli sottili e spenti fossero il mio destino. Mia figlia mi ha regalato una consulenza da Luxosa per il compleanno. Non sapevo cosa aspettarmi. Oggi mia figlia mi dice che sembro più giovane. Ma non è questione di apparenza. È che mi sento di nuovo me stessa.',
     name: 'Patrizia G.',
     role: '59 anni',
     percorso: 'BenEssere',
@@ -70,7 +70,7 @@ const testimonials: TestimonialItem[] = [
     valore: 'Percorso',
   },
   {
-    quote: 'Avevo smesso di credere che ci fosse una soluzione unica. La cute secca, il colore che non teneva, il volume che calava: li affrontavo separatamente da anni, senza mai risolvere davvero niente. Quando mi hanno spiegato il Rituale Luxosa, la prima cosa che ho pensato è stata: finalmente qualcuno che vede tutto insieme. Non mi hanno venduto un servizio. Mi hanno costruito un progetto. Sei mesi dopo, guardo i miei capelli e mi riconosco.',
+    quote: 'Avevo smesso di credere che ci fosse una soluzione unica. La cute secca, il colore che non teneva, il volume che calava: li affrontavo separatamente da anni, senza mai risolvere davvero niente. Quando mi hanno spiegato il Rituale Luxosa, la prima cosa che ho pensato è stata: finalmente qualcuno che vede tutto insieme. Sempre seguita, capelli perfetti, che dire? Guardo i miei capelli e mi riconosco.',
     name: 'Sara M.',
     role: '48 anni',
     percorso: 'Rituale Luxosa',

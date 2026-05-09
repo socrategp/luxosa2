@@ -288,23 +288,39 @@ function CioCheDiventa() {
   return (
     <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="max-w-2xl mb-20 md:mb-28">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">
-            Ciò che diventa possibile
-          </motion.span>
-          <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
-            Ciò che diventa possibile<br />scegliendo Luxosa.
-          </motion.h2>
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center mb-20 md:mb-28">
+          <div className="max-w-2xl">
+            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">
+              Ciò che diventa possibile
+            </motion.span>
+            <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
+              Ciò che diventa possibile<br />scegliendo Luxosa.
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
+              className="mt-10 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
+            >
+              In Luxosa ogni risultato nasce da un processo: ascolto, osservazione, progettazione e cura. Non si chiede di scegliere da soli davanti a un menu. Si viene accompagnati verso la direzione più coerente con il proprio capello, il proprio stile di vita e il risultato desiderato.
+            </motion.p>
+          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 28, scale: 1.02 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ duration: 1.25, ease: premiumEase, delay: 0.42 }}
+            className="overflow-hidden"
+          >
+            <img
+              src="/images/diventa_possibile.webp"
+              alt="Donna Luxosa dopo un percorso di cura"
+              loading="lazy"
+              decoding="async"
+              className="w-full aspect-[4/3] object-cover"
+            />
+          </motion.div>
         </div>
-                <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
-          className="mt-0 mb-16 md:mb-20 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light max-w-2xl"
-        >
-          In Luxosa ogni risultato nasce da un processo: ascolto, osservazione, progettazione e cura. Non si chiede di scegliere da soli davanti a un menu. Si viene accompagnati verso la direzione più coerente con il proprio capello, il proprio stile di vita e il risultato desiderato.
-        </motion.p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12 lg:gap-y-14">
           {items.map((item, i) => (
             <motion.div

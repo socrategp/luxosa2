@@ -1,6 +1,7 @@
-﻿import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { Analytics } from '@vercel/analytics/react';
 import MainLayout from './layouts/MainLayout';
 import { QuizProvider, useQuiz } from './context/QuizContext';
 import CookieConsentBanner from './components/CookieConsentBanner';
@@ -46,6 +47,7 @@ export default function App() {
         </Suspense>
         <QuizOverlay />
         <CookieConsentBanner />
+        <Analytics />
       </QuizProvider>
     </BrowserRouter>
   );

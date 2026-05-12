@@ -4,6 +4,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { track } from '@vercel/analytics';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { ArrowRight, ArrowLeft, X, Check } from 'lucide-react';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
@@ -503,6 +504,23 @@ function buildQuestionSequence(d3Answer: string | undefined): QuestionDef[] {
     ...questionPhase3,
     questionD10,
   ];
+}
+
+type TrackingProperties = Record<string, string | number | boolean | null | undefined>;
+
+function trackLuxosaTestEvent(name: string, properties: TrackingProperties) {
+  track(name, properties);
+}
+
+function getTrackingBranch(answers: Answers): string {
+  const d3 = answers['d3'];
+  return typeof d3 === 'string' ? getBranchKey(d3) : 'unknown';
+}
+
+function getAnsweredCount(answers: Answers): number {
+  return Object.values(answers).filter(value =>
+    Array.isArray(value) ? value.length > 0 : value.trim().length > 0
+  ).length;
 }
 
 function computeScores(answers: Answers, sequence: QuestionDef[]): Scores {
@@ -1819,6 +1837,7 @@ function ResultScreen({
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [selectedLocationId, setSelectedLocationId] = useState<typeof LUXOSA_LOCATIONS[number]['id']>('messina-cavour');
   const [selectedFascia, setSelectedFascia] = useState<string | null>(null);
+  const resultViewedTrackedRef = useRef(false);
   const d3 = answers['d3'] as string | undefined;
   const sequence = buildQuestionSequence(d3);
   const scores = computeScores(answers, sequence);
@@ -1844,6 +1863,18 @@ function ResultScreen({
     mirata: 'Attenzione mirata consigliata',
     prioritaria: "Richiede un'attenzione dedicata",
   };
+
+  useEffect(() => {
+    if (resultViewedTrackedRef.current) return;
+    resultViewedTrackedRef.current = true;
+    trackLuxosaTestEvent('luxosa_test_result_viewed', {
+      percorso_public: pub,
+      primary_area: primary,
+      secondary_area: secondary,
+      attention_level: attention,
+      experiences_count: esperienze.length,
+    });
+  }, [attention, esperienze.length, primary, pub, secondary]);
 
   return (
     <motion.div
@@ -1999,7 +2030,13 @@ function ResultScreen({
         {/* CTA */}
         <div className="border-t border-sand/35 pt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <button
-            onClick={() => setShowTimePicker(true)}
+            onClick={() => {
+              trackLuxosaTestEvent('luxosa_test_contact_cta_clicked', {
+                percorso_public: pub,
+                attention_level: attention,
+              });
+              setShowTimePicker(true);
+            }}
             className="relative overflow-hidden group inline-flex items-center gap-4 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
           >
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
@@ -2083,6 +2120,12 @@ function ResultScreen({
                 const location = LUXOSA_LOCATIONS.find(l => l.id === selectedLocationId)!;
                 const msg = buildWhatsAppMessage(nome, email, whatsapp, selectedFascia, location.label, answers);
                 const url = `https://wa.me/${location.whatsapp}?text=${encodeURIComponent(msg)}`;
+                trackLuxosaTestEvent('luxosa_test_whatsapp_clicked', {
+                  location_id: location.id,
+                  time_slot: selectedFascia,
+                  percorso_public: pub,
+                  attention_level: attention,
+                });
                 window.open(url, '_blank', 'noopener,noreferrer');
                 setShowTimePicker(false);
                 setSelectedFascia(null);
@@ -2119,6 +2162,8 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const [answers, setAnswers] = useState<Answers>({});
   const [contactData, setContactData] = useState<ContactFormData>({ nome: '', email: '', whatsapp: '' });
   const scrollRef = useRef<HTMLDivElement>(null);
+  const trackedStepsRef = useRef<Set<string>>(new Set());
+  const questionsCompletedTrackedRef = useRef(false);
 
   const d3Answer = answers['d3'] as string | undefined;
   const questionSequence = useMemo(() => buildQuestionSequence(d3Answer), [d3Answer]);
@@ -2128,6 +2173,10 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
 
   // Lock body scroll + scroll to top
   useEffect(() => {
+    trackLuxosaTestEvent('luxosa_test_opened', {
+      screen: 'disclaimer',
+      source: 'unknown',
+    });
     document.body.style.overflow = 'hidden';
     window.scrollTo(0, 0);
     return () => { document.body.style.overflow = ''; };
@@ -2138,28 +2187,75 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
     scrollRef.current?.scrollTo({ top: 0, behavior: 'auto' });
   }, [step, screen]);
 
+  useEffect(() => {
+    if (screen !== 'quiz' || !currentQ) return;
+    const trackingKey = `${step}:${currentQ.id}`;
+    if (trackedStepsRef.current.has(trackingKey)) return;
+    trackedStepsRef.current.add(trackingKey);
+    trackLuxosaTestEvent('luxosa_test_step_viewed', {
+      step_number: step + 1,
+      total_steps: totalSteps,
+      question_id: currentQ.id,
+      question_type: currentQ.selectionType,
+      branch: getTrackingBranch(answers),
+    });
+  }, [answers, currentQ, screen, step, totalSteps]);
+
   // Transition quiz → form when all questions answered
   useEffect(() => {
     if (screen === 'quiz' && step >= totalSteps) {
+      if (!questionsCompletedTrackedRef.current) {
+        questionsCompletedTrackedRef.current = true;
+        trackLuxosaTestEvent('luxosa_test_questions_completed', {
+          total_steps: totalSteps,
+          branch: getTrackingBranch(answers),
+          answered_count: getAnsweredCount(answers),
+          has_d10_note: typeof answers['d10'] === 'string' && answers['d10'].trim().length > 0,
+        });
+      }
       setScreen('form');
     }
-  }, [step, totalSteps, screen]);
+  }, [answers, step, totalSteps, screen]);
 
   const advanceStep = useCallback(() => setStep(s => s + 1), []);
 
   const handleSingleSelect = useCallback((qId: string, optId: string) => {
+    trackLuxosaTestEvent('luxosa_test_answer_selected', {
+      question_id: qId,
+      option_id: optId,
+      selection_type: 'single',
+      selected_count: 1,
+      action: 'select',
+    });
     setAnswers(prev => ({ ...prev, [qId]: optId }));
     setTimeout(advanceStep, 450);
   }, [advanceStep]);
 
   const handleMultiToggle = useCallback((qId: string, optId: string, max: number) => {
-    setAnswers(prev => {
-      const cur = (prev[qId] as string[] | undefined) ?? [];
-      if (cur.includes(optId)) return { ...prev, [qId]: cur.filter(id => id !== optId) };
-      if (cur.length >= max) return prev;
-      return { ...prev, [qId]: [...cur, optId] };
+    const cur = (answers[qId] as string[] | undefined) ?? [];
+    if (cur.includes(optId)) {
+      const next = cur.filter(id => id !== optId);
+      trackLuxosaTestEvent('luxosa_test_answer_selected', {
+        question_id: qId,
+        option_id: optId,
+        selection_type: 'multi',
+        selected_count: next.length,
+        action: 'deselect',
+      });
+      setAnswers(prev => ({ ...prev, [qId]: next }));
+      return;
+    }
+    if (cur.length >= max) return;
+    const next = [...cur, optId];
+    trackLuxosaTestEvent('luxosa_test_answer_selected', {
+      question_id: qId,
+      option_id: optId,
+      selection_type: 'multi',
+      selected_count: next.length,
+      action: 'select',
     });
-  }, []);
+    setAnswers(prev => ({ ...prev, [qId]: next }));
+  }, [answers]);
 
   const handleTextChange = useCallback((qId: string, val: string) => {
     setAnswers(prev => ({ ...prev, [qId]: val }));
@@ -2169,6 +2265,25 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
     setContactData(data);
     setScreen('result');
   }, []);
+
+  const handleStartTest = useCallback(() => {
+    trackLuxosaTestEvent('luxosa_test_started', {
+      accepted_disclaimer: true,
+    });
+    setScreen('quiz');
+  }, []);
+
+  const handleClose = useCallback(() => {
+    if (screen !== 'result') {
+      trackLuxosaTestEvent('luxosa_test_abandoned', {
+        screen,
+        step_number: screen === 'quiz' ? step + 1 : null,
+        question_id: screen === 'quiz' ? currentQ?.id ?? null : null,
+        answered_count: getAnsweredCount(answers),
+      });
+    }
+    onReset();
+  }, [answers, currentQ, onReset, screen, step]);
 
   return (
     <motion.div
@@ -2227,7 +2342,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
           {/* Right: close */}
           <div className="w-20 md:w-32 flex justify-end flex-shrink-0">
             <button
-              onClick={onReset}
+              onClick={handleClose}
               aria-label="Chiudi"
               className="group flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-anthracite/45 hover:text-anthracite transition-colors duration-300 outline-none"
             >
@@ -2245,7 +2360,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
       <div ref={scrollRef} className="flex-1 overflow-y-auto bg-ivory">
         <AnimatePresence mode="wait">
           {screen === 'disclaimer' && (
-            <DisclaimerScreen key="disclaimer" onAccept={() => setScreen('quiz')} />
+            <DisclaimerScreen key="disclaimer" onAccept={handleStartTest} />
           )}
 
           {screen === 'quiz' && currentQ && (

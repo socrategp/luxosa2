@@ -1,32 +1,49 @@
 <!doctype html>
 <html lang="it">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NM5WRZ56E7"></script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preload" as="image" href="/images/hero_lamaison_poster.webp" type="image/webp" fetchpriority="high" />
+    <title>LUXOSA — Maison di Cura Evoluta per Cute e Capelli</title>
+    <meta name="description" content="Luxosa è una maison italiana dedicata alla trasformazione della donna attraverso percorsi evoluti di cura, benessere e bellezza per cute e capelli." />
+    <meta name="theme-color" content="#1C1A17" />
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-NM5WRZ56E7');
+
+      window.clarity = window.clarity || function(){(window.clarity.q = window.clarity.q || []).push(arguments)};
+
+      (function(){
+        var loadThirdParty = function(){
+          var ga = document.createElement('script');
+          ga.async = true;
+          ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-NM5WRZ56E7';
+          document.head.appendChild(ga);
+
+          var clarity = document.createElement('script');
+          clarity.async = true;
+          clarity.src = 'https://www.clarity.ms/tag/wpzq63c6jx';
+          document.head.appendChild(clarity);
+        };
+
+        var schedule = function(){
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadThirdParty, { timeout: 3000 });
+          } else {
+            window.setTimeout(loadThirdParty, 1500);
+          }
+        };
+
+        if (document.readyState === 'complete') {
+          schedule();
+        } else {
+          window.addEventListener('load', schedule, { once: true });
+        }
+      })();
     </script>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LUXOSA — Maison di Cura Evoluta per Cute e Capelli</title>
-    <meta name="description" content="Luxosa è una maison italiana dedicata alla trasformazione della donna attraverso percorsi evoluti di cura, benessere e bellezza per cute e capelli." />
-    <meta name="theme-color" content="#1C1A17" />
-    <script type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);
-        t.async=1;
-        t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "wpzq63c6jx");
-    </script>
-<link rel="preload" as="image" href="/images/hero_lamaison_poster.webp" fetchpriority="high" />
   </head>
   <body>
     <div id="root"></div>

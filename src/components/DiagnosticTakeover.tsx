@@ -506,10 +506,73 @@ function buildQuestionSequence(d3Answer: string | undefined): QuestionDef[] {
   ];
 }
 
-type TrackingProperties = Record<string, string | number | boolean | null | undefined>;
+type TrackingValue = string | number | boolean | null | undefined;
+type TrackingProperties = Record<string, TrackingValue>;
+
+const ALLOWED_EXTERNAL_TRACKING_PROPERTIES = [
+  'screen',
+  'step_number',
+  'total_steps',
+  'question_id',
+  'question_type',
+  'branch',
+  'option_id',
+  'selection_type',
+  'selected_count',
+  'action',
+  'answered_count',
+  'has_d10_note',
+  'percorso_public',
+  'primary_area',
+  'secondary_area',
+  'attention_level',
+  'experiences_count',
+  'location_id',
+  'time_slot',
+] as const;
+
+type ExternalTrackingProperty = typeof ALLOWED_EXTERNAL_TRACKING_PROPERTIES[number];
+type ExternalTrackingProperties = Partial<Record<ExternalTrackingProperty, TrackingValue>>;
+
+declare global {
+  interface Window {
+    gtag?: (command: 'event', eventName: string, properties?: ExternalTrackingProperties) => void;
+    clarity?: {
+      (command: 'event', eventName: string): void;
+      (command: 'set', key: string, value: string): void;
+    };
+  }
+}
+
+function getExternalTrackingProperties(properties: TrackingProperties): ExternalTrackingProperties {
+  const externalProperties: ExternalTrackingProperties = {};
+  for (const key of ALLOWED_EXTERNAL_TRACKING_PROPERTIES) {
+    const value = properties[key];
+    if (value !== undefined) {
+      externalProperties[key] = value;
+    }
+  }
+  return externalProperties;
+}
+
+function setClarityTag(key: string, value: TrackingValue) {
+  if (value === null || value === undefined) return;
+  window.clarity?.('set', key, String(value));
+}
+
+function updateClarityLuxosaTestTags(name: string, properties: ExternalTrackingProperties) {
+  setClarityTag('luxosa_test_status', name.replace('luxosa_test_', ''));
+  setClarityTag('luxosa_test_last_step', properties.step_number ?? properties.screen);
+  setClarityTag('luxosa_test_result', properties.percorso_public);
+  setClarityTag('luxosa_test_attention_level', properties.attention_level);
+}
 
 function trackLuxosaTestEvent(name: string, properties: TrackingProperties) {
   track(name, properties);
+  const externalProperties = getExternalTrackingProperties(properties);
+  window.gtag?.('event', name, externalProperties);
+  window.clarity?.('event', name);
+  updateClarityLuxosaTestTags(name, externalProperties);
 }
 
 function getTrackingBranch(answers: Answers): string {

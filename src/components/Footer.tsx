@@ -188,8 +188,30 @@ export default function Footer() {
               </button>
             </div>
 
-            {/* Col 4 — Legal placeholder / empty */}
-            <div className="hidden lg:block" />
+            {/* Col 4 — Contatti Sede Generale */}
+            <div>
+              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">Contatti Sede Generale</h4>
+              <nav className="flex flex-col gap-5">
+                {[
+                  { label: 'Proposte commerciali', email: 'marketing@luxosa.it' },
+                  { label: 'Investitori / nuova apertura', email: 'direzione@luxosa.it' },
+                  { label: 'Lavora con noi', email: 'persone@luxosa.it' },
+                ].map((item) => (
+                  <a
+                    key={item.email}
+                    href={`mailto:${item.email}`}
+                    className="group flex flex-col gap-1 transition-colors duration-400"
+                  >
+                    <span className="text-[10px] tracking-[0.22em] uppercase font-light text-brass-light/55 group-hover:text-brass-light/75 transition-colors duration-400">
+                      {item.label}
+                    </span>
+                    <span className="text-[15px] font-light text-ivory/55 group-hover:text-ivory/90 transition-colors duration-400 tracking-wide">
+                      {item.email}
+                    </span>
+                  </a>
+                ))}
+              </nav>
+            </div>
           </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">

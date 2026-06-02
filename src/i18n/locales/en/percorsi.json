@@ -1,0 +1,61 @@
+{
+  "percorsi": {
+    "001": "PC·01",
+    "002": "BenEssere",
+    "003": "The pathway dedicated to genuine scalp and hair balance.",
+    "004": "When hair loses density, strength and stability — or when the scalp cannot find equilibrium despite repeated treatments — the problem is almost never just a matter of products. It is the absence of a genuine reading: of what has happened over time, of the treatments received, of the specific causes that no one has yet identified with precision.",
+    "005": "Behind every frustration there is almost always the same desire: not simply healthier hair, but to find — or achieve for the first time — hair that can truly be trusted. Strong, stable, full: hair that does not need to be hidden or constantly managed, and that gives back the feeling of finally having a solid foundation to build on.",
+    "006": "BenEssere begins with an in-depth analysis of scalp and fibre; it identifies the specific problem, understands the hair's history and defines the plan most suited to the person's real profile, before initiating any intervention. With rigour, constant care and the stability that every genuine recovery requires.",
+    "007": "PC·02",
+    "008": "ColorLux",
+    "009": "The pathway dedicated to light, harmony and colour identity.",
+    "010": "When colour fades too quickly, shifts into unwanted tones or does not truly enhance the face, the problem is never purely technical. It is the absence of a clear chromatic direction — one built around the person rather than a standard formula.",
+    "011": "Behind every chromatic frustration there is almost always the same desire: not simply a more beautiful colour, but a colour in which to truly recognise oneself — one capable of enhancing the face, creating harmony and giving back the feeling of finally being right. A result that does not fade after a few washes and does not leave, every time, the sense that something is still missing.",
+    "012": "ColorLux begins with an analysis of the natural tone, complexion and personal colour harmony; it identifies the specific problem, understands the genuine desire and defines what result is truly achievable before building the most fitting pathway. With sensitivity, intention and the precision of someone constructing a coherent chromatic identity over time.",
+    "013": "RL·01",
+    "014": "Rituale Luxosa",
+    "015": "The most complete care offering in the Luxosa universe.",
+    "016": "When scalp, fibre, form and colour each present different concerns — and no solution addressed separately has ever truly resolved the overall picture — the problem is not technical. It is the absence of an integrated reading: someone capable of seeing everything together, not one area at a time.",
+    "017": "Behind every fragmented attempt there is almost always the same desire: not to correct something, but to truly transform. To feel genuinely cared for in one's entirety — scalp, hair, form, colour, harmony — with the certainty that every choice is coherent with the others and that the result is built to last.",
+    "018": "Rituale Luxosa begins from a complete and integrated professional reading; it identifies real priorities, understands the genuine desire and builds a bespoke project — prescribed on a personal basis, without predefined levels, with a number of sessions established by the stylist after the reading. With integrated vision, complete guidance and the deep coherence of a project built to last.",
+    "019": "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1"
+  },
+  "il": {
+    "metodo": {
+      "page": {
+        "001": "The Method",
+        "002": "At Luxosa the result is not born from intuition of the moment, but from a precise method.",
+        "003": "A story, a desire, a habit, a personal relationship with one&apos;s hair. We begin from the person, not from a service.",
+        "004": "We listen, observe, assess and build a coherent direction.",
+        "005": "start end",
+        "006": "end start",
+        "007": "The first meeting",
+        "008": "Consulenza Luxosa",
+        "009": "The first meeting.",
+        "010": "The first meeting at Luxosa is a moment of in-depth discovery. Not a quick assessment, but the time needed to hear the history, observe the hair, understand habits and clarify where one wishes to arrive.",
+        "011": "From here the direction of the pathway is born. Every relevant piece of information is retained and updated over time, so that every session is a continuation, not a new beginning.",
+        "012": "Discover the Pathways",
+        "013": "Every choice is born from a vision."
+      }
+    }
+  },
+  "ipercorsi": {
+    "page": {
+      "001": "The Pathways",
+      "002": "There is a difference between receiving a service and entrusting yourself to someone who genuinely takes care of you.",
+      "003": "A Luxosa pathway is born from a genuine understanding of the person, the hair and the goal to be reached. It is not a standard formula, not a package to pick off a shelf: it is a direction built with method, session by session.",
+      "004": "When the pathway is the right one, every appointment has meaning. And every step brings one closer to a result that endures.",
+      "005": "start end",
+      "006": "end start",
+      "007": "Luxosa Test",
+      "008": "The starting point.",
+      "009": "A diagnostic test designed to guide, not to choose. Scalp, hair, history, goals: everything is read to indicate the most coherent direction.",
+      "010": "The test does not replace the consultation: it prepares for it.",
+      "011": "Discover your pathway",
+      "012": "The First Step",
+      "013": "Luxosa Experiences are the first possible entry point for those who wish to approach the Luxosa world through a single gesture, built with the same care.",
+      "014": "Discover the Experiences",
+      "015": "Not services. Pathways."
+    }
+  }
+}

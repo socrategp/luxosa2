@@ -1,0 +1,55 @@
+{
+  "experience": {
+    "001": "PiegaLux",
+    "002": "Taglio Signature",
+    "003": "Nuances",
+    "004": "Luce Signature",
+    "005": "RicciOsa",
+    "006": "RicciOso",
+    "007": "Cheratina Nutrizione Pro",
+    "008": "Area Benessere",
+    "009": "Consulenze Specialistiche",
+    "010": "The experiences",
+    "011": "You do not choose them the way you browse a menu. You discover them together with us, within the context of the pathway you are building.",
+    "012": "Close"
+  },
+  "signature": {
+    "001": "Deep Regenerating Ritual",
+    "002": "Our iconic treatment",
+    "003": "A complete pathway that combines analysis, personalised scalp care, fibre regeneration and conscious styling. Two hours devoted entirely to care.",
+    "004": "Advanced Diagnostic Consultation",
+    "005": "The starting point",
+    "006": "An in-depth assessment of the scalp and hair through professional tools and a dedicated consultation. The foundation on which every pathway is built.",
+    "007": "Colour & Structure Harmony",
+    "008": "The art of evolved colour",
+    "009": "A personalised chromatic study that respects and enhances the hair's natural structure. Analysis of undertone, texture and the client's lifestyle.",
+    "010": "Signature Moments",
+    "011": "Selected experiences,",
+    "012": "designed to excel.",
+    "013": "A few carefully selected moments. Each signature experience represents the highest expression of our method."
+  },
+  "esperienza": {
+    "page": {
+      "001": "The Experiences",
+      "002": "Luxosa experiences are not entries on a price list. They are the gestures through which the method takes form — each with its own identity, its own intention, its own way of caring.",
+      "003": "Here the Luxosa world presents itself as a map of possibilities, not a catalogue.",
+      "004": "Can I book an experience directly?",
+      "005": "Yes, though if in doubt we recommend beginning with an initial consultation.",
+      "006": "Are experiences an alternative to pathways?",
+      "007": "Experiences are individual and function like classic services — you choose what you need. Pathways are organised projects built around a specific goal.",
+      "008": "Why are not all prices shown?",
+      "009": "Because the assessment depends on hair density, length and thickness. At Luxosa there are no surprises at the end: the full price is communicated upfront, with everything included and no hidden additions.",
+      "010": "Frequently asked questions",
+      "011": "opacity-0 scale-y-0",
+      "012": "opacity-100 scale-y-100",
+      "013": "Luxosa experience prices are available on request in person. Every quote is personalised, because every head of hair is different.",
+      "014": "Luxosa Test",
+      "015": "Want to understand which pathway is right for you?",
+      "016": "Answer a few questions about your scalp, hair and goals.",
+      "017": "In a few minutes you will receive guidance on the most suitable Luxosa pathway.",
+      "018": "The test does not replace the consultation: it introduces it.",
+      "019": "Discover your pathway",
+      "020": "At Luxosa, every gesture has a name."
+    }
+  }
+}

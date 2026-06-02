@@ -1,0 +1,61 @@
+{
+  "percorsi": {
+    "001": "PC·01",
+    "002": "BenEssere",
+    "003": "Il percorso dedicato all'equilibrio reale di cute e capello.",
+    "004": "Quando il capello perde densità, forza e stabilità — o quando la cute non trova equilibrio nonostante trattamenti ripetuti — il problema non è quasi mai solo una questione di prodotti. È l'assenza di una lettura reale: di ciò che è accaduto nel tempo, dei trattamenti ricevuti, delle cause specifiche che nessuno ha ancora individuato con precisione.",
+    "005": "Dietro ogni frustrazione c'è quasi sempre lo stesso desiderio: non semplicemente capelli più sani, ma ritrovare — o ottenere per la prima volta — capelli di cui fidarsi davvero. Forti, stabili, pieni: capelli che non richiedano di essere nascosti o continuamente gestiti, e che restituiscano la sensazione di avere finalmente una base solida su cui costruire.",
+    "006": "BenEssere parte dall'analisi approfondita di cute e fibra; individua il problema specifico, comprende la storia del capello e definisce il piano più adatto al profilo reale della persona, prima di avviare qualsiasi intervento. Con rigore, cura costante e la stabilità che ogni recupero autentico richiede.",
+    "007": "PC·02",
+    "008": "ColorLux",
+    "009": "Il percorso dedicato a luce, armonia e identità del colore.",
+    "010": "Quando il colore scarica troppo in fretta, vira in riflessi non desiderati o non valorizza davvero il viso, il problema non è mai solo tecnico. È l'assenza di una direzione cromatica chiara, costruita sulla persona e non su una formula standard.",
+    "011": "Dietro ogni frustrazione cromatica c'è quasi sempre lo stesso desiderio: non semplicemente un colore più bello, ma un colore in cui riconoscersi davvero — capace di valorizzare il viso, creare armonia e restituire la sensazione di essere finalmente giusta. Un risultato che non si perda dopo pochi lavaggi e che non lasci, ogni volta, la percezione che manchi ancora qualcosa.",
+    "012": "ColorLux parte dall'analisi del tono naturale, dell'incarnato e dell'armocromia personale; individua il problema specifico, comprende il desiderio autentico e definisce il risultato realmente ottenibile prima di costruire il percorso più adatto. Con sensibilità, intenzione e la precisione di chi costruisce un'identità cromatica coerente nel tempo.",
+    "013": "RL·01",
+    "014": "Rituale Luxosa",
+    "015": "La presa in carico più completa dell'universo Luxosa.",
+    "016": "Quando cute, fibra, forma e colore presentano criticità diverse — e nessuna soluzione affrontata separatamente ha mai davvero risolto il quadro complessivo — il problema non è tecnico. È l'assenza di una lettura integrata: qualcuno capace di vedere tutto insieme, non un'area alla volta.",
+    "017": "Dietro ogni tentativo frammentato c'è quasi sempre lo stesso desiderio: non correggere qualcosa, ma trasformarsi davvero. Sentirsi presa in carico nella propria interezza — cute, capello, forma, colore, armonia — con la certezza che ogni scelta sia coerente con le altre e che il risultato sia costruito per durare.",
+    "018": "Il Rituale Luxosa nasce da una lettura professionale completa e integrata; individua le priorità reali, comprende il desiderio autentico e costruisce un progetto bespoke — prescritto su misura, senza livelli predefiniti, con un numero di sedute stabilito dalla stilista dopo la lettura. Con visione integrata, guida completa e la coerenza profonda di un progetto costruito per durare.",
+    "019": "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1"
+  },
+  "il": {
+    "metodo": {
+      "page": {
+        "001": "Il Metodo",
+        "002": "In Luxosa il risultato non nasce dall&apos;intuizione del momento, ma da un metodo preciso.",
+        "003": "Una storia, un desiderio, un&apos;abitudine, una relazione personale con i propri capelli. Si parte dalla persona, non da un servizio.",
+        "004": "Si ascolta, si osserva, si valuta e si costruisce una direzione coerente.",
+        "005": "start end",
+        "006": "end start",
+        "007": "Il primo incontro",
+        "008": "La consulenza Luxosa",
+        "009": "Il primo incontro.",
+        "010": "Il primo incontro in Luxosa è un momento di conoscenza approfondita. Non una valutazione rapida, ma il tempo necessario per ascoltare la storia, osservare il capello, capire le abitudini e chiarire dove si desidera arrivare.",
+        "011": "Da qui nasce la direzione del percorso. Ogni informazione rilevante viene custodita e aggiornata nel tempo, così che ogni seduta sia una continuazione, non un nuovo inizio.",
+        "012": "Scopri i Percorsi",
+        "013": "Ogni scelta nasce da una visione."
+      }
+    }
+  },
+  "ipercorsi": {
+    "page": {
+      "001": "I Percorsi",
+      "002": "C'è una differenza tra ricevere una prestazione e affidarsi a qualcuno che prende davvero in carico.",
+      "003": "Un percorso Luxosa nasce da una comprensione reale della persona, del capello e dell'obiettivo da raggiungere. Non è una formula standard, non è un pacchetto da scegliere a scaffale: è una direzione costruita con metodo, seduta dopo seduta.",
+      "004": "Quando il percorso è quello giusto, ogni appuntamento ha un senso. E ogni passo avvicina a un risultato che resta.",
+      "005": "start end",
+      "006": "end start",
+      "007": "Luxosa Test",
+      "008": "Il punto di partenza.",
+      "009": "Un test diagnostico pensato per orientare, non per scegliere. Cute, capello, storia, obiettivi: tutto viene letto per indicare la direzione più coerente.",
+      "010": "Il test non sostituisce la consulenza: la prepara.",
+      "011": "Scopri il tuo percorso",
+      "012": "Il Primo Passo",
+      "013": "Le Esperienze Luxosa sono il primo ingresso possibile per chi desidera avvicinarsi al mondo Luxosa attraverso un gesto singolo, costruito con la stessa attenzione.",
+      "014": "Scopri le Esperienze",
+      "015": "Non servizi. Percorsi."
+    }
+  }
+}

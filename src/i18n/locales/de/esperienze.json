@@ -1,0 +1,55 @@
+{
+  "experience": {
+    "001": "PiegaLux",
+    "002": "Taglio Signature",
+    "003": "Nuances",
+    "004": "Luce Signature",
+    "005": "RicciOsa",
+    "006": "RicciOso",
+    "007": "Cheratina Nutrizione Pro",
+    "008": "Area Benessere",
+    "009": "Consulenze Specialistiche",
+    "010": "Die Erlebnisse",
+    "011": "Man wählt sie nicht wie aus einem Menü. Man entdeckt sie gemeinsam mit uns, im Rahmen des Weges, den man gerade aufbaut.",
+    "012": "Schließen"
+  },
+  "signature": {
+    "001": "Tiefenwirksames regenerierendes Ritual",
+    "002": "Unser ikonisches Erlebnis",
+    "003": "Ein vollständiger Weg, der Analyse, personalisierte Kopfhautpflege, Faserregeneration und bewusstes styling vereint. Zwei Stunden, vollständig der Pflege gewidmet.",
+    "004": "Fortschrittliche diagnostische Beratung",
+    "005": "Der Ausgangspunkt",
+    "006": "Eine eingehende Analyse des Zustands von Kopfhaut und Haar durch professionelle Instrumente und ein dediziertes Gespräch. Die Grundlage, auf der jeder Weg aufgebaut wird.",
+    "007": "Farb- und Strukturharmonie",
+    "008": "Die Kunst der entwickelten Farbe",
+    "009": "Personalisiertes chromatisches Studium, das die natürliche Struktur des Haares respektiert und zur Geltung bringt. Analyse des Unterton, der Textur und des Lebensstils der Kundin.",
+    "010": "Signature-Momente",
+    "011": "Ausgewählte Erlebnisse,",
+    "012": "konzipiert um zu excellieren.",
+    "013": "Wenige Momente, sorgfältig ausgewählt. Jedes Signature-Erlebnis ist der höchste Ausdruck unserer Methode."
+  },
+  "esperienza": {
+    "page": {
+      "001": "Die Erlebnisse",
+      "002": "Die Erlebnisse von Luxosa sind keine Einträge in einer Preisliste. Sie sind die Gesten, durch die die Methode Gestalt annimmt — jede mit einer eigenen Identität, einer eigenen Absicht, einer eigenen Art zu pflegen.",
+      "003": "Hier präsentiert sich die Welt von Luxosa als Karte der Möglichkeiten, nicht als Katalog.",
+      "004": "Kann man direkt ein Erlebnis wählen?",
+      "005": "Ja, bei Unsicherheiten empfiehlt sich jedoch ein erstes Gespräch oder eine Beratung als Ausgangspunkt.",
+      "006": "Sind Erlebnisse eine Alternative zu den Pfaden?",
+      "007": "Erlebnisse sind einzelne Leistungen und funktionieren typischerweise wie klassische Dienste — man wählt, was gebraucht wird. Die Pfade sind nach einem spezifischen Ziel ausgerichtete Projekte.",
+      "008": "Warum sind nicht alle Preise sichtbar?",
+      "009": "Weil die Bewertung nach Dichte, Länge und Stärke des Haares erfolgt. Unser Preis kennt keine Überraschungen an der Kasse: Er wird mit allem Eingeschlossenen kommuniziert, ohne aufgezwungene Zusätze.",
+      "010": "Häufig gestellte Fragen",
+      "011": "opacity-0 scale-y-0",
+      "012": "opacity-100 scale-y-100",
+      "013": "Die Preise der Luxosa-Erlebnisse sind auf Anfrage vor Ort verfügbar. Jeder Kostenvoranschlag ist individuell, denn jedes Haar ist anders.",
+      "014": "Luxosa Test",
+      "015": "Möchtest du verstehen, welcher Weg zu dir passt?",
+      "016": "Beantworte einige Fragen zu Kopfhaut, Haar und Zielen.",
+      "017": "In wenigen Minuten erhältst du eine Orientierung zum passendsten Luxosa-Weg.",
+      "018": "Der Test ersetzt die Beratung nicht: Er leitet sie ein.",
+      "019": "Deinen Weg entdecken",
+      "020": "Bei Luxosa trägt jede Geste einen Namen."
+    }
+  }
+}

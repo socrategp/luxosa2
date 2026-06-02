@@ -1,0 +1,55 @@
+{
+  "experience": {
+    "001": "PiegaLux",
+    "002": "Taglio Signature",
+    "003": "Nuances",
+    "004": "Luce Signature",
+    "005": "RicciOsa",
+    "006": "RicciOso",
+    "007": "Cheratina Nutrizione Pro",
+    "008": "Area Benessere",
+    "009": "Consulenze Specialistiche",
+    "010": "Les expériences",
+    "011": "On ne les choisit pas comme on parcourt un menu. On les découvre ensemble, dans le contexte du parcours que l'on construit.",
+    "012": "Fermer"
+  },
+  "signature": {
+    "001": "Rituale Rigenerante Profondo",
+    "002": "Notre soin iconique",
+    "003": "Un parcours complet qui unit analyse, soin personnalisé du cuir chevelu, régénération de la fibre et styling conscient. Deux heures entièrement dédiées au soin.",
+    "004": "Consulenza Diagnostica Avanzata",
+    "005": "Le point de départ",
+    "006": "Une analyse approfondie de l'état du cuir chevelu et des cheveux à travers des outils professionnels et un entretien dédié. La base sur laquelle construire chaque parcours.",
+    "007": "Armonia Colore & Struttura",
+    "008": "L'art de la couleur évoluée",
+    "009": "Étude chromatique personnalisée qui respecte et valorise la structure naturelle du cheveu. Analyse du sous-ton, de la texture et du mode de vie de la cliente.",
+    "010": "Moments Signature",
+    "011": "Des expériences sélectionnées,",
+    "012": "pensées pour exceller.",
+    "013": "De rares moments, choisis avec soin. Chaque expérience signature représente l'expression la plus haute de notre méthode."
+  },
+  "esperienza": {
+    "page": {
+      "001": "Les Expériences",
+      "002": "Les expériences Luxosa ne sont pas des lignes sur une liste de prix. Ce sont les gestes à travers lesquels la méthode prend forme, chacun avec sa propre identité, sa propre intention, sa propre façon de prendre soin.",
+      "003": "Ici, le monde Luxosa se présente comme une carte des possibles, non comme un catalogue.",
+      "004": "Puis-je choisir directement une expérience ?",
+      "005": "Oui, cependant en cas de doute il est conseillé de commencer par un premier rendez-vous ou par une consultation.",
+      "006": "Les expériences sont-elles une alternative aux parcours ?",
+      "007": "Les expériences sont individuelles et fonctionnent généralement comme des services classiques : on choisit ce dont on a besoin. Les parcours sont des projets organisés en fonction d'un objectif spécifique.",
+      "008": "Pourquoi les prix ne sont-ils pas tous visibles ?",
+      "009": "Parce que l'évaluation est réalisée en fonction de la densité, de la longueur et de l'épaisseur des cheveux. Chez nous, le prix n'a pas de surprises en caisse : il est communiqué tout compris, sans ajouts imposés.",
+      "010": "Questions fréquentes",
+      "011": "opacity-0 scale-y-0",
+      "012": "opacity-100 scale-y-100",
+      "013": "Les tarifs des expériences Luxosa sont disponibles sur demande en maison. Chaque devis est personnalisé, car chaque cheveu est différent.",
+      "014": "Luxosa Test",
+      "015": "Voulez-vous comprendre quel est votre parcours ?",
+      "016": "Répondez à quelques questions sur le cuir chevelu, le cheveu et vos objectifs.",
+      "017": "En quelques minutes, vous recevez une orientation sur le parcours Luxosa le plus adapté.",
+      "018": "Le test ne remplace pas la consultation : il l'introduit.",
+      "019": "Découvrir votre parcours",
+      "020": "Chez Luxosa, chaque geste a un nom."
+    }
+  }
+}

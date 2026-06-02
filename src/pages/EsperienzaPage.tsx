@@ -6,6 +6,7 @@ import Experience from '../components/Experience';
 import { useQuiz } from '../context/QuizContext';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 function EsperienzaIntro() {
   const ref = useRef(null);
@@ -20,9 +21,7 @@ function EsperienzaIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Le Esperienze
-          </motion.span>
+          >{t('esperienze:esperienza.page.001')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -34,17 +33,13 @@ function EsperienzaIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light"
-          >
-            Le esperienze Luxosa non sono voci di un listino. Sono i gesti attraverso cui il metodo prende forma, ciascuno con una propria identità, una propria intenzione, un proprio modo di prendersi cura.
-          </motion.p>
+          >{t('esperienze:esperienza.page.002')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
             className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light"
-          >
-            Qui il mondo Luxosa si presenta come mappa di possibilità, non come catalogo.
-          </motion.p>
+          >{t('esperienze:esperienza.page.003')}</motion.p>
         </div>
       </div>
     </section>
@@ -53,16 +48,16 @@ function EsperienzaIntro() {
 
 const faqs = [
   {
-    q: 'Posso scegliere direttamente un\'esperienza?',
-    a: 'Sì, tuttavia in caso di dubbi si consiglia di iniziare da un primo incontro o da una consulenza.',
+    q:t('esperienze:esperienza.page.004'),
+    a:t('esperienze:esperienza.page.005'),
   },
   {
-    q: 'Le esperienze sono alternative ai percorsi?',
-    a: 'Le esperienze sono singole e funzionano tipicamente come i servizi classici, si sceglie ciò che serve. I percorsi sono progetti organizzati in funzione di un obiettivo specifico.',
+    q:t('esperienze:esperienza.page.006'),
+    a:t('esperienze:esperienza.page.007'),
   },
   {
-    q: 'Perché i prezzi non sono tutti visibili?',
-    a: 'Perché la valutazione è realizzata su densità, lunghezza e spessore dei capelli. Il prezzo da noi non ha sorprese alla cassa: si conosce con tutto incluso, senza aggiunte forzate.',
+    q:t('esperienze:esperienza.page.008'),
+    a:t('esperienze:esperienza.page.009'),
   },
 ];
 
@@ -80,9 +75,7 @@ function EsperienzeFAQ() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Domande frequenti
-          </motion.span>
+          >{t('esperienze:esperienza.page.010')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -157,9 +150,7 @@ function PricingNote() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: premiumEase }}
           className="text-[17px] md:text-[18px] font-light italic text-anthracite/60 text-center max-w-2xl mx-auto leading-[1.8] border-t border-sand/50 pt-10"
-        >
-          I prezzi delle esperienze Luxosa sono disponibili su richiesta in sede. Ogni preventivo è personalizzato, perché ogni capello è diverso.
-        </motion.p>
+        >{t('esperienze:esperienza.page.013')}</motion.p>
       </div>
     </section>
   );
@@ -179,9 +170,7 @@ function EsperienzaCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Luxosa Test
-          </motion.span>
+          >{t('esperienze:esperienza.page.014')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -193,24 +182,16 @@ function EsperienzaCTA() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
             className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal"
-          >
-            Vuoi capire qual è il tuo percorso?
-          </motion.h2>
+          >{t('esperienze:esperienza.page.015')}</motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
             className="mt-8 space-y-4"
           >
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
-              Rispondi a qualche domanda su cute, capello e obiettivi.
-            </p>
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
-              In pochi minuti ricevi un orientamento sul percorso Luxosa più adatto.
-            </p>
-            <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">
-              Il test non sostituisce la consulenza: la introduce.
-            </p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">{t('esperienze:esperienza.page.016')}</p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">{t('esperienze:esperienza.page.017')}</p>
+            <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">{t('esperienze:esperienza.page.018')}</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -223,8 +204,7 @@ function EsperienzaCTA() {
               className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-              <span className="relative z-10 flex items-center gap-3">
-                Scopri il tuo percorso <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+              <span className="relative z-10 flex items-center gap-3">{t('esperienze:esperienza.page.019')}<ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </span>
             </button>
           </motion.div>
@@ -239,7 +219,7 @@ export default function EsperienzaPage() {
     <>
       <PageHero
         label="Le Esperienze"
-        title="In Luxosa ogni gesto ha un nome."
+        title={t('esperienze:esperienza.page.020')}
         subtitle="Le Esperienze Luxosa sono gesti di cura distinti, pensati per avvicinare al metodo e valorizzare ciò che il capello chiede davvero."
         image="/images/hero_esperienze.webp"
       />

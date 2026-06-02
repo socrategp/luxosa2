@@ -1,0 +1,61 @@
+{
+  "percorsi": {
+    "001": "PC·01",
+    "002": "BenEssere",
+    "003": "Le parcours dédié au véritable équilibre du cuir chevelu et du cheveu.",
+    "004": "Quand le cheveu perd densité, force et stabilité — ou quand le cuir chevelu ne trouve pas son équilibre malgré des soins répétés — le problème n'est presque jamais seulement une question de produits. C'est l'absence d'une lecture réelle : de ce qui s'est passé dans le temps, des soins reçus, des causes spécifiques que personne n'a encore identifiées avec précision.",
+    "005": "Derrière chaque frustration, il y a presque toujours le même désir : non pas simplement des cheveux plus sains, mais retrouver — ou obtenir pour la première fois — des cheveux en lesquels on peut vraiment avoir confiance. Forts, stables, pleins : des cheveux qui ne demandent pas à être cachés ou continuellement gérés, et qui redonnent la sensation d'avoir enfin une base solide sur laquelle construire.",
+    "006": "BenEssere part d'une analyse approfondie du cuir chevelu et de la fibre ; il identifie le problème spécifique, comprend l'histoire du cheveu et définit le plan le plus adapté au profil réel de la personne, avant d'engager toute intervention. Avec rigueur, soin constant et la stabilité que toute récupération authentique requiert.",
+    "007": "PC·02",
+    "008": "ColorLux",
+    "009": "Le parcours dédié à la lumière, à l'harmonie et à l'identité de la couleur.",
+    "010": "Quand la couleur s'efface trop vite, vire vers des reflets indésirables ou ne valorise pas vraiment le visage, le problème n'est jamais seulement technique. C'est l'absence d'une direction chromatique claire, construite sur la personne et non sur une formule standard.",
+    "011": "Derrière chaque frustration chromatique, il y a presque toujours le même désir : non pas simplement une plus belle couleur, mais une couleur dans laquelle se reconnaître vraiment — capable de valoriser le visage, de créer une harmonie et de redonner la sensation d'être enfin juste. Un résultat qui ne se perd pas après quelques lavages et qui ne laisse pas, chaque fois, l'impression qu'il manque encore quelque chose.",
+    "012": "ColorLux part de l'analyse du ton naturel, du teint et de l'harmochromatisme personnel ; il identifie le problème spécifique, comprend le désir authentique et définit le résultat réellement atteignable avant de construire le parcours le plus adapté. Avec sensibilité, intention et la précision de qui construit une identité chromatique cohérente dans le temps.",
+    "013": "RL·01",
+    "014": "Rituale Luxosa",
+    "015": "La prise en charge la plus complète de l'univers Luxosa.",
+    "016": "Quand le cuir chevelu, la fibre, la forme et la couleur présentent des difficultés différentes — et qu'aucune solution abordée séparément n'a jamais vraiment résolu l'ensemble — le problème n'est pas technique. C'est l'absence d'une lecture intégrée : quelqu'un capable de voir tout ensemble, non une zone à la fois.",
+    "017": "Derrière chaque tentative fragmentée, il y a presque toujours le même désir : non pas corriger quelque chose, mais se transformer vraiment. Se sentir prise en charge dans sa totalité — cuir chevelu, cheveu, forme, couleur, harmonie — avec la certitude que chaque choix est cohérent avec les autres et que le résultat est construit pour durer.",
+    "018": "Le Rituale Luxosa naît d'une lecture professionnelle complète et intégrée ; il identifie les véritables priorités, comprend le désir authentique et construit un projet bespoke — prescrit sur mesure, sans niveaux prédéfinis, avec un nombre de séances établi par la styliste après la lecture. Avec vision intégrée, accompagnement complet et la cohérence profonde d'un projet construit pour durer.",
+    "019": "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1"
+  },
+  "il": {
+    "metodo": {
+      "page": {
+        "001": "La Méthode",
+        "002": "Chez Luxosa, le résultat ne naît pas de l&apos;intuition du moment, mais d&apos;une méthode précise.",
+        "003": "Une histoire, un désir, une habitude, une relation personnelle avec ses propres cheveux. On part de la personne, non d&apos;un service.",
+        "004": "On écoute, on observe, on évalue et on construit une direction cohérente.",
+        "005": "start end",
+        "006": "end start",
+        "007": "Le premier rendez-vous",
+        "008": "La Consulenza Luxosa",
+        "009": "Le premier rendez-vous.",
+        "010": "Le premier rendez-vous chez Luxosa est un moment de connaissance approfondie. Non pas une évaluation rapide, mais le temps nécessaire pour écouter l'histoire, observer le cheveu, comprendre les habitudes et clarifier où l'on désire arriver.",
+        "011": "C'est de là que naît la direction du parcours. Chaque information pertinente est conservée et mise à jour dans le temps, de sorte que chaque séance soit une continuation, non un nouveau commencement.",
+        "012": "Découvrir les Parcours",
+        "013": "Chaque choix naît d'une vision."
+      }
+    }
+  },
+  "ipercorsi": {
+    "page": {
+      "001": "Les Parcours",
+      "002": "Il y a une différence entre recevoir une prestation et se confier à quelqu'un qui prend véritablement en charge.",
+      "003": "Un parcours Luxosa naît d'une compréhension réelle de la personne, du cheveu et de l'objectif à atteindre. Ce n'est pas une formule standard, ce n'est pas un forfait à choisir en rayon : c'est une direction construite avec méthode, séance après séance.",
+      "004": "Quand le parcours est le bon, chaque rendez-vous a un sens. Et chaque pas rapproche d'un résultat qui reste.",
+      "005": "start end",
+      "006": "end start",
+      "007": "Luxosa Test",
+      "008": "Le point de départ.",
+      "009": "Un test diagnostique pensé pour orienter, non pour choisir. Cuir chevelu, cheveu, histoire, objectifs : tout est lu pour indiquer la direction la plus cohérente.",
+      "010": "Le test ne remplace pas la consultation : il la prépare.",
+      "011": "Découvrir votre parcours",
+      "012": "Le Premier Pas",
+      "013": "Les Expériences Luxosa sont la première entrée possible pour qui souhaite approcher le monde Luxosa à travers un geste singulier, construit avec la même attention.",
+      "014": "Découvrir les Expériences",
+      "015": "Pas des services. Des parcours."
+    }
+  }
+}

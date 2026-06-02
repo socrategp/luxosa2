@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Clock, ArrowRight, ArrowLeft, Ear, Search, Fingerprint, Shield, Sparkles, Facebook, Instagram } from 'lucide-react';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import type { TestimonialItem } from '../../components/TestimonialsCarousel';
+import { t } from '../../i18n/t';
 
 /* ============================================================
    LUXOSA MESSINA CAVOUR — Mini-sito onepage
@@ -23,7 +24,7 @@ function MCHero() {
   return (
     <section className="relative h-[75vh] min-h-[550px] max-h-[850px] overflow-hidden">
       <div className="absolute inset-0">
-        <img src="/images/messina-new.webp" alt="Luxosa Messina Cavour" className="w-full h-full object-cover" />
+        <img src="/images/messina-new.webp" alt={t('messina-cavour:messina.cavour.page.001')} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-deep/55 via-deep/30 to-deep/65" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/30 to-transparent" />
       </div>
@@ -32,14 +33,10 @@ function MCHero() {
           <motion.div initial={{ width: 0 }} animate={{ width: 50 }} transition={{ duration: 1, delay: 0.2 }} className="h-[1px] bg-brass-light mb-6" />
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="flex items-center gap-2 mb-4">
             <MapPin size={14} strokeWidth={1.3} className="text-brass-light" />
-            <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">Messina — Corso Cavour</span>
+            <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">{t('messina-cavour:messina.cavour.page.002')}</span>
           </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">
-            Luxosa<br />Messina Cavour.
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">
-            Un luogo esclusivo nel cuore della città in cui competenza, metodo e accoglienza si incontrano.
-          </motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">{t('messina-cavour:messina.cavour.page.003')}<br />{t('messina-cavour:messina.cavour.page.004')}</motion.h1>
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">{t('messina-cavour:messina.cavour.page.005')}</motion.p>
         </div>
       </div>
     </section>
@@ -52,8 +49,7 @@ function MCBackLink() {
     <div className="bg-ivory border-b border-sand/40">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 py-4">
         <Link to="/sedi" className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-stone hover:text-brass-muted font-light transition-colors">
-          <ArrowLeft size={14} strokeWidth={1.5} /> Tutte le sedi
-        </Link>
+          <ArrowLeft size={14} strokeWidth={1.5} />{t('messina-cavour:messina.cavour.page.006')}</Link>
       </div>
     </div>
   );
@@ -70,27 +66,19 @@ function MCAbout() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
-              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">La Sede</span>
+              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.007')}</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
-              Un punto di riferimento<br />per la cura evoluta.
-            </motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">{t('messina-cavour:messina.cavour.page.008')}<br />{t('messina-cavour:messina.cavour.page.009')}</motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
-                A Messina Cavour, Luxosa prende forma nella sua espressione più fedele. Non come un salone costruito per impressionare, ma come uno spazio pensato per lavorare bene: accogliere con misura, osservare con attenzione, curare con metodo.
-              </p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
-                Qui ogni dettaglio nasce da una scelta precisa. La luce, i materiali, il ritmo, l'ordine, il comfort. Tutto è progettato per creare le condizioni giuste alla consulenza, alla lettura, al trattamento e alla continuità.
-              </p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
-                Messina Cavour non è solo un indirizzo. È il luogo in cui una donna entra e comprende, fin dai primi minuti, che non sarà trattata come una cliente tra tante.
-              </p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.010')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.011')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.012')}</p>
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/reception.webp" alt="Interno Luxosa Messina Cavour" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <img src="/images/reception.webp" alt={t('messina-cavour:messina.cavour.page.013')} loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-4 -left-4 w-20 h-20 border-l border-b border-brass/30" />
           </motion.div>
@@ -109,33 +97,31 @@ function MCSpace() {
     <section id="mc-spazio" className="py-28 md:py-40 lg:py-48 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-14 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Lo Spazio</motion.span>
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.014')}</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">
-  Progettato per accogliere,<br />proteggere, rigenerare.
-          </motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">{t('messina-cavour:messina.cavour.page.015')}<br />{t('messina-cavour:messina.cavour.page.016')}</motion.h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 md:gap-5">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="aspect-[3/4] md:aspect-auto md:row-span-2 overflow-hidden">
-            <img src="/images/zona-consulenza.webp" alt="Zona consulenza" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/zona-consulenza.webp" alt={t('messina-cavour:messina.cavour.page.017')} loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/zona-tecnica.webp" alt="Zona tecnica 1" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/zona-tecnica.webp" alt={t('messina-cavour:messina.cavour.page.018')} loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.45 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/lavaggi.webp" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/lavaggi.webp" alt={t('messina-cavour:messina.cavour.page.019')} loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.55 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/zona-tecnica2.webp" alt="Zona tecnica 2" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/zona-tecnica2.webp" alt={t('messina-cavour:messina.cavour.page.020')} loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.65 }} className="aspect-[4/3] overflow-hidden">
-            <img src="/images/lavaggio2.webp" alt="Area lavaggi" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
+            <img src="/images/lavaggio2.webp" alt={t('messina-cavour:messina.cavour.page.021')} loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-[1.04] transition-transform duration-[1200ms] ease-out" />
           </motion.div>
         </div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.7 }} className="mt-12 flex flex-wrap justify-center gap-x-10 gap-y-4">
-          {['Ordine', 'Luce', 'Armonia', 'Comfort'].map((q) => (
+          {[t('messina-cavour:messina.cavour.page.022'),t('messina-cavour:messina.cavour.page.023'),t('messina-cavour:messina.cavour.page.024'),t('messina-cavour:messina.cavour.page.025')].map((q) => (
             <span key={q} className="text-[12px] tracking-[0.25em] uppercase text-stone font-light">{q}</span>
           ))}
         </motion.div>
@@ -150,21 +136,21 @@ function MCMethod() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   const steps = [
-    { icon: Ear, title: 'Ascolto', text: 'Il primo incontro è dedicato alla conoscenza. La storia del capello, le abitudini quotidiane, i desideri reali: tutto viene ascoltato prima di qualsiasi valutazione.' },
-    { icon: Search, title: 'Osservazione', text: 'Attraverso strumenti professionali, cute e fibra vengono letti con precisione. Non impressioni: dati.' },
-    { icon: Fingerprint, title: 'Progetto', text: 'Ogni percorso nasce da un progetto scritto. Obiettivi chiari, tappe definite, risultati misurabili.' },
-    { icon: Shield, title: 'Costruzione', text: 'Ogni seduta è un passo deliberato. Nessun gesto è casuale: ogni scelta costruisce il risultato previsto.' },
-    { icon: Sparkles, title: 'Trasformazione', text: 'Il cambiamento reale non avviene in una seduta. Si costruisce nel tempo, con continuità e attenzione costante.' },
+    { icon: Ear, title:t('messina-cavour:messina.cavour.page.026'), text:t('messina-cavour:messina.cavour.page.027') },
+    { icon: Search, title:t('messina-cavour:messina.cavour.page.028'), text:t('messina-cavour:messina.cavour.page.029') },
+    { icon: Fingerprint, title:t('messina-cavour:messina.cavour.page.030'), text:t('messina-cavour:messina.cavour.page.031') },
+    { icon: Shield, title:t('messina-cavour:messina.cavour.page.032'), text:t('messina-cavour:messina.cavour.page.033') },
+    { icon: Sparkles, title:t('messina-cavour:messina.cavour.page.034'), text:t('messina-cavour:messina.cavour.page.035') },
   ];
 
   return (
     <section id="mc-metodo" className="py-28 md:py-40 lg:py-48 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il Metodo</motion.span>
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.036')}</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">Il Metodo Luxosa a Messina.</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">Il Metodo Luxosa viene applicato con lo stesso rigore e la stessa sensibilità in ogni sede.</motion.p>
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">{t('messina-cavour:messina.cavour.page.037')}</motion.h2>
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">{t('messina-cavour:messina.cavour.page.038')}</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((s, i) => (
@@ -196,35 +182,27 @@ function MCTeam() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div>
-            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">Master Responsabile</motion.span>
+            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">{t('messina-cavour:messina.cavour.page.039')}</motion.span>
             <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-ivory">
-              Lucia Cotugno
-            </motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-ivory">{t('messina-cavour:messina.cavour.page.040')}</motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">
-                Lucia Cotugno guida la sede Luxosa di Messina Cavour custodendone il metodo, la qualità dell'esperienza e la coerenza operativa. Il suo ruolo è garantire che ogni donna trovi non soltanto accoglienza e competenza, ma una presa in carico reale, ordinata e continua nel tempo.
-              </p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">
-                Nella sede supervisiona l'esperienza, sostiene il percorso della cliente e presidia gli standard che rendono Luxosa riconoscibile: ascolto autentico, metodo, misura, attenzione al dettaglio e cura responsabile.
-              </p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{t('messina-cavour:messina.cavour.page.041')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{t('messina-cavour:messina.cavour.page.042')}</p>
             </motion.div>
-            <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }} className="mt-10 font-serif text-[18px] md:text-[20px] italic text-brass-light/70 font-light leading-[1.7]">
-              "Ogni donna deve sentirsi vista, compresa e accompagnata. È da qui che nasce il vero cambiamento."
-            </motion.p>
+            <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }} className="mt-10 font-serif text-[18px] md:text-[20px] italic text-brass-light/70 font-light leading-[1.7]">{t('messina-cavour:messina.cavour.page.043')}</motion.p>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">
-              <img src="/images/team-master.webp" alt="Lucia Cotugno — Master Responsabile Luxosa Messina" loading="lazy" decoding="async" className="w-full h-full object-cover" />
+              <img src="/images/team-master.webp" alt={t('messina-cavour:messina.cavour.page.044')} loading="lazy" decoding="async" className="w-full h-full object-cover" />
             </div>
             <div className="absolute -top-4 -right-4 w-16 h-16 border-t border-r border-brass/25" />
             <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-deep/80 backdrop-blur-sm px-4 py-3 rounded-sm border border-brass/25">
               <div className="w-8 h-8 rounded-full border border-brass flex items-center justify-center flex-shrink-0">
-                <span className="text-[8px] tracking-[0.1em] uppercase text-brass font-light">L.C.</span>
+                <span className="text-[8px] tracking-[0.1em] uppercase text-brass font-light">{t('messina-cavour:messina.cavour.page.045')}</span>
               </div>
               <div>
-                <p className="text-[11px] tracking-[0.15em] uppercase text-brass-light font-light">Lucia Cotugno</p>
-                <p className="text-[10px] text-brass-light/60">Master Responsabile</p>
+                <p className="text-[11px] tracking-[0.15em] uppercase text-brass-light font-light">{t('messina-cavour:messina.cavour.page.046')}</p>
+                <p className="text-[10px] text-brass-light/60">{t('messina-cavour:messina.cavour.page.047')}</p>
               </div>
             </div>
           </motion.div>
@@ -238,59 +216,59 @@ function MCTeam() {
 // --- Testimonials data ---
 const mcTestimonials: TestimonialItem[] = [
   {
-    quote: 'Ho cambiato quattro saloni in cinque anni. Nessuno si ricordava che colore avevo fatto la volta prima, figuriamoci la mia storia. Da Luxosa la mia professionista conosce ogni centimetro della mia testa. Sa che il mio colore tende a ossidarsi sulle punte, sa che ho capelli misti, più porosi in alcune parti. Non devo rispiegare nulla ogni volta. Questa continuità per me vale più di qualsiasi tecnica o scena da tiktok.',
-    name: 'Francesca M.',
+    quote:t('messina-cavour:messina.cavour.page.048'),
+    name:t('messina-cavour:messina.cavour.page.049'),
     role: '44 anni',
-    percorso: 'ColorLux',
+    percorso:t('messina-cavour:messina.cavour.page.050'),
     valore: 'Continuità professionale',
   },
   {
-    quote: 'Gestisco un team di trenta persone. Non ho tempo da perdere, e non ho pazienza per chi improvvisa. Quando sono entrata da Luxosa la prima volta, mi hanno fatto un\'analisi che è durata venticinque minuti. Nessuno mi aveva mai fatto sedere così a lungo prima di toccarmi i capelli. Quel giorno ho capito la differenza tra un parrucchiere e un posto serio. Due trattamenti dopo, il mio capello è un altro. Ma soprattutto io sono un\'altra quando mi guardo allo specchio la mattina.',
-    name: 'Claudia T.',
+    quote:t('messina-cavour:messina.cavour.page.051'),
+    name:t('messina-cavour:messina.cavour.page.052'),
     role: '41 anni',
-    percorso: 'Rituale Luxosa',
+    percorso:t('messina-cavour:messina.cavour.page.053'),
     valore: 'Il Metodo',
   },
   {
-    quote: 'Sono arrivata da Lucia con i capelli distrutti. Decolorazioni fatte in casa, tinte da supermercato, una lisciatura che mi aveva bruciato le punte. Mi vergognavo. La prima cosa che mi hanno detto è stata: non ti preoccupare, possiamo fare un buon lavoro. Nessun rimprovero, nessuno sguardo, nessuno scherno. Solo un piano chiaro per ricostruire quello che avevo rovinato. Già dopo un mese i capelli sono più sani, e non siamo nemmeno a metà percorso.',
-    name: 'Serena R.',
+    quote:t('messina-cavour:messina.cavour.page.054'),
+    name:t('messina-cavour:messina.cavour.page.055'),
     role: '32 anni',
-    percorso: 'BenEssere',
+    percorso:t('messina-cavour:messina.cavour.page.056'),
     valore: 'Nessun giudizio',
   },
   {
-    quote: 'Ho i ricci. Una vita a sentirmi di lisciarli, di domarli, di tenerli legati. Poi una mia amica mi ha consigliato questo salone, e per la prima volta qualcuno mi ha detto: i tuoi ricci sono belli, ma lavorano contro la tua cute. Costruiamo un percorso che li valorizzi senza stressare niente. Non mi avevano mai parlato così dei miei capelli. HO scelto l\'Esperienza Ricciosa, niente a che vedere con gli altri. Ho capito che i miei ricci sono importanti.',
-    name: 'Giulia S.',
+    quote:t('messina-cavour:messina.cavour.page.057'),
+    name:t('messina-cavour:messina.cavour.page.058'),
     role: '29 anni',
-    percorso: 'EX·05 RicciOsa',
+    percorso:t('messina-cavour:messina.cavour.page.059'),
     valore: 'Progetto personale',
   },
   {
-    quote: 'Ho capito la differenza tra salone e Luxosa quando mi hanno detto: il colore che vuoi richiede tre passaggi in due mesi. In qualsiasi altro posto me lo avrebbero fatto subito, in una seduta, bruciando tutto per accontentarmi. Qui hanno avuto il coraggio di dirmi no, non oggi. E quel no mi ha fatto più fiducia di mille sì.',
-    name: 'Roberta I.',
+    quote:t('messina-cavour:messina.cavour.page.060'),
+    name:t('messina-cavour:messina.cavour.page.061'),
     role: '48 anni',
-    percorso: 'ColorLux',
+    percorso:t('messina-cavour:messina.cavour.page.062'),
     valore: 'Percorso, non appuntamento',
   },
   {
-    quote: 'Come medico so che i risultati si ottengono con la costanza, non con l\'intervento singolo. Il metodo di Luxosa funziona esattamente così: non promette il miracolo in una seduta. Propone un percorso serio, con tappe, verifiche, adattamenti. In un anno i miei capelli si sono trasformati. Non per una singola cosa che hanno fatto. Per la somma di tutte le cose fatte bene, nel tempo.',
-    name: 'Teresa P.',
+    quote:t('messina-cavour:messina.cavour.page.063'),
+    name:t('messina-cavour:messina.cavour.page.064'),
     role: '52 anni',
-    percorso: 'Rituale Luxosa',
+    percorso:t('messina-cavour:messina.cavour.page.065'),
     valore: 'Disciplina e costanza',
   },
   {
-    quote: 'Sono una che vuole prove, ama i numeri. Non mi basta che mi dicano sta migliorando. Quando da Luxosa mi hanno mostrato le immagini della mia cute prima e dopo quattro sedute, ho visto la differenza con i miei occhi. Non opinioni. Fatti. Per una come me abituata ai bilanci, questo approccio è stato decisivo. So esattamente a che punto sono e dove sto andando.',
-    name: 'Giuseppina R.',
+    quote:t('messina-cavour:messina.cavour.page.066'),
+    name:t('messina-cavour:messina.cavour.page.067'),
     role: '53 anni',
-    percorso: 'BenEssere',
+    percorso:t('messina-cavour:messina.cavour.page.068'),
     valore: 'Risultato verificato',
   },
   {
-    quote: 'Ho iniziato il percorso BenEssere fiduciosa. Un investimento per me. Lucia è fantastica, sono stata guidata, così come tutta la squadra. Nessuna pressione. So soltanto che mi sento bene, mi vedo meglio e questo mi rende serena. Sono tranquilla di affidarmi, dopo tanti anni, a parrucchieri professionisti.',
-    name: 'Concetta M.',
+    quote:t('messina-cavour:messina.cavour.page.069'),
+    name:t('messina-cavour:messina.cavour.page.070'),
     role: '58 anni',
-    percorso: 'Rituale Luxosa',
+    percorso:t('messina-cavour:messina.cavour.page.071'),
     valore: 'Costanza che trasforma',
   },
 ];
@@ -304,13 +282,9 @@ function MCReviews() {
     <section ref={ref} className="py-28 md:py-40 lg:py-48 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="max-w-xl mx-auto text-center">
-          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">
-            Su Google
-          </motion.span>
+          <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.072')}</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
-          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-10">
-            Cosa dicono le clienti.
-          </motion.h2>
+          <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-10">{t('messina-cavour:messina.cavour.page.073')}</motion.h2>
 
           <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="flex items-center justify-center gap-3 mb-10">
             <div className="flex items-center gap-1">
@@ -321,7 +295,7 @@ function MCReviews() {
               ))}
             </div>
             <span className="font-serif text-[26px] font-light text-charcoal">5.0</span>
-            <span className="text-[12px] tracking-[0.15em] uppercase text-stone font-light">Recensioni Google</span>
+            <span className="text-[12px] tracking-[0.15em] uppercase text-stone font-light">{t('messina-cavour:messina.cavour.page.074')}</span>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}>
@@ -332,8 +306,7 @@ function MCReviews() {
               className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-              <span className="relative z-10 flex items-center gap-3">
-                Lascia una recensione su Google <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+              <span className="relative z-10 flex items-center gap-3">{t('messina-cavour:messina.cavour.page.075')}<ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </span>
             </a>
           </motion.div>
@@ -356,18 +329,16 @@ function MCContact() {
           {/* Dove Trovarci */}
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
-              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Dove Trovarci</span>
+              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.076')}</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-8">
-              Luxosa Messina Cavour
-            </motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[30px] md:text-[38px] font-light leading-[1.12] text-charcoal mb-8">{t('messina-cavour:messina.cavour.page.077')}</motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="space-y-5">
               <div className="flex items-start gap-4">
                 <MapPin size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-[18px] font-light text-charcoal">Corso Cavour, 1</p>
-                  <p className="text-[17px] font-light text-anthracite/75">98122 Messina (ME), Italia</p>
+                  <p className="text-[18px] font-light text-charcoal">{t('messina-cavour:messina.cavour.page.078')}</p>
+                  <p className="text-[17px] font-light text-anthracite/75">{t('messina-cavour:messina.cavour.page.079')}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -376,25 +347,25 @@ function MCContact() {
               </div>
               <div className="flex items-center gap-4">
                 <Mail size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="mailto:messinacavour@luxosa.it" className="text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">messinacavour@luxosa.it</a>
+                <a href="mailto:messinacavour@luxosa.it" className="text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">{t('messina-cavour:messina.cavour.page.080')}</a>
               </div>
               <div className="flex items-start gap-4">
                 <Clock size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />
                 <div className="text-[18px] font-light text-charcoal">
-                  <p>Martedì — Venerdì: 09:00 — 18:30</p>
-                  <p>Sabato: 09:00 — 19:00</p>
+                  <p>{t('messina-cavour:messina.cavour.page.081')}</p>
+                  <p>{t('messina-cavour:messina.cavour.page.082')}</p>
                 </div>
               </div>
               <div className="pt-4 border-t border-sand/50">
-                <p className="text-[10px] tracking-[0.3em] uppercase text-anthracite/40 font-light mb-5">Seguici</p>
+                <p className="text-[10px] tracking-[0.3em] uppercase text-anthracite/40 font-light mb-5">{t('messina-cavour:messina.cavour.page.083')}</p>
                 <div className="flex items-center gap-3">
-                  <span aria-label="TikTok — link in arrivo" className="flex items-center justify-center w-12 h-12 border border-sand text-anthracite/50 hover:border-brass hover:text-brass-muted transition-all duration-400 cursor-default">
+                  <span aria-label={t('messina-cavour:messina.cavour.page.084')} className="flex items-center justify-center w-12 h-12 border border-sand text-anthracite/50 hover:border-brass hover:text-brass-muted transition-all duration-400 cursor-default">
                     <TikTokIcon className="h-[20px] w-[20px]" />
                   </span>
-                  <span aria-label="Facebook — link in arrivo" className="flex items-center justify-center w-12 h-12 border border-sand text-anthracite/50 hover:border-brass hover:text-brass-muted transition-all duration-400 cursor-default">
+                  <span aria-label={t('messina-cavour:messina.cavour.page.085')} className="flex items-center justify-center w-12 h-12 border border-sand text-anthracite/50 hover:border-brass hover:text-brass-muted transition-all duration-400 cursor-default">
                     <Facebook size={20} strokeWidth={1.3} />
                   </span>
-                  <span aria-label="Instagram — link in arrivo" className="flex items-center justify-center w-12 h-12 border border-sand text-anthracite/50 hover:border-brass hover:text-brass-muted transition-all duration-400 cursor-default">
+                  <span aria-label={t('messina-cavour:messina.cavour.page.086')} className="flex items-center justify-center w-12 h-12 border border-sand text-anthracite/50 hover:border-brass hover:text-brass-muted transition-all duration-400 cursor-default">
                     <Instagram size={20} strokeWidth={1.3} />
                   </span>
                 </div>
@@ -405,7 +376,7 @@ function MCContact() {
           {/* Come Raggiungerci — mappa */}
           <div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}>
-              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Come Raggiungerci</span>
+              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.087')}</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="aspect-[4/3] overflow-hidden">
@@ -417,7 +388,7 @@ function MCContact() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Luxosa Messina Cavour — Corso Cavour, 1"
+                title={t('messina-cavour:messina.cavour.page.088')}
               />
             </motion.div>
           </div>
@@ -440,29 +411,27 @@ function MCBooking() {
 
           {/* Prima consulenza */}
           <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.1 }} className="bg-charcoal text-ivory p-10 md:p-12 h-full flex flex-col">
-            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light">Primo incontro</span>
+            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light">{t('messina-cavour:messina.cavour.page.089')}</span>
             <div className="w-8 h-[1px] bg-brass-light/30 mt-4 mb-6" />
-            <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">Prima consulenza</h3>
-            <p className="text-[17px] md:text-[18px] leading-[1.8] text-ivory/70 font-light mb-8">La prima consulenza è il momento in cui si ascolta, si osserva e si comprende. Il punto di partenza di ogni percorso costruito su misura.</p>
+            <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">{t('messina-cavour:messina.cavour.page.090')}</h3>
+            <p className="text-[17px] md:text-[18px] leading-[1.8] text-ivory/70 font-light mb-8">{t('messina-cavour:messina.cavour.page.091')}</p>
             <div className="space-y-4 mt-auto">
-              <a href="https://wa.me/390902403220?text=Salve%2C%20vorrei%20prenotare%20una%20consulenza%20presso%20Luxosa%20Messina%20Cavour." target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-brass-light transition-all duration-500 w-full">
-                Scrivici su WhatsApp <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
+              <a href="https://wa.me/390902403220?text=Salve%2C%20vorrei%20prenotare%20una%20consulenza%20presso%20Luxosa%20Messina%20Cavour." target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-brass-light transition-all duration-500 w-full">{t('messina-cavour:messina.cavour.page.092')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
               </a>
               <a href="tel:+390902403220" className="flex items-center justify-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/85 font-light border border-ivory/20 px-8 py-4 hover:border-ivory/40 hover:text-ivory transition-all duration-500 w-full">
-                <Phone size={14} strokeWidth={1.5} /> Chiama ora
-              </a>
+                <Phone size={14} strokeWidth={1.5} />{t('messina-cavour:messina.cavour.page.093')}</a>
             </div>
           </motion.div>
 
           {/* Informazioni utili */}
           <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="bg-ivory-warm border border-sand/60 p-10 md:p-12 h-full">
-            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Prima di venire</span>
+            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.094')}</span>
             <div className="w-8 h-[1px] bg-brass mt-4 mb-6" />
-            <h3 className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-6">Informazioni utili</h3>
+            <h3 className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-6">{t('messina-cavour:messina.cavour.page.095')}</h3>
             <div className="space-y-5 text-[17px] font-light text-anthracite/80 leading-[1.8]">
-              <p>La consulenza iniziale ha una durata di circa 15–20 minuti.</p>
-              <p>Si consiglia di arrivare 5 minuti prima dell'appuntamento.</p>
-              <p>La sede è accessibile per persone con mobilità ridotta.</p>
+              <p>{t('messina-cavour:messina.cavour.page.096')}</p>
+              <p>{t('messina-cavour:messina.cavour.page.097')}</p>
+              <p>{t('messina-cavour:messina.cavour.page.098')}</p>
             </div>
           </motion.div>
 

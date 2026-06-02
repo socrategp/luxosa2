@@ -2,36 +2,37 @@
 import { useRef, useState, useEffect } from 'react';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 const fasi = [
   {
     num: '01',
-    name: 'Ascolto',
-    accade: 'Raccogliamo storia, desideri, abitudini e aspettative. Ogni percorso inizia da ciò che conta davvero.',
+    name:t('home:method.001'),
+    accade:t('home:method.002'),
     sente: 'Finalmente qualcuno che vuole capire davvero.',
   },
   {
     num: '02',
-    name: 'Osservazione',
-    accade: 'Leggiamo cute, capello, struttura, forma, colore e abitudini di gestione per comprendere la situazione di partenza.',
+    name:t('home:method.003'),
+    accade:t('home:method.004'),
     sente: 'Vedono ciò che io non sapevo di avere.',
   },
   {
     num: '03',
-    name: 'Progetto',
-    accade: 'Definiamo una direzione, un obiettivo e un ritmo coerente con la persona e con la sostenibilità del risultato.',
+    name:t('home:method.005'),
+    accade:t('home:method.006'),
     sente: 'Ho un piano. Non sto improvvisando più.',
   },
   {
     num: '04',
-    name: 'Costruzione',
-    accade: 'Ogni seduta diventa parte di un disegno più ampio. Nulla è isolato, tutto ha una funzione.',
+    name:t('home:method.007'),
+    accade:t('home:method.008'),
     sente: 'Ogni volta che torno, c\'è continuità.',
   },
   {
     num: '05',
-    name: 'Trasformazione',
-    accade: 'Il risultato emerge, si consolida e apre una nuova fase di ascolto. Per questo il metodo è vivo.',
+    name:t('home:method.009'),
+    accade:t('home:method.010'),
     sente: 'Non sono la stessa di quando sono entrata.',
   },
 ];
@@ -253,9 +254,7 @@ export default function Method() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light"
-          >
-            Le fasi
-          </motion.span>
+          >{t('home:method.011')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -321,9 +320,7 @@ export default function Method() {
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.9 }}
           className="mt-20 md:mt-28 border-t border-brass-light/20 pt-10"
         >
-          <p className="font-serif text-[19px] md:text-[23px] italic text-ivory/65 font-light leading-[1.6] text-center max-w-none">
-            "Trasformazione non è un punto finale. È una soglia. Per questo Luxosa costruisce relazioni nel tempo, non appuntamenti isolati."
-          </p>
+          <p className="font-serif text-[19px] md:text-[23px] italic text-ivory/65 font-light leading-[1.6] text-center max-w-none">{t('home:method.012')}</p>
         </motion.div>
       </div>
     </section>

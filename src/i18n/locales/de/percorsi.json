@@ -1,0 +1,61 @@
+{
+  "percorsi": {
+    "001": "PC·01",
+    "002": "BenEssere",
+    "003": "Der Weg für das echte Gleichgewicht von Kopfhaut und Haar.",
+    "004": "Wenn das Haar an Dichte, Kraft und Stabilität verliert — oder wenn die Kopfhaut trotz wiederholter Behandlungen kein Gleichgewicht findet — liegt das Problem fast nie nur an den Produkten. Es fehlt eine echte Analyse: dessen, was über die Zeit geschehen ist, der erhaltenen Behandlungen, der spezifischen Ursachen, die bisher niemand mit Genauigkeit identifiziert hat.",
+    "005": "Hinter jeder Frustration steht fast immer derselbe Wunsch: nicht einfach gesünderes Haar, sondern wieder — oder erstmals — Haar, dem man wirklich vertrauen kann. Kräftig, stabil, voll: Haar, das nicht versteckt oder ständig gemanagt werden muss, und das das Gefühl vermittelt, endlich eine solide Basis zum Aufbauen zu haben.",
+    "006": "BenEssere beginnt mit der eingehenden Analyse von Kopfhaut und Faser; identifiziert das spezifische Problem, versteht die Haargeschichte und definiert den geeignetsten Plan für das reale Profil der Person — bevor irgendeine Maßnahme eingeleitet wird. Mit Strenge, beständiger Pflege und der Stabilität, die jede echte Erholung erfordert.",
+    "007": "PC·02",
+    "008": "ColorLux",
+    "009": "Der Weg für Licht, Harmonie und Farbidentität.",
+    "010": "Wenn die Farbe zu schnell verblasst, in unerwünschte Reflexe kippt oder das Gesicht nicht wirklich zur Geltung bringt, liegt das Problem nie nur am Technischen. Es fehlt eine klare chromatische Richtung, die auf die Person abgestimmt ist und nicht auf eine Standardformel.",
+    "011": "Hinter jeder Farbfrustration steht fast immer derselbe Wunsch: nicht einfach eine schönere Farbe, sondern eine Farbe, in der man sich wirklich wiederkennt — die das Gesicht betont, Harmonie schafft und das Gefühl vermittelt, endlich richtig zu sein. Ein Ergebnis, das nicht nach wenigen Wäschen verloren geht und nicht jedes Mal das Gefühl hinterlässt, dass noch etwas fehlt.",
+    "012": "ColorLux beginnt mit der Analyse des Naturtons, des Teints und der persönlichen Farbharmonie; identifiziert das spezifische Problem, versteht den echten Wunsch und definiert das realistisch erreichbare Ergebnis — bevor der passendste Weg aufgebaut wird. Mit Sensibilität, Absicht und der Präzision dessen, der eine kohärente chromatische Identität über die Zeit aufbaut.",
+    "013": "RL·01",
+    "014": "Rituale Luxosa",
+    "015": "Die umfassendste Betreuung im Universum Luxosa.",
+    "016": "Wenn Kopfhaut, Faser, Form und Farbe verschiedene Problemstellen aufweisen — und keine separat angegangene Lösung jemals wirklich das Gesamtbild gelöst hat — liegt das Problem nicht im Technischen. Es fehlt eine integrierte Betrachtung: jemanden, der alles zusammen sieht, nicht einen Bereich nach dem anderen.",
+    "017": "Hinter jedem fragmentierten Versuch steht fast immer derselbe Wunsch: nicht etwas zu korrigieren, sondern sich wirklich zu verwandeln. Das Gefühl, in seiner Gesamtheit betreut zu werden — Kopfhaut, Haar, Form, Farbe, Harmonie — mit der Gewissheit, dass jede Entscheidung mit den anderen kohärent ist und das Ergebnis für die Dauer aufgebaut wird.",
+    "018": "Das Rituale Luxosa entsteht aus einer vollständigen und integrierten professionellen Analyse; identifiziert die echten Prioritäten, versteht den wahren Wunsch und baut ein Bespoke-Projekt auf — maßgeschneidert, ohne vordefinierte Stufen, mit einer Anzahl von Behandlungen, die von der Fachfrau nach der Analyse festgelegt wird. Mit integrierter Vision, vollständiger Begleitung und der tiefen Kohärenz eines Projekts, das für die Dauer aufgebaut wurde.",
+    "019": "lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1"
+  },
+  "il": {
+    "metodo": {
+      "page": {
+        "001": "Die Methode",
+        "002": "Bei Luxosa entsteht das Ergebnis nicht aus dem Einfall des Moments, sondern aus einer präzisen Methode.",
+        "003": "Eine Geschichte, ein Wunsch, eine Gewohnheit, eine persönliche Beziehung zum eigenen Haar. Man beginnt bei der Person, nicht bei einer Dienstleistung.",
+        "004": "Man hört zu, beobachtet, bewertet und baut eine stimmige Richtung auf.",
+        "005": "start end",
+        "006": "end start",
+        "007": "Das erste Gespräch",
+        "008": "Die Consulenza Luxosa",
+        "009": "Das erste Gespräch.",
+        "010": "Das erste Gespräch bei Luxosa ist ein Moment eingehenden Kennenlernens. Keine schnelle Einschätzung, sondern die nötige Zeit, die Geschichte zu hören, das Haar zu beobachten, die Gewohnheiten zu verstehen und zu klären, wohin man möchte.",
+        "011": "Von hier aus entsteht die Richtung des Weges. Alle relevanten Informationen werden über die Zeit gepflegt und aktualisiert, sodass jede Behandlung eine Fortsetzung ist, kein neuer Beginn.",
+        "012": "Die Pfade entdecken",
+        "013": "Jede Entscheidung entsteht aus einer Vision."
+      }
+    }
+  },
+  "ipercorsi": {
+    "page": {
+      "001": "Die Pfade",
+      "002": "Es gibt einen Unterschied zwischen einer Leistung zu empfangen und sich jemandem anzuvertrauen, der wirklich die Verantwortung übernimmt.",
+      "003": "Ein Luxosa-Weg entsteht aus einem echten Verständnis der Person, des Haares und des zu erreichenden Ziels. Er ist keine Standardformel, kein Paket, das man aus dem Regal wählt: Er ist eine mit Methode aufgebaute Richtung, Behandlung für Behandlung.",
+      "004": "Wenn der Weg der richtige ist, hat jeder Termin einen Sinn. Und jeder Schritt nähert sich einem Ergebnis, das bleibt.",
+      "005": "start end",
+      "006": "end start",
+      "007": "Luxosa Test",
+      "008": "Der Ausgangspunkt.",
+      "009": "Ein diagnostischer Test, der Orientierung geben soll, keine Entscheidung treffen. Kopfhaut, Haar, Geschichte, Ziele: Alles wird gelesen, um die stimmigste Richtung aufzuzeigen.",
+      "010": "Der Test ersetzt die Beratung nicht: Er bereitet sie vor.",
+      "011": "Deinen Weg entdecken",
+      "012": "Der erste Schritt",
+      "013": "Die Luxosa-Erlebnisse sind der erste mögliche Einstieg für alle, die sich der Welt von Luxosa durch eine einzelne Geste nähern möchten, aufgebaut mit derselben Aufmerksamkeit.",
+      "014": "Die Erlebnisse entdecken",
+      "015": "Keine Dienste. Wege."
+    }
+  }
+}

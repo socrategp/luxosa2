@@ -5,9 +5,12 @@ import ScrollToTop from '../components/ScrollToTop';
 import BackToTop from '../components/BackToTop';
 import CustomCursor from '../components/CustomCursor';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
 export default function MainLayout() {
+  const { i18n } = useTranslation();
   const location = useLocation();
+  const language = i18n.resolvedLanguage ?? i18n.language;
   
   return (
     <div className="min-h-screen bg-ivory">
@@ -22,7 +25,7 @@ export default function MainLayout() {
           exit={{ opacity: 0, y: -8, filter: 'blur(3px)' }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0, 1] }}
         >
-          <Outlet />
+          <Outlet key={language} />
         </motion.main>
       </AnimatePresence>
       <Footer />

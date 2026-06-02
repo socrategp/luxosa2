@@ -1,24 +1,25 @@
 ﻿import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { t } from '../i18n/t';
 
 const signatures = [
   {
-    title: 'Rituale Rigenerante Profondo',
-    subtitle: 'Il nostro trattamento iconico',
-    description: 'Un percorso completo che unisce analisi, trattamento personalizzato della cute, rigenerazione della fibra e styling consapevole. Due ore dedicate interamente alla cura.',
+    title:t('esperienze:signature.001'),
+    subtitle:t('esperienze:signature.002'),
+    description:t('esperienze:signature.003'),
     duration: '120 minuti',
   },
   {
-    title: 'Consulenza Diagnostica Avanzata',
-    subtitle: 'Il punto di partenza',
-    description: 'Un\'analisi approfondita dello stato di cute e capelli attraverso strumenti professionali e colloquio dedicato. La base su cui costruire ogni percorso.',
+    title:t('esperienze:signature.004'),
+    subtitle:t('esperienze:signature.005'),
+    description:t('esperienze:signature.006'),
     duration: '60 minuti',
   },
   {
-    title: 'Armonia Colore & Struttura',
-    subtitle: 'L\'arte del colore evoluto',
-    description: 'Studio cromatico personalizzato che rispetta e valorizza la struttura naturale del capello. Analisi del sottotono, della texture e dello stile di vita della cliente.',
+    title:t('esperienze:signature.007'),
+    subtitle:t('esperienze:signature.008'),
+    description:t('esperienze:signature.009'),
     duration: '150 minuti',
   },
 ];
@@ -37,9 +38,7 @@ export default function Signature() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Momenti Signature
-          </motion.span>
+          >{t('esperienze:signature.010')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -51,18 +50,13 @@ export default function Signature() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
             className="font-serif text-[32px] md:text-[40px] lg:text-[46px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
-          >
-            Esperienze selezionate,<br />
-            pensate per eccellere.
-          </motion.h2>
+          >{t('esperienze:signature.011')}<br />{t('esperienze:signature.012')}</motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
             className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light"
-          >
-            Pochi momenti, selezionati con cura. Ogni esperienza signature rappresenta l'espressione più alta del nostro metodo.
-          </motion.p>
+          >{t('esperienze:signature.013')}</motion.p>
         </div>
 
         {/* Signature Items */}

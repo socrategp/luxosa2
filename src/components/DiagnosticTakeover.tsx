@@ -1,7 +1,7 @@
-﻿// ═══════════════════════════════════════════════════════════════
+﻿// ---------------------------------------------------------------
 // LUXOSA — LUXOSA TEST v2.0
 // Quiz orientativo fullscreen — 10-12 domande con ramificazione
-// ═══════════════════════════════════════════════════════════════
+// ---------------------------------------------------------------
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { track } from '@vercel/analytics';
@@ -11,7 +11,7 @@ import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
-// ── TYPES ──────────────────────────────────────────────────────
+// -- TYPES ------------------------------------------------------
 
 type Percorso = 'cute' | 'rinascita' | 'colore' | 'armonia' | 'rituale';
 type Scores = Record<Percorso, number>;
@@ -28,7 +28,6 @@ interface OptionDef {
   scores: Partial<Scores>;
   image?: string;
 }
-
 interface QuestionDef {
   id: string;
   label: string;
@@ -50,9 +49,10 @@ interface ContactFormData {
   whatsapp: string;
 }
 
-// ── CONSTANTS ──────────────────────────────────────────────────
+// -- CONSTANTS --------------------------------------------------
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 const MAX_SCORES: Scores = {
   cute: 19,
@@ -62,7 +62,7 @@ const MAX_SCORES: Scores = {
   rituale: 20,
 };
 
-// ── OPTION IMAGES ─────────────────────────────────────────────
+// -- OPTION IMAGES ---------------------------------------------
 // Path: /images/quiz/options/{id}.jpg — 800x600, 4:3, warm premium tones
 // Fallback: themed gradient if image not yet available
 
@@ -101,8 +101,6 @@ const OPTION_IMAGES: Record<string, string> = {
 
 const SQ = { aspect: 'aspect-square', position: 'object-center' } as const;
 
-const REPORT_DISCLAIMER = "Questo orientamento ha valore preliminare e personalizzato sulla base delle risposte fornite. Il percorso, le Esperienze suggerite e le eventuali priorità saranno confermati solo durante la Consulenza Luxosa in presenza, dopo l'osservazione diretta di cute, fibra, colore, forma e obiettivi personali.";
-
 const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> = {
   d1_lisci: SQ, d1_mossi: SQ, d1_ricci: SQ, d1_molto_ricci: SQ,
   d2_fragili: SQ, d2_crespi: SQ, d2_sottili: SQ, d2_grassi: SQ, d2_secchi: SQ, d2_sani: SQ,
@@ -131,105 +129,105 @@ const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> =
   d9_amo: SQ, d9_non_piacciono: SQ, d9_trascuro: SQ, d9_ci_lavoro: SQ,
 };
 
-// ── FASE 1: CONOSCENZA (comuni a tutte) ────────────────────────
+// -- FASE 1: CONOSCENZA (comuni a tutte) ------------------------
 
 const questionPhase1: QuestionDef[] = [
   {
     id: 'd1',
-    label: 'Tipo di capello',
-    question: 'I tuoi capelli naturali sono…',
+    label:t('test:diagnostic.takeover.001'),
+    question:t('test:diagnostic.takeover.002'),
     selectionType: 'single',
     options: [
-      { id: 'd1_lisci', text: 'Lisci', scores: { rinascita: 1, colore: 1 } },
-      { id: 'd1_mossi', text: 'Mossi', scores: { rinascita: 1, colore: 1 } },
-      { id: 'd1_ricci', text: 'Ricci', scores: { armonia: 2 } },
-      { id: 'd1_molto_ricci', text: 'Molto ricci', scores: { armonia: 2 } },
+      { id: 'd1_lisci', text:t('test:diagnostic.takeover.003'), scores: { rinascita: 1, colore: 1 } },
+      { id: 'd1_mossi', text:t('test:diagnostic.takeover.004'), scores: { rinascita: 1, colore: 1 } },
+      { id: 'd1_ricci', text:t('test:diagnostic.takeover.005'), scores: { armonia: 2 } },
+      { id: 'd1_molto_ricci', text:t('test:diagnostic.takeover.006'), scores: { armonia: 2 } },
     ],
   },
   {
     id: 'd2',
-    label: 'Stato attuale',
-    question: 'Come li descriveresti oggi?',
-    subtitle: 'Seleziona fino a 2 risposte',
+    label:t('test:diagnostic.takeover.007'),
+    question:t('test:diagnostic.takeover.008'),
+    subtitle:t('test:diagnostic.takeover.009'),
     selectionType: 'multi',
     maxSelections: 2,
     options: [
-      { id: 'd2_fragili', text: 'Fragili / Danneggiati', subtext: 'Si spezzano, mancano di resistenza', scores: { rinascita: 2 } },
-      { id: 'd2_crespi', text: 'Crespi / Difficili da gestire', subtext: 'Difficili da disciplinare', scores: { armonia: 1 } },
-      { id: 'd2_sottili', text: 'Sottili / Con poca densità', subtext: 'Mancano di corpo e volume', scores: { cute: 2 } },
-      { id: 'd2_grassi', text: 'Grassi alla radice', subtext: 'Radici oleose, lavaggi frequenti', scores: { cute: 2 } },
-      { id: 'd2_secchi', text: 'Secchi / Opachi', subtext: 'Spenti, privi di idratazione', scores: { rinascita: 1, colore: 1 } },
-      { id: 'd2_sani', text: 'Sani ma senza carattere', subtext: 'Cerco un livello superiore di cura', scores: { armonia: 1, rituale: 1 } },
+      { id: 'd2_fragili', text:t('test:diagnostic.takeover.010'), subtext:t('test:diagnostic.takeover.011'), scores: { rinascita: 2 } },
+      { id: 'd2_crespi', text:t('test:diagnostic.takeover.012'), subtext:t('test:diagnostic.takeover.013'), scores: { armonia: 1 } },
+      { id: 'd2_sottili', text:t('test:diagnostic.takeover.014'), subtext:t('test:diagnostic.takeover.015'), scores: { cute: 2 } },
+      { id: 'd2_grassi', text:t('test:diagnostic.takeover.016'), subtext:t('test:diagnostic.takeover.017'), scores: { cute: 2 } },
+      { id: 'd2_secchi', text:t('test:diagnostic.takeover.018'), subtext:t('test:diagnostic.takeover.019'), scores: { rinascita: 1, colore: 1 } },
+      { id: 'd2_sani', text:t('test:diagnostic.takeover.020'), subtext:t('test:diagnostic.takeover.021'), scores: { armonia: 1, rituale: 1 } },
     ],
   },
   {
     id: 'd3',
-    label: 'Priorità principale',
-    question: 'Qual è la cosa che ti preoccupa di più?',
-    subtitle: 'La risposta guida il tuo percorso.',
+    label:t('test:diagnostic.takeover.022'),
+    question:t('test:diagnostic.takeover.023'),
+    subtitle:t('test:diagnostic.takeover.024'),
     selectionType: 'single',
     options: [
-      { id: 'd3_cute', text: 'La salute della mia cute', subtext: 'Prurito, desquamazione, eccesso di sebo, sensibilità', scores: { cute: 3 } },
-      { id: 'd3_rovinato', text: 'Il mio capello è rovinato', subtext: 'Danni da trattamenti, fragilità, rottura, secchezza', scores: { rinascita: 3 } },
-      { id: 'd3_colore', text: 'Il colore non mi soddisfa', subtext: 'Colore spento, ossidato, non uniforme, grigi', scores: { colore: 3 } },
-      { id: 'd3_forma', text: 'Non trovo la forma giusta', subtext: 'Volume, ricci, piega, styling che non tiene', scores: { armonia: 3 } },
-      { id: 'd3_tutto', text: 'Voglio prendermi cura di tutto', subtext: 'Esigenza globale, trasformazione completa', scores: { rituale: 3 } },
+      { id: 'd3_cute', text:t('test:diagnostic.takeover.025'), subtext:t('test:diagnostic.takeover.026'), scores: { cute: 3 } },
+      { id: 'd3_rovinato', text:t('test:diagnostic.takeover.027'), subtext:t('test:diagnostic.takeover.028'), scores: { rinascita: 3 } },
+      { id: 'd3_colore', text:t('test:diagnostic.takeover.029'), subtext:t('test:diagnostic.takeover.030'), scores: { colore: 3 } },
+      { id: 'd3_forma', text:t('test:diagnostic.takeover.031'), subtext:t('test:diagnostic.takeover.032'), scores: { armonia: 3 } },
+      { id: 'd3_tutto', text:t('test:diagnostic.takeover.033'), subtext:t('test:diagnostic.takeover.034'), scores: { rituale: 3 } },
     ],
   },
 ];
 
-// ── FASE 2: APPROFONDIMENTO (ramificato) ───────────────────────
+// -- FASE 2: APPROFONDIMENTO (ramificato) -----------------------
 
 const questionBranches: Record<BranchKey, QuestionDef[]> = {
   cute: [
     {
       id: 'd4a',
-      label: 'Sintomi cute',
-      question: 'Cosa noti sulla tua cute?',
-      subtitle: 'Seleziona fino a 2 risposte',
+      label:t('test:diagnostic.takeover.035'),
+      question:t('test:diagnostic.takeover.036'),
+      subtitle:t('test:diagnostic.takeover.037'),
       selectionType: 'multi',
       maxSelections: 2,
       options: [
-        { id: 'd4a_prurito', text: 'Prurito frequente', scores: { cute: 1 } },
-        { id: 'd4a_desquamazione', text: 'Desquamazione / forfora', scores: { cute: 1 } },
-        { id: 'd4a_grassa', text: 'Cute grassa / eccesso di sebo', scores: { cute: 1 } },
-        { id: 'd4a_rossori', text: 'Rossori o irritazione', scores: { cute: 1 } },
-        { id: 'd4a_tira', text: 'Sensazione di cute «che tira»', scores: { cute: 1 } },
+        { id: 'd4a_prurito', text:t('test:diagnostic.takeover.038'), scores: { cute: 1 } },
+        { id: 'd4a_desquamazione', text:t('test:diagnostic.takeover.039'), scores: { cute: 1 } },
+        { id: 'd4a_grassa', text:t('test:diagnostic.takeover.040'), scores: { cute: 1 } },
+        { id: 'd4a_rossori', text:t('test:diagnostic.takeover.041'), scores: { cute: 1 } },
+        { id: 'd4a_tira', text:t('test:diagnostic.takeover.042'), scores: { cute: 1 } },
       ],
     },
     {
       id: 'd5a',
-      label: 'Durata',
-      question: 'Da quanto tempo noti questi fastidi?',
+      label:t('test:diagnostic.takeover.043'),
+      question:t('test:diagnostic.takeover.044'),
       selectionType: 'single',
       options: [
-        { id: 'd5a_settimane', text: 'Da poche settimane', scores: {} },
-        { id: 'd5a_mesi', text: 'Da qualche mese', scores: { cute: 1 } },
-        { id: 'd5a_anno', text: 'Da più di un anno', scores: { cute: 2, rituale: 1 } },
-        { id: 'd5a_sempre', text: 'Da sempre', scores: { cute: 2, rituale: 1 } },
+        { id: 'd5a_settimane', text:t('test:diagnostic.takeover.045'), scores: {} },
+        { id: 'd5a_mesi', text:t('test:diagnostic.takeover.046'), scores: { cute: 1 } },
+        { id: 'd5a_anno', text:t('test:diagnostic.takeover.047'), scores: { cute: 2, rituale: 1 } },
+        { id: 'd5a_sempre', text:t('test:diagnostic.takeover.048'), scores: { cute: 2, rituale: 1 } },
       ],
     },
     {
       id: 'd6a',
-      label: 'Trattamenti precedenti',
-      question: 'Hai già provato trattamenti specifici per la cute?',
+      label:t('test:diagnostic.takeover.049'),
+      question:t('test:diagnostic.takeover.050'),
       selectionType: 'single',
       options: [
-        { id: 'd6a_mai', text: 'No, non ho mai affrontato il problema', scores: {} },
-        { id: 'd6a_prodotti', text: 'Sì, con prodotti da farmacia/supermercato', scores: { cute: 1 } },
-        { id: 'd6a_salone', text: 'Sì, in un salone', scores: { cute: 2 } },
-        { id: 'd6a_dermatologo', text: 'Sì, da un dermatologo', scores: { cute: 1 } },
+        { id: 'd6a_mai', text:t('test:diagnostic.takeover.051'), scores: {} },
+        { id: 'd6a_prodotti', text:t('test:diagnostic.takeover.052'), scores: { cute: 1 } },
+        { id: 'd6a_salone', text:t('test:diagnostic.takeover.053'), scores: { cute: 2 } },
+        { id: 'd6a_dermatologo', text:t('test:diagnostic.takeover.054'), scores: { cute: 1 } },
       ],
     },
     {
       id: 'd7a',
-      label: 'Densità',
-      question: 'Noti anche problemi di densità o diradamento?',
+      label:t('test:diagnostic.takeover.055'),
+      question:t('test:diagnostic.takeover.056'),
       selectionType: 'single',
       options: [
-        { id: 'd7a_no', text: 'No', scores: {} },
-        { id: 'd7a_lieve', text: 'Leggermente, in alcune zone', scores: { cute: 1 } },
-        { id: 'd7a_evidente', text: 'Sì, in modo evidente', scores: { cute: 2, rituale: 1 } },
+        { id: 'd7a_no', text:t('test:diagnostic.takeover.057'), scores: {} },
+        { id: 'd7a_lieve', text:t('test:diagnostic.takeover.058'), scores: { cute: 1 } },
+        { id: 'd7a_evidente', text:t('test:diagnostic.takeover.059'), scores: { cute: 2, rituale: 1 } },
       ],
     },
   ],
@@ -237,51 +235,51 @@ const questionBranches: Record<BranchKey, QuestionDef[]> = {
   struttura: [
     {
       id: 'd4b',
-      label: 'Trattamenti subiti',
-      question: 'Cosa ha subito il tuo capello?',
-      subtitle: 'Seleziona fino a 3 risposte',
+      label:t('test:diagnostic.takeover.060'),
+      question:t('test:diagnostic.takeover.061'),
+      subtitle:t('test:diagnostic.takeover.062'),
       selectionType: 'multi',
       maxSelections: 3,
       options: [
-        { id: 'd4b_colorazioni', text: 'Colorazioni frequenti', scores: { rinascita: 1 } },
-        { id: 'd4b_decolorazioni', text: 'Decolorazioni / schiariture', scores: { rinascita: 1 } },
-        { id: 'd4b_stiratura', text: 'Stiratura chimica', scores: { rinascita: 1 } },
-        { id: 'd4b_calore', text: 'Piastra o phon ad alta temperatura', scores: { rinascita: 1 } },
-        { id: 'd4b_aggressivi', text: 'Trattamenti aggressivi in altri saloni', scores: { rinascita: 1 } },
+        { id: 'd4b_colorazioni', text:t('test:diagnostic.takeover.063'), scores: { rinascita: 1 } },
+        { id: 'd4b_decolorazioni', text:t('test:diagnostic.takeover.064'), scores: { rinascita: 1 } },
+        { id: 'd4b_stiratura', text:t('test:diagnostic.takeover.065'), scores: { rinascita: 1 } },
+        { id: 'd4b_calore', text:t('test:diagnostic.takeover.066'), scores: { rinascita: 1 } },
+        { id: 'd4b_aggressivi', text:t('test:diagnostic.takeover.067'), scores: { rinascita: 1 } },
       ],
     },
     {
       id: 'd5b',
-      label: 'Stato punte',
-      question: 'Come sono le tue punte?',
+      label:t('test:diagnostic.takeover.068'),
+      question:t('test:diagnostic.takeover.069'),
       selectionType: 'single',
       options: [
-        { id: 'd5b_sane', text: 'Sane e chiuse', scores: {} },
-        { id: 'd5b_aperte', text: 'Leggermente aperte', scores: { rinascita: 1 } },
-        { id: 'd5b_spezzano', text: 'Molto aperte, si spezzano', scores: { rinascita: 2 } },
+        { id: 'd5b_sane', text:t('test:diagnostic.takeover.070'), scores: {} },
+        { id: 'd5b_aperte', text:t('test:diagnostic.takeover.071'), scores: { rinascita: 1 } },
+        { id: 'd5b_spezzano', text:t('test:diagnostic.takeover.072'), scores: { rinascita: 2 } },
       ],
     },
     {
       id: 'd6b',
-      label: 'Tatto',
-      question: 'Come senti il tuo capello al tatto?',
+      label:t('test:diagnostic.takeover.073'),
+      question:t('test:diagnostic.takeover.074'),
       selectionType: 'single',
       options: [
-        { id: 'd6b_morbido', text: 'Morbido e scorrevole', scores: {} },
-        { id: 'd6b_ruvido', text: 'Ruvido o poroso', scores: { rinascita: 1 } },
-        { id: 'd6b_secco', text: 'Secco e fragile', scores: { rinascita: 2 } },
-        { id: 'd6b_paglia', text: '«Di paglia», senza vita', scores: { rinascita: 3, rituale: 1 } },
+        { id: 'd6b_morbido', text:t('test:diagnostic.takeover.075'), scores: {} },
+        { id: 'd6b_ruvido', text:t('test:diagnostic.takeover.076'), scores: { rinascita: 1 } },
+        { id: 'd6b_secco', text:t('test:diagnostic.takeover.077'), scores: { rinascita: 2 } },
+        { id: 'd6b_paglia', text:t('test:diagnostic.takeover.078'), scores: { rinascita: 3, rituale: 1 } },
       ],
     },
     {
       id: 'd7b',
-      label: 'Obiettivo struttura',
-      question: 'Cosa vorresti ottenere?',
+      label:t('test:diagnostic.takeover.079'),
+      question:t('test:diagnostic.takeover.080'),
       selectionType: 'single',
       options: [
-        { id: 'd7b_morbidezza', text: 'Ritrovare morbidezza e lucentezza', scores: { rinascita: 1 } },
-        { id: 'd7b_rinforzare', text: 'Rinforzare e fermare la rottura', scores: { rinascita: 2 } },
-        { id: 'd7b_ricominciare', text: 'Ricominciare da zero con un percorso completo', scores: { rinascita: 2, rituale: 2 } },
+        { id: 'd7b_morbidezza', text:t('test:diagnostic.takeover.081'), scores: { rinascita: 1 } },
+        { id: 'd7b_rinforzare', text:t('test:diagnostic.takeover.082'), scores: { rinascita: 2 } },
+        { id: 'd7b_ricominciare', text:t('test:diagnostic.takeover.083'), scores: { rinascita: 2, rituale: 2 } },
       ],
     },
   ],
@@ -289,55 +287,55 @@ const questionBranches: Record<BranchKey, QuestionDef[]> = {
   colore: [
     {
       id: 'd4c',
-      label: 'Situazione colore',
-      question: 'Qual è la tua situazione attuale con il colore?',
+      label:t('test:diagnostic.takeover.084'),
+      question:t('test:diagnostic.takeover.085'),
       selectionType: 'single',
       options: [
-        { id: 'd4c_naturale', text: 'Porto il mio colore naturale', scores: { colore: 1 } },
-        { id: 'd4c_tinta', text: 'Faccio la tinta regolarmente', scores: { colore: 2 } },
-        { id: 'd4c_decolorazioni', text: 'Ho decolorazioni o colpi di sole', scores: { colore: 2, rinascita: 1 } },
-        { id: 'd4c_grigi_coprire', text: 'Ho i capelli grigi e li copro', scores: { colore: 2 } },
-        { id: 'd4c_grigi_valorizzare', text: 'Ho i capelli grigi e vorrei valorizzarli', scores: { colore: 2, armonia: 1 } },
+        { id: 'd4c_naturale', text:t('test:diagnostic.takeover.086'), scores: { colore: 1 } },
+        { id: 'd4c_tinta', text:t('test:diagnostic.takeover.087'), scores: { colore: 2 } },
+        { id: 'd4c_decolorazioni', text:t('test:diagnostic.takeover.088'), scores: { colore: 2, rinascita: 1 } },
+        { id: 'd4c_grigi_coprire', text:t('test:diagnostic.takeover.089'), scores: { colore: 2 } },
+        { id: 'd4c_grigi_valorizzare', text:t('test:diagnostic.takeover.090'), scores: { colore: 2, armonia: 1 } },
       ],
     },
     {
       id: 'd5c',
-      label: 'Problema colore',
-      question: 'Cosa non ti convince del tuo colore attuale?',
-      subtitle: 'Seleziona fino a 2 risposte',
+      label:t('test:diagnostic.takeover.091'),
+      question:t('test:diagnostic.takeover.092'),
+      subtitle:t('test:diagnostic.takeover.093'),
       selectionType: 'multi',
       maxSelections: 2,
       options: [
-        { id: 'd5c_spegne', text: 'Si spegne troppo in fretta', scores: { colore: 1 } },
-        { id: 'd5c_luminoso', text: 'Non è luminoso come vorrei', scores: { colore: 1 } },
-        { id: 'd5c_uniforme', text: 'Non è uniforme', scores: { colore: 1 } },
-        { id: 'd5c_viso', text: 'Non valorizza il mio viso', scores: { colore: 1, armonia: 1 } },
-        { id: 'd5c_danneggia', text: 'Danneggia il capello', scores: { colore: 1, rinascita: 2 } },
+        { id: 'd5c_spegne', text:t('test:diagnostic.takeover.094'), scores: { colore: 1 } },
+        { id: 'd5c_luminoso', text:t('test:diagnostic.takeover.095'), scores: { colore: 1 } },
+        { id: 'd5c_uniforme', text:t('test:diagnostic.takeover.096'), scores: { colore: 1 } },
+        { id: 'd5c_viso', text:t('test:diagnostic.takeover.097'), scores: { colore: 1, armonia: 1 } },
+        { id: 'd5c_danneggia', text:t('test:diagnostic.takeover.098'), scores: { colore: 1, rinascita: 2 } },
       ],
     },
     {
       id: 'd6c',
-      label: 'Frequenza colore',
-      question: 'Quanto spesso colori i capelli?',
+      label:t('test:diagnostic.takeover.099'),
+      question:t('test:diagnostic.takeover.100'),
       selectionType: 'single',
       options: [
-        { id: 'd6c_frequente', text: 'Ogni 3-4 settimane', scores: { colore: 2, rinascita: 1 } },
-        { id: 'd6c_normale', text: 'Ogni 6-8 settimane', scores: { colore: 1 } },
-        { id: 'd6c_raro', text: 'Ogni 3+ mesi', scores: {} },
-        { id: 'd6c_mai', text: 'Raramente o mai', scores: {} },
+        { id: 'd6c_frequente', text:t('test:diagnostic.takeover.101'), scores: { colore: 2, rinascita: 1 } },
+        { id: 'd6c_normale', text:t('test:diagnostic.takeover.102'), scores: { colore: 1 } },
+        { id: 'd6c_raro', text:t('test:diagnostic.takeover.103'), scores: {} },
+        { id: 'd6c_mai', text:t('test:diagnostic.takeover.104'), scores: {} },
       ],
     },
     {
       id: 'd7c',
-      label: 'Obiettivo colore',
-      question: 'Cosa cerchi nel colore ideale?',
+      label:t('test:diagnostic.takeover.105'),
+      question:t('test:diagnostic.takeover.106'),
       selectionType: 'single',
       options: [
-        { id: 'd7c_naturalezza', text: 'Naturalezza e armonia con il mio incarnato', scores: { colore: 1 } },
-        { id: 'd7c_luminosita', text: 'Luminosità e dimensione', scores: { colore: 2 } },
-        { id: 'd7c_copertura', text: 'Copertura perfetta dei grigi', scores: { colore: 1 } },
-        { id: 'd7c_cambiamento', text: 'Un cambiamento deciso', scores: { colore: 1, rituale: 1 } },
-        { id: 'd7c_bianco', text: 'Accompagnare il passaggio al bianco o rendere la ricrescita meno visibile', scores: { colore: 2 } },
+        { id: 'd7c_naturalezza', text:t('test:diagnostic.takeover.107'), scores: { colore: 1 } },
+        { id: 'd7c_luminosita', text:t('test:diagnostic.takeover.108'), scores: { colore: 2 } },
+        { id: 'd7c_copertura', text:t('test:diagnostic.takeover.109'), scores: { colore: 1 } },
+        { id: 'd7c_cambiamento', text:t('test:diagnostic.takeover.110'), scores: { colore: 1, rituale: 1 } },
+        { id: 'd7c_bianco', text:t('test:diagnostic.takeover.111'), scores: { colore: 2 } },
       ],
     },
   ],
@@ -345,49 +343,49 @@ const questionBranches: Record<BranchKey, QuestionDef[]> = {
   forma: [
     {
       id: 'd4d',
-      label: 'Difficoltà principale',
-      question: 'Qual è la tua difficoltà principale?',
+      label:t('test:diagnostic.takeover.112'),
+      question:t('test:diagnostic.takeover.113'),
       selectionType: 'single',
       options: [
-        { id: 'd4d_volume', text: 'Il volume — ne ho troppo o troppo poco', scores: { armonia: 2 } },
-        { id: 'd4d_ricci', text: 'I ricci non sono definiti come vorrei', scores: { armonia: 2 } },
-        { id: 'd4d_piega', text: 'La piega non tiene mai', scores: { armonia: 1 } },
-        { id: 'd4d_taglio', text: 'Non so quale taglio mi valorizzi davvero', scores: { armonia: 1, rituale: 1 } },
+        { id: 'd4d_volume', text:t('test:diagnostic.takeover.114'), scores: { armonia: 2 } },
+        { id: 'd4d_ricci', text:t('test:diagnostic.takeover.115'), scores: { armonia: 2 } },
+        { id: 'd4d_piega', text:t('test:diagnostic.takeover.116'), scores: { armonia: 1 } },
+        { id: 'd4d_taglio', text:t('test:diagnostic.takeover.117'), scores: { armonia: 1, rituale: 1 } },
       ],
     },
     {
       id: 'd5d',
-      label: 'Tempo quotidiano',
-      question: 'Quanto tempo dedichi ai capelli ogni mattina?',
+      label:t('test:diagnostic.takeover.118'),
+      question:t('test:diagnostic.takeover.119'),
       selectionType: 'single',
       options: [
-        { id: 'd5d_poco', text: 'Meno di 5 minuti', scores: { armonia: 1 } },
-        { id: 'd5d_medio', text: '5-15 minuti', scores: {} },
-        { id: 'd5d_molto', text: 'Più di 15 minuti', scores: { armonia: 1, rituale: 1 } },
-        { id: 'd5d_troppo', text: 'Troppo, e vorrei dedicarne meno', scores: { armonia: 1, rituale: 1 } },
+        { id: 'd5d_poco', text:t('test:diagnostic.takeover.120'), scores: { armonia: 1 } },
+        { id: 'd5d_medio', text:t('test:diagnostic.takeover.121'), scores: {} },
+        { id: 'd5d_molto', text:t('test:diagnostic.takeover.122'), scores: { armonia: 1, rituale: 1 } },
+        { id: 'd5d_troppo', text:t('test:diagnostic.takeover.123'), scores: { armonia: 1, rituale: 1 } },
       ],
     },
     {
       id: 'd6d',
-      label: 'Strumenti a caldo',
-      question: 'Usi strumenti a caldo (piastra, arricciacapelli, phon)?',
+      label:t('test:diagnostic.takeover.124'),
+      question:t('test:diagnostic.takeover.125'),
       selectionType: 'single',
       options: [
-        { id: 'd6d_mai', text: 'Mai o raramente', scores: {} },
-        { id: 'd6d_qualche', text: 'Qualche volta a settimana', scores: { rinascita: 1 } },
-        { id: 'd6d_sempre', text: 'Quasi ogni giorno', scores: { rinascita: 2, armonia: 1 } },
+        { id: 'd6d_mai', text:t('test:diagnostic.takeover.126'), scores: {} },
+        { id: 'd6d_qualche', text:t('test:diagnostic.takeover.127'), scores: { rinascita: 1 } },
+        { id: 'd6d_sempre', text:t('test:diagnostic.takeover.128'), scores: { rinascita: 2, armonia: 1 } },
       ],
     },
     {
       id: 'd7d',
-      label: 'Sensazione desiderata',
-      question: 'Come vorresti sentire i tuoi capelli?',
+      label:t('test:diagnostic.takeover.129'),
+      question:t('test:diagnostic.takeover.130'),
       selectionType: 'single',
       options: [
-        { id: 'd7d_liberi', text: 'Liberi e naturali, con la loro forma vera', scores: { armonia: 2 } },
-        { id: 'd7d_disciplinati', text: 'Disciplinati e sotto controllo', scores: { armonia: 1 } },
-        { id: 'd7d_voluminosi', text: 'Voluminosi e pieni di vita', scores: { armonia: 1 } },
-        { id: 'd7d_scoprire', text: 'Vorrei scoprirlo con una professionista', scores: { armonia: 1, rituale: 2 } },
+        { id: 'd7d_liberi', text:t('test:diagnostic.takeover.131'), scores: { armonia: 2 } },
+        { id: 'd7d_disciplinati', text:t('test:diagnostic.takeover.132'), scores: { armonia: 1 } },
+        { id: 'd7d_voluminosi', text:t('test:diagnostic.takeover.133'), scores: { armonia: 1 } },
+        { id: 'd7d_scoprire', text:t('test:diagnostic.takeover.134'), scores: { armonia: 1, rituale: 2 } },
       ],
     },
   ],
@@ -395,95 +393,95 @@ const questionBranches: Record<BranchKey, QuestionDef[]> = {
   completo: [
     {
       id: 'd4e',
-      label: 'Prima priorità',
-      question: 'Se dovessi dare una priorità, cosa viene prima?',
+      label:t('test:diagnostic.takeover.135'),
+      question:t('test:diagnostic.takeover.136'),
       selectionType: 'single',
       options: [
-        { id: 'd4e_cute', text: 'La salute della cute e delle radici', scores: { rituale: 2, cute: 1 } },
-        { id: 'd4e_capello', text: 'La qualità e la forza del capello', scores: { rituale: 2, rinascita: 1 } },
-        { id: 'd4e_colore', text: 'Il colore giusto per me', scores: { rituale: 2, colore: 1 } },
-        { id: 'd4e_forma', text: 'La forma e il volume', scores: { rituale: 2, armonia: 1 } },
-        { id: 'd4e_nonso', text: 'Non saprei, vorrei un parere professionale', scores: { rituale: 3 } },
+        { id: 'd4e_cute', text:t('test:diagnostic.takeover.137'), scores: { rituale: 2, cute: 1 } },
+        { id: 'd4e_capello', text:t('test:diagnostic.takeover.138'), scores: { rituale: 2, rinascita: 1 } },
+        { id: 'd4e_colore', text:t('test:diagnostic.takeover.139'), scores: { rituale: 2, colore: 1 } },
+        { id: 'd4e_forma', text:t('test:diagnostic.takeover.140'), scores: { rituale: 2, armonia: 1 } },
+        { id: 'd4e_nonso', text:t('test:diagnostic.takeover.141'), scores: { rituale: 3 } },
       ],
     },
     {
       id: 'd5e',
-      label: 'Situazione attuale',
-      question: 'Hai già un salone di fiducia o stai cercando?',
+      label:t('test:diagnostic.takeover.142'),
+      question:t('test:diagnostic.takeover.143'),
       selectionType: 'single',
       options: [
-        { id: 'd5e_cercando', text: 'Sto cercando, non ho trovato il posto giusto', scores: { rituale: 1 } },
-        { id: 'd5e_insoddisfatta', text: 'Ho un salone ma non sono soddisfatta', scores: { rituale: 1 } },
-        { id: 'd5e_prima', text: 'È la prima volta che cerco un percorso serio', scores: { rituale: 1 } },
+        { id: 'd5e_cercando', text:t('test:diagnostic.takeover.144'), scores: { rituale: 1 } },
+        { id: 'd5e_insoddisfatta', text:t('test:diagnostic.takeover.145'), scores: { rituale: 1 } },
+        { id: 'd5e_prima', text:t('test:diagnostic.takeover.146'), scores: { rituale: 1 } },
       ],
     },
     {
       id: 'd6e',
-      label: 'Aspettative',
-      question: 'Cosa ti aspetti da un percorso di cura?',
+      label:t('test:diagnostic.takeover.147'),
+      question:t('test:diagnostic.takeover.148'),
       selectionType: 'single',
       options: [
-        { id: 'd6e_risultati', text: 'Risultati visibili e duraturi', scores: { rituale: 1 } },
-        { id: 'd6e_presa', text: 'Qualcuno che mi prenda in carico davvero', scores: { rituale: 2 } },
-        { id: 'd6e_capire', text: 'Capire finalmente cosa serve al mio capello', scores: { rituale: 1 } },
-        { id: 'd6e_tutto', text: 'Tutte queste cose insieme', scores: { rituale: 3 } },
+        { id: 'd6e_risultati', text:t('test:diagnostic.takeover.149'), scores: { rituale: 1 } },
+        { id: 'd6e_presa', text:t('test:diagnostic.takeover.150'), scores: { rituale: 2 } },
+        { id: 'd6e_capire', text:t('test:diagnostic.takeover.151'), scores: { rituale: 1 } },
+        { id: 'd6e_tutto', text:t('test:diagnostic.takeover.152'), scores: { rituale: 3 } },
       ],
     },
     {
       id: 'd7e',
-      label: 'Continuità',
-      question: 'Saresti disposta a seguire un percorso di più sedute nel tempo?',
+      label:t('test:diagnostic.takeover.153'),
+      question:t('test:diagnostic.takeover.154'),
       selectionType: 'single',
       options: [
-        { id: 'd7e_se_funziona', text: 'Sì, se vedo che funziona', scores: { rituale: 1 } },
-        { id: 'd7e_continuita', text: "Sì, mi piace l'idea di continuità", scores: { rituale: 1 } },
-        { id: 'd7e_valutare', text: 'Preferisco valutare dopo il primo incontro', scores: { rituale: 1 } },
+        { id: 'd7e_se_funziona', text:t('test:diagnostic.takeover.155'), scores: { rituale: 1 } },
+        { id: 'd7e_continuita', text:t('test:diagnostic.takeover.156'), scores: { rituale: 1 } },
+        { id: 'd7e_valutare', text:t('test:diagnostic.takeover.157'), scores: { rituale: 1 } },
       ],
     },
   ],
 };
 
-// ── FASE 3: STILE DI VITA ──────────────────────────────────────
+// -- FASE 3: STILE DI VITA --------------------------------------
 
 const questionPhase3: QuestionDef[] = [
   {
     id: 'd8',
-    label: 'Frequenza lavaggio',
-    question: 'Ogni quanto lavi i capelli?',
+    label:t('test:diagnostic.takeover.158'),
+    question:t('test:diagnostic.takeover.159'),
     selectionType: 'single',
     options: [
-      { id: 'd8_ogni_giorno', text: 'Ogni giorno', scores: { cute: 1 } },
-      { id: 'd8_2_3', text: 'Ogni 2-3 giorni', scores: {} },
-      { id: 'd8_settimana', text: 'Una volta a settimana', scores: {} },
-      { id: 'd8_meno', text: 'Meno di una volta a settimana', scores: { cute: 1 } },
+      { id: 'd8_ogni_giorno', text:t('test:diagnostic.takeover.160'), scores: { cute: 1 } },
+      { id: 'd8_2_3', text:t('test:diagnostic.takeover.161'), scores: {} },
+      { id: 'd8_settimana', text:t('test:diagnostic.takeover.162'), scores: {} },
+      { id: 'd8_meno', text:t('test:diagnostic.takeover.163'), scores: { cute: 1 } },
     ],
   },
   {
     id: 'd9',
-    label: 'Rapporto con i capelli',
-    question: 'Come descriveresti il tuo rapporto con i tuoi capelli?',
+    label:t('test:diagnostic.takeover.164'),
+    question:t('test:diagnostic.takeover.165'),
     selectionType: 'single',
     options: [
-      { id: 'd9_amo', text: 'Li amo, ma vorrei valorizzarli di più', scores: { armonia: 1 } },
-      { id: 'd9_non_piacciono', text: 'Non mi piacciono, li sopporto', scores: { rituale: 1 } },
-      { id: 'd9_trascuro', text: 'Li trascuro perché non so come prendermene cura', scores: { rituale: 1, cute: 1 } },
-      { id: 'd9_ci_lavoro', text: 'Ci sto lavorando, ma mi serve aiuto', scores: { rituale: 1 } },
+      { id: 'd9_amo', text:t('test:diagnostic.takeover.166'), scores: { armonia: 1 } },
+      { id: 'd9_non_piacciono', text:t('test:diagnostic.takeover.167'), scores: { rituale: 1 } },
+      { id: 'd9_trascuro', text:t('test:diagnostic.takeover.168'), scores: { rituale: 1, cute: 1 } },
+      { id: 'd9_ci_lavoro', text:t('test:diagnostic.takeover.169'), scores: { rituale: 1 } },
     ],
   },
 ];
 
-// ── D10: SPAZIO LIBERO ─────────────────────────────────────────
+// -- D10: SPAZIO LIBERO -----------------------------------------
 
 const questionD10: QuestionDef = {
   id: 'd10',
-  label: 'Spazio libero',
-  question: "C'è qualcosa che vorresti raccontarci prima del nostro primo incontro?",
-  subtitle: 'Uno spazio libero, tutto tuo. Facoltativo.',
+  label:t('test:diagnostic.takeover.170'),
+  question:t('test:diagnostic.takeover.171'),
+  subtitle:t('test:diagnostic.takeover.172'),
   selectionType: 'text',
   options: [],
 };
 
-// ── HELPERS ────────────────────────────────────────────────────
+// -- HELPERS ----------------------------------------------------
 
 function getBranchKey(d3: string): BranchKey {
   const map: Record<string, BranchKey> = {
@@ -603,11 +601,11 @@ function computeScores(answers: Answers, sequence: QuestionDef[]): Scores {
     }
   }
 
-  // Bonus: D4a ≥2 risposte → +1 cute
+  // Bonus: D4a =2 risposte ? +1 cute
   const d4a = answers['d4a'];
   if (Array.isArray(d4a) && d4a.length >= 2) scores.cute += 1;
 
-  // Bonus: D4b decolorazioni+stiratura → +1 rinascita; ≥3 → +1 rituale
+  // Bonus: D4b decolorazioni+stiratura ? +1 rinascita; =3 ? +1 rituale
   const d4b = answers['d4b'];
   if (Array.isArray(d4b)) {
     if (d4b.includes('d4b_decolorazioni') && d4b.includes('d4b_stiratura')) scores.rinascita += 1;
@@ -646,21 +644,21 @@ function getPercorsoResult(scores: Scores): {
   return { primary, secondary, primaryPct, secondaryPct };
 }
 
-// ── ESPERIENZE UFFICIALI (9) ────────────────────────────────────
+// -- ESPERIENZE UFFICIALI (9) ------------------------------------
 
 const ES: Record<string, EsperienzaDef> = {
-  consulenzeSpecialistiche: { nome: 'Consulenze Specialistiche', sottotitolo: 'Il primo incontro — ascolto, lettura, direzione.' },
-  areaBenessere: { nome: 'Area Benessere', sottotitolo: 'Quando la cura della cute diventa un rituale.' },
-  cheratinaNutrizionePro: { nome: 'Cheratina Nutrizione Pro', sottotitolo: 'Ordine, morbidezza e resistenza duratura.' },
-  piegaLux: { nome: 'PiegaLux', sottotitolo: 'Il gesto che conclude ogni percorso.' },
-  taglioSignature: { nome: 'Taglio Signature', sottotitolo: 'Un taglio costruito sulla morfologia, non su una formula.' },
-  nuances: { nome: 'Nuances', sottotitolo: 'Il colore nella sua espressione più raffinata.' },
-  luceSignature: { nome: 'Luce Signature', sottotitolo: 'Schiariture costruite con precisione e rispetto della fibra.' },
-  ricciOsa: { nome: 'RicciOsa', sottotitolo: "L'esperienza dedicata al capello riccio autentico." },
-  ricciOso: { nome: 'RicciOso', sottotitolo: 'Il taglio costruito sulla morfologia del capello riccio.' },
+  consulenzeSpecialistiche: { nome:t('test:diagnostic.takeover.173'), sottotitolo:t('test:diagnostic.takeover.174') },
+  areaBenessere: { nome:t('test:diagnostic.takeover.175'), sottotitolo:t('test:diagnostic.takeover.176') },
+  cheratinaNutrizionePro: { nome:t('test:diagnostic.takeover.177'), sottotitolo:t('test:diagnostic.takeover.178') },
+  piegaLux: { nome:t('test:diagnostic.takeover.179'), sottotitolo:t('test:diagnostic.takeover.180') },
+  taglioSignature: { nome:t('test:diagnostic.takeover.181'), sottotitolo:t('test:diagnostic.takeover.182') },
+  nuances: { nome:t('test:diagnostic.takeover.183'), sottotitolo:t('test:diagnostic.takeover.184') },
+  luceSignature: { nome:t('test:diagnostic.takeover.185'), sottotitolo:t('test:diagnostic.takeover.186') },
+  ricciOsa: { nome:t('test:diagnostic.takeover.187'), sottotitolo:t('test:diagnostic.takeover.188') },
+  ricciOso: { nome:t('test:diagnostic.takeover.189'), sottotitolo:t('test:diagnostic.takeover.190') },
 };
 
-// ── MAPPING PUBBLICO ────────────────────────────────────────────
+// -- MAPPING PUBBLICO --------------------------------------------
 
 const PUBLIC_PERCORSO_NAMES: Record<PublicPercorso, string> = {
   benessere: 'BenEssere',
@@ -685,7 +683,7 @@ function getSecondaryPublic(primary: Percorso, secondary: Percorso | null, score
   return secondPub;
 }
 
-// ── LIVELLO DI ATTENZIONE ───────────────────────────────────────
+// -- LIVELLO DI ATTENZIONE ---------------------------------------
 
 function getAttentionLevel(answers: Answers, primary: Percorso): AttentionLevel {
   let score = 0;
@@ -739,7 +737,7 @@ function getAttentionLevel(answers: Answers, primary: Percorso): AttentionLevel 
   return 'ordinaria';
 }
 
-// ── CONDIZIONE DI PARTENZA ──────────────────────────────────────
+// -- CONDIZIONE DI PARTENZA --------------------------------------
 
 function buildConditionSummary(answers: Answers, _primary: Percorso): string {
   const d1 = answers['d1'] as string | undefined;
@@ -749,31 +747,31 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
   const d9 = answers['d9'] as string | undefined;
 
   const tipoMap: Record<string, string> = {
-    d1_lisci: 'lisci', d1_mossi: 'mossi',
-    d1_ricci: 'ricci', d1_molto_ricci: 'molto ricci',
+    d1_lisci: t('report:diagnostic.shortLabels.d1_lisci'), d1_mossi: t('report:diagnostic.shortLabels.d1_mossi'),
+    d1_ricci: t('report:diagnostic.shortLabels.d1_ricci'), d1_molto_ricci:t('report:diagnostic.001'),
   };
-  const tipo = d1 ? (tipoMap[d1] ?? 'nella loro struttura naturale') : 'nella loro struttura naturale';
+  const tipo = d1 ? (tipoMap[d1] ?? t('report:diagnostic.shortLabels.naturalStructure')) :t('report:diagnostic.002');
 
   const statoLabels: Record<string, string> = {
-    d2_fragili: 'fragili e con scarsa resistenza',
-    d2_crespi: 'difficili da gestire per via della crespa',
-    d2_sottili: 'sottili e con poco volume',
-    d2_grassi: 'con tendenza alla radice grassa',
-    d2_secchi: 'secchi e opachi',
-    d2_sani: 'in buona salute, ma con margine di miglioramento',
+    d2_fragili:t('report:diagnostic.003'),
+    d2_crespi:t('report:diagnostic.004'),
+    d2_sottili:t('report:diagnostic.005'),
+    d2_grassi:t('report:diagnostic.006'),
+    d2_secchi:t('report:diagnostic.007'),
+    d2_sani:t('report:diagnostic.008'),
   };
   const d2arr = Array.isArray(d2) ? d2 : d2 ? [d2] : [];
-  let statoDesc = d2arr.map(id => statoLabels[id] ?? '').filter(Boolean).join(' e ');
+  let statoDesc = d2arr.map(id => statoLabels[id] ?? '').filter(Boolean).join(t('report:diagnostic.shortLabels.joinAnd'));
   // Evita contraddizione: "in buona salute" + danno da colore rilevato in d5c
   const d5cForCond = answers['d5c'];
   const d5cArrForCond = Array.isArray(d5cForCond) ? (d5cForCond as string[]) : d5cForCond ? [d5cForCond as string] : [];
   if (d3 && getBranchKey(d3) === 'colore' && d5cArrForCond.includes('d5c_danneggia') && d2arr.includes('d2_sani')) {
-    statoDesc = 'con una base ancora ordinata, ma con attenzione alla fibra dalla storia colore';
+    statoDesc = t('report:diagnostic.shortLabels.statoColoreBase');
   }
 
   const lavaggio: Record<string, string> = {
-    d8_ogni_giorno: 'ogni giorno', d8_2_3: 'ogni 2–3 giorni',
-    d8_settimana: 'una volta a settimana', d8_meno: 'meno di una volta a settimana',
+    d8_ogni_giorno:t('report:diagnostic.009'), d8_2_3:t('report:diagnostic.010'),
+    d8_settimana:t('report:diagnostic.011'), d8_meno:t('report:diagnostic.012'),
   };
   const lavaggioDesc = d8 ? (lavaggio[d8] ?? '') : '';
 
@@ -784,61 +782,70 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
     const d4a = answers['d4a'];
     const d4aArr = Array.isArray(d4a) ? d4a : d4a ? [d4a] : [];
     const sintoMap: Record<string, string> = {
-      d4a_prurito: 'prurito', d4a_desquamazione: 'desquamazione',
-      d4a_grassa: 'eccesso di sebo', d4a_rossori: 'rossori', d4a_tira: 'cute che tira',
+      d4a_prurito: t('report:diagnostic.shortLabels.d4a_prurito'), d4a_desquamazione: t('report:diagnostic.shortLabels.d4a_desquamazione'),
+      d4a_grassa:t('report:diagnostic.013'), d4a_rossori: t('report:diagnostic.shortLabels.d4a_rossori'), d4a_tira:t('report:diagnostic.014'),
     };
     const sintomi = d4aArr.map(id => sintoMap[id] ?? '').filter(Boolean).join(', ');
     const d5a = answers['d5a'] as string | undefined;
     const durataMap: Record<string, string> = {
-      d5a_settimane: 'da poche settimane', d5a_mesi: 'da qualche mese',
-      d5a_anno: 'da più di un anno', d5a_sempre: 'da sempre',
+      d5a_settimane:t('report:diagnostic.015'), d5a_mesi:t('report:diagnostic.016'),
+      d5a_anno:t('report:diagnostic.017'), d5a_sempre:t('report:diagnostic.018'),
     };
     const durata = d5a ? (durataMap[d5a] ?? '') : '';
-    specificPart = `La priorità dichiarata è la cute${sintomi ? ` — ${sintomi}` : ''}${durata ? `, presenti ${durata}` : ''}.`;
+    specificPart = t('report:templates.cuteSpecific', {
+      sintomiPart: sintomi ? t('report:templates.cuteSymptomsPart', { sintomi }) : '',
+      durataPart: durata ? t('report:templates.cuteDurationPart', { durata }) : '',
+    });
   } else if (branch === 'struttura') {
     const d4b = answers['d4b'];
     const d4bArr = Array.isArray(d4b) ? d4b : d4b ? [d4b] : [];
     const trattMap: Record<string, string> = {
-      d4b_colorazioni: 'colorazioni', d4b_decolorazioni: 'decolorazioni',
-      d4b_stiratura: 'stirature', d4b_calore: 'calore frequente', d4b_aggressivi: 'prodotti aggressivi',
+      d4b_colorazioni: t('report:diagnostic.shortLabels.d4b_colorazioni'), d4b_decolorazioni: t('report:diagnostic.shortLabels.d4b_decolorazioni'),
+      d4b_stiratura: t('report:diagnostic.shortLabels.d4b_stiratura'), d4b_calore:t('report:diagnostic.019'), d4b_aggressivi:t('report:diagnostic.020'),
     };
     const trattamenti = d4bArr.map(id => trattMap[id] ?? '').filter(Boolean).join(', ');
     const d5b = answers['d5b'] as string | undefined;
     const condMap: Record<string, string> = {
-      d5b_sane: 'le punte sono ancora integre', d5b_aperte: 'le punte tendono ad aprirsi',
-      d5b_spezzano: 'il capello si spezza lungo la lunghezza',
+      d5b_sane:t('report:diagnostic.021'), d5b_aperte:t('report:diagnostic.022'),
+      d5b_spezzano:t('report:diagnostic.023'),
     };
     const cond = d5b ? (condMap[d5b] ?? '') : '';
-    specificPart = `${trattamenti ? `Il capello ha subito nel tempo: ${trattamenti}.` : 'La fibra è stata sollecitata nel tempo.'} ${cond ? `Oggi ${cond}.` : ''}`.trim();
+    specificPart = t('report:templates.structureSpecific', {
+      trattamentoPart: trattamenti ? t('report:templates.structureTreatments', { trattamenti }) : t('report:diagnostic.024'),
+      condPart: cond ? t('report:templates.structureCondition', { cond }) : '',
+    }).trim();
   } else if (branch === 'colore') {
     const d4c = answers['d4c'] as string | undefined;
     const colorMap: Record<string, string> = {
-      d4c_naturale: 'il colore naturale', d4c_tinta: 'una tinta',
-      d4c_decolorazioni: 'decolorazioni', d4c_grigi_coprire: 'grigi da coprire',
-      d4c_grigi_valorizzare: 'grigi da valorizzare',
+      d4c_naturale:t('report:diagnostic.025'), d4c_tinta:t('report:diagnostic.026'),
+      d4c_decolorazioni: t('report:diagnostic.shortLabels.d4c_decolorazioni'), d4c_grigi_coprire:t('report:diagnostic.027'),
+      d4c_grigi_valorizzare:t('report:diagnostic.028'),
     };
-    const colorDesc = d4c ? (colorMap[d4c] ?? 'il colore attuale') : 'il colore attuale';
+    const colorDesc = d4c ? (colorMap[d4c] ?? t('report:diagnostic.shortLabels.colorFallback')) :t('report:diagnostic.029');
     const d5c = answers['d5c'];
     const d5cArr = Array.isArray(d5c) ? d5c : d5c ? [d5c] : [];
     const preoMap: Record<string, string> = {
-      d5c_spegne: 'si spegne rapidamente', d5c_luminoso: 'manca di luminosità',
-      d5c_uniforme: 'non risulta uniforme', d5c_viso: 'non valorizza il viso come vorresti',
-      d5c_danneggia: 'preoccupa per i possibili danni alla fibra',
+      d5c_spegne:t('report:diagnostic.030'), d5c_luminoso:t('report:diagnostic.031'),
+      d5c_uniforme:t('report:diagnostic.032'), d5c_viso:t('report:diagnostic.033'),
+      d5c_danneggia:t('report:diagnostic.034'),
     };
     const preoc = d5cArr.map(id => preoMap[id] ?? '').filter(Boolean).join(' e ');
-    specificPart = `Il punto di partenza è ${colorDesc}.${preoc ? ` Il colore ${preoc}.` : ''}`;
+    specificPart = t('report:templates.colorSpecific', {
+      colorDesc,
+      preocPart: preoc ? t('report:templates.colorConcern', { preoc }) : '',
+    });
   } else if (branch === 'forma') {
     const d4d = answers['d4d'];
     const d4dArr = Array.isArray(d4d) ? d4d : d4d ? [d4d] : [];
     const formaMap: Record<string, string> = {
-      d4d_volume: 'il volume', d4d_ricci: 'la gestione del riccio',
-      d4d_piega: 'la tenuta della piega', d4d_taglio: 'la forma del taglio',
+      d4d_volume:t('report:diagnostic.035'), d4d_ricci:t('report:diagnostic.036'),
+      d4d_piega:t('report:diagnostic.037'), d4d_taglio:t('report:diagnostic.038'),
     };
     const formaDesc = d4dArr.map(id => formaMap[id] ?? '').filter(Boolean).join(', ');
     const d5d = answers['d5d'] as string | undefined;
     const volumeMap: Record<string, string> = {
-      d5d_poco: 'non abbastanza', d5d_medio: 'nella media',
-      d5d_molto: 'abbastanza voluminosi', d5d_troppo: 'eccessivo e difficile da gestire',
+      d5d_poco:t('report:diagnostic.039'), d5d_medio:t('report:diagnostic.040'),
+      d5d_molto:t('report:diagnostic.041'), d5d_troppo:t('report:diagnostic.042'),
     };
     const volumeDesc = d5d ? (volumeMap[d5d] ?? '') : '';
     specificPart = `Le esigenze principali riguardano ${formaDesc || 'la forma e il movimento'}${volumeDesc ? ` — il volume attuale risulta ${volumeDesc}` : ''}.`;
@@ -846,15 +853,15 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
     const d5e = answers['d5e'] as string | undefined;
     const d6e = answers['d6e'] as string | undefined;
     const satMap: Record<string, string> = {
-      d5e_cercando: 'stai cercando ancora la direzione giusta',
-      d5e_insoddisfatta: 'hai provato soluzioni che non hanno risposto davvero',
-      d5e_prima: 'è la prima volta che cerchi un percorso strutturato',
+      d5e_cercando:t('report:diagnostic.043'),
+      d5e_insoddisfatta:t('report:diagnostic.044'),
+      d5e_prima:t('report:diagnostic.045'),
     };
     const d6eMap: Record<string, string> = {
-      d6e_risultati: 'cerchi risultati concreti e misurabili',
-      d6e_presa: 'vuoi essere presa davvero in carico',
-      d6e_capire: 'prima di tutto vuoi capire',
-      d6e_tutto: 'vuoi prenderti cura di tutto in modo integrato',
+      d6e_risultati:t('report:diagnostic.046'),
+      d6e_presa:t('report:diagnostic.047'),
+      d6e_capire:t('report:diagnostic.048'),
+      d6e_tutto:t('report:diagnostic.049'),
     };
     const satDesc = d5e ? (satMap[d5e] ?? '') : '';
     const aspDesc = d6e ? (d6eMap[d6e] ?? '') : '';
@@ -862,10 +869,10 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
   }
 
   const d9Ctx: Record<string, string> = {
-    d9_amo: 'Tieni molto ai tuoi capelli e vorresti valorizzarli di più.',
-    d9_non_piacciono: 'Il rapporto con i tuoi capelli è complicato — li sopporti più che amarli.',
-    d9_trascuro: 'Ammetti di trascurarli, spesso per mancanza di strumenti o punti di riferimento.',
-    d9_ci_lavoro: 'Ci stai lavorando attivamente, ma senti di avere bisogno di un supporto più esperto.',
+    d9_amo:t('report:diagnostic.050'),
+    d9_non_piacciono:t('report:diagnostic.051'),
+    d9_trascuro:t('report:diagnostic.052'),
+    d9_ci_lavoro:t('report:diagnostic.053'),
   };
   const d9Phrase = d9 ? (d9Ctx[d9] ?? '') : '';
 
@@ -879,7 +886,7 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
   return parts.join(' ');
 }
 
-// ── SEGNALI PRINCIPALI ──────────────────────────────────────────
+// -- SEGNALI PRINCIPALI ------------------------------------------
 
 function buildMainSignals(answers: Answers, _primary: Percorso): string[] {
   const d3 = answers['d3'] as string | undefined;
@@ -892,95 +899,95 @@ function buildMainSignals(answers: Answers, _primary: Percorso): string[] {
   if (branch === 'cute') {
     const d4a = answers['d4a'];
     const d4aArr = Array.isArray(d4a) ? d4a : d4a ? [d4a] : [];
-    if (d4aArr.includes('d4a_prurito')) signals.push('Prurito ricorrente — segnale di squilibrio del cuoio capelluto');
-    if (d4aArr.includes('d4a_desquamazione')) signals.push('Desquamazione presente — risposta della cute da esaminare in presenza');
-    if (d4aArr.includes('d4a_grassa')) signals.push('Eccesso di sebo alla radice — pattern che influenza anche il capello');
-    if (d4aArr.includes('d4a_rossori')) signals.push('Rossori o irritazione — cute in condizione di reattività');
-    if (d4aArr.includes('d4a_tira')) signals.push('Sensazione di cute che tira — mancanza di equilibrio da valutare');
+    if (d4aArr.includes('d4a_prurito')) signals.push(t('report:diagnostic.054'));
+    if (d4aArr.includes('d4a_desquamazione')) signals.push(t('report:diagnostic.055'));
+    if (d4aArr.includes('d4a_grassa')) signals.push(t('report:diagnostic.056'));
+    if (d4aArr.includes('d4a_rossori')) signals.push(t('report:diagnostic.057'));
+    if (d4aArr.includes('d4a_tira')) signals.push(t('report:diagnostic.058'));
     const d7a = answers['d7a'] as string | undefined;
-    if (d7a === 'd7a_evidente') signals.push('Diradamento evidente — aspetto da approfondire in consulenza');
-    else if (d7a === 'd7a_lieve') signals.push('Lieve diradamento in alcune zone — da monitorare');
+    if (d7a === 'd7a_evidente') signals.push(t('report:diagnostic.059'));
+    else if (d7a === 'd7a_lieve') signals.push(t('report:diagnostic.060'));
   } else if (branch === 'struttura') {
     const d5b = answers['d5b'] as string | undefined;
-    if (d5b === 'd5b_spezzano') signals.push('Capello che si spezza — fibra strutturalmente indebolita');
-    else if (d5b === 'd5b_aperte') signals.push('Punte aperte — fibra che necessita di rinforzo');
+    if (d5b === 'd5b_spezzano') signals.push(t('report:diagnostic.061'));
+    else if (d5b === 'd5b_aperte') signals.push(t('report:diagnostic.062'));
     const d6b = answers['d6b'] as string | undefined;
-    if (d6b === 'd6b_paglia') signals.push('Texture simile alla paglia — segnale di disidratazione profonda');
-    else if (d6b === 'd6b_secco') signals.push('Capello secco al tatto — fibra povera di idratazione');
-    else if (d6b === 'd6b_ruvido') signals.push('Superficie ruvida — cuticole alterate');
+    if (d6b === 'd6b_paglia') signals.push(t('report:diagnostic.063'));
+    else if (d6b === 'd6b_secco') signals.push(t('report:diagnostic.064'));
+    else if (d6b === 'd6b_ruvido') signals.push(t('report:diagnostic.065'));
     const d7b = answers['d7b'] as string | undefined;
-    if (d7b === 'd7b_ricominciare') signals.push('Desiderio di ricominciare — non solo migliorare, ma ricostruire su basi solide');
+    if (d7b === 'd7b_ricominciare') signals.push(t('report:diagnostic.066'));
     const d4b = answers['d4b'];
     const d4bArr = Array.isArray(d4b) ? d4b : d4b ? [d4b] : [];
     if (d4bArr.includes('d4b_decolorazioni') && d4bArr.includes('d4b_stiratura')) {
-      signals.push('Combinazione di decolorazioni e stirature — stress multiplo sulla stessa fibra');
+      signals.push(t('report:diagnostic.067'));
     } else if (d4bArr.includes('d4b_decolorazioni')) {
-      signals.push('Decolorazioni nel tempo — impatto diretto sulla struttura della fibra');
+      signals.push(t('report:diagnostic.068'));
     }
   } else if (branch === 'colore') {
     const d5c = answers['d5c'];
     const d5cArr = Array.isArray(d5c) ? d5c : d5c ? [d5c] : [];
-    if (d5cArr.includes('d5c_spegne')) signals.push('Colore che si spegne rapidamente — ossidazione precoce da gestire');
-    if (d5cArr.includes('d5c_luminoso')) signals.push('Mancanza di luminosità — colore che non riflette come dovrebbe');
-    if (d5cArr.includes('d5c_uniforme')) signals.push('Disuniformità cromatica — da leggere e progettare in consulenza');
-    if (d5cArr.includes('d5c_danneggia')) signals.push('Attenzione alla fibra — la protezione entra nella progettazione del colore');
+    if (d5cArr.includes('d5c_spegne')) signals.push(t('report:diagnostic.069'));
+    if (d5cArr.includes('d5c_luminoso')) signals.push(t('report:diagnostic.070'));
+    if (d5cArr.includes('d5c_uniforme')) signals.push(t('report:diagnostic.071'));
+    if (d5cArr.includes('d5c_danneggia')) signals.push(t('report:diagnostic.072'));
     const d6c = answers['d6c'] as string | undefined;
-    if (d6c === 'd6c_frequente') signals.push('Frequenza alta delle colorazioni — ciclo da ottimizzare per fibra e risultato');
+    if (d6c === 'd6c_frequente') signals.push(t('report:diagnostic.073'));
     const d7c = answers['d7c'] as string | undefined;
-    if (d7c === 'd7c_luminosita') signals.push('Obiettivo luminosità — direzione cromatica da costruire con precisione');
-    else if (d7c === 'd7c_naturalezza') signals.push('Obiettivo naturalezza — colore che si integra, non che si impone');
-    else if (d7c === 'd7c_copertura') signals.push('Obiettivo copertura — tecnica da valutare in base alla fibra e al viso');
-    else if (d7c === 'd7c_cambiamento') signals.push('Desiderio di cambiamento cromatico — da progettare con gradualità');
-    else if (d7c === 'd7c_bianco') signals.push('Strategia cromatica evolutiva — gestione del passaggio al bianco o morbidezza visiva sulla ricrescita');
+    if (d7c === 'd7c_luminosita') signals.push(t('report:diagnostic.074'));
+    else if (d7c === 'd7c_naturalezza') signals.push(t('report:diagnostic.075'));
+    else if (d7c === 'd7c_copertura') signals.push(t('report:diagnostic.076'));
+    else if (d7c === 'd7c_cambiamento') signals.push(t('report:diagnostic.077'));
+    else if (d7c === 'd7c_bianco') signals.push(t('report:diagnostic.078'));
   } else if (branch === 'forma') {
     const d1 = answers['d1'] as string | undefined;
-    if (d1 === 'd1_ricci' || d1 === 'd1_molto_ricci') signals.push('Capello riccio — morfologia che richiede lettura e approccio specifici');
-    else if (d1 === 'd1_mossi') signals.push('Capello mosso — texture con gestione propria tra liscio e riccio');
+    if (d1 === 'd1_ricci' || d1 === 'd1_molto_ricci') signals.push(t('report:diagnostic.079'));
+    else if (d1 === 'd1_mossi') signals.push(t('report:diagnostic.080'));
     // Relational signal — alta priorità, prima dei segnali tecnici
-    if (d9 === 'd9_non_piacciono') signals.push('Relazione con i capelli da ricostruire — dimensione personale da tenere presente nel percorso');
-    else if (d9 === 'd9_trascuro') signals.push('Una cura ancora da costruire — punto di partenza pulito, senza giudizio');
+    if (d9 === 'd9_non_piacciono') signals.push(t('report:diagnostic.081'));
+    else if (d9 === 'd9_trascuro') signals.push(t('report:diagnostic.082'));
     // Condizione della fibra — segnali da d2, rilevanti anche in percorso forma
-    if (d2arr.includes('d2_fragili')) signals.push('Fibra fragile — resistenza ridotta da considerare anche nel progetto di forma');
-    if (d2arr.includes('d2_secchi')) signals.push('Capello secco e opaco — idratazione da integrare nel percorso');
-    if (d2arr.includes('d2_crespi')) signals.push('Crespo strutturale — elemento da leggere insieme alla morfologia del capello');
-    if (d2arr.includes('d2_grassi')) signals.push('Tendenza alla radice grassa — comfort cute da valutare nel percorso');
+    if (d2arr.includes('d2_fragili')) signals.push(t('report:diagnostic.083'));
+    if (d2arr.includes('d2_secchi')) signals.push(t('report:diagnostic.084'));
+    if (d2arr.includes('d2_crespi')) signals.push(t('report:diagnostic.085'));
+    if (d2arr.includes('d2_grassi')) signals.push(t('report:diagnostic.086'));
     const d4d = answers['d4d'];
     const d4dArr = Array.isArray(d4d) ? d4d : d4d ? [d4d] : [];
-    if (d4dArr.includes('d4d_volume')) signals.push('Volume da gestire — obiettivo forma e leggerezza');
-    if (d4dArr.includes('d4d_ricci')) signals.push('Definizione del riccio da migliorare — potenziale da esprimere');
-    if (d4dArr.includes('d4d_piega')) signals.push('Piega che non regge — tecnica e prodotto da rivedere');
-    if (d4dArr.includes('d4d_taglio')) signals.push('Taglio che non valorizza — costruzione sulla morfologia reale');
+    if (d4dArr.includes('d4d_volume')) signals.push(t('report:diagnostic.087'));
+    if (d4dArr.includes('d4d_ricci')) signals.push(t('report:diagnostic.088'));
+    if (d4dArr.includes('d4d_piega')) signals.push(t('report:diagnostic.089'));
+    if (d4dArr.includes('d4d_taglio')) signals.push(t('report:diagnostic.090'));
     const d7d = answers['d7d'] as string | undefined;
-    if (d7d === 'd7d_liberi') signals.push('Desiderio di capelli liberi e naturali — meno intervento, più identità');
-    else if (d7d === 'd7d_disciplinati') signals.push('Desiderio di più ordine e forma definita');
+    if (d7d === 'd7d_liberi') signals.push(t('report:diagnostic.091'));
+    else if (d7d === 'd7d_disciplinati') signals.push(t('report:diagnostic.092'));
   } else {
-    signals.push('Situazione articolata che tocca più aspetti contemporaneamente');
+    signals.push(t('report:diagnostic.093'));
     const d4e = answers['d4e'] as string | undefined;
-    if (d4e === 'd4e_cute') signals.push('Salute della cute — parte integrante della presa in carico');
-    if (d4e === 'd4e_capello') signals.push('Struttura della fibra — aspetto centrale del percorso');
-    if (d4e === 'd4e_colore') signals.push('Colore e cromatica — da integrare nel progetto complessivo');
-    if (d4e === 'd4e_forma') signals.push('Forma e movimento — da leggere insieme agli altri elementi');
+    if (d4e === 'd4e_cute') signals.push(t('report:diagnostic.094'));
+    if (d4e === 'd4e_capello') signals.push(t('report:diagnostic.095'));
+    if (d4e === 'd4e_colore') signals.push(t('report:diagnostic.096'));
+    if (d4e === 'd4e_forma') signals.push(t('report:diagnostic.097'));
     const d7e = answers['d7e'] as string | undefined;
-    if (d7e === 'd7e_continuita') signals.push('Ricerca di continuità — non un episodio, ma una relazione professionale nel tempo');
+    if (d7e === 'd7e_continuita') signals.push(t('report:diagnostic.098'));
   }
 
   // Per forma branch i segnali d9 sono già stati inseriti con priorità alta sopra
   if (branch !== 'forma') {
-    if (d9 === 'd9_non_piacciono') signals.push('Relazione con i capelli da ricostruire — dimensione personale da tenere presente nel percorso');
-    if (d9 === 'd9_trascuro') signals.push('Una cura ancora da costruire — punto di partenza pulito, senza giudizio');
+    if (d9 === 'd9_non_piacciono') signals.push(t('report:diagnostic.099'));
+    if (d9 === 'd9_trascuro') signals.push(t('report:diagnostic.100'));
   }
 
   return signals.slice(0, 5);
 }
 
-// ── CONDIZIONE DESIDERATA ───────────────────────────────────────
+// -- CONDIZIONE DESIDERATA ---------------------------------------
 
 function buildDesiredOutcome(pub: PublicPercorso, primary: Percorso, answers: Answers): string {
   if (pub === 'benessere' && primary === 'cute') {
-    return 'La direzione consigliata è verso un maggiore equilibrio del cuoio capelluto — meno fastidi, meno necessità di intervento quotidiano, più leggerezza e risposta sana.';
+    return t('report:diagnostic.101');
   }
   if (pub === 'benessere' && primary === 'rinascita') {
-    return 'La direzione consigliata è verso una fibra più forte e più morbida — restituire al capello la struttura che i trattamenti o il tempo hanno ridotto, con continuità e metodo.';
+    return t('report:diagnostic.102');
   }
   if (pub === 'benessere' && primary === 'armonia') {
     const d9 = answers['d9'] as string | undefined;
@@ -989,40 +996,40 @@ function buildDesiredOutcome(pub: PublicPercorso, primary: Percorso, answers: An
     const hasFibraFragile = d2arr.includes('d2_fragili') || d2arr.includes('d2_secchi');
     const hasRelational = d9 === 'd9_non_piacciono' || d9 === 'd9_trascuro';
     if (hasFibraFragile && hasRelational) {
-      return 'La direzione consigliata abbraccia più di un aspetto: struttura della fibra, morfologia del capello, e il rapporto con entrambi. Il punto di partenza è la lettura reale — senza preconcetti, senza semplificazioni.';
+      return t('report:diagnostic.103');
     }
     if (hasFibraFragile) {
-      return 'La direzione consigliata è verso una forma più autentica, costruita anche su una fibra più solida. Morfologia e struttura si leggono insieme — quando la fibra risponde, la forma può esprimersi al meglio.';
+      return t('report:diagnostic.104');
     }
     if (hasRelational) {
-      return 'La direzione consigliata è verso un capello che smette di essere un problema e diventa un\'espressione più coerente di sé. La forma giusta è quella che si comprende — non quella che si sopporta.';
+      return t('report:diagnostic.105');
     }
-    return 'La direzione consigliata è verso una forma più coerente con la propria natura — meno gestione quotidiana, più identità. Un capello che si lascia leggere nella sua morfologia e poi esprimere al meglio.';
+    return t('report:diagnostic.106');
   }
   if (pub === 'colorlux') {
     const d5c = answers['d5c'];
     const d5cArr = Array.isArray(d5c) ? (d5c as string[]) : d5c ? [d5c as string] : [];
     if (d5cArr.includes('d5c_danneggia')) {
-      return 'La direzione consigliata è verso un colore che valorizza senza costo per la fibra — luminosità costruita con metodo, continuità cromatica nel tempo, struttura rispettata a ogni incontro.';
+      return t('report:diagnostic.107');
     }
-    return 'La direzione consigliata è verso un colore più luminoso e coerente — riflessi costruiti sul viso, continuità cromatica nel tempo, risultato leggibile e raffinato senza sforzo quotidiano.';
+    return t('report:diagnostic.108');
   }
   if (pub === 'rituale' && primary === 'armonia') {
-    return 'La direzione consigliata è verso una forma più coerente con la propria natura — meno gestione quotidiana, più identità. Un capello che si lascia leggere nella sua morfologia e poi esprimere al meglio.';
+    return t('report:diagnostic.109');
   }
-  return 'La direzione consigliata è verso una presa in carico integrata — cute, struttura, colore e forma letti insieme, in un progetto costruito nel tempo e adattato alle esigenze reali.';
+  return t('report:diagnostic.110');
 }
 
-// ── RATIONALE DEL PERCORSO ──────────────────────────────────────
+// -- RATIONALE DEL PERCORSO --------------------------------------
 
 function buildPercorsoRationale(pub: PublicPercorso, primary: Percorso, answers: Answers, attention: AttentionLevel): string {
   if (pub === 'benessere' && primary === 'cute') {
     const d6a = answers['d6a'] as string | undefined;
     const mai = d6a === 'd6a_mai';
-    return `Il percorso BenEssere parte dalla cute e la legge nel tempo, con metodo. Non un singolo intervento, ma una sequenza costruita per restituire equilibrio reale${mai ? ' — in un contesto mai affrontato in modo professionale' : ''}. La lettura in presenza permetterà di valutare la condizione reale e definire i passi più adatti.`;
+    return `Il percorso BenEssere parte dalla cute e la legge nel tempo, con metodo. Non un singolo intervento, ma una sequenza costruita per restituire equilibrio reale${mai ?t('report:diagnostic.111') : ''}. La lettura in presenza permetterà di valutare la condizione reale e definire i passi più adatti.`;
   }
   if (pub === 'benessere' && primary === 'rinascita') {
-    return 'Il percorso BenEssere, nella declinazione orientata alla fibra, è pensato per restituire al capello una base solida da cui ripartire. Non una copertura superficiale, ma un lavoro in profondità, seduta dopo seduta. La consulenza in presenza definirà la sequenza più adatta alla situazione reale.';
+    return t('report:diagnostic.112');
   }
   if (pub === 'benessere' && primary === 'armonia') {
     const d4d = answers['d4d'] as string | undefined;
@@ -1033,29 +1040,29 @@ function buildPercorsoRationale(pub: PublicPercorso, primary: Percorso, answers:
     const hasRelationalRat = d9rat === 'd9_non_piacciono' || d9rat === 'd9_trascuro';
     const isComplexRat = hasFibraFragileRat || hasRelationalRat;
     if (isComplexRat && d4d === 'd4d_taglio') {
-      return 'Il percorso BenEssere, orientato verso la forma, affronta anche le condizioni della fibra — perché un taglio costruito sulla morfologia reale richiede una base su cui poggiare. La consulenza in presenza definirà la priorità giusta e la sequenza più efficace.';
+      return t('report:diagnostic.113');
     }
     if (isComplexRat) {
-      return "Il percorso BenEssere, orientato verso la forma, tiene conto anche delle condizioni della fibra e del rapporto quotidiano con il proprio capello. La consulenza in presenza inizierà da una lettura senza preconcetti — morfologia, resistenza, routine — per costruire un punto di partenza coerente con la situazione reale.";
+      return t('report:diagnostic.114');
     }
     if (d4d === 'd4d_taglio') {
-      return 'Il percorso BenEssere, orientato verso la forma, porta le prime Esperienze direttamente sulla morfologia — un taglio costruito sul capello reale e un ascolto della gestione quotidiana. La consulenza in presenza definirà il punto di partenza e la direzione più adatta.';
+      return t('report:diagnostic.115');
     }
-    return "Il percorso BenEssere, orientato verso la forma e l'espressione del capello, offre già dai primi incontri Esperienze calibrate sulla morfologia specifica — piega, definizione, o cura del riccio. La consulenza in presenza valuterà insieme qual è il gesto più coerente da cui partire.";
+    return t('report:diagnostic.116');
   }
   if (pub === 'colorlux') {
-    return "Il percorso ColorLux è costruito per chi desidera che il colore smetta di essere un'urgenza ripetuta e possa diventare un progetto di lungo periodo — pensato per la fibra, non solo per l'estetica immediata. La consulenza in presenza permetterà di progettare insieme la direzione cromatica più adatta.";
+    return t('report:diagnostic.117');
   }
   if (pub === 'rituale' && primary === 'armonia') {
     if (attention === 'prioritaria') {
-      return 'La forma e il movimento del capello si leggono meglio all\'interno di una valutazione più ampia — struttura della fibra, morfologia, routine quotidiana. Il Rituale Luxosa è il contesto più adatto per iniziare questa lettura, con prime Esperienze già molto mirate sulla forma specifica. La consulenza in presenza confermerà la direzione più coerente.';
+      return t('report:diagnostic.118');
     }
-    return 'La forma e il movimento del capello si leggono meglio all\'interno di una valutazione complessiva. Il Rituale Luxosa è l\'orientamento consigliato come cornice di partenza — da confermare in consulenza, con prime Esperienze già calibrate sulla morfologia specifica e sull\'obiettivo dichiarato.';
+    return t('report:diagnostic.119');
   }
-  return 'Il Rituale Luxosa è il percorso più completo: abbraccia cute, struttura, colore e forma in un progetto di cura integrata. Non la somma di più interventi, ma un percorso pensato per prendere in carico ogni aspetto in modo coerente. La consulenza in presenza definirà le priorità e la sequenza delle Esperienze.';
+  return t('report:diagnostic.120');
 }
 
-// ── ESPERIENZE SUGGERITE ────────────────────────────────────────
+// -- ESPERIENZE SUGGERITE ----------------------------------------
 
 function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answers): { es: EsperienzaDef; perche: string }[] {
   const d1 = answers['d1'] as string | undefined;
@@ -1087,76 +1094,76 @@ function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answe
 
   const result: { es: EsperienzaDef; perche: string }[] = [];
 
-  // ── Slot 1: sempre Consulenze Specialistiche ──────────────────
+  // -- Slot 1: sempre Consulenze Specialistiche ------------------
   result.push({
     es: ES.consulenzeSpecialistiche,
-    perche: 'Il primo gesto è la lettura — del capello, della cute, della persona. Il punto di partenza per qualsiasi percorso.',
+    perche:t('test:diagnostic.takeover.191'),
   });
 
   if (pub === 'benessere' && primary === 'cute') {
     // Slot 2: cura cute
     result.push({
       es: ES.areaBenessere,
-      perche: "Trasforma la cura della cute da urgenza a rituale — l'esperienza più mirata per questa condizione.",
+      perche:t('test:diagnostic.takeover.192'),
     });
     // Slot 3: complement styling
     if (isRicci) {
-      result.push({ es: ES.ricciOsa, perche: 'Definizione e gestione del capello riccio — per valorizzare ogni incontro.' });
+      result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.193') });
     } else {
-      result.push({ es: ES.piegaLux, perche: 'Il gesto che valorizza il risultato di ogni incontro.' });
+      result.push({ es: ES.piegaLux, perche:t('test:diagnostic.takeover.194') });
     }
 
   } else if (pub === 'benessere' && primary === 'rinascita') {
     // Slot 2: fibra
     result.push({
       es: ES.cheratinaNutrizionePro,
-      perche: 'Restituisce ordine, morbidezza e resistenza a una fibra che ha subito trattamenti intensi nel tempo.',
+      perche:t('test:diagnostic.takeover.195'),
     });
     // Slot 3
     if (d4barr.includes('d4b_decolorazioni')) {
-      result.push({ es: ES.areaBenessere, perche: 'La fibra decolorata beneficia di un approccio integrato alla salute del capello.' });
+      result.push({ es: ES.areaBenessere, perche:t('test:diagnostic.takeover.196') });
     } else if (isRicci) {
-      result.push({ es: ES.ricciOsa, perche: 'Dopo aver ristabilito la salute della fibra, la gestione del riccio trova il suo spazio naturale.' });
+      result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.197') });
     } else {
-      result.push({ es: ES.piegaLux, perche: 'Per vedere la fibra nella sua versione valorizzata già dal primo incontro.' });
+      result.push({ es: ES.piegaLux, perche:t('test:diagnostic.takeover.198') });
     }
 
   } else if (pub === 'benessere' && primary === 'armonia') {
     // Slot 2: servizio styling principale sulla morfologia
     if (isRicci) {
       if (needsTaglioForma) {
-        result.push({ es: ES.ricciOso, perche: 'Il taglio costruito sulla morfologia del riccio — la base strutturale da cui tutto parte.' });
+        result.push({ es: ES.ricciOso, perche:t('test:diagnostic.takeover.199') });
       } else {
-        result.push({ es: ES.ricciOsa, perche: "Definizione, gestione e piega del capello riccio — l'esperienza dedicata alla morfologia riccio autentica." });
+        result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.200') });
       }
     } else if (isMossi) {
       if (needsTaglioForma) {
-        result.push({ es: ES.taglioSignature, perche: 'Un taglio costruito sulla morfologia mosso porta armonia e gestibilità duratura.' });
+        result.push({ es: ES.taglioSignature, perche:t('test:diagnostic.takeover.201') });
       } else {
-        result.push({ es: ES.piegaLux, perche: 'Il finish che valorizza il mosso nella sua forma più naturale e definita.' });
+        result.push({ es: ES.piegaLux, perche:t('test:diagnostic.takeover.202') });
       }
     } else {
       // lisci / senzaforma
       if (needsTaglioForma) {
-        result.push({ es: ES.taglioSignature, perche: 'Un taglio costruito sulla morfologia specifica può cambiare la gestione quotidiana in modo duraturo.' });
+        result.push({ es: ES.taglioSignature, perche:t('test:diagnostic.takeover.203') });
       } else {
-        result.push({ es: ES.piegaLux, perche: 'Il gesto che rivela il potenziale del capello nella sua versione più valorizzata.' });
+        result.push({ es: ES.piegaLux, perche:t('test:diagnostic.takeover.204') });
       }
     }
     // Slot 3: complementare intelligente
     if (isRicci && needsTaglioForma) {
-      // RicciOso in slot 2 → RicciOsa o Cheratina come complemento
+      // RicciOso in slot 2 ? RicciOsa o Cheratina come complemento
       if (hasFibraFragile || hasCrespo) {
-        result.push({ es: ES.cheratinaNutrizionePro, perche: 'Ordine e morbidezza della fibra riccio — la base per un taglio che esprima tutta la morfologia.' });
+        result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.205') });
       } else {
-        result.push({ es: ES.ricciOsa, perche: 'Gestione e definizione del riccio — il gesto che valorizza il risultato del taglio morfologico.' });
+        result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.206') });
       }
     } else if (hasFibraFragile) {
-      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Restituisce morbidezza e struttura alla fibra — il complemento ideale alla cura della forma.' });
+      result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.207') });
     } else if (hasCrespo && !isRicci) {
-      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Disciplina il crespo strutturalmente — la base per una forma più definita e gestibile.' });
+      result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.208') });
     } else if (hasRadiceGrassa) {
-      result.push({ es: ES.areaBenessere, perche: 'Quando la radice grassa condiziona la piega e la gestione quotidiana, la cute entra nel progetto.' });
+      result.push({ es: ES.areaBenessere, perche:t('test:diagnostic.takeover.209') });
     }
     // else: 2 esperienze — Consulenza + styling (nel range "2-3")
 
@@ -1164,30 +1171,30 @@ function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answe
     // Slot 2: servizio colore
     if (d7c === 'd7c_bianco') {
       // d7c_bianco override: sempre Luce Signature con copy specifico, mai Nuances
-      result.push({ es: ES.luceSignature, perche: 'Una strategia cromatica evolutiva — pensata per accompagnare la ricrescita, il passaggio al bianco o una maggiore morbidezza visiva tra base naturale e lunghezze. La direzione specifica sarà definita durante la consulenza in presenza.' });
+      result.push({ es: ES.luceSignature, perche:t('test:diagnostic.takeover.210') });
     } else if (d4c === 'd4c_decolorazioni' || d4c === 'd4c_grigi_coprire') {
       const lucePerche = d4c === 'd4c_grigi_coprire'
-        ? 'Copertura e continuità cromatica costruite con metodo — per una ricrescita gestita e un colore sempre coerente nel tempo.'
-        : 'Schiariture costruite con precisione — luce, profondità e rispetto della fibra a ogni incontro.';
+        ?t('report:diagnostic.121')
+        :t('report:diagnostic.122');
       result.push({ es: ES.luceSignature, perche: lucePerche });
     } else if (d4c === 'd4c_naturale' || d4c === 'd4c_grigi_valorizzare') {
-      result.push({ es: ES.nuances, perche: 'Valorizza il colore nella sua espressione più raffinata, senza stravolgere.' });
+      result.push({ es: ES.nuances, perche:t('test:diagnostic.takeover.211') });
     } else if (d4c === 'd4c_tinta') {
       if (d7c === 'd7c_cambiamento' || d7c === 'd7c_luminosita') {
-        result.push({ es: ES.luceSignature, perche: d7c === 'd7c_cambiamento' ? 'Schiariture e tecniche di luce per un cambiamento costruito con metodo — non una svolta, ma una direzione.' : 'Luce e dimensione costruite con precisione — per un colore che valorizza senza appesantire.' });
+        result.push({ es: ES.luceSignature, perche: d7c === 'd7c_cambiamento' ?t('report:diagnostic.123') :t('report:diagnostic.124') });
       } else {
-        result.push({ es: ES.nuances, perche: 'Il colore nella sua versione più raffinata e duratura.' });
+        result.push({ es: ES.nuances, perche:t('test:diagnostic.takeover.212') });
       }
     } else {
-      result.push({ es: ES.nuances, perche: 'Il colore nella sua espressione più raffinata.' });
+      result.push({ es: ES.nuances, perche:t('test:diagnostic.takeover.213') });
     }
     // Slot 3
     if (d5carr.includes('d5c_danneggia')) {
-      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Quando il colore impatta sulla fibra, la cura strutturale entra nel progetto cromatico.' });
+      result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.214') });
     } else if (isRicci) {
-      result.push({ es: ES.ricciOsa, perche: 'Il colore valorizzato nella sua forma più autentica — riccio, definito, luminoso.' });
+      result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.215') });
     } else {
-      result.push({ es: ES.piegaLux, perche: 'Per valorizzare subito il risultato colore con il gesto giusto.' });
+      result.push({ es: ES.piegaLux, perche:t('test:diagnostic.takeover.216') });
     }
 
   } else {
@@ -1195,36 +1202,36 @@ function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answe
     // Slot 2: styling principale per morfologia
     if (isRicci) {
       if (d4e === 'd4e_forma' || needsTaglioForma) {
-        result.push({ es: ES.ricciOso, perche: 'Il taglio costruito sulla morfologia del riccio — la base strutturale del percorso integrato.' });
+        result.push({ es: ES.ricciOso, perche:t('test:diagnostic.takeover.217') });
       } else {
-        result.push({ es: ES.ricciOsa, perche: 'Gestione, definizione e piega del riccio — il gesto fondante per un percorso che parte dalla morfologia.' });
+        result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.218') });
       }
     } else {
-      // mossi o lisci → Taglio Signature (mai RicciOso)
-      result.push({ es: ES.taglioSignature, perche: 'Il taglio costruito sulla morfologia è il gesto fondante di ogni percorso integrato.' });
+      // mossi o lisci ? Taglio Signature (mai RicciOso)
+      result.push({ es: ES.taglioSignature, perche:t('test:diagnostic.takeover.219') });
     }
     // Slot 3: concern primario del percorso completo
     if (d4e === 'd4e_cute') {
-      result.push({ es: ES.areaBenessere, perche: 'La cute è parte integrante del percorso — la sua salute è il punto di partenza.' });
+      result.push({ es: ES.areaBenessere, perche:t('test:diagnostic.takeover.220') });
     } else if (d4e === 'd4e_capello') {
-      result.push({ es: ES.cheratinaNutrizionePro, perche: 'Restituisce morbidezza e struttura alla fibra — base per tutto il resto.' });
+      result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.221') });
     } else if (d4e === 'd4e_colore') {
-      result.push({ es: ES.nuances, perche: 'Il colore entra nel percorso come elemento di valorizzazione, progettato insieme.' });
+      result.push({ es: ES.nuances, perche:t('test:diagnostic.takeover.222') });
     } else if (d4e === 'd4e_forma') {
       // forma già in slot 2; se ricci con RicciOso, RicciOsa come complemento
       if (isRicci && result.some(r => r.es.nome === ES.ricciOso.nome)) {
-        result.push({ es: ES.ricciOsa, perche: 'Gestione e definizione del riccio — il gesto che valorizza il risultato del taglio morfologico.' });
+        result.push({ es: ES.ricciOsa, perche:t('test:diagnostic.takeover.223') });
       } else if (hasFibraFragile) {
-        result.push({ es: ES.cheratinaNutrizionePro, perche: 'Fibra e forma si sostengono — la struttura sana è la base di ogni risultato duraturo.' });
+        result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.224') });
       } else {
-        result.push({ es: ES.piegaLux, perche: 'Il gesto che rende visibile la direzione del percorso.' });
+        result.push({ es: ES.piegaLux, perche:t('test:diagnostic.takeover.225') });
       }
     } else {
       // d4e_nonso o non definito
       if (hasFibraFragile) {
-        result.push({ es: ES.cheratinaNutrizionePro, perche: 'Restituisce morbidezza, corpo e resistenza — la base per qualsiasi percorso integrato.' });
+        result.push({ es: ES.cheratinaNutrizionePro, perche:t('test:diagnostic.takeover.226') });
       } else {
-        result.push({ es: ES.areaBenessere, perche: "Benessere e struttura — le fondamenta di ogni percorso che parte dall'inizio." });
+        result.push({ es: ES.areaBenessere, perche:t('test:diagnostic.takeover.227') });
       }
     }
   }
@@ -1238,7 +1245,7 @@ function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answe
   });
 }
 
-// ── COSA APPROFONDIRE IN CONSULENZA ────────────────────────────
+// -- COSA APPROFONDIRE IN CONSULENZA ----------------------------
 
 function buildConsultationFocus(primary: Percorso, answers: Answers, esperienzaNames: Set<string>): string[] {
   const d9 = answers['d9'] as string | undefined;
@@ -1246,24 +1253,20 @@ function buildConsultationFocus(primary: Percorso, answers: Answers, esperienzaN
   const d4b = answers['d4b'];
 
   if (primary === 'cute') {
-    const points = [
-      'Lo stato reale del cuoio capelluto — equilibrio sebaceo, sensibilità, reattività',
-      'La routine domestica attuale — prodotti usati, frequenza di lavaggio, esposizione al calore',
+    const points = [t('test:diagnostic.takeover.228'),t('test:diagnostic.takeover.229'),
     ];
     points.push(d6a === 'd6a_mai'
-      ? 'La storia della cute — un aspetto mai affrontato in modo professionale, che sarà osservato senza preconcetti'
-      : 'Le soluzioni già provate — cosa ha funzionato, cosa no, e perché');
+      ?t('report:diagnostic.125')
+      :t('report:diagnostic.126'));
     return points;
   }
 
   if (primary === 'rinascita') {
     const d4bArr = Array.isArray(d4b) ? d4b : d4b ? [d4b] : [];
-    return [
-      'Lo stato reale della fibra — elasticità, coesione, punti critici lungo la lunghezza',
-      'La storia dei trattamenti — frequenza, prodotti, data dell\'ultimo intervento chimico o termico',
+    return [t('report:diagnostic.127'),t('report:diagnostic.128'),
       d4bArr.includes('d4b_decolorazioni')
-        ? 'Il rapporto tra colore e struttura — attenzione tecnica da valutare in presenza con cura'
-        : "L'aspettativa rispetto ai tempi — i risultati solidi si costruiscono con continuità",
+        ?t('report:diagnostic.129')
+        :t('report:diagnostic.130'),
     ];
   }
 
@@ -1273,58 +1276,53 @@ function buildConsultationFocus(primary: Percorso, answers: Answers, esperienzaN
       'La storia cromatica — prodotti usati, frequenza, tecnica degli interventi precedenti',
       'Lo stato attuale della fibra colorata — porosità e risposta al calore',
       d7cFocus === 'd7c_bianco'
-        ? 'La strategia evolutiva sulla ricrescita — ritmo degli incontri, tecniche più adatte (airtouch, babylight, degradé) e gradualità del percorso: da valutare in consulenza'
-        : 'La direzione cromatica desiderata — luminosità, profondità, uniformità o cambiamento',
+        ?t('report:diagnostic.131')
+        :t('report:diagnostic.132'),
     ];
     const d5cFocus = answers['d5c'];
     const d5cFocusArr = Array.isArray(d5cFocus) ? (d5cFocus as string[]) : d5cFocus ? [d5cFocus as string] : [];
     if (d5cFocusArr.includes('d5c_danneggia') && !esperienzaNames.has('Cheratina Nutrizione Pro')) {
-      points.push('La protezione strutturale durante il percorso colore — da valutare se integrare Cheratina Nutrizione Pro');
+      points.push(t('report:diagnostic.133'));
     }
     return points;
   }
 
   if (primary === 'armonia') {
-    const points = [
-      'La morfologia reale del capello — tipo di riccio o mosso, diametro, porosità, movimento naturale',
-      'La routine quotidiana — prodotti, tecnica di asciugatura, tempo e difficoltà di gestione',
-      "L'aspettativa sulla forma — riccio libero e naturale, definito, o strutturato con il taglio",
+    const points = [t('test:diagnostic.takeover.230'),t('test:diagnostic.takeover.231'),t('test:diagnostic.takeover.232'),
     ];
     const d2arm = answers['d2'];
     const d2armArr = Array.isArray(d2arm) ? (d2arm as string[]) : d2arm ? [d2arm as string] : [];
     if (d2armArr.includes('d2_grassi') && !esperienzaNames.has('Area Benessere')) {
-      points.push('Il comfort della cute e la tendenza alla radice grassa — da valutare se integrare Area Benessere nel percorso');
+      points.push(t('report:diagnostic.134'));
     }
     if ((d2armArr.includes('d2_fragili') || d2armArr.includes('d2_secchi')) && !esperienzaNames.has('Cheratina Nutrizione Pro')) {
-      points.push('La resistenza della fibra — fragile o secca, aspetto da considerare nella sequenza delle Esperienze');
+      points.push(t('report:diagnostic.135'));
     }
     return points;
   }
 
   const d7e = answers['d7e'] as string | undefined;
-  return [
-    'Lo stato complessivo — cute, fibra, colore e forma osservati insieme in presenza',
-    'La storia professionale passata — cosa è stato provato e perché non ha soddisfatto',
+  return [t('report:diagnostic.136'),t('report:diagnostic.137'),
     d7e === 'd7e_continuita' || d9 === 'd9_non_piacciono'
-      ? "La continuità — come costruire un percorso che abbia senso nel tempo e risponda davvero"
-      : "Le aspettative — cosa è realistico fare nel breve e cosa richiede più sedute",
+      ?t('report:diagnostic.138')
+      :t('report:diagnostic.139'),
   ];
 }
 
-// ── CHIUSURA ────────────────────────────────────────────────────
+// -- CHIUSURA ----------------------------------------------------
 
 function buildClosing(pub: PublicPercorso, attention: AttentionLevel, primary: Percorso, answers: Answers): string {
   if (pub === 'benessere' && primary === 'cute') {
     if (attention === 'prioritaria') {
-      return 'La cute è il terreno — e un terreno in difficoltà ha bisogno di ascolto prima di qualsiasi intervento. Il percorso BenEssere inizia da questa lettura, concreta e metodica.';
+      return t('report:diagnostic.140');
     }
-    return 'La cute è il terreno. Quando è in equilibrio, il capello può rispondere meglio. Il percorso BenEssere inizia da questa lettura — senza fretta, con metodo.';
+    return t('report:diagnostic.141');
   }
   if (pub === 'benessere' && primary === 'rinascita') {
     if (attention === 'prioritaria') {
-      return "Quando la fibra ha attraversato molto, il punto di partenza non può essere una soluzione rapida. Può essere la lettura onesta di quello che c'è — e da lì, la costruzione di una base reale.";
+      return t('report:diagnostic.142');
     }
-    return 'La fibra si ricostruisce con metodo e continuità. Il percorso BenEssere è la risposta consigliata — non per coprire, ma per restituire.';
+    return t('report:diagnostic.143');
   }
   if (pub === 'benessere' && primary === 'armonia') {
     const d9cl = answers['d9'] as string | undefined;
@@ -1335,40 +1333,40 @@ function buildClosing(pub: PublicPercorso, attention: AttentionLevel, primary: P
     const d1cl = answers['d1'] as string | undefined;
     const isRicciCl = d1cl === 'd1_ricci' || d1cl === 'd1_molto_ricci';
     if (hasFibraFragileCl && hasRelationalCl) {
-      return 'Quando fibra, forma e rapporto con il proprio capello si intrecciano, la risposta non può essere un gesto singolo. Il percorso BenEssere è il contesto in cui questa complessità viene accolta e trasformata in una direzione concreta.';
+      return t('report:diagnostic.144');
     }
     if (hasFibraFragileCl) {
-      return 'Forma e struttura si leggono insieme. Quando la fibra è indebolita, la morfologia non può esprimersi al meglio — il percorso BenEssere inizia da questa lettura integrata, per costruire un risultato che regge nel tempo.';
+      return t('report:diagnostic.145');
     }
     if (hasRelationalCl) {
-      return 'Un capello che non piace ancora merita di essere compreso prima di essere trasformato. Il percorso BenEssere inizia da questo ascolto — senza giudizio, con metodo.';
+      return t('report:diagnostic.146');
     }
     if (isRicciCl) {
-      return "La forma del capello riccio può diventare più coerente con la propria natura. Il percorso BenEssere porta le prime Esperienze direttamente sulla morfologia — costruite sull'osservazione in presenza, non su una formula.";
+      return t('report:diagnostic.147');
     }
-    return "Il momento in cui il capello trova la sua forma giusta è quello in cui la gestione smette di essere un problema. Il percorso BenEssere porta a quel momento con metodo — osservazione, morfologia, gesto calibrato.";
+    return t('report:diagnostic.148');
   }
   if (pub === 'colorlux') {
     const d5ccl = answers['d5c'];
     const d5cclArr = Array.isArray(d5ccl) ? (d5ccl as string[]) : d5ccl ? [d5ccl as string] : [];
     if (d5cclArr.includes('d5c_danneggia')) {
-      return 'Un colore che valorizza e rispetta la fibra è un progetto — non un prodotto. Il percorso ColorLux inizia dalla lettura integrata di colore e struttura, per trovare la direzione cromatica che dura senza costo per il capello.';
+      return t('report:diagnostic.149');
     }
     if (attention === 'prioritaria') {
-      return "Il colore che dura e valorizza non si trova per caso — si progetta. Il percorso ColorLux può trasformare la colorazione da urgenza ripetuta a scelta consapevole e duratura.";
+      return t('report:diagnostic.150');
     }
-    return "Il colore giusto non si sceglie a scaffale — si comprende. Il percorso ColorLux è il contesto in cui questa comprensione può diventare un risultato reale.";
+    return t('report:diagnostic.151');
   }
   if (pub === 'rituale' && primary === 'armonia') {
-    return 'La forma del capello può diventare più coerente con la propria natura. Il primo passo è comprenderla davvero — con la lettura giusta e le Esperienze più adatte alla morfologia specifica.';
+    return t('report:diagnostic.152');
   }
   if (attention === 'prioritaria') {
-    return "Quando la complessità viene accolta invece di semplificata, il percorso può diventare reale. Il Rituale Luxosa inizia da una cosa sola: capire davvero.";
+    return t('report:diagnostic.153');
   }
-  return 'La presa in carico integrata è la risposta più coerente per chi sente che un singolo gesto non basta. Il Rituale Luxosa è il contesto in cui questa risposta può prendere forma.';
+  return t('report:diagnostic.154');
 }
 
-// ── NOTA D10 ────────────────────────────────────────────────────
+// -- NOTA D10 ----------------------------------------------------
 
 function buildD10Note(d10: string | undefined): string | null {
   if (!d10 || d10.trim().length <= 10) return null;
@@ -1376,17 +1374,17 @@ function buildD10Note(d10: string | undefined): string | null {
 }
 
 
-// ── SEDI ──────────────────────────────────────────────────────────
+// -- SEDI ----------------------------------------------------------
 
 const LUXOSA_LOCATIONS = [
   {
     id: 'messina-cavour',
-    label: 'Messina Cavour',
+    label:t('test:diagnostic.takeover.233'),
     whatsapp: '390902403220',
   },
 ] as const;
 
-// ── WHATSAPP MESSAGE BUILDER ─────────────────────────────────────
+// -- WHATSAPP MESSAGE BUILDER -------------------------------------
 
 function buildWhatsAppMessage(
   nome: string,
@@ -1420,34 +1418,34 @@ function buildWhatsAppMessage(
   const closing = buildClosing(pub, attention, primary, answers);
 
   const lines: string[] = [];
-  lines.push('Buongiorno, vorrei maggiori informazioni circa la mia condizione, e chiedo il ricontatto da parte di un vostro consulente.');
+  lines.push(t('report:diagnostic.155'));
   lines.push('');
   lines.push(`Fascia oraria preferita: ${fascia}`);
   lines.push(`Sede selezionata: ${sede}`);
   lines.push('');
-  lines.push('DATI INSERITI NEL LUXOSA TEST');
+  lines.push(t('report:diagnostic.156'));
   lines.push(`Nome: ${nome}`);
   lines.push(`Email: ${email}`);
   lines.push(`WhatsApp: ${whatsapp}`);
   lines.push('');
-  lines.push('--- REPORT LUXOSA TEST ---');
+  lines.push(t('report:diagnostic.157'));
   lines.push('');
   lines.push(`PERCORSO: ${percorsoName}`);
   lines.push(`Attenzione: ${attentionLabels[attention]}`);
   lines.push('');
-  lines.push('CONDIZIONE DI PARTENZA');
+  lines.push(t('report:diagnostic.158'));
   lines.push(conditionSummary);
   lines.push('');
-  lines.push('SEGNALI PRINCIPALI');
+  lines.push(t('report:diagnostic.159'));
   mainSignals.forEach(s => lines.push(`- ${s}`));
   lines.push('');
-  lines.push('DIREZIONE DEL PERCORSO');
+  lines.push(t('report:diagnostic.160'));
   lines.push(desiredOutcome);
   lines.push('');
-  lines.push("PERCHE' QUESTO PERCORSO");
+  lines.push(t('report:diagnostic.161'));
   lines.push(percorsoRationale);
   lines.push('');
-  lines.push('ESPERIENZE SUGGERITE');
+  lines.push(t('report:diagnostic.162'));
   esperienze.forEach(e => {
     lines.push(`- ${e.es.nome}`);
     lines.push(`  ${e.perche}`);
@@ -1457,26 +1455,26 @@ function buildWhatsAppMessage(
     lines.push(`PERCORSO SECONDARIO: ${PUBLIC_PERCORSO_NAMES[secondPub]}`);
   }
   lines.push('');
-  lines.push('COSA APPROFONDIRE IN CONSULENZA');
+  lines.push(t('report:diagnostic.163'));
   consultationFocus.forEach(f => lines.push(`- ${f}`));
   if (d10Note) {
     lines.push('');
-    lines.push('NOTE AGGIUNTIVE');
+    lines.push(t('report:diagnostic.164'));
     lines.push(d10Note);
   }
   lines.push('');
   lines.push(closing);
   lines.push('');
   lines.push('---');
-  lines.push(REPORT_DISCLAIMER);
+  lines.push(t('report:disclaimer'));
   return lines.join('\n');
 }
 
-// ═══════════════════════════════════════════════════════════════
+// ---------------------------------------------------------------
 // SUB-COMPONENTS
-// ═══════════════════════════════════════════════════════════════
+// ---------------------------------------------------------------
 
-// ── DISCLAIMER SCREEN ──────────────────────────────────────────
+// -- DISCLAIMER SCREEN ------------------------------------------
 
 function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
   const [accepted, setAccepted] = useState(false);
@@ -1489,24 +1487,16 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
       transition={{ duration: 0.5, ease: premiumEase }}
       className="w-full max-w-[720px] mx-auto px-6 md:px-10 py-10 md:py-14"
     >
-      <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
-      <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-2">
-        Scopri il tuo percorso ideale
-      </h2>
-      <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-8">
-        Rispondi a poche domande sul tuo capello, sulla tua cute e sulle tue abitudini. In pochi minuti riceverai un suggerimento personalizzato.
-      </p>
+      <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.234')}</span>
+      <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-2">{t('test:diagnostic.takeover.235')}</h2>
+      <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-8">{t('test:diagnostic.takeover.236')}</p>
 
       <div className="border border-sand/50 p-6 md:p-8 bg-ecru/20 mb-8 space-y-4 text-[16px] leading-[1.85] text-anthracite/80 font-light">
         <p>
-          <strong className="text-charcoal/80 font-normal">IMPORTANTE:</strong> Il risultato di questo test ha valore esclusivamente orientativo e non costituisce in alcun modo una diagnosi medica, tricologica o dermatologica. La valutazione definitiva avviene esclusivamente in sede, durante la consulenza professionale con la tua professionista Luxosa.
-        </p>
+          <strong className="text-charcoal/80 font-normal">{t('test:diagnostic.takeover.237')}</strong>{t('test:diagnostic.takeover.238')}</p>
         <p>
-          <strong className="text-charcoal/80 font-normal">TRATTAMENTO DEI DATI:</strong> Compilando questo test e fornendo i tuoi dati di contatto, autorizzi Luxosa a raccogliere e trattare le informazioni per elaborare il risultato personalizzato, contattarti per la consulenza gratuita in sede e inviarti comunicazioni relative ai servizi Luxosa. Puoi revocare il consenso scrivendo a{' '}
-          <a href="mailto:privacy@luxosa.it" className="text-brass hover:underline underline-offset-2">
-            privacy@luxosa.it
-          </a>
-          . Consulta la nostra <span className="text-brass">Privacy Policy</span>
+          <strong className="text-charcoal/80 font-normal">{t('test:diagnostic.takeover.239')}</strong>{t('test:diagnostic.takeover.240')}{' '}
+          <a href="mailto:privacy@luxosa.it" className="text-brass hover:underline underline-offset-2">{t('test:diagnostic.takeover.241')}</a>{t('test:diagnostic.takeover.242')}<span className="text-brass">{t('test:diagnostic.takeover.243')}</span>
           .
         </p>
       </div>
@@ -1520,9 +1510,7 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
         }`}>
           {accepted && <Check size={11} strokeWidth={2.5} className="text-ivory" />}
         </div>
-        <span className="text-[16px] leading-[1.7] text-anthracite/80 font-light">
-          Ho letto e accetto le condizioni sopra indicate. *
-        </span>
+        <span className="text-[16px] leading-[1.7] text-anthracite/80 font-light">{t('test:diagnostic.takeover.246')}</span>
       </button>
 
       <button
@@ -1537,18 +1525,16 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
         {accepted && (
           <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
         )}
-        <span className={`flex items-center gap-3 ${accepted ? 'relative z-10' : ''}`}>
-          Inizia il Luxosa Test
-          <ArrowRight size={14} strokeWidth={1.5} />
+        <span className={`flex items-center gap-3 ${accepted ? 'relative z-10' : ''}`}>{t('test:diagnostic.takeover.250')}<ArrowRight size={14} strokeWidth={1.5} />
         </span>
       </button>
     </motion.div>
   );
 }
 
-// ── QUIZ CONTENT ───────────────────────────────────────────────
+// -- QUIZ CONTENT -----------------------------------------------
 
-// ── LAYOUT HELPERS (count-based, no per-question overrides) ────
+// -- LAYOUT HELPERS (count-based, no per-question overrides) ----
 
 function getColCount(n: number): number {
   if (n <= 4) return n;
@@ -1721,7 +1707,7 @@ function QuizContent({
             value={textValue}
             onChange={e => onTextChange(q.id, e.target.value)}
             maxLength={500}
-            placeholder="Scrivi qui liberamente…"
+            placeholder={t('test:diagnostic.takeover.260')}
             className="w-full h-36 md:h-44 bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/95 font-light leading-[1.8] resize-none outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/40"
           />
           <div className="text-right mt-1.5">
@@ -1773,15 +1759,13 @@ function ContinuaButton({ onClick, enabled }: { onClick: () => void; enabled: bo
       {enabled && (
         <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
       )}
-      <span className={`flex items-center gap-3 ${enabled ? 'relative z-10' : ''}`}>
-        Continua
-        <ArrowRight size={14} strokeWidth={1.5} className={enabled ? 'group-hover:translate-x-1 transition-transform duration-300' : ''} />
+      <span className={`flex items-center gap-3 ${enabled ? 'relative z-10' : ''}`}>{t('test:diagnostic.takeover.264')}<ArrowRight size={14} strokeWidth={1.5} className={enabled ? 'group-hover:translate-x-1 transition-transform duration-300' : ''} />
       </span>
     </button>
   );
 }
 
-// ── FORM SCREEN ────────────────────────────────────────────────
+// -- FORM SCREEN ------------------------------------------------
 
 function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void }) {
   const [nome, setNome] = useState('');
@@ -1824,25 +1808,21 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
       </div>
 
       <div className="relative z-10 max-w-[580px] mx-auto px-6 md:px-10 py-10 md:py-14">
-        <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Quasi pronta</span>
-        <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">
-          Ricevi il tuo risultato.
-        </h2>
-        <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-10">
-          Per ricevere il tuo risultato personalizzato e permetterci di contattarti per la consulenza gratuita in sede, lasciaci i tuoi dati.
-        </p>
+        <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.266')}</span>
+        <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">{t('test:diagnostic.takeover.267')}</h2>
+        <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-10">{t('test:diagnostic.takeover.268')}</p>
 
         <div className="space-y-4">
           <input
             type="text"
-            placeholder="Il tuo nome *"
+            placeholder={t('test:diagnostic.takeover.269')}
             value={nome}
             onChange={e => { setNome(e.target.value); setError(''); }}
             className={inputClass}
           />
           <input
             type="email"
-            placeholder="Il tuo indirizzo email *"
+            placeholder={t('test:diagnostic.takeover.270')}
             value={email}
             onChange={e => { setEmail(e.target.value); setError(''); }}
             className={inputClass}
@@ -1854,7 +1834,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               defaultCountry="IT"
               value={phone}
               onChange={(val) => { setPhone(val); setError(''); }}
-              placeholder="Il tuo numero WhatsApp *"
+              placeholder={t('test:diagnostic.takeover.271')}
               international
               countryCallingCodeEditable={false}
             />
@@ -1870,9 +1850,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               className="relative overflow-hidden group w-full inline-flex items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light py-5"
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-              <span className="relative z-10 flex items-center gap-3">
-                Scopri il tuo orientamento
-                <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+              <span className="relative z-10 flex items-center gap-3">{t('test:diagnostic.takeover.272')}<ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </button>
           </div>
@@ -1882,7 +1860,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
   );
 }
 
-// ── RESULT SCREEN ──────────────────────────────────────────────
+// -- RESULT SCREEN ----------------------------------------------
 
 function ResultScreen({
   nome,
@@ -1956,9 +1934,9 @@ function ResultScreen({
 
         {/* 1 — Apertura personalizzata */}
         <div className="mb-12 md:mb-16">
-          <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Il tuo orientamento Luxosa</span>
+          <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.273')}</span>
           <h2 className="font-serif text-[24px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-6">
-            {nome ? `${nome}, il percorso pensato per te è…` : 'Il percorso pensato per te è…'}
+            {nome ? t('test:result.personalizedTitle', { nome }) :t('test:diagnostic.takeover.274')}
           </h2>
           <div className="border-l-[3px] border-brass pl-6">
             <p className="font-serif text-[38px] md:text-[50px] font-light leading-[1.05] text-charcoal">{percorsoName}</p>
@@ -1967,13 +1945,13 @@ function ResultScreen({
 
         {/* 2 — Condizione di partenza */}
         <div className="mb-10 border-t border-sand/35 pt-8">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Condizione di partenza</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.275')}</span>
           <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light">{conditionSummary}</p>
         </div>
 
         {/* 3 — Segnali principali */}
         <div className="mb-10 border-t border-sand/35 pt-8">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-5">Segnali principali</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-5">{t('test:diagnostic.takeover.276')}</span>
           <ul className="space-y-3">
             {mainSignals.map((signal, i) => (
               <motion.li
@@ -1992,7 +1970,7 @@ function ResultScreen({
 
         {/* 4 — Livello di attenzione */}
         <div className="mb-10 border-t border-sand/35 pt-8">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Livello di attenzione</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.277')}</span>
           <span className={`inline-flex items-center px-4 py-2 text-[11px] tracking-[0.18em] uppercase font-light ${
             attention === 'prioritaria'
               ? 'bg-brass/10 text-brass-muted border border-brass/30'
@@ -2006,19 +1984,19 @@ function ResultScreen({
 
         {/* 5 — La direzione */}
         <div className="mb-10 border-t border-sand/35 pt-8">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">La direzione</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.281')}</span>
           <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light">{desiredOutcome}</p>
         </div>
 
         {/* 6 — Perché questo percorso */}
         <div className="mb-10 -mx-6 md:-mx-10 px-6 md:px-10 py-8 md:py-10 bg-ecru/25 border-t border-b border-sand/30">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Perché questo percorso</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.282')}</span>
           <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">{percorsoRationale}</p>
         </div>
 
         {/* 7 — Esperienze suggerite */}
         <div className="mb-10 pt-4">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-6">Esperienze suggerite</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-6">{t('test:diagnostic.takeover.283')}</span>
           <div className="space-y-4">
             {esperienze.map((item, i) => (
               <motion.div
@@ -2043,7 +2021,7 @@ function ResultScreen({
 
         {/* 8 — Cosa approfondire in consulenza */}
         <div className="mb-10 border-t border-sand/35 pt-8">
-          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-5">Cosa approfondire in consulenza</span>
+          <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-5">{t('test:diagnostic.takeover.284')}</span>
           <ul className="space-y-3">
             {consultationFocus.map((point, i) => (
               <li key={i} className="flex items-start gap-3">
@@ -2062,7 +2040,7 @@ function ResultScreen({
             transition={{ delay: 0.4, duration: 0.6, ease: premiumEase }}
             className="mb-10 border-t border-sand/35 pt-8"
           >
-            <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Dal tuo racconto</span>
+            <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.285')}</span>
             <blockquote className="border-l-[2px] border-brass/30 pl-5">
               <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light italic">«{d10Note}»</p>
             </blockquote>
@@ -2082,11 +2060,8 @@ function ResultScreen({
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mb-10 p-5 border border-brass/20 bg-brass/5"
           >
-            <p className="text-[13px] leading-[1.75] text-anthracite/70 font-light">
-              La consulenza potrebbe rivelare un'affinità anche con{' '}
-              <strong className="text-charcoal/75 font-normal">{PUBLIC_PERCORSO_NAMES[secondPub]}</strong>
-              . La lettura in presenza definirà la direzione più coerente.
-            </p>
+            <p className="text-[13px] leading-[1.75] text-anthracite/70 font-light">{t('test:diagnostic.takeover.286')}{' '}
+              <strong className="text-charcoal/75 font-normal">{PUBLIC_PERCORSO_NAMES[secondPub]}</strong>{t('test:diagnostic.takeover.287')}</p>
           </motion.div>
         )}
 
@@ -2103,22 +2078,18 @@ function ResultScreen({
             className="relative overflow-hidden group inline-flex items-center gap-4 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
           >
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-            <span className="relative z-10 flex items-center gap-4">
-              Voglio essere contattata per maggiori informazioni
-              <ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+            <span className="relative z-10 flex items-center gap-4">{t('test:diagnostic.takeover.288')}<ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
             </span>
           </button>
           <button
             onClick={onReset}
             className="text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/50 border border-anthracite/15 px-8 py-5 hover:text-anthracite/85 hover:border-anthracite/25 transition-all duration-300"
-          >
-            Ricomincia
-          </button>
+          >{t('test:diagnostic.takeover.289')}</button>
         </div>
 
         {/* Disclaimer */}
         <p className="mt-10 text-[11px] leading-[1.7] text-anthracite/43 font-light italic text-center max-w-xl mx-auto">
-          {REPORT_DISCLAIMER}
+          {t('report:disclaimer')}
         </p>
       </div>
 
@@ -2135,14 +2106,10 @@ function ResultScreen({
             transition={{ duration: 0.4, ease: [0.25, 0.1, 0, 1] }}
             className="relative bg-ivory max-w-sm w-full px-8 py-10 shadow-2xl"
           >
-            <p className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">
-              Luxosa · Consulenza
-            </p>
+            <p className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">{t('test:diagnostic.takeover.290')}</p>
 
             {/* Sede */}
-            <p className="text-[11px] tracking-[0.2em] uppercase text-anthracite/65 font-light mb-2">
-              Scegli la sede
-            </p>
+            <p className="text-[11px] tracking-[0.2em] uppercase text-anthracite/65 font-light mb-2">{t('test:diagnostic.takeover.291')}</p>
             <div className="relative mb-8">
               <select
                 value={selectedLocationId}
@@ -2153,12 +2120,10 @@ function ResultScreen({
                   <option key={l.id} value={l.id}>{l.label}</option>
                 ))}
               </select>
-              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brass-muted text-[10px]">▾</span>
+              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brass-muted text-[10px]">?</span>
             </div>
 
-            <h3 className="font-serif text-[22px] font-light text-charcoal leading-snug mb-2">
-              In quale fascia oraria preferisci essere ricontattata?
-            </h3>
+            <h3 className="font-serif text-[22px] font-light text-charcoal leading-snug mb-2">{t('test:diagnostic.takeover.292')}</h3>
             <div className="h-[1px] bg-sand/60 mb-8" />
             <div className="flex flex-col gap-3">
               {['09:00 – 11:00', '11:00 – 13:00', '13:00 – 15:00', '15:00 – 18:00', 'Indifferente'].map(fascia => (
@@ -2198,16 +2163,12 @@ function ResultScreen({
                   ? 'bg-charcoal text-ivory hover:bg-deep cursor-pointer'
                   : 'bg-sand/40 text-anthracite/45 cursor-not-allowed'
               }`}
-            >
-              Invia
-            </button>
+            >{t('test:diagnostic.takeover.297')}</button>
 
             <button
               onClick={() => { setShowTimePicker(false); setSelectedFascia(null); }}
               className="mt-3 w-full text-center text-[11px] tracking-[0.2em] uppercase font-light text-anthracite/50 hover:text-anthracite/75 transition-colors duration-300"
-            >
-              Annulla
-            </button>
+            >{t('test:diagnostic.takeover.298')}</button>
           </motion.div>
         </div>
       )}
@@ -2215,9 +2176,9 @@ function ResultScreen({
   );
 }
 
-// ═══════════════════════════════════════════════════════════════
+// ---------------------------------------------------------------
 // MAIN COMPONENT
-// ═══════════════════════════════════════════════════════════════
+// ---------------------------------------------------------------
 
 export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const [screen, setScreen] = useState<Screen>('disclaimer');
@@ -2264,7 +2225,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
     });
   }, [answers, currentQ, screen, step, totalSteps]);
 
-  // Transition quiz → form when all questions answered
+  // Transition quiz ? form when all questions answered
   useEffect(() => {
     if (screen === 'quiz' && step >= totalSteps) {
       if (!questionsCompletedTrackedRef.current) {
@@ -2356,7 +2317,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
       transition={{ duration: 0.5, ease: premiumEase }}
       className="fixed inset-0 z-[9999] bg-ivory flex flex-col overflow-hidden"
     >
-      {/* ── HEADER ──────────────────────────────────────────── */}
+      {/* -- HEADER -------------------------------------------- */}
       <div className="flex-shrink-0 bg-ivory border-b border-sand/40 h-[64px] md:h-[80px] w-full flex items-center">
         <div className="w-full px-4 sm:px-6 md:px-10 flex items-center justify-between gap-4">
 
@@ -2364,7 +2325,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
           <div className="w-28 md:w-40 flex items-center flex-shrink-0 gap-3">
             <img
               src="/images/luxosa-logo-orizzontale-bianco-tras.png"
-              alt="Luxosa"
+              alt={t('test:diagnostic.takeover.299')}
               className="h-5 md:h-6 w-auto object-contain brightness-0"
             />
             {screen === 'quiz' && step > 0 && (
@@ -2373,7 +2334,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
                 className="flex items-center gap-1 text-[11px] tracking-[0.2em] uppercase text-charcoal/40 hover:text-charcoal transition-colors group outline-none"
               >
                 <ArrowLeft size={14} strokeWidth={1} className="group-hover:-translate-x-1 transition-transform duration-300" />
-                <span className="hidden sm:inline font-light">Indietro</span>
+                <span className="hidden sm:inline font-light">{t('test:diagnostic.takeover.300')}</span>
               </button>
             )}
           </div>
@@ -2383,7 +2344,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
             {screen === 'quiz' && currentQ ? (
               <div className="w-full max-w-[400px]">
                 <div className="flex justify-between items-end mb-1.5">
-                  <span className="text-[9px] tracking-[0.25em] uppercase text-brass font-bold">Luxosa Test</span>
+                  <span className="text-[9px] tracking-[0.25em] uppercase text-brass font-bold">{t('test:diagnostic.takeover.301')}</span>
                   <span className="text-[9px] text-charcoal/30 font-light italic hidden sm:block">{currentQ.label}</span>
                 </div>
                 <div className="h-[2px] bg-sand/30 w-full">
@@ -2397,7 +2358,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
               </div>
             ) : (
               <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/50">
-                {screen === 'result' ? 'Luxosa Test · Orientamento personalizzato' : screen === 'form' ? 'Ultimo passo' : ''}
+                {screen === 'result' ?t('test:diagnostic.takeover.302') : screen === 'form' ?t('test:diagnostic.takeover.303') : ''}
               </span>
             )}
           </div>
@@ -2406,10 +2367,10 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
           <div className="w-20 md:w-32 flex justify-end flex-shrink-0">
             <button
               onClick={handleClose}
-              aria-label="Chiudi"
+              aria-label={t('test:diagnostic.takeover.304')}
               className="group flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase text-anthracite/45 hover:text-anthracite transition-colors duration-300 outline-none"
             >
-              <span className="hidden sm:inline font-light">Chiudi</span>
+              <span className="hidden sm:inline font-light">{t('test:diagnostic.takeover.305')}</span>
               <div className="w-8 h-8 border border-sand/60 rounded-full flex items-center justify-center group-hover:border-charcoal group-hover:bg-charcoal group-hover:text-ivory transition-all duration-400">
                 <X size={14} strokeWidth={1} />
               </div>
@@ -2419,7 +2380,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
         </div>
       </div>
 
-      {/* ── SCROLLABLE CONTENT ──────────────────────────────── */}
+      {/* -- SCROLLABLE CONTENT -------------------------------- */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto bg-ivory">
         <AnimatePresence mode="wait">
           {screen === 'disclaimer' && (

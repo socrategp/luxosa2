@@ -7,6 +7,7 @@ import { PillarSection, TestimonialsCarousel } from '../components/Authority';
 import LuxosaValuesRing from '../components/LuxosaValuesRing';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 function HomeIdentity() {
   const ref = useRef(null);
@@ -18,21 +19,19 @@ function HomeIdentity() {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           <div className="lg:pr-8">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }}>
-              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">La Maison</span>
+              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('home:home.page.001')}</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
-            <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.15, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.2] text-charcoal tracking-[0.01em]">
-              Non un salone.<br />Una maison.
-            </motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.15, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.2] text-charcoal tracking-[0.01em]">{t('home:home.page.002')}<br />{t('home:home.page.003')}</motion.h2>
             <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.3, ease: premiumEase }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light">Luxosa nasce per offrire un modo diverso di vivere la cura dei capelli.</p>
-              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light">Non un servizio isolato, non una scelta veloce, non una risposta standard. Un luogo in cui ogni donna viene accolta, ascoltata e accompagnata con attenzione.</p>
-              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light">Ogni gesto, ogni consulenza, ogni percorso nasce da una visione precisa: valorizzare la persona, proteggere la qualità del capello e costruire risultati coerenti nel tempo.</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light">{t('home:home.page.004')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light">{t('home:home.page.005')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light">{t('home:home.page.006')}</p>
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} transition={{ duration: 1.5, delay: 0.2 }} className="relative group">
             <motion.div initial={{ scale: 1.15 }} animate={inView ? { scale: 1 } : {}} transition={{ duration: 1.8, ease: premiumEase }} className="aspect-[3/4] overflow-hidden">
-              <img src="/images/nosalone_unamaison.webp" alt="La visione Luxosa" loading="lazy" decoding="async" className="w-full h-full object-cover object-center transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out" />
+              <img src="/images/nosalone_unamaison.webp" alt={t('home:home.page.007')} loading="lazy" decoding="async" className="w-full h-full object-cover object-center transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out" />
             </motion.div>
             <div className="absolute -bottom-6 -left-6 w-24 h-24 border-l border-b border-brass/30" />
           </motion.div>
@@ -61,33 +60,25 @@ function PerChiE() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
             className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.2] text-charcoal tracking-[0.01em] mb-10"
-          >
-            Forse non si cerca un altro salone.
-          </motion.h2>
+          >{t('home:home.page.008')}</motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
-          >
-            Si cerca un luogo in cui non dover ricominciare ogni volta da zero. In cui il colore non sia un tentativo. In cui il taglio non perda senso dopo pochi giorni. In cui la cute venga ascoltata prima di essere trattata. In cui nessuno proponga quello che va di moda, ma ciò che ha davvero senso.
-          </motion.p>
+          >{t('home:home.page.009')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.5 }}
             className="mt-6 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
-          >
-            Una cura che non si limiti all&apos;apparenza. Un luogo in cui il capello venga osservato con attenzione, il desiderio ascoltato con rispetto, ogni scelta costruita con metodo.
-          </motion.p>
+          >{t('home:home.page.010')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.65 }}
             className="mt-6 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
-          >
-            Luxosa nasce per questo.
-          </motion.p>
+          >{t('home:home.page.011')}</motion.p>
         </div>
       </div>
     </section>
@@ -107,9 +98,7 @@ function Appartenenza() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light"
-          >
-            Appartenenza
-          </motion.span>
+          >{t('home:home.page.012')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -121,31 +110,23 @@ function Appartenenza() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
             className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.3] text-ivory/95 tracking-[0.01em]"
-          >
-            Ci sono luoghi che frequenti. E luoghi a cui senti di appartenere.
-          </motion.p>
+          >{t('home:home.page.013')}</motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
             className="mt-8 space-y-5"
           >
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/65 font-light">              Il vero potere è decidere di prendersi cura di sé. Non più tentativi, non più risposte uguali per tutte, non più la sensazione di dover ricominciare ogni volta da capo.</p>
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/65 font-light">
-              Qui ogni donna viene accolta con la sua storia, i suoi desideri, il suo tempo, la sua identità. È da lì che nasce il percorso. Ed è da lì che nasce anche la fiducia.
-            </p>
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/65 font-light">
-              Chi sceglie Luxosa non cambia soltanto luogo. Cambia standard.
-            </p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/65 font-light">{t('home:home.page.014')}</p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/65 font-light">{t('home:home.page.015')}</p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/65 font-light">{t('home:home.page.016')}</p>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.7 }}
             className="mt-12 font-serif text-[28px] md:text-[34px] font-light text-brass-light italic"
-          >
-            Io sono Luxosa.
-          </motion.p>
+          >{t('home:home.page.017')}</motion.p>
         </div>
       </div>
     </section>
@@ -155,15 +136,15 @@ function Appartenenza() {
 const TRIADE_PAYOFF = [
   {
     word: 'Ama',
-    text: 'La cura come atto d’amore verso sé stessa.',
+    text:t('home:home.page.018'),
   },
   {
     word: 'Splendi',
-    text: 'Il risultato come espressione naturale di ciò che si è.',
+    text:t('home:home.page.019'),
   },
   {
     word: 'Osa',
-    text: 'La scelta di non accontentarsi più.',
+    text:t('home:home.page.020'),
   },
 ];
 
@@ -217,9 +198,7 @@ function CinematicPayoff() {
       <div className="absolute inset-0 bg-gradient-to-b from-deep/60 via-deep/40 to-deep/80" />
 
       <div className="absolute top-0 left-0 right-0 z-20 pt-16 md:pt-20 text-center pointer-events-none">
-        <p className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light drop-shadow-[0_1px_12px_rgba(0,0,0,1)]">
-          La triade del femminile
-        </p>
+        <p className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light drop-shadow-[0_1px_12px_rgba(0,0,0,1)]">{t('home:home.page.023')}</p>
       </div>
 
       <div className="absolute inset-0 z-10 grid grid-cols-3">
@@ -241,7 +220,7 @@ function CinematicPayoff() {
                   <motion.span
                     className="block"
                     animate={{
-                      color: isActive ? '#C4AE8C' : 'rgba(249,246,241,0.85)',
+                      color: isActive ?t('home:home.page.024') :t('home:home.page.025'),
                     }}
                     transition={{ duration: 1.6, ease: premiumEase }}
                     style={{ fontSize: 'clamp(44px, 5vw, 64px)', display: 'block' }}
@@ -277,12 +256,12 @@ function CioCheDiventa() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   const items = [
-    { title: 'Presa in carico reale', text: 'Non una cliente tra tante. Una storia da leggere con attenzione.' },
-    { title: 'Ascolto autentico', text: 'Ogni percorso inizia da ciò che si dice, da ciò che si mostra, da ciò che non si riesce ancora a spiegare.' },
-    { title: 'Progetto chiaro', text: 'Una direzione definita, non un servizio scelto al momento.' },
-    { title: 'Risultati duraturi', text: 'Non bellezza per un giorno. Bellezza costruita per restare.' },
-    { title: 'Continuità professionale', text: 'Ogni seduta è una continuazione, non un nuovo inizio.' },
-    { title: 'Eleganza sostanziale', text: 'Non scenografia. Qualità reale, visibile e percepita nel tempo.' },
+    { title:t('home:home.page.026'), text:t('home:home.page.027') },
+    { title:t('home:home.page.028'), text:t('home:home.page.029') },
+    { title:t('home:home.page.030'), text:t('home:home.page.031') },
+    { title:t('home:home.page.032'), text:t('home:home.page.033') },
+    { title:t('home:home.page.034'), text:t('home:home.page.035') },
+    { title:t('home:home.page.036'), text:t('home:home.page.037') },
   ];
 
   return (
@@ -290,21 +269,15 @@ function CioCheDiventa() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center mb-20 md:mb-28">
           <div className="max-w-2xl">
-            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">
-              Ciò che diventa possibile
-            </motion.span>
+            <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('home:home.page.038')}</motion.span>
             <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
-            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">
-              Ciò che diventa possibile<br />scegliendo Luxosa.
-            </motion.h2>
+            <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">{t('home:home.page.039')}<br />{t('home:home.page.040')}</motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
               className="mt-10 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/80 font-light"
-            >
-              In Luxosa ogni risultato nasce da un processo: ascolto, osservazione, progettazione e cura. Non si chiede di scegliere da soli davanti a un menu. Si viene accompagnati verso la direzione più coerente con il proprio capello, il proprio stile di vita e il risultato desiderato.
-            </motion.p>
+            >{t('home:home.page.041')}</motion.p>
           </div>
           <motion.div
             initial={{ opacity: 0, y: 28, scale: 1.02 }}
@@ -314,7 +287,7 @@ function CioCheDiventa() {
           >
             <img
               src="/images/diventa_possibile.webp"
-              alt="Donna Luxosa dopo un percorso di cura"
+              alt={t('home:home.page.042')}
               loading="lazy"
               decoding="async"
               className="w-full aspect-[4/3] object-cover"
@@ -351,25 +324,18 @@ function HomeCTA() {
       </div>
       <div className="max-w-[900px] mx-auto px-6 md:px-10 lg:px-16 text-center relative z-10" ref={ref}>
         <motion.div initial={{ width: 0 }} animate={inView ? { width: 60 } : {}} transition={{ duration: 1.2, delay: 0.1, ease: premiumEase }} className="h-[1px] bg-brass mx-auto mb-12" />
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.2 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-8">
-          Il prossimo passo
-        </motion.p>
-        <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.3, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">
-          Dopo aver conosciuto Luxosa,<br />il passo successivo è entrare nel metodo.
-        </motion.h2>
-        <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.45 }} className="mt-6 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/75 font-light max-w-xl mx-auto">
-          Il primo incontro è il punto di partenza per conoscere il mondo Luxosa e comprendere quale direzione può essere più adatta.
-        </motion.p>
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.2 }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-8">{t('home:home.page.043')}</motion.p>
+        <motion.h2 initial={{ opacity: 0, y: 40 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, delay: 0.3, ease: premiumEase }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]">{t('home:home.page.044')}<br />{t('home:home.page.045')}</motion.h2>
+        <motion.p initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: premiumEase, delay: 0.45 }} className="mt-6 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/75 font-light max-w-xl mx-auto">{t('home:home.page.046')}</motion.p>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, delay: 0.5, ease: premiumEase }} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
           <Link to="/il-metodo" className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5 transition-shadow duration-500 hover:shadow-xl hover:shadow-deep/10">
             <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-            <span className="relative z-10 flex items-center gap-3">
-              Scopri il Metodo <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+            <span className="relative z-10 flex items-center gap-3">{t('home:home.page.047')}<ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </span>
           </Link>
           <Link to="/i-percorsi" className="group relative overflow-hidden inline-flex items-center gap-3 text-[12px] tracking-[0.2em] uppercase text-anthracite/85 font-light border border-anthracite/20 px-10 py-5 bg-transparent transition-colors duration-300">
             <span className="absolute inset-0 bg-charcoal translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-            <span className="relative z-10 group-hover:text-ivory transition-colors duration-300">Esplora i Percorsi</span>
+            <span className="relative z-10 group-hover:text-ivory transition-colors duration-300">{t('home:home.page.048')}</span>
           </Link>
         </motion.div>
       </div>

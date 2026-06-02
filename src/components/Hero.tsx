@@ -1,11 +1,12 @@
 ﻿import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { t } from '../i18n/t';
 
 export default function Hero() {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"]
+    offset: ['start start', 'end start']
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
@@ -54,27 +55,21 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
             className="text-[11px] md:text-[12px] tracking-[0.35em] uppercase text-brass-light font-medium mb-4 drop-shadow-md"
-          >
-            La Maison
-          </motion.p>
+          >{t('home:hero.003')}</motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease: [0.25, 0.1, 0, 1] }}
             className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
-          >
-            Un luogo in cui<br />riconoscersi.
-          </motion.h1>
+          >{t('home:hero.004')}<br />{t('home:hero.005')}</motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
             className="mt-6 md:mt-8 text-white/85 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide"
-          >
-            Luxosa è la maison dedicata alla cura evoluta di cute e capelli, dove bellezza, metodo e ascolto si incontrano per accompagnare ogni donna in un percorso personale.
-          </motion.p>
+          >{t('home:hero.006')}</motion.p>
         </div>
       </div>
 

@@ -1,3 +1,4 @@
+import { t } from '../i18n/t';
 ﻿import { motion } from 'framer-motion';
 
 const ease = [0.25, 0.1, 0, 1] as const;
@@ -41,25 +42,19 @@ export default function PrivacyPolicyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease, delay: 0.15 }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-5"
-          >
-            Documenti legali
-          </motion.p>
+          >{t('common:privacy.policy.page.001')}</motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease, delay: 0.25 }}
             className="font-serif text-[36px] md:text-[48px] lg:text-[56px] font-light leading-[1.08] text-charcoal tracking-[0.01em]"
-          >
-            Privacy Policy
-          </motion.h1>
+          >{t('common:privacy.policy.page.002')}</motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease, delay: 0.45 }}
             className="mt-6 text-[16px] text-stone font-light tracking-wide"
-          >
-            Ultimo aggiornamento: [data da definire] — Versione 1.0
-          </motion.p>
+          >{t('common:privacy.policy.page.003')}</motion.p>
         </div>
       </section>
 
@@ -69,156 +64,122 @@ export default function PrivacyPolicyPage() {
 
           {/* Intro */}
           <div className="mb-14 pb-10 border-b border-sand/60">
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
-              La presente informativa descrive le modalità di raccolta e trattamento dei dati personali degli utenti che visitano il sito web di Luxosa (di seguito "Sito") o usufruiscono dei servizi offerti dalla Maison, in conformità al Regolamento (UE) 2016/679 (GDPR) e al D.Lgs. 196/2003, come modificato dal D.Lgs. 101/2018.
-            </p>
-            <p className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
-              Si invita a leggere attentamente il presente documento prima di fornire qualsiasi dato personale o di continuare la navigazione sul Sito.
-            </p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">{t('common:privacy.policy.page.004')}</p>
+            <p className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">{t('common:privacy.policy.page.005')}</p>
           </div>
 
           <div className="space-y-2">
 
-            <Section number="01" title="Titolare del Trattamento">
-              <p>
-                Il Titolare del trattamento dei dati personali è <strong className="font-normal text-anthracite">Luxosa S.r.l.</strong> (o ragione sociale da definire), con sede in Via Cavour 1, 98100 Messina (ME) — Italia.
-              </p>
-              <p>
-                Per qualsiasi comunicazione relativa al trattamento dei dati personali è possibile contattare il Titolare ai seguenti recapiti:
-              </p>
+            <Section number="01" title={t('common:privacy.policy.page.006')}>
+              <p>{t('common:privacy.policy.page.007')}<strong className="font-normal text-anthracite">{t('common:privacy.policy.page.008')}</strong>{t('common:privacy.policy.page.009')}</p>
+              <p>{t('common:privacy.policy.page.010')}</p>
               <ul className="list-none space-y-1 text-anthracite/80">
-                <li>— E-mail: <span className="text-anthracite/95">[privacy@luxosa.it — da definire]</span></li>
-                <li>— Telefono: +39 090 240 3220</li>
-                <li>— PEC: <span className="text-anthracite/95">[indirizzo PEC — da definire]</span></li>
+                <li>{t('common:privacy.policy.page.011')}<span className="text-anthracite/95">{t('common:privacy.policy.page.012')}</span></li>
+                <li>{t('common:privacy.policy.page.013')}</li>
+                <li>{t('common:privacy.policy.page.014')}<span className="text-anthracite/95">{t('common:privacy.policy.page.015')}</span></li>
               </ul>
             </Section>
 
-            <Section number="02" title="Tipologie di Dati Raccolti">
-              <p>Il Titolare raccoglie e tratta le seguenti categorie di dati personali:</p>
-              <p><em className="not-italic font-normal text-anthracite/95">Dati forniti volontariamente dall'utente:</em></p>
+            <Section number="02" title={t('common:privacy.policy.page.016')}>
+              <p>{t('common:privacy.policy.page.017')}</p>
+              <p><em className="not-italic font-normal text-anthracite/95">{t('common:privacy.policy.page.018')}</em></p>
               <ul className="list-none space-y-1 text-anthracite/80 pl-4">
-                <li>— Nome, cognome e dati anagrafici</li>
-                <li>— Indirizzo e-mail e numero di telefono</li>
-                <li>— Dati relativi allo stato di salute di cute e capelli, forniti nell'ambito della consulenza (dati particolari ex art. 9 GDPR)</li>
-                <li>— Messaggi e comunicazioni inviate tramite il modulo di contatto</li>
+                <li>{t('common:privacy.policy.page.019')}</li>
+                <li>{t('common:privacy.policy.page.020')}</li>
+                <li>{t('common:privacy.policy.page.021')}</li>
+                <li>{t('common:privacy.policy.page.022')}</li>
               </ul>
-              <p className="mt-3"><em className="not-italic font-normal text-anthracite/95">Dati raccolti automaticamente durante la navigazione:</em></p>
+              <p className="mt-3"><em className="not-italic font-normal text-anthracite/95">{t('common:privacy.policy.page.023')}</em></p>
               <ul className="list-none space-y-1 text-anthracite/80 pl-4">
-                <li>— Indirizzo IP e dati di accesso</li>
-                <li>— Informazioni sul browser e dispositivo utilizzato</li>
-                <li>— Pagine visitate e durata della navigazione</li>
-                <li>— Cookie (si rimanda alla Cookie Policy)</li>
+                <li>{t('common:privacy.policy.page.024')}</li>
+                <li>{t('common:privacy.policy.page.025')}</li>
+                <li>{t('common:privacy.policy.page.026')}</li>
+                <li>{t('common:privacy.policy.page.027')}</li>
               </ul>
             </Section>
 
-            <Section number="03" title="Finalità e Base Giuridica del Trattamento">
-              <p>I dati personali vengono trattati per le seguenti finalità:</p>
+            <Section number="03" title={t('common:privacy.policy.page.028')}>
+              <p>{t('common:privacy.policy.page.029')}</p>
               <div className="space-y-5">
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-1">Gestione delle prenotazioni e consulenze</p>
-                  <p>Trattamento necessario per l'esecuzione di un contratto o per adempiere a obblighi precontrattuali (art. 6, par. 1, lett. b, GDPR).</p>
+                  <p className="text-anthracite/95 font-normal mb-1">{t('common:privacy.policy.page.030')}</p>
+                  <p>{t('common:privacy.policy.page.031')}</p>
                 </div>
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-1">Adempimenti fiscali e contabili</p>
-                  <p>Trattamento necessario per adempiere a obblighi di legge (art. 6, par. 1, lett. c, GDPR).</p>
+                  <p className="text-anthracite/95 font-normal mb-1">{t('common:privacy.policy.page.032')}</p>
+                  <p>{t('common:privacy.policy.page.033')}</p>
                 </div>
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-1">Comunicazioni di marketing e newsletter</p>
-                  <p>Basato sul consenso espresso dell'interessato (art. 6, par. 1, lett. a, GDPR), liberamente revocabile in qualsiasi momento.</p>
+                  <p className="text-anthracite/95 font-normal mb-1">{t('common:privacy.policy.page.034')}</p>
+                  <p>{t('common:privacy.policy.page.035')}</p>
                 </div>
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-1">Miglioramento del Sito e analisi statistica</p>
-                  <p>Basato sul legittimo interesse del Titolare (art. 6, par. 1, lett. f, GDPR), nel rispetto dei diritti e libertà fondamentali degli utenti.</p>
+                  <p className="text-anthracite/95 font-normal mb-1">{t('common:privacy.policy.page.036')}</p>
+                  <p>{t('common:privacy.policy.page.037')}</p>
                 </div>
               </div>
             </Section>
 
-            <Section number="04" title="Modalità di Trattamento e Conservazione">
-              <p>
-                I dati personali sono trattati con strumenti elettronici e/o cartacei, adottando misure tecniche e organizzative adeguate a garantirne la sicurezza, l'integrità e la riservatezza, nel rispetto delle disposizioni di cui agli artt. 25 e 32 del GDPR.
-              </p>
-              <p>
-                I dati saranno conservati per il tempo strettamente necessario al conseguimento delle finalità per cui sono stati raccolti, e comunque:
-              </p>
+            <Section number="04" title={t('common:privacy.policy.page.038')}>
+              <p>{t('common:privacy.policy.page.039')}</p>
+              <p>{t('common:privacy.policy.page.040')}</p>
               <ul className="list-none space-y-1 text-anthracite/80 pl-4">
-                <li>— Dati contrattuali e fiscali: <strong className="font-normal">10 anni</strong> dalla cessazione del rapporto</li>
-                <li>— Dati di contatto e consulenza: <strong className="font-normal">3 anni</strong> dall'ultimo contatto</li>
-                <li>— Dati di navigazione: <strong className="font-normal">12 mesi</strong></li>
-                <li>— Dati trattati su base di consenso: fino alla revoca del consenso</li>
+                <li>{t('common:privacy.policy.page.041')}<strong className="font-normal">{t('common:privacy.policy.page.042')}</strong>{t('common:privacy.policy.page.043')}</li>
+                <li>{t('common:privacy.policy.page.044')}<strong className="font-normal">{t('common:privacy.policy.page.045')}</strong>{t('common:privacy.policy.page.046')}</li>
+                <li>{t('common:privacy.policy.page.047')}<strong className="font-normal">{t('common:privacy.policy.page.048')}</strong></li>
+                <li>{t('common:privacy.policy.page.049')}</li>
               </ul>
             </Section>
 
-            <Section number="05" title="Comunicazione e Trasferimento dei Dati">
-              <p>
-                I dati personali non saranno venduti, ceduti o comunque trasferiti a terzi per finalità proprie di questi ultimi, salvo i casi di seguito indicati o in presenza di un esplicito consenso dell'interessato.
-              </p>
-              <p>
-                I dati potranno essere comunicati a:
-              </p>
+            <Section number="05" title={t('common:privacy.policy.page.050')}>
+              <p>{t('common:privacy.policy.page.051')}</p>
+              <p>{t('common:privacy.policy.page.052')}</p>
               <ul className="list-none space-y-1 text-anthracite/80 pl-4">
-                <li>— Soggetti che svolgono attività in outsourcing per conto del Titolare (es. fornitori di servizi informatici, piattaforme di prenotazione)</li>
-                <li>— Autorità pubbliche e organi di vigilanza, nei casi previsti dalla legge</li>
-                <li>— Professionisti e consulenti del Titolare (dottori commercialisti, avvocati) vincolati da obblighi di riservatezza</li>
+                <li>{t('common:privacy.policy.page.053')}</li>
+                <li>{t('common:privacy.policy.page.054')}</li>
+                <li>{t('common:privacy.policy.page.055')}</li>
               </ul>
-              <p>
-                [Sezione da completare con eventuali trasferimenti extra-UE e relative garanzie]
-              </p>
+              <p>{t('common:privacy.policy.page.056')}</p>
             </Section>
 
-            <Section number="06" title="Diritti dell'Interessato">
-              <p>
-                In qualità di interessato, l'utente ha il diritto di esercitare in qualsiasi momento i seguenti diritti nei confronti del Titolare, ai sensi degli artt. 15-22 del GDPR:
-              </p>
+            <Section number="06" title={t('common:privacy.policy.page.057')}>
+              <p>{t('common:privacy.policy.page.058')}</p>
               <ul className="list-none space-y-1.5 text-anthracite/80 pl-4">
-                <li>— <strong className="font-normal text-anthracite/95">Accesso</strong>: ottenere conferma del trattamento e copia dei dati personali</li>
-                <li>— <strong className="font-normal text-anthracite/95">Rettifica</strong>: correggere dati inesatti o incompleti</li>
-                <li>— <strong className="font-normal text-anthracite/95">Cancellazione</strong>: ottenere la cancellazione dei dati ("diritto all'oblio")</li>
-                <li>— <strong className="font-normal text-anthracite/95">Limitazione</strong>: richiedere la sospensione del trattamento in determinati casi</li>
-                <li>— <strong className="font-normal text-anthracite/95">Portabilità</strong>: ricevere i dati in formato strutturato e leggibile</li>
-                <li>— <strong className="font-normal text-anthracite/95">Opposizione</strong>: opporsi al trattamento per motivi legittimi</li>
-                <li>— <strong className="font-normal text-anthracite/95">Revoca del consenso</strong>: senza pregiudizio per la liceità del trattamento basato sul consenso prestato prima della revoca</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.059')}</strong>{t('common:privacy.policy.page.060')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.061')}</strong>{t('common:privacy.policy.page.062')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.063')}</strong>{t('common:privacy.policy.page.064')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.065')}</strong>{t('common:privacy.policy.page.066')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.067')}</strong>{t('common:privacy.policy.page.068')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.069')}</strong>{t('common:privacy.policy.page.070')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.071')}</strong>{t('common:privacy.policy.page.072')}</li>
               </ul>
-              <p>
-                Le richieste possono essere inviate a <span className="text-anthracite/95">[privacy@luxosa.it — da definire]</span>. Il Titolare risponderà entro 30 giorni dalla ricezione. È altresì riconosciuto il diritto di proporre reclamo all'Autorità Garante per la protezione dei dati personali (www.garanteprivacy.it).
+              <p>{t('common:privacy.policy.page.073')}<span className="text-anthracite/95">{t('common:privacy.policy.page.074')}</span>{t('common:privacy.policy.page.075')}</p>
+            </Section>
+
+            <Section number="07" title={t('common:privacy.policy.page.076')}>
+              <p>{t('common:privacy.policy.page.077')}<strong className="font-normal text-anthracite/95">{t('common:privacy.policy.page.078')}</strong>.
               </p>
             </Section>
 
-            <Section number="07" title="Cookie">
-              <p>
-                Il Sito utilizza cookie e tecnologie di tracciamento analoghe. Per informazioni dettagliate sulle tipologie di cookie utilizzati, sulle finalità e sulle modalità di gestione delle preferenze, si rimanda alla <strong className="font-normal text-anthracite/95">Cookie Policy</strong>.
-              </p>
+            <Section number="08" title={t('common:privacy.policy.page.079')}>
+              <p>{t('common:privacy.policy.page.080')}</p>
+              <p>{t('common:privacy.policy.page.081')}</p>
             </Section>
 
-            <Section number="08" title="Sicurezza dei Dati">
-              <p>
-                Il Titolare adotta misure di sicurezza tecniche e organizzative adeguate per proteggere i dati personali da accessi non autorizzati, divulgazione, alterazione o distruzione. Tuttavia, nessuna trasmissione di dati su Internet o sistema di archiviazione elettronico può essere garantita come sicura al 100%.
-              </p>
-              <p>
-                [Sezione da completare con dettagli tecnici specifici: cifratura, accesso limitato, backup, ecc.]
-              </p>
+            <Section number="09" title={t('common:privacy.policy.page.082')}>
+              <p>{t('common:privacy.policy.page.083')}</p>
             </Section>
 
-            <Section number="09" title="Minori">
-              <p>
-                Il Sito e i servizi di Luxosa non sono destinati a soggetti di età inferiore ai 18 anni. Il Titolare non raccoglie consapevolmente dati personali relativi a minori. Qualora vengano identificati trattamenti accidentali di dati di minori, il Titolare provvederà alla loro immediata cancellazione.
-              </p>
-            </Section>
-
-            <Section number="10" title="Modifiche alla Privacy Policy">
-              <p>
-                Il Titolare si riserva il diritto di modificare la presente informativa in qualsiasi momento, in conformità con le normative vigenti. Le modifiche verranno pubblicate su questa pagina con indicazione della data di aggiornamento. Si consiglia di consultare periodicamente questa sezione.
-              </p>
-              <p>
-                La versione attuale è la 1.0, in vigore dal [data da definire].
-              </p>
+            <Section number="10" title={t('common:privacy.policy.page.084')}>
+              <p>{t('common:privacy.policy.page.085')}</p>
+              <p>{t('common:privacy.policy.page.086')}</p>
             </Section>
 
           </div>
 
           {/* Bottom note */}
           <div className="mt-16 pt-10 border-t border-sand/60">
-            <p className="text-[12px] tracking-[0.15em] text-stone/60 font-light text-center">
-              Luxosa — Via Cavour 1, Messina — <span className="text-anthracite/55">[privacy@luxosa.it — da definire]</span>
+            <p className="text-[12px] tracking-[0.15em] text-stone/60 font-light text-center">{t('common:privacy.policy.page.087')}<span className="text-anthracite/55">{t('common:privacy.policy.page.088')}</span>
             </p>
           </div>
         </div>

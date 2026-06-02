@@ -1,5 +1,6 @@
 ﻿import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { t } from '../i18n/t';
 
 export default function Space() {
   const ref = useRef(null);
@@ -16,7 +17,7 @@ export default function Space() {
             transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
           >
-            Lo Spazio
+            {t('home:space.label')}
           </motion.span>
           <motion.div
             initial={{ width: 0 }}
@@ -30,8 +31,8 @@ export default function Space() {
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }}
             className="font-serif text-[32px] md:text-[40px] lg:text-[48px] font-light leading-[1.1] text-charcoal tracking-[0.01em]"
           >
-            Un ambiente che parla<br />
-            il linguaggio della cura.
+            {t('home:space.titleLine1')}<br />
+            {t('home:space.titleLine2')}
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -39,8 +40,8 @@ export default function Space() {
             transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }}
             className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light"
           >
-            Lo spazio Luxosa è un'estensione del metodo: ordine, armonia, luce e comfort.<br className="hidden md:block" />
-            Ogni dettaglio è pensato per accogliere, proteggere e rigenerare.
+            {t('home:space.descriptionLine1')}<br className="hidden md:block" />
+            {t('home:space.descriptionLine2')}
           </motion.p>
         </div>
 
@@ -54,7 +55,7 @@ export default function Space() {
           >
             <img
               src="/images/spazio_luxosa.webp"
-              alt="Lo spazio Luxosa"
+              alt={t('home:space.imageAlt')}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
@@ -68,7 +69,7 @@ export default function Space() {
           >
             <img
               src="/images/hero_esperienze.webp"
-              alt="Dettaglio dello spazio"
+              alt={t('home:space.detailAlt')}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
@@ -83,7 +84,7 @@ export default function Space() {
           transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.6 }}
           className="mt-12 md:mt-16 flex flex-wrap justify-center gap-x-10 gap-y-4"
         >
-          {['Ordine', 'Armonia', 'Luce', 'Comfort', 'Raffinatezza', 'Protezione'].map((q) => (
+          {(t('home:space.qualities', { returnObjects: true }) as unknown as string[]).map((q) => (
             <span
               key={q}
               className="text-[12px] tracking-[0.25em] uppercase text-stone font-light"

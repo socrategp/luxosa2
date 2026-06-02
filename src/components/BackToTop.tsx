@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { t } from '../i18n/t';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -24,7 +25,7 @@ export default function BackToTop() {
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0, 1] }}
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-40 group cursor-pointer"
-          aria-label="Torna in cima"
+          aria-label={t('common:backToTop.ariaLabel')}
         >
           <div className="relative w-12 h-12 flex items-center justify-center">
             {/* Outer ring — organic shape */}
@@ -55,7 +56,7 @@ export default function BackToTop() {
 
           {/* Label */}
           <span className="block mt-2 text-[9px] tracking-[0.3em] uppercase text-anthracite/45 font-light text-center group-hover:text-anthracite/70 transition-colors duration-500">
-            Top
+            {t('common:backToTop.label')}
           </span>
         </motion.button>
       )}

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 function SediManifesto() {
   const ref = useRef(null);
@@ -19,9 +20,7 @@ function SediManifesto() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.4, ease: premiumEase, delay: 0.2 }}
           className="font-serif text-[24px] md:text-[32px] lg:text-[38px] font-light leading-[1.4] text-charcoal text-center max-w-4xl mx-auto"
-        >
-          Ogni sede Luxosa è un'estensione fedele del metodo. Lo stesso sistema, la stessa qualità, la stessa attenzione alla persona. Ovunque.
-        </motion.p>
+        >{t('messina-cavour:sedi.page.001')}</motion.p>
       </div>
     </section>
   );
@@ -32,10 +31,10 @@ function SediPrincipi() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   const principi = [
-    { title: 'Metodo unico', text: "Ogni sede applica lo stesso Metodo Luxosa in tutto. La coerenza è un valore non negoziabile." },
-    { title: 'Standard condivisi', text: "Prodotti, protocolli, formazione e qualità dell'esperienza sono identici in ogni sede." },
-    { title: 'Spazio come metodo', text: "Ogni ambiente è progettato seguendo gli stessi principi: ordine, luce, materiali naturali, comfort." },
-    { title: 'Team formato', text: "Ogni professionista condivide la stessa visione, la stessa formazione, lo stesso approccio alla cura." },
+    { title:t('messina-cavour:sedi.page.002'), text:t('messina-cavour:sedi.page.003') },
+    { title:t('messina-cavour:sedi.page.004'), text:t('messina-cavour:sedi.page.005') },
+    { title:t('messina-cavour:sedi.page.006'), text:t('messina-cavour:sedi.page.007') },
+    { title:t('messina-cavour:sedi.page.008'), text:t('messina-cavour:sedi.page.009') },
   ];
 
   return (
@@ -47,9 +46,9 @@ function SediPrincipi() {
           transition={{ duration: 1, ease: premiumEase }}
           className="mb-12"
         >
-          <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Il principio</span>
+          <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:sedi.page.010')}</span>
           <div className="h-[1px] w-10 bg-brass mt-4 mb-8" />
-          <h2 className="font-serif text-[26px] md:text-[32px] font-light text-charcoal">Cosa accomuna ogni sede Luxosa.</h2>
+          <h2 className="font-serif text-[26px] md:text-[32px] font-light text-charcoal">{t('messina-cavour:sedi.page.011')}</h2>
         </motion.div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {principi.map((p, i) => (
@@ -85,7 +84,7 @@ function SedeFlagship() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, ease: premiumEase }}
             >
-              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">Sede Flagship</span>
+              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:sedi.page.012')}</span>
               <div className="h-[1px] w-10 bg-brass mt-4 mb-8" />
             </motion.div>
             <motion.h2
@@ -93,19 +92,14 @@ function SedeFlagship() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }}
               className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal"
-            >
-              Luxosa Messina Cavour
-            </motion.h2>
+            >{t('messina-cavour:sedi.page.013')}</motion.h2>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.3 }}
               className="mt-8 space-y-4"
             >
-              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">
-                Luxosa si trova a Messina, in zona Cavour.
-                Questo spazio è stato scelto perché riflette il metodo Luxosa: raccolto, intenzionale, curato nei dettagli. Non grande per impressionare. Esatto per accogliere.
-              </p>
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/85 font-light">{t('messina-cavour:sedi.page.014')}</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -118,8 +112,7 @@ function SedeFlagship() {
                 className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
               >
                 <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-                <span className="relative z-10 flex items-center gap-3">
-                  Entra nella sede <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+                <span className="relative z-10 flex items-center gap-3">{t('messina-cavour:sedi.page.015')}<ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
                 </span>
               </Link>
             </motion.div>
@@ -134,13 +127,13 @@ function SedeFlagship() {
           >
             <img
               src="/images/messina-new.webp"
-              alt="Luxosa Messina — Via Cavour"
+              alt={t('messina-cavour:sedi.page.016')}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover object-left transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out"
             />
             <div className="absolute bottom-4 left-5">
-              <span className="text-[10px] tracking-[0.3em] uppercase text-ivory/65 font-light">© Messina — Via Cavour</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase text-ivory/65 font-light">{t('messina-cavour:sedi.page.017')}</span>
             </div>
           </motion.div>
         </div>
@@ -167,25 +160,19 @@ function VisioneReplicabile() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
           className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light text-ivory/95 leading-[1.12]"
-        >
-          Una visione pensata<br />per crescere.
-        </motion.h2>
+        >{t('messina-cavour:sedi.page.018')}<br />{t('messina-cavour:sedi.page.019')}</motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
           className="mt-8 text-[18px] leading-[1.85] text-ivory/60 font-light max-w-xl mx-auto"
-        >
-          Luxosa nasce con un sistema replicabile. Ogni nuova sede sarà un'estensione fedele del metodo, della qualità e dell'esperienza. La coerenza è il fondamento della crescita.
-        </motion.p>
+        >{t('messina-cavour:sedi.page.020')}</motion.p>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, ease: premiumEase, delay: 0.6 }}
           className="mt-8 text-[11px] tracking-[0.35em] uppercase text-brass-light/30 font-light"
-        >
-          Nuove sedi · Prossimamente · In arrivo
-        </motion.p>
+        >{t('messina-cavour:sedi.page.021')}</motion.p>
       </div>
     </section>
   );
@@ -196,7 +183,7 @@ export default function SediPage() {
     <>
       <PageHero
         label="Sedi"
-        title="Entrare in Luxosa inizia già prima di sedersi."
+        title={t('messina-cavour:sedi.page.022')}
         subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
         video="/videos/hero_sedi_opt.mp4"
       />

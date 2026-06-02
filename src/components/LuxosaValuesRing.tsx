@@ -2,35 +2,36 @@
 import { useRef, useState, useEffect } from 'react';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 const valori = [
   {
-    title: 'Unicità',
-    text: 'Non esiste uno standard di bellezza, ma la naturale espressione di ogni singola persona. Valorizziamo ciò che ti rende unica.',
+    title:t('home:luxosa.values.ring.001'),
+    text:t('home:luxosa.values.ring.002'),
   },
   {
-    title: 'Cura',
-    text: 'Attenzione ai dettagli, delicatezza nel tocco e rispetto assoluto per il benessere di cute e capelli in ogni istante del percorso.',
+    title:t('home:luxosa.values.ring.003'),
+    text:t('home:luxosa.values.ring.004'),
   },
   {
-    title: 'Competenza',
-    text: 'Una conoscenza profonda, aggiornata e rigorosa. Perché la fiducia nasce da risultati concreti e solide basi professionali.',
+    title:t('home:luxosa.values.ring.005'),
+    text:t('home:luxosa.values.ring.006'),
   },
   {
-    title: 'Esclusività',
-    text: 'Esperienze pensate su misura, protocolli dedicati e un ambiente intimo dove il tempo si ferma solo per te.',
+    title:t('home:luxosa.values.ring.007'),
+    text:t('home:luxosa.values.ring.008'),
   },
   {
-    title: 'Trasformazione',
-    text: 'Non cambiamo chi sei, ne sveliamo la versione migliore. Un percorso graduale, rispettoso e profondamente empatico.',
+    title:t('home:luxosa.values.ring.009'),
+    text:t('home:luxosa.values.ring.010'),
   },
   {
-    title: 'Audacia',
-    text: 'Il coraggio di consigliare ciò che è giusto, di uscire dalle convenzioni per raggiungere l\'eccellenza senza compromessi.',
+    title:t('home:luxosa.values.ring.011'),
+    text:t('home:luxosa.values.ring.012'),
   },
   {
-    title: 'Disciplina',
-    text: 'Metodo, precisione e dedizione costante. La perfezione si ottiene solo attraverso un approccio rigoroso e misurato.',
+    title:t('home:luxosa.values.ring.013'),
+    text:t('home:luxosa.values.ring.014'),
   },
 ];
 
@@ -86,9 +87,7 @@ export default function LuxosaValuesRing() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            I Nostri Valori
-          </motion.span>
+          >{t('home:luxosa.values.ring.015')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -100,9 +99,7 @@ export default function LuxosaValuesRing() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
             className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.08] text-charcoal"
-          >
-            I valori che guidano<br />ogni nostro passo.
-          </motion.h2>
+          >{t('home:luxosa.values.ring.016')}<br />{t('home:luxosa.values.ring.017')}</motion.h2>
         </div>
 
         {/* Ring + Content panel */}
@@ -115,7 +112,7 @@ export default function LuxosaValuesRing() {
               className="w-full h-auto"
               style={{ overflow: 'visible' }}
               role="group"
-              aria-label="I valori Luxosa"
+              aria-label={t('home:luxosa.values.ring.018')}
             >
               {/* Outer atmospheric ring */}
               <motion.circle
@@ -205,7 +202,7 @@ export default function LuxosaValuesRing() {
                       animate={{
                         fillOpacity: isActive ? 1 : 0.55,
                       }}
-                      fill={isActive ? '#B09872' : '#282520'}
+                      fill={isActive ?t('home:luxosa.values.ring.019') : '#282520'}
                       transition={{ duration: 0.9, ease: premiumEase }}
                     >
                       {isActive ? v.title.toUpperCase() : v.title}
@@ -254,8 +251,7 @@ export default function LuxosaValuesRing() {
                 transition={{ duration: 0.8, ease: premiumEase }}
               >
                 <div className="w-8 h-[1px] bg-brass mb-7 mx-auto lg:mx-0" />
-                <p className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">
-                  Valore {activeIndex + 1} di {valori.length}
+                <p className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">{t('home:luxosa.values.ring.020')}{activeIndex + 1} di {valori.length}
                 </p>
                 <h4 className="font-serif text-[30px] md:text-[36px] font-light text-charcoal mb-5 leading-tight tracking-wide">
                   {valori[activeIndex].title}

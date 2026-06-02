@@ -6,6 +6,7 @@ import PageHero from '../components/PageHero';
 import Method from '../components/Method';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 function MethodIntro() {
   const ref = useRef(null);
@@ -20,9 +21,7 @@ function MethodIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Il Metodo
-          </motion.span>
+          >{t('percorsi:il.metodo.page.001')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -34,25 +33,19 @@ function MethodIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light"
-          >
-            In Luxosa il risultato non nasce dall&apos;intuizione del momento, ma da un metodo preciso.
-          </motion.p>
+          >{t('percorsi:il.metodo.page.002')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
             className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light"
-          >
-            Una storia, un desiderio, un&apos;abitudine, una relazione personale con i propri capelli. Si parte dalla persona, non da un servizio.
-          </motion.p>
+          >{t('percorsi:il.metodo.page.003')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.5 }}
             className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light"
-          >
-            Si ascolta, si osserva, si valuta e si costruisce una direzione coerente.
-          </motion.p>
+          >{t('percorsi:il.metodo.page.004')}</motion.p>
         </div>
       </div>
     </section>
@@ -125,7 +118,7 @@ function PrimoIncontro() {
             <div className="aspect-[4/3] overflow-hidden">
               <img
                 src="/images/prima_consulenza.webp"
-                alt="Il primo incontro"
+                alt={t('percorsi:il.metodo.page.007')}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover object-center transition-transform duration-[15000ms] group-hover:scale-[1.04] ease-out"
@@ -140,9 +133,7 @@ function PrimoIncontro() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, ease: premiumEase }}
               className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-            >
-              La consulenza Luxosa
-            </motion.span>
+            >{t('percorsi:il.metodo.page.008')}</motion.span>
             <motion.div
               initial={{ width: 0 }}
               animate={inView ? { width: 40 } : {}}
@@ -154,21 +145,15 @@ function PrimoIncontro() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
               className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
-            >
-              Il primo incontro.
-            </motion.h2>
+            >{t('percorsi:il.metodo.page.009')}</motion.h2>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
               className="mt-8 space-y-5"
             >
-              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
-                Il primo incontro in Luxosa è un momento di conoscenza approfondita. Non una valutazione rapida, ma il tempo necessario per ascoltare la storia, osservare il capello, capire le abitudini e chiarire dove si desidera arrivare.
-              </p>
-              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
-                Da qui nasce la direzione del percorso. Ogni informazione rilevante viene custodita e aggiornata nel tempo, così che ogni seduta sia una continuazione, non un nuovo inizio.
-              </p>
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">{t('percorsi:il.metodo.page.010')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">{t('percorsi:il.metodo.page.011')}</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -176,8 +161,7 @@ function PrimoIncontro() {
               transition={{ duration: 1, ease: premiumEase, delay: 0.55 }}
               className="mt-12 flex flex-col sm:flex-row gap-8"
             >
-              <Link to="/i-percorsi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">
-                Scopri i Percorsi <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+              <Link to="/i-percorsi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">{t('percorsi:il.metodo.page.012')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </Link>
             </motion.div>
           </div>
@@ -192,7 +176,7 @@ export default function IlMetodoPage() {
     <>
       <PageHero
         label="Il Metodo"
-        title="Ogni scelta nasce da una visione."
+        title={t('percorsi:il.metodo.page.013')}
         subtitle="In Luxosa il risultato non nasce dall'intuizione del momento, ma da un metodo chiaro: ascoltare, osservare, progettare e accompagnare ogni donna nel tempo."
         image="/images/hero_ilmetodo.webp"
       />

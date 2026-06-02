@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
@@ -50,36 +51,22 @@ function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
             <div className="px-8 sm:px-12 py-14 sm:py-16">
               {/* Label */}
               <div className="text-center mb-10">
-                <span className="text-[10px] tracking-[0.4em] uppercase text-brass-muted font-light">
-                  Accesso riservato
-                </span>
+                <span className="text-[10px] tracking-[0.4em] uppercase text-brass-muted font-light">{t('common:footer.001')}</span>
                 <div className="w-8 h-[1px] bg-brass mx-auto mt-4 mb-8" />
-                <h3 className="font-serif text-[30px] md:text-[36px] font-light text-charcoal leading-[1.08] tracking-wide">
-                  Club Luxosa
-                </h3>
+                <h3 className="font-serif text-[30px] md:text-[36px] font-light text-charcoal leading-[1.08] tracking-wide">{t('common:footer.002')}</h3>
               </div>
 
               {/* Intro */}
-              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light text-center mb-4">
-                Un accesso riservato a una selezione di clienti già parte del mondo Luxosa.
-              </p>
-              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light text-center mb-10">
-                Il Club nasce per offrire un'esperienza ancora più esclusiva, fatta di priorità, attenzioni dedicate e occasioni selezionate.
-              </p>
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light text-center mb-4">{t('common:footer.003')}</p>
+              <p className="text-[17px] md:text-[18px] leading-[1.85] text-anthracite/80 font-light text-center mb-10">{t('common:footer.004')}</p>
 
               {/* Separator */}
               <div className="w-6 h-[1px] bg-sand mx-auto mb-10" />
 
               {/* Benefits */}
-              <p className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light mb-5 text-center">
-                Benefici riservati alle membri
-              </p>
+              <p className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light mb-5 text-center">{t('common:footer.005')}</p>
               <ul className="space-y-3.5 mb-10 max-w-[380px] mx-auto">
-                {[
-                  'Priorità sull\'agenda',
-                  'Accesso a giornate riservate',
-                  'Attenzioni e proposte personalizzate',
-                  'Priorità su novità ed esperienze dedicate',
+                {[t('common:footer.006'),t('common:footer.007'),t('common:footer.008'),t('common:footer.009'),
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="w-1 h-1 rounded-full bg-brass mt-2.5 shrink-0" />
@@ -95,12 +82,8 @@ function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
 
               {/* Access restriction */}
               <div className="text-center mb-2">
-                <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light mb-1.5">
-                  L'accesso non è aperto al pubblico.
-                </p>
-                <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light">
-                  È consentito esclusivamente alle clienti già attive del salone, solo su invito diretto di Luxosa o su proposta approvata internamente.
-                </p>
+                <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light mb-1.5">{t('common:footer.010')}</p>
+                <p className="text-[16px] md:text-[17px] leading-[1.85] text-anthracite/70 font-light">{t('common:footer.011')}</p>
               </div>
             </div>
 
@@ -127,31 +110,27 @@ export default function Footer() {
               <Link to="/">
                 <img
                   src="/images/luxosa-logo-orizzontale-bianco-tras.png"
-                  alt="Luxosa"
+                  alt={t('common:footer.012')}
                   width="200"
                   height="36"
                   className="h-8 md:h-9 w-auto object-contain brightness-0 invert opacity-90 hover:opacity-100 transition-opacity"
                 />
               </Link>
-              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/60">
-                Maison di cura e bellezza<br />per cute e capelli.
-              </p>
+              <p className="mt-5 text-[16px] leading-[1.8] font-light text-ivory/60">{t('common:footer.013')}<br />{t('common:footer.014')}</p>
               <div className="mt-6 w-8 h-[1px] bg-brass/40" />
-              <p className="mt-5 text-[10px] tracking-[0.35em] uppercase text-brass-light/50 font-light">
-                Ama. Splendi. Osa.
-              </p>
+              <p className="mt-5 text-[10px] tracking-[0.35em] uppercase text-brass-light/50 font-light">{t('common:footer.015')}</p>
             </div>
 
             {/* Col 2 — Navigazione */}
             <div>
-              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">Navigazione</h4>
+              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">{t('common:footer.016')}</h4>
               <nav className="flex flex-col gap-3">
                 {[
-                  { label: 'La Maison', href: '/' },
-                  { label: 'Il Metodo', href: '/il-metodo' },
-                  { label: 'I Percorsi', href: '/i-percorsi' },
-                  { label: 'Le Esperienze', href: '/le-esperienze' },
-                  { label: 'Sedi', href: '/sedi' },
+                  { label:t('common:footer.017'), href: '/' },
+                  { label:t('common:footer.018'), href: '/il-metodo' },
+                  { label:t('common:footer.019'), href: '/i-percorsi' },
+                  { label:t('common:footer.020'), href: '/le-esperienze' },
+                  { label:t('common:footer.021'), href: '/sedi' },
                 ].map((item) => (
                   <Link
                     key={item.label}
@@ -166,12 +145,10 @@ export default function Footer() {
 
             {/* Col 3 — Club Luxosa */}
             <div>
-              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">Club Luxosa</h4>
-              <p className="text-[16px] font-light text-ivory/60 leading-[1.8] mb-6">
-                Un accesso riservato. Un riconoscimento che si guadagna nel tempo.
-              </p>
+              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">{t('common:footer.022')}</h4>
+              <p className="text-[16px] font-light text-ivory/60 leading-[1.8] mb-6">{t('common:footer.023')}</p>
               <div className="flex gap-2 mb-7">
-                {['AMA', 'SPLENDI', 'OSA'].map((badge) => (
+                {[t('common:footer.024'),t('common:footer.025'),t('common:footer.026')].map((badge) => (
                   <span
                     key={badge}
                     className="text-[9px] tracking-[0.22em] uppercase font-light text-brass-light/70 border border-brass-light/30 px-2.5 py-1"
@@ -183,19 +160,17 @@ export default function Footer() {
               <button
                 onClick={() => setClubOpen(true)}
                 className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/55 hover:text-ivory/85 transition-colors duration-400 inline-flex items-center gap-2"
-              >
-                Scopri il Club →
-              </button>
+              >{t('common:footer.027')}</button>
             </div>
 
             {/* Col 4 — Contatti Sede Generale */}
             <div>
-              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">Contatti Sede Generale</h4>
+              <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">{t('common:footer.028')}</h4>
               <nav className="flex flex-col gap-5">
                 {[
-                  { label: 'Proposte commerciali', email: 'marketing@luxosa.it' },
-                  { label: 'Investitori / nuova apertura', email: 'direzione@luxosa.it' },
-                  { label: 'Lavora con noi', email: 'persone@luxosa.it' },
+                  { label:t('common:footer.029'), email: 'marketing@luxosa.it' },
+                  { label:t('common:footer.030'), email: 'direzione@luxosa.it' },
+                  { label:t('common:footer.031'), email: 'persone@luxosa.it' },
                 ].map((item) => (
                   <a
                     key={item.email}
@@ -215,10 +190,10 @@ export default function Footer() {
           </div>
 
           <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] tracking-[0.15em] text-ivory/35 font-light">© 2026 Luxosa. Tutti i diritti riservati.</p>
+            <p className="text-[11px] tracking-[0.15em] text-ivory/35 font-light">{t('common:footer.032')}</p>
             <div className="flex gap-6">
-              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">Privacy Policy</span>
-              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">Cookie Policy</span>
+              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">{t('common:footer.033')}</span>
+              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">{t('common:footer.034')}</span>
             </div>
           </div>
         </div>

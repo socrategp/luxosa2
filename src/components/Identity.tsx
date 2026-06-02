@@ -1,6 +1,7 @@
 ﻿import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { t } from '../i18n/t';
 
 export default function Identity() {
   const ref = useRef(null);
@@ -17,9 +18,7 @@ export default function Identity() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1] }}
             >
-              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">
-                La Maison
-              </span>
+              <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('home:identity.001')}</span>
               <div className="w-10 h-[1px] bg-brass mt-4 mb-8" />
             </motion.div>
 
@@ -28,10 +27,7 @@ export default function Identity() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }}
               className="font-serif text-[32px] md:text-[40px] lg:text-[46px] font-light leading-[1.12] text-charcoal tracking-[0.01em]"
-            >
-              Non un salone.<br />
-              Una visione della cura.
-            </motion.h2>
+            >{t('home:identity.002')}<br />{t('home:identity.003')}</motion.h2>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -39,15 +35,9 @@ export default function Identity() {
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }}
               className="mt-8 space-y-5"
             >
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
-                Luxosa nasce dalla convinzione che la bellezza autentica non si impone, si rivela. Ogni donna porta con sé una storia unica, un equilibrio personale, un'espressione che merita di essere compresa prima di essere valorizzata.
-              </p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
-                Per questo non offriamo trattamenti standardizzati. Offriamo percorsi di cura costruiti su ascolto, analisi e personalizzazione: un approccio che unisce la competenza professionale più rigorosa alla sensibilità più attenta verso la persona.
-              </p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">
-                Luxosa è una maison italiana dove la cura di cute e capelli diventa scienza, metodo e accompagnamento.
-              </p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('home:identity.004')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('home:identity.005')}</p>
+              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('home:identity.006')}</p>
             </motion.div>
 
             <motion.div
@@ -56,9 +46,7 @@ export default function Identity() {
               transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.5 }}
               className="mt-10 pt-8 border-t border-sand/60"
             >
-              <p className="font-serif text-[20px] md:text-[22px] italic text-charcoal/70 font-light leading-relaxed">
-                "La vera competenza non si dimostra. Si percepisce."
-              </p>
+              <p className="font-serif text-[20px] md:text-[22px] italic text-charcoal/70 font-light leading-relaxed">{t('home:identity.007')}</p>
             </motion.div>
           </div>
 
@@ -72,7 +60,7 @@ export default function Identity() {
             <div className="aspect-[3/4] overflow-hidden">
               <img
                 src="/images/nosalone_unamaison.webp"
-                alt="La visione Luxosa"
+                alt={t('home:identity.008')}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover"

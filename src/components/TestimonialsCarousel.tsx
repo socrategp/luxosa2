@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { t } from '../i18n/t';
 
 const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
 const CARD_RATIO = 0.72;
@@ -73,10 +74,10 @@ export default function TestimonialsCarousel({
             <div className="h-[1px] w-10 bg-brass-light/30 mt-4" />
           </div>
           <div className="hidden md:flex items-center gap-4">
-            <button onClick={prev} aria-label="Precedente" className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400">
+            <button onClick={prev} aria-label={t('home:testimonials.carousel.001')} className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400">
               <ChevronLeft size={16} strokeWidth={1.2} />
             </button>
-            <button onClick={next} aria-label="Successiva" className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400">
+            <button onClick={next} aria-label={t('home:testimonials.carousel.002')} className="w-11 h-11 border border-ivory/15 flex items-center justify-center text-ivory/55 hover:text-ivory/95 hover:border-ivory/30 transition-colors duration-400">
               <ChevronRight size={16} strokeWidth={1.2} />
             </button>
           </div>

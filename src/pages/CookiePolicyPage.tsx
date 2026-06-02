@@ -1,3 +1,4 @@
+import { t } from '../i18n/t';
 ﻿import { motion } from 'framer-motion';
 
 const ease = [0.25, 0.1, 0, 1] as const;
@@ -34,10 +35,10 @@ function CookieTable({ rows }: CookieTableProps) {
       <table className="w-full text-[16px] font-light">
         <thead>
           <tr className="border-b border-sand">
-            <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">Nome</th>
-            <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">Tipo</th>
-            <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">Durata</th>
-            <th className="text-left py-2.5 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">Finalità</th>
+            <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">{t('common:cookie.policy.page.001')}</th>
+            <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">{t('common:cookie.policy.page.002')}</th>
+            <th className="text-left py-2.5 pr-4 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">{t('common:cookie.policy.page.003')}</th>
+            <th className="text-left py-2.5 text-[10px] tracking-[0.25em] uppercase text-anthracite/65 font-light">{t('common:cookie.policy.page.004')}</th>
           </tr>
         </thead>
         <tbody>
@@ -72,25 +73,19 @@ export default function CookiePolicyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease, delay: 0.15 }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light mb-5"
-          >
-            Documenti legali
-          </motion.p>
+          >{t('common:cookie.policy.page.005')}</motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.1, ease, delay: 0.25 }}
             className="font-serif text-[36px] md:text-[48px] lg:text-[56px] font-light leading-[1.08] text-charcoal tracking-[0.01em]"
-          >
-            Cookie Policy
-          </motion.h1>
+          >{t('common:cookie.policy.page.006')}</motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease, delay: 0.45 }}
             className="mt-6 text-[16px] text-stone font-light tracking-wide"
-          >
-            Ultimo aggiornamento: [data da definire] — Versione 1.0
-          </motion.p>
+          >{t('common:cookie.policy.page.007')}</motion.p>
         </div>
       </section>
 
@@ -100,141 +95,105 @@ export default function CookiePolicyPage() {
 
           {/* Intro */}
           <div className="mb-14 pb-10 border-b border-sand/60">
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
-              La presente Cookie Policy descrive le tipologie di cookie e tecnologie di tracciamento utilizzate dal sito web di Luxosa (di seguito "Sito"), con sede in Via Cavour 1, Messina, in conformità alla Direttiva 2009/136/CE (c.d. Cookie Law), al Regolamento (UE) 2016/679 (GDPR) e alle Linee Guida del Garante per la protezione dei dati personali.
-            </p>
-            <p className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">
-              Per informazioni più generali sul trattamento dei dati personali, si rimanda alla <strong className="font-normal text-anthracite/95">Privacy Policy</strong>.
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">{t('common:cookie.policy.page.008')}</p>
+            <p className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/90 font-light">{t('common:cookie.policy.page.009')}<strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.010')}</strong>.
             </p>
           </div>
 
           <div className="space-y-2">
 
-            <Section number="01" title="Cosa sono i Cookie">
-              <p>
-                I cookie sono piccoli file di testo che i siti web visitati dall'utente inviano al suo dispositivo (computer, tablet, smartphone), dove vengono memorizzati e successivamente ritrasmessi agli stessi siti al momento della visita successiva.
-              </p>
-              <p>
-                I cookie consentono al Sito di riconoscere il dispositivo dell'utente, memorizzare le sue preferenze e raccogliere informazioni sulla navigazione, al fine di migliorare l'esperienza d'uso e la fruizione dei servizi offerti.
-              </p>
+            <Section number="01" title={t('common:cookie.policy.page.011')}>
+              <p>{t('common:cookie.policy.page.012')}</p>
+              <p>{t('common:cookie.policy.page.013')}</p>
             </Section>
 
-            <Section number="02" title="Tipologie di Cookie Utilizzati">
-              <p>Il Sito utilizza le seguenti categorie di cookie:</p>
+            <Section number="02" title={t('common:cookie.policy.page.014')}>
+              <p>{t('common:cookie.policy.page.015')}</p>
 
               <div className="space-y-6 mt-2">
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-2">Cookie tecnici (strettamente necessari)</p>
-                  <p>
-                    Sono indispensabili per il corretto funzionamento del Sito. Senza questi cookie alcune funzionalità non sarebbero disponibili. Non richiedono il consenso dell'utente ai sensi dell'art. 122 del Codice Privacy.
-                  </p>
+                  <p className="text-anthracite/95 font-normal mb-2">{t('common:cookie.policy.page.016')}</p>
+                  <p>{t('common:cookie.policy.page.017')}</p>
                   <CookieTable rows={[
-                    { nome: 'session_id', tipo: 'Session', durata: 'Sessione', finalita: 'Gestione della sessione utente' },
-                    { nome: 'cookie_consent', tipo: 'Persistente', durata: '12 mesi', finalita: 'Memorizzazione preferenze cookie' },
-                    { nome: '[da completare]', tipo: '—', durata: '—', finalita: 'Da definire con il team tecnico' },
+                    { nome:t('common:cookie.policy.page.018'), tipo: 'Session', durata: 'Sessione', finalita: 'Gestione della sessione utente' },
+                    { nome:t('common:cookie.policy.page.019'), tipo: 'Persistente', durata: '12 mesi', finalita: 'Memorizzazione preferenze cookie' },
+                    { nome:t('common:cookie.policy.page.020'), tipo: '—', durata: '—', finalita: 'Da definire con il team tecnico' },
                   ]} />
                 </div>
 
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-2">Cookie analitici</p>
-                  <p>
-                    Raccolgono informazioni aggregate e anonime sulle modalità di utilizzo del Sito (pagine visitate, tempo di permanenza, provenienza del traffico) al fine di migliorarne le prestazioni. Richiedono il consenso dell'utente.
-                  </p>
+                  <p className="text-anthracite/95 font-normal mb-2">{t('common:cookie.policy.page.021')}</p>
+                  <p>{t('common:cookie.policy.page.022')}</p>
                   <CookieTable rows={[
-                    { nome: '_ga', tipo: 'Persistente', durata: '2 anni', finalita: 'Google Analytics — identificazione utente univoco' },
-                    { nome: '_ga_*', tipo: 'Persistente', durata: '2 anni', finalita: 'Google Analytics — mantenimento stato sessione' },
-                    { nome: '_gid', tipo: 'Persistente', durata: '24 ore', finalita: 'Google Analytics — distinzione utenti' },
-                    { nome: '[da completare]', tipo: '—', durata: '—', finalita: 'Da definire con il team tecnico' },
+                    { nome:t('common:cookie.policy.page.023'), tipo: 'Persistente', durata: '2 anni', finalita: 'Google Analytics — identificazione utente univoco' },
+                    { nome:t('common:cookie.policy.page.024'), tipo: 'Persistente', durata: '2 anni', finalita: 'Google Analytics — mantenimento stato sessione' },
+                    { nome:t('common:cookie.policy.page.025'), tipo: 'Persistente', durata: '24 ore', finalita: 'Google Analytics — distinzione utenti' },
+                    { nome:t('common:cookie.policy.page.026'), tipo: '—', durata: '—', finalita: 'Da definire con il team tecnico' },
                   ]} />
                 </div>
 
                 <div>
-                  <p className="text-anthracite/95 font-normal mb-2">Cookie di marketing e profilazione</p>
-                  <p>
-                    Utilizzati per tracciare i visitatori tra i siti web e visualizzare annunci pertinenti. Richiedono il consenso esplicito dell'utente.
-                  </p>
+                  <p className="text-anthracite/95 font-normal mb-2">{t('common:cookie.policy.page.027')}</p>
+                  <p>{t('common:cookie.policy.page.028')}</p>
                   <CookieTable rows={[
-                    { nome: '[da completare]', tipo: '—', durata: '—', finalita: 'Da definire — es. Meta Pixel, Google Ads' },
+                    { nome:t('common:cookie.policy.page.029'), tipo: '—', durata: '—', finalita: 'Da definire — es. Meta Pixel, Google Ads' },
                   ]} />
-                  <p className="mt-3 text-[16px] text-anthracite/65">
-                    [Sezione da completare in base agli strumenti di marketing effettivamente utilizzati]
-                  </p>
+                  <p className="mt-3 text-[16px] text-anthracite/65">{t('common:cookie.policy.page.030')}</p>
                 </div>
               </div>
             </Section>
 
-            <Section number="03" title="Cookie di Terze Parti">
-              <p>
-                Il Sito può incorporare contenuti o servizi forniti da terze parti che installano i propri cookie sul dispositivo dell'utente. Il Titolare non ha controllo diretto su tali cookie e si rimanda alle rispettive informative:
-              </p>
+            <Section number="03" title={t('common:cookie.policy.page.031')}>
+              <p>{t('common:cookie.policy.page.032')}</p>
               <ul className="list-none space-y-2 text-anthracite/80 pl-4">
                 <li>
-                  — <strong className="font-normal text-anthracite/95">Google Analytics</strong> (Google LLC) — Analisi statistica del traffico
-                  <br /><span className="text-[16px]">Privacy Policy: policies.google.com/privacy</span>
+                  — <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.033')}</strong>{t('common:cookie.policy.page.034')}<br /><span className="text-[16px]">{t('common:cookie.policy.page.035')}</span>
                 </li>
                 <li>
-                  — <strong className="font-normal text-anthracite/95">Google Maps</strong> (Google LLC) — Visualizzazione mappe nelle pagine Sedi
-                  <br /><span className="text-[16px]">Privacy Policy: policies.google.com/privacy</span>
+                  — <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.036')}</strong>{t('common:cookie.policy.page.037')}<br /><span className="text-[16px]">{t('common:cookie.policy.page.038')}</span>
                 </li>
                 <li>
-                  — <strong className="font-normal text-anthracite/95">[Piattaforma di prenotazione — da definire]</strong>
-                  <br /><span className="text-[16px]">Privacy Policy: [da completare]</span>
+                  — <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.039')}</strong>
+                  <br /><span className="text-[16px]">{t('common:cookie.policy.page.040')}</span>
                 </li>
                 <li>
-                  — <strong className="font-normal text-anthracite/95">[Eventuali altri servizi — da definire]</strong>
+                  — <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.041')}</strong>
                 </li>
               </ul>
             </Section>
 
-            <Section number="04" title="Gestione del Consenso">
-              <p>
-                Al primo accesso al Sito, all'utente viene presentato un banner informativo che consente di accettare, rifiutare o personalizzare le proprie preferenze in materia di cookie non tecnici.
-              </p>
-              <p>
-                Il consenso prestato può essere revocato in qualsiasi momento accedendo al pannello di gestione delle preferenze, disponibile [modalità di accesso da definire — es. link in footer, icona flottante].
-              </p>
-              <p>
-                Il consenso sarà memorizzato per un periodo di <strong className="font-normal">12 mesi</strong>, trascorsi i quali verrà nuovamente richiesto.
-              </p>
+            <Section number="04" title={t('common:cookie.policy.page.042')}>
+              <p>{t('common:cookie.policy.page.043')}</p>
+              <p>{t('common:cookie.policy.page.044')}</p>
+              <p>{t('common:cookie.policy.page.045')}<strong className="font-normal">{t('common:cookie.policy.page.046')}</strong>{t('common:cookie.policy.page.047')}</p>
             </Section>
 
-            <Section number="05" title="Come Disabilitare i Cookie dal Browser">
-              <p>
-                Indipendentemente dalla gestione tramite il banner del Sito, l'utente può configurare il proprio browser per accettare o rifiutare tutti i cookie, oppure per ricevere una notifica ogni volta che un cookie viene inviato. Di seguito i link alle istruzioni dei principali browser:
-              </p>
+            <Section number="05" title={t('common:cookie.policy.page.048')}>
+              <p>{t('common:cookie.policy.page.049')}</p>
               <ul className="list-none space-y-1.5 text-anthracite/80 pl-4">
-                <li>— <strong className="font-normal text-anthracite/95">Google Chrome</strong>: support.google.com/chrome/answer/95647</li>
-                <li>— <strong className="font-normal text-anthracite/95">Mozilla Firefox</strong>: support.mozilla.org/kb/enable-and-disable-cookies</li>
-                <li>— <strong className="font-normal text-anthracite/95">Safari</strong>: support.apple.com/guide/safari/manage-cookies</li>
-                <li>— <strong className="font-normal text-anthracite/95">Microsoft Edge</strong>: support.microsoft.com/microsoft-edge/delete-cookies</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.050')}</strong>{t('common:cookie.policy.page.051')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.052')}</strong>{t('common:cookie.policy.page.053')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.054')}</strong>{t('common:cookie.policy.page.055')}</li>
+                <li>— <strong className="font-normal text-anthracite/95">{t('common:cookie.policy.page.056')}</strong>{t('common:cookie.policy.page.057')}</li>
               </ul>
-              <p className="mt-2 text-[16px] text-anthracite/65">
-                Nota: la disabilitazione totale dei cookie potrebbe compromettere la corretta fruizione di alcune funzionalità del Sito.
+              <p className="mt-2 text-[16px] text-anthracite/65">{t('common:cookie.policy.page.058')}</p>
+            </Section>
+
+            <Section number="06" title={t('common:cookie.policy.page.059')}>
+              <p>{t('common:cookie.policy.page.060')}<br /><span className="text-anthracite/95">{t('common:cookie.policy.page.061')}</span>
               </p>
             </Section>
 
-            <Section number="06" title="Opt-out dagli Strumenti Analitici">
-              <p>
-                Per disattivare specificamente il tracciamento di Google Analytics su tutti i siti web, è possibile installare il componente aggiuntivo del browser disponibile all'indirizzo:
-                <br /><span className="text-anthracite/95">tools.google.com/dlpage/gaoptout</span>
-              </p>
-            </Section>
-
-            <Section number="07" title="Modifiche alla Cookie Policy">
-              <p>
-                Il Titolare si riserva il diritto di modificare la presente Cookie Policy in qualsiasi momento, in particolare a seguito di variazioni normative o all'adozione di nuovi strumenti tecnologici. Le modifiche verranno pubblicate su questa pagina con indicazione della data di aggiornamento.
-              </p>
-              <p>
-                La versione attuale è la 1.0, in vigore dal [data da definire].
-              </p>
+            <Section number="07" title={t('common:cookie.policy.page.062')}>
+              <p>{t('common:cookie.policy.page.063')}</p>
+              <p>{t('common:cookie.policy.page.064')}</p>
             </Section>
 
           </div>
 
           {/* Bottom note */}
           <div className="mt-16 pt-10 border-t border-sand/60">
-            <p className="text-[12px] tracking-[0.15em] text-stone/60 font-light text-center">
-              Luxosa — Via Cavour 1, Messina — <span className="text-anthracite/55">[privacy@luxosa.it — da definire]</span>
+            <p className="text-[12px] tracking-[0.15em] text-stone/60 font-light text-center">{t('common:cookie.policy.page.065')}<span className="text-anthracite/55">{t('common:cookie.policy.page.066')}</span>
             </p>
           </div>
         </div>

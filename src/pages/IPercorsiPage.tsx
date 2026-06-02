@@ -7,6 +7,7 @@ import Percorsi from '../components/Percorsi';
 import { useQuiz } from '../context/QuizContext';
 
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 function PercorsiIntro() {
   const ref = useRef(null);
@@ -21,9 +22,7 @@ function PercorsiIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            I Percorsi
-          </motion.span>
+          >{t('percorsi:ipercorsi.page.001')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -35,25 +34,19 @@ function PercorsiIntro() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light"
-          >
-            C'è una differenza tra ricevere una prestazione e affidarsi a qualcuno che prende davvero in carico.
-          </motion.p>
+          >{t('percorsi:ipercorsi.page.002')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.4 }}
             className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light"
-          >
-            Un percorso Luxosa nasce da una comprensione reale della persona, del capello e dell'obiettivo da raggiungere. Non è una formula standard, non è un pacchetto da scegliere a scaffale: è una direzione costruita con metodo, seduta dopo seduta.
-          </motion.p>
+          >{t('percorsi:ipercorsi.page.003')}</motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.5 }}
             className="mt-5 text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light"
-          >
-            Quando il percorso è quello giusto, ogni appuntamento ha un senso. E ogni passo avvicina a un risultato che resta.
-          </motion.p>
+          >{t('percorsi:ipercorsi.page.004')}</motion.p>
         </div>
       </div>
     </section>
@@ -122,9 +115,7 @@ function LuxosaTestSection({ onQuizOpen }: { onQuizOpen: () => void }) {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Luxosa Test
-          </motion.span>
+          >{t('percorsi:ipercorsi.page.007')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -136,21 +127,15 @@ function LuxosaTestSection({ onQuizOpen }: { onQuizOpen: () => void }) {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
             className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal"
-          >
-            Il punto di partenza.
-          </motion.h2>
+          >{t('percorsi:ipercorsi.page.008')}</motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.1, ease: premiumEase, delay: 0.35 }}
             className="mt-8 space-y-4"
           >
-            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">
-              Un test diagnostico pensato per orientare, non per scegliere. Cute, capello, storia, obiettivi: tutto viene letto per indicare la direzione più coerente.
-            </p>
-            <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">
-              Il test non sostituisce la consulenza: la prepara.
-            </p>
+            <p className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/85 font-light">{t('percorsi:ipercorsi.page.009')}</p>
+            <p className="text-[17px] leading-[1.8] text-anthracite/60 font-light italic">{t('percorsi:ipercorsi.page.010')}</p>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -163,8 +148,7 @@ function LuxosaTestSection({ onQuizOpen }: { onQuizOpen: () => void }) {
               className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-              <span className="relative z-10 flex items-center gap-3">
-                Scopri il tuo percorso <ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+              <span className="relative z-10 flex items-center gap-3">{t('percorsi:ipercorsi.page.011')}<ArrowRight size={15} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </span>
             </button>
           </motion.div>
@@ -187,9 +171,7 @@ function IlPrimoPasso() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light"
-          >
-            Il Primo Passo
-          </motion.span>
+          >{t('percorsi:ipercorsi.page.012')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -201,9 +183,7 @@ function IlPrimoPasso() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.25 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-anthracite/95 font-light"
-          >
-            Le Esperienze Luxosa sono il primo ingresso possibile per chi desidera avvicinarsi al mondo Luxosa attraverso un gesto singolo, costruito con la stessa attenzione.
-          </motion.p>
+          >{t('percorsi:ipercorsi.page.013')}</motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -213,8 +193,7 @@ function IlPrimoPasso() {
             <Link
               to="/le-esperienze"
               className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500"
-            >
-              Scopri le Esperienze <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+            >{t('percorsi:ipercorsi.page.014')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </Link>
           </motion.div>
         </div>
@@ -230,7 +209,7 @@ export default function IPercorsiPage() {
     <>
       <PageHero
         label="I Percorsi"
-        title="Non servizi. Percorsi."
+        title={t('percorsi:ipercorsi.page.015')}
         subtitle="Dove la relazione diventa metodo, continuità e trasformazione."
         image="/images/hero_ipercorsi.webp"
       />

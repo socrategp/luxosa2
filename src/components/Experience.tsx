@@ -2,17 +2,18 @@
 import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { premiumEase } from '../lib/animations';
+import { t } from '../i18n/t';
 
 const esperienze = [
-  { code: 'EX·01', name: 'PiegaLux', copy: 'Non una semplice piega. Un gesto che nutre, valorizza e restituisce luce al capello nel suo miglior momento.' },
-  { code: 'EX·02', name: 'Taglio Signature', copy: "Un taglio che nasce dall'osservazione e dalla visione. Non routine, ma progetto." },
-  { code: 'EX·03', name: 'Nuances', copy: 'Il colore nella sua espressione più raffinata: luce, profondità e naturalezza.' },
-  { code: 'EX·04', name: 'Luce Signature', copy: 'Schiariture costruite con precisione — Airtouch, Babylight, Degradé e altri — per un risultato sofisticato e mai forzato.' },
-  { code: 'EX·05', name: 'RicciOsa', copy: 'Il gesto dedicato al capello riccio quando definizione, elasticità e rispetto diventano una priorità. Un trattamento specifico con prodotti mirati per garantire il riccio desiderato.' },
-  { code: 'EX·06', name: 'RicciOso', copy: 'Il taglio sartoriale per capelli ricci, eseguito a capello asciutto per garantire la tenuta del riccio e il rispetto della forma. Un progetto che legge e valorizza ogni movimento naturale.' },
-  { code: 'EX·07', name: 'Cheratina Nutrizione Pro', copy: 'Un trattamento che restituisce ordine, morbidezza e vitalità al capello — senza sacrificare il movimento naturale.' },
-  { code: 'EX·08', name: 'Area Benessere', copy: 'Trattamenti mirati dedicati a cute, fibra e riequilibrio del capello. Un inizio mirato e professionale che pone le basi per la salute autentica dei capelli.' },
-  { code: 'EX·09', name: 'Consulenze Specialistiche', copy: "Prima di ogni scelta, c'è una lettura. Consulenze dedicate all'estetica del colore e dell'immagine, al benessere di cute e capello, o a entrambe le dimensioni insieme — per costruire una direzione reale prima di procedere." },
+  { code: 'EX·01', name:t('esperienze:experience.001'), copy: 'Non una semplice piega. Un gesto che nutre, valorizza e restituisce luce al capello nel suo miglior momento.' },
+  { code: 'EX·02', name:t('esperienze:experience.002'), copy: "Un taglio che nasce dall'osservazione e dalla visione. Non routine, ma progetto." },
+  { code: 'EX·03', name:t('esperienze:experience.003'), copy: 'Il colore nella sua espressione più raffinata: luce, profondità e naturalezza.' },
+  { code: 'EX·04', name:t('esperienze:experience.004'), copy: 'Schiariture costruite con precisione — Airtouch, Babylight, Degradé e altri — per un risultato sofisticato e mai forzato.' },
+  { code: 'EX·05', name:t('esperienze:experience.005'), copy: 'Il gesto dedicato al capello riccio quando definizione, elasticità e rispetto diventano una priorità. Un trattamento specifico con prodotti mirati per garantire il riccio desiderato.' },
+  { code: 'EX·06', name:t('esperienze:experience.006'), copy: 'Il taglio sartoriale per capelli ricci, eseguito a capello asciutto per garantire la tenuta del riccio e il rispetto della forma. Un progetto che legge e valorizza ogni movimento naturale.' },
+  { code: 'EX·07', name:t('esperienze:experience.007'), copy: 'Un trattamento che restituisce ordine, morbidezza e vitalità al capello — senza sacrificare il movimento naturale.' },
+  { code: 'EX·08', name:t('esperienze:experience.008'), copy: 'Trattamenti mirati dedicati a cute, fibra e riequilibrio del capello. Un inizio mirato e professionale che pone le basi per la salute autentica dei capelli.' },
+  { code: 'EX·09', name:t('esperienze:experience.009'), copy: "Prima di ogni scelta, c'è una lettura. Consulenze dedicate all'estetica del colore e dell'immagine, al benessere di cute e capello, o a entrambe le dimensioni insieme — per costruire una direzione reale prima di procedere." },
 ];
 
 const IMAGE = '/images/esperienze-puzzle.webp';
@@ -52,9 +53,7 @@ export default function Experience() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, ease: premiumEase }}
             className="text-[11px] tracking-[0.35em] uppercase text-brass-light/50 font-light"
-          >
-            Le esperienze
-          </motion.span>
+          >{t('esperienze:experience.010')}</motion.span>
           <motion.div
             initial={{ width: 0 }}
             animate={inView ? { width: 40 } : {}}
@@ -66,9 +65,7 @@ export default function Experience() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
             className="text-[18px] md:text-[20px] leading-[1.85] text-ivory/70 font-light"
-          >
-            Non le scegli come si sfoglia un menu. Le scopri insieme a noi, nel contesto del percorso che stai costruendo.
-          </motion.p>
+          >{t('esperienze:experience.011')}</motion.p>
         </div>
 
         <div className="grid grid-cols-3 gap-px bg-deep/80">
@@ -191,9 +188,7 @@ export default function Experience() {
                 fontFamily: 'Jost, sans-serif',
                 WebkitAppearance: 'none',
               }}
-            >
-              Chiudi
-            </button>
+            >{t('esperienze:experience.012')}</button>
           </div>
         </div>,
         document.body

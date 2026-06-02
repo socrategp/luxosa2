@@ -15,6 +15,7 @@ import '@fontsource/jost/latin-400-italic.css'
 import '@fontsource/jost/latin-500.css'
 import '@fontsource/jost/latin-600.css'
 import './index.css'
+import './i18n'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(

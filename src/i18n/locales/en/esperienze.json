@@ -3,15 +3,24 @@
     "001": "PiegaLux",
     "002": "Taglio Signature",
     "003": "Nuances",
-    "004": "Luce Signature",
+    "004": "Signature Light",
     "005": "RicciOsa",
     "006": "RicciOso",
     "007": "Cheratina Nutrizione Pro",
     "008": "Area Benessere",
-    "009": "Consulenze Specialistiche",
+    "009": "Specialist Consultations",
     "010": "The experiences",
     "011": "You do not choose them the way you browse a menu. You discover them together with us, within the context of the pathway you are building.",
-    "012": "Close"
+    "012": "Close",
+    "013": "Not a simple blow-dry. A gesture that nourishes, enhances and returns light to the hair at its best moment.",
+    "014": "A cut born from observation and vision. Not routine, but a project.",
+    "015": "Colour in its most refined expression: light, depth and naturalness.",
+    "016": "Lightening built with precision ? Airtouch, Babylight, Degrad? and more ? for a sophisticated result that never feels forced.",
+    "017": "The gesture dedicated to curly hair when definition, elasticity and respect become a priority. A specific treatment with targeted products to support the desired curl.",
+    "018": "A tailored cut for curly hair, performed on dry hair to preserve curl hold and respect its shape. A project that reads and enhances every natural movement.",
+    "019": "A treatment that restores order, softness and vitality to the hair ? without sacrificing natural movement.",
+    "020": "Targeted treatments dedicated to scalp, fibre and hair rebalancing. A precise, professional beginning that lays the foundations for authentic hair health.",
+    "021": "Before every choice, there is a reading. Consultations dedicated to colour and image aesthetics, scalp and hair wellbeing, or both dimensions together ? to build a real direction before proceeding."
   },
   "signature": {
     "001": "Deep Regenerating Ritual",
@@ -49,7 +58,8 @@
       "017": "In a few minutes you will receive guidance on the most suitable Luxosa pathway.",
       "018": "The test does not replace the consultation: it introduces it.",
       "019": "Discover your pathway",
-      "020": "At Luxosa, every gesture has a name."
+      "020": "At Luxosa, every gesture has a name.",
+      "021": "The Luxosa Experiences are distinct gestures of care, designed to bring you closer to the method and enhance what the hair is truly asking for."
     }
   }
 }

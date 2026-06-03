@@ -848,7 +848,10 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
       d5d_molto:t('report:diagnostic.041'), d5d_troppo:t('report:diagnostic.042'),
     };
     const volumeDesc = d5d ? (volumeMap[d5d] ?? '') : '';
-    specificPart = `Le esigenze principali riguardano ${formaDesc || 'la forma e il movimento'}${volumeDesc ? ` — il volume attuale risulta ${volumeDesc}` : ''}.`;
+    specificPart = t('report:templates.formSpecific', {
+      formaDesc: formaDesc || t('report:diagnostic.165'),
+      volumePart: volumeDesc ? t('report:templates.formVolumePart', { volumeDesc }) : '',
+    });
   } else {
     const d5e = answers['d5e'] as string | undefined;
     const d6e = answers['d6e'] as string | undefined;
@@ -865,7 +868,10 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
     };
     const satDesc = d5e ? (satMap[d5e] ?? '') : '';
     const aspDesc = d6e ? (d6eMap[d6e] ?? '') : '';
-    specificPart = `Dalla lettura del profilo emerge una situazione articolata${satDesc ? `: ${satDesc}` : ''}. ${aspDesc ? `In questo momento ${aspDesc}.` : ''}`.trim();
+    specificPart = t('report:templates.completeSpecific', {
+      satPart: satDesc ? t('report:templates.completeSatisfactionPart', { satDesc }) : '',
+      aspPart: aspDesc ? t('report:templates.completeAspirationPart', { aspDesc }) : '',
+    }).trim();
   }
 
   const d9Ctx: Record<string, string> = {
@@ -877,10 +883,13 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
   const d9Phrase = d9 ? (d9Ctx[d9] ?? '') : '';
 
   const parts = [
-    `Capelli ${tipo}${statoDesc ? `, che descrivi come ${statoDesc}` : ''}.`,
+    t('report:templates.hairSummary', {
+      tipo,
+      statoPart: statoDesc ? t('report:templates.hairStatePart', { statoDesc }) : '',
+    }),
     specificPart,
     d9Phrase,
-    lavaggioDesc ? `Frequenza di lavaggio: ${lavaggioDesc}.` : '',
+    lavaggioDesc ? t('report:templates.washFrequency', { lavaggioDesc }) : '',
   ].filter(Boolean);
 
   return parts.join(' ');
@@ -1026,7 +1035,9 @@ function buildPercorsoRationale(pub: PublicPercorso, primary: Percorso, answers:
   if (pub === 'benessere' && primary === 'cute') {
     const d6a = answers['d6a'] as string | undefined;
     const mai = d6a === 'd6a_mai';
-    return `Il percorso BenEssere parte dalla cute e la legge nel tempo, con metodo. Non un singolo intervento, ma una sequenza costruita per restituire equilibrio reale${mai ?t('report:diagnostic.111') : ''}. La lettura in presenza permetterà di valutare la condizione reale e definire i passi più adatti.`;
+    return t('report:templates.benessereCuteRationale', {
+      neverPart: mai ? t('report:diagnostic.111') : '',
+    });
   }
   if (pub === 'benessere' && primary === 'rinascita') {
     return t('report:diagnostic.112');
@@ -1273,8 +1284,8 @@ function buildConsultationFocus(primary: Percorso, answers: Answers, esperienzaN
   if (primary === 'colore') {
     const d7cFocus = answers['d7c'] as string | undefined;
     const points = [
-      'La storia cromatica — prodotti usati, frequenza, tecnica degli interventi precedenti',
-      'Lo stato attuale della fibra colorata — porosità e risposta al calore',
+      t('report:diagnostic.166'),
+      t('report:diagnostic.167'),
       d7cFocus === 'd7c_bianco'
         ?t('report:diagnostic.131')
         :t('report:diagnostic.132'),
@@ -1403,9 +1414,9 @@ function buildWhatsAppMessage(
   const attention = getAttentionLevel(answers, primary);
   const percorsoName = PUBLIC_PERCORSO_NAMES[pub];
   const attentionLabels: Record<AttentionLevel, string> = {
-    ordinaria: 'In fase di ascolto',
-    mirata: 'Attenzione mirata consigliata',
-    prioritaria: "Richiede un'attenzione dedicata",
+    ordinaria: t('report:diagnostic.168'),
+    mirata: t('report:diagnostic.151'),
+    prioritaria: t('report:diagnostic.152'),
   };
   const conditionSummary = buildConditionSummary(answers, primary);
   const mainSignals = buildMainSignals(answers, primary);
@@ -1420,18 +1431,18 @@ function buildWhatsAppMessage(
   const lines: string[] = [];
   lines.push(t('report:diagnostic.155'));
   lines.push('');
-  lines.push(`Fascia oraria preferita: ${fascia}`);
-  lines.push(`Sede selezionata: ${sede}`);
+  lines.push(t('report:diagnostic.169', { fascia }));
+  lines.push(t('report:diagnostic.170', { sede }));
   lines.push('');
   lines.push(t('report:diagnostic.156'));
-  lines.push(`Nome: ${nome}`);
-  lines.push(`Email: ${email}`);
-  lines.push(`WhatsApp: ${whatsapp}`);
+  lines.push(t('report:diagnostic.171', { nome }));
+  lines.push(t('report:diagnostic.172', { email }));
+  lines.push(t('report:diagnostic.173', { whatsapp }));
   lines.push('');
   lines.push(t('report:diagnostic.157'));
   lines.push('');
-  lines.push(`PERCORSO: ${percorsoName}`);
-  lines.push(`Attenzione: ${attentionLabels[attention]}`);
+  lines.push(t('report:diagnostic.174', { percorsoName }));
+  lines.push(t('report:diagnostic.175', { attention: attentionLabels[attention] }));
   lines.push('');
   lines.push(t('report:diagnostic.158'));
   lines.push(conditionSummary);
@@ -1452,7 +1463,7 @@ function buildWhatsAppMessage(
   });
   if (secondPub) {
     lines.push('');
-    lines.push(`PERCORSO SECONDARIO: ${PUBLIC_PERCORSO_NAMES[secondPub]}`);
+    lines.push(t('report:diagnostic.176', { percorsoName: PUBLIC_PERCORSO_NAMES[secondPub] }));
   }
   lines.push('');
   lines.push(t('report:diagnostic.163'));
@@ -1777,15 +1788,15 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 
   const handleSubmit = () => {
     if (!nome.trim()) {
-      setError('Completa tutti i campi per scoprire la tua soluzione.');
+      setError(t('test:diagnostic.takeover.306'));
       return;
     }
     if (!isValidEmail(email)) {
-      setError('Controlla l\'indirizzo email inserito: sembra incompleto o non corretto.');
+      setError(t('test:diagnostic.takeover.307'));
       return;
     }
     if (!phone || !isPossiblePhoneNumber(phone)) {
-      setError('Controlla il numero inserito: sembra incompleto o non corretto.');
+      setError(t('test:diagnostic.takeover.308'));
       return;
     }
     onSubmit({ nome: nome.trim(), email: email.trim(), whatsapp: phone });
@@ -1900,9 +1911,9 @@ function ResultScreen({
   const closing = buildClosing(pub, attention, primary, answers);
 
   const attentionLabels: Record<AttentionLevel, string> = {
-    ordinaria: 'In fase di ascolto',
-    mirata: 'Attenzione mirata consigliata',
-    prioritaria: "Richiede un'attenzione dedicata",
+    ordinaria: t('report:diagnostic.168'),
+    mirata: t('report:diagnostic.151'),
+    prioritaria: t('report:diagnostic.152'),
   };
 
   useEffect(() => {

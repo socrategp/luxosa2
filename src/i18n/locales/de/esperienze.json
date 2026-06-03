@@ -3,15 +3,24 @@
     "001": "PiegaLux",
     "002": "Taglio Signature",
     "003": "Nuances",
-    "004": "Luce Signature",
+    "004": "Signature-Licht",
     "005": "RicciOsa",
     "006": "RicciOso",
     "007": "Cheratina Nutrizione Pro",
     "008": "Area Benessere",
-    "009": "Consulenze Specialistiche",
+    "009": "Fachberatungen",
     "010": "Die Erlebnisse",
     "011": "Man wählt sie nicht wie aus einem Menü. Man entdeckt sie gemeinsam mit uns, im Rahmen des Weges, den man gerade aufbaut.",
-    "012": "Schließen"
+    "012": "Schließen",
+    "013": "Nicht einfach ein Styling. Eine Geste, die das Haar nährt, veredelt und ihm in seinem besten Moment Licht zurückgibt.",
+    "014": "Ein Schnitt, der aus Beobachtung und Vision entsteht. Keine Routine, sondern ein Projekt.",
+    "015": "Farbe in ihrer raffiniertesten Ausdrucksform: Licht, Tiefe und Natürlichkeit.",
+    "016": "Aufhellungen mit Präzision aufgebaut — Airtouch, Babylight, Degradé und weitere — für ein anspruchsvolles Ergebnis, das nie erzwungen wirkt.",
+    "017": "Die Geste für lockiges Haar, wenn Definition, Elastizität und Respekt Priorität werden. Eine spezifische Behandlung mit gezielten Produkten für die gewünschte Locke.",
+    "018": "Der maßgeschneiderte Schnitt für lockiges Haar, trocken ausgeführt, um Halt und Form der Locke zu respektieren. Ein Projekt, das jede natürliche Bewegung liest und hervorhebt.",
+    "019": "Eine Behandlung, die dem Haar Ordnung, Weichheit und Vitalität zurückgibt — ohne die natürliche Bewegung zu opfern.",
+    "020": "Gezielte Behandlungen für Kopfhaut, Faser und das Gleichgewicht des Haares. Ein präziser, professioneller Beginn, der die Basis für authentische Haargesundheit legt.",
+    "021": "Vor jeder Wahl steht eine Lesart. Beratungen zur Ästhetik von Farbe und Image, zum Wohlbefinden von Kopfhaut und Haar oder zu beiden Dimensionen gemeinsam — um vor dem Vorgehen eine echte Richtung aufzubauen."
   },
   "signature": {
     "001": "Tiefenwirksames regenerierendes Ritual",
@@ -49,7 +58,8 @@
       "017": "In wenigen Minuten erhältst du eine Orientierung zum passendsten Luxosa-Weg.",
       "018": "Der Test ersetzt die Beratung nicht: Er leitet sie ein.",
       "019": "Deinen Weg entdecken",
-      "020": "Bei Luxosa trägt jede Geste einen Namen."
+      "020": "Bei Luxosa trägt jede Geste einen Namen.",
+      "021": "Die Luxosa Erlebnisse sind eigenständige Gesten der Pflege, gedacht, um der Methode näherzukommen und zu veredeln, was das Haar wirklich braucht."
     }
   }
 }

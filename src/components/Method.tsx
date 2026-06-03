@@ -9,31 +9,31 @@ const fasi = [
     num: '01',
     name:t('home:method.001'),
     accade:t('home:method.002'),
-    sente: 'Finalmente qualcuno che vuole capire davvero.',
+    sente: t('home:method.013'),
   },
   {
     num: '02',
     name:t('home:method.003'),
     accade:t('home:method.004'),
-    sente: 'Vedono ciò che io non sapevo di avere.',
+    sente: t('home:method.014'),
   },
   {
     num: '03',
     name:t('home:method.005'),
     accade:t('home:method.006'),
-    sente: 'Ho un piano. Non sto improvvisando più.',
+    sente: t('home:method.015'),
   },
   {
     num: '04',
     name:t('home:method.007'),
     accade:t('home:method.008'),
-    sente: 'Ogni volta che torno, c\'è continuità.',
+    sente: t('home:method.016'),
   },
   {
     num: '05',
     name:t('home:method.009'),
     accade:t('home:method.010'),
-    sente: 'Non sono la stessa di quando sono entrata.',
+    sente: t('home:method.017'),
   },
 ];
 

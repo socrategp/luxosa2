@@ -129,7 +129,7 @@ function PillarSection() {
 }
 
 export function TestimonialsCarousel() {
-  return <SharedCarousel testimonials={testimonials} label="Voci di chi si è affidata" />;
+  return <SharedCarousel testimonials={testimonials} label={t('home:authority.032')} />;
 }
 
 export { PillarSection };

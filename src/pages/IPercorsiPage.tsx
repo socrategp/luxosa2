@@ -59,7 +59,7 @@ function PercorsiCinematic() {
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
   const inView = useInView(ref, { once: true, margin: '-15%' });
 
-  const words = ['"Ogni', 'capello', 'racconta', 'una', 'storia.', 'Noi', 'la', 'sappiamo', 'leggere."'];
+  const words = t('percorsi:ipercorsi.page.016').split(' ');
 
   return (
     <section ref={ref} className="relative h-[70vh] min-h-[480px] overflow-hidden">
@@ -208,9 +208,9 @@ export default function IPercorsiPage() {
   return (
     <>
       <PageHero
-        label="I Percorsi"
+        label={t('percorsi:ipercorsi.page.001')}
         title={t('percorsi:ipercorsi.page.015')}
-        subtitle="Dove la relazione diventa metodo, continuità e trasformazione."
+        subtitle={t('percorsi:ipercorsi.page.017')}
         image="/images/hero_ipercorsi.webp"
       />
       <PercorsiIntro />

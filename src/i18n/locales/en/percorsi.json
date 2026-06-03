@@ -35,7 +35,9 @@
         "010": "The first meeting at Luxosa is a moment of in-depth discovery. Not a quick assessment, but the time needed to hear the history, observe the hair, understand habits and clarify where one wishes to arrive.",
         "011": "From here the direction of the pathway is born. Every relevant piece of information is retained and updated over time, so that every session is a continuation, not a new beginning.",
         "012": "Discover the Pathways",
-        "013": "Every choice is born from a vision."
+        "013": "Every choice is born from a vision.",
+        "014": "At Luxosa, the result does not come from a momentary intuition, but from a clear method: listening, observing, designing and accompanying every woman over time.",
+        "015": "\"Authentic care begins with listening. Not with the answer.\""
       }
     }
   },
@@ -55,7 +57,9 @@
       "012": "The First Step",
       "013": "Luxosa Experiences are the first possible entry point for those who wish to approach the Luxosa world through a single gesture, built with the same care.",
       "014": "Discover the Experiences",
-      "015": "Not services. Pathways."
+      "015": "Not services. Pathways.",
+      "016": "\"Every head of hair tells a story. We know how to read it.\"",
+      "017": "Where relationship becomes method, continuity and transformation."
     }
   }
 }

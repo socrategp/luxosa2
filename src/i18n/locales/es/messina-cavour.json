@@ -12,7 +12,7 @@
       "009": "Cada profesional comparte la misma visión, la misma formación, el mismo enfoque del cuidado.",
       "010": "El principio",
       "011": "Qué tienen en común todas las sedes Luxosa.",
-      "012": "Sede Flagship",
+      "012": "Sede insignia",
       "013": "Luxosa Messina Cavour",
       "014": "Luxosa se encuentra en Messina, en la zona de Cavour. Este espacio fue elegido porque refleja el método Luxosa: recogido, intencional, cuidado en los detalles. No grande para impresionar. Exacto para acoger.",
       "015": "Entra en la sede",
@@ -22,19 +22,37 @@
       "019": "para crecer.",
       "020": "Luxosa nace con un sistema replicable. Cada nueva sede será una extensión fiel del método, la calidad y la experiencia. La coherencia es el fundamento del crecimiento.",
       "021": "Nuevas sedes · Próximamente · En camino",
-      "022": "Entrar en Luxosa comienza ya antes de sentarse."
+      "022": "Entrar en Luxosa comienza ya antes de sentarse.",
+      "023": "Sedes",
+      "024": "Cada sede Luxosa es una extensión fiel del método: orden, armonía, luz y confort al servicio de la persona."
     }
   },
   "messina": {
     "cavour": {
       "page": {
+        "100": "Continuidad profesional",
+        "101": "41 años",
+        "102": "El Método",
+        "103": "32 años",
+        "104": "Sin juicio",
+        "105": "29 años",
+        "106": "Proyecto personal",
+        "107": "48 años",
+        "108": "Recorrido, no cita",
+        "109": "52 años",
+        "110": "Disciplina y constancia",
+        "111": "53 años",
+        "112": "Resultado verificado",
+        "113": "58 años",
+        "114": "Constancia que transforma",
+        "115": "Voces de la sede",
         "001": "Luxosa Messina Cavour",
         "002": "Messina — Corso Cavour",
         "003": "Luxosa",
         "004": "Messina Cavour.",
         "005": "Un lugar exclusivo en el corazón de la ciudad donde competencia, método y acogida se encuentran.",
         "006": "Todas las sedes",
-        "007": "La Sede",
+        "007": "La sede",
         "008": "Un punto de referencia",
         "009": "para el cuidado evolucionado.",
         "010": "En Messina Cavour, Luxosa toma forma en su expresión más fiel. No como un salón construido para impresionar, sino como un espacio pensado para trabajar bien: acoger con medida, observar con atención, cuidar con método.",
@@ -66,15 +84,15 @@
         "036": "El Método",
         "037": "El Metodo Luxosa en Messina.",
         "038": "El Metodo Luxosa se aplica con el mismo rigor y la misma sensibilidad en cada sede.",
-        "039": "Master Responsabile",
+        "039": "Master responsable",
         "040": "Lucia Cotugno",
         "041": "Lucia Cotugno dirige la sede Luxosa de Messina Cavour custodiando el método, la calidad de la experiencia y la coherencia operativa. Su función es garantizar que cada mujer encuentre no solo acogida y competencia, sino una atención real, ordenada y continua en el tiempo.",
         "042": "En la sede supervisa la experiencia, acompaña el recorrido de la clienta y vela por los estándares que hacen a Luxosa reconocible: escucha auténtica, método, medida, atención al detalle y cuidado responsable.",
         "043": "\"Cada mujer debe sentirse vista, comprendida y acompañada. Es de aquí de donde nace el verdadero cambio.\"",
-        "044": "Lucia Cotugno — Master Responsabile Luxosa Messina",
+        "044": "Lucia Cotugno — Master responsable Luxosa Messina",
         "045": "L.C.",
         "046": "Lucia Cotugno",
-        "047": "Master Responsabile",
+        "047": "Master responsable",
         "048": "Cambié de salón cuatro veces en cinco años. Nadie recordaba qué color me había hecho la vez anterior, por no hablar de mi historia. En Luxosa mi profesional conoce cada centímetro de mi cabeza. Sabe que mi color tiende a oxidarse en las puntas, sabe que tengo un cabello mixto, más poroso en algunas zonas. No tengo que volver a explicar nada cada vez. Esta continuidad para mí vale más que cualquier técnica.",
         "049": "Francesca M.",
         "050": "ColorLux",
@@ -125,7 +143,8 @@
         "095": "Información útil",
         "096": "La consulta inicial tiene una duración de aproximadamente 15–20 minutos.",
         "097": "Se recomienda llegar 5 minutos antes de la cita.",
-        "098": "La sede es accesible para personas con movilidad reducida."
+        "098": "La sede es accesible para personas con movilidad reducida.",
+        "099": "44 años"
       }
     }
   }

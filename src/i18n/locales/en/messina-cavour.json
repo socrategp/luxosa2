@@ -22,12 +22,30 @@
       "019": "to grow.",
       "020": "Luxosa was created with a replicable system. Every new location will be a faithful extension of the method, the quality and the experience. Consistency is the foundation of growth.",
       "021": "New locations · Coming soon · On the way",
-      "022": "Entering Luxosa begins before you even sit down."
+      "022": "Entering Luxosa begins before you even sit down.",
+      "023": "Locations",
+      "024": "Every Luxosa location is a faithful extension of the method: order, harmony, light and comfort in service of the person."
     }
   },
   "messina": {
     "cavour": {
       "page": {
+        "100": "Professional continuity",
+        "101": "41 years old",
+        "102": "The Method",
+        "103": "32 years old",
+        "104": "No judgement",
+        "105": "29 years old",
+        "106": "Personal project",
+        "107": "48 years old",
+        "108": "Pathway, not appointment",
+        "109": "52 years old",
+        "110": "Discipline and consistency",
+        "111": "53 years old",
+        "112": "Verified result",
+        "113": "58 years old",
+        "114": "Consistency that transforms",
+        "115": "Voices from the Location",
         "001": "Luxosa Messina Cavour",
         "002": "Messina — Corso Cavour",
         "003": "Luxosa",
@@ -125,7 +143,8 @@
         "095": "Useful information",
         "096": "The initial consultation lasts approximately 15–20 minutes.",
         "097": "We recommend arriving 5 minutes before your appointment.",
-        "098": "The location is accessible for people with reduced mobility."
+        "098": "The location is accessible for people with reduced mobility.",
+        "099": "44 years old"
       }
     }
   }

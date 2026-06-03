@@ -35,7 +35,9 @@
         "010": "El primer encuentro en Luxosa es un momento de conocimiento profundo. No una valoración rápida, sino el tiempo necesario para escuchar la historia, observar el cabello, comprender los hábitos y aclarar adónde se desea llegar.",
         "011": "De aquí nace la dirección del recorrido. Cada información relevante se guarda y actualiza con el tiempo, de modo que cada sesión sea una continuación, no un nuevo comienzo.",
         "012": "Descubre los Recorridos",
-        "013": "Cada elección nace de una visión."
+        "013": "Cada elección nace de una visión.",
+        "014": "En Luxosa el resultado no nace de la intuición del momento, sino de un método claro: escuchar, observar, diseñar y acompañar a cada mujer en el tiempo.",
+        "015": "\"El cuidado auténtico empieza por la escucha. No por la respuesta.\""
       }
     }
   },
@@ -55,7 +57,9 @@
       "012": "El Primer Paso",
       "013": "Las Experiencias Luxosa son la primera puerta de entrada para quienes desean acercarse al mundo Luxosa a través de un gesto individual, construido con la misma atención.",
       "014": "Descubre las Experiencias",
-      "015": "No servicios. Recorridos."
+      "015": "No servicios. Recorridos.",
+      "016": "\"Cada cabello cuenta una historia. Nosotros sabemos leerla.\"",
+      "017": "Donde la relación se convierte en método, continuidad y transformación."
     }
   }
 }

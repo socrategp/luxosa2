@@ -22,12 +22,30 @@
       "019": "pour grandir.",
       "020": "Luxosa naît avec un système reproductible. Chaque nouvelle maison sera une extension fidèle de la méthode, de la qualité et de l'expérience. La cohérence est le fondement de la croissance.",
       "021": "Nouvelles maisons · Prochainement · À venir",
-      "022": "Entrer dans Luxosa commence bien avant de s'asseoir."
+      "022": "Entrer dans Luxosa commence bien avant de s'asseoir.",
+      "023": "Maisons",
+      "024": "Chaque maison Luxosa est une extension fidèle de la méthode : ordre, harmonie, lumière et confort au service de la personne."
     }
   },
   "messina": {
     "cavour": {
       "page": {
+        "100": "Continuité professionnelle",
+        "101": "41 ans",
+        "102": "La Méthode",
+        "103": "32 ans",
+        "104": "Aucun jugement",
+        "105": "29 ans",
+        "106": "Projet personnel",
+        "107": "48 ans",
+        "108": "Parcours, non rendez-vous",
+        "109": "52 ans",
+        "110": "Discipline et constance",
+        "111": "53 ans",
+        "112": "Résultat vérifié",
+        "113": "58 ans",
+        "114": "Constance qui transforme",
+        "115": "Voix de la Maison",
         "001": "Luxosa Messina Cavour",
         "002": "Messine — Corso Cavour",
         "003": "Luxosa",
@@ -125,7 +143,8 @@
         "095": "Informations utiles",
         "096": "La consultation initiale dure environ 15 à 20 minutes.",
         "097": "Il est conseillé d'arriver 5 minutes avant le rendez-vous.",
-        "098": "La maison est accessible aux personnes à mobilité réduite."
+        "098": "La maison est accessible aux personnes à mobilité réduite.",
+        "099": "44 ans"
       }
     }
   }

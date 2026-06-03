@@ -22,12 +22,30 @@
       "019": "per crescere.",
       "020": "Luxosa nasce con un sistema replicabile. Ogni nuova sede sarà un'estensione fedele del metodo, della qualità e dell'esperienza. La coerenza è il fondamento della crescita.",
       "021": "Nuove sedi · Prossimamente · In arrivo",
-      "022": "Entrare in Luxosa inizia già prima di sedersi."
+      "022": "Entrare in Luxosa inizia già prima di sedersi.",
+      "023": "Sedi",
+      "024": "Ogni sede Luxosa è un’estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
     }
   },
   "messina": {
     "cavour": {
       "page": {
+        "100": "Continuità professionale",
+        "101": "41 anni",
+        "102": "Il Metodo",
+        "103": "32 anni",
+        "104": "Nessun giudizio",
+        "105": "29 anni",
+        "106": "Progetto personale",
+        "107": "48 anni",
+        "108": "Percorso, non appuntamento",
+        "109": "52 anni",
+        "110": "Disciplina e costanza",
+        "111": "53 anni",
+        "112": "Risultato verificato",
+        "113": "58 anni",
+        "114": "Costanza che trasforma",
+        "115": "Voci dalla Sede",
         "001": "Luxosa Messina Cavour",
         "002": "Messina — Corso Cavour",
         "003": "Luxosa",
@@ -125,7 +143,8 @@
         "095": "Informazioni utili",
         "096": "La consulenza iniziale ha una durata di circa 15–20 minuti.",
         "097": "Si consiglia di arrivare 5 minuti prima dell'appuntamento.",
-        "098": "La sede è accessibile per persone con mobilità ridotta."
+        "098": "La sede è accessibile per persone con mobilità ridotta.",
+        "099": "44 anni"
       }
     }
   }

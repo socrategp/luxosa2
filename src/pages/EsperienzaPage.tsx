@@ -218,9 +218,9 @@ export default function EsperienzaPage() {
   return (
     <>
       <PageHero
-        label="Le Esperienze"
+        label={t('esperienze:esperienza.page.001')}
         title={t('esperienze:esperienza.page.020')}
-        subtitle="Le Esperienze Luxosa sono gesti di cura distinti, pensati per avvicinare al metodo e valorizzare ciò che il capello chiede davvero."
+        subtitle={t('esperienze:esperienza.page.021')}
         image="/images/hero_esperienze.webp"
       />
       <EsperienzaIntro />

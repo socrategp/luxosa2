@@ -22,12 +22,30 @@
       "019": "um zu wachsen.",
       "020": "Luxosa entstand mit einem replizierbaren System. Jeder neue Standort wird eine getreue Verlängerung der Methode, der Qualität und des Erlebnisses sein. Kohärenz ist das Fundament des Wachstums.",
       "021": "Neue Standorte · Demnächst · In Kürze",
-      "022": "Das Betreten von Luxosa beginnt schon bevor man sich setzt."
+      "022": "Das Betreten von Luxosa beginnt schon bevor man sich setzt.",
+      "023": "Standorte",
+      "024": "Jeder Luxosa Standort ist eine treue Erweiterung der Methode: Ordnung, Harmonie, Licht und Komfort im Dienst der Person."
     }
   },
   "messina": {
     "cavour": {
       "page": {
+        "100": "Professionelle Kontinuität",
+        "101": "41 Jahre",
+        "102": "Die Methode",
+        "103": "32 Jahre",
+        "104": "Kein Urteil",
+        "105": "29 Jahre",
+        "106": "Persönliches Projekt",
+        "107": "48 Jahre",
+        "108": "Weg, nicht Termin",
+        "109": "52 Jahre",
+        "110": "Disziplin und Beständigkeit",
+        "111": "53 Jahre",
+        "112": "Überprüftes Ergebnis",
+        "113": "58 Jahre",
+        "114": "Beständigkeit, die verwandelt",
+        "115": "Stimmen vom Standort",
         "001": "Luxosa Messina Cavour",
         "002": "Messina — Corso Cavour",
         "003": "Luxosa",
@@ -66,15 +84,15 @@
         "036": "Die Methode",
         "037": "Das Metodo Luxosa in Messina.",
         "038": "Das Metodo Luxosa wird an jedem Standort mit derselben Strenge und Sensibilität angewendet.",
-        "039": "Master Responsabile",
+        "039": "Verantwortlicher Master",
         "040": "Lucia Cotugno",
         "041": "Lucia Cotugno leitet den Luxosa-Standort Messina Cavour und hütet die Methode, die Erlebnisqualität und die operative Kohärenz. Ihre Aufgabe ist es, sicherzustellen, dass jede Frau nicht nur Herzlichkeit und Kompetenz findet, sondern eine echte, geordnete und kontinuierliche Betreuung über die Zeit.",
         "042": "Am Standort begleitet sie das Erlebnis, unterstützt den Weg der Kundin und wahrt die Standards, die Luxosa unverwechselbar machen: aufrichtiges Zuhören, Methode, Maß, Aufmerksamkeit fürs Detail und verantwortungsvolle Pflege.",
         "043": "\"Jede Frau soll sich gesehen, verstanden und begleitet fühlen. Von hier aus entsteht die wahre Veränderung.\"",
-        "044": "Lucia Cotugno — Master Responsabile Luxosa Messina",
+        "044": "Lucia Cotugno — Verantwortlicher Master Luxosa Messina",
         "045": "L.C.",
         "046": "Lucia Cotugno",
-        "047": "Master Responsabile",
+        "047": "Verantwortlicher Master",
         "048": "In fünf Jahren habe ich vier Salons gewechselt. Keiner erinnerte sich, welche Farbe ich beim letzten Mal hatte — von meiner Geschichte ganz zu schweigen. Bei Luxosa kennt meine Fachfrau jeden Zentimeter meines Haares. Sie weiß, dass meine Farbe an den Spitzen oxidiert, dass ich gemischtes Haar habe, das in manchen Bereichen poröser ist. Ich muss jedes Mal nichts neu erklären. Diese Kontinuität bedeutet mir mehr als jede Technik.",
         "049": "Francesca M.",
         "050": "ColorLux",
@@ -125,7 +143,8 @@
         "095": "Nützliche Informationen",
         "096": "Die Erstberatung dauert etwa 15–20 Minuten.",
         "097": "Es wird empfohlen, 5 Minuten vor dem Termin einzutreffen.",
-        "098": "Der Standort ist für Personen mit eingeschränkter Mobilität zugänglich."
+        "098": "Der Standort ist für Personen mit eingeschränkter Mobilität zugänglich.",
+        "099": "44 Jahre"
       }
     }
   }

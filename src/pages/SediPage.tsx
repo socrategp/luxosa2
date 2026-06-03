@@ -182,9 +182,9 @@ export default function SediPage() {
   return (
     <>
       <PageHero
-        label="Sedi"
+        label={t('messina-cavour:sedi.page.023')}
         title={t('messina-cavour:sedi.page.022')}
-        subtitle="Ogni sede Luxosa è un'estensione fedele del metodo: ordine, armonia, luce e comfort al servizio della persona."
+        subtitle={t('messina-cavour:sedi.page.024')}
         video="/videos/hero_sedi_opt.mp4"
       />
       <SediManifesto />

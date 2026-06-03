@@ -3,24 +3,33 @@
     "001": "PiegaLux",
     "002": "Taglio Signature",
     "003": "Nuances",
-    "004": "Luce Signature",
+    "004": "Lumière Signature",
     "005": "RicciOsa",
     "006": "RicciOso",
     "007": "Cheratina Nutrizione Pro",
     "008": "Area Benessere",
-    "009": "Consulenze Specialistiche",
+    "009": "Consultations spécialisées",
     "010": "Les expériences",
     "011": "On ne les choisit pas comme on parcourt un menu. On les découvre ensemble, dans le contexte du parcours que l'on construit.",
-    "012": "Fermer"
+    "012": "Fermer",
+    "013": "Pas un simple brushing. Un geste qui nourrit, valorise et rend de la lumière au cheveu dans son meilleur moment.",
+    "014": "Une coupe qui naît de l'observation et de la vision. Non une routine, mais un projet.",
+    "015": "La couleur dans son expression la plus raffinée : lumière, profondeur et naturel.",
+    "016": "Des éclaircissements construits avec précision — Airtouch, Babylight, Degradé et autres — pour un résultat sophistiqué, jamais forcé.",
+    "017": "Le geste dédié au cheveu bouclé lorsque définition, élasticité et respect deviennent une priorité. Un soin spécifique avec des produits ciblés pour accompagner la boucle désirée.",
+    "018": "La coupe sur mesure pour cheveux bouclés, réalisée sur cheveu sec afin de préserver la tenue de la boucle et le respect de la forme. Un projet qui lit et valorise chaque mouvement naturel.",
+    "019": "Un soin qui rend au cheveu ordre, douceur et vitalité — sans sacrifier le mouvement naturel.",
+    "020": "Des soins ciblés dédiés au cuir chevelu, à la fibre et au rééquilibrage du cheveu. Un début précis et professionnel qui pose les bases d'une santé capillaire authentique.",
+    "021": "Avant chaque choix, il y a une lecture. Des consultations dédiées à l'esthétique de la couleur et de l'image, au bien-être du cuir chevelu et du cheveu, ou aux deux dimensions ensemble — pour construire une direction réelle avant d'agir."
   },
   "signature": {
-    "001": "Rituale Rigenerante Profondo",
+    "001": "Rituel régénérant profond",
     "002": "Notre soin iconique",
     "003": "Un parcours complet qui unit analyse, soin personnalisé du cuir chevelu, régénération de la fibre et styling conscient. Deux heures entièrement dédiées au soin.",
-    "004": "Consulenza Diagnostica Avanzata",
+    "004": "Consultation diagnostique avancée",
     "005": "Le point de départ",
     "006": "Une analyse approfondie de l'état du cuir chevelu et des cheveux à travers des outils professionnels et un entretien dédié. La base sur laquelle construire chaque parcours.",
-    "007": "Armonia Colore & Struttura",
+    "007": "Harmonie couleur & structure",
     "008": "L'art de la couleur évoluée",
     "009": "Étude chromatique personnalisée qui respecte et valorise la structure naturelle du cheveu. Analyse du sous-ton, de la texture et du mode de vie de la cliente.",
     "010": "Moments Signature",
@@ -49,7 +58,8 @@
       "017": "En quelques minutes, vous recevez une orientation sur le parcours Luxosa le plus adapté.",
       "018": "Le test ne remplace pas la consultation : il l'introduit.",
       "019": "Découvrir votre parcours",
-      "020": "Chez Luxosa, chaque geste a un nom."
+      "020": "Chez Luxosa, chaque geste a un nom.",
+      "021": "Les Expériences Luxosa sont des gestes de soin distincts, pensés pour rapprocher de la méthode et révéler ce que le cheveu demande vraiment."
     }
   }
 }

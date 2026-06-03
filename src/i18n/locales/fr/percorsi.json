@@ -35,7 +35,9 @@
         "010": "Le premier rendez-vous chez Luxosa est un moment de connaissance approfondie. Non pas une évaluation rapide, mais le temps nécessaire pour écouter l'histoire, observer le cheveu, comprendre les habitudes et clarifier où l'on désire arriver.",
         "011": "C'est de là que naît la direction du parcours. Chaque information pertinente est conservée et mise à jour dans le temps, de sorte que chaque séance soit une continuation, non un nouveau commencement.",
         "012": "Découvrir les Parcours",
-        "013": "Chaque choix naît d'une vision."
+        "013": "Chaque choix naît d'une vision.",
+        "014": "Chez Luxosa, le résultat ne naît pas de l’intuition du moment, mais d’une méthode claire : écouter, observer, concevoir et accompagner chaque femme dans le temps.",
+        "015": "\"Le soin authentique commence par l’écoute. Non par la réponse.\""
       }
     }
   },
@@ -55,7 +57,9 @@
       "012": "Le Premier Pas",
       "013": "Les Expériences Luxosa sont la première entrée possible pour qui souhaite approcher le monde Luxosa à travers un geste singulier, construit avec la même attention.",
       "014": "Découvrir les Expériences",
-      "015": "Pas des services. Des parcours."
+      "015": "Pas des services. Des parcours.",
+      "016": "\"Chaque cheveu raconte une histoire. Nous savons la lire.\"",
+      "017": "Là où la relation devient méthode, continuité et transformation."
     }
   }
 }

@@ -5,15 +5,15 @@ import { premiumEase } from '../lib/animations';
 import { t } from '../i18n/t';
 
 const esperienze = [
-  { code: 'EX·01', name:t('esperienze:experience.001'), copy: 'Non una semplice piega. Un gesto che nutre, valorizza e restituisce luce al capello nel suo miglior momento.' },
-  { code: 'EX·02', name:t('esperienze:experience.002'), copy: "Un taglio che nasce dall'osservazione e dalla visione. Non routine, ma progetto." },
-  { code: 'EX·03', name:t('esperienze:experience.003'), copy: 'Il colore nella sua espressione più raffinata: luce, profondità e naturalezza.' },
-  { code: 'EX·04', name:t('esperienze:experience.004'), copy: 'Schiariture costruite con precisione — Airtouch, Babylight, Degradé e altri — per un risultato sofisticato e mai forzato.' },
-  { code: 'EX·05', name:t('esperienze:experience.005'), copy: 'Il gesto dedicato al capello riccio quando definizione, elasticità e rispetto diventano una priorità. Un trattamento specifico con prodotti mirati per garantire il riccio desiderato.' },
-  { code: 'EX·06', name:t('esperienze:experience.006'), copy: 'Il taglio sartoriale per capelli ricci, eseguito a capello asciutto per garantire la tenuta del riccio e il rispetto della forma. Un progetto che legge e valorizza ogni movimento naturale.' },
-  { code: 'EX·07', name:t('esperienze:experience.007'), copy: 'Un trattamento che restituisce ordine, morbidezza e vitalità al capello — senza sacrificare il movimento naturale.' },
-  { code: 'EX·08', name:t('esperienze:experience.008'), copy: 'Trattamenti mirati dedicati a cute, fibra e riequilibrio del capello. Un inizio mirato e professionale che pone le basi per la salute autentica dei capelli.' },
-  { code: 'EX·09', name:t('esperienze:experience.009'), copy: "Prima di ogni scelta, c'è una lettura. Consulenze dedicate all'estetica del colore e dell'immagine, al benessere di cute e capello, o a entrambe le dimensioni insieme — per costruire una direzione reale prima di procedere." },
+  { code: 'EX·01', name:t('esperienze:experience.001'), copy: t('esperienze:experience.013') },
+  { code: 'EX·02', name:t('esperienze:experience.002'), copy: t('esperienze:experience.014') },
+  { code: 'EX·03', name:t('esperienze:experience.003'), copy: t('esperienze:experience.015') },
+  { code: 'EX·04', name:t('esperienze:experience.004'), copy: t('esperienze:experience.016') },
+  { code: 'EX·05', name:t('esperienze:experience.005'), copy: t('esperienze:experience.017') },
+  { code: 'EX·06', name:t('esperienze:experience.006'), copy: t('esperienze:experience.018') },
+  { code: 'EX·07', name:t('esperienze:experience.007'), copy: t('esperienze:experience.019') },
+  { code: 'EX·08', name:t('esperienze:experience.008'), copy: t('esperienze:experience.020') },
+  { code: 'EX·09', name:t('esperienze:experience.009'), copy: t('esperienze:experience.021') },
 ];
 
 const IMAGE = '/images/esperienze-puzzle.webp';

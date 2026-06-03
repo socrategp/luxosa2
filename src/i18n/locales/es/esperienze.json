@@ -3,15 +3,24 @@
     "001": "PiegaLux",
     "002": "Taglio Signature",
     "003": "Nuances",
-    "004": "Luce Signature",
+    "004": "Luz Signature",
     "005": "RicciOsa",
     "006": "RicciOso",
     "007": "Cheratina Nutrizione Pro",
     "008": "Area Benessere",
-    "009": "Consulenze Specialistiche",
+    "009": "Consultas especializadas",
     "010": "Las experiencias",
     "011": "No las eliges como quien hojea un menú. Las descubres junto a nosotras, en el contexto del recorrido que estás construyendo.",
-    "012": "Cerrar"
+    "012": "Cerrar",
+    "013": "No una simple puesta en forma. Un gesto que nutre, realza y devuelve luz al cabello en su mejor momento.",
+    "014": "Un corte que nace de la observación y la visión. No rutina, sino proyecto.",
+    "015": "El color en su expresión más refinada: luz, profundidad y naturalidad.",
+    "016": "Aclaraciones construidas con precisión — Airtouch, Babylight, Degradé y otras — para un resultado sofisticado y nunca forzado.",
+    "017": "El gesto dedicado al cabello rizado cuando definición, elasticidad y respeto se vuelven una prioridad. Un tratamiento específico con productos dirigidos para acompañar el rizo deseado.",
+    "018": "El corte a medida para cabello rizado, realizado en seco para garantizar la duración del rizo y el respeto de la forma. Un proyecto que lee y realza cada movimiento natural.",
+    "019": "Un tratamiento que devuelve orden, suavidad y vitalidad al cabello — sin sacrificar el movimiento natural.",
+    "020": "Tratamientos específicos dedicados al cuero cabelludo, la fibra y el reequilibrio del cabello. Un inicio preciso y profesional que sienta las bases de una salud capilar auténtica.",
+    "021": "Antes de cada elección, hay una lectura. Consultas dedicadas a la estética del color y de la imagen, al bienestar del cuero cabelludo y del cabello, o a ambas dimensiones juntas — para construir una dirección real antes de actuar."
   },
   "signature": {
     "001": "Ritual Regenerador Profundo",
@@ -49,7 +58,8 @@
       "017": "En pocos minutos recibes una orientación sobre el recorrido Luxosa más adecuado.",
       "018": "El test no sustituye a la consulta: la introduce.",
       "019": "Descubre tu recorrido",
-      "020": "En Luxosa cada gesto tiene un nombre."
+      "020": "En Luxosa cada gesto tiene un nombre.",
+      "021": "Las Experiencias Luxosa son gestos de cuidado distintos, pensados para acercar al método y realzar lo que el cabello pide de verdad."
     }
   }
 }

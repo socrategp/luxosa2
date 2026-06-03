@@ -218,58 +218,58 @@ const mcTestimonials: TestimonialItem[] = [
   {
     quote:t('messina-cavour:messina.cavour.page.048'),
     name:t('messina-cavour:messina.cavour.page.049'),
-    role: '44 anni',
+    role: t('messina-cavour:messina.cavour.page.099'),
     percorso:t('messina-cavour:messina.cavour.page.050'),
-    valore: 'Continuità professionale',
+    valore: t('messina-cavour:messina.cavour.page.100'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.051'),
     name:t('messina-cavour:messina.cavour.page.052'),
-    role: '41 anni',
+    role: t('messina-cavour:messina.cavour.page.101'),
     percorso:t('messina-cavour:messina.cavour.page.053'),
-    valore: 'Il Metodo',
+    valore: t('messina-cavour:messina.cavour.page.102'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.054'),
     name:t('messina-cavour:messina.cavour.page.055'),
-    role: '32 anni',
+    role: t('messina-cavour:messina.cavour.page.103'),
     percorso:t('messina-cavour:messina.cavour.page.056'),
-    valore: 'Nessun giudizio',
+    valore: t('messina-cavour:messina.cavour.page.104'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.057'),
     name:t('messina-cavour:messina.cavour.page.058'),
-    role: '29 anni',
+    role: t('messina-cavour:messina.cavour.page.105'),
     percorso:t('messina-cavour:messina.cavour.page.059'),
-    valore: 'Progetto personale',
+    valore: t('messina-cavour:messina.cavour.page.106'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.060'),
     name:t('messina-cavour:messina.cavour.page.061'),
-    role: '48 anni',
+    role: t('messina-cavour:messina.cavour.page.107'),
     percorso:t('messina-cavour:messina.cavour.page.062'),
-    valore: 'Percorso, non appuntamento',
+    valore: t('messina-cavour:messina.cavour.page.108'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.063'),
     name:t('messina-cavour:messina.cavour.page.064'),
-    role: '52 anni',
+    role: t('messina-cavour:messina.cavour.page.109'),
     percorso:t('messina-cavour:messina.cavour.page.065'),
-    valore: 'Disciplina e costanza',
+    valore: t('messina-cavour:messina.cavour.page.110'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.066'),
     name:t('messina-cavour:messina.cavour.page.067'),
-    role: '53 anni',
+    role: t('messina-cavour:messina.cavour.page.111'),
     percorso:t('messina-cavour:messina.cavour.page.068'),
-    valore: 'Risultato verificato',
+    valore: t('messina-cavour:messina.cavour.page.112'),
   },
   {
     quote:t('messina-cavour:messina.cavour.page.069'),
     name:t('messina-cavour:messina.cavour.page.070'),
-    role: '58 anni',
+    role: t('messina-cavour:messina.cavour.page.113'),
     percorso:t('messina-cavour:messina.cavour.page.071'),
-    valore: 'Costanza che trasforma',
+    valore: t('messina-cavour:messina.cavour.page.114'),
   },
 ];
 
@@ -454,7 +454,7 @@ export default function MessinaCavourPage() {
       <MCReviews />
       <TestimonialsCarousel
         testimonials={mcTestimonials}
-        label="Voci dalla Sede"
+        label={t('messina-cavour:messina.cavour.page.115')}
         sectionClassName="py-28 md:py-40 lg:py-48 bg-charcoal overflow-hidden"
       />
       <MCContact />

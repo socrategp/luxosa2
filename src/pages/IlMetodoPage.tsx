@@ -58,7 +58,7 @@ function MethodCinematic() {
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
   const inView = useInView(ref, { once: true, margin: '-15%' });
 
-  const words = ['"La', 'cura', 'autentica', 'inizia', "dall'ascolto.", 'Non', 'dalla', 'risposta."'];
+  const words = t('percorsi:il.metodo.page.015').split(' ');
 
   return (
     <section ref={ref} className="relative h-[70vh] min-h-[480px] overflow-hidden">
@@ -175,9 +175,9 @@ export default function IlMetodoPage() {
   return (
     <>
       <PageHero
-        label="Il Metodo"
+        label={t('percorsi:il.metodo.page.001')}
         title={t('percorsi:il.metodo.page.013')}
-        subtitle="In Luxosa il risultato non nasce dall'intuizione del momento, ma da un metodo chiaro: ascoltare, osservare, progettare e accompagnare ogni donna nel tempo."
+        subtitle={t('percorsi:il.metodo.page.014')}
         image="/images/hero_ilmetodo.webp"
       />
       <MethodIntro />

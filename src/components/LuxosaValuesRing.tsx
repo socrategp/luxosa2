@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import { premiumEase } from '../lib/animations';
 import { t } from '../i18n/t';
 
-const valori = [
+function getValori() {
+  return [
   {
     title:t('home:luxosa.values.ring.001'),
     text:t('home:luxosa.values.ring.002'),
@@ -33,7 +34,8 @@ const valori = [
     title:t('home:luxosa.values.ring.013'),
     text:t('home:luxosa.values.ring.014'),
   },
-];
+  ];
+}
 
 // SVG ViewBox: 750 x 750 — center at 375,375
 const CX = 375;
@@ -46,6 +48,7 @@ export default function LuxosaValuesRing() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [activeIndex, setActiveIndex] = useState(0);
   const [userInteracted, setUserInteracted] = useState(false);
+  const valori = getValori();
 
   // Auto-rotate — starts after entry anims (~3s), then every 4s
   useEffect(() => {
@@ -251,7 +254,7 @@ export default function LuxosaValuesRing() {
                 transition={{ duration: 0.8, ease: premiumEase }}
               >
                 <div className="w-8 h-[1px] bg-brass mb-7 mx-auto lg:mx-0" />
-                <p className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">{t('home:luxosa.values.ring.020')}{activeIndex + 1} di {valori.length}
+                <p className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light mb-4">{t('home:luxosa.values.ring.020')}{activeIndex + 1} {t('home:luxosa.values.ring.021')} {valori.length}
                 </p>
                 <h4 className="font-serif text-[30px] md:text-[36px] font-light text-charcoal mb-5 leading-tight tracking-wide">
                   {valori[activeIndex].title}

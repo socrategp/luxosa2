@@ -133,7 +133,20 @@
         "063": "The Controller reserves the right to amend this Cookie Policy at any time, in particular following regulatory changes or the adoption of new technological tools. Amendments will be published on this page with the date of update.",
         "064": "The current version is 1.0, in force from [date to be defined].",
         "065": "Luxosa — Via Cavour 1, Messina —",
-        "066": "[privacy@luxosa.it — to be defined]"
+        "066": "[privacy@luxosa.it — to be defined]",
+        "067": "Session",
+        "068": "Session",
+        "069": "User session management",
+        "070": "Persistent",
+        "071": "12 months",
+        "072": "Cookie preference storage",
+        "073": "To be defined with the technical team",
+        "074": "2 years",
+        "075": "Google Analytics ? unique user identification",
+        "076": "Google Analytics ? session state maintenance",
+        "077": "24 hours",
+        "078": "Google Analytics ? user distinction",
+        "079": "To be defined ? e.g. Meta Pixel, Google Ads"
       }
     }
   },

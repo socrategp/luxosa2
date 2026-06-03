@@ -35,7 +35,10 @@
     "010": "Momenti Signature",
     "011": "Esperienze selezionate,",
     "012": "pensate per eccellere.",
-    "013": "Pochi momenti, selezionati con cura. Ogni esperienza signature rappresenta l'espressione più alta del nostro metodo."
+    "013": "Pochi momenti, selezionati con cura. Ogni esperienza signature rappresenta l'espressione più alta del nostro metodo.",
+    "014": "120 minuti",
+    "015": "60 minuti",
+    "016": "150 minuti"
   },
   "esperienza": {
     "page": {

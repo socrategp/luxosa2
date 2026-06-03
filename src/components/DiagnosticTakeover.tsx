@@ -6,6 +6,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, ArrowLeft, X, Check } from 'lucide-react';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
@@ -131,7 +132,8 @@ const OPTION_IMAGE_STYLE: Record<string, { aspect: string; position: string }> =
 
 // -- FASE 1: CONOSCENZA (comuni a tutte) ------------------------
 
-const questionPhase1: QuestionDef[] = [
+function getQuestionPhase1(): QuestionDef[] {
+  return [
   {
     id: 'd1',
     label:t('test:diagnostic.takeover.001'),
@@ -174,11 +176,13 @@ const questionPhase1: QuestionDef[] = [
       { id: 'd3_tutto', text:t('test:diagnostic.takeover.033'), subtext:t('test:diagnostic.takeover.034'), scores: { rituale: 3 } },
     ],
   },
-];
+  ];
+}
 
 // -- FASE 2: APPROFONDIMENTO (ramificato) -----------------------
 
-const questionBranches: Record<BranchKey, QuestionDef[]> = {
+function getQuestionBranches(): Record<BranchKey, QuestionDef[]> {
+  return {
   cute: [
     {
       id: 'd4a',
@@ -439,11 +443,13 @@ const questionBranches: Record<BranchKey, QuestionDef[]> = {
       ],
     },
   ],
-};
+  };
+}
 
 // -- FASE 3: STILE DI VITA --------------------------------------
 
-const questionPhase3: QuestionDef[] = [
+function getQuestionPhase3(): QuestionDef[] {
+  return [
   {
     id: 'd8',
     label:t('test:diagnostic.takeover.158'),
@@ -468,18 +474,21 @@ const questionPhase3: QuestionDef[] = [
       { id: 'd9_ci_lavoro', text:t('test:diagnostic.takeover.169'), scores: { rituale: 1 } },
     ],
   },
-];
+  ];
+}
 
 // -- D10: SPAZIO LIBERO -----------------------------------------
 
-const questionD10: QuestionDef = {
-  id: 'd10',
-  label:t('test:diagnostic.takeover.170'),
-  question:t('test:diagnostic.takeover.171'),
-  subtitle:t('test:diagnostic.takeover.172'),
-  selectionType: 'text',
-  options: [],
-};
+function getQuestionD10(): QuestionDef {
+  return {
+    id: 'd10',
+    label:t('test:diagnostic.takeover.170'),
+    question:t('test:diagnostic.takeover.171'),
+    subtitle:t('test:diagnostic.takeover.172'),
+    selectionType: 'text',
+    options: [],
+  };
+}
 
 // -- HELPERS ----------------------------------------------------
 
@@ -495,12 +504,14 @@ function getBranchKey(d3: string): BranchKey {
 }
 
 function buildQuestionSequence(d3Answer: string | undefined): QuestionDef[] {
+  const questionPhase1 = getQuestionPhase1();
   if (!d3Answer) return questionPhase1;
+  const questionBranches = getQuestionBranches();
   return [
     ...questionPhase1,
     ...questionBranches[getBranchKey(d3Answer)],
-    ...questionPhase3,
-    questionD10,
+    ...getQuestionPhase3(),
+    getQuestionD10(),
   ];
 }
 
@@ -646,17 +657,19 @@ function getPercorsoResult(scores: Scores): {
 
 // -- ESPERIENZE UFFICIALI (9) ------------------------------------
 
-const ES: Record<string, EsperienzaDef> = {
-  consulenzeSpecialistiche: { nome:t('test:diagnostic.takeover.173'), sottotitolo:t('test:diagnostic.takeover.174') },
-  areaBenessere: { nome:t('test:diagnostic.takeover.175'), sottotitolo:t('test:diagnostic.takeover.176') },
-  cheratinaNutrizionePro: { nome:t('test:diagnostic.takeover.177'), sottotitolo:t('test:diagnostic.takeover.178') },
-  piegaLux: { nome:t('test:diagnostic.takeover.179'), sottotitolo:t('test:diagnostic.takeover.180') },
-  taglioSignature: { nome:t('test:diagnostic.takeover.181'), sottotitolo:t('test:diagnostic.takeover.182') },
-  nuances: { nome:t('test:diagnostic.takeover.183'), sottotitolo:t('test:diagnostic.takeover.184') },
-  luceSignature: { nome:t('test:diagnostic.takeover.185'), sottotitolo:t('test:diagnostic.takeover.186') },
-  ricciOsa: { nome:t('test:diagnostic.takeover.187'), sottotitolo:t('test:diagnostic.takeover.188') },
-  ricciOso: { nome:t('test:diagnostic.takeover.189'), sottotitolo:t('test:diagnostic.takeover.190') },
-};
+function getEsperienzaDefs(): Record<string, EsperienzaDef> {
+  return {
+    consulenzeSpecialistiche: { nome:t('test:diagnostic.takeover.173'), sottotitolo:t('test:diagnostic.takeover.174') },
+    areaBenessere: { nome:t('test:diagnostic.takeover.175'), sottotitolo:t('test:diagnostic.takeover.176') },
+    cheratinaNutrizionePro: { nome:t('test:diagnostic.takeover.177'), sottotitolo:t('test:diagnostic.takeover.178') },
+    piegaLux: { nome:t('test:diagnostic.takeover.179'), sottotitolo:t('test:diagnostic.takeover.180') },
+    taglioSignature: { nome:t('test:diagnostic.takeover.181'), sottotitolo:t('test:diagnostic.takeover.182') },
+    nuances: { nome:t('test:diagnostic.takeover.183'), sottotitolo:t('test:diagnostic.takeover.184') },
+    luceSignature: { nome:t('test:diagnostic.takeover.185'), sottotitolo:t('test:diagnostic.takeover.186') },
+    ricciOsa: { nome:t('test:diagnostic.takeover.187'), sottotitolo:t('test:diagnostic.takeover.188') },
+    ricciOso: { nome:t('test:diagnostic.takeover.189'), sottotitolo:t('test:diagnostic.takeover.190') },
+  };
+}
 
 // -- MAPPING PUBBLICO --------------------------------------------
 
@@ -1076,6 +1089,7 @@ function buildPercorsoRationale(pub: PublicPercorso, primary: Percorso, answers:
 // -- ESPERIENZE SUGGERITE ----------------------------------------
 
 function getNewEsperienze(pub: PublicPercorso, primary: Percorso, answers: Answers): { es: EsperienzaDef; perche: string }[] {
+  const ES = getEsperienzaDefs();
   const d1 = answers['d1'] as string | undefined;
   const d2 = answers['d2'];
   const d4b = answers['d4b'];
@@ -2192,6 +2206,8 @@ function ResultScreen({
 // ---------------------------------------------------------------
 
 export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage ?? i18n.language;
   const [screen, setScreen] = useState<Screen>('disclaimer');
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
@@ -2201,7 +2217,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const questionsCompletedTrackedRef = useRef(false);
 
   const d3Answer = answers['d3'] as string | undefined;
-  const questionSequence = useMemo(() => buildQuestionSequence(d3Answer), [d3Answer]);
+  const questionSequence = useMemo(() => buildQuestionSequence(d3Answer), [d3Answer, language]);
   const currentQ = questionSequence[step] as QuestionDef | undefined;
   const totalSteps = questionSequence.length;
   const progressTotalSteps = 10;
@@ -2365,7 +2381,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
                     transition={{ duration: 0.6, ease: premiumEase }}
                   />
                 </div>
-                <p className="text-[8px] text-anthracite/40 font-light mt-1">{step + 1} di {progressTotalSteps}</p>
+                <p className="text-[8px] text-anthracite/40 font-light mt-1">{step + 1} {t('test:diagnostic.takeover.309')} {progressTotalSteps}</p>
               </div>
             ) : (
               <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/50">

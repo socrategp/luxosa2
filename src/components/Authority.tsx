@@ -6,7 +6,8 @@ import { t } from '../i18n/t';
 
 const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
 
-const pillars = [
+function getPillars() {
+  return [
   {
     num: '01',
     label:t('home:authority.001'),
@@ -25,63 +26,67 @@ const pillars = [
     title:t('home:authority.008'),
     text:t('home:authority.009'),
   },
-];
+  ];
+}
 
-const testimonials: TestimonialItem[] = [
+function getTestimonials(): TestimonialItem[] {
+  return [
   {
     quote:t('home:authority.010'),
     name:t('home:authority.011'),
-    role: '39 anni',
+    role:t('home:authority.033'),
     percorso:t('home:authority.012'),
     valore: 'Competenza',
   },
   {
     quote:t('home:authority.013'),
     name:t('home:authority.014'),
-    role: '46 anni',
+    role:t('home:authority.034'),
     percorso:t('home:authority.015'),
     valore: 'Metodo',
   },
   {
     quote:t('home:authority.016'),
     name:t('home:authority.017'),
-    role: '43 anni',
+    role:t('home:authority.035'),
     percorso:t('home:authority.018'),
     valore: 'Ascolto',
   },
   {
     quote:t('home:authority.019'),
     name:t('home:authority.020'),
-    role: '57 anni',
+    role:t('home:authority.036'),
     percorso:t('home:authority.021'),
     valore: 'Presa in carico',
   },
   {
     quote:t('home:authority.022'),
     name:t('home:authority.023'),
-    role: '59 anni',
+    role:t('home:authority.037'),
     percorso:t('home:authority.024'),
     valore: 'Trasformazione',
   },
   {
     quote:t('home:authority.025'),
     name:t('home:authority.026'),
-    role: '55 anni',
+    role:t('home:authority.038'),
     percorso:t('home:authority.027'),
     valore: 'Percorso',
   },
   {
     quote:t('home:authority.028'),
     name:t('home:authority.029'),
-    role: '48 anni',
+    role:t('home:authority.039'),
     percorso:t('home:authority.030'),
     valore: 'Visione integrata',
   },
-];
+  ];
+}
 
 function PillarSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const pillars = getPillars();
 
   return (
     <section className="py-32 md:py-48 lg:py-56 bg-ivory" ref={ref}>
@@ -129,6 +134,8 @@ function PillarSection() {
 }
 
 export function TestimonialsCarousel() {
+  const testimonials = getTestimonials();
+
   return <SharedCarousel testimonials={testimonials} label={t('home:authority.032')} />;
 }
 

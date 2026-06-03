@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import { premiumEase } from '../lib/animations';
 import { t } from '../i18n/t';
 
-const fasi = [
+function getFasi() {
+  return [
   {
     num: '01',
     name:t('home:method.001'),
@@ -35,7 +36,10 @@ const fasi = [
     accade:t('home:method.010'),
     sente: t('home:method.017'),
   },
-];
+  ];
+}
+
+type Fase = ReturnType<typeof getFasi>[number];
 
 // Circle positions: 5 nodi a 72° partendo da -90° (top)
 const getPhasePosition = (index: number) => {
@@ -128,11 +132,13 @@ function CircleViz({
   drawnArcs,
   drawingArc,
   cycleCount,
+  fasi,
 }: {
   activePhase: number;
   drawnArcs: Set<number>;
   drawingArc: number | null;
   cycleCount: number;
+  fasi: Fase[];
 }) {
   const cycleColor = cycleCount % 2 === 0 ? '#C4AE8C' : '#F9F6F1'; // brass-light or ivory
 
@@ -243,6 +249,7 @@ export default function Method() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const { phase, drawnArcs, drawingArc, cycleCount } = usePhasesCycle(inView);
+  const fasi = getFasi();
 
   return (
     <section id="metodo" className="py-32 md:py-48 lg:py-56 bg-charcoal">
@@ -271,7 +278,7 @@ export default function Method() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
           >
-            <CircleViz activePhase={phase} drawnArcs={drawnArcs} drawingArc={drawingArc} cycleCount={cycleCount} />
+            <CircleViz activePhase={phase} drawnArcs={drawnArcs} drawingArc={drawingArc} cycleCount={cycleCount} fasi={fasi} />
           </motion.div>
 
           {/* Right: Phase info panel */}

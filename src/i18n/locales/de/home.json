@@ -31,7 +31,14 @@
     "029": "Sara M.",
     "030": "Rituale Luxosa",
     "031": "Warum man Luxosa vertrauen sollte",
-    "032": "Stimmen derer, die sich anvertraut haben"
+    "032": "Stimmen derer, die sich anvertraut haben",
+    "033": "39 Jahre",
+    "034": "46 Jahre",
+    "035": "43 Jahre",
+    "036": "57 Jahre",
+    "037": "59 Jahre",
+    "038": "55 Jahre",
+    "039": "48 Jahre"
   },
   "hero": {
     "001": "start start",
@@ -73,7 +80,8 @@
         "017": "jeden unserer Schritte leiten.",
         "018": "Die Luxosa-Werte",
         "019": "#B09872",
-        "020": "Wert"
+        "020": "Wert",
+        "021": "von"
       }
     }
   },
@@ -157,7 +165,10 @@
       "045": "ist der nächste Schritt, die Methode zu betreten.",
       "046": "Das erste Gespräch ist der Ausgangspunkt, um die Welt von Luxosa zu entdecken und zu verstehen, welche Richtung am besten passt.",
       "047": "Die Methode entdecken",
-      "048": "Die Pfade erkunden"
+      "048": "Die Pfade erkunden",
+      "049": "Liebe",
+      "050": "Strahle",
+      "051": "Wage"
     }
   },
   "space": {

@@ -4,7 +4,8 @@ import { createPortal } from 'react-dom';
 import { premiumEase } from '../lib/animations';
 import { t } from '../i18n/t';
 
-const esperienze = [
+function getEsperienze() {
+  return [
   { code: 'EX·01', name:t('esperienze:experience.001'), copy: t('esperienze:experience.013') },
   { code: 'EX·02', name:t('esperienze:experience.002'), copy: t('esperienze:experience.014') },
   { code: 'EX·03', name:t('esperienze:experience.003'), copy: t('esperienze:experience.015') },
@@ -14,7 +15,8 @@ const esperienze = [
   { code: 'EX·07', name:t('esperienze:experience.007'), copy: t('esperienze:experience.019') },
   { code: 'EX·08', name:t('esperienze:experience.008'), copy: t('esperienze:experience.020') },
   { code: 'EX·09', name:t('esperienze:experience.009'), copy: t('esperienze:experience.021') },
-];
+  ];
+}
 
 const IMAGE = '/images/esperienze-puzzle.webp';
 const COLS = 3;
@@ -30,6 +32,7 @@ export default function Experience() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const esperienze = getEsperienze();
 
   useEffect(() => {
     if (activeIndex === null) return;

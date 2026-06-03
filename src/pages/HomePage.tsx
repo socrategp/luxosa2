@@ -133,20 +133,22 @@ function Appartenenza() {
   );
 }
 
-const TRIADE_PAYOFF = [
+function getTriadePayoff() {
+  return [
   {
-    word: 'Ama',
+    word:t('home:home.page.049'),
     text:t('home:home.page.018'),
   },
   {
-    word: 'Splendi',
+    word:t('home:home.page.050'),
     text:t('home:home.page.019'),
   },
   {
-    word: 'Osa',
+    word:t('home:home.page.051'),
     text:t('home:home.page.020'),
   },
-];
+  ];
+}
 
 const TRIADE_DELAY = 2000;
 const TRIADE_PAUSE = 2800;
@@ -156,6 +158,7 @@ function CinematicPayoff() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%']);
   const inView = useInView(ref, { once: false, margin: '-10%' });
+  const triadePayoff = getTriadePayoff();
 
   const [active, setActive] = useState(0);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -202,7 +205,7 @@ function CinematicPayoff() {
       </div>
 
       <div className="absolute inset-0 z-10 grid grid-cols-3">
-        {TRIADE_PAYOFF.map((item, i) => {
+        {triadePayoff.map((item, i) => {
           const isActive = active > i;
           return (
             <div

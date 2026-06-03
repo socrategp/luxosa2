@@ -3,30 +3,33 @@ import { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { t } from '../i18n/t';
 
-const signatures = [
+function getSignatures() {
+  return [
   {
     title:t('esperienze:signature.001'),
     subtitle:t('esperienze:signature.002'),
     description:t('esperienze:signature.003'),
-    duration: '120 minuti',
+    duration:t('esperienze:signature.014'),
   },
   {
     title:t('esperienze:signature.004'),
     subtitle:t('esperienze:signature.005'),
     description:t('esperienze:signature.006'),
-    duration: '60 minuti',
+    duration:t('esperienze:signature.015'),
   },
   {
     title:t('esperienze:signature.007'),
     subtitle:t('esperienze:signature.008'),
     description:t('esperienze:signature.009'),
-    duration: '150 minuti',
+    duration:t('esperienze:signature.016'),
   },
-];
+  ];
+}
 
 export default function Signature() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
+  const signatures = getSignatures();
 
   return (
     <section className="py-32 md:py-48 lg:py-56 bg-ecru/40">

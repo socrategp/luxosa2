@@ -46,7 +46,8 @@ function EsperienzaIntro() {
   );
 }
 
-const faqs = [
+function getFaqs() {
+  return [
   {
     q:t('esperienze:esperienza.page.004'),
     a:t('esperienze:esperienza.page.005'),
@@ -59,12 +60,14 @@ const faqs = [
     q:t('esperienze:esperienza.page.008'),
     a:t('esperienze:esperienza.page.009'),
   },
-];
+  ];
+}
 
 function EsperienzeFAQ() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqs = getFaqs();
 
   return (
     <section className="py-24 md:py-32 bg-ivory" ref={ref}>

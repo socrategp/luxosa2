@@ -115,9 +115,9 @@ export default function CookiePolicyPage() {
                   <p className="text-anthracite/95 font-normal mb-2">{t('common:cookie.policy.page.016')}</p>
                   <p>{t('common:cookie.policy.page.017')}</p>
                   <CookieTable rows={[
-                    { nome:t('common:cookie.policy.page.018'), tipo: 'Session', durata: 'Sessione', finalita: 'Gestione della sessione utente' },
-                    { nome:t('common:cookie.policy.page.019'), tipo: 'Persistente', durata: '12 mesi', finalita: 'Memorizzazione preferenze cookie' },
-                    { nome:t('common:cookie.policy.page.020'), tipo: '—', durata: '—', finalita: 'Da definire con il team tecnico' },
+                    { nome:t('common:cookie.policy.page.018'), tipo:t('common:cookie.policy.page.067'), durata:t('common:cookie.policy.page.068'), finalita:t('common:cookie.policy.page.069') },
+                    { nome:t('common:cookie.policy.page.019'), tipo:t('common:cookie.policy.page.070'), durata:t('common:cookie.policy.page.071'), finalita:t('common:cookie.policy.page.072') },
+                    { nome:t('common:cookie.policy.page.020'), tipo: '—', durata: '—', finalita:t('common:cookie.policy.page.073') },
                   ]} />
                 </div>
 
@@ -125,10 +125,10 @@ export default function CookiePolicyPage() {
                   <p className="text-anthracite/95 font-normal mb-2">{t('common:cookie.policy.page.021')}</p>
                   <p>{t('common:cookie.policy.page.022')}</p>
                   <CookieTable rows={[
-                    { nome:t('common:cookie.policy.page.023'), tipo: 'Persistente', durata: '2 anni', finalita: 'Google Analytics — identificazione utente univoco' },
-                    { nome:t('common:cookie.policy.page.024'), tipo: 'Persistente', durata: '2 anni', finalita: 'Google Analytics — mantenimento stato sessione' },
-                    { nome:t('common:cookie.policy.page.025'), tipo: 'Persistente', durata: '24 ore', finalita: 'Google Analytics — distinzione utenti' },
-                    { nome:t('common:cookie.policy.page.026'), tipo: '—', durata: '—', finalita: 'Da definire con il team tecnico' },
+                    { nome:t('common:cookie.policy.page.023'), tipo:t('common:cookie.policy.page.070'), durata:t('common:cookie.policy.page.074'), finalita:t('common:cookie.policy.page.075') },
+                    { nome:t('common:cookie.policy.page.024'), tipo:t('common:cookie.policy.page.070'), durata:t('common:cookie.policy.page.074'), finalita:t('common:cookie.policy.page.076') },
+                    { nome:t('common:cookie.policy.page.025'), tipo:t('common:cookie.policy.page.070'), durata:t('common:cookie.policy.page.077'), finalita:t('common:cookie.policy.page.078') },
+                    { nome:t('common:cookie.policy.page.026'), tipo: '—', durata: '—', finalita:t('common:cookie.policy.page.073') },
                   ]} />
                 </div>
 
@@ -136,7 +136,7 @@ export default function CookiePolicyPage() {
                   <p className="text-anthracite/95 font-normal mb-2">{t('common:cookie.policy.page.027')}</p>
                   <p>{t('common:cookie.policy.page.028')}</p>
                   <CookieTable rows={[
-                    { nome:t('common:cookie.policy.page.029'), tipo: '—', durata: '—', finalita: 'Da definire — es. Meta Pixel, Google Ads' },
+                    { nome:t('common:cookie.policy.page.029'), tipo: '—', durata: '—', finalita:t('common:cookie.policy.page.079') },
                   ]} />
                   <p className="mt-3 text-[16px] text-anthracite/65">{t('common:cookie.policy.page.030')}</p>
                 </div>

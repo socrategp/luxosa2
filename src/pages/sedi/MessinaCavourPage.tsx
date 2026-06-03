@@ -214,7 +214,8 @@ function MCTeam() {
 
 
 // --- Testimonials data ---
-const mcTestimonials: TestimonialItem[] = [
+function getMcTestimonials(): TestimonialItem[] {
+  return [
   {
     quote:t('messina-cavour:messina.cavour.page.048'),
     name:t('messina-cavour:messina.cavour.page.049'),
@@ -271,7 +272,8 @@ const mcTestimonials: TestimonialItem[] = [
     percorso:t('messina-cavour:messina.cavour.page.071'),
     valore: t('messina-cavour:messina.cavour.page.114'),
   },
-];
+  ];
+}
 
 // --- Reviews Google ---
 function MCReviews() {
@@ -443,6 +445,8 @@ function MCBooking() {
 
 // --- Main Page Component ---
 export default function MessinaCavourPage() {
+  const mcTestimonials = getMcTestimonials();
+
   return (
     <>
       <MCHero />

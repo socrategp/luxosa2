@@ -4,7 +4,8 @@ import { useRef } from 'react';
 import { premiumEase } from '../lib/animations';
 import { t } from '../i18n/t';
 
-const percorsi = [
+function getPercorsi() {
+  return [
   {
     num:t('percorsi:percorsi.001'),
     name:t('percorsi:percorsi.002'),
@@ -32,9 +33,12 @@ const percorsi = [
     desc:t('percorsi:percorsi.018'),
     image: '/images/rituale_luxosa.webp',
   },
-];
+  ];
+}
 
-function PercorsoRow({ percorso, index }: { percorso: typeof percorsi[0]; index: number }) {
+type PercorsoItem = ReturnType<typeof getPercorsi>[number];
+
+function PercorsoRow({ percorso, index }: { percorso: PercorsoItem; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
   const imageLeft = index % 2 === 0;
@@ -119,6 +123,8 @@ function PercorsoRow({ percorso, index }: { percorso: typeof percorsi[0]; index:
 }
 
 export default function Percorsi() {
+  const percorsi = getPercorsi();
+
   return (
     <section className="py-32 md:py-48 lg:py-56 bg-ivory">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">

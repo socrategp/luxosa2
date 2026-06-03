@@ -6,11 +6,19 @@ import BackToTop from '../components/BackToTop';
 import CustomCursor from '../components/CustomCursor';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
 
 export default function MainLayout() {
   const { i18n } = useTranslation();
   const location = useLocation();
-  const language = i18n.resolvedLanguage ?? i18n.language;
+  const [language, setLanguage] = useState(i18n.language);
+
+  useEffect(() => {
+    const handleLanguageChanged = (nextLanguage: string) => setLanguage(nextLanguage);
+    i18n.on('languageChanged', handleLanguageChanged);
+    setLanguage(i18n.language);
+    return () => i18n.off('languageChanged', handleLanguageChanged);
+  }, [i18n]);
   
   return (
     <div className="min-h-screen bg-ivory">

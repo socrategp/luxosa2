@@ -31,7 +31,14 @@
     "029": "Sara M.",
     "030": "Rituale Luxosa",
     "031": "Perché affidarsi a Luxosa",
-    "032": "Voci di chi si è affidata"
+    "032": "Voci di chi si è affidata",
+    "033": "39 anni",
+    "034": "46 anni",
+    "035": "43 anni",
+    "036": "57 anni",
+    "037": "59 anni",
+    "038": "55 anni",
+    "039": "48 anni"
   },
   "hero": {
     "001": "start start",
@@ -73,7 +80,8 @@
         "017": "ogni nostro passo.",
         "018": "I valori Luxosa",
         "019": "#B09872",
-        "020": "Valore"
+        "020": "Valore",
+        "021": "di"
       }
     }
   },
@@ -157,7 +165,10 @@
       "045": "il passo successivo è entrare nel metodo.",
       "046": "Il primo incontro è il punto di partenza per conoscere il mondo Luxosa e comprendere quale direzione può essere più adatta.",
       "047": "Scopri il Metodo",
-      "048": "Esplora i Percorsi"
+      "048": "Esplora i Percorsi",
+      "049": "Ama",
+      "050": "Splendi",
+      "051": "Osa"
     }
   },
   "space": {

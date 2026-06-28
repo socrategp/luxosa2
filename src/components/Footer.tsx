@@ -6,6 +6,87 @@ import { X } from 'lucide-react';
 import { premiumEase } from '../lib/animations';
 import { t } from '../i18n/t';
 
+function PayBadge({
+  children,
+  label,
+  className = 'bg-white',
+}: {
+  children: React.ReactNode;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <div
+      title={label}
+      className={`flex h-[28px] w-[44px] items-center justify-center rounded-[3px] border border-white/25 shadow-[0_1px_5px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.28)] ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+function VisaIcon() {
+  return (
+    <svg width="32" height="12" viewBox="0 0 64 24" fill="none">
+      <text x="0" y="19" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="20" fill="white" letterSpacing="-1.2">VISA</text>
+    </svg>
+  );
+}
+
+function MastercardIcon() {
+  return (
+    <svg width="28" height="18" viewBox="0 0 42 26">
+      <circle cx="16" cy="13" r="10" fill="#EB001B" />
+      <circle cx="26" cy="13" r="10" fill="#F79E1B" />
+      <path d="M21 5.2a10 10 0 010 15.6 10 10 0 010-15.6z" fill="#FF5F00" />
+    </svg>
+  );
+}
+
+function AmexIcon() {
+  return (
+    <svg width="33" height="18" viewBox="0 0 52 28" fill="none">
+      <rect width="52" height="28" rx="3" fill="#006FCF" />
+      <text x="6" y="12" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="11" fill="white" letterSpacing="-0.5">AM</text>
+      <text x="6" y="23" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="11" fill="white" letterSpacing="-0.5">EX</text>
+    </svg>
+  );
+}
+
+function ApplePayIcon() {
+  return (
+    <svg width="34" height="15" viewBox="0 0 58 24" fill="none">
+      <text x="1" y="17" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="12" fill="#111111" letterSpacing="-0.6">Apple</text>
+      <text x="34" y="17" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="12" fill="#111111" letterSpacing="-0.6">Pay</text>
+    </svg>
+  );
+}
+
+function PayPalIcon() {
+  return (
+    <svg width="33" height="13" viewBox="0 0 62 24" fill="none">
+      <text x="0" y="18" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="16" fill="#003087" letterSpacing="-0.5">Pay</text>
+      <text x="29" y="18" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="16" fill="#009CDE" letterSpacing="-0.5">Pal</text>
+    </svg>
+  );
+}
+
+function KlarnaIcon() {
+  return (
+    <svg width="34" height="13" viewBox="0 0 64 24" fill="none">
+      <text x="2" y="17" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="15" fill="#111111" letterSpacing="-0.7">Klarna</text>
+    </svg>
+  );
+}
+
+function ScalapayIcon() {
+  return (
+    <svg width="36" height="13" viewBox="0 0 76 24" fill="none">
+      <text x="0" y="17" fontFamily="Arial,sans-serif" fontWeight="900" fontSize="13" fill="#6D28D9" letterSpacing="-0.4">Scalapay</text>
+    </svg>
+  );
+}
+
 function ClubModal({ open, onClose }: { open: boolean; onClose: () => void }) {
   useEffect(() => {
     if (open) {
@@ -189,11 +270,29 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[11px] tracking-[0.15em] text-ivory/35 font-light">{t('common:footer.032')}</p>
-            <div className="flex gap-6">
-              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">{t('common:footer.033')}</span>
-              <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">{t('common:footer.034')}</span>
+          <div className="pt-8 flex flex-col gap-6">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+              <p className="text-[11px] tracking-[0.15em] text-ivory/35 font-light shrink-0">{t('common:footer.032')}</p>
+
+              <div className="flex flex-col items-center gap-2 md:-translate-y-2">
+                <p className="text-[8px] tracking-[0.3em] uppercase text-ivory/25 font-light">
+                  Pagamenti accettati · Anche in comode rate
+                </p>
+                <div className="flex items-center gap-2 flex-wrap justify-center">
+                  <PayBadge label="Visa" className="bg-[#1434CB]"><VisaIcon /></PayBadge>
+                  <PayBadge label="Mastercard" className="bg-[#1f1f1f]"><MastercardIcon /></PayBadge>
+                  <PayBadge label="American Express" className="bg-[#006FCF]"><AmexIcon /></PayBadge>
+                  <PayBadge label="Apple Pay"><ApplePayIcon /></PayBadge>
+                  <PayBadge label="PayPal"><PayPalIcon /></PayBadge>
+                  <PayBadge label="Klarna – Paga in 3 rate" className="bg-[#FFB3C7]"><KlarnaIcon /></PayBadge>
+                  <PayBadge label="Scalapay – Paga in 3 rate" className="bg-[#F1EAFE]"><ScalapayIcon /></PayBadge>
+                </div>
+              </div>
+
+              <div className="flex gap-6 shrink-0">
+                <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">{t('common:footer.033')}</span>
+                <span className="text-[11px] tracking-[0.1em] text-ivory/35 font-light">{t('common:footer.034')}</span>
+              </div>
             </div>
           </div>
         </div>

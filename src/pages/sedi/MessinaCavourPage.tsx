@@ -1,7 +1,7 @@
 ﻿import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Clock, ArrowRight, ArrowLeft, Ear, Search, Fingerprint, Shield, Sparkles, Facebook, Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, CalendarDays, ArrowRight, ArrowLeft, Ear, Search, Fingerprint, Shield, Sparkles, Facebook, Instagram } from 'lucide-react';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import type { TestimonialItem } from '../../components/TestimonialsCarousel';
 import { t } from '../../i18n/t';
@@ -401,6 +401,105 @@ function MCContact() {
   );
 }
 
+// --- Orari Speciali ---
+function MCSpecialHours() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  const periods = [
+    {
+      month: 'Luglio',
+      note: 'Orario standard confermato',
+      rows: [
+        { days: 'Mercoledi e sabato', hours: '9.00 - 14.30' },
+        { days: 'Altri giorni', hours: 'come orario standard' },
+      ],
+    },
+    {
+      month: 'Agosto',
+      note: '1 - 22 agosto',
+      rows: [
+        { days: 'Martedi, mercoledi, venerdi', hours: '9.00 - 14.30' },
+        { days: 'Giovedi', hours: '9.00 - 18.30' },
+        { days: 'Sabato', hours: 'chiuso' },
+      ],
+    },
+    {
+      month: 'Agosto',
+      note: '24 - 31 agosto',
+      rows: [
+        { days: 'Mercoledi e venerdi', hours: '9.00 - 14.30' },
+        { days: 'Martedi e giovedi', hours: '9.00 - 18.30' },
+        { days: 'Sabato', hours: '9.00 - 14.30' },
+      ],
+    },
+  ];
+
+  return (
+    <section id="mc-orari-speciali" className="py-24 md:py-32 bg-charcoal text-ivory">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1] }}
+          className="border-y border-brass/25 py-12 md:py-16"
+        >
+          <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-12 lg:gap-16 items-start">
+            <div>
+              <div className="inline-flex items-center gap-3 text-brass-light mb-5">
+                <CalendarDays size={18} strokeWidth={1.3} />
+                <span className="text-[11px] tracking-[0.35em] uppercase font-light">Calendario sede</span>
+              </div>
+              <div className="w-10 h-[1px] bg-brass-light/60 mb-8" />
+              <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-ivory">
+                Orari speciali
+              </h2>
+              <p className="mt-6 text-[17px] md:text-[18px] leading-[1.85] text-ivory/72 font-light max-w-lg">
+                Gli orari abituali restano il riferimento della sede. In alcuni periodi dell'anno, qui trovi le variazioni gia programmate per organizzare la tua visita con maggiore tranquillita.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 md:gap-5">
+              {periods.map((period, index) => (
+                <motion.article
+                  key={`${period.month}-${period.note}`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.9, ease: [0.25, 0.1, 0, 1], delay: 0.12 + index * 0.08 }}
+                  className="bg-deep/42 border border-brass/25 p-6 md:p-7 min-h-[280px] flex flex-col backdrop-blur-sm"
+                >
+                  <div className="flex items-start justify-between gap-4 pb-5 border-b border-brass/20">
+                    <div>
+                      <p className="text-[10px] tracking-[0.3em] uppercase text-brass-light/70 font-light mb-2">{period.note}</p>
+                      <h3 className="font-serif text-[27px] md:text-[30px] font-light text-ivory leading-none">{period.month}</h3>
+                    </div>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brass/35 text-brass-light">
+                      <Clock size={16} strokeWidth={1.25} />
+                    </span>
+                  </div>
+
+                  <div className="pt-5 space-y-4">
+                    {period.rows.map((row) => (
+                      <div key={`${row.days}-${row.hours}`} className="grid grid-cols-[1fr_auto] gap-4 items-baseline">
+                        <p className="text-[13px] md:text-[14px] leading-[1.55] text-ivory/62 font-light">{row.days}</p>
+                        <p className="text-[14px] md:text-[15px] text-ivory font-light whitespace-nowrap">{row.hours}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-auto pt-6">
+                    <div className="h-[1px] w-full bg-brass/20" />
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // --- Booking & Info ---
 function MCBooking() {
   const ref = useRef(null);
@@ -444,7 +543,7 @@ function MCBooking() {
 }
 
 // --- Main Page Component ---
-export default function MessinaCavourPage() {
+export default function MessinaCavourPage({ showSpecialHours = true }: { showSpecialHours?: boolean }) {
   const mcTestimonials = getMcTestimonials();
 
   return (
@@ -462,6 +561,7 @@ export default function MessinaCavourPage() {
         sectionClassName="py-28 md:py-40 lg:py-48 bg-charcoal overflow-hidden"
       />
       <MCContact />
+      {showSpecialHours && <MCSpecialHours />}
       <MCBooking />
     </>
   );

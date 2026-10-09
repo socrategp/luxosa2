@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pdf:test": "esbuild scripts/generate-test-pdf.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=.tmp/generate-test-pdf.mjs && node .tmp/generate-test-pdf.mjs",
+    "pdf:test:media": "esbuild scripts/generate-test-pdf-media-preview.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=.tmp/generate-test-pdf-media-preview.mjs && node .tmp/generate-test-pdf-media-preview.mjs"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.2.11",
     "@fontsource/jost": "^5.2.8",
+    "@react-pdf/renderer": "^4.9.0",
     "@tailwindcss/vite": "^4.2.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",

@@ -1,8 +1,12 @@
 node_modules
 dist
+.tmp
 .env
 .env.*
 *.local
 **/test immagini/
 **/test*/
 public_original/
+.vercel
+.env*
+!.env.example

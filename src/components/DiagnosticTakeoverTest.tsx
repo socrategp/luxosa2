@@ -21,6 +21,8 @@ interface ContactFormData {
   cognome: string;
   email: string;
   whatsapp: string;
+  privacyAcknowledged: boolean;
+  marketingConsent: boolean;
 }
 
 // -- CONSTANTS --------------------------------------------------
@@ -564,6 +566,8 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
   const [cognome, setCognome] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
+  const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
+  const [marketingConsent, setMarketingConsent] = useState(false);
   const [error, setError] = useState('');
 
   const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
@@ -581,7 +585,18 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
       setError('Controlla il numero inserito: sembra incompleto o non corretto.');
       return;
     }
-    onSubmit({ nome: nome.trim(), cognome: cognome.trim(), email: email.trim(), whatsapp: phone });
+    if (!privacyAcknowledged) {
+      setError('Conferma la richiesta necessaria per elaborare il tuo Luxosa Test prima di continuare.');
+      return;
+    }
+    onSubmit({
+      nome: nome.trim(),
+      cognome: cognome.trim(),
+      email: email.trim(),
+      whatsapp: phone,
+      privacyAcknowledged,
+      marketingConsent,
+    });
   };
 
   const inputClass = 'w-full bg-ivory/80 border border-sand/50 px-5 py-4 text-[17px] text-anthracite/95 font-light outline-none focus:border-brass/50 transition-colors duration-300 placeholder:text-anthracite/43';
@@ -641,6 +656,31 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               countryCallingCodeEditable={false}
             />
           </div>
+
+          {/* [COPY DA VALIDARE] — conferma obbligatoria, distinta dal consenso marketing */}
+          <label className="flex items-start gap-3 pt-2 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={privacyAcknowledged}
+              onChange={e => { setPrivacyAcknowledged(e.target.checked); setError(''); }}
+              className="mt-[3px] h-4 w-4 flex-shrink-0 accent-charcoal"
+            />
+            <span className="text-[13px] leading-[1.6] text-anthracite/75 font-light">
+              [COPY DA VALIDARE] Confermo di voler richiedere l'elaborazione del mio Luxosa Test e la generazione del relativo dossier, e autorizzo l'invio dello stesso ai recapiti indicati. *
+            </span>
+          </label>
+
+          <label className="flex items-start gap-3 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              checked={marketingConsent}
+              onChange={e => setMarketingConsent(e.target.checked)}
+              className="mt-[3px] h-4 w-4 flex-shrink-0 accent-charcoal"
+            />
+            <span className="text-[13px] leading-[1.6] text-anthracite/55 font-light">
+              [COPY DA VALIDARE] Desidero ricevere da Luxosa contenuti, consigli, offerte e comunicazioni.
+            </span>
+          </label>
 
           {error && (
             <p className="text-[12px] text-brass-muted font-light italic pt-1">{error}</p>
@@ -969,7 +1009,9 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const [screen, setScreen] = useState<Screen>('disclaimer');
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
-  const [contactData, setContactData] = useState<ContactFormData>({ nome: '', cognome: '', email: '', whatsapp: '' });
+  const [contactData, setContactData] = useState<ContactFormData>({
+    nome: '', cognome: '', email: '', whatsapp: '', privacyAcknowledged: false, marketingConsent: false,
+  });
   const scrollRef = useRef<HTMLDivElement>(null);
   const trackedStepsRef = useRef<Set<string>>(new Set());
   const questionsCompletedTrackedRef = useRef(false);
@@ -1073,9 +1115,40 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const handleFormSubmit = useCallback((data: ContactFormData) => {
     setContactData(data);
     setScreen('sending');
-    // No backend/email call yet — this is a UI-only placeholder for the future async save+send step.
+
+    const submissionId = crypto.randomUUID();
+    const payload = {
+      submissionId,
+      testVersion: 'v2.0',
+      language,
+      answers,
+      firstName: data.nome,
+      lastName: data.cognome,
+      email: data.email,
+      phone: data.whatsapp,
+      privacyAcknowledged: data.privacyAcknowledged,
+      marketingConsent: data.marketingConsent,
+    };
+
+    // The server result is authoritative for PDF/GHL/email — this call's
+    // outcome never changes what the client shows next. The client-side
+    // result below (ResultScreen computing buildLuxosaTestResult itself)
+    // is immediate-UX only, exactly per the browser/server contract.
+    fetch('/api/luxosa-test/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(res => res.json())
+      .then(outcome => {
+        console.info('[luxosa-test] submission outcome:', outcome);
+      })
+      .catch(err => {
+        console.error('[luxosa-test] submission request failed:', err);
+      });
+
     setTimeout(() => setScreen('result'), 1800);
-  }, []);
+  }, [answers, language]);
 
   const handleStartTest = useCallback(() => {
     trackLuxosaTestEvent('luxosa_test_started', {

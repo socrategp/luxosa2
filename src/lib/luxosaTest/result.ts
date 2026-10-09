@@ -598,6 +598,16 @@ function joinItalianList(items: string[]): string {
   return `${clean.slice(0, -1).join(', ')} e ${clean[clean.length - 1]}`;
 }
 
+// Splits a label on commas that separate true list fragments (e.g. "fragili,
+// poco resistenti" -> 2 items), but NOT on a comma immediately followed by a
+// coordinating conjunction (ma/e/o/però) — that comma belongs to a single
+// clause (e.g. "in buona salute, ma con margine di miglioramento" must stay
+// whole, or joining it with another item produces "... e ma ...").
+const ENUMERATION_COMMA = /,(?!\s*(?:ma|e|o|però)\s)/i;
+function splitEnumerableFragments(label: string): string[] {
+  return label.split(ENUMERATION_COMMA).map(s => s.trim()).filter(Boolean);
+}
+
 // -- CONDIZIONE DI PARTENZA --------------------------------------
 
 function buildConditionSummary(answers: Answers, _primary: Percorso): string {
@@ -622,11 +632,13 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
     d2_sani:t('report:diagnostic.008'),
   };
   const d2arr = Array.isArray(d2) ? d2 : d2 ? [d2] : [];
-  // Compound labels (e.g. "fragili, poco resistenti") are comma-separated —
-  // split them so every adjective becomes its own list item, then join the
-  // whole thing (tipo + every selected descriptor) with a single natural
-  // Italian serial "e" at the end, never one "e" per compound label.
-  const statoItems = d2arr.flatMap(id => (statoLabels[id] ?? '').split(',').map(s => s.trim()).filter(Boolean));
+  // Compound labels (e.g. "fragili, poco resistenti") have their enumerable
+  // fragments split into separate list items, then the whole thing (tipo +
+  // every selected descriptor) is joined with a single natural Italian
+  // serial "e" at the end, never one "e" per compound label. Labels whose
+  // comma belongs to a single clause (e.g. "in buona salute, ma con margine
+  // di miglioramento") are kept intact by splitEnumerableFragments.
+  const statoItems = d2arr.flatMap(id => splitEnumerableFragments(statoLabels[id] ?? ''));
   // Evita contraddizione: "in buona salute" + danno da colore rilevato in d5c
   const d5cForCond = answers['d5c'];
   const d5cArrForCond = Array.isArray(d5cForCond) ? (d5cForCond as string[]) : d5cForCond ? [d5cForCond as string] : [];

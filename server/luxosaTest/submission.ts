@@ -18,6 +18,7 @@ import {
   uploadDocument as realUploadDocument,
   sendDossierEmail as realSendDossierEmail,
   GhlScopeBlockedError,
+  EmailSendTimeoutError,
   isTestMode,
   SANDBOX_CONTACT_ID,
   SANDBOX_LOCATION_ID,
@@ -32,6 +33,7 @@ export interface SubmissionOutcome {
   status: LedgerStatus;
   contactId: string | null;
   errorMessage?: string;
+  emailMessageId?: string | null;
 }
 
 // Injectable collaborators — defaulted to the real GHL/PDF/ledger
@@ -88,6 +90,35 @@ function fileAlreadyUploaded(documentiValue: unknown, fileName: string): boolean
     const meta = (entry as { meta?: { originalname?: string } } | undefined)?.meta;
     return meta?.originalname === fileName;
   });
+}
+
+// GHL stores each uploaded file's own fetchable URL alongside its metadata
+// (confirmed on the real sandbox: {meta, url, documentId}) — reading it
+// back rather than guessing a URL pattern keeps the email attachment
+// reference authoritative, for both a fresh upload and a skipped (already
+// present) one.
+function findDocumentUrl(documentiValue: unknown, fileName: string): string | null {
+  if (!documentiValue || typeof documentiValue !== 'object') return null;
+  for (const entry of Object.values(documentiValue as Record<string, unknown>)) {
+    const typed = entry as { meta?: { originalname?: string }; url?: string } | undefined;
+    if (typed?.meta?.originalname === fileName && typeof typed.url === 'string') {
+      return typed.url;
+    }
+  }
+  return null;
+}
+
+function buildDossierEmailContent(firstName: string, percorsoName: string): { subject: string; html: string } {
+  return {
+    subject: 'Il tuo Luxosa Test è pronto',
+    html: `
+      <p>Ciao ${firstName},</p>
+      <p>in allegato trovi il tuo dossier Luxosa Test completo, con il tuo orientamento personalizzato verso <strong>${percorsoName}</strong>.</p>
+      <p>Resta un orientamento preliminare: il percorso definitivo sarà confermato durante la Consulenza Luxosa in presenza.</p>
+      <p>Per qualsiasi domanda siamo a tua disposizione su WhatsApp.</p>
+      <p>— Luxosa</p>
+    `.trim(),
+  };
 }
 
 export async function processSubmission(
@@ -230,25 +261,43 @@ export async function processSubmission(
     }
     await ledger.update(data.submissionId, { status: 'ARCHIVED', uploadDocumentId });
 
+    // Re-read the contact so the attachment URL comes from GHL's own record
+    // of the file (covers both "just uploaded" and "already present, skipped").
+    const contactAfterUpload = alreadyUploaded ? currentContact : await deps.getContact(contactId);
+    const attachmentUrl = findDocumentUrl(findCustomFieldValue(contactAfterUpload, FIELD_DOCUMENTI), fileName);
+    const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName);
+
     await ledger.update(data.submissionId, { status: 'EMAIL_SENDING' });
+    let emailMessageId: string | null = null;
     try {
-      await deps.sendDossierEmail();
+      const sendResult = await deps.sendDossierEmail({
+        contactId,
+        subject,
+        html,
+        attachmentUrls: attachmentUrl ? [attachmentUrl] : undefined,
+      });
+      emailMessageId = sendResult.messageId;
     } catch (err) {
       if (err instanceof GhlScopeBlockedError) {
         await ledger.update(data.submissionId, { status: 'BLOCKED_EMAIL_SCOPE', errorMessage: err.message });
         return { submissionId: data.submissionId, status: 'BLOCKED_EMAIL_SCOPE', contactId, errorMessage: err.message };
       }
+      if (err instanceof EmailSendTimeoutError) {
+        // Ambiguous — GHL may or may not have sent it. No automatic resend.
+        await ledger.update(data.submissionId, { status: 'EMAIL_UNKNOWN', errorMessage: err.message });
+        return { submissionId: data.submissionId, status: 'EMAIL_UNKNOWN', contactId, errorMessage: err.message };
+      }
       const message = err instanceof Error ? err.message : String(err);
       await ledger.update(data.submissionId, { status: 'FAILED_EMAIL', errorMessage: message });
       return { submissionId: data.submissionId, status: 'FAILED_EMAIL', contactId, errorMessage: message };
     }
+    await ledger.update(data.submissionId, { status: 'EMAIL_SENT', emailProviderMessageId: emailMessageId });
 
-    // Unreachable until the email scope is added — kept for when it is.
     await deps.updateContact(contactId, {
       customFields: [{ id: FIELD_ULTIMA_DATA, value: submittedAt.toISOString().slice(0, 10) }],
     });
     await ledger.update(data.submissionId, { status: 'COMPLETED' });
-    return { submissionId: data.submissionId, status: 'COMPLETED', contactId };
+    return { submissionId: data.submissionId, status: 'COMPLETED', contactId, emailMessageId };
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     try {

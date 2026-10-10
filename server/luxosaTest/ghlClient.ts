@@ -210,12 +210,92 @@ export class GhlScopeBlockedError extends Error {
   }
 }
 
-// Confirmed BLOCKED (2026-10-10): GET /conversations/search -> 401 "The
-// token is not authorized for this scope." Sending a dossier email requires
-// a conversations/messages write, which needs the same resource family.
-// This function deliberately does not attempt an unverified send — per the
-// task's own instruction, a missing scope must stop here with an exact,
-// minimal ask, not an improvised workaround or an untested call.
-export async function sendDossierEmail(): Promise<never> {
-  throw new GhlScopeBlockedError('conversations/message.write (or equivalent)', 'POST /conversations/messages');
+// Thrown when the send request itself times out / the connection is
+// aborted — GHL may or may not have already processed it. Never retried
+// automatically by the caller (see submission.ts: EMAIL_UNKNOWN).
+export class EmailSendTimeoutError extends Error {
+  constructor() {
+    super('GHL message send timed out — delivery status unknown, no automatic resend');
+    this.name = 'EmailSendTimeoutError';
+  }
+}
+
+const SEND_EMAIL_TIMEOUT_MS = 15_000;
+// Shape confirmed empirically against the real endpoint (2026-10-10):
+// POST /conversations/messages, Version 2021-04-15. Validation progression
+// observed: missing contactId -> 404 CONVERSATIONS_MSG_CONTACT_ID_NOT_PROVIDED;
+// contactId + type only -> 422 CONVERSATIONS_MSG_NO_CONTENT ("no message or
+// attachments"); invalid type -> 422 "type must be a valid enum value"
+// (confirming "Email" itself is accepted). conversations/search (a read
+// endpoint) still returns 401 after the scope change — that scope is
+// unrelated to sending and was never requested; the write path above is
+// the one that matters here and is now authorized.
+export interface SendEmailInput {
+  contactId: string;
+  subject: string;
+  html: string;
+  attachmentUrls?: string[];
+}
+
+export interface SendEmailResult {
+  status: number;
+  body: unknown;
+  messageId: string | null;
+}
+
+function extractMessageId(body: unknown): string | null {
+  if (!body || typeof body !== 'object') return null;
+  const maybe = body as Record<string, unknown>;
+  const direct = maybe.messageId ?? maybe.id;
+  if (typeof direct === 'string') return direct;
+  const nested = (maybe.message as Record<string, unknown> | undefined)?.id;
+  return typeof nested === 'string' ? nested : null;
+}
+
+export async function sendDossierEmail(input: SendEmailInput): Promise<SendEmailResult> {
+  assertSandboxWriteAllowed(input.contactId);
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), SEND_EMAIL_TIMEOUT_MS);
+
+  let res: Response;
+  try {
+    res = await fetch(`${BASE_URL}/conversations/messages`, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        Version: '2021-04-15',
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        type: 'Email',
+        contactId: input.contactId,
+        subject: input.subject,
+        html: input.html,
+        ...(input.attachmentUrls?.length ? { attachments: input.attachmentUrls } : {}),
+      }),
+    });
+  } catch (err) {
+    if (err instanceof Error && err.name === 'AbortError') {
+      throw new EmailSendTimeoutError();
+    }
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
+
+  const text = await res.text();
+  let body: unknown = text;
+  try { body = text ? JSON.parse(text) : null; } catch { /* keep raw text */ }
+
+  if (res.status === 401) {
+    throw new GhlScopeBlockedError('conversations/message.write (or equivalent)', 'POST /conversations/messages');
+  }
+  if (res.status < 200 || res.status >= 300) {
+    throw new Error(`GHL sendDossierEmail failed: ${res.status} ${JSON.stringify(body).slice(0, 300)}`);
+  }
+
+  return { status: res.status, body, messageId: extractMessageId(body) };
 }

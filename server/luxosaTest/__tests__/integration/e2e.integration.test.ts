@@ -40,24 +40,27 @@ function payload(submissionId: string) {
 }
 
 test(
-  'real E2E against the sandbox: reaches BLOCKED_EMAIL_SCOPE exactly, writes land only on the sandbox contact',
+  'real E2E against the sandbox: reaches COMPLETED, email sent, writes land only on the sandbox contact',
   { skip: !HAS_CREDENTIALS && 'GHL_PRIVATE_INTEGRATION_TOKEN / GHL_LOCATION_ID not set' },
   async () => {
     assert.equal(process.env.LUXOSA_TEST_MODE, 'test', 'refusing to run this test outside TEST MODE');
     const submissionId = `sub_int_${Date.now()}`;
     const outcome = await processSubmission(payload(submissionId));
+    console.log('[integration] outcome:', JSON.stringify(outcome));
     assert.equal(outcome.contactId, SANDBOX_CONTACT_ID);
-    assert.equal(outcome.status, 'BLOCKED_EMAIL_SCOPE');
+    assert.equal(outcome.status, 'COMPLETED');
   },
 );
 
 test(
-  'replay submission (real sandbox): same submissionId twice returns the identical cached outcome',
+  'replay submission (real sandbox): same submissionId twice returns the identical cached outcome, no second email',
   { skip: !HAS_CREDENTIALS && 'GHL_PRIVATE_INTEGRATION_TOKEN / GHL_LOCATION_ID not set' },
   async () => {
     const submissionId = `sub_int_replay_${Date.now()}`;
     const first = await processSubmission(payload(submissionId));
     const second = await processSubmission(payload(submissionId));
+    console.log('[integration] replay first:', JSON.stringify(first));
+    console.log('[integration] replay second (should be short-circuited):', JSON.stringify(second));
     assert.equal(second.status, first.status);
     assert.equal(second.contactId, first.contactId);
   },

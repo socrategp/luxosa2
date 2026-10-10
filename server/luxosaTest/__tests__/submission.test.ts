@@ -2,6 +2,12 @@
 // SubmissionDeps. Zero network calls. LUXOSA_TEST_MODE is forced to "test"
 // so the sandbox-only write invariant is exercised exactly as in production
 // test mode.
+//
+// sendDossierEmail is faked here to resolve successfully by default (the
+// real endpoint now works — scope was added 2026-10-10). BLOCKED_EMAIL_SCOPE
+// and EMAIL_UNKNOWN are each exercised as explicit, deliberate overrides
+// (simulating a scope regression / an ambiguous send timeout), never as the
+// default happy path.
 
 process.env.LUXOSA_TEST_MODE = 'test';
 
@@ -10,7 +16,7 @@ import assert from 'node:assert/strict';
 import { processSubmission, type SubmissionDeps } from '../submission';
 import { buildDossierFileName } from '../pdfGeneration';
 import { InMemoryLedger } from '../ledger';
-import { SANDBOX_CONTACT_ID, GhlScopeBlockedError, type GhlContact } from '../ghlClient';
+import { SANDBOX_CONTACT_ID, GhlScopeBlockedError, EmailSendTimeoutError, type GhlContact } from '../ghlClient';
 
 const BASE_ANSWERS = {
   d1: 'd1_lisci',
@@ -41,7 +47,7 @@ function basePayload(overrides: Record<string, unknown> = {}) {
 }
 
 interface HappyDepsResult extends Partial<SubmissionDeps> {
-  __updateContactCalls: { contactId: string; patch: { customFields?: { id: string }[] } }[];
+  __updateContactCalls: { contactId: string; patch: { customFields?: { id: string; value?: unknown }[] } }[];
   __uploadDocumentCalls: { contactId: string; fileName: string }[];
 }
 
@@ -65,32 +71,38 @@ function happyDeps(overrides: Partial<SubmissionDeps> = {}, contactOverride?: Gh
       uploadDocumentCalls.push({ contactId, fileName });
       return { status: 200, body: { documentId: 'doc_fake_1' } };
     },
-    // sendDossierEmail intentionally NOT overridden — the real implementation
-    // always throws GhlScopeBlockedError, which is the documented, expected
-    // stopping point for this phase.
+    sendDossierEmail: async () => ({ status: 200, body: {}, messageId: 'fake-message-id' }),
     ...overrides,
     __updateContactCalls: updateContactCalls,
     __uploadDocumentCalls: uploadDocumentCalls,
   };
 }
 
-test('server result coerente + happy path up to the documented blocker: BLOCKED_EMAIL_SCOPE', async () => {
+test('server result coerente + happy path reaches COMPLETED (real send scope now present)', async () => {
   const ledger = new InMemoryLedger();
   const deps = happyDeps({ ledger });
   const outcome = await processSubmission(basePayload(), deps);
 
-  assert.equal(outcome.status, 'BLOCKED_EMAIL_SCOPE');
+  assert.equal(outcome.status, 'COMPLETED');
   assert.equal(outcome.contactId, SANDBOX_CONTACT_ID);
 
   const entry = await ledger.get(outcome.submissionId);
-  assert.equal(entry?.status, 'BLOCKED_EMAIL_SCOPE');
+  assert.equal(entry?.status, 'COMPLETED');
   assert.ok(entry?.resultHash, 'resultHash should be recorded for traceability');
   assert.equal(entry?.uploadDocumentId, 'doc_fake_1');
+});
 
-  // "Ultima data aggiornata solo al punto corretto": the run stopped before
-  // step 14, so no updateContact call should have touched FIELD_ULTIMA_DATA.
-  const touchedUltimaData = deps.__updateContactCalls.some(c => c.patch.customFields?.some(f => f.id === 'baDYUcYkGZ2UUVgD9FRD'));
-  assert.equal(touchedUltimaData, false);
+test('Ultima data aggiornata solo al punto corretto: written only once COMPLETED is reached, never before', async () => {
+  const ledger = new InMemoryLedger();
+  const deps = happyDeps({ ledger });
+  await processSubmission(basePayload(), deps);
+
+  const ultimaDataWrites = deps.__updateContactCalls.filter(c =>
+    c.patch.customFields?.some(f => f.id === 'baDYUcYkGZ2UUVgD9FRD'),
+  );
+  assert.equal(ultimaDataWrites.length, 1, 'exactly one write should touch Ultima data (the final step)');
+  // It must be the LAST updateContact call (after contact resolve + consent writes, if any).
+  assert.equal(deps.__updateContactCalls.at(-1), ultimaDataWrites[0]);
 });
 
 test('nessun write fuori sandbox: every write call receives only SANDBOX_CONTACT_ID', async () => {
@@ -120,29 +132,44 @@ test('identity conflict simulato (end to end through the orchestrator): stops be
 test('doppio click stesso submissionId through the orchestrator: second call returns the first result, side effects run once', async () => {
   const ledger = new InMemoryLedger();
   let uploadCallCount = 0;
+  let emailCallCount = 0;
   const deps = happyDeps({
     ledger,
     uploadDocument: async () => {
       uploadCallCount++;
       return { status: 200, body: { documentId: 'doc_fake_1' } };
     },
+    sendDossierEmail: async () => {
+      emailCallCount++;
+      return { status: 200, body: {}, messageId: 'fake-message-id' };
+    },
   });
   const payload = basePayload();
   const [first, second] = await Promise.all([processSubmission(payload, deps), processSubmission(payload, deps)]);
 
   assert.equal(uploadCallCount, 1, 'upload (and the rest of the pipeline) must run exactly once');
+  assert.equal(emailCallCount, 1, 'un replay dello stesso submissionId non invia una seconda email');
   const statuses = [first.status, second.status];
-  assert.ok(statuses.includes('BLOCKED_EMAIL_SCOPE'));
+  assert.ok(statuses.includes('COMPLETED'));
 });
 
-test('replay submission: calling processSubmission again with the same submissionId after completion returns the cached terminal state', async () => {
+test('replay submission: calling processSubmission again with the same submissionId after completion returns the cached terminal state, no second email', async () => {
   const ledger = new InMemoryLedger();
-  const deps = happyDeps({ ledger });
+  let emailCallCount = 0;
+  const deps = happyDeps({
+    ledger,
+    sendDossierEmail: async () => {
+      emailCallCount++;
+      return { status: 200, body: {}, messageId: 'fake-message-id' };
+    },
+  });
   const payload = basePayload();
   const firstRun = await processSubmission(payload, deps);
   const replay = await processSubmission(payload, deps);
   assert.equal(replay.status, firstRun.status);
+  assert.equal(replay.status, 'COMPLETED');
   assert.equal(replay.contactId, firstRun.contactId);
+  assert.equal(emailCallCount, 1, 'replay must not re-trigger the email send');
 });
 
 test('failure PDF: generateDossierPdf throwing maps to FAILED_PDF, no upload attempted', async () => {
@@ -168,7 +195,7 @@ test('failure upload: uploadDocument throwing maps to FAILED_UPLOAD', async () =
   assert.equal(outcome.status, 'FAILED_UPLOAD');
 });
 
-test('failure email pre-send (non-scope error) maps to FAILED_EMAIL, distinct from BLOCKED_EMAIL_SCOPE', async () => {
+test('failure email pre-send (non-scope, non-timeout error) maps to FAILED_EMAIL', async () => {
   const ledger = new InMemoryLedger();
   const deps = happyDeps({
     ledger,
@@ -178,20 +205,30 @@ test('failure email pre-send (non-scope error) maps to FAILED_EMAIL, distinct fr
   assert.equal(outcome.status, 'FAILED_EMAIL');
 });
 
-test('BLOCKED_EMAIL_SCOPE is reached via the real sendDossierEmail (GhlScopeBlockedError), not a generic failure', async () => {
-  let thrown: unknown;
-  try {
-    const { sendDossierEmail } = await import('../ghlClient');
-    await sendDossierEmail();
-  } catch (err) {
-    thrown = err;
-  }
-  assert.ok(thrown instanceof GhlScopeBlockedError);
-
+test('BLOCKED_EMAIL_SCOPE: a simulated scope regression (GhlScopeBlockedError) is mapped distinctly, Ultima data untouched', async () => {
   const ledger = new InMemoryLedger();
-  const deps = happyDeps({ ledger });
+  const deps = happyDeps({
+    ledger,
+    sendDossierEmail: async () => { throw new GhlScopeBlockedError('conversations/message.write', 'POST /conversations/messages'); },
+  });
   const outcome = await processSubmission(basePayload(), deps);
   assert.equal(outcome.status, 'BLOCKED_EMAIL_SCOPE');
+  const touchedUltimaData = deps.__updateContactCalls.some(c => c.patch.customFields?.some(f => f.id === 'baDYUcYkGZ2UUVgD9FRD'));
+  assert.equal(touchedUltimaData, false);
+});
+
+test('EMAIL_UNKNOWN: an ambiguous send timeout is mapped distinctly from FAILED_EMAIL, no automatic resend, Ultima data untouched', async () => {
+  const ledger = new InMemoryLedger();
+  let emailAttempts = 0;
+  const deps = happyDeps({
+    ledger,
+    sendDossierEmail: async () => { emailAttempts++; throw new EmailSendTimeoutError(); },
+  });
+  const outcome = await processSubmission(basePayload(), deps);
+  assert.equal(outcome.status, 'EMAIL_UNKNOWN');
+  assert.equal(emailAttempts, 1, 'no automatic resend after an ambiguous timeout');
+  const touchedUltimaData = deps.__updateContactCalls.some(c => c.patch.customFields?.some(f => f.id === 'baDYUcYkGZ2UUVgD9FRD'));
+  assert.equal(touchedUltimaData, false);
 });
 
 test('storico Documenti preservato: a file already uploaded under the SAME filename today is not re-uploaded', async () => {
@@ -201,7 +238,7 @@ test('storico Documenti preservato: a file already uploaded under the SAME filen
     id: SANDBOX_CONTACT_ID,
     locationId: 'loc1',
     customFields: [
-      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: existingFileName } } } },
+      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: existingFileName }, url: 'https://example.com/doc1.pdf' } } },
     ],
   };
   let uploadCalled = false;
@@ -210,7 +247,7 @@ test('storico Documenti preservato: a file already uploaded under the SAME filen
     contactWithExistingUpload,
   );
   const outcome = await processSubmission(basePayload(), deps);
-  assert.equal(outcome.status, 'BLOCKED_EMAIL_SCOPE');
+  assert.equal(outcome.status, 'COMPLETED');
   assert.equal(uploadCalled, false, 'identical filename already present -> upload must be skipped, not duplicated');
 });
 
@@ -219,7 +256,7 @@ test('a DIFFERENT filename (e.g. different day) still uploads normally', async (
     id: SANDBOX_CONTACT_ID,
     locationId: 'loc1',
     customFields: [
-      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: 'Luxosa_Test_Someone_Else_2000-01-01.pdf' } } } },
+      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: 'Luxosa_Test_Someone_Else_2000-01-01.pdf' }, url: 'https://example.com/old.pdf' } } },
     ],
   };
   let uploadCalled = false;
@@ -228,7 +265,7 @@ test('a DIFFERENT filename (e.g. different day) still uploads normally', async (
     contactWithOldUpload,
   );
   const outcome = await processSubmission(basePayload(), deps);
-  assert.equal(outcome.status, 'BLOCKED_EMAIL_SCOPE');
+  assert.equal(outcome.status, 'COMPLETED');
   assert.equal(uploadCalled, true);
 });
 

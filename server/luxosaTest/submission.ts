@@ -84,6 +84,13 @@ function findCustomFieldValue(contact: { customFields?: { id: string; value: unk
   return contact?.customFields?.find(f => f.id === fieldId)?.value ?? null;
 }
 
+// "Up to 10 historical dossiers" per the archive requirement — reaching it
+// blocks/flags rather than silently dropping anything; rotation/deletion
+// policy beyond this point is explicitly out of scope here.
+const MAX_DOCUMENTI_HISTORY = 10;
+
+type DocumentiEntry = { meta?: { originalname?: string }; url?: string; documentId?: string };
+
 function fileAlreadyUploaded(documentiValue: unknown, fileName: string): boolean {
   if (!documentiValue || typeof documentiValue !== 'object') return false;
   return Object.values(documentiValue as Record<string, unknown>).some(entry => {
@@ -92,17 +99,15 @@ function fileAlreadyUploaded(documentiValue: unknown, fileName: string): boolean
   });
 }
 
-// GHL stores each uploaded file's own fetchable URL alongside its metadata
-// (confirmed on the real sandbox: {meta, url, documentId}) — reading it
-// back rather than guessing a URL pattern keeps the email attachment
-// reference authoritative, for both a fresh upload and a skipped (already
-// present) one.
-function findDocumentUrl(documentiValue: unknown, fileName: string): string | null {
+// Returns the single {uuid: entry} pair whose meta.originalname matches, or
+// null — used both to recover a replay's existing entry and to pull the
+// one real entry GHL just created after a (reliable) single-file upload.
+function extractEntryByFileName(documentiValue: unknown, fileName: string): Record<string, DocumentiEntry> | null {
   if (!documentiValue || typeof documentiValue !== 'object') return null;
-  for (const entry of Object.values(documentiValue as Record<string, unknown>)) {
-    const typed = entry as { meta?: { originalname?: string }; url?: string } | undefined;
-    if (typed?.meta?.originalname === fileName && typeof typed.url === 'string') {
-      return typed.url;
+  for (const [key, entry] of Object.entries(documentiValue as Record<string, unknown>)) {
+    const typed = entry as DocumentiEntry | undefined;
+    if (typed?.meta?.originalname === fileName) {
+      return { [key]: typed };
     }
   }
   return null;
@@ -232,7 +237,7 @@ export async function processSubmission(
 
     let pdfBuffer: Buffer;
     const submittedAt = new Date();
-    const fileName = buildDossierFileName(data.firstName, data.lastName, submittedAt);
+    const fileName = buildDossierFileName(data.firstName, data.lastName, submittedAt, data.submissionId);
     try {
       const generated = await deps.generateDossierPdf(
         result,
@@ -247,12 +252,54 @@ export async function processSubmission(
     }
     await ledger.update(data.submissionId, { status: 'PDF_READY' });
 
-    const alreadyUploaded = fileAlreadyUploaded(findCustomFieldValue(currentContact, FIELD_DOCUMENTI), fileName);
+    // Archive preservation — verified empirically on the real sandbox
+    // (2026-10-10, controlled matrix) that forms/upload-custom-files is
+    // reliable ONLY for a single file per request, where it always REPLACES
+    // the field's entire value (4/4 single-file calls observed). Sending
+    // multiple files in one request was empirically INCONSISTENT (1 replace,
+    // 1 append across 2 attempts, no controlling variable identified) and is
+    // therefore never relied upon. The one technique that was reliable
+    // across repeated calls (3/3) was: upload only the new file (accepting
+    // the replace), read back its real {meta,url,documentId}, then PUT the
+    // full merged set (previously-known entries + the new one) via the
+    // standard contact update endpoint — ordinary customFields upsert
+    // semantics, the same mechanism already relied on everywhere else in
+    // this pipeline.
+    const existingDocumentiValue = findCustomFieldValue(currentContact, FIELD_DOCUMENTI);
+    const existingDocumentiMap =
+      existingDocumentiValue && typeof existingDocumentiValue === 'object'
+        ? (existingDocumentiValue as Record<string, DocumentiEntry>)
+        : {};
+    const alreadyUploaded = fileAlreadyUploaded(existingDocumentiValue, fileName);
+
     let uploadDocumentId: string | null = null;
-    if (!alreadyUploaded) {
+    let attachmentUrl: string | null = null;
+
+    if (alreadyUploaded) {
+      // Same submissionId seen before (e.g. ledger lost state across a
+      // restart) — reuse the existing entry, never re-upload.
+      const existingEntry = extractEntryByFileName(existingDocumentiValue, fileName);
+      const existingValues = existingEntry ? Object.values(existingEntry) : [];
+      attachmentUrl = existingValues[0]?.url ?? null;
+      uploadDocumentId = existingValues[0]?.documentId ?? null;
+    } else if (Object.keys(existingDocumentiMap).length >= MAX_DOCUMENTI_HISTORY) {
+      const message = `Documenti archive limit reached (${MAX_DOCUMENTI_HISTORY}) — new dossier not uploaded, nothing overwritten; rotation policy is separate and not yet defined`;
+      await ledger.update(data.submissionId, { status: 'FAILED_UPLOAD', errorMessage: message });
+      return { submissionId: data.submissionId, status: 'FAILED_UPLOAD', contactId, errorMessage: message };
+    } else {
       try {
         const uploadResult = await deps.uploadDocument(contactId, fileName, pdfBuffer, 'application/pdf');
         uploadDocumentId = extractUploadedDocumentId(uploadResult.body);
+
+        const contactWithOnlyNewFile = await deps.getContact(contactId);
+        const newFieldValue = findCustomFieldValue(contactWithOnlyNewFile, FIELD_DOCUMENTI);
+        const newEntry = extractEntryByFileName(newFieldValue, fileName);
+
+        const mergedValue = { ...existingDocumentiMap, ...(newEntry ?? {}) };
+        await deps.updateContact(contactId, {
+          customFields: [{ id: FIELD_DOCUMENTI, value: mergedValue }],
+        });
+        attachmentUrl = newEntry ? Object.values(newEntry)[0]?.url ?? null : null;
       } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
         await ledger.update(data.submissionId, { status: 'FAILED_UPLOAD', errorMessage: message });
@@ -261,10 +308,6 @@ export async function processSubmission(
     }
     await ledger.update(data.submissionId, { status: 'ARCHIVED', uploadDocumentId });
 
-    // Re-read the contact so the attachment URL comes from GHL's own record
-    // of the file (covers both "just uploaded" and "already present, skipped").
-    const contactAfterUpload = alreadyUploaded ? currentContact : await deps.getContact(contactId);
-    const attachmentUrl = findDocumentUrl(findCustomFieldValue(contactAfterUpload, FIELD_DOCUMENTI), fileName);
     const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName);
 
     await ledger.update(data.submissionId, { status: 'EMAIL_SENDING' });

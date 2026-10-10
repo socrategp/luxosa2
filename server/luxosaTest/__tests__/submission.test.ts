@@ -49,32 +49,61 @@ function basePayload(overrides: Record<string, unknown> = {}) {
 interface HappyDepsResult extends Partial<SubmissionDeps> {
   __updateContactCalls: { contactId: string; patch: { customFields?: { id: string; value?: unknown }[] } }[];
   __uploadDocumentCalls: { contactId: string; fileName: string }[];
+  __getDocumentiState: () => unknown;
 }
 
+// Realistic fake GHL state: uploadDocument REPLACES the Documenti field
+// entirely (matching the real, empirically-confirmed single-file behavior),
+// and updateContact performs ordinary per-field upsert on customFields
+// (matching the real, already-reliable PUT /contacts/{id} semantics used
+// everywhere else in this pipeline) — so a test exercising the real
+// upload-then-merge logic in submission.ts sees realistic before/after
+// state, not a static fixture.
 function happyDeps(overrides: Partial<SubmissionDeps> = {}, contactOverride?: GhlContact): HappyDepsResult {
   const updateContactCalls: HappyDepsResult['__updateContactCalls'] = [];
   const uploadDocumentCalls: HappyDepsResult['__uploadDocumentCalls'] = [];
-  const contact: GhlContact = contactOverride ?? { id: SANDBOX_CONTACT_ID, locationId: 'loc1', customFields: [] };
+  const contactId = contactOverride?.id ?? SANDBOX_CONTACT_ID;
+  let customFields: { id: string; value: unknown }[] = contactOverride?.customFields ? [...contactOverride.customFields] : [];
+
+  function upsertCustomField(id: string, value: unknown) {
+    const idx = customFields.findIndex(f => f.id === id);
+    if (idx >= 0) {
+      const next = [...customFields];
+      next[idx] = { id, value };
+      customFields = next;
+    } else {
+      customFields = [...customFields, { id, value }];
+    }
+  }
 
   return {
     reconcileIdentity: async () => ({ kind: 'single_match', contactId: SANDBOX_CONTACT_ID, matchedBy: ['email', 'phone'] }),
-    getContact: async () => contact,
-    updateContact: async (contactId, patch) => {
-      updateContactCalls.push({ contactId, patch });
-      return { ...contact };
+    getContact: async () => ({ id: contactId, locationId: 'loc1', customFields: [...customFields] }),
+    updateContact: async (cId, patch) => {
+      updateContactCalls.push({ contactId: cId, patch });
+      for (const f of patch.customFields ?? []) upsertCustomField(f.id, f.value);
+      return { id: cId, locationId: 'loc1', customFields: [...customFields] };
     },
     createContact: async () => {
       throw new Error('createContact should never be called in TEST MODE');
     },
     generateDossierPdf: async () => ({ buffer: Buffer.from('fake-pdf'), usedFallback: false }),
-    uploadDocument: async (contactId, fileName) => {
-      uploadDocumentCalls.push({ contactId, fileName });
+    uploadDocument: async (cId, fileName) => {
+      uploadDocumentCalls.push({ contactId: cId, fileName });
+      upsertCustomField('tzRkZVDj1SoYHUlkO5AF', {
+        [`uuid-${fileName}`]: {
+          meta: { originalname: fileName },
+          url: `https://fake.example/${fileName}`,
+          documentId: 'doc_fake_1',
+        },
+      });
       return { status: 200, body: { documentId: 'doc_fake_1' } };
     },
     sendDossierEmail: async () => ({ status: 200, body: {}, messageId: 'fake-message-id' }),
     ...overrides,
     __updateContactCalls: updateContactCalls,
     __uploadDocumentCalls: uploadDocumentCalls,
+    __getDocumentiState: () => customFields.find(f => f.id === 'tzRkZVDj1SoYHUlkO5AF')?.value,
   };
 }
 
@@ -231,14 +260,19 @@ test('EMAIL_UNKNOWN: an ambiguous send timeout is mapped distinctly from FAILED_
   assert.equal(touchedUltimaData, false);
 });
 
-test('storico Documenti preservato: a file already uploaded under the SAME filename today is not re-uploaded', async () => {
+test('stesso submissionId (replay con ledger perso): file già presente con quell\'esatto filename non viene ricaricato', async () => {
+  // Defensive branch: if the ledger lost its state (e.g. process restart,
+  // non-durable InMemoryLedger) but GHL still has the file from a prior
+  // partial run of the SAME submissionId, fileAlreadyUploaded must still
+  // prevent a duplicate upload.
+  const payload = basePayload();
   const submittedAt = new Date();
-  const existingFileName = buildDossierFileName('Maria', 'Rossi', submittedAt);
+  const existingFileName = buildDossierFileName(payload.firstName as string, payload.lastName as string, submittedAt, payload.submissionId as string);
   const contactWithExistingUpload: GhlContact = {
     id: SANDBOX_CONTACT_ID,
     locationId: 'loc1',
     customFields: [
-      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: existingFileName }, url: 'https://example.com/doc1.pdf' } } },
+      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: existingFileName }, url: 'https://example.com/doc1.pdf', documentId: 'doc-1' } } },
     ],
   };
   let uploadCalled = false;
@@ -246,27 +280,48 @@ test('storico Documenti preservato: a file already uploaded under the SAME filen
     { ledger: new InMemoryLedger(), uploadDocument: async () => { uploadCalled = true; return { status: 200, body: {} }; } },
     contactWithExistingUpload,
   );
-  const outcome = await processSubmission(basePayload(), deps);
+  const outcome = await processSubmission(payload, deps);
   assert.equal(outcome.status, 'COMPLETED');
-  assert.equal(uploadCalled, false, 'identical filename already present -> upload must be skipped, not duplicated');
+  assert.equal(uploadCalled, false, 'identical filename (same submissionId) already present -> upload must be skipped, not duplicated');
 });
 
-test('a DIFFERENT filename (e.g. different day) still uploads normally', async () => {
-  const contactWithOldUpload: GhlContact = {
+test('due submissionId DIVERSI, stessa persona, stesso giorno -> due filename diversi, nessuno dei due elimina l\'altro', async () => {
+  const ledger = new InMemoryLedger();
+  const deps = happyDeps({ ledger }); // realistic shared fake GHL state, no overrides
+
+  const first = await processSubmission(basePayload({ submissionId: 'sub_first_aaaaaaaa' }), deps);
+  assert.equal(first.status, 'COMPLETED');
+  const second = await processSubmission(basePayload({ submissionId: 'sub_second_bbbbbbbb' }), deps);
+  assert.equal(second.status, 'COMPLETED');
+
+  const documentiState = deps.__getDocumentiState() as Record<string, { meta?: { originalname?: string } }>;
+  const names = Object.values(documentiState).map(e => e.meta?.originalname);
+  assert.equal(Object.keys(documentiState).length, 2, 'both dossiers must be present, neither overwritten');
+  // submissionIdShort is the first 8 characters of each submissionId
+  assert.ok(names.some(n => n?.includes('sub_firs')));
+  assert.ok(names.some(n => n?.includes('sub_seco')));
+});
+
+test('al limite di 10 dossier storici: blocca/flagga, non sovrascrive nulla silenziosamente', async () => {
+  const tenExisting: Record<string, unknown> = {};
+  for (let i = 0; i < 10; i++) {
+    tenExisting[`uuid-${i}`] = { meta: { originalname: `Luxosa_Test_Old_Old_2000-01-0${i}_aaaaaaaa.pdf` }, url: `https://example.com/${i}.pdf`, documentId: `doc-${i}` };
+  }
+  const contactAtLimit: GhlContact = {
     id: SANDBOX_CONTACT_ID,
     locationId: 'loc1',
-    customFields: [
-      { id: 'tzRkZVDj1SoYHUlkO5AF', value: { 'uuid-1': { meta: { originalname: 'Luxosa_Test_Someone_Else_2000-01-01.pdf' }, url: 'https://example.com/old.pdf' } } },
-    ],
+    customFields: [{ id: 'tzRkZVDj1SoYHUlkO5AF', value: tenExisting }],
   };
   let uploadCalled = false;
   const deps = happyDeps(
     { ledger: new InMemoryLedger(), uploadDocument: async () => { uploadCalled = true; return { status: 200, body: {} }; } },
-    contactWithOldUpload,
+    contactAtLimit,
   );
   const outcome = await processSubmission(basePayload(), deps);
-  assert.equal(outcome.status, 'COMPLETED');
-  assert.equal(uploadCalled, true);
+  assert.equal(outcome.status, 'FAILED_UPLOAD');
+  assert.equal(uploadCalled, false, 'limit reached -> no upload attempted, nothing overwritten');
+  const documentiState = deps.__getDocumentiState() as Record<string, unknown>;
+  assert.equal(Object.keys(documentiState).length, 10, 'all 10 pre-existing entries remain untouched');
 });
 
 test('marketingConsent=true performs a positive-write on the consent field; marketingConsent=false touches nothing', async () => {

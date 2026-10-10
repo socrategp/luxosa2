@@ -21,11 +21,18 @@ function sanitizeNamePart(raw: string): string {
   return raw.trim().replace(/\s+/g, '').replace(/[^\p{L}\p{N}]/gu, '') || 'Cliente';
 }
 
-export function buildDossierFileName(firstName: string, lastName: string, submittedAt: Date): string {
+// submissionId (not just name+date) determines the filename so that two
+// DIFFERENT submissions from the same person on the same day never collide
+// — idempotency is governed by submissionId, a same-day duplicate-name
+// collision must never be mistaken for a replay. A retry/replay of the SAME
+// submissionId still produces the SAME filename (harmless: the ledger's own
+// claim already short-circuits replays before a second PDF is ever built).
+export function buildDossierFileName(firstName: string, lastName: string, submittedAt: Date, submissionId: string): string {
   const yyyy = submittedAt.getUTCFullYear();
   const mm = String(submittedAt.getUTCMonth() + 1).padStart(2, '0');
   const dd = String(submittedAt.getUTCDate()).padStart(2, '0');
-  return `Luxosa_Test_${sanitizeNamePart(firstName)}_${sanitizeNamePart(lastName)}_${yyyy}-${mm}-${dd}.pdf`;
+  const submissionIdShort = submissionId.slice(0, 8);
+  return `Luxosa_Test_${sanitizeNamePart(firstName)}_${sanitizeNamePart(lastName)}_${yyyy}-${mm}-${dd}_${submissionIdShort}.pdf`;
 }
 
 export async function generateDossierPdf(

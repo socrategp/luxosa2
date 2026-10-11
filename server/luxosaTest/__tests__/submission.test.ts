@@ -17,6 +17,7 @@ import { processSubmission, type SubmissionDeps } from '../submission';
 import { buildDossierFileName } from '../pdfGeneration';
 import { InMemoryLedger } from '../ledger';
 import { SANDBOX_CONTACT_ID, GhlScopeBlockedError, EmailSendTimeoutError, type GhlContact } from '../ghlClient';
+import { createFakeLockClient } from './fakes/fakeLockClient';
 
 const BASE_ANSWERS = {
   d1: 'd1_lisci',
@@ -77,6 +78,7 @@ function happyDeps(overrides: Partial<SubmissionDeps> = {}, contactOverride?: Gh
   }
 
   return {
+    lockClient: createFakeLockClient(),
     reconcileIdentity: async () => ({ kind: 'single_match', contactId: SANDBOX_CONTACT_ID, matchedBy: ['email', 'phone'] }),
     getContact: async () => ({ id: contactId, locationId: 'loc1', customFields: [...customFields] }),
     updateContact: async (cId, patch) => {

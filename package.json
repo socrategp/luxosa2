@@ -11,13 +11,14 @@
     "pdf:test": "esbuild scripts/generate-test-pdf.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=.tmp/generate-test-pdf.mjs && node .tmp/generate-test-pdf.mjs",
     "pdf:test:media": "esbuild scripts/generate-test-pdf-media-preview.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=.tmp/generate-test-pdf-media-preview.mjs && node .tmp/generate-test-pdf-media-preview.mjs",
     "test:luxosa:unit": "esbuild server/luxosaTest/__tests__/*.test.ts --bundle --platform=node --format=esm --jsx=automatic --packages=external --outdir=.tmp/luxosa-unit && node --test .tmp/luxosa-unit/*.js",
-    "test:luxosa:integration": "esbuild server/luxosaTest/__tests__/integration/*.test.ts --bundle --platform=node --format=esm --jsx=automatic --packages=external --outdir=.tmp/luxosa-integration && node --env-file=.env.local --test .tmp/luxosa-integration/*.js"
+    "test:luxosa:integration": "esbuild server/luxosaTest/__tests__/integration/*.test.ts --bundle --platform=node --format=esm --jsx=automatic --packages=external --outdir=.tmp/luxosa-integration && node --use-system-ca --env-file=.env.local --test .tmp/luxosa-integration/*.js"
   },
   "dependencies": {
     "@fontsource/cormorant-garamond": "^5.2.11",
     "@fontsource/jost": "^5.2.8",
     "@react-pdf/renderer": "^4.9.0",
     "@tailwindcss/vite": "^4.2.1",
+    "@upstash/redis": "^1.39.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "framer-motion": "^12.35.0",

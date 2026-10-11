@@ -11,6 +11,9 @@ import { getLedger, type Ledger } from './ledger';
 import type { LedgerStatus } from './ledger';
 import { buildLuxosaTestResult } from '../../src/lib/luxosaTest/result';
 import { generateDossierPdf as realGenerateDossierPdf, buildDossierFileName } from './pdfGeneration';
+import { findCustomFieldValue } from './customFields';
+import { archiveDossier, type ArchiveDeps } from './documentsArchive';
+import type { LockClient } from './distributedLock';
 import {
   getContact as realGetContact,
   updateContact as realUpdateContact,
@@ -23,7 +26,6 @@ import {
   SANDBOX_CONTACT_ID,
   SANDBOX_LOCATION_ID,
   FIELD_ULTIMA_DATA,
-  FIELD_DOCUMENTI,
   FIELD_CONSENSO_MARKETING,
   CONSENSO_MARKETING_OPTION,
 } from './ghlClient';
@@ -49,6 +51,9 @@ export interface SubmissionDeps {
   generateDossierPdf: typeof realGenerateDossierPdf;
   uploadDocument: typeof realUploadDocument;
   sendDossierEmail: typeof realSendDossierEmail;
+  // Tests inject an in-memory fake; production leaves it undefined so the
+  // Documenti lock falls back to the real Upstash client.
+  lockClient?: LockClient;
 }
 
 // Each default is resolved lazily and only when not overridden, so tests
@@ -66,51 +71,12 @@ function resolveDeps(overrides: Partial<SubmissionDeps>): SubmissionDeps {
     generateDossierPdf: overrides.generateDossierPdf ?? realGenerateDossierPdf,
     uploadDocument: overrides.uploadDocument ?? realUploadDocument,
     sendDossierEmail: overrides.sendDossierEmail ?? realSendDossierEmail,
+    lockClient: overrides.lockClient,
   };
 }
 
 function hashResult(value: unknown): string {
   return createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
-}
-
-function extractUploadedDocumentId(body: unknown): string | null {
-  if (!body || typeof body !== 'object') return null;
-  const maybe = body as Record<string, unknown>;
-  const direct = maybe.documentId ?? maybe.id;
-  return typeof direct === 'string' ? direct : null;
-}
-
-function findCustomFieldValue(contact: { customFields?: { id: string; value: unknown }[] } | null, fieldId: string): unknown {
-  return contact?.customFields?.find(f => f.id === fieldId)?.value ?? null;
-}
-
-// "Up to 10 historical dossiers" per the archive requirement — reaching it
-// blocks/flags rather than silently dropping anything; rotation/deletion
-// policy beyond this point is explicitly out of scope here.
-const MAX_DOCUMENTI_HISTORY = 10;
-
-type DocumentiEntry = { meta?: { originalname?: string }; url?: string; documentId?: string };
-
-function fileAlreadyUploaded(documentiValue: unknown, fileName: string): boolean {
-  if (!documentiValue || typeof documentiValue !== 'object') return false;
-  return Object.values(documentiValue as Record<string, unknown>).some(entry => {
-    const meta = (entry as { meta?: { originalname?: string } } | undefined)?.meta;
-    return meta?.originalname === fileName;
-  });
-}
-
-// Returns the single {uuid: entry} pair whose meta.originalname matches, or
-// null — used both to recover a replay's existing entry and to pull the
-// one real entry GHL just created after a (reliable) single-file upload.
-function extractEntryByFileName(documentiValue: unknown, fileName: string): Record<string, DocumentiEntry> | null {
-  if (!documentiValue || typeof documentiValue !== 'object') return null;
-  for (const [key, entry] of Object.entries(documentiValue as Record<string, unknown>)) {
-    const typed = entry as DocumentiEntry | undefined;
-    if (typed?.meta?.originalname === fileName) {
-      return { [key]: typed };
-    }
-  }
-  return null;
 }
 
 function buildDossierEmailContent(firstName: string, percorsoName: string): { subject: string; html: string } {
@@ -258,54 +224,34 @@ export async function processSubmission(
     // the field's entire value (4/4 single-file calls observed). Sending
     // multiple files in one request was empirically INCONSISTENT (1 replace,
     // 1 append across 2 attempts, no controlling variable identified) and is
-    // therefore never relied upon. The one technique that was reliable
-    // across repeated calls (3/3) was: upload only the new file (accepting
-    // the replace), read back its real {meta,url,documentId}, then PUT the
-    // full merged set (previously-known entries + the new one) via the
-    // standard contact update endpoint — ordinary customFields upsert
-    // semantics, the same mechanism already relied on everywhere else in
-    // this pipeline.
-    const existingDocumentiValue = findCustomFieldValue(currentContact, FIELD_DOCUMENTI);
-    const existingDocumentiMap =
-      existingDocumentiValue && typeof existingDocumentiValue === 'object'
-        ? (existingDocumentiValue as Record<string, DocumentiEntry>)
-        : {};
-    const alreadyUploaded = fileAlreadyUploaded(existingDocumentiValue, fileName);
-
-    let uploadDocumentId: string | null = null;
-    let attachmentUrl: string | null = null;
-
-    if (alreadyUploaded) {
-      // Same submissionId seen before (e.g. ledger lost state across a
-      // restart) — reuse the existing entry, never re-upload.
-      const existingEntry = extractEntryByFileName(existingDocumentiValue, fileName);
-      const existingValues = existingEntry ? Object.values(existingEntry) : [];
-      attachmentUrl = existingValues[0]?.url ?? null;
-      uploadDocumentId = existingValues[0]?.documentId ?? null;
-    } else if (Object.keys(existingDocumentiMap).length >= MAX_DOCUMENTI_HISTORY) {
-      const message = `Documenti archive limit reached (${MAX_DOCUMENTI_HISTORY}) — new dossier not uploaded, nothing overwritten; rotation policy is separate and not yet defined`;
-      await ledger.update(data.submissionId, { status: 'FAILED_UPLOAD', errorMessage: message });
-      return { submissionId: data.submissionId, status: 'FAILED_UPLOAD', contactId, errorMessage: message };
-    } else {
-      try {
-        const uploadResult = await deps.uploadDocument(contactId, fileName, pdfBuffer, 'application/pdf');
-        uploadDocumentId = extractUploadedDocumentId(uploadResult.body);
-
-        const contactWithOnlyNewFile = await deps.getContact(contactId);
-        const newFieldValue = findCustomFieldValue(contactWithOnlyNewFile, FIELD_DOCUMENTI);
-        const newEntry = extractEntryByFileName(newFieldValue, fileName);
-
-        const mergedValue = { ...existingDocumentiMap, ...(newEntry ?? {}) };
-        await deps.updateContact(contactId, {
-          customFields: [{ id: FIELD_DOCUMENTI, value: mergedValue }],
-        });
-        attachmentUrl = newEntry ? Object.values(newEntry)[0]?.url ?? null : null;
-      } catch (err) {
-        const message = err instanceof Error ? err.message : String(err);
-        await ledger.update(data.submissionId, { status: 'FAILED_UPLOAD', errorMessage: message });
-        return { submissionId: data.submissionId, status: 'FAILED_UPLOAD', contactId, errorMessage: message };
-      }
+    // therefore never relied upon. archiveDossier() owns the full
+    // lock-protected, snapshot-recoverable read-modify-write this requires
+    // (see documentsArchive.ts for why a lock and a pre-upload snapshot are
+    // both necessary).
+    const archiveDeps: ArchiveDeps = {
+      getContact: deps.getContact,
+      updateContact: deps.updateContact,
+      uploadDocument: deps.uploadDocument,
+    };
+    const archiveResult = await archiveDossier({
+      contactId,
+      fileName,
+      pdfBuffer,
+      submissionId: data.submissionId,
+      ledger,
+      deps: archiveDeps,
+      lockClient: deps.lockClient,
+    });
+    if (archiveResult.status === 'FAILED_UPLOAD') {
+      await ledger.update(data.submissionId, { status: 'FAILED_UPLOAD', errorMessage: archiveResult.errorMessage });
+      return {
+        submissionId: data.submissionId,
+        status: 'FAILED_UPLOAD',
+        contactId,
+        errorMessage: archiveResult.errorMessage,
+      };
     }
+    const { uploadDocumentId, attachmentUrl } = archiveResult;
     await ledger.update(data.submissionId, { status: 'ARCHIVED', uploadDocumentId });
 
     const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName);

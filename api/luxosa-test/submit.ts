@@ -1,31 +1,18 @@
 // POST /api/luxosa-test/submit — the single entry point for the browser ->
-// server Luxosa Test contract. Payload-size bound and a best-effort,
-// process-local rate limiter run here (before validation even starts);
-// everything else is delegated to processSubmission().
+// server Luxosa Test contract. Payload-size bound and a Redis-distributed
+// rate limiter run here (before validation even starts); everything else
+// is delegated to processSubmission().
 //
-// The in-process rate limiter is NOT distributed (same honesty caveat as
-// the ledger: a serverless instance is ephemeral and can be scaled to many
-// concurrent instances). It still blocks obvious single-instance abuse at
-// zero infrastructure cost; a durable/distributed limiter needs the same
-// storage provider as the ledger (see server/luxosaTest/ledger.ts).
+// FAIL CLOSED: if the rate limiter can't reach Redis, the request is
+// rejected (503) rather than let through unchecked — same policy as the
+// ledger (server/luxosaTest/ledger.ts).
 
 import { processSubmission } from '../../server/luxosaTest/submission';
+import { isRateLimited } from '../../server/luxosaTest/rateLimit';
 
 export const config = { runtime: 'nodejs' };
 
 const MAX_BODY_BYTES = 20_000; // generous for the answers payload, far below abuse territory
-const RATE_LIMIT_WINDOW_MS = 60_000;
-const RATE_LIMIT_MAX_REQUESTS = 10;
-
-const hits = new Map<string, number[]>();
-
-function isRateLimited(key: string): boolean {
-  const now = Date.now();
-  const timestamps = (hits.get(key) ?? []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
-  timestamps.push(now);
-  hits.set(key, timestamps);
-  return timestamps.length > RATE_LIMIT_MAX_REQUESTS;
-}
 
 function clientKey(request: Request): string {
   return request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
@@ -40,8 +27,13 @@ export default async function handler(request: Request): Promise<Response> {
     return json(405, { error: 'method not allowed' });
   }
 
-  if (isRateLimited(clientKey(request))) {
-    return json(429, { error: 'rate limited' });
+  try {
+    if (await isRateLimited(clientKey(request))) {
+      return json(429, { error: 'rate limited' });
+    }
+  } catch (err) {
+    console.error('[luxosa-test] rate limiter unavailable, failing closed:', err);
+    return json(503, { error: 'service temporarily unavailable' });
   }
 
   const contentLength = Number(request.headers.get('content-length') ?? '0');

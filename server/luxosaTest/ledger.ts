@@ -3,18 +3,13 @@
 // no PDF are ever stored here (see LedgerEntry below for the exhaustive
 // field list).
 //
-// BLOCKER (documented, not worked around): this repository has no durable
-// storage provisioned. A Vercel serverless function is stateless between
-// invocations, so an in-memory Map cannot provide real idempotency in
-// production — it only works for a single local process. InMemoryLedger
-// below exists ONLY to let the rest of the pipeline (and its tests) be
-// built and exercised today; getLedger() refuses to silently use it unless
-// LUXOSA_LEDGER_PROVIDER is explicitly set to "memory-dev-only", and throws
-// a clear, actionable error otherwise. See the final report for the exact
-// provisioning steps needed to replace this with a real provider (Vercel
-// KV/Upstash Redis is the recommended minimal fit: atomic SETNX-style
-// claim, no application database, Vercel-native env var injection once
-// connected).
+// Durable provider: Upstash Redis (see redisClient.ts), wired in as
+// RedisLedger below. InMemoryLedger still exists ONLY for explicitly-opted
+// local/dev testing (LUXOSA_LEDGER_PROVIDER=memory-dev-only) and is refused
+// outright on Vercel — see getLedger().
+
+import { getRedisClient, isRedisConfigured } from './redisClient';
+import type { DocumentiMap } from './customFields';
 
 export type LedgerStatus =
   | 'RECEIVED'
@@ -45,6 +40,14 @@ export interface LedgerEntry {
   emailProviderMessageId: string | null;
   resultHash: string | null;
   errorMessage: string | null;
+  // Snapshot of the Documenti custom field taken BEFORE the first upload
+  // attempt for this submission, persisted once and never overwritten by a
+  // later re-read. Upload replaces the whole field value, so a crash after
+  // upload and before the final merge-PUT would otherwise make a retry
+  // believe the only-just-uploaded file is the entire history; this
+  // snapshot is what lets a retry reconstruct previous+new correctly.
+  // Technical metadata only (file ids/urls/names), never the PDF itself.
+  documentsSnapshotBeforeUpload: DocumentiMap | null;
 }
 
 export interface ClaimResult {
@@ -71,6 +74,7 @@ function emptyEntry(submissionId: string, contactId: string | null): LedgerEntry
     emailProviderMessageId: null,
     resultHash: null,
     errorMessage: null,
+    documentsSnapshotBeforeUpload: null,
   };
 }
 
@@ -100,13 +104,85 @@ export class InMemoryLedger implements Ledger {
   }
 }
 
+// Short technical retention, not a data-retention policy for customer data
+// (none is stored here — see LedgerEntry). 24h is long enough to dedupe an
+// accidental double-submit, a browser/network retry, or a same-day support
+// investigation; short enough to satisfy minimization for what is ultimately
+// just a pipeline run-tracker. Refreshed (slid) on every update() so a
+// normal multi-second pipeline run is never at risk of expiring mid-flight.
+const LEDGER_TTL_SECONDS = 24 * 60 * 60;
+
+function ledgerKey(submissionId: string): string {
+  return `luxosa-test:ledger:${submissionId}`;
+}
+
+// Minimal surface this module needs from the Redis client — lets tests
+// inject an in-memory fake instead of talking to real Upstash.
+export interface LedgerClient {
+  get<TData>(key: string): Promise<TData | null>;
+  set<TData>(key: string, value: TData, opts?: { nx?: true; ex?: number }): Promise<'OK' | TData | null>;
+}
+
+// Durable, cross-instance ledger backed by Upstash Redis. claim() is the
+// only operation that must be truly atomic across concurrent instances —
+// implemented as SET key value NX EX, exactly the primitive Upstash Redis
+// is built around for this pattern (no read-then-write race window).
+export class RedisLedger implements Ledger {
+  private client: LedgerClient;
+
+  constructor(client?: LedgerClient) {
+    this.client = client ?? (getRedisClient() as unknown as LedgerClient);
+  }
+
+  async claim(submissionId: string, contactId: string | null): Promise<ClaimResult> {
+    const key = ledgerKey(submissionId);
+    const entry = emptyEntry(submissionId, contactId);
+    const result = await this.client.set(key, entry, { nx: true, ex: LEDGER_TTL_SECONDS });
+    if (result === 'OK') {
+      return { claimed: true, existing: null };
+    }
+    const existing = await this.client.get<LedgerEntry>(key);
+    return { claimed: false, existing: existing ?? null };
+  }
+
+  async get(submissionId: string): Promise<LedgerEntry | null> {
+    const existing = await this.client.get<LedgerEntry>(ledgerKey(submissionId));
+    return existing ?? null;
+  }
+
+  async update(submissionId: string, patch: Partial<LedgerEntry>): Promise<LedgerEntry> {
+    const key = ledgerKey(submissionId);
+    const existing = await this.client.get<LedgerEntry>(key);
+    if (!existing) throw new Error(`RedisLedger.update: no entry for ${submissionId}`);
+    const updated: LedgerEntry = { ...existing, ...patch, updatedAt: new Date().toISOString() };
+    await this.client.set(key, updated, { ex: LEDGER_TTL_SECONDS });
+    return updated;
+  }
+}
+
 let singleton: Ledger | null = null;
 
 export function getLedger(): Ledger {
   if (singleton) return singleton;
 
+  if (isRedisConfigured()) {
+    singleton = new RedisLedger();
+    return singleton;
+  }
+
   const provider = process.env.LUXOSA_LEDGER_PROVIDER;
+  const onVercel = process.env.VERCEL === '1';
+
   if (provider === 'memory-dev-only') {
+    if (onVercel) {
+      // FAIL CLOSED: never allow the non-durable ledger to run on Vercel,
+      // even if this was set there by mistake — a serverless instance
+      // cannot provide real idempotency from an in-memory Map.
+      throw new Error(
+        'LUXOSA_LEDGER_PROVIDER=memory-dev-only is not allowed on Vercel (VERCEL=1). ' +
+          'Configure Upstash Redis (UPSTASH_REDIS_REST_KV_REST_API_URL / _TOKEN) instead.',
+      );
+    }
     console.warn(
       '[luxosa-test] LUXOSA_LEDGER_PROVIDER=memory-dev-only — ledger is NOT durable across invocations. ' +
         'Local/dev testing only. Never use in production.',
@@ -115,9 +191,11 @@ export function getLedger(): Ledger {
     return singleton;
   }
 
+  // FAIL CLOSED: no durable provider and no explicit, non-production dev
+  // opt-in — refuse rather than silently proceed without idempotency.
   throw new Error(
-    'No durable ledger provider configured. Set LUXOSA_LEDGER_PROVIDER=memory-dev-only for local/dev testing only, ' +
-      'or provision a real provider (recommended: Vercel KV / Upstash Redis) and implement a Ledger backed by it. ' +
-      'See the E2E implementation report for exact provisioning steps.',
+    'No durable ledger provider configured. Configure Upstash Redis ' +
+      '(UPSTASH_REDIS_REST_KV_REST_API_URL / _TOKEN) or set LUXOSA_LEDGER_PROVIDER=memory-dev-only ' +
+      'for local/dev testing only (never on Vercel).',
   );
 }

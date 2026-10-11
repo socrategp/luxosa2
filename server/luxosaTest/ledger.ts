@@ -105,12 +105,15 @@ export class InMemoryLedger implements Ledger {
 }
 
 // Short technical retention, not a data-retention policy for customer data
-// (none is stored here — see LedgerEntry). 24h is long enough to dedupe an
-// accidental double-submit, a browser/network retry, or a same-day support
-// investigation; short enough to satisfy minimization for what is ultimately
-// just a pipeline run-tracker. Refreshed (slid) on every update() so a
-// normal multi-second pipeline run is never at risk of expiring mid-flight.
-const LEDGER_TTL_SECONDS = 24 * 60 * 60;
+// (none is stored here — see LedgerEntry). 7 days, not just 24h: this entry
+// is not only a double-submit guard, it is also where documentsArchive.ts
+// persists the minimal technical snapshot needed to reconcile an
+// interrupted Documenti transaction (documentsSnapshotBeforeUpload) — that
+// reconciliation window needs to outlive a single day. Still bounded and
+// minimal (no answers, no full result, no PDF — see LedgerEntry), and
+// refreshed (slid) on every update() so it tracks from the last touch of
+// the technical transaction, not a fixed calendar date.
+const LEDGER_TTL_SECONDS = 7 * 24 * 60 * 60;
 
 function ledgerKey(submissionId: string): string {
   return `luxosa-test:ledger:${submissionId}`;

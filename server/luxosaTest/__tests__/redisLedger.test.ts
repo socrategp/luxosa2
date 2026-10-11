@@ -60,7 +60,7 @@ test('update() throws for an unknown submissionId rather than silently creating 
   await assert.rejects(() => ledger.update('ghost-id', { status: 'COMPLETED' }));
 });
 
-test('claim persists the entry with the configured 24h TTL (ex), not unbounded', async () => {
+test('claim persists the entry with the configured 7-day TTL (ex), not unbounded', async () => {
   const { client, store } = createFakeLedgerClient();
   const ledger = new RedisLedger(client);
   await ledger.claim('sub5', 'contact5');
@@ -68,8 +68,9 @@ test('claim persists the entry with the configured 24h TTL (ex), not unbounded',
   assert.ok(raw, 'entry should be present in the backing store');
   assert.ok(raw!.expiresAt !== null, 'entry must have a TTL, not persist forever');
   const remainingMs = raw!.expiresAt! - Date.now();
-  // 24h = 86_400_000ms — allow generous slack for test execution time.
-  assert.ok(remainingMs > 86_000_000 && remainingMs <= 86_400_000, `expected ~24h TTL, got ${remainingMs}ms remaining`);
+  const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
+  // Allow generous slack for test execution time.
+  assert.ok(remainingMs > sevenDaysMs - 400_000 && remainingMs <= sevenDaysMs, `expected ~7d TTL, got ${remainingMs}ms remaining`);
 });
 
 test('update() refreshes (slides) the TTL rather than letting it expire mid-pipeline', async () => {

@@ -39,12 +39,26 @@ function payload(submissionId: string) {
   };
 }
 
+// Each prefix below is exactly 8 characters and distinct from the other —
+// matching the production naming rule (submissionIdShort = the first 8
+// characters of the real submissionId, see pdfGeneration.ts), so the two
+// test cases never collide on the same archived filename and the naming
+// behavior is exercised for real, not accidentally short-circuited by a
+// shared prefix. (A prior run used "sub_int_" for both tests, including
+// as a sub-prefix of "sub_int_replay_" — identical first 8 characters —
+// which silently made the replay test reuse the first test's own upload
+// instead of archiving its own file.)
+function uniqueSubmissionId(prefix8: string): string {
+  if (prefix8.length !== 8) throw new Error(`prefix8 must be exactly 8 characters, got "${prefix8}" (${prefix8.length})`);
+  return `${prefix8}${Date.now()}`;
+}
+
 test(
   'real E2E against the sandbox: reaches COMPLETED, email sent, writes land only on the sandbox contact',
   { skip: !HAS_CREDENTIALS && 'GHL_PRIVATE_INTEGRATION_TOKEN / GHL_LOCATION_ID not set' },
   async () => {
     assert.equal(process.env.LUXOSA_TEST_MODE, 'test', 'refusing to run this test outside TEST MODE');
-    const submissionId = `sub_int_${Date.now()}`;
+    const submissionId = uniqueSubmissionId('e2emain_');
     const outcome = await processSubmission(payload(submissionId));
     console.log('[integration] outcome:', JSON.stringify(outcome));
     assert.equal(outcome.contactId, SANDBOX_CONTACT_ID);
@@ -56,7 +70,7 @@ test(
   'replay submission (real sandbox): same submissionId twice returns the identical cached outcome, no second email',
   { skip: !HAS_CREDENTIALS && 'GHL_PRIVATE_INTEGRATION_TOKEN / GHL_LOCATION_ID not set' },
   async () => {
-    const submissionId = `sub_int_replay_${Date.now()}`;
+    const submissionId = uniqueSubmissionId('e2erepl_');
     const first = await processSubmission(payload(submissionId));
     const second = await processSubmission(payload(submissionId));
     console.log('[integration] replay first:', JSON.stringify(first));

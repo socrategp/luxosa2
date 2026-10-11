@@ -1,8 +1,14 @@
 // In-memory fake matching distributedLock.ts's LockClient surface (SET NX
-// PX + Lua check-and-del via eval), so tests never need real Upstash
-// network access. TTL-aware (checks real elapsed time), so lock-timeout
-// and lock-expiry scenarios are exercised faithfully, not just happy-path
-// acquire/release.
+// PX, plus Lua check-and-del / check-and-extend via eval), so tests never
+// need real Upstash network access. TTL-aware (checks real elapsed time),
+// so lock-timeout, lock-expiry, and renewal scenarios are all exercised
+// faithfully, not just happy-path acquire/release.
+//
+// eval() is called with two different scripts in distributedLock.ts, but
+// this fake doesn't need to parse Lua to tell them apart: release always
+// passes exactly 1 arg (the token), renewal always passes 2 (token, ttlMs)
+// — so arg count alone discriminates check-and-delete from
+// check-and-extend.
 
 import type { LockClient } from '../../distributedLock';
 
@@ -27,13 +33,18 @@ export function createFakeLockClient(): LockClient {
     },
     async eval(_script, keys, args) {
       const [key] = keys;
-      const [token] = args;
+      const [token, ttlArg] = args;
       const existing = store.get(key);
-      if (isAlive(existing) && existing.value === token) {
-        store.delete(key);
+      if (!isAlive(existing) || existing.value !== token) return 0;
+
+      if (ttlArg !== undefined) {
+        // Renewal: check-and-extend, never deletes.
+        store.set(key, { value: token, expiresAt: Date.now() + Number(ttlArg) });
         return 1;
       }
-      return 0;
+      // Release: check-and-delete.
+      store.delete(key);
+      return 1;
     },
   };
 }

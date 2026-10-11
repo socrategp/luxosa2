@@ -6,16 +6,29 @@
 // key if it still holds OUR token, so one execution can never release a
 // lock acquired by another (e.g. after its own TTL already expired and a
 // third execution took over).
+//
+// The initial TTL alone is NOT what keeps the lock safe for the duration of
+// the critical section (read/snapshot -> upload -> PUT -> re-read/verify):
+// that section does several real GHL round trips and its actual duration is
+// not bounded by anything this process controls. Correctness instead comes
+// from periodic owner-safe RENEWAL (startLockRenewal below) — the initial
+// TTL only needs enough margin to survive up to the first renewal tick.
 
 import { randomUUID } from 'node:crypto';
 import { getRedisClient } from './redisClient';
 
 export const DOCUMENTS_LOCK_PREFIX = 'luxosa-test:documents-lock:';
 
-// Generous enough for a GHL upload + two GET + one PUT round trip under
-// normal latency; short enough that a crashed holder self-heals quickly
-// without manual intervention.
-export const DOCUMENTS_LOCK_TTL_MS = 30_000;
+// Ample margin above observed real GHL latency for the critical section's
+// first read+upload round trip (a few seconds in practice — see the E2E
+// report) before the first renewal tick lands. Not load-bearing for the
+// rest of the critical section's duration; renewal is.
+export const DOCUMENTS_LOCK_TTL_MS = 45_000;
+
+// Renew at 1/3 of the TTL, so a holder gets at least two renewal attempts
+// before the lock could expire out from under it even if one tick is
+// delayed or dropped.
+export const DOCUMENTS_LOCK_RENEWAL_INTERVAL_MS = Math.floor(DOCUMENTS_LOCK_TTL_MS / 3);
 
 // Bounded wait for a contender on the SAME contactId (two submissions of
 // the same person racing). Past this, fail explicitly rather than queue
@@ -27,6 +40,18 @@ const DOCUMENTS_LOCK_POLL_INTERVAL_MS = 250;
 const RELEASE_IF_OWNER_SCRIPT = `
 if redis.call("get", KEYS[1]) == ARGV[1] then
   return redis.call("del", KEYS[1])
+else
+  return 0
+end
+`;
+
+// Atomic check-and-extend: only resets the TTL if the key still holds OUR
+// token, in one Redis command execution (no separate GET then PEXPIRE,
+// which would leave a window for another owner to take over in between).
+const RENEW_IF_OWNER_SCRIPT = `
+if redis.call("get", KEYS[1]) == ARGV[1] then
+  redis.call("pexpire", KEYS[1], ARGV[2])
+  return 1
 else
   return 0
 end
@@ -73,4 +98,54 @@ export async function releaseLock(key: string, token: string, options: { client?
   const client = options.client ?? defaultClient();
   const result = await client.eval(RELEASE_IF_OWNER_SCRIPT, [key], [token]);
   return result === 1;
+}
+
+export interface LockRenewalHandle {
+  readonly token: string;
+  // False once a renewal tick has confirmed (or failed to confirm) that we
+  // no longer hold the lock. The critical section must check this before
+  // every further mutation and fail closed if it has flipped.
+  hasOwnership(): boolean;
+  stop(): void;
+}
+
+// Periodically re-extends the lock's TTL, but ONLY while the stored value
+// still matches our token (atomic check-and-extend — see
+// RENEW_IF_OWNER_SCRIPT). If a tick ever finds the token no longer matches
+// (another owner took over after our TTL lapsed) — or the renewal call
+// itself fails, e.g. Redis unreachable, so continued ownership can no
+// longer be confirmed — ownership is marked lost and never un-marked; the
+// caller is expected to check hasOwnership() before every subsequent write
+// and fail closed rather than assume it is still safe to mutate.
+export function startLockRenewal(
+  key: string,
+  token: string,
+  options: { ttlMs?: number; renewalIntervalMs?: number; client?: LockClient } = {},
+): LockRenewalHandle {
+  const client = options.client ?? defaultClient();
+  const ttlMs = options.ttlMs ?? DOCUMENTS_LOCK_TTL_MS;
+  const renewalIntervalMs = options.renewalIntervalMs ?? Math.floor(ttlMs / 3);
+  let ownershipLost = false;
+
+  const timer = setInterval(() => {
+    if (ownershipLost) return;
+    client
+      .eval(RENEW_IF_OWNER_SCRIPT, [key], [token, String(ttlMs)])
+      .then(result => {
+        if (result !== 1) ownershipLost = true;
+      })
+      .catch(() => {
+        // Can't confirm we still hold the lock — fail closed rather than
+        // assume we do.
+        ownershipLost = true;
+      });
+  }, renewalIntervalMs);
+  // Never keep the Node process alive just for this background renewal.
+  if (typeof timer.unref === 'function') timer.unref();
+
+  return {
+    token,
+    hasOwnership: () => !ownershipLost,
+    stop: () => clearInterval(timer),
+  };
 }

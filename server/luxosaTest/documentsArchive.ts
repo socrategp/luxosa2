@@ -17,7 +17,7 @@
 // reconstruct previous+new correctly instead.
 
 import type { Ledger } from './ledger';
-import { acquireLock, releaseLock, DOCUMENTS_LOCK_PREFIX, type LockClient } from './distributedLock';
+import { acquireLock, releaseLock, startLockRenewal, DOCUMENTS_LOCK_PREFIX, type LockClient } from './distributedLock';
 import { findCustomFieldValue, asDocumentiMap, fileAlreadyUploaded, extractEntryByFileName, type DocumentiMap } from './customFields';
 import { FIELD_DOCUMENTI } from './ghlClient';
 import type {
@@ -51,6 +51,7 @@ export interface ArchiveDossierParams {
   // (DOCUMENTS_LOCK_MAX_WAIT_MS); production leaves them at the defaults.
   lockTtlMs?: number;
   lockMaxWaitMs?: number;
+  lockRenewalIntervalMs?: number;
 }
 
 export interface ArchiveDossierResult {
@@ -67,8 +68,11 @@ function extractUploadedDocumentId(body: unknown): string | null {
   return typeof direct === 'string' ? direct : null;
 }
 
+const OWNERSHIP_LOST_MESSAGE =
+  'Lost ownership of the documents lock during the critical section — aborting before further mutation (fail closed)';
+
 export async function archiveDossier(params: ArchiveDossierParams): Promise<ArchiveDossierResult> {
-  const { contactId, fileName, pdfBuffer, submissionId, ledger, deps, lockClient, lockTtlMs, lockMaxWaitMs } = params;
+  const { contactId, fileName, pdfBuffer, submissionId, ledger, deps, lockClient, lockTtlMs, lockMaxWaitMs, lockRenewalIntervalMs } = params;
   const lockKey = `${DOCUMENTS_LOCK_PREFIX}${contactId}`;
 
   const lock = await acquireLock(lockKey, { client: lockClient, ttlMs: lockTtlMs, maxWaitMs: lockMaxWaitMs });
@@ -80,6 +84,16 @@ export async function archiveDossier(params: ArchiveDossierParams): Promise<Arch
       errorMessage: 'Could not acquire the documents lock for this contact within the timeout (another submission is archiving concurrently)',
     };
   }
+
+  // The initial TTL only needs to survive until the first renewal tick —
+  // correctness for the rest of the (variable-length) critical section
+  // comes from this periodic owner-safe renewal, not from guessing a TTL
+  // long enough up front.
+  const renewal = startLockRenewal(lockKey, lock.token!, {
+    client: lockClient,
+    ttlMs: lockTtlMs,
+    renewalIntervalMs: lockRenewalIntervalMs,
+  });
 
   try {
     // Snapshot: reuse what a prior (crashed) attempt already persisted for
@@ -122,6 +136,9 @@ export async function archiveDossier(params: ArchiveDossierParams): Promise<Arch
       const existingValues = newEntry ? Object.values(newEntry) : [];
       uploadDocumentId = existingValues[0]?.documentId ?? null;
     } else {
+      if (!renewal.hasOwnership()) {
+        return { status: 'FAILED_UPLOAD', uploadDocumentId: null, attachmentUrl: null, errorMessage: OWNERSHIP_LOST_MESSAGE };
+      }
       const uploadResult = await deps.uploadDocument(contactId, fileName, pdfBuffer, 'application/pdf');
       uploadDocumentId = extractUploadedDocumentId(uploadResult.body);
 
@@ -137,6 +154,9 @@ export async function archiveDossier(params: ArchiveDossierParams): Promise<Arch
     // read — the live field only ever shows the single most-recent upload.
     const mergedValue: DocumentiMap = { ...snapshot, ...(newEntry ?? {}) };
 
+    if (!renewal.hasOwnership()) {
+      return { status: 'FAILED_UPLOAD', uploadDocumentId, attachmentUrl, errorMessage: OWNERSHIP_LOST_MESSAGE };
+    }
     await deps.updateContact(contactId, { customFields: [{ id: FIELD_DOCUMENTI, value: mergedValue }] });
 
     // Verify every entry we expect (snapshot + new) actually survived the
@@ -163,6 +183,7 @@ export async function archiveDossier(params: ArchiveDossierParams): Promise<Arch
     const message = err instanceof Error ? err.message : String(err);
     return { status: 'FAILED_UPLOAD', uploadDocumentId: null, attachmentUrl: null, errorMessage: message };
   } finally {
+    renewal.stop();
     if (lock.token) {
       await releaseLock(lockKey, lock.token, { client: lockClient });
     }

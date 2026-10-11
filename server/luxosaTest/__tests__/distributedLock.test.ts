@@ -4,7 +4,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { acquireLock, releaseLock } from '../distributedLock';
+import { acquireLock, releaseLock, startLockRenewal } from '../distributedLock';
 import { createFakeLockClient } from './fakes/fakeLockClient';
 
 test('acquireLock: succeeds immediately when the key is free', async () => {
@@ -63,4 +63,74 @@ test('acquireLock: two different keys never contend with each other', async () =
   const b = await acquireLock('key-b', { client, maxWaitMs: 0 });
   assert.equal(a.acquired, true);
   assert.equal(b.acquired, true);
+});
+
+test('startLockRenewal: a correct-owner renewal tick extends the TTL and keeps ownership', async () => {
+  const client = createFakeLockClient();
+  const lock = await acquireLock('r1', { client, ttlMs: 100 });
+  assert.equal(lock.acquired, true);
+
+  const renewal = startLockRenewal('r1', lock.token!, { client, ttlMs: 100, renewalIntervalMs: 30 });
+  await new Promise(resolve => setTimeout(resolve, 80));
+  assert.equal(renewal.hasOwnership(), true);
+
+  renewal.stop();
+  const released = await releaseLock('r1', lock.token!, { client });
+  assert.equal(released, true);
+});
+
+test("startLockRenewal: a renewal attempt with the wrong token is a no-op (does not touch the real owner's lock)", async () => {
+  const client = createFakeLockClient();
+  const owner = await acquireLock('r2', { client, ttlMs: 5000 });
+  assert.equal(owner.acquired, true);
+
+  const impostorRenewal = startLockRenewal('r2', 'not-the-real-token', { client, ttlMs: 5000, renewalIntervalMs: 20 });
+  await new Promise(resolve => setTimeout(resolve, 60));
+  assert.equal(impostorRenewal.hasOwnership(), false, "an impostor's renewal must never report success");
+  impostorRenewal.stop();
+
+  const releasedByRealOwner = await releaseLock('r2', owner.token!, { client });
+  assert.equal(releasedByRealOwner, true, "the real owner's token must be untouched by the impostor's failed renewal");
+});
+
+test('startLockRenewal: the lock remains valid throughout a simulated critical section longer than the initial TTL', async () => {
+  const client = createFakeLockClient();
+  const lock = await acquireLock('r3', { client, ttlMs: 100 });
+  assert.equal(lock.acquired, true);
+
+  const renewal = startLockRenewal('r3', lock.token!, { client, ttlMs: 100, renewalIntervalMs: 30 });
+  // Simulated critical section lasting well past the original 100ms TTL.
+  await new Promise(resolve => setTimeout(resolve, 150));
+
+  const contender = await acquireLock('r3', { client, maxWaitMs: 0 });
+  assert.equal(contender.acquired, false, 'renewal should have kept the lock alive past its original TTL');
+  assert.equal(renewal.hasOwnership(), true);
+
+  renewal.stop();
+  const released = await releaseLock('r3', lock.token!, { client });
+  assert.equal(released, true);
+
+  const nowFree = await acquireLock('r3', { client, maxWaitMs: 0 });
+  assert.equal(nowFree.acquired, true, 'lock must be free after the real owner releases it');
+});
+
+test('startLockRenewal: losing ownership to another owner is detected and reported as a sticky failure', async () => {
+  const client = createFakeLockClient();
+  const original = await acquireLock('r4', { client, ttlMs: 20 });
+  assert.equal(original.acquired, true);
+
+  // Renewal interval (50ms) deliberately longer than the TTL (20ms), so the
+  // lock genuinely expires before the first renewal tick — a worst-case
+  // race where another process takes over first.
+  const renewal = startLockRenewal('r4', original.token!, { client, ttlMs: 20, renewalIntervalMs: 50 });
+  await new Promise(resolve => setTimeout(resolve, 30));
+
+  const takeover = await acquireLock('r4', { client, ttlMs: 10_000, maxWaitMs: 0 });
+  assert.equal(takeover.acquired, true, 'a different owner must be able to take over the now-expired lock');
+
+  // Let the delayed renewal tick fire — it must detect the mismatch.
+  await new Promise(resolve => setTimeout(resolve, 40));
+  assert.equal(renewal.hasOwnership(), false, 'the original holder must detect it lost ownership');
+
+  renewal.stop();
 });

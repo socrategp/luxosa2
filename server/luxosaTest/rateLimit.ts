@@ -1,7 +1,11 @@
 // Redis-distributed rate limiter — replaces the old in-process Map, which
 // could not see requests handled by a different serverless instance.
-// Fixed-window counter via INCR+EXPIRE: INCR is atomic on Redis, so
-// concurrent requests in the same window never under-count each other.
+// Fixed-window counter via a single atomic Lua script (INCR, then PEXPIRE
+// only on the first hit of the window) — a separate INCR followed by a
+// separate EXPIRE call would leave a window between the two where a crash
+// (or the process simply never getting to the second call) leaves the key
+// incremented but without a TTL, so it would never expire. One eval() call
+// is one atomic Redis command execution; there is no window to leave open.
 // No second service: reuses the same Upstash Redis instance as the ledger.
 
 import { getRedisClient } from './redisClient';
@@ -10,9 +14,16 @@ export const RATE_LIMIT_WINDOW_SECONDS = Number(process.env.LUXOSA_RATE_LIMIT_WI
 export const RATE_LIMIT_MAX_REQUESTS = Number(process.env.LUXOSA_RATE_LIMIT_MAX_REQUESTS ?? 10);
 
 export interface RateLimitClient {
-  incr(key: string): Promise<number>;
-  expire(key: string, seconds: number): Promise<number | boolean>;
+  eval(script: string, keys: string[], args: string[]): Promise<unknown>;
 }
+
+const INCR_WITH_TTL_SCRIPT = `
+local count = redis.call("INCR", KEYS[1])
+if count == 1 then
+  redis.call("PEXPIRE", KEYS[1], ARGV[1])
+end
+return count
+`;
 
 // FAIL CLOSED: if Redis is unreachable we cannot verify the caller is
 // within limits, so the caller must treat a thrown error as "reject the
@@ -27,10 +38,9 @@ export async function isRateLimited(
 
   const windowBucket = Math.floor(Date.now() / 1000 / windowSeconds);
   const windowKey = `luxosa-test:ratelimit:${key}:${windowBucket}`;
+  const windowMs = windowSeconds * 1000;
 
-  const count = await client.incr(windowKey);
-  if (count === 1) {
-    await client.expire(windowKey, windowSeconds);
-  }
+  const result = await client.eval(INCR_WITH_TTL_SCRIPT, [windowKey], [String(windowMs)]);
+  const count = typeof result === 'number' ? result : Number(result);
   return count > maxRequests;
 }

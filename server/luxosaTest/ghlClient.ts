@@ -7,8 +7,10 @@
 // (read-only GET/no-op probes, 2026-10-10): contacts.readonly, contacts
 // search/query, contacts.write, contacts/notes.readonly all return 200.
 // locations.readonly and locations/customFields.readonly return 401 ("not
-// authorized for this scope"); conversations/search returns 401 — email
-// sending is BLOCKED until that scope is added (see sendDossierEmail).
+// authorized for this scope"); conversations/search (a read endpoint) also
+// returns 401, but that scope is unrelated to sending. conversations/
+// message.write was added separately, and real email sending is verified
+// working end to end (see sendDossierEmail).
 
 const BASE_URL = 'https://services.leadconnectorhq.com';
 const CONTACTS_API_VERSION = '2021-07-28';
@@ -22,11 +24,10 @@ export const SANDBOX_LOCATION_ID = 'BLblyxBc2SQtAviSppr5';
 // elsewhere in this codebase.
 export const FIELD_ULTIMA_DATA = 'baDYUcYkGZ2UUVgD9FRD';
 export const FIELD_DOCUMENTI = 'tzRkZVDj1SoYHUlkO5AF';
-// Identity confirmed empirically (not via the blocked customFields list
-// endpoint): this is the only customField id on the sandbox contact whose
-// value — ["Consenso prestato"] — matches the single known checkbox option
-// for "Privacy | Consenso marketing". Formal name/key confirmation via
-// GET /locations/{id}/customFields is blocked by missing scope (see below).
+// Confirmed: "Privacy | Consenso marketing" (key
+// contact.privacy__consenso_marketing), CHECKBOX type, API value format
+// ["Consenso prestato"]. Write/read verified empirically on the sandbox
+// contact.
 export const FIELD_CONSENSO_MARKETING = 'vRIoj7Qom8xNRclYt5ub';
 export const CONSENSO_MARKETING_OPTION = 'Consenso prestato';
 

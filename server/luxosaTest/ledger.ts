@@ -30,6 +30,7 @@ export type LedgerStatus =
   | 'TEST_IDENTITY_NOT_ALLOWED'
   | 'BLOCKED_TEST_CONFIG_MISSING'
   | 'BLOCKED_TEST_RECIPIENT_MISMATCH'
+  | 'BLOCKED_MODE_CONFIG_INVALID'
   | 'UNKNOWN';
 
 export interface LedgerEntry {

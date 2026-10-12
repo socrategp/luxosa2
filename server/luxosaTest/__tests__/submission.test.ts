@@ -163,9 +163,10 @@ test('identity conflict simulato (end to end through the orchestrator, productio
   // Identity conflict detection is a PRODUCTION-mode path: TEST MODE no
   // longer calls reconcileIdentity at all (see the TEST MODE isolation
   // tests below), so this scenario is exercised with LUXOSA_TEST_MODE
-  // temporarily unset, exactly as it already was before TEST MODE existed.
+  // explicitly set to "production" — mode must be an explicit, valid
+  // value, never unset/deleted (that is now its own fail-closed case).
   const original = process.env.LUXOSA_TEST_MODE;
-  delete process.env.LUXOSA_TEST_MODE;
+  process.env.LUXOSA_TEST_MODE = 'production';
   try {
     const ledger = new InMemoryLedger();
     let writeAttempted = false;
@@ -465,9 +466,9 @@ test('pre-email guard: Contact email on file no longer matches the sandbox addre
   assert.equal(emailSent, false, 'no send once the recipient Contact email fails the independent pre-send check');
 });
 
-test('production mode (LUXOSA_TEST_MODE unset): real identity reconciliation runs and standard Contact fields are written, unchanged from before this phase', async () => {
+test('production mode (LUXOSA_TEST_MODE=production): real identity reconciliation runs and standard Contact fields are written, unchanged from before this phase', async () => {
   const original = process.env.LUXOSA_TEST_MODE;
-  delete process.env.LUXOSA_TEST_MODE;
+  process.env.LUXOSA_TEST_MODE = 'production';
   try {
     let reconcileCalled = false;
     const deps = happyDeps({
@@ -486,4 +487,55 @@ test('production mode (LUXOSA_TEST_MODE unset): real identity reconciliation run
   } finally {
     if (original !== undefined) process.env.LUXOSA_TEST_MODE = original;
   }
+});
+
+// --- LUXOSA_TEST_MODE must be explicit and valid ------------------------
+// No implicit default toward production: missing, empty, or any value
+// other than exactly "test"/"production" must fail closed, before any
+// GHL/email side effect, with zero exceptions.
+
+async function expectModeFailsClosed(modeValue: string | undefined) {
+  const original = process.env.LUXOSA_TEST_MODE;
+  if (modeValue === undefined) {
+    delete process.env.LUXOSA_TEST_MODE;
+  } else {
+    process.env.LUXOSA_TEST_MODE = modeValue;
+  }
+  try {
+    let anySideEffect = false;
+    const deps: Partial<SubmissionDeps> = {
+      ledger: new InMemoryLedger(),
+      reconcileIdentity: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      getContact: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      updateContact: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      uploadDocument: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      sendDossierEmail: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      generateDossierPdf: async () => { anySideEffect = true; throw new Error('must not be called'); },
+    };
+    const outcome = await processSubmission(basePayload(), deps);
+    assert.equal(outcome.status, 'BLOCKED_MODE_CONFIG_INVALID');
+    assert.equal(outcome.contactId, null);
+    assert.equal(anySideEffect, false, 'zero GHL/PDF/email side effects for an invalid mode');
+  } finally {
+    if (original !== undefined) process.env.LUXOSA_TEST_MODE = original;
+    else delete process.env.LUXOSA_TEST_MODE;
+  }
+}
+
+test('LUXOSA_TEST_MODE assente (var deleted) -> BLOCKED_MODE_CONFIG_INVALID, fail closed', async () => {
+  await expectModeFailsClosed(undefined);
+});
+
+test('LUXOSA_TEST_MODE vuoto ("") -> BLOCKED_MODE_CONFIG_INVALID, fail closed', async () => {
+  await expectModeFailsClosed('');
+});
+
+test('LUXOSA_TEST_MODE sconosciuto ("staging") -> BLOCKED_MODE_CONFIG_INVALID, fail closed', async () => {
+  await expectModeFailsClosed('staging');
+});
+
+test('LUXOSA_TEST_MODE con case diverso ("Test") non è silenziosamente accettato -> BLOCKED_MODE_CONFIG_INVALID', async () => {
+  // Guards against a naive case-insensitive comparison creeping in later —
+  // only the exact lowercase literals "test"/"production" are valid.
+  await expectModeFailsClosed('Test');
 });

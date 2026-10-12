@@ -31,8 +31,27 @@ export const FIELD_DOCUMENTI = 'tzRkZVDj1SoYHUlkO5AF';
 export const FIELD_CONSENSO_MARKETING = 'vRIoj7Qom8xNRclYt5ub';
 export const CONSENSO_MARKETING_OPTION = 'Consenso prestato';
 
+export type LuxosaMode = 'test' | 'production';
+
+// Thrown by getLuxosaMode()/isTestMode() whenever LUXOSA_TEST_MODE is
+// missing, empty, or anything other than exactly "test"/"production".
+// Deliberately no implicit default — ambiguous config must never silently
+// behave as production.
+export class LuxosaModeConfigError extends Error {
+  constructor() {
+    super('LUXOSA_TEST_MODE must be set to exactly "test" or "production" — no implicit default is allowed.');
+    this.name = 'LuxosaModeConfigError';
+  }
+}
+
+export function getLuxosaMode(): LuxosaMode {
+  const raw = process.env.LUXOSA_TEST_MODE;
+  if (raw === 'test' || raw === 'production') return raw;
+  throw new LuxosaModeConfigError();
+}
+
 export function isTestMode(): boolean {
-  return process.env.LUXOSA_TEST_MODE === 'test';
+  return getLuxosaMode() === 'test';
 }
 
 export function normalizeEmail(email: string): string {

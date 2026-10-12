@@ -22,7 +22,8 @@ import {
   sendDossierEmail as realSendDossierEmail,
   GhlScopeBlockedError,
   EmailSendTimeoutError,
-  isTestMode,
+  getLuxosaMode,
+  type LuxosaMode,
   normalizeEmail,
   getTestSandboxEmail,
   SANDBOX_CONTACT_ID,
@@ -81,6 +82,12 @@ function hashResult(value: unknown): string {
   return createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
 }
 
+function extractSubmissionIdForError(rawPayload: unknown): string {
+  return typeof rawPayload === 'object' && rawPayload !== null && typeof (rawPayload as Record<string, unknown>).submissionId === 'string'
+    ? ((rawPayload as Record<string, unknown>).submissionId as string)
+    : 'unknown';
+}
+
 function buildDossierEmailContent(firstName: string, percorsoName: string): { subject: string; html: string } {
   return {
     subject: 'Il tuo Luxosa Test è pronto',
@@ -99,13 +106,32 @@ export async function processSubmission(
   overrides: Partial<SubmissionDeps> = {},
 ): Promise<SubmissionOutcome> {
   const deps: SubmissionDeps = resolveDeps(overrides);
+
+  // Mode must be explicit and valid before ANYTHING else — before payload
+  // validation, before any GHL call, before PDF/upload/email. There is no
+  // implicit default: missing, empty, or any value other than exactly
+  // "test"/"production" fails closed right here.
+  let mode: LuxosaMode;
+  try {
+    mode = getLuxosaMode();
+  } catch {
+    return {
+      submissionId: extractSubmissionIdForError(rawPayload),
+      status: 'BLOCKED_MODE_CONFIG_INVALID',
+      contactId: null,
+      errorMessage: 'LUXOSA_TEST_MODE must be set to exactly "test" or "production" — refusing before any GHL/email side effect',
+    };
+  }
+  const isTest = mode === 'test';
+
   const validation = validateSubmission(rawPayload);
   if (!validation.ok) {
-    const submissionId =
-      typeof rawPayload === 'object' && rawPayload !== null && typeof (rawPayload as Record<string, unknown>).submissionId === 'string'
-        ? ((rawPayload as Record<string, unknown>).submissionId as string)
-        : 'unknown';
-    return { submissionId, status: 'FAILED_VALIDATION', contactId: null, errorMessage: validation.errors.join('; ') };
+    return {
+      submissionId: extractSubmissionIdForError(rawPayload),
+      status: 'FAILED_VALIDATION',
+      contactId: null,
+      errorMessage: validation.errors.join('; '),
+    };
   }
 
   const data = validation.data;
@@ -129,7 +155,7 @@ export async function processSubmission(
   // outside the sandbox: in TEST MODE the submitted email is the only
   // "identity" that matters, and it must exactly match the one address
   // this environment is authorized to use end to end.
-  if (isTestMode()) {
+  if (isTest) {
     const sandboxEmail = getTestSandboxEmail();
     if (!sandboxEmail) {
       // FAIL CLOSED — refusing before any GHL/email side effect.
@@ -151,7 +177,7 @@ export async function processSubmission(
   }
 
   let contactId: string;
-  if (isTestMode()) {
+  if (isTest) {
     // TEST MODE never performs identity reconciliation against the real
     // CRM (no search by email/phone against arbitrary Contacts) — the
     // allowlist check above already confirmed the submitted email is the
@@ -188,7 +214,7 @@ export async function processSubmission(
     }
   }
 
-  if (isTestMode() && contactId !== SANDBOX_CONTACT_ID) {
+  if (isTest && contactId !== SANDBOX_CONTACT_ID) {
     // Should be unreachable now (TEST MODE no longer calls reconcileIdentity
     // or createContact at all) — kept as defense-in-depth.
     return {
@@ -224,7 +250,7 @@ export async function processSubmission(
     // marketingConsent === false => NO ACTION on the field (no entry pushed,
     // no DND, no clearing of a prior consent).
 
-    if (isTestMode()) {
+    if (isTest) {
       // TEST MODE never mutates the sandbox Contact's standard fields —
       // firstName/lastName/email/phone from the browser are used ONLY to
       // build the dossier content (below), never written back to the
@@ -305,7 +331,7 @@ export async function processSubmission(
     // the authorized sandbox address. Catches any drift between the start
     // of this run and now (e.g. the Contact's email changed out from under
     // us) that the earlier, payload-only check could never see.
-    if (isTestMode()) {
+    if (isTest) {
       const sandboxEmail = getTestSandboxEmail();
       const recipientContact = await deps.getContact(contactId);
       const recipientEmail = recipientContact?.email ? normalizeEmail(recipientContact.email) : null;

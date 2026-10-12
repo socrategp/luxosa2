@@ -5,15 +5,15 @@
 // or faked as success.
 
 import { createHash } from 'node:crypto';
-import { validateSubmission } from './submissionSchema';
-import { reconcileIdentity as realReconcileIdentity } from './identity';
-import { getLedger, type Ledger } from './ledger';
-import type { LedgerStatus } from './ledger';
-import { buildLuxosaTestResult } from '../../src/lib/luxosaTest/result';
-import { generateDossierPdf as realGenerateDossierPdf, buildDossierFileName } from './pdfGeneration';
-import { findCustomFieldValue } from './customFields';
-import { archiveDossier, type ArchiveDeps } from './documentsArchive';
-import type { LockClient } from './distributedLock';
+import { validateSubmission } from './submissionSchema.js';
+import { reconcileIdentity as realReconcileIdentity } from './identity.js';
+import { getLedger, type Ledger } from './ledger.js';
+import type { LedgerStatus } from './ledger.js';
+import { buildLuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
+import { generateDossierPdf as realGenerateDossierPdf, buildDossierFileName } from './pdfGeneration.js';
+import { findCustomFieldValue } from './customFields.js';
+import { archiveDossier, type ArchiveDeps } from './documentsArchive.js';
+import type { LockClient } from './distributedLock.js';
 import {
   getContact as realGetContact,
   updateContact as realUpdateContact,
@@ -31,7 +31,7 @@ import {
   FIELD_ULTIMA_DATA,
   FIELD_CONSENSO_MARKETING,
   CONSENSO_MARKETING_OPTION,
-} from './ghlClient';
+} from './ghlClient.js';
 
 export interface SubmissionOutcome {
   submissionId: string;

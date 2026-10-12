@@ -8,8 +8,8 @@
 // local/dev testing (LUXOSA_LEDGER_PROVIDER=memory-dev-only) and is refused
 // outright on Vercel — see getLedger().
 
-import { getRedisClient, isRedisConfigured } from './redisClient';
-import type { DocumentiMap } from './customFields';
+import { getRedisClient, isRedisConfigured } from './redisClient.js';
+import type { DocumentiMap } from './customFields.js';
 
 export type LedgerStatus =
   | 'RECEIVED'

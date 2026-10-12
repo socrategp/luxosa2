@@ -733,12 +733,14 @@ function ResultScreen({
   whatsapp,
   answers,
   onReset,
+  dossierDelivered,
 }: {
   nome: string;
   email: string;
   whatsapp: string;
   answers: Answers;
   onReset: () => void;
+  dossierDelivered: boolean;
 }) {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [selectedLocationId, setSelectedLocationId] = useState<typeof LUXOSA_LOCATIONS[number]['id']>('messina-cavour');
@@ -866,13 +868,21 @@ function ResultScreen({
           </p>
         </div>
 
-        {/* Conferma invio — sintesi sul sito, dossier completo via PDF email */}
+        {/* Conferma invio — sintesi sul sito, dossier completo via PDF email.
+            dossierDelivered reflects the server's authoritative outcome
+            (status === 'COMPLETED'); never shown as sent when it wasn't. */}
         <div className="mb-12 -mx-6 md:-mx-10 px-6 md:px-10 py-10 md:py-12 bg-ecru/25 border-t border-b border-sand/30 text-center">
           <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
           <h3 className="font-serif text-[26px] md:text-[32px] font-light leading-[1.2] text-charcoal mb-4">Il tuo Luxosa Test è pronto</h3>
-          <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
-            Ti abbiamo appena inviato via email il tuo report personalizzato completo. Controlla la tua casella di posta e, se necessario, anche Spam o Promozioni.
-          </p>
+          {dossierDelivered ? (
+            <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
+              Ti abbiamo appena inviato via email il tuo report personalizzato completo. Controlla la tua casella di posta e, se necessario, anche Spam o Promozioni.
+            </p>
+          ) : (
+            <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
+              Il tuo profilo è completo. Per un piccolo imprevisto tecnico non siamo ancora riusciti a recapitarti il report via email — nessun problema: puoi richiederlo subito qui sotto su WhatsApp, oppure la Maison te lo invierà a breve.
+            </p>
+          )}
         </div>
 
         {/* Percorso secondario */}
@@ -1012,6 +1022,10 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const [contactData, setContactData] = useState<ContactFormData>({
     nome: '', cognome: '', email: '', whatsapp: '', privacyAcknowledged: false, marketingConsent: false,
   });
+  // Whether the server confirmed the dossier was actually generated and
+  // emailed (status === 'COMPLETED'). Only meaningful once screen==='result';
+  // defaults to true so an impossible render order never shows the fallback.
+  const [dossierDelivered, setDossierDelivered] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
   const trackedStepsRef = useRef<Set<string>>(new Set());
   const questionsCompletedTrackedRef = useRef(false);
@@ -1130,24 +1144,34 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
       marketingConsent: data.marketingConsent,
     };
 
-    // The server result is authoritative for PDF/GHL/email — this call's
-    // outcome never changes what the client shows next. The client-side
-    // result below (ResultScreen computing buildLuxosaTestResult itself)
-    // is immediate-UX only, exactly per the browser/server contract.
-    fetch('/api/luxosa-test/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    })
-      .then(res => res.json())
-      .then(outcome => {
-        console.info('[luxosa-test] submission outcome:', outcome);
-      })
-      .catch(err => {
-        console.error('[luxosa-test] submission request failed:', err);
-      });
+    // The server result is authoritative for PDF/GHL/email. The client-side
+    // result (ResultScreen computing buildLuxosaTestResult itself) is always
+    // shown — it is correct regardless of delivery — but the dossier
+    // confirmation copy on that screen must reflect what actually happened
+    // server-side (COMPLETED = dossier emailed) rather than assume success:
+    // the "sending" screen stays up until we actually know.
+    const minVisibleDelay = new Promise(resolve => setTimeout(resolve, 900));
 
-    setTimeout(() => setScreen('result'), 1800);
+    Promise.all([
+      fetch('/api/luxosa-test/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(res => res.json())
+        .then(outcome => {
+          console.info('[luxosa-test] submission outcome:', outcome);
+          return outcome?.status === 'COMPLETED';
+        })
+        .catch(err => {
+          console.error('[luxosa-test] submission request failed:', err);
+          return false;
+        }),
+      minVisibleDelay,
+    ]).then(([delivered]) => {
+      setDossierDelivered(delivered);
+      setScreen('result');
+    });
   }, [answers, language]);
 
   const handleStartTest = useCallback(() => {
@@ -1275,6 +1299,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
               whatsapp={contactData.whatsapp}
               answers={answers}
               onReset={onReset}
+              dossierDelivered={dossierDelivered}
             />
           )}
         </AnimatePresence>

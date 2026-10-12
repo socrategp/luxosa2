@@ -9,9 +9,9 @@ import { z } from 'zod';
 import {
   buildQuestionSequence,
   type Answers,
-} from '../../src/lib/luxosaTest/result';
-import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../../src/i18n/config';
-import { normalizePhoneToE164 } from './phone';
+} from '../../src/lib/luxosaTest/result.js';
+import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../../src/i18n/config.js';
+import { normalizePhoneToE164 } from './phone.js';
 
 // Bumped only when the question bank or contract shape changes in a way
 // that would make an older client's payload unsafe to score as-is.

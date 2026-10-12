@@ -15,7 +15,7 @@
 //     (Vite strips both the branch and this chunk from production builds)
 // ---------------------------------------------------------------
 
-import type { LuxosaTestMediaAsset, LuxosaTestBeforeAfterAsset } from './media';
+import type { LuxosaTestMediaAsset, LuxosaTestBeforeAfterAsset } from './media.js';
 
 function placeholderSvg(label: string, bg: string, fg: string): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">

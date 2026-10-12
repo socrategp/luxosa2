@@ -8,7 +8,7 @@
 // is one atomic Redis command execution; there is no window to leave open.
 // No second service: reuses the same Upstash Redis instance as the ledger.
 
-import { getRedisClient } from './redisClient';
+import { getRedisClient } from './redisClient.js';
 
 export const RATE_LIMIT_WINDOW_SECONDS = Number(process.env.LUXOSA_RATE_LIMIT_WINDOW_SECONDS ?? 60);
 export const RATE_LIMIT_MAX_REQUESTS = Number(process.env.LUXOSA_RATE_LIMIT_MAX_REQUESTS ?? 10);

@@ -15,7 +15,7 @@
 // TTL only needs enough margin to survive up to the first renewal tick.
 
 import { randomUUID } from 'node:crypto';
-import { getRedisClient } from './redisClient';
+import { getRedisClient } from './redisClient.js';
 
 export const DOCUMENTS_LOCK_PREFIX = 'luxosa-test:documents-lock:';
 

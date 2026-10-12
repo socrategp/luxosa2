@@ -16,10 +16,10 @@
 // ---------------------------------------------------------------
 
 import { Document, Page, View, Text, Image, StyleSheet, Font } from '@react-pdf/renderer';
-import { t } from '../../src/i18n/t';
-import type { LuxosaTestResult, AttentionLevel } from '../../src/lib/luxosaTest/result';
-import type { ResolvedLuxosaTestMedia, LuxosaTestMediaAsset, LuxosaTestMediaAspect } from '../../src/lib/luxosaTest/media';
-import { resolvePdfImageSrc } from './pdfAssets';
+import { t } from '../../src/i18n/t.js';
+import type { LuxosaTestResult, AttentionLevel } from '../../src/lib/luxosaTest/result.js';
+import type { ResolvedLuxosaTestMedia, LuxosaTestMediaAsset, LuxosaTestMediaAspect } from '../../src/lib/luxosaTest/media.js';
+import { resolvePdfImageSrc } from './pdfAssets.js';
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);

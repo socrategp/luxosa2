@@ -6,9 +6,9 @@
 // requirement).
 
 import { renderToBuffer } from '@react-pdf/renderer';
-import { LuxosaTestDossier } from './pdf';
-import { resolveMediaForResult } from '../../src/lib/luxosaTest/media';
-import type { LuxosaTestResult } from '../../src/lib/luxosaTest/result';
+import { LuxosaTestDossier } from './pdf.js';
+import { resolveMediaForResult } from '../../src/lib/luxosaTest/media.js';
+import type { LuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
 
 export interface DossierContact {
   nome: string;

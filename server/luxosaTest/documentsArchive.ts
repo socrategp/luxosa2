@@ -16,15 +16,15 @@
 // snapshot taken and persisted BEFORE the upload is what lets a retry
 // reconstruct previous+new correctly instead.
 
-import type { Ledger } from './ledger';
-import { acquireLock, releaseLock, startLockRenewal, DOCUMENTS_LOCK_PREFIX, type LockClient } from './distributedLock';
-import { findCustomFieldValue, asDocumentiMap, fileAlreadyUploaded, extractEntryByFileName, type DocumentiMap } from './customFields';
-import { FIELD_DOCUMENTI } from './ghlClient';
+import type { Ledger } from './ledger.js';
+import { acquireLock, releaseLock, startLockRenewal, DOCUMENTS_LOCK_PREFIX, type LockClient } from './distributedLock.js';
+import { findCustomFieldValue, asDocumentiMap, fileAlreadyUploaded, extractEntryByFileName, type DocumentiMap } from './customFields.js';
+import { FIELD_DOCUMENTI } from './ghlClient.js';
 import type {
   getContact as realGetContact,
   updateContact as realUpdateContact,
   uploadDocument as realUploadDocument,
-} from './ghlClient';
+} from './ghlClient.js';
 
 // "Up to 10 historical dossiers" per the archive requirement — reaching it
 // blocks/flags rather than silently dropping anything; rotation/deletion

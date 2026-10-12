@@ -6,7 +6,7 @@
 // DiagnosticTakeoverTest.tsx, and (later) the PDF/email builders.
 // ---------------------------------------------------------------
 
-import { t } from '../../i18n/t';
+import { t } from '../../i18n/t.js';
 
 // -- TYPES --------------------------------------------------------
 

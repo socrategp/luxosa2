@@ -1,4 +1,4 @@
-import i18n from './index'
+import i18n from './index.js'
 
 export function t(key: string, options?: Record<string, unknown>) {
   return i18n.t(key, options)

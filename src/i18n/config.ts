@@ -1,4 +1,4 @@
-import { resources } from './resources'
+import { resources } from './resources.js'
 
 export const DEFAULT_LANGUAGE = 'it'
 

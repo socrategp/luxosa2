@@ -10,7 +10,7 @@
 // that only dev-only entry points may import — never this file.
 // ---------------------------------------------------------------
 
-import type { EsperienzaDef, PublicPercorso, LuxosaTestResult } from './result';
+import type { EsperienzaDef, PublicPercorso, LuxosaTestResult } from './result.js';
 
 export type LuxosaTestMediaType = 'hero' | 'experience' | 'product' | 'video';
 export type LuxosaTestMediaChannel = 'web' | 'pdf';

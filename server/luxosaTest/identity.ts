@@ -10,8 +10,8 @@
 // phone. Two separate calls (one per identifier) still satisfy "cerca
 // separatamente" even though they share the same underlying query param.
 
-import { searchContactsByQuery, type GhlContact } from './ghlClient';
-import { normalizePhoneToE164 } from './phone';
+import { searchContactsByQuery, type GhlContact } from './ghlClient.js';
+import { normalizePhoneToE164 } from './phone.js';
 
 export type IdentityResolution =
   | { kind: 'no_match' }

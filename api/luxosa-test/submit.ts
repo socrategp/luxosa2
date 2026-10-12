@@ -7,8 +7,8 @@
 // rejected (503) rather than let through unchecked — same policy as the
 // ledger (server/luxosaTest/ledger.ts).
 
-import { processSubmission } from '../../server/luxosaTest/submission';
-import { isRateLimited } from '../../server/luxosaTest/rateLimit';
+import { processSubmission } from '../../server/luxosaTest/submission.js';
+import { isRateLimited } from '../../server/luxosaTest/rateLimit.js';
 
 export const config = { runtime: 'nodejs' };
 

@@ -2,7 +2,7 @@
 // Shared by submission.ts (FIELD_ULTIMA_DATA) and documentsArchive.ts
 // (FIELD_DOCUMENTI) — no I/O, no GHL client calls.
 
-export type DocumentiEntry = { meta?: { originalname?: string }; url?: string; documentId?: string };
+export type DocumentiEntry = { meta?: { originalname?: string; deleted?: boolean }; url?: string; documentId?: string };
 export type DocumentiMap = Record<string, DocumentiEntry>;
 
 export function findCustomFieldValue(
@@ -14,6 +14,16 @@ export function findCustomFieldValue(
 
 export function asDocumentiMap(value: unknown): DocumentiMap {
   return value && typeof value === 'object' ? (value as DocumentiMap) : {};
+}
+
+// GHL's own "delete" action on a Documenti entry is a soft delete: the
+// entry stays in the field's value with meta.deleted === true rather than
+// being removed. Counting it toward the archive cap would make a Contact
+// that looks empty in the GHL dashboard still silently block new uploads
+// — confirmed empirically against the real sandbox. Entries with no
+// `meta.deleted` property (the common case) are active by default.
+export function countActiveDocumenti(documentiMap: DocumentiMap): number {
+  return Object.values(documentiMap).filter(entry => entry.meta?.deleted !== true).length;
 }
 
 export function fileAlreadyUploaded(documentiValue: unknown, fileName: string): boolean {

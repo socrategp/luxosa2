@@ -193,6 +193,29 @@ test('at the 10-document limit: no upload is attempted and history is unchanged'
   assert.equal(Object.keys(getDocumentiValue()).length, 10);
 });
 
+test("at the 10-document limit but all 10 are GHL-soft-deleted (meta.deleted: true): upload proceeds, since GHL's own \"delete\" leaves the entry in place rather than removing it", async () => {
+  // Confirmed empirically against the real sandbox: deleting a Documenti
+  // file via the GHL UI does not remove its entry from the field's value —
+  // it only sets meta.deleted = true on it. A Contact that looks empty in
+  // the dashboard must not still be treated as archive-full.
+  const tenDeleted: Record<string, unknown> = {};
+  for (let i = 0; i < 10; i++) {
+    tenDeleted[`uuid-${i}`] = { meta: { originalname: `old-${i}.pdf`, deleted: true }, url: `https://fake.example/${i}.pdf`, documentId: `doc-${i}` };
+  }
+  const { deps, getUploadCalls } = createFakeGhl(tenDeleted);
+  const lockClient = createFakeLockClient();
+  const ledger = new InMemoryLedger();
+  await ledger.claim('subSoftDeleted', 'contactSoftDeleted');
+
+  const result = await archiveDossier({
+    contactId: 'contactSoftDeleted', fileName: 'new.pdf', pdfBuffer: Buffer.from('new'),
+    submissionId: 'subSoftDeleted', ledger, deps, lockClient,
+  });
+
+  assert.equal(result.status, 'ARCHIVED');
+  assert.equal(getUploadCalls(), 1);
+});
+
 test('replay: the same submissionId seen twice (ledger lost the snapshot, GHL still has the file) never re-uploads', async () => {
   const existingFileEntry = {
     'uuid-replay': { meta: { originalname: 'replay.pdf' }, url: 'https://fake.example/replay.pdf', documentId: 'doc-replay' },

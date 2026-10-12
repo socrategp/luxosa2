@@ -18,7 +18,7 @@
 
 import type { Ledger } from './ledger.js';
 import { acquireLock, releaseLock, startLockRenewal, DOCUMENTS_LOCK_PREFIX, type LockClient } from './distributedLock.js';
-import { findCustomFieldValue, asDocumentiMap, fileAlreadyUploaded, extractEntryByFileName, type DocumentiMap } from './customFields.js';
+import { findCustomFieldValue, asDocumentiMap, fileAlreadyUploaded, extractEntryByFileName, countActiveDocumenti, type DocumentiMap } from './customFields.js';
 import { FIELD_DOCUMENTI } from './ghlClient.js';
 import type {
   getContact as realGetContact,
@@ -107,7 +107,7 @@ export async function archiveDossier(params: ArchiveDossierParams): Promise<Arch
       const liveValue = findCustomFieldValue(liveContact, FIELD_DOCUMENTI);
       const liveMap = asDocumentiMap(liveValue);
 
-      if (!fileAlreadyUploaded(liveValue, fileName) && Object.keys(liveMap).length >= MAX_DOCUMENTI_HISTORY) {
+      if (!fileAlreadyUploaded(liveValue, fileName) && countActiveDocumenti(liveMap) >= MAX_DOCUMENTI_HISTORY) {
         return {
           status: 'FAILED_UPLOAD',
           uploadDocumentId: null,

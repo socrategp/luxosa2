@@ -18,8 +18,9 @@ import {
 } from '../components/luxosaTestLanding/LandingChrome';
 
 /**
- * Luxosa Test landing — Variante B (valore del risultato / Dossier / conversione).
- * Temporary comparison route: /luxosa-test-b
+ * Luxosa Test lead-magnet landing for external traffic (ads, email, WhatsApp, QR).
+ * Route: /luxosa-test — not linked from the site navigation. The site's own
+ * Luxosa Test CTAs keep opening the popup directly.
  */
 
 type StartProps = { onStart: () => void };
@@ -409,7 +410,7 @@ function MobileStickyCta({ visible, onStart }: StartProps & { visible: boolean }
   );
 }
 
-export default function LuxosaTestLandingB() {
+export default function LuxosaTestLandingPage() {
   const startTest = useLandingTestCta();
   const { quizOpen } = useQuiz();
   const heroRef = useRef<HTMLElement>(null);

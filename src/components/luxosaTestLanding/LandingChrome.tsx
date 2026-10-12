@@ -16,7 +16,7 @@ export const LANDING_DISCLAIMER =
 const PAGE_TITLE = 'Luxosa Test — Luxosa';
 
 /**
- * Standalone frame for the Luxosa Test landings: lives outside MainLayout so
+ * Standalone frame for the Luxosa Test landing: lives outside MainLayout so
  * the ordinary navigation does not compete with the CTA. CustomCursor is
  * mounted here because the global CSS hides the native cursor on desktop.
  */
@@ -43,13 +43,11 @@ export function LandingShell({ children }: { children: ReactNode }) {
   );
 }
 
-type CtaTone = 'dark' | 'light' | 'outline-light' | 'outline-dark';
+type CtaTone = 'dark' | 'light';
 
 const CTA_TONES: Record<CtaTone, { base: string; fill: string }> = {
   dark: { base: 'bg-charcoal text-ivory', fill: 'bg-deep' },
   light: { base: 'bg-ivory text-charcoal', fill: 'bg-ivory-warm' },
-  'outline-light': { base: 'border border-ivory/45 text-ivory', fill: 'bg-ivory/10' },
-  'outline-dark': { base: 'border border-charcoal/40 text-charcoal', fill: 'bg-charcoal/[0.06]' },
 };
 
 interface StartTestButtonProps {

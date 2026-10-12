@@ -22,11 +22,14 @@ function json(status: number, body: unknown): Response {
   return new Response(JSON.stringify(body), { status, headers: { 'Content-Type': 'application/json' } });
 }
 
-export default async function handler(request: Request): Promise<Response> {
-  if (request.method !== 'POST') {
-    return json(405, { error: 'method not allowed' });
-  }
-
+// Named HTTP-method export rather than `export default` — Vercel's Node.js
+// runtime has been observed to occasionally invoke a `export default`
+// handler using the legacy (req, res) => void calling convention instead
+// of the modern single-argument Fetch API convention this function is
+// written for (confirmed via a real hung invocation + the runtime's own
+// warning, which explicitly recommends this fix). A named method export is
+// unambiguous.
+export async function POST(request: Request): Promise<Response> {
   try {
     if (await isRateLimited(clientKey(request))) {
       return json(429, { error: 'rate limited' });

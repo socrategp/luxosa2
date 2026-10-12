@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npm run build:pdf-functions",
+    "build:pdf-functions": "esbuild server/luxosaTest/pdf.tsx server/luxosaTest/pdfGeneration.tsx --jsx=automatic --format=esm --target=es2023 --outdir=server/luxosaTest",
     "lint": "eslint .",
     "preview": "vite preview",
     "pdf:test": "esbuild scripts/generate-test-pdf.tsx --bundle --platform=node --format=esm --jsx=automatic --packages=external --outfile=.tmp/generate-test-pdf.mjs && node .tmp/generate-test-pdf.mjs",

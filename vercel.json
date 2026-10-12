@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "api/luxosa-test/submit.ts": {
+      "includeFiles": "node_modules/{@fontsource,pdfkit}/**"
+    }
+  },
   "rewrites": [
     { "source": "/((?!_vercel/|api/).*)", "destination": "/index.html" }
   ],

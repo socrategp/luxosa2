@@ -17,6 +17,8 @@ const MessinaCavourPage = lazy(() => import('./pages/sedi/MessinaCavourPage'));
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'));
 const CookiePolicyPage = lazy(() => import('./pages/CookiePolicyPage'));
 const TestLuxosaIntroPage = lazy(() => import('./pages/TestLuxosaIntroPage'));
+const LuxosaTestLandingA = lazy(() => import('./pages/LuxosaTestLandingA'));
+const LuxosaTestLandingB = lazy(() => import('./pages/LuxosaTestLandingB'));
 
 function QuizOverlay() {
   const { quizOpen, closeQuiz } = useQuiz();
@@ -36,6 +38,9 @@ export default function App() {
         <Suspense fallback={null}>
           <Routes>
             <Route path="/test-luxosa-intro" element={<TestLuxosaIntroPage />} />
+            {/* Luxosa Test landing — temporary A/B comparison routes, not linked from the site */}
+            <Route path="/luxosa-test-a" element={<LuxosaTestLandingA />} />
+            <Route path="/luxosa-test-b" element={<LuxosaTestLandingB />} />
             <Route element={<MainLayout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/il-metodo" element={<IlMetodoPage />} />

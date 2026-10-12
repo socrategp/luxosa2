@@ -145,7 +145,7 @@ export default function Header() {
 
             <div className="hidden lg:flex items-center gap-5">
               <button
-                onClick={() => openQuiz()}
+                onClick={() => openQuiz('new')}
                 className={`text-[12px] tracking-[0.12em] uppercase font-light px-6 py-2.5 border transition-all duration-500 ${
                   onLight
                     ? 'border-anthracite/25 text-anthracite hover:bg-anthracite hover:text-ivory'
@@ -289,7 +289,7 @@ export default function Header() {
                   </AnimatePresence>
                 </div>
                 <button
-                  onClick={() => { setMenuOpen(false); openQuiz(); }}
+                  onClick={() => { setMenuOpen(false); openQuiz('new'); }}
                   className="text-[16px] tracking-[0.15em] uppercase text-ivory border border-ivory/30 px-8 py-3 hover:bg-ivory/10 transition-all duration-300"
                 >{t('common:header.020')}</button>
               </motion.div>

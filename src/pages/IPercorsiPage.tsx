@@ -217,7 +217,7 @@ export default function IPercorsiPage() {
       <Percorsi />
       <PercorsiCinematic />
       <IlPrimoPasso />
-      <LuxosaTestSection onQuizOpen={openQuiz} />
+      <LuxosaTestSection onQuizOpen={() => openQuiz('new')} />
     </>
   );
 }

@@ -7,6 +7,7 @@ import MainLayout from './layouts/MainLayout';
 import { QuizProvider, useQuiz } from './context/QuizContext';
 import CookieConsentBanner from './components/CookieConsentBanner';
 const DiagnosticTakeover = lazy(() => import('./components/DiagnosticTakeover').then(m => ({ default: m.DiagnosticTakeover })));
+const DiagnosticTakeoverNew = lazy(() => import('./components/DiagnosticTakeoverTest').then(m => ({ default: m.DiagnosticTakeover })));
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const IlMetodoPage = lazy(() => import('./pages/IlMetodoPage'));
@@ -20,11 +21,15 @@ const TestLuxosaIntroPage = lazy(() => import('./pages/TestLuxosaIntroPage'));
 const LuxosaTestLandingPage = lazy(() => import('./pages/LuxosaTestLandingPage'));
 
 function QuizOverlay() {
-  const { quizOpen, closeQuiz } = useQuiz();
+  const { quizOpen, quizVariant, closeQuiz } = useQuiz();
   return (
     <Suspense fallback={null}>
       <AnimatePresence>
-        {quizOpen && <DiagnosticTakeover onReset={closeQuiz} />}
+        {quizOpen && (
+          quizVariant === 'new'
+            ? <DiagnosticTakeoverNew onReset={closeQuiz} />
+            : <DiagnosticTakeover onReset={closeQuiz} />
+        )}
       </AnimatePresence>
     </Suspense>
   );

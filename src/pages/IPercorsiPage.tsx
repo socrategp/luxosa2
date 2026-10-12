@@ -144,7 +144,7 @@ function LuxosaTestSection({ onQuizOpen }: { onQuizOpen: () => void }) {
             className="mt-12"
           >
             <button
-              onClick={onQuizOpen}
+              onClick={() => onQuizOpen()}
               className="group relative overflow-hidden inline-flex items-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5"
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />

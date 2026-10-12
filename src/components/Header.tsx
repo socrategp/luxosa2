@@ -145,7 +145,7 @@ export default function Header() {
 
             <div className="hidden lg:flex items-center gap-5">
               <button
-                onClick={openQuiz}
+                onClick={() => openQuiz()}
                 className={`text-[12px] tracking-[0.12em] uppercase font-light px-6 py-2.5 border transition-all duration-500 ${
                   onLight
                     ? 'border-anthracite/25 text-anthracite hover:bg-anthracite hover:text-ivory'

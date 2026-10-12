@@ -35,6 +35,19 @@ export function isTestMode(): boolean {
   return process.env.LUXOSA_TEST_MODE === 'test';
 }
 
+export function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+// The ONLY email TEST MODE is authorized to target — never hardcoded, read
+// from the environment each time so Preview/local can set it independently
+// of production. Returns null if unset so callers can fail closed rather
+// than silently proceeding without this guarantee.
+export function getTestSandboxEmail(): string | null {
+  const raw = process.env.LUXOSA_TEST_SANDBOX_EMAIL;
+  return raw ? normalizeEmail(raw) : null;
+}
+
 function getToken(): string {
   const token = process.env.GHL_PRIVATE_INTEGRATION_TOKEN;
   if (!token) throw new Error('GHL_PRIVATE_INTEGRATION_TOKEN is not set');

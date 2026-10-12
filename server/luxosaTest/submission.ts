@@ -23,6 +23,8 @@ import {
   GhlScopeBlockedError,
   EmailSendTimeoutError,
   isTestMode,
+  normalizeEmail,
+  getTestSandboxEmail,
   SANDBOX_CONTACT_ID,
   SANDBOX_LOCATION_ID,
   FIELD_ULTIMA_DATA,
@@ -121,28 +123,58 @@ export async function processSubmission(
 
   const ledger = deps.ledger;
 
-  const identity = await deps.reconcileIdentity(data.email, data.phoneE164);
-
-  if (identity.kind === 'conflict') {
-    return {
-      submissionId: data.submissionId,
-      status: 'FAILED_IDENTITY_CONFLICT',
-      contactId: null,
-      errorMessage: `email resolves to ${identity.emailContactId}, phone resolves to ${identity.phoneContactId}`,
-    };
-  }
-  if (identity.kind === 'ambiguous') {
-    return { submissionId: data.submissionId, status: 'UNKNOWN', contactId: null, errorMessage: identity.reason };
+  // TEST MODE isolation gate — runs before ANY GHL call (identity lookup,
+  // Contact update, PDF/upload, email). Nothing the browser sends can
+  // determine a real email recipient, mutate a real Contact, or reach
+  // outside the sandbox: in TEST MODE the submitted email is the only
+  // "identity" that matters, and it must exactly match the one address
+  // this environment is authorized to use end to end.
+  if (isTestMode()) {
+    const sandboxEmail = getTestSandboxEmail();
+    if (!sandboxEmail) {
+      // FAIL CLOSED — refusing before any GHL/email side effect.
+      return {
+        submissionId: data.submissionId,
+        status: 'BLOCKED_TEST_CONFIG_MISSING',
+        contactId: null,
+        errorMessage: 'LUXOSA_TEST_MODE=test requires LUXOSA_TEST_SANDBOX_EMAIL to be configured',
+      };
+    }
+    if (normalizeEmail(data.email) !== sandboxEmail) {
+      return {
+        submissionId: data.submissionId,
+        status: 'TEST_IDENTITY_NOT_ALLOWED',
+        contactId: null,
+        errorMessage: 'TEST_IDENTITY_NOT_ALLOWED',
+      };
+    }
   }
 
   let contactId: string;
-  if (identity.kind === 'no_match') {
-    if (isTestMode()) {
-      // TEST MODE never creates a real Contact — an unmatched identity is
-      // exercised against the authorized sandbox so reconciliation can
-      // still be observed end to end without any out-of-sandbox write.
-      contactId = SANDBOX_CONTACT_ID;
-    } else {
+  if (isTestMode()) {
+    // TEST MODE never performs identity reconciliation against the real
+    // CRM (no search by email/phone against arbitrary Contacts) — the
+    // allowlist check above already confirmed the submitted email is the
+    // one authorized sandbox identity, so the Contact is simply the
+    // pre-authorized sandbox Contact. Production identity reconciliation
+    // (below) is completely unchanged.
+    contactId = SANDBOX_CONTACT_ID;
+  } else {
+    const identity = await deps.reconcileIdentity(data.email, data.phoneE164);
+
+    if (identity.kind === 'conflict') {
+      return {
+        submissionId: data.submissionId,
+        status: 'FAILED_IDENTITY_CONFLICT',
+        contactId: null,
+        errorMessage: `email resolves to ${identity.emailContactId}, phone resolves to ${identity.phoneContactId}`,
+      };
+    }
+    if (identity.kind === 'ambiguous') {
+      return { submissionId: data.submissionId, status: 'UNKNOWN', contactId: null, errorMessage: identity.reason };
+    }
+
+    if (identity.kind === 'no_match') {
       const created = await deps.createContact({
         locationId: SANDBOX_LOCATION_ID,
         firstName: data.firstName,
@@ -151,14 +183,14 @@ export async function processSubmission(
         phone: data.phoneE164,
       });
       contactId = created.id;
+    } else {
+      contactId = identity.contactId;
     }
-  } else {
-    contactId = identity.contactId;
   }
 
   if (isTestMode() && contactId !== SANDBOX_CONTACT_ID) {
-    // Should be unreachable — ghlClient's own guard would already have
-    // thrown on the first write attempt. Fails fast here too.
+    // Should be unreachable now (TEST MODE no longer calls reconcileIdentity
+    // or createContact at all) — kept as defense-in-depth.
     return {
       submissionId: data.submissionId,
       status: 'UNKNOWN',
@@ -192,13 +224,26 @@ export async function processSubmission(
     // marketingConsent === false => NO ACTION on the field (no entry pushed,
     // no DND, no clearing of a prior consent).
 
-    await deps.updateContact(contactId, {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      phone: data.phoneE164,
-      ...(customFieldsPatch.length ? { customFields: customFieldsPatch } : {}),
-    });
+    if (isTestMode()) {
+      // TEST MODE never mutates the sandbox Contact's standard fields —
+      // firstName/lastName/email/phone from the browser are used ONLY to
+      // build the dossier content (below), never written back to the
+      // Contact. The sandbox Contact's own existing name/email/phone are
+      // left exactly as they are. Only the explicitly allowed custom-field
+      // write (marketing consent) may still land, and only if there's
+      // actually something to write.
+      if (customFieldsPatch.length > 0) {
+        await deps.updateContact(contactId, { customFields: customFieldsPatch });
+      }
+    } else {
+      await deps.updateContact(contactId, {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        phone: data.phoneE164,
+        ...(customFieldsPatch.length ? { customFields: customFieldsPatch } : {}),
+      });
+    }
     await ledger.update(data.submissionId, { status: 'CONTACT_RESOLVED' });
 
     let pdfBuffer: Buffer;
@@ -253,6 +298,23 @@ export async function processSubmission(
     }
     const { uploadDocumentId, attachmentUrl } = archiveResult;
     await ledger.update(data.submissionId, { status: 'ARCHIVED', uploadDocumentId });
+
+    // Independent second check, deliberately separate from the payload-level
+    // allowlist gate above: re-reads the ACTUAL recipient Contact right
+    // before the real side effect and verifies its email-on-file is still
+    // the authorized sandbox address. Catches any drift between the start
+    // of this run and now (e.g. the Contact's email changed out from under
+    // us) that the earlier, payload-only check could never see.
+    if (isTestMode()) {
+      const sandboxEmail = getTestSandboxEmail();
+      const recipientContact = await deps.getContact(contactId);
+      const recipientEmail = recipientContact?.email ? normalizeEmail(recipientContact.email) : null;
+      if (!sandboxEmail || recipientEmail !== sandboxEmail) {
+        const message = 'TEST MODE pre-email guard: recipient Contact email does not match LUXOSA_TEST_SANDBOX_EMAIL — refusing to send';
+        await ledger.update(data.submissionId, { status: 'BLOCKED_TEST_RECIPIENT_MISMATCH', errorMessage: message });
+        return { submissionId: data.submissionId, status: 'BLOCKED_TEST_RECIPIENT_MISMATCH', contactId, errorMessage: message };
+      }
+    }
 
     const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName);
 

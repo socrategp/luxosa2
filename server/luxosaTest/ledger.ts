@@ -27,6 +27,9 @@ export type LedgerStatus =
   | 'FAILED_EMAIL'
   | 'EMAIL_UNKNOWN'
   | 'BLOCKED_EMAIL_SCOPE'
+  | 'TEST_IDENTITY_NOT_ALLOWED'
+  | 'BLOCKED_TEST_CONFIG_MISSING'
+  | 'BLOCKED_TEST_RECIPIENT_MISMATCH'
   | 'UNKNOWN';
 
 export interface LedgerEntry {

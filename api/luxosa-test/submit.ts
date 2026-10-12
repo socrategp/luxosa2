@@ -55,7 +55,12 @@ export default async function handler(request: Request): Promise<Response> {
 
   try {
     const outcome = await processSubmission(payload);
-    const httpStatus = outcome.status === 'COMPLETED' || outcome.status === 'BLOCKED_EMAIL_SCOPE' ? 200 : 422;
+    const httpStatus =
+      outcome.status === 'COMPLETED' || outcome.status === 'BLOCKED_EMAIL_SCOPE'
+        ? 200
+        : outcome.status === 'TEST_IDENTITY_NOT_ALLOWED'
+          ? 403
+          : 422;
     return json(httpStatus, outcome);
   } catch (err) {
     console.error('[luxosa-test] unhandled error in processSubmission:', err);

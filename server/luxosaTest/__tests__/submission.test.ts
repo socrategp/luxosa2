@@ -10,13 +10,18 @@
 // default happy path.
 
 process.env.LUXOSA_TEST_MODE = 'test';
+// The only email TEST MODE is authorized to target — basePayload()'s
+// default email below is deliberately the same address, so every existing
+// happy-path test already exercises the (now mandatory) allowlist gate
+// instead of needing to bypass it.
+process.env.LUXOSA_TEST_SANDBOX_EMAIL = 'maria.rossi@example.com';
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { processSubmission, type SubmissionDeps } from '../submission';
 import { buildDossierFileName } from '../pdfGeneration';
 import { InMemoryLedger } from '../ledger';
-import { SANDBOX_CONTACT_ID, GhlScopeBlockedError, EmailSendTimeoutError, type GhlContact } from '../ghlClient';
+import { SANDBOX_CONTACT_ID, GhlScopeBlockedError, EmailSendTimeoutError, type GhlContact, type ContactUpdatePatch } from '../ghlClient';
 import { createFakeLockClient } from './fakes/fakeLockClient';
 
 const BASE_ANSWERS = {
@@ -48,10 +53,17 @@ function basePayload(overrides: Record<string, unknown> = {}) {
 }
 
 interface HappyDepsResult extends Partial<SubmissionDeps> {
-  __updateContactCalls: { contactId: string; patch: { customFields?: { id: string; value?: unknown }[] } }[];
+  __updateContactCalls: { contactId: string; patch: ContactUpdatePatch }[];
   __uploadDocumentCalls: { contactId: string; fileName: string }[];
   __getDocumentiState: () => unknown;
 }
+
+// Default email on the fake sandbox Contact — matches basePayload()'s
+// default email AND LUXOSA_TEST_SANDBOX_EMAIL above, so the new pre-email
+// guard (which checks the Contact's actual email on file) passes by
+// default for every existing test, exactly like the real sandbox Contact's
+// own email is already the authorized address.
+const DEFAULT_FAKE_CONTACT_EMAIL = 'maria.rossi@example.com';
 
 // Realistic fake GHL state: uploadDocument REPLACES the Documenti field
 // entirely (matching the real, empirically-confirmed single-file behavior),
@@ -65,6 +77,7 @@ function happyDeps(overrides: Partial<SubmissionDeps> = {}, contactOverride?: Gh
   const uploadDocumentCalls: HappyDepsResult['__uploadDocumentCalls'] = [];
   const contactId = contactOverride?.id ?? SANDBOX_CONTACT_ID;
   let customFields: { id: string; value: unknown }[] = contactOverride?.customFields ? [...contactOverride.customFields] : [];
+  let contactEmail: string | undefined = contactOverride?.email ?? DEFAULT_FAKE_CONTACT_EMAIL;
 
   function upsertCustomField(id: string, value: unknown) {
     const idx = customFields.findIndex(f => f.id === id);
@@ -80,11 +93,12 @@ function happyDeps(overrides: Partial<SubmissionDeps> = {}, contactOverride?: Gh
   return {
     lockClient: createFakeLockClient(),
     reconcileIdentity: async () => ({ kind: 'single_match', contactId: SANDBOX_CONTACT_ID, matchedBy: ['email', 'phone'] }),
-    getContact: async () => ({ id: contactId, locationId: 'loc1', customFields: [...customFields] }),
+    getContact: async () => ({ id: contactId, locationId: 'loc1', email: contactEmail, customFields: [...customFields] }),
     updateContact: async (cId, patch) => {
       updateContactCalls.push({ contactId: cId, patch });
       for (const f of patch.customFields ?? []) upsertCustomField(f.id, f.value);
-      return { id: cId, locationId: 'loc1', customFields: [...customFields] };
+      if (patch.email !== undefined) contactEmail = patch.email;
+      return { id: cId, locationId: 'loc1', email: contactEmail, customFields: [...customFields] };
     },
     createContact: async () => {
       throw new Error('createContact should never be called in TEST MODE');
@@ -145,19 +159,29 @@ test('nessun write fuori sandbox: every write call receives only SANDBOX_CONTACT
   assert.ok(deps.__uploadDocumentCalls.every(c => c.contactId === SANDBOX_CONTACT_ID));
 });
 
-test('identity conflict simulato (end to end through the orchestrator): stops before any write, no merge', async () => {
-  const ledger = new InMemoryLedger();
-  let writeAttempted = false;
-  const deps: Partial<SubmissionDeps> = {
-    ledger,
-    reconcileIdentity: async () => ({ kind: 'conflict', emailContactId: 'c_email', phoneContactId: 'c_phone' }),
-    updateContact: async () => { writeAttempted = true; throw new Error('must not be called'); },
-    uploadDocument: async () => { writeAttempted = true; throw new Error('must not be called'); },
-  };
-  const outcome = await processSubmission(basePayload(), deps);
-  assert.equal(outcome.status, 'FAILED_IDENTITY_CONFLICT');
-  assert.equal(outcome.contactId, null);
-  assert.equal(writeAttempted, false);
+test('identity conflict simulato (end to end through the orchestrator, production mode): stops before any write, no merge', async () => {
+  // Identity conflict detection is a PRODUCTION-mode path: TEST MODE no
+  // longer calls reconcileIdentity at all (see the TEST MODE isolation
+  // tests below), so this scenario is exercised with LUXOSA_TEST_MODE
+  // temporarily unset, exactly as it already was before TEST MODE existed.
+  const original = process.env.LUXOSA_TEST_MODE;
+  delete process.env.LUXOSA_TEST_MODE;
+  try {
+    const ledger = new InMemoryLedger();
+    let writeAttempted = false;
+    const deps: Partial<SubmissionDeps> = {
+      ledger,
+      reconcileIdentity: async () => ({ kind: 'conflict', emailContactId: 'c_email', phoneContactId: 'c_phone' }),
+      updateContact: async () => { writeAttempted = true; throw new Error('must not be called'); },
+      uploadDocument: async () => { writeAttempted = true; throw new Error('must not be called'); },
+    };
+    const outcome = await processSubmission(basePayload(), deps);
+    assert.equal(outcome.status, 'FAILED_IDENTITY_CONFLICT');
+    assert.equal(outcome.contactId, null);
+    assert.equal(writeAttempted, false);
+  } finally {
+    if (original !== undefined) process.env.LUXOSA_TEST_MODE = original;
+  }
 });
 
 test('doppio click stesso submissionId through the orchestrator: second call returns the first result, side effects run once', async () => {
@@ -349,4 +373,117 @@ test('privacyAcknowledged=false is rejected server-side even if somehow reaching
   const deps = happyDeps({ ledger });
   const outcome = await processSubmission(basePayload({ privacyAcknowledged: false }), deps);
   assert.equal(outcome.status, 'FAILED_VALIDATION');
+});
+
+// --- TEST MODE isolation -----------------------------------------------
+// Nothing the browser submits in TEST MODE may determine the real email
+// recipient, mutate a real Contact, or reach outside the sandbox. These
+// tests exercise that boundary directly, independent of the GHL sandbox.
+
+test('TEST MODE + email arbitraria -> 403 TEST_IDENTITY_NOT_ALLOWED, with zero identity lookup, zero Contact write, zero PDF/upload/email', async () => {
+  let reconcileCalled = false;
+  let getContactCalled = false;
+  let updateContactCalled = false;
+  let createContactCalled = false;
+  let pdfCalled = false;
+  let uploadCalled = false;
+  let emailCalled = false;
+  const deps = happyDeps({
+    ledger: new InMemoryLedger(),
+    reconcileIdentity: async () => { reconcileCalled = true; return { kind: 'single_match', contactId: SANDBOX_CONTACT_ID, matchedBy: ['email'] }; },
+    getContact: async () => { getContactCalled = true; return { id: SANDBOX_CONTACT_ID, locationId: 'loc1', customFields: [] }; },
+    updateContact: async () => { updateContactCalled = true; throw new Error('must not be called'); },
+    createContact: async () => { createContactCalled = true; throw new Error('must not be called'); },
+    generateDossierPdf: async () => { pdfCalled = true; throw new Error('must not be called'); },
+    uploadDocument: async () => { uploadCalled = true; throw new Error('must not be called'); },
+    sendDossierEmail: async () => { emailCalled = true; throw new Error('must not be called'); },
+  });
+
+  const outcome = await processSubmission(basePayload({ email: 'someone-else@example.com' }), deps);
+
+  assert.equal(outcome.status, 'TEST_IDENTITY_NOT_ALLOWED');
+  assert.equal(outcome.contactId, null);
+  assert.equal(reconcileCalled, false, 'zero identity lookup for an arbitrary email');
+  assert.equal(getContactCalled, false, 'zero Contact read for an arbitrary email');
+  assert.equal(updateContactCalled, false, 'zero Contact write for an arbitrary email');
+  assert.equal(createContactCalled, false);
+  assert.equal(pdfCalled, false, 'zero PDF generation for an arbitrary email');
+  assert.equal(uploadCalled, false, 'zero upload for an arbitrary email');
+  assert.equal(emailCalled, false, 'zero email send for an arbitrary email');
+});
+
+test('TEST MODE senza LUXOSA_TEST_SANDBOX_EMAIL -> fail closed before any GHL/email side effect', async () => {
+  const original = process.env.LUXOSA_TEST_SANDBOX_EMAIL;
+  delete process.env.LUXOSA_TEST_SANDBOX_EMAIL;
+  try {
+    let anySideEffect = false;
+    const deps = happyDeps({
+      ledger: new InMemoryLedger(),
+      reconcileIdentity: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      getContact: async () => { anySideEffect = true; throw new Error('must not be called'); },
+      sendDossierEmail: async () => { anySideEffect = true; throw new Error('must not be called'); },
+    });
+    const outcome = await processSubmission(basePayload(), deps);
+    assert.equal(outcome.status, 'BLOCKED_TEST_CONFIG_MISSING');
+    assert.equal(outcome.contactId, null);
+    assert.equal(anySideEffect, false);
+  } finally {
+    if (original !== undefined) process.env.LUXOSA_TEST_SANDBOX_EMAIL = original;
+  }
+});
+
+test("TEST MODE never overwrites the sandbox Contact's existing firstName/lastName/email/phone", async () => {
+  const deps = happyDeps({ ledger: new InMemoryLedger() });
+  const outcome = await processSubmission(basePayload({ marketingConsent: true }), deps);
+  assert.equal(outcome.status, 'COMPLETED');
+  for (const call of deps.__updateContactCalls) {
+    const keys = Object.keys(call.patch);
+    assert.deepEqual(
+      keys.filter(k => ['firstName', 'lastName', 'email', 'phone'].includes(k)),
+      [],
+      `updateContact call must never touch standard Contact fields in TEST MODE, got keys: ${keys.join(', ')}`,
+    );
+  }
+});
+
+test('pre-email guard: Contact email on file no longer matches the sandbox address -> BLOCKED_TEST_RECIPIENT_MISMATCH, no send', async () => {
+  const driftedContact: GhlContact = {
+    id: SANDBOX_CONTACT_ID,
+    locationId: 'loc1',
+    email: 'drifted-away@example.com',
+    customFields: [],
+  };
+  let emailSent = false;
+  const deps = happyDeps(
+    { ledger: new InMemoryLedger(), sendDossierEmail: async () => { emailSent = true; return { status: 200, body: {}, messageId: 'x' }; } },
+    driftedContact,
+  );
+
+  const outcome = await processSubmission(basePayload(), deps);
+
+  assert.equal(outcome.status, 'BLOCKED_TEST_RECIPIENT_MISMATCH');
+  assert.equal(emailSent, false, 'no send once the recipient Contact email fails the independent pre-send check');
+});
+
+test('production mode (LUXOSA_TEST_MODE unset): real identity reconciliation runs and standard Contact fields are written, unchanged from before this phase', async () => {
+  const original = process.env.LUXOSA_TEST_MODE;
+  delete process.env.LUXOSA_TEST_MODE;
+  try {
+    let reconcileCalled = false;
+    const deps = happyDeps({
+      ledger: new InMemoryLedger(),
+      reconcileIdentity: async () => { reconcileCalled = true; return { kind: 'single_match', contactId: SANDBOX_CONTACT_ID, matchedBy: ['email', 'phone'] }; },
+    });
+
+    const outcome = await processSubmission(basePayload({ email: 'any-production-email@example.com' }), deps);
+
+    assert.equal(reconcileCalled, true, 'production mode must still perform real identity reconciliation');
+    assert.equal(outcome.status, 'COMPLETED');
+    const contactResolveCall = deps.__updateContactCalls.find(c => !c.patch.customFields);
+    assert.ok(contactResolveCall, 'production mode must still write standard Contact fields');
+    assert.equal(contactResolveCall!.patch.email, 'any-production-email@example.com');
+    assert.equal(contactResolveCall!.patch.firstName, 'Maria');
+  } finally {
+    if (original !== undefined) process.env.LUXOSA_TEST_MODE = original;
+  }
 });

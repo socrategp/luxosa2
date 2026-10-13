@@ -27,7 +27,6 @@ import {
   normalizeEmail,
   getTestSandboxEmail,
   SANDBOX_CONTACT_ID,
-  SANDBOX_LOCATION_ID,
   FIELD_ULTIMA_DATA,
   FIELD_CONSENSO_MARKETING,
   CONSENSO_MARKETING_OPTION,
@@ -202,7 +201,6 @@ export async function processSubmission(
 
     if (identity.kind === 'no_match') {
       const created = await deps.createContact({
-        locationId: SANDBOX_LOCATION_ID,
         firstName: data.firstName,
         lastName: data.lastName,
         email: data.email,

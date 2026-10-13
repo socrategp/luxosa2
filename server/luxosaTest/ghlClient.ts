@@ -18,7 +18,6 @@ const CONTACTS_API_VERSION = '2021-07-28';
 const UPLOAD_API_VERSION = 'v3';
 
 export const SANDBOX_CONTACT_ID = 'xvwmhVsXiGuoHfVbTTtG';
-export const SANDBOX_LOCATION_ID = 'BLblyxBc2SQtAviSppr5';
 
 // Custom Field IDs — given by the brief, never re-derived or assumed
 // elsewhere in this codebase.
@@ -162,7 +161,6 @@ export async function updateContact(contactId: string, patch: ContactUpdatePatch
 }
 
 export interface CreateContactInput {
-  locationId: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -177,7 +175,10 @@ export async function createContact(input: CreateContactInput): Promise<GhlConta
   if (isTestMode()) {
     throw new Error('TEST MODE refuses contact creation — identity reconciliation must resolve to the sandbox contact.');
   }
-  const { status, body } = await ghlFetch('/contacts/', { method: 'POST', body: input });
+  const { status, body } = await ghlFetch('/contacts/', {
+    method: 'POST',
+    body: { ...input, locationId: getLocationId() },
+  });
   if (status !== 200 && status !== 201) {
     throw new Error(`GHL createContact failed: ${status} ${JSON.stringify(body).slice(0, 300)}`);
   }

@@ -567,7 +567,6 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState<PhoneValue | undefined>(undefined);
   const [privacyAcknowledged, setPrivacyAcknowledged] = useState(false);
-  const [marketingConsent, setMarketingConsent] = useState(false);
   const [error, setError] = useState('');
 
   const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
@@ -595,7 +594,9 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
       email: email.trim(),
       whatsapp: phone,
       privacyAcknowledged,
-      marketingConsent,
+      // Not collected by this form: false is a strict no-op server-side
+      // (GHL's marketing-consent field is never written or cleared).
+      marketingConsent: false,
     });
   };
 
@@ -657,7 +658,6 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
             />
           </div>
 
-          {/* [COPY DA VALIDARE] — conferma obbligatoria, distinta dal consenso marketing */}
           <label className="flex items-start gap-3 pt-2 cursor-pointer select-none">
             <input
               type="checkbox"
@@ -666,19 +666,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               className="mt-[3px] h-4 w-4 flex-shrink-0 accent-charcoal"
             />
             <span className="text-[13px] leading-[1.6] text-anthracite/75 font-light">
-              [COPY DA VALIDARE] Confermo di voler richiedere l'elaborazione del mio Luxosa Test e la generazione del relativo dossier, e autorizzo l'invio dello stesso ai recapiti indicati. *
-            </span>
-          </label>
-
-          <label className="flex items-start gap-3 cursor-pointer select-none">
-            <input
-              type="checkbox"
-              checked={marketingConsent}
-              onChange={e => setMarketingConsent(e.target.checked)}
-              className="mt-[3px] h-4 w-4 flex-shrink-0 accent-charcoal"
-            />
-            <span className="text-[13px] leading-[1.6] text-anthracite/55 font-light">
-              [COPY DA VALIDARE] Desidero ricevere da Luxosa contenuti, consigli, offerte e comunicazioni.
+              Confermo di voler ricevere il mio Luxosa Test e autorizzo Luxosa a utilizzare i recapiti indicati per l'elaborazione, l'invio del dossier e le comunicazioni direttamente collegate alla mia richiesta. *
             </span>
           </label>
 
@@ -704,23 +692,141 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 
 // -- SENDING SCREEN -----------------------------------------------
 
-function SendingScreen() {
+const PROCESSING_PHASES = [
+  'Analizziamo le sue risposte',
+  'Definiamo il suo profilo Luxosa',
+  'Prepariamo il suo dossier personalizzato',
+  'Organizziamo il risultato finale',
+  "Completiamo l'invio",
+];
+const PROCESSING_VISUAL_MS = 60_000;
+const PROCESSING_PHASE_MS = PROCESSING_VISUAL_MS / PROCESSING_PHASES.length;
+const PROCESSING_TICK_MS = 250;
+// The bar never reaches 100% on time alone: past the visual duration it
+// creeps asymptotically below this ceiling until the server really answers.
+const PROCESSING_TIMED_CEILING = 0.92;
+const PROCESSING_OVERTIME_CEILING = 0.97;
+const PROCESSING_FINISH_HOLD_MS = 900;
+
+function processingProgress(elapsedMs: number): number {
+  if (elapsedMs <= PROCESSING_VISUAL_MS) {
+    const x = elapsedMs / PROCESSING_VISUAL_MS;
+    return PROCESSING_TIMED_CEILING * (1 - Math.pow(1 - x, 1.6));
+  }
+  const overtime = (elapsedMs - PROCESSING_VISUAL_MS) / 30_000;
+  return PROCESSING_TIMED_CEILING
+    + (PROCESSING_OVERTIME_CEILING - PROCESSING_TIMED_CEILING) * (1 - Math.exp(-overtime));
+}
+
+function SendingScreen({ isDone, onFinished }: { isDone: boolean; onFinished: () => void }) {
+  const [elapsed, setElapsed] = useState(0);
+
+  useEffect(() => {
+    const startedAt = Date.now();
+    const id = window.setInterval(() => setElapsed(Date.now() - startedAt), PROCESSING_TICK_MS);
+    return () => window.clearInterval(id);
+  }, []);
+
+  // Completion requires BOTH the full visual journey and the real server
+  // outcome: an early backend never cuts the sequence short, a slow one is
+  // never shown as finished before it actually is.
+  // Monotonic: isDone never reverts and elapsed only grows.
+  const completed = isDone && elapsed >= PROCESSING_VISUAL_MS;
+
+  const onFinishedRef = useRef(onFinished);
+  useEffect(() => { onFinishedRef.current = onFinished; }, [onFinished]);
+
+  useEffect(() => {
+    if (!completed) return;
+    const id = window.setTimeout(() => onFinishedRef.current(), PROCESSING_FINISH_HOLD_MS);
+    return () => window.clearTimeout(id);
+  }, [completed]);
+
+  const progress = completed ? 1 : processingProgress(elapsed);
+  const activePhase = completed
+    ? PROCESSING_PHASES.length
+    : Math.min(Math.floor(elapsed / PROCESSING_PHASE_MS), PROCESSING_PHASES.length - 1);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: premiumEase }}
-      className="w-full flex flex-col items-center justify-center text-center px-6 py-24"
+      className="w-full flex flex-col items-center justify-center text-center px-6 py-16 md:py-24"
     >
-      <motion.div
-        animate={{ opacity: [0.3, 1, 0.3] }}
-        transition={{ duration: 1.6, repeat: Infinity, ease: premiumEase }}
-        className="w-2 h-2 rounded-full bg-brass mb-8"
-      />
-      <h2 className="font-serif text-[24px] md:text-[30px] font-light leading-[1.2] text-charcoal">
-        Stiamo preparando il tuo Luxosa Test…
-      </h2>
+      <div className="w-full max-w-[460px]">
+        <motion.div
+          animate={completed ? { opacity: 1 } : { opacity: [0.3, 1, 0.3] }}
+          transition={completed ? { duration: 0.4 } : { duration: 1.6, repeat: Infinity, ease: premiumEase }}
+          className="w-2 h-2 rounded-full bg-brass mx-auto mb-8"
+        />
+        <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
+        <h2 className="font-serif text-[24px] md:text-[30px] font-light leading-[1.2] text-charcoal mb-10">
+          Stiamo elaborando il suo Luxosa Test
+        </h2>
+
+        <div
+          className="h-[2px] bg-sand/40 w-full overflow-hidden"
+          role="progressbar"
+          aria-label="Elaborazione del Luxosa Test"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(progress * 100)}
+        >
+          <motion.div
+            className="h-full bg-brass"
+            initial={{ width: '0%' }}
+            animate={{ width: `${progress * 100}%` }}
+            transition={{ duration: completed ? 0.8 : PROCESSING_TICK_MS / 1000, ease: completed ? premiumEase : 'linear' }}
+          />
+        </div>
+
+        <ul className="mt-10 space-y-4 text-left" aria-live="polite">
+          {PROCESSING_PHASES.map((label, i) => {
+            const isPast = i < activePhase;
+            const isActive = i === activePhase;
+            const isVisible = i <= activePhase;
+            return (
+              <motion.li
+                key={label}
+                initial={false}
+                animate={{ opacity: isVisible ? 1 : 0.28, y: isVisible ? 0 : 4 }}
+                transition={{ duration: 0.8, ease: premiumEase }}
+                className="flex items-center gap-4"
+              >
+                <span className="w-5 h-5 flex-shrink-0 flex items-center justify-center">
+                  {isPast ? (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.6 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.5, ease: premiumEase }}
+                      className="w-5 h-5 rounded-full border border-brass/50 flex items-center justify-center text-brass"
+                    >
+                      <Check size={11} strokeWidth={1.5} />
+                    </motion.span>
+                  ) : isActive ? (
+                    <motion.span
+                      animate={{ opacity: [0.35, 1, 0.35] }}
+                      transition={{ duration: 1.6, repeat: Infinity, ease: premiumEase }}
+                      className="w-1.5 h-1.5 rounded-full bg-brass"
+                    />
+                  ) : (
+                    <span className="w-1.5 h-1.5 rounded-full bg-sand" />
+                  )}
+                </span>
+                <span
+                  className={`text-[15px] leading-[1.6] font-light transition-colors duration-700 ${
+                    isActive ? 'text-charcoal' : isPast ? 'text-anthracite/60' : 'text-anthracite/40'
+                  }`}
+                >
+                  {label}
+                </span>
+              </motion.li>
+            );
+          })}
+        </ul>
+      </div>
     </motion.div>
   );
 }
@@ -1026,6 +1132,8 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   // emailed (status === 'COMPLETED'). Only meaningful once screen==='result';
   // defaults to true so an impossible render order never shows the fallback.
   const [dossierDelivered, setDossierDelivered] = useState(true);
+  // Server outcome of the submission; null while still in flight.
+  const [submissionDelivered, setSubmissionDelivered] = useState<boolean | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const trackedStepsRef = useRef<Set<string>>(new Set());
   const questionsCompletedTrackedRef = useRef(false);
@@ -1128,6 +1236,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
 
   const handleFormSubmit = useCallback((data: ContactFormData) => {
     setContactData(data);
+    setSubmissionDelivered(null);
     setScreen('sending');
 
     const submissionId = crypto.randomUUID();
@@ -1149,30 +1258,30 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
     // shown — it is correct regardless of delivery — but the dossier
     // confirmation copy on that screen must reflect what actually happened
     // server-side (COMPLETED = dossier emailed) rather than assume success:
-    // the "sending" screen stays up until we actually know.
-    const minVisibleDelay = new Promise(resolve => setTimeout(resolve, 900));
-
-    Promise.all([
-      fetch('/api/luxosa-test/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+    // the "sending" screen stays up until we actually know. SendingScreen
+    // owns the timing and calls handleProcessingFinished once both its
+    // visual sequence and this outcome are done.
+    fetch('/api/luxosa-test/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+      .then(res => res.json())
+      .then(outcome => {
+        console.info('[luxosa-test] submission outcome:', outcome);
+        return outcome?.status === 'COMPLETED';
       })
-        .then(res => res.json())
-        .then(outcome => {
-          console.info('[luxosa-test] submission outcome:', outcome);
-          return outcome?.status === 'COMPLETED';
-        })
-        .catch(err => {
-          console.error('[luxosa-test] submission request failed:', err);
-          return false;
-        }),
-      minVisibleDelay,
-    ]).then(([delivered]) => {
-      setDossierDelivered(delivered);
-      setScreen('result');
-    });
+      .catch(err => {
+        console.error('[luxosa-test] submission request failed:', err);
+        return false;
+      })
+      .then(delivered => setSubmissionDelivered(delivered));
   }, [answers, language]);
+
+  const handleProcessingFinished = useCallback(() => {
+    setDossierDelivered(submissionDelivered === true);
+    setScreen('result');
+  }, [submissionDelivered]);
 
   const handleStartTest = useCallback(() => {
     trackLuxosaTestEvent('luxosa_test_started', {
@@ -1288,7 +1397,11 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
           )}
 
           {screen === 'sending' && (
-            <SendingScreen key="sending" />
+            <SendingScreen
+              key="sending"
+              isDone={submissionDelivered !== null}
+              onFinished={handleProcessingFinished}
+            />
           )}
 
           {screen === 'result' && (

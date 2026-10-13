@@ -693,9 +693,9 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 // -- SENDING SCREEN -----------------------------------------------
 
 const PROCESSING_PHASES = [
-  'Analizziamo le sue risposte',
-  'Definiamo il suo profilo Luxosa',
-  'Prepariamo il suo dossier personalizzato',
+  'Analizziamo le tue risposte',
+  'Definiamo il tuo profilo Luxosa',
+  'Prepariamo il tuo dossier personalizzato',
   'Organizziamo il risultato finale',
   "Completiamo l'invio",
 ];
@@ -763,7 +763,7 @@ function SendingScreen({ isDone, onFinished }: { isDone: boolean; onFinished: ()
         />
         <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
         <h2 className="font-serif text-[24px] md:text-[30px] font-light leading-[1.2] text-charcoal mb-10">
-          Stiamo elaborando il suo Luxosa Test
+          Stiamo elaborando il tuo Luxosa Test
         </h2>
 
         <div

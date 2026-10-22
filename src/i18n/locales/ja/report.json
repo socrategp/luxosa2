@@ -116,10 +116,6 @@
     "036": "くせ毛の管理",
     "037": "ヘアスタイルの持続性",
     "038": "カットの形",
-    "039": "十分でない",
-    "040": "平均的",
-    "041": "十分なボリュームがある",
-    "042": "過剰で管理が難しい",
     "043": "まだ正しい方向を探している",
     "044": "真に効果のなかった解決策を試してきた",
     "045": "構造的なパーコルソを探すのは初めて",
@@ -192,6 +188,12 @@
       "colorFallback": "現在のカラー",
       "naturalStructure": "自然な構造のまま",
       "joinAnd": "と"
+    },
+    "timeLabels": {
+      "d5d_poco": "5分未満",
+      "d5d_medio": "5〜15分",
+      "d5d_molto": "15分以上",
+      "d5d_troppo": "ご希望より長い時間"
     }
   },
   "templates": {
@@ -203,8 +205,8 @@
     "structureCondition": "現在{{cond}}。",
     "colorSpecific": "出発点は{{colorDesc}}です。{{preocPart}}",
     "colorConcern": " カラーは{{preoc}}。",
-    "formSpecific": "主なニーズは {{formaDesc}}{{volumePart}} に関わっています。",
-    "formVolumePart": " — 現在のボリュームは {{volumeDesc}} と見受けられます",
+    "formSpecific": "主なニーズは {{formaDesc}} に関わっています。",
+    "formTimePart": "毎朝、髪にかける時間は{{timeDesc}}です。",
     "completeSpecific": "プロフィールの読み解きから、複合的な状況が見えてきます{{satPart}}。{{aspPart}}",
     "completeSatisfactionPart": "：{{satDesc}}",
     "completeAspirationPart": "今は {{aspDesc}}。",

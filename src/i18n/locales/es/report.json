@@ -116,10 +116,6 @@
     "036": "la gestión del rizo",
     "037": "la duración del peinado",
     "038": "la forma del corte",
-    "039": "no suficiente",
-    "040": "en la media",
-    "041": "bastante voluminosos",
-    "042": "excesivo y difícil de gestionar",
     "043": "aún buscas la dirección correcta",
     "044": "has probado soluciones que no han respondido de verdad",
     "045": "es la primera vez que buscas un recorrido estructurado",
@@ -192,6 +188,12 @@
       "colorFallback": "el color actual",
       "naturalStructure": "en su estructura natural",
       "joinAnd": " y "
+    },
+    "timeLabels": {
+      "d5d_poco": "menos de 5 minutos",
+      "d5d_medio": "entre 5 y 15 minutos",
+      "d5d_molto": "más de 15 minutos",
+      "d5d_troppo": "más tiempo del que querrías"
     }
   },
   "templates": {
@@ -203,8 +205,8 @@
     "structureCondition": "Hoy {{cond}}.",
     "colorSpecific": "El punto de partida es {{colorDesc}}.{{preocPart}}",
     "colorConcern": " El color {{preoc}}.",
-    "formSpecific": "Las necesidades principales se refieren a {{formaDesc}}{{volumePart}}.",
-    "formVolumePart": " — el volumen actual resulta {{volumeDesc}}",
+    "formSpecific": "Las necesidades principales se refieren a {{formaDesc}}.",
+    "formTimePart": "Por la mañana dedicas {{timeDesc}} a tu cabello.",
     "completeSpecific": "De la lectura del perfil emerge una situación articulada{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "En este momento {{aspDesc}}.",

@@ -116,10 +116,6 @@
     "036": "curl management",
     "037": "style hold",
     "038": "cut shape",
-    "039": "not enough",
-    "040": "average",
-    "041": "quite voluminous",
-    "042": "excessive and difficult to manage",
     "043": "still looking for the right direction",
     "044": "tried solutions that have not truly responded",
     "045": "seeking a structured pathway for the first time",
@@ -192,6 +188,12 @@
       "colorFallback": "current colour",
       "naturalStructure": "in their natural state",
       "joinAnd": " and "
+    },
+    "timeLabels": {
+      "d5d_poco": "less than 5 minutes",
+      "d5d_medio": "between 5 and 15 minutes",
+      "d5d_molto": "more than 15 minutes",
+      "d5d_troppo": "more time than you would like"
     }
   },
   "templates": {
@@ -203,8 +205,8 @@
     "structureCondition": "Today {{cond}}.",
     "colorSpecific": "The starting point is {{colorDesc}}.{{preocPart}}",
     "colorConcern": " The colour {{preoc}}.",
-    "formSpecific": "The main needs concern {{formaDesc}}{{volumePart}}.",
-    "formVolumePart": " ? the current volume appears {{volumeDesc}}",
+    "formSpecific": "The main needs concern {{formaDesc}}.",
+    "formTimePart": "In the morning you spend {{timeDesc}} on your hair.",
     "completeSpecific": "The profile reading reveals a layered situation{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "At this moment {{aspDesc}}.",

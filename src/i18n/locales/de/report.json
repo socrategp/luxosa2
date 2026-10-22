@@ -116,10 +116,6 @@
     "036": "das Lockenmanagement",
     "037": "die Haltbarkeit der Frisur",
     "038": "die Schnittform",
-    "039": "nicht genug",
-    "040": "im Durchschnitt",
-    "041": "recht voluminös",
-    "042": "übermäßig und schwer zu managen",
     "043": "du suchst noch die richtige Richtung",
     "044": "du hast Lösungen versucht, die nicht wirklich angesprochen haben",
     "045": "es ist das erste Mal, dass du einen strukturierten Weg suchst",
@@ -192,6 +188,12 @@
       "colorFallback": "die aktuelle Farbe",
       "naturalStructure": "in ihrer natürlichen Struktur",
       "joinAnd": " und "
+    },
+    "timeLabels": {
+      "d5d_poco": "weniger als 5 Minuten",
+      "d5d_medio": "zwischen 5 und 15 Minuten",
+      "d5d_molto": "mehr als 15 Minuten",
+      "d5d_troppo": "mehr Zeit, als du möchtest"
     }
   },
   "templates": {
@@ -203,8 +205,8 @@
     "structureCondition": "Heute {{cond}}.",
     "colorSpecific": "Der Ausgangspunkt ist {{colorDesc}}.{{preocPart}}",
     "colorConcern": " Die Farbe {{preoc}}.",
-    "formSpecific": "Die wichtigsten Bedürfnisse betreffen {{formaDesc}}{{volumePart}}.",
-    "formVolumePart": " — das aktuelle Volumen wirkt {{volumeDesc}}",
+    "formSpecific": "Die wichtigsten Bedürfnisse betreffen {{formaDesc}}.",
+    "formTimePart": "Morgens widmest du deinen Haaren {{timeDesc}}.",
     "completeSpecific": "Aus der Profilanalyse ergibt sich eine vielschichtige Situation{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "In diesem Moment {{aspDesc}}.",

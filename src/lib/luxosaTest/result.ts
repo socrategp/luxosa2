@@ -718,15 +718,15 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
     };
     const formaDesc = d4dArr.map(id => formaMap[id] ?? '').filter(Boolean).join(', ');
     const d5d = answers['d5d'] as string | undefined;
-    const volumeMap: Record<string, string> = {
-      d5d_poco:t('report:diagnostic.039'), d5d_medio:t('report:diagnostic.040'),
-      d5d_molto:t('report:diagnostic.041'), d5d_troppo:t('report:diagnostic.042'),
+    const timeMap: Record<string, string> = {
+      d5d_poco: t('report:diagnostic.timeLabels.d5d_poco'), d5d_medio: t('report:diagnostic.timeLabels.d5d_medio'),
+      d5d_molto: t('report:diagnostic.timeLabels.d5d_molto'), d5d_troppo: t('report:diagnostic.timeLabels.d5d_troppo'),
     };
-    const volumeDesc = d5d ? (volumeMap[d5d] ?? '') : '';
-    specificPart = t('report:templates.formSpecific', {
-      formaDesc: formaDesc || t('report:diagnostic.165'),
-      volumePart: volumeDesc ? t('report:templates.formVolumePart', { volumeDesc }) : '',
-    });
+    const timeDesc = d5d ? (timeMap[d5d] ?? '') : '';
+    specificPart = [
+      t('report:templates.formSpecific', { formaDesc: formaDesc || t('report:diagnostic.165') }),
+      timeDesc ? t('report:templates.formTimePart', { timeDesc }) : '',
+    ].filter(Boolean).join(' ');
   } else {
     const d5e = answers['d5e'] as string | undefined;
     const d6e = answers['d6e'] as string | undefined;

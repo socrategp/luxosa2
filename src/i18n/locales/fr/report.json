@@ -116,10 +116,6 @@
     "036": "la gestion du bouclé",
     "037": "la tenue du brushing",
     "038": "la forme de la coupe",
-    "039": "pas suffisamment",
-    "040": "dans la moyenne",
-    "041": "assez volumineux",
-    "042": "excessif et difficile à gérer",
     "043": "vous cherchez encore la bonne direction",
     "044": "vous avez essayé des solutions qui n'ont pas vraiment répondu",
     "045": "c'est la première fois que vous cherchez un parcours structuré",
@@ -192,6 +188,12 @@
       "colorFallback": "la couleur actuelle",
       "naturalStructure": "dans leur structure naturelle",
       "joinAnd": " et "
+    },
+    "timeLabels": {
+      "d5d_poco": "moins de 5 minutes",
+      "d5d_medio": "entre 5 et 15 minutes",
+      "d5d_molto": "plus de 15 minutes",
+      "d5d_troppo": "plus de temps que vous ne le souhaiteriez"
     }
   },
   "templates": {
@@ -203,8 +205,8 @@
     "structureCondition": "Aujourd'hui {{cond}}.",
     "colorSpecific": "Le point de départ est {{colorDesc}}.{{preocPart}}",
     "colorConcern": " La couleur {{preoc}}.",
-    "formSpecific": "Les besoins principaux concernent {{formaDesc}}{{volumePart}}.",
-    "formVolumePart": " — le volume actuel apparaît {{volumeDesc}}",
+    "formSpecific": "Les besoins principaux concernent {{formaDesc}}.",
+    "formTimePart": "Le matin, vous consacrez {{timeDesc}} à vos cheveux.",
     "completeSpecific": "La lecture du profil révèle une situation articulée{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": " : {{satDesc}}",
     "completeAspirationPart": "En ce moment {{aspDesc}}.",

@@ -116,10 +116,6 @@
     "036": "la gestione del riccio",
     "037": "la tenuta della piega",
     "038": "la forma del taglio",
-    "039": "non abbastanza",
-    "040": "nella media",
-    "041": "abbastanza voluminosi",
-    "042": "eccessivo e difficile da gestire",
     "043": "stai cercando ancora la direzione giusta",
     "044": "hai provato soluzioni che non hanno risposto davvero",
     "045": "è la prima volta che cerchi un percorso strutturato",
@@ -192,6 +188,12 @@
       "colorFallback": "il colore attuale",
       "naturalStructure": "nella loro struttura naturale",
       "joinAnd": " e "
+    },
+    "timeLabels": {
+      "d5d_poco": "meno di 5 minuti",
+      "d5d_medio": "tra 5 e 15 minuti",
+      "d5d_molto": "più di 15 minuti",
+      "d5d_troppo": "più tempo di quanto vorresti"
     }
   },
   "templates": {
@@ -203,8 +205,8 @@
     "structureCondition": "Oggi {{cond}}.",
     "colorSpecific": "Il punto di partenza è {{colorDesc}}.{{preocPart}}",
     "colorConcern": " Il colore {{preoc}}.",
-    "formSpecific": "Le esigenze principali riguardano {{formaDesc}}{{volumePart}}.",
-    "formVolumePart": " ? il volume attuale risulta {{volumeDesc}}",
+    "formSpecific": "Le esigenze principali riguardano {{formaDesc}}.",
+    "formTimePart": "Al mattino dedichi ai capelli {{timeDesc}}.",
     "completeSpecific": "Dalla lettura del profilo emerge una situazione articolata{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "In questo momento {{aspDesc}}.",

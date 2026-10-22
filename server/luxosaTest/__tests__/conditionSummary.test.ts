@@ -2,6 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { buildLuxosaTestResult, buildQuestionSequence, type Answers } from '../../../src/lib/luxosaTest/result.js';
 import { t } from '../../../src/i18n/t.js';
+import i18n from '../../../src/i18n/index.js';
 
 const D3_BRANCHES = ['d3_cute', 'd3_rovinato', 'd3_colore', 'd3_forma', 'd3_tutto'] as const;
 const D2_OPTIONS = ['d2_fragili', 'd2_crespi', 'd2_sottili', 'd2_grassi', 'd2_secchi', 'd2_sani'] as const;
@@ -72,6 +73,52 @@ test('Ramo forma: D5d (tempo al mattino) is reported as time, never as a judgeme
 test('Ramo forma: the needs sentence stands alone and ends cleanly', () => {
   const { conditionSummary } = buildLuxosaTestResult({ ...baseAnswers('d3_forma'), d4d: ['d4d_piega'], d5d: 'd5d_medio' });
   assert.match(conditionSummary, /Le esigenze principali riguardano [^.?]+\. Al mattino dedichi ai capelli tra 5 e 15 minuti\./);
+});
+
+const LANGUAGES = ['it', 'en', 'fr', 'de', 'es', 'ru', 'ja'] as const;
+
+function reportTexts(answers: Answers): Record<string, string> {
+  const r = buildLuxosaTestResult(answers);
+  const texts: Record<string, string> = {
+    conditionSummary: r.conditionSummary,
+    percorsoTagline: r.percorsoTagline,
+    attentionNote: r.attentionNote,
+    desiredOutcome: r.desiredOutcome,
+    percorsoRationale: r.percorsoRationale,
+    closing: r.closing,
+  };
+  r.mainSignals.forEach((text, i) => { texts[`mainSignals.${i}`] = text; });
+  r.consultationFocus.forEach((text, i) => { texts[`consultationFocus.${i}`] = text; });
+  r.esperienze.forEach((item, i) => { texts[`esperienze.${i}.perche`] = item.perche; });
+  return texts;
+}
+
+test('Report texts: well formed and actually translated in every supported language, all D2 combinations and branches', async () => {
+  const italian = new Map<string, Record<string, string>>();
+  const problems: string[] = [];
+  try {
+    for (const lang of LANGUAGES) {
+      await i18n.changeLanguage(lang);
+      for (const d3 of D3_BRANCHES) {
+        for (const combo of D2_COMBOS) {
+          const answers = { ...baseAnswers(d3), d2: combo };
+          const texts = reportTexts(answers);
+          const id = `${d3}/${combo.join('+')}`;
+          if (lang === 'it') italian.set(id, texts);
+          for (const [field, text] of Object.entries(texts)) {
+            const where = `${lang} ${id} ${field}`;
+            if (!text.trim()) problems.push(`${where}: empty`);
+            if (/\{\{|\}\}|undefined|\[object|NaN/.test(text)) problems.push(`${where}: unresolved — ${text.slice(0, 90)}`);
+            if (/\s{2,}|\s[.,;:]\s*$|\s,/.test(text)) problems.push(`${where}: spacing — ${text.slice(0, 90)}`);
+            if (lang !== 'it' && italian.get(id)?.[field] === text) problems.push(`${where}: still Italian — ${text.slice(0, 90)}`);
+          }
+        }
+      }
+    }
+  } finally {
+    await i18n.changeLanguage('it');
+  }
+  assert.deepEqual(problems, [], `${problems.length} problems:\n${problems.slice(0, 20).join('\n')}`);
 });
 
 test('Ramo forma: D5d does not change the attention level or the public percorso', () => {

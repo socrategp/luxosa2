@@ -145,28 +145,10 @@
       "241": "privacy@luxosa.it",
       "242": ". Consulta nuestra",
       "243": "Privacy Policy",
-      "244": "bg-brass border-brass",
-      "245": "border-anthracite/30 group-hover:border-brass/50",
       "246": "He leído y acepto las condiciones indicadas anteriormente. *",
-      "247": "relative overflow-hidden group bg-charcoal text-ivory cursor-pointer",
-      "248": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "249": "relative z-10",
       "250": "Iniciar el Luxosa Test",
-      "251": "border-brass shadow-md ring-1 ring-brass/20",
-      "252": "border-anthracite/20 hover:border-brass/35 hover:shadow-md",
-      "253": "bg-ivory/95",
-      "254": "text-brass-muted",
-      "255": "bg-ecru/35",
-      "256": "bg-ecru/20 group-hover:bg-ecru/40",
-      "257": "text-brass-muted",
-      "258": "text-charcoal group-hover:text-brass-muted",
-      "259": "bg-transparent group-hover:bg-brass/20",
       "260": "Escribe aquí libremente…",
-      "261": "bg-charcoal text-ivory cursor-pointer",
-      "262": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "263": "relative z-10",
       "264": "Continuar",
-      "265": "group-hover:translate-x-1 transition-transform duration-300",
       "266": "Casi lista",
       "267": "Recibe tu resultado.",
       "268": "Para recibir tu resultado personalizado y permitirnos contactarte para la consulta gratuita en sede, déjanos tus datos.",
@@ -179,9 +161,6 @@
       "275": "Condición de partida",
       "276": "Señales principales",
       "277": "Nivel de atención",
-      "278": "bg-brass/10 text-brass-muted border border-brass/30",
-      "279": "bg-ecru text-anthracite/70 border border-sand/50",
-      "280": "bg-ecru/40 text-anthracite/55 border border-sand/30",
       "281": "La dirección",
       "282": "Por qué este recorrido",
       "283": "Experiencias sugeridas",
@@ -194,10 +173,6 @@
       "290": "Luxosa · Consulta",
       "291": "Elige la sede",
       "292": "¿En qué franja horaria prefieres ser contactada?",
-      "293": "border-brass/60 bg-ecru text-anthracite",
-      "294": "border-sand/60 text-anthracite/85 hover:border-brass/40 hover:bg-ecru/40",
-      "295": "bg-charcoal text-ivory hover:bg-deep cursor-pointer",
-      "296": "bg-sand/40 text-anthracite/45 cursor-not-allowed",
       "297": "Enviar",
       "298": "Cancelar",
       "299": "Luxosa",
@@ -314,5 +289,55 @@
   },
   "result": {
     "personalizedTitle": "{{nome}}, el recorrido pensado para ti es…"
+  },
+  "ui": {
+    "disclaimer": {
+      "title": "Te damos la bienvenida al Luxosa Test",
+      "intro": "En pocos minutos nos ayudará a comprender mejor las características de tu cabello y de tu cuero cabelludo, tus hábitos y tus necesidades, para ofrecerte una primera orientación personalizada.",
+      "howLabel": "Cómo funciona",
+      "howText": "Es un test sencillo, de respuestas múltiples: en cada pregunta, selecciona las opciones propuestas. Algunas admiten una sola respuesta y avanzan automáticamente; otras permiten hasta dos, que deberás confirmar con «{{continue}}». Siempre podrás volver atrás y modificar tus elecciones.",
+      "importantLabel": "Importante",
+      "importantText": "El Luxosa Test ofrece una orientación preliminar y no constituye un diagnóstico médico, tricológico ni dermatológico. La valoración profesional se realiza en la Maison."
+    },
+    "form": {
+      "title": "Tu Luxosa Test está casi listo",
+      "intro": "Completa todos los campos para recibir por correo electrónico tu informe personalizado completo. Introduce una dirección de correo válida: allí te enviaremos tu Luxosa Test.",
+      "name": "Tu nombre *",
+      "surname": "Tu apellido *",
+      "consent": "Confirmo que deseo recibir mi Luxosa Test y autorizo a Luxosa a utilizar los datos de contacto indicados para su elaboración, el envío del dossier y las comunicaciones directamente relacionadas con mi solicitud. *",
+      "submit": "Quiero recibir mi Informe Luxosa",
+      "errorFields": "Completa todos los campos para recibir tu Luxosa Test.",
+      "errorConsent": "Confirma la solicitud necesaria para elaborar tu Luxosa Test antes de continuar."
+    },
+    "sending": {
+      "title": "Estamos elaborando tu Luxosa Test",
+      "aria": "Elaboración del Luxosa Test",
+      "moment": "Un momento…",
+      "phase1": "Analizamos tus respuestas",
+      "phase2": "Definimos tu perfil Luxosa",
+      "phase3": "Preparamos tu dossier personalizado",
+      "phase4": "Organizamos el resultado final",
+      "phase5": "Completamos el envío"
+    },
+    "result": {
+      "attention": {
+        "ordinaria": {
+          "title": "Atención ordinaria",
+          "description": "La situación que ha surgido no requiere una prioridad especial. La consulta puede ayudar a valorizar lo que funciona y a definir con mayor precisión la dirección más adecuada."
+        },
+        "mirata": {
+          "title": "Atención específica",
+          "description": "Algunas señales merecen un análisis específico, para comprender mejor cómo intervenir y qué Experiencias pueden resultar más útiles."
+        },
+        "prioritaria": {
+          "title": "Atención prioritaria",
+          "description": "Varios elementos que han surgido sugieren que es importante profundizar en la situación con prioridad en la Maison, antes de definir la dirección más adecuada."
+        }
+      },
+      "confirmTitle": "Tu Luxosa Test está listo",
+      "confirmSent": "Acabamos de enviarte por correo electrónico tu informe personalizado completo. Revisa tu bandeja de entrada y, si es necesario, también las carpetas de Spam o Promociones.",
+      "confirmFailed": "Tu perfil está completo. Por un pequeño imprevisto técnico todavía no hemos podido enviarte el informe por correo electrónico — no te preocupes: puedes solicitarlo ahora mismo aquí abajo por WhatsApp, o la Maison te lo enviará en breve.",
+      "slotAny": "Indiferente"
+    }
   }
 }

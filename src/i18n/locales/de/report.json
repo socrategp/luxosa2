@@ -80,11 +80,11 @@
     "176": "SEKUNDÄRER PFAD: {{percorsoName}}",
     "001": "stark lockig",
     "002": "in ihrer natürlichen Struktur",
-    "003": "spröde und mit geringer Belastbarkeit",
+    "003": "spröde, wenig belastbar",
     "004": "schwer zu managen aufgrund von Frizz",
-    "005": "fein und mit wenig Volumen",
+    "005": "fein, mit wenig Volumen",
     "006": "mit Tendenz zur fettigen Wurzel",
-    "007": "trocken und glanzlos",
+    "007": "trocken, glanzlos",
     "008": "in gutem Zustand, aber mit Verbesserungspotenzial",
     "009": "täglich",
     "010": "alle 2–3 Tage",
@@ -210,9 +210,19 @@
     "completeSpecific": "Aus der Profilanalyse ergibt sich eine vielschichtige Situation{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "In diesem Moment {{aspDesc}}.",
-    "hairSummary": "Haare {{tipo}}{{statoPart}}.",
-    "hairStatePart": ", die du als {{statoDesc}} beschreibst",
+    "hairSummary": "Du beschreibst dein Haar als {{list}}.",
+    "hairSummaryOverride": "Du beschreibst dein Haar als {{tipo}}, {{overrideClause}}.",
     "washFrequency": "Waschhäufigkeit: {{lavaggioDesc}}.",
-    "benessereCuteRationale": "Der BenEssere Weg beginnt bei der Kopfhaut und liest sie im Verlauf der Zeit, mit Methode. Kein einzelner Eingriff, sondern eine Abfolge, die aufgebaut ist, um echtes Gleichgewicht zurückzugeben{{neverPart}}. Die persönliche Analyse wird es ermöglichen, den realen Zustand zu bewerten und die passendsten Schritte zu definieren."
+    "benessereCuteRationale": "Der BenEssere Weg beginnt bei der Kopfhaut und liest sie im Verlauf der Zeit, mit Methode. Kein einzelner Eingriff, sondern eine Abfolge, die aufgebaut ist, um echtes Gleichgewicht zurückzugeben{{neverPart}}. Die persönliche Analyse wird es ermöglichen, den realen Zustand zu bewerten und die passendsten Schritte zu definieren.",
+    "percorsoTagline": {
+      "benessere": "Gleichgewicht zwischen Kopfhaut und Haar, mit Methode aufgebaut.",
+      "colorlux": "Farbe und Licht, konzipiert für lange Beständigkeit.",
+      "rituale": "Pflege, Form und Farbe unter einer einzigen Regie."
+    },
+    "attentionNote": {
+      "ordinaria": "Das Gesamtbild wirkt ausgewogen: Die Analyse in der Maison bestätigt die passendste Richtung.",
+      "mirata": "Einige Signale verdienen bei der professionellen Analyse in der Maison Aufmerksamkeit.",
+      "prioritaria": "Einige der erkannten Signale verdienen bei der professionellen Analyse in der Maison besondere Aufmerksamkeit."
+    }
   }
 }

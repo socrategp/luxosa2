@@ -145,28 +145,10 @@
       "241": "privacy@luxosa.it",
       "242": ". Consultez notre",
       "243": "Privacy Policy",
-      "244": "bg-brass border-brass",
-      "245": "border-anthracite/30 group-hover:border-brass/50",
       "246": "J'ai lu et j'accepte les conditions indiquées ci-dessus. *",
-      "247": "relative overflow-hidden group bg-charcoal text-ivory cursor-pointer",
-      "248": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "249": "relative z-10",
       "250": "Commencer le Luxosa Test",
-      "251": "border-brass shadow-md ring-1 ring-brass/20",
-      "252": "border-anthracite/20 hover:border-brass/35 hover:shadow-md",
-      "253": "bg-ivory/95",
-      "254": "text-brass-muted",
-      "255": "bg-ecru/35",
-      "256": "bg-ecru/20 group-hover:bg-ecru/40",
-      "257": "text-brass-muted",
-      "258": "text-charcoal group-hover:text-brass-muted",
-      "259": "bg-transparent group-hover:bg-brass/20",
       "260": "Écrivez librement ici…",
-      "261": "bg-charcoal text-ivory cursor-pointer",
-      "262": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "263": "relative z-10",
       "264": "Continuer",
-      "265": "group-hover:translate-x-1 transition-transform duration-300",
       "266": "Presque prête",
       "267": "Recevez votre résultat.",
       "268": "Pour recevoir votre résultat personnalisé et nous permettre de vous contacter pour la consultation gratuite en maison, laissez-nous vos coordonnées.",
@@ -179,9 +161,6 @@
       "275": "Condition de départ",
       "276": "Signaux principaux",
       "277": "Niveau d'attention",
-      "278": "bg-brass/10 text-brass-muted border border-brass/30",
-      "279": "bg-ecru text-anthracite/70 border border-sand/50",
-      "280": "bg-ecru/40 text-anthracite/55 border border-sand/30",
       "281": "La direction",
       "282": "Pourquoi ce parcours",
       "283": "Expériences suggérées",
@@ -194,10 +173,6 @@
       "290": "Luxosa · Consultation",
       "291": "Choisir la maison",
       "292": "Dans quelle plage horaire préférez-vous être recontactée ?",
-      "293": "border-brass/60 bg-ecru text-anthracite",
-      "294": "border-sand/60 text-anthracite/85 hover:border-brass/40 hover:bg-ecru/40",
-      "295": "bg-charcoal text-ivory hover:bg-deep cursor-pointer",
-      "296": "bg-sand/40 text-anthracite/45 cursor-not-allowed",
       "297": "Envoyer",
       "298": "Annuler",
       "299": "Luxosa",
@@ -314,5 +289,55 @@
   },
   "result": {
     "personalizedTitle": "{{nome}}, le parcours pensé pour vous est…"
+  },
+  "ui": {
+    "disclaimer": {
+      "title": "Bienvenue dans le Luxosa Test",
+      "intro": "En quelques minutes, il nous aidera à mieux comprendre les caractéristiques de vos cheveux et de votre cuir chevelu, vos habitudes et vos besoins, afin de vous offrir une première orientation personnalisée.",
+      "howLabel": "Comment ça marche",
+      "howText": "Il s'agit d'un test simple, à choix multiples : pour chaque question, sélectionnez les options proposées. Certaines n'admettent qu'une seule réponse et vous font avancer automatiquement ; d'autres en permettent jusqu'à deux, à confirmer avec « {{continue}} ». Vous pourrez toujours revenir en arrière et modifier vos choix.",
+      "importantLabel": "Important",
+      "importantText": "Le Luxosa Test offre une orientation préliminaire et ne constitue pas un diagnostic médical, trichologique ou dermatologique. L'évaluation professionnelle est réalisée en Maison."
+    },
+    "form": {
+      "title": "Votre Luxosa Test est presque prêt",
+      "intro": "Remplissez tous les champs pour recevoir par e-mail votre rapport personnalisé complet. Saisissez une adresse e-mail valide : c'est là que nous vous enverrons votre Luxosa Test.",
+      "name": "Votre prénom *",
+      "surname": "Votre nom de famille *",
+      "consent": "Je confirme souhaiter recevoir mon Luxosa Test et j'autorise Luxosa à utiliser les coordonnées indiquées pour son élaboration, l'envoi du dossier et les communications directement liées à ma demande. *",
+      "submit": "Je souhaite recevoir mon Rapport Luxosa",
+      "errorFields": "Remplissez tous les champs pour recevoir votre Luxosa Test.",
+      "errorConsent": "Veuillez confirmer la demande nécessaire à l'élaboration de votre Luxosa Test avant de continuer."
+    },
+    "sending": {
+      "title": "Nous élaborons votre Luxosa Test",
+      "aria": "Élaboration du Luxosa Test",
+      "moment": "Un instant…",
+      "phase1": "Nous analysons vos réponses",
+      "phase2": "Nous définissons votre profil Luxosa",
+      "phase3": "Nous préparons votre dossier personnalisé",
+      "phase4": "Nous organisons le résultat final",
+      "phase5": "Nous finalisons l'envoi"
+    },
+    "result": {
+      "attention": {
+        "ordinaria": {
+          "title": "Attention ordinaire",
+          "description": "La situation qui ressort n'appelle pas de priorité particulière. La consultation peut aider à valoriser ce qui fonctionne et à définir avec plus de précision la direction la plus adaptée."
+        },
+        "mirata": {
+          "title": "Attention ciblée",
+          "description": "Certains signaux méritent un approfondissement spécifique, afin de mieux comprendre comment intervenir et quelles Expériences peuvent être les plus utiles."
+        },
+        "prioritaria": {
+          "title": "Attention prioritaire",
+          "description": "Plusieurs éléments ressortis suggèrent qu'il est important d'approfondir la situation en priorité en Maison, avant de définir la direction la plus adaptée."
+        }
+      },
+      "confirmTitle": "Votre Luxosa Test est prêt",
+      "confirmSent": "Nous venons de vous envoyer par e-mail votre rapport personnalisé complet. Consultez votre boîte de réception et, si nécessaire, également vos dossiers Spam ou Promotions.",
+      "confirmFailed": "Votre profil est complet. En raison d'un petit imprévu technique, nous n'avons pas encore pu vous remettre le rapport par e-mail — pas de souci : vous pouvez le demander dès maintenant ci-dessous sur WhatsApp, ou la Maison vous l'enverra sous peu.",
+      "slotAny": "Indifférent"
+    }
   }
 }

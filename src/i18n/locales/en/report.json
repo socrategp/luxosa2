@@ -80,11 +80,11 @@
     "176": "SECONDARY PATH: {{percorsoName}}",
     "001": "very curly",
     "002": "in their natural state",
-    "003": "fragile and lacking resilience",
+    "003": "fragile, lacking resilience",
     "004": "difficult to manage due to frizz",
-    "005": "fine with little volume",
+    "005": "fine, with little volume",
     "006": "with a tendency towards greasy roots",
-    "007": "dry and dull",
+    "007": "dry, dull",
     "008": "in good health, but with room for improvement",
     "009": "every day",
     "010": "every 2–3 days",
@@ -210,9 +210,19 @@
     "completeSpecific": "The profile reading reveals a layered situation{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "At this moment {{aspDesc}}.",
-    "hairSummary": "Hair {{tipo}}{{statoPart}}.",
-    "hairStatePart": ", which you describe as {{statoDesc}}",
+    "hairSummary": "You describe your hair as {{list}}.",
+    "hairSummaryOverride": "You describe your hair as {{tipo}}, {{overrideClause}}.",
     "washFrequency": "Washing frequency: {{lavaggioDesc}}.",
-    "benessereCuteRationale": "The BenEssere pathway starts from the scalp and reads it over time, with method. Not a single intervention, but a sequence built to restore real balance{{neverPart}}. The in-person reading will make it possible to assess the real condition and define the most suitable steps."
+    "benessereCuteRationale": "The BenEssere pathway starts from the scalp and reads it over time, with method. Not a single intervention, but a sequence built to restore real balance{{neverPart}}. The in-person reading will make it possible to assess the real condition and define the most suitable steps.",
+    "percorsoTagline": {
+      "benessere": "Balance between scalp and hair, built with method.",
+      "colorlux": "Colour and light, designed to last over time.",
+      "rituale": "Care, shape and colour, brought together under one direction."
+    },
+    "attentionNote": {
+      "ordinaria": "The overall picture appears balanced: the reading in Maison will confirm the most suitable direction.",
+      "mirata": "Some signals deserve attention during the professional reading in Maison.",
+      "prioritaria": "Some of the signals that emerged deserve particular attention during the professional reading in Maison."
+    }
   }
 }

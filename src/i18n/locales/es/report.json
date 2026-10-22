@@ -80,11 +80,11 @@
     "176": "RECORRIDO SECUNDARIO: {{percorsoName}}",
     "001": "muy rizados",
     "002": "en su estructura natural",
-    "003": "frágiles y con poca resistencia",
+    "003": "frágiles, con poca resistencia",
     "004": "difíciles de gestionar por el frizz",
-    "005": "finos y con poco volumen",
+    "005": "finos, con poco volumen",
     "006": "con tendencia a la raíz grasa",
-    "007": "secos y opacos",
+    "007": "secos, opacos",
     "008": "en buen estado, pero con margen de mejora",
     "009": "cada día",
     "010": "cada 2–3 días",
@@ -205,14 +205,24 @@
     "structureCondition": "Hoy {{cond}}.",
     "colorSpecific": "El punto de partida es {{colorDesc}}.{{preocPart}}",
     "colorConcern": " El color {{preoc}}.",
-    "formSpecific": "Las necesidades principales se refieren a {{formaDesc}}.",
+    "formSpecific": "Las necesidades principales tienen que ver con {{formaDesc}}.",
     "formTimePart": "Por la mañana dedicas {{timeDesc}} a tu cabello.",
     "completeSpecific": "De la lectura del perfil emerge una situación articulada{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": ": {{satDesc}}",
     "completeAspirationPart": "En este momento {{aspDesc}}.",
-    "hairSummary": "Cabello {{tipo}}{{statoPart}}.",
-    "hairStatePart": ", que describes como {{statoDesc}}",
+    "hairSummary": "Describes tus cabellos como {{list}}.",
+    "hairSummaryOverride": "Describes tus cabellos como {{tipo}}, {{overrideClause}}.",
     "washFrequency": "Frecuencia de lavado: {{lavaggioDesc}}.",
-    "benessereCuteRationale": "El recorrido BenEssere parte del cuero cabelludo y lo lee en el tiempo, con método. No una intervención aislada, sino una secuencia construida para devolver equilibrio real{{neverPart}}. La lectura presencial permitirá evaluar la condición real y definir los pasos más adecuados."
+    "benessereCuteRationale": "El recorrido BenEssere parte del cuero cabelludo y lo lee en el tiempo, con método. No una intervención aislada, sino una secuencia construida para devolver equilibrio real{{neverPart}}. La lectura presencial permitirá evaluar la condición real y definir los pasos más adecuados.",
+    "percorsoTagline": {
+      "benessere": "Equilibrio entre cuero cabelludo y cabello, construido con método.",
+      "colorlux": "Color y luz, pensados para perdurar en el tiempo.",
+      "rituale": "Cuidado, forma y color bajo una única dirección."
+    },
+    "attentionNote": {
+      "ordinaria": "El cuadro parece equilibrado: la lectura en la Maison confirmará la dirección más adecuada.",
+      "mirata": "Algunas señales merecen atención durante la lectura profesional en la Maison.",
+      "prioritaria": "Algunas de las señales detectadas merecen una atención particular durante la lectura profesional en la Maison."
+    }
   }
 }

@@ -145,28 +145,10 @@
       "241": "privacy@luxosa.it",
       "242": "。詳細は",
       "243": "Privacy Policy",
-      "244": "bg-brass border-brass",
-      "245": "border-anthracite/30 group-hover:border-brass/50",
       "246": "上記の条件を読み、同意します。 *",
-      "247": "relative overflow-hidden group bg-charcoal text-ivory cursor-pointer",
-      "248": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "249": "relative z-10",
       "250": "Luxosa Testを始める",
-      "251": "border-brass shadow-md ring-1 ring-brass/20",
-      "252": "border-anthracite/20 hover:border-brass/35 hover:shadow-md",
-      "253": "bg-ivory/95",
-      "254": "text-brass-muted",
-      "255": "bg-ecru/35",
-      "256": "bg-ecru/20 group-hover:bg-ecru/40",
-      "257": "text-brass-muted",
-      "258": "text-charcoal group-hover:text-brass-muted",
-      "259": "bg-transparent group-hover:bg-brass/20",
       "260": "こちらに自由にお書きください…",
-      "261": "bg-charcoal text-ivory cursor-pointer",
-      "262": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "263": "relative z-10",
       "264": "次へ",
-      "265": "group-hover:translate-x-1 transition-transform duration-300",
       "266": "もう少しで完成",
       "267": "あなたの結果を受け取りましょう。",
       "268": "パーソナライズされた結果を受け取り、ご来店での無料Consulenzaのご連絡をお受けするために、情報をご入力ください。",
@@ -179,9 +161,6 @@
       "275": "出発点となる状態",
       "276": "主なシグナル",
       "277": "ケアレベル",
-      "278": "bg-brass/10 text-brass-muted border border-brass/30",
-      "279": "bg-ecru text-anthracite/70 border border-sand/50",
-      "280": "bg-ecru/40 text-anthracite/55 border border-sand/30",
       "281": "方向性",
       "282": "このパスウェイの理由",
       "283": "おすすめのEsperienza",
@@ -194,10 +173,6 @@
       "290": "Luxosa · カウンセリング",
       "291": "店舗を選択",
       "292": "ご希望のご連絡時間帯をお選びください。",
-      "293": "border-brass/60 bg-ecru text-anthracite",
-      "294": "border-sand/60 text-anthracite/85 hover:border-brass/40 hover:bg-ecru/40",
-      "295": "bg-charcoal text-ivory hover:bg-deep cursor-pointer",
-      "296": "bg-sand/40 text-anthracite/45 cursor-not-allowed",
       "297": "送信",
       "298": "キャンセル",
       "299": "Luxosa",
@@ -314,5 +289,55 @@
   },
   "result": {
     "personalizedTitle": "{{nome}}さん、あなたのために考えられたパスウェイは…"
+  },
+  "ui": {
+    "disclaimer": {
+      "title": "Luxosa Testへようこそ",
+      "intro": "わずか数分で、髪や頭皮の特徴、日々の習慣、ご要望をより深く理解し、最初のパーソナルなオリエンテーションをご提案します。",
+      "howLabel": "ご利用方法",
+      "howText": "選択式のシンプルなテストです。各質問で、表示された選択肢をお選びください。回答が1つの質問は自動的に次へ進み、2つまで選べる質問は「{{continue}}」で確定してください。いつでも前に戻って、選択を変更できます。",
+      "importantLabel": "重要",
+      "importantText": "Luxosa Testは予備的なオリエンテーションであり、医学的・毛髪学的・皮膚科学的な診断ではありません。専門的な評価はMaisonで行われます。"
+    },
+    "form": {
+      "title": "Luxosa Testまであと少しです",
+      "intro": "すべての項目をご入力いただくと、パーソナライズされた詳細なレポートをメールでお受け取りいただけます。有効なメールアドレスをご入力ください。Luxosa Testはそちらにお送りします。",
+      "name": "名 *",
+      "surname": "姓 *",
+      "consent": "Luxosa Testの受け取りを希望することを確認し、ご入力の連絡先を、結果の作成、ドシエ（レポート）の送付、およびお申し込みに直接関連するご連絡のためにLuxosaが利用することを承諾します。 *",
+      "submit": "Luxosaレポートを受け取る",
+      "errorFields": "Luxosa Testを受け取るには、すべての項目をご入力ください。",
+      "errorConsent": "続行する前に、Luxosa Testの作成に必要なご確認にチェックを入れてください。"
+    },
+    "sending": {
+      "title": "Luxosa Testを作成しています",
+      "aria": "Luxosa Testの作成中",
+      "moment": "少々お待ちください…",
+      "phase1": "回答を分析しています",
+      "phase2": "あなたのLuxosaプロフィールを定義しています",
+      "phase3": "パーソナライズされたドシエを準備しています",
+      "phase4": "最終結果をまとめています",
+      "phase5": "送信を完了しています"
+    },
+    "result": {
+      "attention": {
+        "ordinaria": {
+          "title": "通常の注意レベル",
+          "description": "現状では、特に優先して対応すべき点は見られません。カウンセリングでは、うまくいっている部分を活かしながら、最適な方向性をより正確に定めることができます。"
+        },
+        "mirata": {
+          "title": "重点的な注意",
+          "description": "いくつかのサインについて、どのように対応すべきか、どのエスペリエンツェが役立つかを理解するため、より詳しく確認することをおすすめします。"
+        },
+        "prioritaria": {
+          "title": "優先的な注意",
+          "description": "複数のサインから、最適な方向性を定める前に、まずMaisonで状況を詳しく確認することが大切だと考えられます。"
+        }
+      },
+      "confirmTitle": "Luxosa Testの準備ができました",
+      "confirmSent": "パーソナライズされた詳細なレポートをメールでお送りしました。受信トレイをご確認いただき、必要に応じて迷惑メールやプロモーションのフォルダもご確認ください。",
+      "confirmFailed": "プロフィールが完成しました。小さな技術的なトラブルのため、メールでのレポート送付がまだ完了していません。ご心配なく。下のWhatsAppからすぐにご依頼いただくか、Maisonから近日中にお送りします。",
+      "slotAny": "いつでも可"
+    }
   }
 }

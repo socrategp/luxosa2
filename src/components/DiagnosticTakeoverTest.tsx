@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { track } from '@vercel/analytics';
 import { useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, ArrowLeft, X, Check } from 'lucide-react';
+import { ArrowRight, ArrowLeft, X, Check, ChevronDown } from 'lucide-react';
 import PhoneInput, { isPossiblePhoneNumber } from 'react-phone-number-input';
 import type { Value as PhoneValue } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
@@ -290,19 +290,19 @@ function DisclaimerScreen({ onAccept }: { onAccept: () => void }) {
       className="w-full max-w-[720px] mx-auto px-6 md:px-10 py-10 md:py-14"
     >
       <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">{t('test:diagnostic.takeover.234')}</span>
-      <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-2">Benvenuta nel Luxosa Test</h2>
+      <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-2">{t('test:ui.disclaimer.title')}</h2>
       <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-6">
-        In pochi minuti ci aiuterà a comprendere meglio le caratteristiche dei tuoi capelli, della cute, le tue abitudini e le tue esigenze, per offrirti un primo orientamento personalizzato.
+        {t('test:ui.disclaimer.intro')}
       </p>
       <p className="text-[15px] leading-[1.8] text-anthracite/70 font-light mb-8">
-        <strong className="text-charcoal/80 font-normal">Come funziona — </strong>
-        Si tratta di un test semplice, a risposte multiple: per ogni domanda seleziona le opzioni proposte. Alcune prevedono una sola risposta e proseguiranno automaticamente; altre ne consentono fino a due, da confermare con "Continua". Potrai sempre tornare indietro e modificare le tue scelte.
+        <strong className="text-charcoal/80 font-normal">{t('test:ui.disclaimer.howLabel')} — </strong>
+        {t('test:ui.disclaimer.howText', { continue: t('test:diagnostic.takeover.264') })}
       </p>
 
       <div className="border border-sand/50 p-6 md:p-8 bg-ecru/20 mb-10 text-[16px] leading-[1.85] text-anthracite/80 font-light">
         <p>
-          <strong className="text-charcoal/80 font-normal">Importante — </strong>
-          Il Luxosa Test offre un orientamento preliminare e non costituisce diagnosi medica, tricologica o dermatologica. La valutazione professionale viene effettuata in Maison.
+          <strong className="text-charcoal/80 font-normal">{t('test:ui.disclaimer.importantLabel')} — </strong>
+          {t('test:ui.disclaimer.importantText')}
         </p>
       </div>
 
@@ -573,19 +573,19 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 
   const handleSubmit = () => {
     if (!nome.trim() || !cognome.trim()) {
-      setError('Compila tutti i campi per ricevere il tuo Luxosa Test.');
+      setError(t('test:ui.form.errorFields'));
       return;
     }
     if (!isValidEmail(email)) {
-      setError("Controlla l'indirizzo email inserito: sembra incompleto o non corretto.");
+      setError(t('test:diagnostic.takeover.307'));
       return;
     }
     if (!phone || !isPossiblePhoneNumber(phone)) {
-      setError('Controlla il numero inserito: sembra incompleto o non corretto.');
+      setError(t('test:diagnostic.takeover.308'));
       return;
     }
     if (!privacyAcknowledged) {
-      setError('Conferma la richiesta necessaria per elaborare il tuo Luxosa Test prima di continuare.');
+      setError(t('test:ui.form.errorConsent'));
       return;
     }
     onSubmit({
@@ -618,29 +618,29 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 
       <div className="relative z-10 max-w-[580px] mx-auto px-6 md:px-10 py-10 md:py-14">
         <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
-        <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">Il tuo Luxosa Test è quasi pronto</h2>
+        <h2 className="font-serif text-[26px] md:text-[34px] font-light leading-[1.15] text-charcoal mb-4">{t('test:ui.form.title')}</h2>
         <p className="text-[17px] leading-[1.8] text-anthracite/70 font-light mb-10">
-          Compila tutti i campi per ricevere via email il tuo report personalizzato completo. Inserisci un indirizzo email valido: è lì che ti invieremo il tuo Luxosa Test.
+          {t('test:ui.form.intro')}
         </p>
 
         <div className="space-y-4">
           <input
             type="text"
-            placeholder="Il tuo nome *"
+            placeholder={t('test:ui.form.name')}
             value={nome}
             onChange={e => { setNome(e.target.value); setError(''); }}
             className={inputClass}
           />
           <input
             type="text"
-            placeholder="Il tuo cognome *"
+            placeholder={t('test:ui.form.surname')}
             value={cognome}
             onChange={e => { setCognome(e.target.value); setError(''); }}
             className={inputClass}
           />
           <input
             type="email"
-            placeholder="Il tuo indirizzo email *"
+            placeholder={t('test:diagnostic.takeover.270')}
             value={email}
             onChange={e => { setEmail(e.target.value); setError(''); }}
             className={inputClass}
@@ -652,7 +652,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               defaultCountry="IT"
               value={phone}
               onChange={(val) => { setPhone(val); setError(''); }}
-              placeholder="Il tuo numero WhatsApp *"
+              placeholder={t('test:diagnostic.takeover.271')}
               international
               countryCallingCodeEditable={false}
             />
@@ -666,7 +666,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               className="mt-[3px] h-4 w-4 flex-shrink-0 accent-charcoal"
             />
             <span className="text-[13px] leading-[1.6] text-anthracite/75 font-light">
-              Confermo di voler ricevere il mio Luxosa Test e autorizzo Luxosa a utilizzare i recapiti indicati per l'elaborazione, l'invio del dossier e le comunicazioni direttamente collegate alla mia richiesta. *
+              {t('test:ui.form.consent')}
             </span>
           </label>
 
@@ -680,7 +680,7 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
               className="relative overflow-hidden group w-full inline-flex items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light py-5"
             >
               <span className="absolute inset-0 bg-deep translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.25,0.1,0,1)]" />
-              <span className="relative z-10 flex items-center gap-3">Voglio ricevere il mio Report Luxosa<ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
+              <span className="relative z-10 flex items-center gap-3">{t('test:ui.form.submit')}<ArrowRight size={14} strokeWidth={1.5} className="group-hover:translate-x-1 transition-transform duration-300" />
               </span>
             </button>
           </div>
@@ -693,11 +693,11 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
 // -- SENDING SCREEN -----------------------------------------------
 
 const PROCESSING_PHASES = [
-  'Analizziamo le tue risposte',
-  'Definiamo il tuo profilo Luxosa',
-  'Prepariamo il tuo dossier personalizzato',
-  'Organizziamo il risultato finale',
-  "Completiamo l'invio",
+  'test:ui.sending.phase1',
+  'test:ui.sending.phase2',
+  'test:ui.sending.phase3',
+  'test:ui.sending.phase4',
+  'test:ui.sending.phase5',
 ];
 const PROCESSING_VISUAL_MS = 60_000;
 const PROCESSING_PHASE_MS = PROCESSING_VISUAL_MS / PROCESSING_PHASES.length;
@@ -763,13 +763,13 @@ function SendingScreen({ isDone, onFinished }: { isDone: boolean; onFinished: ()
         />
         <span className="text-[11px] tracking-[0.4em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
         <h2 className="font-serif text-[24px] md:text-[30px] font-light leading-[1.2] text-charcoal mb-10">
-          Stiamo elaborando il tuo Luxosa Test
+          {t('test:ui.sending.title')}
         </h2>
 
         <div
           className="h-[2px] bg-sand/40 w-full overflow-hidden"
           role="progressbar"
-          aria-label="Elaborazione del Luxosa Test"
+          aria-label={t('test:ui.sending.aria')}
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(progress * 100)}
@@ -820,7 +820,7 @@ function SendingScreen({ isDone, onFinished }: { isDone: boolean; onFinished: ()
                     isActive ? 'text-charcoal' : isPast ? 'text-anthracite/60' : 'text-anthracite/40'
                   }`}
                 >
-                  {label}
+                  {t(label)}
                 </span>
               </motion.li>
             );
@@ -866,21 +866,18 @@ function ResultScreen({
 
   const ATTENTION_PRESENTATION: Record<AttentionLevel, { title: string; description: string; color: string }> = {
     ordinaria: {
-      title: 'Attenzione ordinaria',
-      description:
-        'La situazione emersa non richiede una particolare priorità. La consulenza può aiutare a valorizzare ciò che funziona e a definire con maggiore precisione la direzione più adatta.',
+      title: t('test:ui.result.attention.ordinaria.title'),
+      description: t('test:ui.result.attention.ordinaria.description'),
       color: '#7D9471',
     },
     mirata: {
-      title: 'Attenzione mirata',
-      description:
-        'Alcuni segnali meritano un approfondimento specifico, per comprendere meglio come intervenire e quali Esperienze possano essere più utili.',
+      title: t('test:ui.result.attention.mirata.title'),
+      description: t('test:ui.result.attention.mirata.description'),
       color: '#C08B4A',
     },
     prioritaria: {
-      title: 'Attenzione prioritaria',
-      description:
-        'Più elementi emersi suggeriscono che sia importante approfondire la situazione con priorità in Maison, prima di definire la direzione più adatta.',
+      title: t('test:ui.result.attention.prioritaria.title'),
+      description: t('test:ui.result.attention.prioritaria.description'),
       color: '#A8574C',
     },
   };
@@ -979,14 +976,14 @@ function ResultScreen({
             (status === 'COMPLETED'); never shown as sent when it wasn't. */}
         <div className="mb-12 -mx-6 md:-mx-10 px-6 md:px-10 py-10 md:py-12 bg-ecru/25 border-t border-b border-sand/30 text-center">
           <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
-          <h3 className="font-serif text-[26px] md:text-[32px] font-light leading-[1.2] text-charcoal mb-4">Il tuo Luxosa Test è pronto</h3>
+          <h3 className="font-serif text-[26px] md:text-[32px] font-light leading-[1.2] text-charcoal mb-4">{t('test:ui.result.confirmTitle')}</h3>
           {dossierDelivered ? (
             <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
-              Ti abbiamo appena inviato via email il tuo report personalizzato completo. Controlla la tua casella di posta e, se necessario, anche Spam o Promozioni.
+              {t('test:ui.result.confirmSent')}
             </p>
           ) : (
             <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
-              Il tuo profilo è completo. Per un piccolo imprevisto tecnico non siamo ancora riusciti a recapitarti il report via email — nessun problema: puoi richiederlo subito qui sotto su WhatsApp, oppure la Maison te lo invierà a breve.
+              {t('test:ui.result.confirmFailed')}
             </p>
           )}
         </div>
@@ -1059,13 +1056,13 @@ function ResultScreen({
                   <option key={l.id} value={l.id}>{l.label}</option>
                 ))}
               </select>
-              <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brass-muted text-[10px]">?</span>
+              <ChevronDown size={14} strokeWidth={1.5} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-brass-muted" aria-hidden="true" />
             </div>
 
             <h3 className="font-serif text-[22px] font-light text-charcoal leading-snug mb-2">{t('test:diagnostic.takeover.292')}</h3>
             <div className="h-[1px] bg-sand/60 mb-8" />
             <div className="flex flex-col gap-3">
-              {['09:00 – 11:00', '11:00 – 13:00', '13:00 – 15:00', '15:00 – 18:00', 'Indifferente'].map(fascia => (
+              {['09:00 – 11:00', '11:00 – 13:00', '13:00 – 15:00', '15:00 – 18:00', t('test:ui.result.slotAny')].map(fascia => (
                 <button
                   key={fascia}
                   onClick={() => setSelectedFascia(fascia)}
@@ -1351,7 +1348,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
               </div>
             ) : (
               <span className="text-[10px] tracking-[0.4em] uppercase font-light text-anthracite/50">
-                {screen === 'result' ?t('test:diagnostic.takeover.302') : screen === 'form' ?t('test:diagnostic.takeover.303') : screen === 'sending' ? 'Un istante…' : ''}
+                {screen === 'result' ?t('test:diagnostic.takeover.302') : screen === 'form' ?t('test:diagnostic.takeover.303') : screen === 'sending' ? t('test:ui.sending.moment') : ''}
               </span>
             )}
           </div>

@@ -205,14 +205,24 @@
     "structureCondition": "現在{{cond}}。",
     "colorSpecific": "出発点は{{colorDesc}}です。{{preocPart}}",
     "colorConcern": " カラーは{{preoc}}。",
-    "formSpecific": "主なニーズは {{formaDesc}} に関わっています。",
+    "formSpecific": "主なニーズは{{formaDesc}}に関わっています。",
     "formTimePart": "毎朝、髪にかける時間は{{timeDesc}}です。",
     "completeSpecific": "プロフィールの読み解きから、複合的な状況が見えてきます{{satPart}}。{{aspPart}}",
     "completeSatisfactionPart": "：{{satDesc}}",
     "completeAspirationPart": "今は {{aspDesc}}。",
-    "hairSummary": "髪は {{tipo}}{{statoPart}}。",
-    "hairStatePart": "、ご自身では {{statoDesc}} と表現されています",
+    "hairSummary": "髪の状態は{{list}}とのことです。",
+    "hairSummaryOverride": "髪の状態は{{tipo}}で、{{overrideClause}}とのことです。",
     "washFrequency": "洗髪頻度：{{lavaggioDesc}}。",
-    "benessereCuteRationale": "BenEssere プログラムは頭皮から始まり、時間の中でそれをメソッドに沿って読み解きます。単発の介入ではなく、真のバランスを取り戻すために構築された連続的なプロセスです{{neverPart}}。対面での読み解きにより、実際の状態を評価し、最も適したステップを定めます。"
+    "benessereCuteRationale": "BenEssere プログラムは頭皮から始まり、時間の中でそれをメソッドに沿って読み解きます。単発の介入ではなく、真のバランスを取り戻すために構築された連続的なプロセスです{{neverPart}}。対面での読み解きにより、実際の状態を評価し、最も適したステップを定めます。",
+    "percorsoTagline": {
+      "benessere": "頭皮と髪のバランスを、メソッドに基づいて築く。",
+      "colorlux": "時を経ても続く、カラーと光。",
+      "rituale": "ケア、フォルム、カラーをひとつの演出のもとに。"
+    },
+    "attentionNote": {
+      "ordinaria": "全体としてバランスの取れた状態です。Maisonでの見立てで、最適な方向性を確認します。",
+      "mirata": "Maisonでの専門的な見立ての際に、注意して確認したいサインがあります。",
+      "prioritaria": "Maisonでの専門的な見立ての際に、特に丁寧に確認したいサインがあります。"
+    }
   }
 }

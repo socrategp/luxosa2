@@ -6,7 +6,7 @@
 // DiagnosticTakeoverTest.tsx, and (later) the PDF/email builders.
 // ---------------------------------------------------------------
 
-import { t } from '../../i18n/t.js';
+import { t, currentLanguage } from '../../i18n/t.js';
 
 // -- TYPES --------------------------------------------------------
 
@@ -589,21 +589,29 @@ export function getAttentionLevel(answers: Answers, primary: Percorso): Attentio
 
 // -- HELPERS DI TESTO ---------------------------------------------
 
-// Natural Italian serial list: "a", "a e b", "a, b e c" — never chains
-// multiple "e" when joining already-selected descriptors.
-function joinItalianList(items: string[]): string {
+// Natural serial list in the client's language: IT "a, b e c", EN "a, b and c",
+// FR "a, b et c"… — never chains several conjunctions when joining
+// already-selected descriptors. British English for "en" (the copy is British).
+function listLocale(): string {
+  const language = currentLanguage();
+  return language === 'en' ? 'en-GB' : language;
+}
+
+function joinList(items: string[]): string {
   const clean = items.map(s => s.trim()).filter(Boolean);
   if (clean.length === 0) return '';
   if (clean.length === 1) return clean[0];
-  return `${clean.slice(0, -1).join(', ')} e ${clean[clean.length - 1]}`;
+  return new Intl.ListFormat(listLocale(), { style: 'long', type: 'conjunction' }).format(clean);
 }
 
 // Splits a label on commas that separate true list fragments (e.g. "fragili,
 // poco resistenti" -> 2 items), but NOT on a comma immediately followed by a
-// coordinating conjunction (ma/e/o/però) — that comma belongs to a single
-// clause (e.g. "in buona salute, ma con margine di miglioramento" must stay
-// whole, or joining it with another item produces "... e ma ...").
-const ENUMERATION_COMMA = /,(?!\s*(?:ma|e|o|però)\s)/i;
+// coordinating conjunction — that comma belongs to a single clause (e.g. "in
+// buona salute, ma con margine di miglioramento" must stay whole, or joining it
+// with another item produces "... e ma ..."). Conjunctions of every supported
+// language: it ma/e/o/però · en but/and/or/yet · fr mais/et/ou · de aber/und/oder/jedoch
+// · es pero/y/o · ru но/и/или/однако.
+const ENUMERATION_COMMA = /,(?!\s*(?:ma|e|o|però|but|and|or|yet|mais|et|ou|aber|und|oder|jedoch|pero|y|но|и|или|однако)\s)/i;
 function splitEnumerableFragments(label: string): string[] {
   return label.split(ENUMERATION_COMMA).map(s => s.trim()).filter(Boolean);
 }
@@ -704,7 +712,7 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
       d5c_uniforme:t('report:diagnostic.032'), d5c_viso:t('report:diagnostic.033'),
       d5c_danneggia:t('report:diagnostic.034'),
     };
-    const preoc = d5cArr.map(id => preoMap[id] ?? '').filter(Boolean).join(' e ');
+    const preoc = joinList(d5cArr.map(id => preoMap[id] ?? ''));
     specificPart = t('report:templates.colorSpecific', {
       colorDesc,
       preocPart: preoc ? t('report:templates.colorConcern', { preoc }) : '',
@@ -759,7 +767,7 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
 
   const openingSentence = hasColorContradiction
     ? t('report:templates.hairSummaryOverride', { tipo, overrideClause: t('report:diagnostic.shortLabels.statoColoreBase') })
-    : t('report:templates.hairSummary', { list: joinItalianList([tipo, ...statoItems]) });
+    : t('report:templates.hairSummary', { list: joinList([tipo, ...statoItems]) });
 
   const parts = [
     openingSentence,
@@ -1301,21 +1309,13 @@ export interface LuxosaTestResult {
 // -- TAGLINE PERCORSO (hero, breve, derivata dal risultato) -------
 
 function buildPercorsoTagline(pub: PublicPercorso): string {
-  if (pub === 'benessere') return 'Equilibrio tra cute e capello, costruito con metodo.';
-  if (pub === 'colorlux') return 'Colore e luce, pensati per durare nel tempo.';
-  return 'Cura, forma e colore in un’unica regia.';
+  return t(`report:templates.percorsoTagline.${pub}`);
 }
 
 // -- NOTA LIVELLO DI ATTENZIONE (orientativa, mai medica) ---------
 
 function buildAttentionNote(level: AttentionLevel): string {
-  if (level === 'prioritaria') {
-    return 'Alcuni segnali emersi meritano un approfondimento particolare durante la lettura professionale in Maison.';
-  }
-  if (level === 'mirata') {
-    return 'Alcuni segnali meritano attenzione nella lettura professionale in Maison.';
-  }
-  return 'Il quadro appare equilibrato: la lettura in Maison confermerà la direzione più adatta.';
+  return t(`report:templates.attentionNote.${level}`);
 }
 
 export function buildLuxosaTestResult(answers: Answers): LuxosaTestResult {

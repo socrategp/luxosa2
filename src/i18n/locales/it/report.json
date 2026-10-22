@@ -213,6 +213,16 @@
     "hairSummary": "Descrivi i tuoi capelli come {{list}}.",
     "hairSummaryOverride": "Descrivi i tuoi capelli come {{tipo}}, {{overrideClause}}.",
     "washFrequency": "Frequenza di lavaggio: {{lavaggioDesc}}.",
-    "benessereCuteRationale": "Il percorso BenEssere parte dalla cute e la legge nel tempo, con metodo. Non un singolo intervento, ma una sequenza costruita per restituire equilibrio reale{{neverPart}}. La lettura in presenza permetterà di valutare la condizione reale e definire i passi più adatti."
+    "benessereCuteRationale": "Il percorso BenEssere parte dalla cute e la legge nel tempo, con metodo. Non un singolo intervento, ma una sequenza costruita per restituire equilibrio reale{{neverPart}}. La lettura in presenza permetterà di valutare la condizione reale e definire i passi più adatti.",
+    "percorsoTagline": {
+      "benessere": "Equilibrio tra cute e capello, costruito con metodo.",
+      "colorlux": "Colore e luce, pensati per durare nel tempo.",
+      "rituale": "Cura, forma e colore in un’unica regia."
+    },
+    "attentionNote": {
+      "ordinaria": "Il quadro appare equilibrato: la lettura in Maison confermerà la direzione più adatta.",
+      "mirata": "Alcuni segnali meritano attenzione nella lettura professionale in Maison.",
+      "prioritaria": "Alcuni segnali emersi meritano un approfondimento particolare durante la lettura professionale in Maison."
+    }
   }
 }

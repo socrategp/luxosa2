@@ -80,11 +80,11 @@
     "176": "PARCOURS SECONDAIRE : {{percorsoName}}",
     "001": "très bouclés",
     "002": "dans leur structure naturelle",
-    "003": "fragiles et peu résistants",
+    "003": "fragiles, peu résistants",
     "004": "difficiles à gérer en raison du frisottis",
-    "005": "fins et peu volumineux",
+    "005": "fins, peu volumineux",
     "006": "avec tendance à la racine grasse",
-    "007": "secs et ternes",
+    "007": "secs, ternes",
     "008": "en bonne santé, mais avec une marge d'amélioration",
     "009": "chaque jour",
     "010": "tous les 2 à 3 jours",
@@ -210,9 +210,19 @@
     "completeSpecific": "La lecture du profil révèle une situation articulée{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": " : {{satDesc}}",
     "completeAspirationPart": "En ce moment {{aspDesc}}.",
-    "hairSummary": "Cheveux {{tipo}}{{statoPart}}.",
-    "hairStatePart": ", que vous décrivez comme {{statoDesc}}",
+    "hairSummary": "Vous décrivez vos cheveux comme {{list}}.",
+    "hairSummaryOverride": "Vous décrivez vos cheveux comme {{tipo}}, {{overrideClause}}.",
     "washFrequency": "Fréquence de lavage : {{lavaggioDesc}}.",
-    "benessereCuteRationale": "Le parcours BenEssere part du cuir chevelu et le lit dans le temps, avec méthode. Non une intervention isolée, mais une séquence construite pour retrouver un équilibre réel{{neverPart}}. La lecture en présence permettra d’évaluer la condition réelle et de définir les étapes les plus adaptées."
+    "benessereCuteRationale": "Le parcours BenEssere part du cuir chevelu et le lit dans le temps, avec méthode. Non une intervention isolée, mais une séquence construite pour retrouver un équilibre réel{{neverPart}}. La lecture en présence permettra d’évaluer la condition réelle et de définir les étapes les plus adaptées.",
+    "percorsoTagline": {
+      "benessere": "L'équilibre entre cuir chevelu et cheveux, construit avec méthode.",
+      "colorlux": "La couleur et la lumière, pensées pour durer dans le temps.",
+      "rituale": "Soin, forme et couleur réunis sous une seule direction."
+    },
+    "attentionNote": {
+      "ordinaria": "Le tableau semble équilibré : la lecture en Maison confirmera la direction la plus adaptée.",
+      "mirata": "Certains signaux méritent de l'attention lors de la lecture professionnelle en Maison.",
+      "prioritaria": "Certains signaux ressortis méritent un approfondissement particulier lors de la lecture professionnelle en Maison."
+    }
   }
 }

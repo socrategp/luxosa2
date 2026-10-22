@@ -145,28 +145,10 @@
       "241": "privacy@luxosa.it",
       "242": ". Besuche unsere",
       "243": "Privacy Policy",
-      "244": "bg-brass border-brass",
-      "245": "border-anthracite/30 group-hover:border-brass/50",
       "246": "Ich habe die oben genannten Bedingungen gelesen und akzeptiere sie. *",
-      "247": "relative overflow-hidden group bg-charcoal text-ivory cursor-pointer",
-      "248": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "249": "relative z-10",
       "250": "Luxosa Test starten",
-      "251": "border-brass shadow-md ring-1 ring-brass/20",
-      "252": "border-anthracite/20 hover:border-brass/35 hover:shadow-md",
-      "253": "bg-ivory/95",
-      "254": "text-brass-muted",
-      "255": "bg-ecru/35",
-      "256": "bg-ecru/20 group-hover:bg-ecru/40",
-      "257": "text-brass-muted",
-      "258": "text-charcoal group-hover:text-brass-muted",
-      "259": "bg-transparent group-hover:bg-brass/20",
       "260": "Schreib hier frei…",
-      "261": "bg-charcoal text-ivory cursor-pointer",
-      "262": "bg-anthracite/10 text-anthracite/40 cursor-not-allowed",
-      "263": "relative z-10",
       "264": "Weiter",
-      "265": "group-hover:translate-x-1 transition-transform duration-300",
       "266": "Fast fertig",
       "267": "Erhalte dein Ergebnis.",
       "268": "Um dein personalisiertes Ergebnis zu erhalten und damit wir dich für die kostenlose Beratung vor Ort kontaktieren können, hinterlasse uns deine Daten.",
@@ -179,9 +161,6 @@
       "275": "Ausgangszustand",
       "276": "Hauptsignale",
       "277": "Aufmerksamkeitsniveau",
-      "278": "bg-brass/10 text-brass-muted border border-brass/30",
-      "279": "bg-ecru text-anthracite/70 border border-sand/50",
-      "280": "bg-ecru/40 text-anthracite/55 border border-sand/30",
       "281": "Die Richtung",
       "282": "Warum dieser Weg",
       "283": "Vorgeschlagene Erlebnisse",
@@ -194,10 +173,6 @@
       "290": "Luxosa · Beratung",
       "291": "Standort wählen",
       "292": "Zu welcher Uhrzeit möchtest du zurückgerufen werden?",
-      "293": "border-brass/60 bg-ecru text-anthracite",
-      "294": "border-sand/60 text-anthracite/85 hover:border-brass/40 hover:bg-ecru/40",
-      "295": "bg-charcoal text-ivory hover:bg-deep cursor-pointer",
-      "296": "bg-sand/40 text-anthracite/45 cursor-not-allowed",
       "297": "Senden",
       "298": "Abbrechen",
       "299": "Luxosa",
@@ -314,5 +289,55 @@
   },
   "result": {
     "personalizedTitle": "{{nome}}, der für dich gedachte Weg ist…"
+  },
+  "ui": {
+    "disclaimer": {
+      "title": "Willkommen beim Luxosa Test",
+      "intro": "In wenigen Minuten hilft er uns, die Eigenschaften deines Haares und deiner Kopfhaut, deine Gewohnheiten und deine Bedürfnisse besser zu verstehen, um dir eine erste persönliche Orientierung zu geben.",
+      "howLabel": "So funktioniert es",
+      "howText": "Es handelt sich um einen einfachen Multiple-Choice-Test: Wähle bei jeder Frage die angebotenen Optionen aus. Bei einigen genügt eine einzige Antwort und es geht automatisch weiter; bei anderen sind bis zu zwei möglich, die du mit „{{continue}}“ bestätigst. Du kannst jederzeit zurückgehen und deine Auswahl ändern.",
+      "importantLabel": "Wichtig",
+      "importantText": "Der Luxosa Test bietet eine vorläufige Orientierung und stellt keine medizinische, trichologische oder dermatologische Diagnose dar. Die professionelle Beurteilung erfolgt in der Maison."
+    },
+    "form": {
+      "title": "Dein Luxosa Test ist fast fertig",
+      "intro": "Fülle alle Felder aus, um deinen vollständigen persönlichen Bericht per E-Mail zu erhalten. Gib eine gültige E-Mail-Adresse ein: Dorthin senden wir dir deinen Luxosa Test.",
+      "name": "Dein Vorname *",
+      "surname": "Dein Nachname *",
+      "consent": "Ich bestätige, dass ich meinen Luxosa Test erhalten möchte, und ermächtige Luxosa, die angegebenen Kontaktdaten für die Erstellung, den Versand des Dossiers und die unmittelbar mit meiner Anfrage verbundene Kommunikation zu verwenden. *",
+      "submit": "Ich möchte meinen Luxosa Bericht erhalten",
+      "errorFields": "Fülle alle Felder aus, um deinen Luxosa Test zu erhalten.",
+      "errorConsent": "Bestätige bitte die für die Erstellung deines Luxosa Test erforderliche Anfrage, bevor du fortfährst."
+    },
+    "sending": {
+      "title": "Wir erstellen deinen Luxosa Test",
+      "aria": "Erstellung des Luxosa Test",
+      "moment": "Einen Moment…",
+      "phase1": "Wir analysieren deine Antworten",
+      "phase2": "Wir definieren dein Luxosa-Profil",
+      "phase3": "Wir bereiten dein persönliches Dossier vor",
+      "phase4": "Wir ordnen das Endergebnis",
+      "phase5": "Wir schließen den Versand ab"
+    },
+    "result": {
+      "attention": {
+        "ordinaria": {
+          "title": "Normale Aufmerksamkeit",
+          "description": "Die Situation, die sich gezeigt hat, erfordert keine besondere Priorität. Die Beratung kann helfen, das zu stärken, was gut funktioniert, und die passendste Richtung genauer zu bestimmen."
+        },
+        "mirata": {
+          "title": "Gezielte Aufmerksamkeit",
+          "description": "Einige Signale verdienen eine gezielte Vertiefung, um besser zu verstehen, wie vorzugehen ist und welche Erlebnisse am hilfreichsten sein können."
+        },
+        "prioritaria": {
+          "title": "Vorrangige Aufmerksamkeit",
+          "description": "Mehrere Aspekte deuten darauf hin, dass es wichtig ist, die Situation vorrangig in der Maison zu vertiefen, bevor die passendste Richtung festgelegt wird."
+        }
+      },
+      "confirmTitle": "Dein Luxosa Test ist fertig",
+      "confirmSent": "Wir haben dir soeben deinen vollständigen persönlichen Bericht per E-Mail geschickt. Sieh in deinem Posteingang nach und, falls nötig, auch im Spam- oder Werbung-Ordner.",
+      "confirmFailed": "Dein Profil ist vollständig. Wegen eines kleinen technischen Problems konnten wir dir den Bericht noch nicht per E-Mail zustellen — kein Problem: Du kannst ihn gleich unten über WhatsApp anfordern, oder die Maison sendet ihn dir in Kürze.",
+      "slotAny": "Egal"
+    }
   }
 }

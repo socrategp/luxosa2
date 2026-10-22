@@ -10,6 +10,8 @@ import { reconcileIdentity as realReconcileIdentity } from './identity.js';
 import { getLedger, type Ledger } from './ledger.js';
 import type { LedgerStatus } from './ledger.js';
 import { buildLuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
+import { t } from '../../src/i18n/t.js';
+import { withLanguage, isSupportedLanguage, DEFAULT_LANGUAGE } from './language.js';
 import { generateDossierPdf as realGenerateDossierPdf, buildDossierFileName } from './pdfGeneration.js';
 import { findCustomFieldValue } from './customFields.js';
 import { archiveDossier, type ArchiveDeps } from './documentsArchive.js';
@@ -87,17 +89,37 @@ function extractSubmissionIdForError(rawPayload: unknown): string {
     : 'unknown';
 }
 
-function buildDossierEmailContent(firstName: string, percorsoName: string): { subject: string; html: string } {
-  return {
-    subject: 'Il tuo Luxosa Test è pronto',
-    html: `
-      <p>Ciao ${firstName},</p>
-      <p>in allegato trovi il tuo dossier Luxosa Test completo, con il tuo orientamento personalizzato verso <strong>${percorsoName}</strong>.</p>
-      <p>Resta un orientamento preliminare: il percorso definitivo sarà confermato durante la Consulenza Luxosa in presenza.</p>
-      <p>Per qualsiasi domanda siamo a tua disposizione su WhatsApp.</p>
-      <p>— Luxosa</p>
-    `.trim(),
-  };
+// The name is typed by the client and the email goes out from Luxosa's own
+// sender: it must never be able to inject markup (links, images) into it.
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+// Written in the client's language; non-Italian emails add one line saying the
+// attached dossier also carries the Italian copy the Maison reads.
+export function buildDossierEmailContent(
+  firstName: string,
+  percorsoName: string,
+  language: string = DEFAULT_LANGUAGE,
+): { subject: string; html: string } {
+  const lang = isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE;
+  return withLanguage(lang, () => {
+    const italianNote = lang === DEFAULT_LANGUAGE ? '' : `<p>${t('report:email.italianNote')}</p>`;
+    const html = `
+      <p>${t('report:email.greeting', { firstName: escapeHtml(firstName) })}</p>
+      <p>${t('report:email.intro', { percorso: `<strong>${escapeHtml(percorsoName)}</strong>` })}</p>
+      <p>${t('report:email.preliminary')}</p>
+      ${italianNote}
+      <p>${t('report:email.questions')}</p>
+      <p>${t('report:email.signoff')}</p>
+    `.trim();
+    return { subject: t('report:email.subject'), html };
+  });
 }
 
 export async function processSubmission(
@@ -278,6 +300,7 @@ export async function processSubmission(
         result,
         { nome: data.firstName, cognome: data.lastName, email: data.email, whatsapp: data.phoneE164 },
         submittedAt,
+        { language: data.language, answers: data.answers },
       );
       pdfBuffer = generated.buffer;
     } catch (err) {
@@ -340,7 +363,7 @@ export async function processSubmission(
       }
     }
 
-    const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName);
+    const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName, data.language);
 
     await ledger.update(data.submissionId, { status: 'EMAIL_SENDING' });
     let emailMessageId: string | null = null;

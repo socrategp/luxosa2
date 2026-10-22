@@ -108,6 +108,7 @@ test('locales: interpolation placeholders match the Italian source in every lang
 const NEVER_TRANSLATED = new Set([
   'Area Benessere', 'Cheratina Nutrizione Pro', 'PiegaLux', 'Taglio Signature', 'Nuances', 'RicciOsa', 'RicciOso',
   'Messina Cavour', 'Luxosa Test', 'Luxosa', 'privacy@luxosa.it', 'Privacy Policy', 'Email: {{email}}', 'WhatsApp: {{whatsapp}}',
+  'Luxosa Test — {{name}}', '— Luxosa',
   // Genuine cognates: the same correct word in Spanish.
   'IMPORTANTE:', 'Importante',
 ]);

@@ -224,5 +224,33 @@
       "mirata": "Maisonでの専門的な見立ての際に、注意して確認したいサインがあります。",
       "prioritaria": "Maisonでの専門的な見立ての際に、特に丁寧に確認したいサインがあります。"
     }
+  },
+  "pdf": {
+    "kickerSub": "パーソナライズドドシエ",
+    "fallbackName": "あなたのLuxosa Test",
+    "fallbackFooterName": "パーソナライズドレポート",
+    "footer": "Luxosa Test · 予備的なオリエンテーション · {{name}} · {{date}}",
+    "docTitle": "Luxosa Test — {{name}}",
+    "yourOrientation": "あなたのオリエンテーション",
+    "experiences": "おすすめのシグネチャー・エスペリエンツェ",
+    "beforeAfter": "ビフォー / アフター",
+    "before": "ビフォー",
+    "after": "アフター",
+    "secondaryLead": "カウンセリングでは、",
+    "secondaryTail": "との相性も見えてくるかもしれません。対面での見立てが、最も整合する方向性を定めます。",
+    "nextStepTitle": "次のステップ",
+    "nextStepText": "Luxosa Testは最初のオリエンテーションです。Maisonでの専門的な見立てにより、頭皮、髪の状態、フォルム、これまでの経緯、そしてあなたのご希望を直接確認し、最適な方向性を定めます。",
+    "quoteOpen": "「",
+    "quoteClose": "」",
+    "signoff": "愛する。輝く。挑戦する。"
+  },
+  "email": {
+    "subject": "Luxosa Testの準備ができました",
+    "greeting": "{{firstName}}様、",
+    "intro": "パーソナライズされたLuxosa Testの詳細なドシエを添付しております。あなたに向けたオリエンテーションは{{percorso}}です。",
+    "preliminary": "こちらはあくまで予備的なオリエンテーションです。最終的なプログラムは、対面でのConsulenza Luxosaで確定いたします。",
+    "questions": "ご不明な点がございましたら、WhatsAppでお気軽にお問い合わせください。",
+    "italianNote": "ドシエにはイタリア語版も含まれており、Maisonのチームがカウンセリングの際に参照します。",
+    "signoff": "— Luxosa"
   }
 }

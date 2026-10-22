@@ -2,7 +2,7 @@
   "buildCommand": "npm run build",
   "functions": {
     "api/luxosa-test/submit.ts": {
-      "includeFiles": "node_modules/{@fontsource,pdfkit}/**"
+      "includeFiles": "{node_modules/{@fontsource,pdfkit}/**,server/luxosaTest/assets/**}"
     }
   },
   "rewrites": [

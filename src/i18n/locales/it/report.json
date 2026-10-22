@@ -224,5 +224,33 @@
       "mirata": "Alcuni segnali meritano attenzione nella lettura professionale in Maison.",
       "prioritaria": "Alcuni segnali emersi meritano un approfondimento particolare durante la lettura professionale in Maison."
     }
+  },
+  "pdf": {
+    "kickerSub": "Dossier personalizzato",
+    "fallbackName": "Il tuo Luxosa Test",
+    "fallbackFooterName": "Report personalizzato",
+    "footer": "Luxosa Test · Orientamento preliminare · {{name}} · {{date}}",
+    "docTitle": "Luxosa Test — {{name}}",
+    "yourOrientation": "Il tuo orientamento",
+    "experiences": "Esperienze Signature consigliate",
+    "beforeAfter": "Prima / dopo",
+    "before": "Prima",
+    "after": "Dopo",
+    "secondaryLead": "La consulenza potrebbe rivelare un'affinità anche con ",
+    "secondaryTail": ". La lettura in presenza definirà la direzione più coerente.",
+    "nextStepTitle": "Il prossimo passo",
+    "nextStepText": "Il Luxosa Test è un primo orientamento. La lettura professionale in Maison permetterà di osservare direttamente cute, fibra, forma, storia e obiettivi dei tuoi capelli e definire la direzione più adatta a te.",
+    "quoteOpen": "«",
+    "quoteClose": "»",
+    "signoff": "Ama, splendi, osa."
+  },
+  "email": {
+    "subject": "Il tuo Luxosa Test è pronto",
+    "greeting": "Ciao {{firstName}},",
+    "intro": "in allegato trovi il tuo dossier Luxosa Test completo, con il tuo orientamento personalizzato verso {{percorso}}.",
+    "preliminary": "Resta un orientamento preliminare: il percorso definitivo sarà confermato durante la Consulenza Luxosa in presenza.",
+    "questions": "Per qualsiasi domanda siamo a tua disposizione su WhatsApp.",
+    "italianNote": "",
+    "signoff": "— Luxosa"
   }
 }

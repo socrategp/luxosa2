@@ -224,5 +224,33 @@
       "mirata": "Some signals deserve attention during the professional reading in Maison.",
       "prioritaria": "Some of the signals that emerged deserve particular attention during the professional reading in Maison."
     }
+  },
+  "pdf": {
+    "kickerSub": "Personalised dossier",
+    "fallbackName": "Your Luxosa Test",
+    "fallbackFooterName": "Personalised report",
+    "footer": "Luxosa Test · Preliminary orientation · {{name}} · {{date}}",
+    "docTitle": "Luxosa Test — {{name}}",
+    "yourOrientation": "Your orientation",
+    "experiences": "Recommended Signature Experiences",
+    "beforeAfter": "Before / after",
+    "before": "Before",
+    "after": "After",
+    "secondaryLead": "The consultation may also reveal an affinity with ",
+    "secondaryTail": ". The in-person reading will define the most coherent direction.",
+    "nextStepTitle": "The next step",
+    "nextStepText": "The Luxosa Test is a first orientation. The professional reading in Maison will allow us to observe your scalp, hair fibre, shape, history and goals first-hand and to define the direction that suits you best.",
+    "quoteOpen": "“",
+    "quoteClose": "”",
+    "signoff": "Love, shine, dare."
+  },
+  "email": {
+    "subject": "Your Luxosa Test is ready",
+    "greeting": "Hello {{firstName}},",
+    "intro": "please find attached your complete Luxosa Test dossier, with your personalised orientation towards {{percorso}}.",
+    "preliminary": "It remains a preliminary orientation: the definitive pathway will be confirmed during the in-person Consulenza Luxosa.",
+    "questions": "For any question, we are at your disposal on WhatsApp.",
+    "italianNote": "The dossier also includes an Italian version, which our Maison team will read for your consultation.",
+    "signoff": "— Luxosa"
   }
 }

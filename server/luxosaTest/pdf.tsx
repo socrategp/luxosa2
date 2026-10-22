@@ -4,10 +4,14 @@
 // used by the on-site summary and the WhatsApp message — no separate content
 // logic lives here, only layout/typography for the printable dossier.
 //
-// Pagination is fully dynamic: everything lives inside ONE <Page wrap>,
-// and @react-pdf/renderer flows it across as many physical pages as the
-// content actually needs. Do not split this into multiple <Page> blocks —
-// that was the bug that produced a fixed, mostly-empty page 2 before.
+// The dossier is made of one or two language sections: the client's chosen
+// language first, then the Italian copy the Maison reads. Each section is ONE
+// <Page wrap> that @react-pdf/renderer flows across as many physical pages as
+// the content needs — do not split a section into several <Page> blocks (that
+// produced a fixed, mostly-empty page 2 before).
+//
+// All fixed text comes from pdfLabels.ts (already resolved in the section's
+// language); this file only knows layout, typography and fonts.
 //
 // Media is entirely optional and resolved elsewhere (see
 // src/lib/luxosaTest/media.ts) — this file only knows how to lay a
@@ -15,12 +19,16 @@
 // the dossier stays exactly as elegant as the text-only version.
 // ---------------------------------------------------------------
 
-import { Document, Page, View, Text, Image, StyleSheet, Font } from '@react-pdf/renderer';
-import { t } from '../../src/i18n/t.js';
-import type { LuxosaTestResult, AttentionLevel } from '../../src/lib/luxosaTest/result.js';
+import { Document, Page, View, Text as BaseText, Image, StyleSheet, Font } from '@react-pdf/renderer';
+import type { ComponentProps } from 'react';
+import { syllables } from '@react-pdf/hyphenate/en-us';
+import type { LuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
 import type { ResolvedLuxosaTestMedia, LuxosaTestMediaAsset, LuxosaTestMediaAspect } from '../../src/lib/luxosaTest/media.js';
 import { resolvePdfImageSrc } from './pdfAssets.js';
+import { withLanguage } from './language.js';
+import { buildDossierLabels, type DossierLabels } from './pdfLabels.js';
 import { createRequire } from 'node:module';
+import path from 'node:path';
 
 const require = createRequire(import.meta.url);
 
@@ -44,6 +52,69 @@ Font.register({
   ],
 });
 
+// Russian: the same two families, Cyrillic glyphs. Only used (as a glyph
+// fallback) in Russian sections, so Latin-only dossiers never load them.
+Font.register({
+  family: 'Cormorant Garamond Cyrillic',
+  fonts: [
+    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-400-normal.woff') },
+    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-500-normal.woff'), fontWeight: 500 },
+    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-600-normal.woff'), fontWeight: 600 },
+    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-400-italic.woff'), fontStyle: 'italic' },
+  ],
+});
+
+Font.register({
+  family: 'Jost Cyrillic',
+  fonts: [
+    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-300-normal.woff'), fontWeight: 300 },
+    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-400-normal.woff'), fontWeight: 400 },
+    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-500-normal.woff'), fontWeight: 500 },
+    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-400-italic.woff'), fontStyle: 'italic' },
+  ],
+});
+
+// Japanese: Noto Sans JP (SIL OFL, see assets/fonts). One file, loaded only
+// when a Japanese section is rendered; the renderer embeds just the glyphs
+// actually used, so the PDF stays small.
+// CJK has no true italics: the italic slot reuses the upright file so a
+// section that mixes Latin italics with a Japanese name never fails to resolve.
+const NOTO_SANS_JP = path.join(process.cwd(), 'server/luxosaTest/assets/fonts/NotoSansJP-Regular.otf');
+Font.register({
+  family: 'Noto Sans JP',
+  fonts: [{ src: NOTO_SANS_JP }, { src: NOTO_SANS_JP, fontStyle: 'italic' }],
+});
+
+interface DossierFonts {
+  sans: string | string[];
+  serif: string | string[];
+}
+
+const CYRILLIC = /[Ѐ-ӿ]/;
+const CJK = /[　-ヿ㐀-䶿一-鿿＀-￯]/;
+
+// Same hyphenation the renderer applies by default (soft hyphens first, then the
+// built-in English patterns) for every Latin word; Japanese words are never
+// split with a hyphen — a clause simply moves to the next line.
+const SOFT_HYPHEN = '­';
+Font.registerHyphenationCallback((word: string) => {
+  if (CJK.test(word)) return [word];
+  if (word.includes(SOFT_HYPHEN)) return word.split(SOFT_HYPHEN);
+  return syllables(word);
+});
+
+// The font chain follows the characters actually printed in the section — not
+// only its language — because a client's name or free-text story can use any
+// script (a Japanese name inside the Italian copy for the Maison, for
+// instance). Fallback fonts are loaded only when such characters are present.
+function fontsFor(sample: string): DossierFonts {
+  const sans = ['Jost'];
+  const serif = ['Cormorant Garamond'];
+  if (CYRILLIC.test(sample)) { sans.push('Jost Cyrillic'); serif.push('Cormorant Garamond Cyrillic'); }
+  if (CJK.test(sample)) { sans.push('Noto Sans JP'); serif.push('Noto Sans JP'); }
+  return { sans: sans.length === 1 ? sans[0] : sans, serif: serif.length === 1 ? serif[0] : serif };
+}
+
 // Luxosa design-system palette (src/index.css @theme) — print values.
 const COLORS = {
   ivory: '#F9F6F1',
@@ -53,12 +124,6 @@ const COLORS = {
   charcoal: '#282520',
   brass: '#B09872',
   brassMuted: '#9E8868',
-};
-
-const ATTENTION_LABELS: Record<AttentionLevel, string> = {
-  ordinaria: 'Attenzione ordinaria',
-  mirata: 'Attenzione mirata',
-  prioritaria: 'Attenzione prioritaria',
 };
 
 // Per-aspect box heights for media slots — a pragmatic fixed value per
@@ -76,244 +141,263 @@ function heightForAsset(asset: LuxosaTestMediaAsset | null | undefined, fallback
   return ASPECT_HEIGHT[asset?.aspect ?? fallback];
 }
 
-const styles = StyleSheet.create({
-  page: {
-    backgroundColor: COLORS.ivory,
-    paddingTop: 54,
-    paddingBottom: 60,
-    paddingHorizontal: 52,
-    fontFamily: 'Jost',
-    fontSize: 10.5,
-    color: COLORS.anthracite,
-  },
-  kicker: {
-    fontSize: 9,
-    letterSpacing: 3,
-    textTransform: 'uppercase',
-    color: COLORS.brassMuted,
-  },
-  kickerSub: {
-    fontSize: 9,
-    letterSpacing: 3,
-    textTransform: 'uppercase',
-    color: COLORS.anthracite,
-    opacity: 0.7,
-    marginBottom: 20,
-  },
-  heroName: {
-    fontFamily: 'Cormorant Garamond',
-    fontSize: 26,
-    fontWeight: 500,
-    color: COLORS.charcoal,
-  },
-  heroDate: {
-    fontSize: 9,
-    color: COLORS.anthracite,
-    opacity: 0.55,
-    marginTop: 3,
-    marginBottom: 20,
-  },
-  divider: {
-    borderTopWidth: 1,
-    borderTopColor: COLORS.sand,
-    marginBottom: 20,
-  },
-  orientamentoLabel: {
-    fontSize: 8,
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-    color: COLORS.brassMuted,
-    marginBottom: 6,
-  },
-  percorsoName: {
-    fontFamily: 'Cormorant Garamond',
-    fontSize: 36,
-    fontWeight: 400,
-    color: COLORS.charcoal,
-  },
-  percorsoTagline: {
-    fontSize: 10.5,
-    fontStyle: 'italic',
-    color: COLORS.anthracite,
-    opacity: 0.65,
-    marginTop: 4,
-  },
-  heroImage: {
-    width: '100%',
-    objectFit: 'cover',
-    marginTop: 18,
-    marginBottom: 4,
-  },
-  sectionLabel: {
-    fontSize: 8,
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-    color: COLORS.brassMuted,
-    marginTop: 24,
-    marginBottom: 8,
-  },
-  body: {
-    fontSize: 10.5,
-    lineHeight: 1.6,
-    color: COLORS.anthracite,
-  },
-  signalRow: {
-    flexDirection: 'row',
-    marginBottom: 6,
-    alignItems: 'flex-start',
-  },
-  dot: {
-    width: 3,
-    height: 3,
-    borderRadius: 1.5,
-    backgroundColor: COLORS.brass,
-    marginTop: 4,
-    marginRight: 8,
-  },
-  dotMuted: {
-    width: 3,
-    height: 3,
-    borderRadius: 1.5,
-    backgroundColor: COLORS.sand,
-    marginTop: 4,
-    marginRight: 8,
-  },
-  // Attention: one neutral treatment for all three levels on purpose —
-  // never color-coded by severity (no medical scale, no traffic light).
-  attentionBox: {
-    borderLeftWidth: 2,
-    borderLeftColor: COLORS.brass,
-    paddingLeft: 12,
-    paddingVertical: 2,
-  },
-  attentionValue: {
-    fontFamily: 'Cormorant Garamond',
-    fontSize: 15,
-    color: COLORS.charcoal,
-  },
-  attentionNote: {
-    fontSize: 9.5,
-    lineHeight: 1.5,
-    color: COLORS.anthracite,
-    opacity: 0.65,
-    marginTop: 4,
-  },
-  rationaleBox: {
-    marginTop: 4,
-    padding: 16,
-    backgroundColor: COLORS.ecru,
-  },
-  esperienzaRow: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.sand,
-    paddingVertical: 14,
-  },
-  esperienzaIndex: {
-    fontFamily: 'Cormorant Garamond',
-    fontSize: 20,
-    color: COLORS.brass,
-    width: 36,
-  },
-  esperienzaContent: {
-    flex: 1,
-  },
-  esperienzaNome: {
-    fontFamily: 'Cormorant Garamond',
-    fontSize: 17,
-    fontWeight: 400,
-    color: COLORS.charcoal,
-  },
-  esperienzaSottotitolo: {
-    fontSize: 8.5,
-    color: COLORS.anthracite,
-    opacity: 0.6,
-    marginTop: 2,
-    marginBottom: 6,
-  },
-  mediaImage: {
-    width: '100%',
-    objectFit: 'cover',
-    marginBottom: 8,
-  },
-  devPlaceholderBox: {
-    width: '100%',
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: COLORS.brassMuted,
-    borderStyle: 'dashed',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: COLORS.ecru,
-  },
-  devPlaceholderLabel: {
-    fontSize: 7,
-    letterSpacing: 1.5,
-    textTransform: 'uppercase',
-    color: COLORS.brassMuted,
-  },
-  devPlaceholderCaption: {
-    fontSize: 7.5,
-    color: COLORS.anthracite,
-    opacity: 0.6,
-    marginTop: 2,
-  },
-  beforeAfterRow: {
-    flexDirection: 'row',
-    gap: 10,
-    marginTop: 4,
-    marginBottom: 6,
-  },
-  beforeAfterCell: {
-    flex: 1,
-  },
-  beforeAfterCaption: {
-    fontSize: 7.5,
-    color: COLORS.anthracite,
-    opacity: 0.55,
-    textAlign: 'center',
-    marginTop: 3,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-  },
-  brandSignoff: {
-    fontFamily: 'Cormorant Garamond',
-    fontStyle: 'italic',
-    fontSize: 14,
-    color: COLORS.brassMuted,
-    marginTop: 14,
-  },
-  finalDisclaimerBlock: {
-    borderTopWidth: 1,
-    borderTopColor: COLORS.sand,
-    marginTop: 26,
-    paddingTop: 14,
-  },
-  finalDisclaimerText: {
-    fontSize: 8,
-    lineHeight: 1.6,
-    color: COLORS.anthracite,
-    opacity: 0.55,
-    fontStyle: 'italic',
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 28,
-    left: 52,
-    right: 52,
-    fontSize: 7.5,
-    letterSpacing: 0.5,
-    color: COLORS.anthracite,
-    opacity: 0.45,
-    textAlign: 'center',
-  },
-});
+function createStyles(fonts: DossierFonts) {
+  return StyleSheet.create({
+    page: {
+      backgroundColor: COLORS.ivory,
+      paddingTop: 54,
+      paddingBottom: 60,
+      paddingHorizontal: 52,
+      fontFamily: fonts.sans,
+      fontSize: 10.5,
+      color: COLORS.anthracite,
+    },
+    kicker: {
+      fontSize: 9,
+      letterSpacing: 3,
+      textTransform: 'uppercase',
+      color: COLORS.brassMuted,
+    },
+    kickerSub: {
+      fontSize: 9,
+      letterSpacing: 3,
+      textTransform: 'uppercase',
+      color: COLORS.anthracite,
+      opacity: 0.7,
+      marginBottom: 20,
+    },
+    copyBanner: {
+      fontSize: 8,
+      letterSpacing: 2,
+      textTransform: 'uppercase',
+      color: COLORS.brassMuted,
+      marginBottom: 16,
+    },
+    heroName: {
+      fontFamily: fonts.serif,
+      fontSize: 26,
+      fontWeight: 500,
+      color: COLORS.charcoal,
+    },
+    heroDate: {
+      fontSize: 9,
+      color: COLORS.anthracite,
+      opacity: 0.55,
+      marginTop: 3,
+      marginBottom: 20,
+    },
+    divider: {
+      borderTopWidth: 1,
+      borderTopColor: COLORS.sand,
+      marginBottom: 20,
+    },
+    orientamentoLabel: {
+      fontSize: 8,
+      letterSpacing: 2,
+      textTransform: 'uppercase',
+      color: COLORS.brassMuted,
+      marginBottom: 6,
+    },
+    percorsoName: {
+      fontFamily: fonts.serif,
+      fontSize: 36,
+      fontWeight: 400,
+      color: COLORS.charcoal,
+    },
+    percorsoTagline: {
+      fontSize: 10.5,
+      fontStyle: 'italic',
+      color: COLORS.anthracite,
+      opacity: 0.65,
+      marginTop: 4,
+    },
+    heroImage: {
+      width: '100%',
+      objectFit: 'cover',
+      marginTop: 18,
+      marginBottom: 4,
+    },
+    sectionLabel: {
+      fontSize: 8,
+      letterSpacing: 2,
+      textTransform: 'uppercase',
+      color: COLORS.brassMuted,
+      marginTop: 24,
+      marginBottom: 8,
+    },
+    body: {
+      fontSize: 10.5,
+      lineHeight: 1.6,
+      color: COLORS.anthracite,
+    },
+    bodyItalic: {
+      fontSize: 10.5,
+      lineHeight: 1.6,
+      color: COLORS.anthracite,
+      fontStyle: 'italic',
+    },
+    signalRow: {
+      flexDirection: 'row',
+      marginBottom: 6,
+      alignItems: 'flex-start',
+    },
+    dot: {
+      width: 3,
+      height: 3,
+      borderRadius: 1.5,
+      backgroundColor: COLORS.brass,
+      marginTop: 4,
+      marginRight: 8,
+    },
+    dotMuted: {
+      width: 3,
+      height: 3,
+      borderRadius: 1.5,
+      backgroundColor: COLORS.sand,
+      marginTop: 4,
+      marginRight: 8,
+    },
+    // Attention: one neutral treatment for all three levels on purpose —
+    // never color-coded by severity (no medical scale, no traffic light).
+    attentionBox: {
+      borderLeftWidth: 2,
+      borderLeftColor: COLORS.brass,
+      paddingLeft: 12,
+      paddingVertical: 2,
+    },
+    attentionValue: {
+      fontFamily: fonts.serif,
+      fontSize: 15,
+      color: COLORS.charcoal,
+    },
+    attentionNote: {
+      fontSize: 9.5,
+      lineHeight: 1.5,
+      color: COLORS.anthracite,
+      opacity: 0.65,
+      marginTop: 4,
+    },
+    rationaleBox: {
+      marginTop: 4,
+      padding: 16,
+      backgroundColor: COLORS.ecru,
+    },
+    esperienzaRow: {
+      flexDirection: 'row',
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.sand,
+      paddingVertical: 14,
+    },
+    esperienzaIndex: {
+      fontFamily: fonts.serif,
+      fontSize: 20,
+      color: COLORS.brass,
+      width: 36,
+    },
+    esperienzaContent: {
+      flex: 1,
+    },
+    esperienzaNome: {
+      fontFamily: fonts.serif,
+      fontSize: 17,
+      fontWeight: 400,
+      color: COLORS.charcoal,
+    },
+    esperienzaSottotitolo: {
+      fontSize: 8.5,
+      color: COLORS.anthracite,
+      opacity: 0.6,
+      marginTop: 2,
+      marginBottom: 6,
+    },
+    mediaImage: {
+      width: '100%',
+      objectFit: 'cover',
+      marginBottom: 8,
+    },
+    devPlaceholderBox: {
+      width: '100%',
+      marginBottom: 8,
+      borderWidth: 1,
+      borderColor: COLORS.brassMuted,
+      borderStyle: 'dashed',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: COLORS.ecru,
+    },
+    devPlaceholderLabel: {
+      fontSize: 7,
+      letterSpacing: 1.5,
+      textTransform: 'uppercase',
+      color: COLORS.brassMuted,
+    },
+    devPlaceholderCaption: {
+      fontSize: 7.5,
+      color: COLORS.anthracite,
+      opacity: 0.6,
+      marginTop: 2,
+    },
+    beforeAfterRow: {
+      flexDirection: 'row',
+      gap: 10,
+      marginTop: 4,
+      marginBottom: 6,
+    },
+    beforeAfterCell: {
+      flex: 1,
+    },
+    beforeAfterCaption: {
+      fontSize: 7.5,
+      color: COLORS.anthracite,
+      opacity: 0.55,
+      textAlign: 'center',
+      marginTop: 3,
+      textTransform: 'uppercase',
+      letterSpacing: 1,
+    },
+    brandSignoff: {
+      fontFamily: fonts.serif,
+      fontStyle: 'italic',
+      fontSize: 14,
+      color: COLORS.brassMuted,
+      marginTop: 14,
+    },
+    finalDisclaimerBlock: {
+      borderTopWidth: 1,
+      borderTopColor: COLORS.sand,
+      marginTop: 26,
+      paddingTop: 14,
+    },
+    finalDisclaimerText: {
+      fontSize: 8,
+      lineHeight: 1.6,
+      color: COLORS.anthracite,
+      opacity: 0.55,
+      fontStyle: 'italic',
+    },
+    footer: {
+      position: 'absolute',
+      bottom: 28,
+      left: 52,
+      right: 52,
+      fontSize: 7.5,
+      letterSpacing: 0.5,
+      color: COLORS.anthracite,
+      opacity: 0.45,
+      textAlign: 'center',
+    },
+  });
+}
+
+type DossierStyles = ReturnType<typeof createStyles>;
+
+const Text = BaseText;
 
 function isDevPlaceholder(asset: LuxosaTestMediaAsset | undefined | null): boolean {
   return !!asset?.id.startsWith('dev-placeholder');
 }
 
-function MediaSlot({ asset, aspect }: { asset: LuxosaTestMediaAsset | null | undefined; aspect: LuxosaTestMediaAspect }) {
+function MediaSlot({ asset, aspect, styles }: { asset: LuxosaTestMediaAsset | null | undefined; aspect: LuxosaTestMediaAspect; styles: DossierStyles }) {
   if (!asset?.imageSrc) return null;
   const height = heightForAsset(asset, aspect);
   if (isDevPlaceholder(asset)) {
@@ -327,138 +411,170 @@ function MediaSlot({ asset, aspect }: { asset: LuxosaTestMediaAsset | null | und
   return <Image src={resolvePdfImageSrc(asset.imageSrc)} style={[styles.mediaImage, { height }]} />;
 }
 
-export interface LuxosaTestDossierProps {
+export interface DossierSection {
+  language: string;
   result: LuxosaTestResult;
+  labels: DossierLabels;
+  // Small line above the content, e.g. marking the Italian copy kept for the Maison.
+  banner?: string;
+}
+
+export interface LuxosaTestDossierProps {
+  // Either pass `sections` (one per language) or, for the Italian-only dossier, just `result`.
+  result?: LuxosaTestResult;
+  sections?: DossierSection[];
   contact: { nome: string; cognome: string; email: string; whatsapp: string };
   submittedAt: Date;
   media?: ResolvedLuxosaTestMedia;
 }
 
-export function LuxosaTestDossier({ result, contact, submittedAt, media }: LuxosaTestDossierProps) {
-  const fullName = `${contact.nome} ${contact.cognome}`.trim();
-  const dateLabel = submittedAt.toLocaleDateString('it-IT', { day: '2-digit', month: 'long', year: 'numeric' });
-  const footerLabel = `Luxosa Test · Orientamento preliminare · ${fullName || 'Report personalizzato'} · ${dateLabel}`;
+function DossierPage({ section, media }: { section: DossierSection; media?: ResolvedLuxosaTestMedia }) {
+  const { result, labels } = section;
+  const fonts = fontsFor(JSON.stringify([section.labels, section.result]));
+  const styles = createStyles(fonts);
+  const sample = JSON.stringify([section.labels, section.result]);
+  // Japanese is segmented into tiny words by the renderer and every boundary would be
+  // a hyphenation point: forbid those breaks (10000 is the line-breaker's "infinity").
+  const noHyphenation = CJK.test(sample);
+  const Text = (props: ComponentProps<typeof BaseText>) => (
+    <BaseText {...props} hyphenationPenalty={noHyphenation ? 10000 : undefined} />
+  );
   const secondaryBeforeAfter = media?.beforeAfter ?? [];
 
   return (
-    <Document title={`Luxosa Test — ${fullName || 'Report personalizzato'}`} author="Luxosa">
-      <Page size="A4" style={styles.page} wrap>
-        <Text style={styles.kicker}>Luxosa Test</Text>
-        <Text style={styles.kickerSub}>Dossier personalizzato</Text>
+    <Page size="A4" style={styles.page} wrap>
+      {section.banner && <Text style={styles.copyBanner}>{section.banner}</Text>}
+      <Text style={styles.kicker}>Luxosa Test</Text>
+      <Text style={styles.kickerSub}>{labels.kickerSub}</Text>
 
-        <Text style={styles.heroName}>{fullName || 'Il tuo Luxosa Test'}</Text>
-        <Text style={styles.heroDate}>{dateLabel}</Text>
+      <Text style={styles.heroName}>{labels.heroName}</Text>
+      <Text style={styles.heroDate}>{labels.dateLabel}</Text>
 
-        <MediaSlot asset={media?.hero} aspect="landscape-3-2" />
+      <MediaSlot asset={media?.hero} aspect="landscape-3-2" styles={styles} />
 
-        <View style={styles.divider} />
+      <View style={styles.divider} />
 
-        <Text style={styles.orientamentoLabel}>Il tuo orientamento</Text>
-        <Text style={styles.percorsoName}>{result.percorsoName}</Text>
-        <Text style={styles.percorsoTagline}>{result.percorsoTagline}</Text>
+      <Text style={styles.orientamentoLabel}>{labels.orientation}</Text>
+      <Text style={styles.percorsoName}>{result.percorsoName}</Text>
+      <Text style={styles.percorsoTagline}>{result.percorsoTagline}</Text>
 
-        <Text style={styles.sectionLabel} minPresenceAhead={50}>Condizione di partenza</Text>
-        <Text style={styles.body}>{result.conditionSummary}</Text>
+      <Text style={styles.sectionLabel} minPresenceAhead={50}>{labels.condition}</Text>
+      <Text style={styles.body}>{result.conditionSummary}</Text>
 
-        <Text style={styles.sectionLabel} minPresenceAhead={70}>Segnali principali</Text>
-        {result.mainSignals.map((signal, i) => (
-          <View style={styles.signalRow} key={i}>
-            <View style={styles.dot} />
-            <Text style={styles.body}>{signal}</Text>
+      <Text style={styles.sectionLabel} minPresenceAhead={70}>{labels.signals}</Text>
+      {result.mainSignals.map((signal, i) => (
+        <View style={styles.signalRow} key={i}>
+          <View style={styles.dot} />
+          <Text style={styles.body}>{signal}</Text>
+        </View>
+      ))}
+
+      <View style={styles.attentionBox} wrap={false} minPresenceAhead={70}>
+        <Text style={[styles.sectionLabel, { marginTop: 0 }]}>{labels.attentionTitle}</Text>
+        <Text style={styles.attentionValue}>{labels.attention[result.attentionLevel]}</Text>
+        <Text style={styles.attentionNote}>{result.attentionNote}</Text>
+      </View>
+
+      <Text style={styles.sectionLabel} minPresenceAhead={50}>{labels.direction}</Text>
+      <Text style={styles.body}>{result.desiredOutcome}</Text>
+
+      <View wrap={false} style={styles.rationaleBox} minPresenceAhead={90}>
+        <Text style={[styles.sectionLabel, { marginTop: 0 }]}>{labels.why}</Text>
+        <Text style={styles.body}>{result.percorsoRationale}</Text>
+      </View>
+
+      <Text style={styles.sectionLabel} minPresenceAhead={90}>{labels.experiences}</Text>
+      {result.esperienze.map((item, i) => (
+        <View key={item.es.nome} wrap={false} style={styles.esperienzaRow}>
+          <Text style={styles.esperienzaIndex}>{String(i + 1).padStart(2, '0')}</Text>
+          <View style={styles.esperienzaContent}>
+            <MediaSlot asset={media?.experienceMedia[item.es.nome]?.[0]} aspect="portrait-4-5" styles={styles} />
+            <Text style={styles.esperienzaNome}>{item.es.nome}</Text>
+            <Text style={styles.esperienzaSottotitolo}>{item.es.sottotitolo}</Text>
+            <Text style={styles.bodyItalic}>{item.perche}</Text>
           </View>
-        ))}
-
-        <View style={styles.attentionBox} wrap={false} minPresenceAhead={70}>
-          <Text style={[styles.sectionLabel, { marginTop: 0 }]}>Livello di attenzione</Text>
-          <Text style={styles.attentionValue}>{ATTENTION_LABELS[result.attentionLevel]}</Text>
-          <Text style={styles.attentionNote}>{result.attentionNote}</Text>
         </View>
+      ))}
 
-        <Text style={styles.sectionLabel} minPresenceAhead={50}>La direzione</Text>
-        <Text style={styles.body}>{result.desiredOutcome}</Text>
-
-        <View wrap={false} style={styles.rationaleBox} minPresenceAhead={90}>
-          <Text style={[styles.sectionLabel, { marginTop: 0 }]}>Perché questo percorso</Text>
-          <Text style={styles.body}>{result.percorsoRationale}</Text>
-        </View>
-
-        <Text style={styles.sectionLabel} minPresenceAhead={90}>Esperienze Signature consigliate</Text>
-        {result.esperienze.map((item, i) => (
-          <View key={item.es.nome} wrap={false} style={styles.esperienzaRow}>
-            <Text style={styles.esperienzaIndex}>{String(i + 1).padStart(2, '0')}</Text>
-            <View style={styles.esperienzaContent}>
-              <MediaSlot asset={media?.experienceMedia[item.es.nome]?.[0]} aspect="portrait-4-5" />
-              <Text style={styles.esperienzaNome}>{item.es.nome}</Text>
-              <Text style={styles.esperienzaSottotitolo}>{item.es.sottotitolo}</Text>
-              <Text style={[styles.body, { fontStyle: 'italic' }]}>{item.perche}</Text>
+      {secondaryBeforeAfter.map(ba => (
+        <View key={ba.id} wrap={false} style={{ marginTop: 16 }}>
+          <Text style={styles.sectionLabel}>{labels.beforeAfter}</Text>
+          <View style={styles.beforeAfterRow}>
+            <View style={styles.beforeAfterCell}>
+              <MediaSlot
+                asset={{ id: ba.id, type: 'experience', imageSrc: ba.beforeImage, aspect: 'portrait-4-5', alt: 'prima', channels: ['pdf'], approved: true }}
+                aspect="portrait-4-5"
+                styles={styles}
+              />
+              <Text style={styles.beforeAfterCaption}>{labels.before}</Text>
+            </View>
+            <View style={styles.beforeAfterCell}>
+              <MediaSlot
+                asset={{ id: ba.id, type: 'experience', imageSrc: ba.afterImage, aspect: 'portrait-4-5', alt: 'dopo', channels: ['pdf'], approved: true }}
+                aspect="portrait-4-5"
+                styles={styles}
+              />
+              <Text style={styles.beforeAfterCaption}>{labels.after}</Text>
             </View>
           </View>
-        ))}
+          {ba.caption && <Text style={[styles.body, { fontSize: 9, opacity: 0.7 }]}>{ba.caption}</Text>}
+          {ba.disclaimer && <Text style={[styles.body, { fontSize: 8, opacity: 0.5, fontStyle: 'italic' }]}>{ba.disclaimer}</Text>}
+        </View>
+      ))}
 
-        {secondaryBeforeAfter.map(ba => (
-          <View key={ba.id} wrap={false} style={{ marginTop: 16 }}>
-            <Text style={styles.sectionLabel}>Prima / dopo</Text>
-            <View style={styles.beforeAfterRow}>
-              <View style={styles.beforeAfterCell}>
-                <MediaSlot
-                  asset={{ id: ba.id, type: 'experience', imageSrc: ba.beforeImage, aspect: 'portrait-4-5', alt: 'prima', channels: ['pdf'], approved: true }}
-                  aspect="portrait-4-5"
-                />
-                <Text style={styles.beforeAfterCaption}>Prima</Text>
-              </View>
-              <View style={styles.beforeAfterCell}>
-                <MediaSlot
-                  asset={{ id: ba.id, type: 'experience', imageSrc: ba.afterImage, aspect: 'portrait-4-5', alt: 'dopo', channels: ['pdf'], approved: true }}
-                  aspect="portrait-4-5"
-                />
-                <Text style={styles.beforeAfterCaption}>Dopo</Text>
-              </View>
-            </View>
-            {ba.caption && <Text style={[styles.body, { fontSize: 9, opacity: 0.7 }]}>{ba.caption}</Text>}
-            {ba.disclaimer && <Text style={[styles.body, { fontSize: 8, opacity: 0.5, fontStyle: 'italic' }]}>{ba.disclaimer}</Text>}
-          </View>
-        ))}
-
-        {result.secondaryName && (
-          <Text style={[styles.body, { marginTop: 16, marginBottom: 4 }]}>
-            La consulenza potrebbe rivelare un'affinità anche con{' '}
-            <Text style={{ fontWeight: 600 }}>{result.secondaryName}</Text>
-            . La lettura in presenza definirà la direzione più coerente.
-          </Text>
-        )}
-
-        <Text style={styles.sectionLabel} minPresenceAhead={70}>Cosa approfondire in consulenza</Text>
-        {result.consultationFocus.map((point, i) => (
-          <View style={styles.signalRow} key={i}>
-            <View style={styles.dotMuted} />
-            <Text style={styles.body}>{point}</Text>
-          </View>
-        ))}
-
-        {result.d10Note && (
-          <>
-            <Text style={styles.sectionLabel} minPresenceAhead={50}>Dal tuo racconto</Text>
-            <Text style={[styles.body, { fontStyle: 'italic' }]}>«{result.d10Note}»</Text>
-          </>
-        )}
-
-        <Text style={[styles.body, { marginTop: 20 }]}>{result.closing}</Text>
-
-        <Text style={styles.sectionLabel} minPresenceAhead={140}>Il prossimo passo</Text>
-        <Text style={styles.body}>
-          Il Luxosa Test è un primo orientamento. La lettura professionale in Maison permetterà di osservare
-          direttamente cute, fibra, forma, storia e obiettivi dei tuoi capelli e definire la direzione più adatta a te.
+      {result.secondaryName && (
+        <Text style={[styles.body, { marginTop: 16, marginBottom: 4 }]}>
+          {labels.secondaryLead}
+          <Text style={{ fontWeight: 600 }}>{result.secondaryName}</Text>
+          {labels.secondaryTail}
         </Text>
-        <Text style={styles.brandSignoff}>Ama, splendi, osa.</Text>
+      )}
 
-        <View style={styles.finalDisclaimerBlock} wrap={false}>
-          <Text style={styles.finalDisclaimerText}>{t('report:disclaimer')}</Text>
+      <Text style={styles.sectionLabel} minPresenceAhead={70}>{labels.focus}</Text>
+      {result.consultationFocus.map((point, i) => (
+        <View style={styles.signalRow} key={i}>
+          <View style={styles.dotMuted} />
+          <Text style={styles.body}>{point}</Text>
         </View>
+      ))}
 
-        <Text style={styles.footer} fixed render={({ pageNumber, totalPages }) =>
-          totalPages > 1 ? `${footerLabel} · ${pageNumber}/${totalPages}` : footerLabel
-        } />
-      </Page>
+      {result.d10Note && (
+        <>
+          <Text style={styles.sectionLabel} minPresenceAhead={50}>{labels.story}</Text>
+          <Text style={styles.bodyItalic}>{labels.quoteOpen}{result.d10Note}{labels.quoteClose}</Text>
+        </>
+      )}
+
+      <Text style={[styles.body, { marginTop: 20 }]}>{result.closing}</Text>
+
+      <Text style={styles.sectionLabel} minPresenceAhead={140}>{labels.nextStepTitle}</Text>
+      <Text style={styles.body}>{labels.nextStepText}</Text>
+      <Text style={styles.brandSignoff}>{labels.signoff}</Text>
+
+      <View style={styles.finalDisclaimerBlock} wrap={false}>
+        <Text style={styles.finalDisclaimerText}>{labels.disclaimer}</Text>
+      </View>
+
+      <Text style={styles.footer} fixed render={({ pageNumber, totalPages }) =>
+        totalPages > 1 ? `${labels.footerLabel} · ${pageNumber}/${totalPages}` : labels.footerLabel
+      } />
+    </Page>
+  );
+}
+
+export function LuxosaTestDossier({ result, sections, contact, submittedAt, media }: LuxosaTestDossierProps) {
+  const fullName = `${contact.nome} ${contact.cognome}`.trim();
+  const resolved: DossierSection[] = sections ?? [{
+    language: 'it',
+    result: result as LuxosaTestResult,
+    labels: withLanguage('it', () => buildDossierLabels('it', fullName, submittedAt)),
+  }];
+
+  return (
+    <Document title={resolved[0].labels.docTitle} author="Luxosa">
+      {resolved.map((section, i) => (
+        <DossierPage key={`${section.language}-${i}`} section={section} media={media} />
+      ))}
     </Document>
   );
 }

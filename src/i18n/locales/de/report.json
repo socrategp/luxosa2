@@ -224,5 +224,33 @@
       "mirata": "Einige Signale verdienen bei der professionellen Analyse in der Maison Aufmerksamkeit.",
       "prioritaria": "Einige der erkannten Signale verdienen bei der professionellen Analyse in der Maison besondere Aufmerksamkeit."
     }
+  },
+  "pdf": {
+    "kickerSub": "Persönliches Dossier",
+    "fallbackName": "Dein Luxosa Test",
+    "fallbackFooterName": "Persönlicher Bericht",
+    "footer": "Luxosa Test · Vorläufige Orientierung · {{name}} · {{date}}",
+    "docTitle": "Luxosa Test — {{name}}",
+    "yourOrientation": "Deine Orientierung",
+    "experiences": "Empfohlene Signature-Erlebnisse",
+    "beforeAfter": "Vorher / nachher",
+    "before": "Vorher",
+    "after": "Nachher",
+    "secondaryLead": "Die Beratung könnte auch eine Affinität zu ",
+    "secondaryTail": " erkennen lassen. Die Analyse vor Ort bestimmt die stimmigste Richtung.",
+    "nextStepTitle": "Der nächste Schritt",
+    "nextStepText": "Der Luxosa Test ist eine erste Orientierung. Die professionelle Analyse in der Maison ermöglicht es, Kopfhaut, Haarfaser, Form, Geschichte und Ziele deines Haares direkt zu beobachten und die für dich passendste Richtung zu bestimmen.",
+    "quoteOpen": "„",
+    "quoteClose": "“",
+    "signoff": "Liebe, strahle, wage."
+  },
+  "email": {
+    "subject": "Dein Luxosa Test ist fertig",
+    "greeting": "Hallo {{firstName}},",
+    "intro": "im Anhang findest du dein vollständiges Luxosa Test Dossier mit deiner persönlichen Orientierung in Richtung {{percorso}}.",
+    "preliminary": "Es bleibt eine vorläufige Orientierung: Der endgültige Weg wird bei der persönlichen Consulenza Luxosa bestätigt.",
+    "questions": "Bei Fragen stehen wir dir jederzeit über WhatsApp zur Verfügung.",
+    "italianNote": "Das Dossier enthält außerdem eine italienische Fassung, die unser Maison-Team für deine Beratung liest.",
+    "signoff": "— Luxosa"
   }
 }

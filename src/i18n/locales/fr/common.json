@@ -139,14 +139,14 @@
         "069": "Gestion de la session utilisateur",
         "070": "Persistant",
         "071": "12 mois",
-        "072": "M?morisation des pr?f?rences de cookies",
-        "073": "? d?finir avec l??quipe technique",
+        "072": "Mémorisation des préférences de cookies",
+        "073": "À définir avec l'équipe technique",
         "074": "2 ans",
-        "075": "Google Analytics ? identification unique de l?utilisateur",
-        "076": "Google Analytics ? maintien de l??tat de session",
+        "075": "Google Analytics — identification unique de l'utilisateur",
+        "076": "Google Analytics — maintien de l'état de session",
         "077": "24 heures",
-        "078": "Google Analytics ? distinction des utilisateurs",
-        "079": "? d?finir ? par ex. Meta Pixel, Google Ads"
+        "078": "Google Analytics — distinction des utilisateurs",
+        "079": "À définir — par ex. Meta Pixel, Google Ads"
       }
     }
   },

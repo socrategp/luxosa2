@@ -142,11 +142,11 @@
         "072": "Cookie preference storage",
         "073": "To be defined with the technical team",
         "074": "2 years",
-        "075": "Google Analytics ? unique user identification",
-        "076": "Google Analytics ? session state maintenance",
+        "075": "Google Analytics — unique user identification",
+        "076": "Google Analytics — session state maintenance",
         "077": "24 hours",
-        "078": "Google Analytics ? user distinction",
-        "079": "To be defined ? e.g. Meta Pixel, Google Ads"
+        "078": "Google Analytics — user distinction",
+        "079": "To be defined — e.g. Meta Pixel, Google Ads"
       }
     }
   },

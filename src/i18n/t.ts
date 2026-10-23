@@ -17,6 +17,19 @@ export function currentLanguage(): string {
   return languageResolver?.() ?? i18n.resolvedLanguage ?? i18n.language ?? 'it'
 }
 
+// Renders text in another language for the duration of a synchronous call
+// (the WhatsApp message also carries the Italian copy for the Maison). Safe
+// because nothing inside fn awaits, so no other render can interleave.
+export function inLanguage<T>(language: string, fn: () => T): T {
+  const previous = languageResolver
+  languageResolver = () => language
+  try {
+    return fn()
+  } finally {
+    languageResolver = previous
+  }
+}
+
 export function t(key: string, options?: Record<string, unknown>) {
   const lng = languageResolver?.()
   return i18n.t(key, lng ? { ...options, lng } : options)

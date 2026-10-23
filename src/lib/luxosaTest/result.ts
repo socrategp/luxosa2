@@ -668,7 +668,7 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
       d4a_prurito: t('report:diagnostic.shortLabels.d4a_prurito'), d4a_desquamazione: t('report:diagnostic.shortLabels.d4a_desquamazione'),
       d4a_grassa:t('report:diagnostic.013'), d4a_rossori: t('report:diagnostic.shortLabels.d4a_rossori'), d4a_tira:t('report:diagnostic.014'),
     };
-    const sintomi = d4aArr.map(id => sintoMap[id] ?? '').filter(Boolean).join(', ');
+    const sintomi = joinList(d4aArr.map(id => sintoMap[id] ?? ''));
     const d5a = answers['d5a'] as string | undefined;
     const durataMap: Record<string, string> = {
       d5a_settimane:t('report:diagnostic.015'), d5a_mesi:t('report:diagnostic.016'),
@@ -686,7 +686,7 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
       d4b_colorazioni: t('report:diagnostic.shortLabels.d4b_colorazioni'), d4b_decolorazioni: t('report:diagnostic.shortLabels.d4b_decolorazioni'),
       d4b_stiratura: t('report:diagnostic.shortLabels.d4b_stiratura'), d4b_calore:t('report:diagnostic.019'), d4b_aggressivi:t('report:diagnostic.020'),
     };
-    const trattamenti = d4bArr.map(id => trattMap[id] ?? '').filter(Boolean).join(', ');
+    const trattamenti = joinList(d4bArr.map(id => trattMap[id] ?? ''));
     const d5b = answers['d5b'] as string | undefined;
     const condMap: Record<string, string> = {
       d5b_sane:t('report:diagnostic.021'), d5b_aperte:t('report:diagnostic.022'),
@@ -724,7 +724,7 @@ function buildConditionSummary(answers: Answers, _primary: Percorso): string {
       d4d_volume:t('report:diagnostic.035'), d4d_ricci:t('report:diagnostic.036'),
       d4d_piega:t('report:diagnostic.037'), d4d_taglio:t('report:diagnostic.038'),
     };
-    const formaDesc = d4dArr.map(id => formaMap[id] ?? '').filter(Boolean).join(', ');
+    const formaDesc = joinList(d4dArr.map(id => formaMap[id] ?? ''));
     const d5d = answers['d5d'] as string | undefined;
     const timeMap: Record<string, string> = {
       d5d_poco: t('report:diagnostic.timeLabels.d5d_poco'), d5d_medio: t('report:diagnostic.timeLabels.d5d_medio'),

@@ -20,8 +20,7 @@
 // ---------------------------------------------------------------
 
 import { Document, Page, View, Text as BaseText, Image, StyleSheet, Font } from '@react-pdf/renderer';
-import type { ComponentProps } from 'react';
-import { syllables } from '@react-pdf/hyphenate/en-us';
+import { Children, type ComponentProps, type ReactNode } from 'react';
 import type { LuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
 import type { ResolvedLuxosaTestMedia, LuxosaTestMediaAsset, LuxosaTestMediaAspect } from '../../src/lib/luxosaTest/media.js';
 import { resolvePdfImageSrc } from './pdfAssets.js';
@@ -52,25 +51,30 @@ Font.register({
   ],
 });
 
-// Russian: the same two families, Cyrillic glyphs. Only used (as a glyph
-// fallback) in Russian sections, so Latin-only dossiers never load them.
+// Russian: the same two families with Latin AND Cyrillic glyphs in one file
+// (Fontsource's two subsets merged, under their own PostScript name — see
+// assets/fonts/README.md). Separate subset files share one PostScript name, and
+// the PDF writer re-embedded a new copy at every switch between alphabets.
+const ASSET_FONTS = path.join(process.cwd(), 'server/luxosaTest/assets/fonts');
+const assetFont = (file: string) => path.join(ASSET_FONTS, file);
+
 Font.register({
-  family: 'Cormorant Garamond Cyrillic',
+  family: 'Cormorant Garamond LatCyr',
   fonts: [
-    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-400-normal.woff') },
-    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-500-normal.woff'), fontWeight: 500 },
-    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-600-normal.woff'), fontWeight: 600 },
-    { src: require.resolve('@fontsource/cormorant-garamond/files/cormorant-garamond-cyrillic-400-italic.woff'), fontStyle: 'italic' },
+    { src: assetFont('cormorant-garamond-latcyr-400-normal.ttf') },
+    { src: assetFont('cormorant-garamond-latcyr-500-normal.ttf'), fontWeight: 500 },
+    { src: assetFont('cormorant-garamond-latcyr-600-normal.ttf'), fontWeight: 600 },
+    { src: assetFont('cormorant-garamond-latcyr-400-italic.ttf'), fontStyle: 'italic' },
   ],
 });
 
 Font.register({
-  family: 'Jost Cyrillic',
+  family: 'Jost LatCyr',
   fonts: [
-    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-300-normal.woff'), fontWeight: 300 },
-    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-400-normal.woff'), fontWeight: 400 },
-    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-500-normal.woff'), fontWeight: 500 },
-    { src: require.resolve('@fontsource/jost/files/jost-cyrillic-400-italic.woff'), fontStyle: 'italic' },
+    { src: assetFont('jost-latcyr-300-normal.ttf'), fontWeight: 300 },
+    { src: assetFont('jost-latcyr-400-normal.ttf'), fontWeight: 400 },
+    { src: assetFont('jost-latcyr-500-normal.ttf'), fontWeight: 500 },
+    { src: assetFont('jost-latcyr-400-italic.ttf'), fontStyle: 'italic' },
   ],
 });
 
@@ -79,7 +83,7 @@ Font.register({
 // actually used, so the PDF stays small.
 // CJK has no true italics: the italic slot reuses the upright file so a
 // section that mixes Latin italics with a Japanese name never fails to resolve.
-const NOTO_SANS_JP = path.join(process.cwd(), 'server/luxosaTest/assets/fonts/NotoSansJP-Regular.otf');
+const NOTO_SANS_JP = assetFont('NotoSansJP-Regular.otf');
 Font.register({
   family: 'Noto Sans JP',
   fonts: [{ src: NOTO_SANS_JP }, { src: NOTO_SANS_JP, fontStyle: 'italic' }],
@@ -93,24 +97,29 @@ interface DossierFonts {
 const CYRILLIC = /[Ѐ-ӿ]/;
 const CJK = /[　-ヿ㐀-䶿一-鿿＀-￯]/;
 
-// Same hyphenation the renderer applies by default (soft hyphens first, then the
-// built-in English patterns) for every Latin word; Japanese words are never
-// split with a hyphen — a clause simply moves to the next line.
+// No automatic hyphenation: the renderer only ships English patterns, which
+// split Italian, French, German or Spanish words in the wrong places. The text
+// is ragged-right, so whole words simply move to the next line; an explicit
+// soft hyphen is still honoured.
 const SOFT_HYPHEN = '­';
-Font.registerHyphenationCallback((word: string) => {
-  if (CJK.test(word)) return [word];
-  if (word.includes(SOFT_HYPHEN)) return word.split(SOFT_HYPHEN);
-  return syllables(word);
-});
+Font.registerHyphenationCallback((word: string) =>
+  word.includes(SOFT_HYPHEN) ? word.split(SOFT_HYPHEN) : [word],
+);
+
+// Invisible line-break opportunity inside Japanese text (see pdfGeneration.tsx).
+// The renderer only wraps at spaces, so each marker is printed as a space at a
+// size too small to see: the line can wrap there, nothing visible is added.
+export const LINE_BREAK_OPPORTUNITY = '​';
+const INVISIBLE_SPACE_SIZE = 0.1;
 
 // The font chain follows the characters actually printed in the section — not
 // only its language — because a client's name or free-text story can use any
 // script (a Japanese name inside the Italian copy for the Maison, for
 // instance). Fallback fonts are loaded only when such characters are present.
 function fontsFor(sample: string): DossierFonts {
-  const sans = ['Jost'];
-  const serif = ['Cormorant Garamond'];
-  if (CYRILLIC.test(sample)) { sans.push('Jost Cyrillic'); serif.push('Cormorant Garamond Cyrillic'); }
+  const hasCyrillic = CYRILLIC.test(sample);
+  const sans = [hasCyrillic ? 'Jost LatCyr' : 'Jost'];
+  const serif = [hasCyrillic ? 'Cormorant Garamond LatCyr' : 'Cormorant Garamond'];
   if (CJK.test(sample)) { sans.push('Noto Sans JP'); serif.push('Noto Sans JP'); }
   return { sans: sans.length === 1 ? sans[0] : sans, serif: serif.length === 1 ? serif[0] : serif };
 }
@@ -393,6 +402,15 @@ type DossierStyles = ReturnType<typeof createStyles>;
 
 const Text = BaseText;
 
+function withInvisibleBreaks(children: ReactNode): ReactNode {
+  return Children.map(children, child => {
+    if (typeof child !== 'string' || !child.includes(LINE_BREAK_OPPORTUNITY)) return child;
+    return child.split(LINE_BREAK_OPPORTUNITY).flatMap((part, i) =>
+      i === 0 ? [part] : [<BaseText key={i} style={{ fontSize: INVISIBLE_SPACE_SIZE, letterSpacing: 0 }}> </BaseText>, part],
+    );
+  });
+}
+
 function isDevPlaceholder(asset: LuxosaTestMediaAsset | undefined | null): boolean {
   return !!asset?.id.startsWith('dev-placeholder');
 }
@@ -436,8 +454,10 @@ function DossierPage({ section, media }: { section: DossierSection; media?: Reso
   // Japanese is segmented into tiny words by the renderer and every boundary would be
   // a hyphenation point: forbid those breaks (10000 is the line-breaker's "infinity").
   const noHyphenation = CJK.test(sample);
-  const Text = (props: ComponentProps<typeof BaseText>) => (
-    <BaseText {...props} hyphenationPenalty={noHyphenation ? 10000 : undefined} />
+  const Text = ({ children, ...props }: ComponentProps<typeof BaseText> & { children?: ReactNode }) => (
+    <BaseText {...props} hyphenationPenalty={noHyphenation ? 10000 : undefined}>
+      {noHyphenation ? withInvisibleBreaks(children) : children}
+    </BaseText>
   );
   const secondaryBeforeAfter = media?.beforeAfter ?? [];
 

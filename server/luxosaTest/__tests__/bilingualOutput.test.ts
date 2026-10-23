@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { t } from '../../../src/i18n/t.js';
+import { t, inLanguage } from '../../../src/i18n/t.js';
+import { buildWhatsAppMessage } from '../../../src/lib/luxosaTest/whatsappMessage.js';
+import { MAISON_COPY_BANNER } from '../../../src/lib/luxosaTest/maisonCopy.js';
 import { withLanguage, SUPPORTED_LANGUAGES } from '../language.js';
 import { buildDossierEmailContent } from '../submission.js';
 import { generateDossierPdf } from '../pdfGeneration.js';
@@ -43,6 +45,39 @@ test('email: client-supplied name is HTML-escaped', () => {
   assert.ok(!html.includes('<script>'));
   assert.ok(!html.includes('Color<b>'));
   assert.ok(html.includes('&lt;script&gt;'));
+});
+
+function whatsAppIn(language: string, fascia: string): string {
+  return inLanguage(language, () =>
+    buildWhatsAppMessage('Anna', 'anna@example.com', '+390000000000', fascia, 'Messina Cavour', { ...ANSWERS, d10: 'Test.' }),
+  );
+}
+
+test('WhatsApp: Italian client -> Italian only, no Maison banner', () => {
+  const message = whatsAppIn('it', '09:00 – 11:00');
+  assert.ok(!message.includes(MAISON_COPY_BANNER.toUpperCase()));
+  assert.ok(message.startsWith(inLanguage('it', () => t('report:diagnostic.155'))));
+});
+
+for (const language of SUPPORTED_LANGUAGES.filter(l => l !== 'it')) {
+  test(`WhatsApp ${language}: client language first, then the Italian copy (like the PDF)`, () => {
+    const anySlot = inLanguage(language, () => t('test:ui.result.slotAny'));
+    const message = whatsAppIn(language, anySlot);
+    const [client, italian] = message.split(MAISON_COPY_BANNER.toUpperCase());
+    assert.ok(italian, 'Maison banner present');
+    assert.ok(client.startsWith(inLanguage(language, () => t('report:diagnostic.155'))));
+    assert.ok(italian.includes(inLanguage('it', () => t('report:diagnostic.155'))));
+    assert.ok(client.includes(anySlot), 'time slot in the client language');
+    assert.ok(italian.includes(inLanguage('it', () => t('test:ui.result.slotAny'))), 'time slot in Italian');
+    assert.ok(italian.includes(inLanguage('it', () => t('report:disclaimer'))));
+  });
+}
+
+test('inLanguage restores the previous language, also after an error', () => {
+  const before = t('report:email.subject');
+  assert.throws(() => inLanguage('ja', () => { throw new Error('x'); }));
+  inLanguage('ru', () => t('report:email.subject'));
+  assert.equal(t('report:email.subject'), before);
 });
 
 for (const language of SUPPORTED_LANGUAGES) {

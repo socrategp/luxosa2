@@ -108,7 +108,7 @@ test('locales: interpolation placeholders match the Italian source in every lang
 const NEVER_TRANSLATED = new Set([
   'Area Benessere', 'Cheratina Nutrizione Pro', 'PiegaLux', 'Taglio Signature', 'Nuances', 'RicciOsa', 'RicciOso',
   'Messina Cavour', 'Luxosa Test', 'Luxosa', 'privacy@luxosa.it', 'Privacy Policy', 'Email: {{email}}', 'WhatsApp: {{whatsapp}}',
-  'Luxosa Test — {{name}}', '— Luxosa', 'Luce Signature', 'Consulenze Specialistiche',
+  'Luxosa Test — {{name}}', '— Luxosa', 'Luce Signature',
   // Genuine cognates: the same correct word in Spanish.
   'IMPORTANTE:', 'Importante',
 ]);
@@ -156,6 +156,11 @@ test('new Luxosa Test component: no fixed Italian text outside the translation s
     if (hits >= 2 && /["'>`][^"'<>`]{12,}/.test(visible)) offenders.push(`${index + 1}: ${line.trim().slice(0, 100)}`);
   });
   assert.deepEqual(offenders, [], `hardcoded Italian text:\n${offenders.join('\n')}`);
+});
+
+test('new Luxosa Test component: follows the selected language (never pinned to one)', () => {
+  const source = readFileSync(path.join(process.cwd(), 'src/components/DiagnosticTakeoverTest.tsx'), 'utf8');
+  assert.ok(!/getFixedT\(/.test(source), 'getFixedT pins every fixed text to a single language');
 });
 
 test('question-mark detector: flags the known corruption patterns and spares real questions', () => {

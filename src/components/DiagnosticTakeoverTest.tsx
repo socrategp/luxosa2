@@ -28,7 +28,8 @@ interface ContactFormData {
 // -- CONSTANTS --------------------------------------------------
 
 import { premiumEase } from '../lib/animations';
-import i18n from '../i18n';
+import { t } from '../i18n/t';
+import { buildWhatsAppMessage } from '../lib/luxosaTest/whatsappMessage';
 import {
   type Answers,
   type AttentionLevel,
@@ -40,10 +41,6 @@ import {
   PUBLIC_PERCORSO_NAMES,
   LUXOSA_LOCATIONS,
 } from '../lib/luxosaTest/result';
-
-// Test copy: force Italian regardless of browser-detected language.
-// Multi-language adaptation of the new intro copy is a later, separate step.
-const t = i18n.getFixedT('it');
 
 // -- OPTION IMAGES ---------------------------------------------
 // Path: /images/quiz/options/{id}.jpg — 800x600, 4:3, warm premium tones
@@ -190,88 +187,6 @@ function getAnsweredCount(answers: Answers): number {
   return Object.values(answers).filter(value =>
     Array.isArray(value) ? value.length > 0 : value.trim().length > 0
   ).length;
-}
-
-// -- WHATSAPP MESSAGE BUILDER -------------------------------------
-
-function buildWhatsAppMessage(
-  nome: string,
-  email: string,
-  whatsapp: string,
-  fascia: string,
-  sede: string,
-  answers: Answers
-): string {
-  const {
-    secondaryPublic: secondPub,
-    attentionLevel: attention,
-    percorsoName,
-    conditionSummary,
-    mainSignals,
-    desiredOutcome,
-    percorsoRationale,
-    esperienze,
-    consultationFocus,
-    d10Note,
-    closing,
-  } = buildLuxosaTestResult(answers);
-  const attentionLabels: Record<AttentionLevel, string> = {
-    ordinaria: t('report:diagnostic.168'),
-    mirata: t('report:diagnostic.151'),
-    prioritaria: t('report:diagnostic.152'),
-  };
-
-  const lines: string[] = [];
-  lines.push(t('report:diagnostic.155'));
-  lines.push('');
-  lines.push(t('report:diagnostic.169', { fascia }));
-  lines.push(t('report:diagnostic.170', { sede }));
-  lines.push('');
-  lines.push(t('report:diagnostic.156'));
-  lines.push(t('report:diagnostic.171', { nome }));
-  lines.push(t('report:diagnostic.172', { email }));
-  lines.push(t('report:diagnostic.173', { whatsapp }));
-  lines.push('');
-  lines.push(t('report:diagnostic.157'));
-  lines.push('');
-  lines.push(t('report:diagnostic.174', { percorsoName }));
-  lines.push(t('report:diagnostic.175', { attention: attentionLabels[attention] }));
-  lines.push('');
-  lines.push(t('report:diagnostic.158'));
-  lines.push(conditionSummary);
-  lines.push('');
-  lines.push(t('report:diagnostic.159'));
-  mainSignals.forEach(s => lines.push(`- ${s}`));
-  lines.push('');
-  lines.push(t('report:diagnostic.160'));
-  lines.push(desiredOutcome);
-  lines.push('');
-  lines.push(t('report:diagnostic.161'));
-  lines.push(percorsoRationale);
-  lines.push('');
-  lines.push(t('report:diagnostic.162'));
-  esperienze.forEach(e => {
-    lines.push(`- ${e.es.nome}`);
-    lines.push(`  ${e.perche}`);
-  });
-  if (secondPub) {
-    lines.push('');
-    lines.push(t('report:diagnostic.176', { percorsoName: PUBLIC_PERCORSO_NAMES[secondPub] }));
-  }
-  lines.push('');
-  lines.push(t('report:diagnostic.163'));
-  consultationFocus.forEach(f => lines.push(`- ${f}`));
-  if (d10Note) {
-    lines.push('');
-    lines.push(t('report:diagnostic.164'));
-    lines.push(d10Note);
-  }
-  lines.push('');
-  lines.push(closing);
-  lines.push('');
-  lines.push('---');
-  lines.push(t('report:disclaimer'));
-  return lines.join('\n');
 }
 
 // ---------------------------------------------------------------

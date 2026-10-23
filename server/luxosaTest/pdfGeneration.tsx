@@ -6,14 +6,13 @@
 // requirement).
 
 import { renderToBuffer } from '@react-pdf/renderer';
-import { LuxosaTestDossier, type DossierSection } from './pdf.js';
+import { LuxosaTestDossier, LINE_BREAK_OPPORTUNITY, type DossierSection } from './pdf.js';
 import { buildDossierLabels } from './pdfLabels.js';
 import { withLanguage, isSupportedLanguage, DEFAULT_LANGUAGE } from './language.js';
 import { resolveMediaForResult } from '../../src/lib/luxosaTest/media.js';
 import { buildLuxosaTestResult, type Answers, type LuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
 
-// Printed on the Italian section when the dossier also carries the client's language.
-const MAISON_COPY_BANNER = 'Versione italiana per la Maison';
+import { MAISON_COPY_BANNER } from '../../src/lib/luxosaTest/maisonCopy.js';
 
 export interface DossierOptions {
   // The client's language and answers: when the language is not Italian the PDF
@@ -22,20 +21,38 @@ export interface DossierOptions {
   answers?: Answers;
 }
 
-// Japanese has no spaces, so the renderer would have to chop a long line in the
-// middle of a clause and add a hyphen. A normal space after the sentence
-// punctuation (and a safety space inside any very long unbroken run) gives it
-// clean break points between clauses instead.
-const MAX_UNBROKEN_RUN = 36;
-const LONG_RUN = new RegExp('\\S{' + (MAX_UNBROKEN_RUN + 1) + ',}', 'g');
-const RUN_CHUNK = new RegExp('(\\S{' + MAX_UNBROKEN_RUN + '})', 'g');
+// Japanese has no spaces, so the renderer finds no place to wrap a line. Mark
+// invisible break opportunities (rendered by pdf.tsx, nothing is printed): after
+// sentence punctuation, and between two Japanese characters every few
+// characters — never where Japanese typesetting forbids it (no closing
+// punctuation or small kana at the start of a line, no opening bracket at its end).
+const MAX_UNBROKEN_RUN = 14;
+const JAPANESE_CHAR = /[　-ヿ㐀-䶿一-鿿＀-￯]/;
+const BREAK_AFTER = /[、。，！？]/;
+const NO_LINE_START = /[、。，．！？）」』】〕・ーぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ：；]/;
+const NO_LINE_END = /[（「『【〔]/;
+
+function markJapaneseBreaks(text: string): string {
+  let out = '';
+  let sinceBreak = 0;
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const next = text[i + 1];
+    out += char;
+    sinceBreak = /\s/.test(char) ? 0 : sinceBreak + 1;
+    if (!next || /\s/.test(next) || NO_LINE_START.test(next) || NO_LINE_END.test(char)) continue;
+    const afterPunctuation = BREAK_AFTER.test(char);
+    const longRun = sinceBreak >= MAX_UNBROKEN_RUN && JAPANESE_CHAR.test(char) && JAPANESE_CHAR.test(next);
+    if (afterPunctuation || longRun) {
+      out += LINE_BREAK_OPPORTUNITY;
+      sinceBreak = 0;
+    }
+  }
+  return out;
+}
 
 function allowBreaksAfterPunctuation<T>(value: T): T {
-  if (typeof value === 'string') {
-    return value
-      .replace(/([、。，！？])(?!\s)/g, '$1 ')
-      .replace(LONG_RUN, run => run.replace(RUN_CHUNK, '$1 ')) as T;
-  }
+  if (typeof value === 'string') return markJapaneseBreaks(value) as T;
   if (Array.isArray(value)) return value.map(allowBreaksAfterPunctuation) as T;
   if (value && typeof value === 'object') {
     return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, allowBreaksAfterPunctuation(v)])) as T;

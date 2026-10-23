@@ -44,7 +44,7 @@
     "140": "Le cuir chevelu est le terrain — et un terrain en difficulté a besoin d'écoute avant toute intervention. Le parcours BenEssere commence par cette lecture, concrète et méthodique.",
     "141": "Le cuir chevelu est le terrain. Quand il est en équilibre, le cheveu peut mieux répondre. Le parcours BenEssere commence par cette lecture — sans précipitation, avec méthode.",
     "142": "Quand la fibre a traversé beaucoup d'épreuves, le point de départ ne peut pas être une solution rapide. Il peut être la lecture honnête de ce qui existe — et à partir de là, la construction d'une base réelle.",
-    "143": "La fibre se reconstruit avec méthode et continuité. Le parcours BenEssere est la réponse recommandée — non pour couvrir, mais pour restituer.",
+    "143": "La fibre se reconstruit avec méthode et continuité. Le parcours BenEssere est la réponse recommandée — non pour masquer, mais pour restaurer la fibre.",
     "144": "Quand fibre, forme et relation avec ses propres cheveux s'entremêlent, la réponse ne peut pas être un geste unique. Le parcours BenEssere est le contexte dans lequel cette complexité est accueillie et transformée en une direction concrète.",
     "145": "Forme et structure se lisent ensemble. Quand la fibre est affaiblie, la morphologie ne peut pas s'exprimer au mieux — le parcours BenEssere commence par cette lecture intégrée, pour construire un résultat qui tient dans le temps.",
     "146": "Un cheveu qui ne plaît pas encore mérite d'être compris avant d'être transformé. Le parcours BenEssere commence par cette écoute — sans jugement, avec méthode.",
@@ -199,7 +199,7 @@
   "templates": {
     "cuteSpecific": "La priorité déclarée concerne le cuir chevelu{{sintomiPart}}{{durataPart}}.",
     "cuteSymptomsPart": " — {{sintomi}}",
-    "cuteDurationPart": ", présents {{durata}}",
+    "cuteDurationPart": ", {{durata}}",
     "structureSpecific": "{{trattamentoPart}} {{condPart}}",
     "structureTreatments": "Les cheveux ont subi au fil du temps : {{trattamenti}}.",
     "structureCondition": "Aujourd'hui {{cond}}.",
@@ -207,7 +207,7 @@
     "colorConcern": " La couleur {{preoc}}.",
     "formSpecific": "Les besoins principaux concernent {{formaDesc}}.",
     "formTimePart": "Le matin, vous consacrez {{timeDesc}} à vos cheveux.",
-    "completeSpecific": "La lecture du profil révèle une situation articulée{{satPart}}. {{aspPart}}",
+    "completeSpecific": "L’analyse du profil révèle une situation aux dimensions multiples{{satPart}}. {{aspPart}}",
     "completeSatisfactionPart": " : {{satDesc}}",
     "completeAspirationPart": "En ce moment, {{aspDesc}}.",
     "hairSummary": "Vous décrivez vos cheveux comme {{list}}.",
@@ -250,7 +250,7 @@
     "intro": "vous trouverez en pièce jointe votre dossier Luxosa Test complet, avec votre orientation personnalisée vers {{percorso}}.",
     "preliminary": "Cela reste une orientation préliminaire : le parcours définitif sera confirmé lors de la Consulenza Luxosa en présence.",
     "questions": "Pour toute question, nous restons à votre disposition sur WhatsApp.",
-    "italianNote": "Le dossier comprend également une version italienne, que notre équipe de la Maison consultera pour votre consultation.",
+    "italianNote": "Le dossier comprend également une version italienne, destinée à l’équipe de la Maison en vue de votre consultation.",
     "signoff": "— Luxosa"
   }
 }

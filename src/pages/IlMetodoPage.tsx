@@ -161,7 +161,7 @@ function PrimoIncontro() {
               transition={{ duration: 1, ease: premiumEase, delay: 0.55 }}
               className="mt-12 flex flex-col sm:flex-row gap-8"
             >
-              <Link to="/i-percorsi" className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">{t('percorsi:il.metodo.page.012')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
+              <Link to="/i-percorsi" className="group inline-flex items-center gap-2 py-[13px] -my-[13px] text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500">{t('percorsi:il.metodo.page.012')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
               </Link>
             </motion.div>
           </div>

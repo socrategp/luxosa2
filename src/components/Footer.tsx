@@ -205,7 +205,7 @@ export default function Footer() {
             {/* Col 2 — Navigazione */}
             <div>
               <h4 className="text-[11px] tracking-[0.3em] uppercase text-ivory/60 font-light mb-6">{t('common:footer.016')}</h4>
-              <nav className="flex flex-col gap-3">
+              <nav className="flex flex-col items-start">
                 {[
                   { label:t('common:footer.017'), href: '/' },
                   { label:t('common:footer.018'), href: '/il-metodo' },
@@ -216,7 +216,7 @@ export default function Footer() {
                   <Link
                     key={item.label}
                     to={item.href}
-                    className="text-[16px] font-light text-ivory/55 hover:text-ivory/90 transition-colors duration-400 tracking-wide"
+                    className="py-[10px] -my-1 text-[16px] font-light text-ivory/55 hover:text-ivory/90 transition-colors duration-400 tracking-wide"
                   >
                     {item.label}
                   </Link>
@@ -240,7 +240,7 @@ export default function Footer() {
               </div>
               <button
                 onClick={() => setClubOpen(true)}
-                className="text-[11px] tracking-[0.2em] uppercase font-light text-ivory/55 hover:text-ivory/85 transition-colors duration-400 inline-flex items-center gap-2"
+                className="py-[14px] -my-[14px] text-[11px] tracking-[0.2em] uppercase font-light text-ivory/55 hover:text-ivory/85 transition-colors duration-400 inline-flex items-center gap-2"
               >{t('common:footer.027')}</button>
             </div>
 

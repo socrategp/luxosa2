@@ -15,11 +15,20 @@ import '@fontsource/jost/latin-400-italic.css'
 import '@fontsource/jost/latin-500.css'
 import '@fontsource/jost/latin-600.css'
 import './index.css'
-import './i18n'
+import i18n from './i18n'
+import { loadLanguage } from './i18n/loadLanguage'
 import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const render = () =>
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  )
+
+// Re-applying the language after its bundle arrives refreshes i18n.resolvedLanguage,
+// which was computed at init when only Italian was available.
+loadLanguage(i18n.language)
+  .then(() => i18n.changeLanguage(i18n.language))
+  .catch(() => i18n.changeLanguage('it'))
+  .finally(render)

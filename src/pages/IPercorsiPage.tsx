@@ -192,7 +192,7 @@ function IlPrimoPasso() {
           >
             <Link
               to="/le-esperienze"
-              className="group inline-flex items-center gap-2 text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500"
+              className="group inline-flex items-center gap-2 py-[13px] -my-[13px] text-[12px] tracking-[0.18em] uppercase text-brass-muted font-light hover:text-brass transition-colors duration-500"
             >{t('percorsi:ipercorsi.page.014')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-2" />
             </Link>
           </motion.div>

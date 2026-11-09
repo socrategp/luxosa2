@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useQuiz } from '../context/QuizContext';
+import { loadLanguage } from '../i18n/loadLanguage';
 import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../i18n/config';
 import { premiumEase } from '../lib/animations';
 
@@ -45,7 +46,7 @@ export default function Header() {
 
   const handleLanguageChange = (language: SupportedLanguage) => {
     window.localStorage.setItem('luxosa-language', language);
-    void i18n.changeLanguage(language);
+    void loadLanguage(language).then(() => i18n.changeLanguage(language));
     setLanguageOpen(false);
   };
 

@@ -141,7 +141,7 @@ export default function TestimonialsCarousel({
         className="flex items-center justify-center gap-2.5 mt-12"
       >
         {testimonials.map((_, i) => (
-          <button key={i} onClick={() => goTo(i)} aria-label={`Testimonianza ${i + 1}`} className="relative w-6 h-[1px] bg-ivory/15 transition-all duration-500">
+          <button key={i} onClick={() => goTo(i)} aria-label={`Testimonianza ${i + 1}`} className="relative w-6 h-[1px] bg-ivory/15 transition-all duration-500 before:absolute before:-inset-x-1 before:-inset-y-5 before:content-['']">
             <motion.span
               className="absolute inset-0 bg-brass-light/70"
               initial={{ scaleX: 0 }}

@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -10,5 +11,12 @@ export default defineConfig(async () => {
     const m = await import('./.vite-source-tags.js');
     plugins.push(m.sourceTags());
   } catch {}
-  return { plugins, server: { port: 5176 } };
+  return {
+    plugins,
+    server: { port: 5176 },
+    // The browser ships only Italian; other languages load on demand (src/i18n/loadLanguage.ts).
+    resolve: {
+      alias: [{ find: /^\.\/resources\.js$/, replacement: fileURLToPath(new URL('./src/i18n/resources.browser.ts', import.meta.url)) }],
+    },
+  };
 })

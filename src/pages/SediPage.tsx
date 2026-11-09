@@ -186,6 +186,7 @@ export default function SediPage() {
         title={t('messina-cavour:sedi.page.022')}
         subtitle={t('messina-cavour:sedi.page.024')}
         video="/videos/hero_sedi_opt.mp4"
+        poster="/images/hero_sedi_poster.webp"
       />
       <SediManifesto />
       <SediPrincipi />

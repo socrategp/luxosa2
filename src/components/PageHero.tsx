@@ -1,6 +1,7 @@
 ﻿import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import React from 'react';
+import { prefersStillMedia } from '../lib/liteMedia';
 
 interface PageHeroProps {
   label: string;
@@ -8,10 +9,12 @@ interface PageHeroProps {
   subtitle?: string;
   image?: string;
   video?: string;
+  poster?: string;
   children?: React.ReactNode;
 }
 
-export default function PageHero({ label, title, subtitle, image, video, children }: PageHeroProps) {
+export default function PageHero({ label, title, subtitle, image, video, poster, children }: PageHeroProps) {
+  const [stillMedia] = useState(prefersStillMedia);
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -22,9 +25,10 @@ export default function PageHero({ label, title, subtitle, image, video, childre
   return (
     <section ref={ref} className="relative h-[85vh] min-h-[620px] max-h-[900px] overflow-hidden bg-deep">
       <motion.div className="absolute inset-0" style={{ y: video ? undefined : backgroundY }}>
-        {video ? (
+        {video && !(stillMedia && poster) ? (
           <video
             src={video}
+            poster={poster}
             autoPlay
             muted
             loop
@@ -32,6 +36,8 @@ export default function PageHero({ label, title, subtitle, image, video, childre
             preload="metadata"
             className="w-full h-full object-cover absolute inset-0"
           />
+        ) : video && poster ? (
+          <img src={poster} alt="" fetchPriority="high" className="w-full h-full object-cover absolute inset-0" />
         ) : image ? (
           <img src={image} alt={title} fetchPriority="high" decoding="sync" className="w-full h-[120%] -top-[10%] object-cover absolute" />
         ) : null}

@@ -40,7 +40,7 @@ function MCHero() {
             <span className="text-[11px] md:text-[12px] tracking-[0.3em] uppercase text-brass-light font-light">{t('messina-cavour:messina.cavour.page.002')}</span>
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">{t('messina-cavour:messina.cavour.page.003')}<br />{t('messina-cavour:messina.cavour.page.004')}</motion.h1>
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">{t('messina-cavour:messina.cavour.page.005')}</motion.p>
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[16px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">{t('messina-cavour:messina.cavour.page.005')}</motion.p>
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -102,9 +102,9 @@ function MCAbout() {
             </motion.div>
             <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-charcoal">{t('messina-cavour:messina.cavour.page.008')}<br />{t('messina-cavour:messina.cavour.page.009')}</motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.010')}</p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.011')}</p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.012')}</p>
+              <p className="text-[16px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.010')}</p>
+              <p className="text-[16px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.011')}</p>
+              <p className="text-[16px] md:text-[20px] leading-[1.8] text-anthracite/95 font-light">{t('messina-cavour:messina.cavour.page.012')}</p>
             </motion.div>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
@@ -181,7 +181,7 @@ function MCMethod() {
           <motion.span initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1] }} className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.036')}</motion.span>
           <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mx-auto mt-4 mb-8" />
           <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-charcoal">{t('messina-cavour:messina.cavour.page.037')}</motion.h2>
-          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[18px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">{t('messina-cavour:messina.cavour.page.038')}</motion.p>
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-6 text-[16px] md:text-[20px] leading-[1.8] text-anthracite/85 font-light lg:whitespace-nowrap">{t('messina-cavour:messina.cavour.page.038')}</motion.p>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {steps.map((s, i) => (
@@ -217,10 +217,10 @@ function MCTeam() {
             <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
             <motion.h2 initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.2 }} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.1] text-ivory">{t('messina-cavour:messina.cavour.page.040')}</motion.h2>
             <motion.div initial={{ opacity: 0, y: 20 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.35 }} className="mt-8 space-y-5">
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{t('messina-cavour:messina.cavour.page.041')}</p>
-              <p className="text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{t('messina-cavour:messina.cavour.page.042')}</p>
+              <p className="text-[16px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{t('messina-cavour:messina.cavour.page.041')}</p>
+              <p className="text-[16px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{t('messina-cavour:messina.cavour.page.042')}</p>
             </motion.div>
-            <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }} className="mt-10 font-serif text-[18px] md:text-[20px] italic text-brass-light/70 font-light leading-[1.7]">{t('messina-cavour:messina.cavour.page.043')}</motion.p>
+            <motion.p initial={{ opacity: 0, y: 15 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.5 }} className="mt-10 font-serif text-[16px] md:text-[20px] italic text-brass-light/70 font-light leading-[1.7]">{t('messina-cavour:messina.cavour.page.043')}</motion.p>
           </div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={inView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 1, delay: 0.3 }} className="relative">
             <div className="aspect-[3/4] overflow-hidden">

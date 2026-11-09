@@ -5,6 +5,9 @@ import { t } from '../i18n/t';
 
 const premiumEase: [number, number, number, number] = [0.25, 0.1, 0, 1];
 const CARD_RATIO = 0.72;
+const CARD_RATIO_MOBILE = 0.9;
+const MOBILE_MAX_WIDTH = 640;
+const SWIPE_THRESHOLD_PX = 50;
 const CARD_GAP = 28;
 
 export interface TestimonialItem {
@@ -27,6 +30,7 @@ export default function TestimonialsCarousel({
   const [active, setActive] = useState(0);
   const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const viewportRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const sectionRef = useRef(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
@@ -40,11 +44,11 @@ export default function TestimonialsCarousel({
 
   useEffect(() => {
     const update = () => {
-      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+      if (viewportRef.current) setContainerWidth(viewportRef.current.offsetWidth);
     };
     update();
     const ro = new ResizeObserver(update);
-    if (containerRef.current) ro.observe(containerRef.current);
+    if (viewportRef.current) ro.observe(viewportRef.current);
     return () => ro.disconnect();
   }, []);
 
@@ -53,8 +57,10 @@ export default function TestimonialsCarousel({
     return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
   }, [resetInterval]);
 
-  const cardWidth = containerWidth * CARD_RATIO;
-  const trackX = containerWidth * (1 - CARD_RATIO) / 2 - active * (cardWidth + CARD_GAP);
+  const ratio = containerWidth > 0 && containerWidth < MOBILE_MAX_WIDTH ? CARD_RATIO_MOBILE : CARD_RATIO;
+  const gap = ratio === CARD_RATIO_MOBILE ? CARD_GAP / 2 : CARD_GAP;
+  const cardWidth = containerWidth * ratio;
+  const trackX = containerWidth * (1 - ratio) / 2 - active * (cardWidth + gap);
 
   const goTo = (i: number) => { setActive(i); resetInterval(); };
   const prev = () => goTo((active - 1 + total) % total);
@@ -90,12 +96,19 @@ export default function TestimonialsCarousel({
         transition={{ duration: 1.2, ease: premiumEase, delay: 0.2 }}
       >
         <div ref={containerRef} className="relative mx-auto max-w-[1400px] px-6 md:px-10 lg:px-16">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-charcoal to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-charcoal to-transparent z-10 pointer-events-none" />
-          <div className="overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-6 md:w-24 bg-gradient-to-r from-charcoal to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 md:w-24 bg-gradient-to-l from-charcoal to-transparent z-10 pointer-events-none" />
+          <div ref={viewportRef} className="overflow-hidden">
             <motion.div
-              className="flex"
-              style={{ gap: CARD_GAP }}
+              className="flex touch-pan-y"
+              style={{ gap }}
+              drag="x"
+              dragConstraints={{ left: trackX, right: trackX }}
+              dragElastic={0.2}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -SWIPE_THRESHOLD_PX) next();
+                else if (info.offset.x > SWIPE_THRESHOLD_PX) prev();
+              }}
               animate={{ x: containerWidth > 0 ? trackX : 0 }}
               transition={{ duration: 0.8, ease: premiumEase }}
             >
@@ -107,10 +120,10 @@ export default function TestimonialsCarousel({
                 return (
                   <motion.div
                     key={t.name}
-                    style={{ width: containerWidth > 0 ? cardWidth : `${CARD_RATIO * 100}%`, flexShrink: 0 }}
+                    style={{ width: containerWidth > 0 ? cardWidth : `${ratio * 100}%`, flexShrink: 0 }}
                     animate={{ opacity, scale }}
                     transition={{ duration: 0.7, ease: premiumEase }}
-                    className="py-12 md:py-16 px-8 md:px-12 border border-ivory/10 cursor-pointer select-none"
+                    className="py-10 md:py-16 px-6 md:px-12 border border-ivory/10 cursor-pointer select-none"
                     onClick={() => !isActive && goTo(i)}
                   >
                     <div className="flex items-center gap-3 mb-8">
@@ -118,7 +131,7 @@ export default function TestimonialsCarousel({
                       <div className="h-[1px] flex-1 bg-ivory/10" />
                       <span className="text-[9px] tracking-[0.25em] uppercase text-ivory/35 font-light">{t.valore}</span>
                     </div>
-                    <p className="font-serif text-[18px] md:text-[20px] lg:text-[21px] italic font-light leading-[1.8] text-ivory/85 mb-10">"{t.quote}"</p>
+                    <p className="font-serif text-[18px] md:text-[20px] lg:text-[21px] italic font-light leading-[1.65] md:leading-[1.8] text-ivory/85 mb-10">"{t.quote}"</p>
                     <div className="flex items-center gap-4">
                       <div className="h-[1px] w-6 bg-brass-light/30 flex-shrink-0" />
                       <div>

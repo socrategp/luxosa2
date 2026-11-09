@@ -33,11 +33,11 @@ export default function MessinaFinalEntry() {
     <section id="mc-ingresso" className="py-28 md:py-40 lg:py-48 bg-ivory" ref={ref}>
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-          <motion.div {...slideIn(-40, 0.1)} className="bg-ivory-warm border border-sand/60 p-10 md:p-12 h-full flex flex-col overflow-hidden">
+          <motion.div {...slideIn(-40, 0.1)} className="bg-ivory-warm border border-sand/60 p-7 md:p-12 h-full flex flex-col overflow-hidden">
             <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{tf('test.eyebrow')}</span>
             <div className="w-8 h-[1px] bg-brass mt-4 mb-6" />
             <h3 className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-4">{tf('test.title')}</h3>
-            <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/80 font-light">{tf('test.lead')}</p>
+            <p className="text-[16px] md:text-[18px] leading-[1.8] text-anthracite/80 font-light">{tf('test.lead')}</p>
             <p className="mt-4 mb-8 text-[15px] leading-[1.7] text-anthracite/60 font-light italic">{tf('test.note')}</p>
             <div aria-hidden="true" className="mb-8 aspect-[1440/346] overflow-hidden border border-sand bg-ivory">
               <img src="/images/luxosa-test-snapshot.webp" alt="" loading="lazy" className="h-full w-full object-cover object-bottom" />
@@ -45,21 +45,21 @@ export default function MessinaFinalEntry() {
             <button
               type="button"
               onClick={() => openQuiz('new')}
-              className="group mt-auto flex w-full items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-deep transition-colors duration-500"
+              className="group mt-auto flex w-full items-center justify-center gap-3 bg-charcoal text-ivory text-[12px] tracking-[0.16em] md:tracking-[0.2em] uppercase font-light px-5 md:px-8 py-4 hover:bg-deep transition-colors duration-500"
             >
               {tf('test.cta')}
               <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
             </button>
           </motion.div>
 
-          <motion.div {...slideIn(40, 0.25)} className="bg-charcoal text-ivory p-10 md:p-12 h-full flex flex-col">
+          <motion.div {...slideIn(40, 0.25)} className="bg-charcoal text-ivory p-7 md:p-12 h-full flex flex-col">
             <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light">{tf('prima.eyebrow')}</span>
             <div className="w-8 h-[1px] bg-brass-light/30 mt-4 mb-6" />
             <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">{tf('prima.title')}</h3>
-            <p className="mb-8 text-[17px] md:text-[18px] leading-[1.8] text-ivory/70 font-light">{tf('prima.lead')}</p>
+            <p className="mb-8 text-[16px] md:text-[18px] leading-[1.8] text-ivory/70 font-light">{tf('prima.lead')}</p>
             <ul className="mb-8 space-y-5">
               {INCLUDED_KEYS.map((key) => (
-                <li key={key} className="flex items-start gap-3 text-[17px] md:text-[18px] leading-[1.6] text-ivory/85 font-light">
+                <li key={key} className="flex items-start gap-3 text-[16px] md:text-[18px] leading-[1.6] text-ivory/85 font-light">
                   <span aria-hidden="true" className="mt-[0.7em] h-[5px] w-[5px] shrink-0 rounded-full bg-brass-light" />
                   {tf(`prima.included.${key}`)}
                 </li>
@@ -70,7 +70,7 @@ export default function MessinaFinalEntry() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={tf('prima.ctaAria')}
-              className="group mt-auto flex w-full items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-brass-light transition-colors duration-500"
+              className="group mt-auto flex w-full items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.16em] md:tracking-[0.2em] uppercase font-light px-5 md:px-8 py-4 hover:bg-brass-light transition-colors duration-500"
             >
               {tf('prima.cta')}
               <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />

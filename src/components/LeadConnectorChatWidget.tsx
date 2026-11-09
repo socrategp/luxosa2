@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const WIDGET_ROUTE = '/sedi/messina-cavour';
+export const WIDGET_ROUTE = '/sedi/messina-cavour';
 const WIDGET_ID = '6a0f5db53e715fb5ddf2bf11';
 const LOADER_URL = 'https://widgets.leadconnectorhq.com/loader.js';
 const RESOURCES_URL = 'https://widgets.leadconnectorhq.com/chat-widget/loader.js';

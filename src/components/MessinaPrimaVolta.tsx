@@ -26,15 +26,15 @@ export default function MessinaPrimaVolta() {
             <motion.span {...reveal(0)} className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">{tp('eyebrow')}</motion.span>
             <motion.div initial={{ width: 0 }} animate={inView ? { width: 40 } : {}} transition={{ duration: 1.2, ease: premiumEase, delay: 0.15 }} className="h-[1px] bg-brass mt-4 mb-8" />
             <motion.h2 {...reveal(0.2)} className="font-serif text-[34px] md:text-[44px] lg:text-[50px] font-light leading-[1.12] text-ivory">{tp('title')}</motion.h2>
-            <motion.p {...reveal(0.3)} className="mt-8 max-w-xl text-[18px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{tp('lead')}</motion.p>
-            <motion.p {...reveal(0.35)} className="mt-4 max-w-xl text-[18px] md:text-[20px] leading-[1.8] text-ivory font-light">{tp('outcome')}</motion.p>
+            <motion.p {...reveal(0.3)} className="mt-8 max-w-xl text-[16px] md:text-[20px] leading-[1.8] text-ivory/80 font-light">{tp('lead')}</motion.p>
+            <motion.p {...reveal(0.35)} className="mt-4 max-w-xl text-[16px] md:text-[20px] leading-[1.8] text-ivory font-light">{tp('outcome')}</motion.p>
             <motion.div {...reveal(0.4)} className="mt-10">
               <a
                 href={getPrimaVoltaUrl('blocco-offerta')}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={tp('ctaAria')}
-                className="group inline-flex items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5 hover:bg-brass-light transition-colors duration-500"
+                className="group flex w-full sm:inline-flex sm:w-auto items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-10 py-5 hover:bg-brass-light transition-colors duration-500"
               >
                 {tp('cta')}
                 <ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
@@ -53,7 +53,7 @@ export default function MessinaPrimaVolta() {
             </motion.figure>
           </div>
 
-          <motion.div {...reveal(0.3)} className="border border-brass/30 p-10 md:p-12">
+          <motion.div {...reveal(0.3)} className="border border-brass/30 p-7 md:p-12">
             <div className="flex items-end justify-between gap-6 pb-8 border-b border-ivory/15">
               <div>
                 <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">{tp('cardLabel')}</span>

@@ -1,9 +1,13 @@
 ﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { t } from '../i18n/t';
+import { WIDGET_ROUTE } from './LeadConnectorChatWidget';
 
 export default function BackToTop() {
   const [visible, setVisible] = useState(false);
+  // On phones the chat bubble already sits in this corner on the widget route.
+  const sharesCornerWithChat = useLocation().pathname === WIDGET_ROUTE;
 
   useEffect(() => {
     const handleScroll = () => setVisible(window.scrollY > 600);
@@ -24,7 +28,7 @@ export default function BackToTop() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0, 1] }}
           onClick={scrollToTop}
-          className="fixed bottom-24 right-8 z-40 group cursor-pointer"
+          className={`fixed bottom-24 right-8 z-40 group cursor-pointer ${sharesCornerWithChat ? 'hidden md:block' : ''}`}
           aria-label={t('common:backToTop.ariaLabel')}
         >
           <div className="relative w-12 h-12 flex items-center justify-center">

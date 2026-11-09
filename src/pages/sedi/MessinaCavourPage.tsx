@@ -21,16 +21,18 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
+const scrollToPrimaVolta = () => document.getElementById('mc-prima-volta')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
 // --- Hero ---
 function MCHero() {
   return (
-    <section className="relative h-[75vh] min-h-[550px] max-h-[850px] overflow-hidden">
+    <section className="relative flex flex-col min-h-[max(550px,75svh)] xl:h-[75vh] xl:min-h-[550px] xl:max-h-[850px] overflow-hidden">
       <div className="absolute inset-0">
         <img src="/images/messina-new.webp" alt={t('messina-cavour:messina.cavour.page.001')} className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-b from-deep/55 via-deep/30 to-deep/65" />
         <div className="absolute inset-0 bg-gradient-to-r from-deep/30 to-transparent" />
       </div>
-      <div className="relative h-full flex flex-col justify-end pb-20 md:pb-28 lg:pb-32">
+      <div className="relative flex-1 flex flex-col justify-end pt-32 xl:pt-0 pb-16 md:pb-28 lg:pb-32">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 w-full">
           <motion.div initial={{ width: 0 }} animate={{ width: 50 }} transition={{ duration: 1, delay: 0.2 }} className="h-[1px] bg-brass-light mb-6" />
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.3 }} className="flex items-center gap-2 mb-4">
@@ -39,6 +41,23 @@ function MCHero() {
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 25 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.1, 0, 1] }} className="font-serif text-[36px] md:text-[50px] lg:text-[60px] text-white font-normal leading-[1.08] tracking-[0.02em] max-w-3xl drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]">{t('messina-cavour:messina.cavour.page.003')}<br />{t('messina-cavour:messina.cavour.page.004')}</motion.h1>
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">{t('messina-cavour:messina.cavour.page.005')}</motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
+            className="xl:hidden mt-8 max-w-[420px] border border-white/30 bg-deep/40 backdrop-blur-sm px-5 py-5"
+          >
+            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">{t('messina-cavour:messina.cavour.prima.heroLabel')}</span>
+            <p className="mt-3 text-[15px] leading-[1.6] text-white/85 font-light">{t('messina-cavour:messina.cavour.prima.heroText')}</p>
+            <button
+              type="button"
+              onClick={scrollToPrimaVolta}
+              className="mt-4 flex min-h-[44px] w-full items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-5 py-3"
+            >
+              {t('messina-cavour:messina.cavour.prima.cta')}
+              <ArrowDown size={14} strokeWidth={1.5} />
+            </button>
+          </motion.div>
         </div>
       </div>
       <motion.aside
@@ -54,7 +73,7 @@ function MCHero() {
             <p className="text-[16px] leading-[1.7] text-white/85 font-light">{t('messina-cavour:messina.cavour.prima.heroText')}</p>
             <button
               type="button"
-              onClick={() => document.getElementById('mc-prima-volta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              onClick={scrollToPrimaVolta}
               className="group mt-6 flex w-full items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-6 py-4 hover:bg-brass-light transition-colors duration-500"
             >
               {t('messina-cavour:messina.cavour.prima.cta')}

@@ -42,9 +42,11 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
+  overflow-x: clip;
   font-family: var(--font-sans);
   color: var(--color-anthracite);
   background-color: var(--color-ivory);

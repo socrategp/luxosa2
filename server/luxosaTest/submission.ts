@@ -104,7 +104,7 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
-// The GHL template's frame (closing line, signature, footer) is written in
+// The GHL template's frame (signature, footer) is written in
 // Italian, so only Italian emails use it; other languages keep the built-in
 // email entirely in the client's language.
 export function usesDossierTemplate(language: string = DEFAULT_LANGUAGE): boolean {
@@ -126,6 +126,8 @@ export function buildDossierEmailContent(
         t('report:email.greeting', { firstName: escapeHtml(firstName) }),
         t('report:email.intro', { percorso: `<strong>${escapeHtml(percorsoName)}</strong>` }),
         t('report:email.preliminary'),
+        t('report:email.questions'),
+        t('report:email.closing'),
       ]);
       if (rendered) return { subject: t('report:email.subject'), html: rendered };
     }

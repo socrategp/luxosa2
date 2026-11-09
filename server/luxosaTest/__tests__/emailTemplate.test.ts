@@ -22,14 +22,15 @@ test('returns null when the template has no placeholder', () => {
   assert.equal(renderDossierTemplate('<p>niente</p>', ['x']), null);
 });
 
-test('Italian email uses the template without the built-in closing and signature', () => {
+test('Italian email uses the template: text and closing from the server, signature from the template', () => {
   const { subject, html } = buildDossierEmailContent('Giulia', 'ColorLux', 'it', TEMPLATE);
   assert.equal(subject, 'Il Suo Luxosa Test è pronto');
   assert.ok(html.includes('Intestazione'));
   assert.ok(html.includes('Gentile Giulia,'));
   assert.ok(html.includes('<strong>ColorLux</strong>'));
-  assert.ok(!html.includes('Un cordiale saluto'));
-  assert.ok(!html.includes('WhatsApp'));
+  assert.ok(html.includes('Un cordiale saluto,'));
+  assert.ok(html.includes('WhatsApp'));
+  assert.ok(!html.includes('Luxosa Messina Cavour'), 'signature comes from the template only');
 });
 
 test('falls back to the built-in email when the template is missing or broken', () => {

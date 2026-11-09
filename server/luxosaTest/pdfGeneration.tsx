@@ -27,7 +27,7 @@ export interface DossierOptions {
 // characters — never where Japanese typesetting forbids it (no closing
 // punctuation or small kana at the start of a line, no opening bracket at its end).
 const MAX_UNBROKEN_RUN = 14;
-const JAPANESE_CHAR = /[　-ヿ㐀-䶿一-鿿＀-￯]/;
+const JAPANESE_CHAR = /[\u3000-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uFF00-\uFFEF]/;
 const BREAK_AFTER = /[、。，！？]/;
 const NO_LINE_START = /[、。，．！？）」』】〕・ーぁぃぅぇぉっゃゅょゎァィゥェォッャュョヮヵヶ：；]/;
 const NO_LINE_END = /[（「『【〔]/;

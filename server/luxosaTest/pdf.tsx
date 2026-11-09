@@ -20,7 +20,7 @@
 // ---------------------------------------------------------------
 
 import { Document, Page, View, Text as BaseText, Image, StyleSheet, Font } from '@react-pdf/renderer';
-import { Children, type ComponentProps, type ReactNode } from 'react';
+import { Children, createContext, useContext, type ComponentProps, type ReactNode } from 'react';
 import type { LuxosaTestResult } from '../../src/lib/luxosaTest/result.js';
 import type { ResolvedLuxosaTestMedia, LuxosaTestMediaAsset, LuxosaTestMediaAspect } from '../../src/lib/luxosaTest/media.js';
 import { resolvePdfImageSrc } from './pdfAssets.js';
@@ -94,14 +94,14 @@ interface DossierFonts {
   serif: string | string[];
 }
 
-const CYRILLIC = /[Ѐ-ӿ]/;
-const CJK = /[　-ヿ㐀-䶿一-鿿＀-￯]/;
+const CYRILLIC = /[\u0400-\u04FF]/;
+const CJK = /[\u3000-\u30FF\u3400-\u4DBF\u4E00-\u9FFF\uFF00-\uFFEF]/;
 
 // No automatic hyphenation: the renderer only ships English patterns, which
 // split Italian, French, German or Spanish words in the wrong places. The text
 // is ragged-right, so whole words simply move to the next line; an explicit
 // soft hyphen is still honoured.
-const SOFT_HYPHEN = '­';
+const SOFT_HYPHEN = '\u00AD';
 Font.registerHyphenationCallback((word: string) =>
   word.includes(SOFT_HYPHEN) ? word.split(SOFT_HYPHEN) : [word],
 );
@@ -400,7 +400,20 @@ function createStyles(fonts: DossierFonts) {
 
 type DossierStyles = ReturnType<typeof createStyles>;
 
-const Text = BaseText;
+// True inside a section that prints Japanese. The renderer segments Japanese into
+// tiny words and every boundary would be a hyphenation point: those breaks are
+// forbidden (10000 is the line-breaker's "infinity") and the invisible break
+// opportunities are used instead.
+const JapaneseLayout = createContext(false);
+
+function Text({ children, ...props }: ComponentProps<typeof BaseText> & { children?: ReactNode }) {
+  const isJapanese = useContext(JapaneseLayout);
+  return (
+    <BaseText {...props} hyphenationPenalty={isJapanese ? 10000 : undefined}>
+      {isJapanese ? withInvisibleBreaks(children) : children}
+    </BaseText>
+  );
+}
 
 function withInvisibleBreaks(children: ReactNode): ReactNode {
   return Children.map(children, child => {
@@ -450,18 +463,11 @@ function DossierPage({ section, media }: { section: DossierSection; media?: Reso
   const { result, labels } = section;
   const fonts = fontsFor(JSON.stringify([section.labels, section.result]));
   const styles = createStyles(fonts);
-  const sample = JSON.stringify([section.labels, section.result]);
-  // Japanese is segmented into tiny words by the renderer and every boundary would be
-  // a hyphenation point: forbid those breaks (10000 is the line-breaker's "infinity").
-  const noHyphenation = CJK.test(sample);
-  const Text = ({ children, ...props }: ComponentProps<typeof BaseText> & { children?: ReactNode }) => (
-    <BaseText {...props} hyphenationPenalty={noHyphenation ? 10000 : undefined}>
-      {noHyphenation ? withInvisibleBreaks(children) : children}
-    </BaseText>
-  );
+  const isJapanese = CJK.test(JSON.stringify([section.labels, section.result]));
   const secondaryBeforeAfter = media?.beforeAfter ?? [];
 
   return (
+    <JapaneseLayout.Provider value={isJapanese}>
     <Page size="A4" style={styles.page} wrap>
       {section.banner && <Text style={styles.copyBanner}>{section.banner}</Text>}
       <Text style={styles.kicker}>Luxosa Test</Text>
@@ -579,6 +585,7 @@ function DossierPage({ section, media }: { section: DossierSection; media?: Reso
         totalPages > 1 ? `${labels.footerLabel} · ${pageNumber}/${totalPages}` : labels.footerLabel
       } />
     </Page>
+    </JapaneseLayout.Provider>
   );
 }
 

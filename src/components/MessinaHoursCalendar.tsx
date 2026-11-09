@@ -23,7 +23,10 @@ const CLOSED_HATCH = 'bg-[repeating-linear-gradient(135deg,transparent_0_6px,rgb
 const th = (key: string, options?: Record<string, unknown>) =>
   t(`messina-cavour:messina.cavour.hours.${key}`, options);
 
-const capitalize = (text: string) => text.charAt(0).toUpperCase() + text.slice(1);
+// French puts a non-breaking space before the colon; Japanese uses the full-width colon.
+const LIST_COLON: Record<string, string> = { fr: ' : ', ja: '：' };
+
+const capitalize = (text: string) =>text.charAt(0).toUpperCase() + text.slice(1);
 
 function useDateFormat() {
   const locale = currentLanguage();
@@ -61,12 +64,17 @@ function describeException(exception: HoursException, format: DateFormat): strin
     : [];
   if (days.length > 0) {
     const weekday = format(days[0], { weekday: 'long' });
-    const labels = days.map((date) =>
-      isItalian ? String(date.getUTCDate()) : format(date, { day: 'numeric', month: 'long' }),
-    );
-    const last = labels.pop() ?? '';
-    const list = labels.length > 0 ? th('pair', { a: labels.join(', '), b: last }) : last;
-    return capitalize(isItalian ? `${weekday} ${list} ${format(to, { month: 'long' })}` : `${weekday}: ${list}`);
+    if (!isItalian) {
+      // Intl.ListFormat gives each language its own joiners (ja "、", de "und"…)
+      const list = new Intl.ListFormat(currentLanguage(), { style: 'long', type: 'conjunction' }).format(
+        days.map((date) => format(date, { day: 'numeric', month: 'long' })),
+      );
+      return capitalize(`${weekday}${LIST_COLON[currentLanguage()] ?? ': '}${list}`);
+    }
+    const numbers = days.map((date) => String(date.getUTCDate()));
+    const last = numbers.pop() ?? '';
+    const list = numbers.length > 0 ? th('pair', { a: numbers.join(', '), b: last }) : last;
+    return capitalize(`${weekday} ${list} ${format(to, { month: 'long' })}`);
   }
   const sameMonth = from.getUTCMonth() === to.getUTCMonth();
   const fromLabel = sameMonth && isItalian ? dayOnly(from) : fullDate(from);
@@ -74,7 +82,7 @@ function describeException(exception: HoursException, format: DateFormat): strin
 
   if (exception.from === exception.to) return capitalize(toLabel);
   if (daysBetween(from, to) === 1) return capitalize(th('pair', { a: fromLabel, b: toLabel }));
-  return th('range', { from: fromLabel, to: toLabel });
+  return capitalize(th('range', { from: fromLabel, to: toLabel }));
 }
 
 function weekdayName(format: DateFormat, index: number, style: 'long' | 'short'): string {

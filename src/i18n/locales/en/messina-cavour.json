@@ -164,7 +164,7 @@
         "pair": "{{a}} and {{b}}",
         "range": "From {{from}} to {{to}}",
         "variations": "Changes to the usual hours",
-        "noVariations": "No changes, the usual hours apply.",
+        "noVariations": "No changes: the usual hours apply.",
         "note": {
           "aperturaLunedi": "special opening",
           "immacolata": "Feast of the Immaculate Conception",
@@ -190,7 +190,7 @@
             "summary": "An orientation summary and a direction for the next step"
           },
           "cta": "Discover Prima Volta",
-          "ctaAria": "Discover Prima Volta (opens in a new page)"
+          "ctaAria": "Discover Prima Volta (opens in a new tab)"
         },
         "help": {
           "lead": "Would you rather talk to us first?",
@@ -209,8 +209,8 @@
         "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
         "proofAuthor": "Rosanna T.",
         "cta": "Discover Prima Volta",
-        "ctaAria": "Discover Prima Volta (opens in a new page)",
-        "ctaNote": "Purchased online. Our Reception will contact you within 24 working hours to agree the day and time together.",
+        "ctaAria": "Discover Prima Volta (opens in a new tab)",
+        "ctaNote": "Online purchase. Our Reception team will contact you within 24 working hours to arrange the day and time with you.",
         "cardLabel": "Prima Volta Luxosa",
         "duration": "Total duration about 1 hour",
         "price": "€47",

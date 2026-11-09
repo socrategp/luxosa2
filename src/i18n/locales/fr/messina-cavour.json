@@ -150,8 +150,8 @@
         "test": {
           "eyebrow": "Luxosa Test",
           "title": "Découvrez par où commencer.",
-          "lead": "Un test professionnel conçu pour orienter, non pour choisir à votre place. Cuir chevelu, cheveu, histoire, objectifs : tout est lu pour indiquer la direction la plus cohérente.",
-          "note": "Le test ne remplace pas la consultation : il la prépare.",
+          "lead": "Un test professionnel conçu pour orienter, non pour choisir à votre place. Cuir chevelu, cheveu, histoire, objectifs : tout est lu pour indiquer la direction la plus cohérente.",
+          "note": "Le test ne remplace pas la consultation : il la prépare.",
           "cta": "Découvrir votre parcours"
         },
         "prima": {
@@ -160,22 +160,22 @@
           "lead": "Une consultation professionnelle et un finish de votre choix. Tous les détails sur la page dédiée.",
           "included": {
             "consult": "Consultation initiale de 15 à 20 minutes",
-            "finish": "Finish de votre choix : PiegaLux ou RicciOsa",
+            "finish": "Finish de votre choix : PiegaLux ou RicciOsa",
             "summary": "Synthèse d’orientation et direction pour la suite"
           },
           "cta": "Découvrir Prima Volta",
-          "ctaAria": "Découvrir Prima Volta (s’ouvre dans une nouvelle page)"
+          "ctaAria": "Découvrir Prima Volta (s’ouvre dans un nouvel onglet)"
         },
         "help": {
-          "lead": "Vous préférez nous en parler d’abord ?",
+          "lead": "Vous préférez nous en parler d’abord ?",
           "whatsapp": "Écrivez-nous sur WhatsApp",
           "phone": "Appelez-nous"
         }
       },
       "prima": {
         "eyebrow": "Prima Volta",
-        "title": "Le premier pas, c’est se connaître.",
-        "lead": "Chaque nouvelle relation avec Luxosa commence par une rencontre. Prima Volta est une consultation professionnelle et un finish de votre choix : la manière d’entrer dans la Maison.",
+        "title": "Le premier pas, c’est faire connaissance.",
+        "lead": "Chaque nouvelle relation avec Luxosa commence par une rencontre. Prima Volta est une consultation professionnelle et un finish de votre choix : la manière d’entrer dans la Maison.",
         "outcome": "Vous repartez avec une direction claire pour vos cheveux et le finish déjà réalisé.",
         "heroLabel": "Prima Volta",
         "heroText": "Commencez par une consultation professionnelle et un finish de votre choix. Une première rencontre pensée pour faire connaissance.",
@@ -183,11 +183,11 @@
         "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
         "proofAuthor": "Rosanna T.",
         "cta": "Découvrir Prima Volta",
-        "ctaAria": "Découvrir Prima Volta (s’ouvre dans une nouvelle page)",
-        "ctaNote": "Achat en ligne. L’Accueil vous recontacte sous 24 heures ouvrées pour fixer ensemble le jour et l’horaire.",
+        "ctaAria": "Découvrir Prima Volta (s’ouvre dans un nouvel onglet)",
+        "ctaNote": "Achat en ligne. L’Accueil vous recontacte sous 24 heures ouvrées pour fixer ensemble le jour et l’heure.",
         "cardLabel": "Prima Volta Luxosa",
         "duration": "Durée totale d’environ 1 heure",
-        "price": "47 €",
+        "price": "47 €",
         "priceNote": "prix fixe",
         "items": {
           "consult": {
@@ -196,7 +196,7 @@
           },
           "finish": {
             "title": "Finish de votre choix",
-            "text": "PiegaLux ou RicciOsa. Vous choisissez : le Technicien vous oriente selon votre cheveu."
+            "text": "PiegaLux ou RicciOsa. Vous choisissez : le Technicien vous oriente selon votre cheveu."
           },
           "summary": {
             "title": "Synthèse d’orientation",
@@ -208,7 +208,7 @@
         "calendar": "Calendrier",
         "openCta": "Horaires et calendrier",
         "closeCta": "Fermer",
-        "nextVariation": "Prochain changement : {{date}}",
+        "nextVariation": "Prochain changement : {{date}}",
         "months": "Mois",
         "today": "Aujourd’hui, {{date}}",
         "statusOpen": "ouvert {{hours}}",
@@ -216,7 +216,7 @@
         "legendToday": "Aujourd’hui",
         "legendVaried": "Horaire modifié",
         "legendClosed": "Fermé",
-        "cellLabel": "{{date}} : {{status}}",
+        "cellLabel": "{{date}} : {{status}}",
         "usual": "Horaires habituels",
         "closedLabel": "Fermé",
         "pair": "{{a}} et {{b}}",
@@ -226,8 +226,8 @@
         "note": {
           "aperturaLunedi": "ouverture exceptionnelle",
           "immacolata": "Immaculée Conception",
-          "natale": "Noël et Saint-Étienne",
-          "festivita": "Fêtes de fin d’année"
+          "natale": "Noël et la Saint-Étienne",
+          "festivita": "Période des fêtes"
         }
       }
     }

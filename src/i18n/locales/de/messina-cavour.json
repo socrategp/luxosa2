@@ -102,7 +102,7 @@
         "054": "Ich kam zu Lucia mit zerstörtem Haar. Heimaufhellungen, Supermarktfarben, eine Glättung, die mir die Spitzen verbrannt hatte. Ich schämte mich. Das Erste, was man mir sagte, war: Keine Sorge, wir können gute Arbeit leisten. Kein Tadel, kein Blick, kein Spott. Nur ein klarer Plan, um das Beschädigte wieder aufzubauen. Schon nach einem Monat ist das Haar gesünder — und wir sind noch nicht einmal zur Hälfte des Weges.",
         "055": "Serena R.",
         "056": "BenEssere",
-        "057": "Ich habe Locken. Ein Leben lang hörte ich, ich solle sie glätten, zähmen, zusammenbinden. Dann empfahl mir eine Freundin diesen Salon, und zum ersten Mal sagte mir jemand: Deine Locken sind schön, aber sie belasten deine Kopfhaut. Wir bauen einen Weg, der sie zur Geltung bringt, ohne irgendetwas zu stressen. Noch nie hatte jemand so mit mir über mein Haar gesprochen. Ich habe die Esperienza Ricciosa gewählt — nicht zu vergleichen mit allem anderen. Ich habe verstanden, dass meine Locken wichtig sind.",
+        "057": "Ich habe Locken. Ein Leben lang hörte ich, ich solle sie glätten, zähmen, zusammenbinden. Dann empfahl mir eine Freundin Luxosa, und zum ersten Mal sagte mir jemand: Deine Locken sind schön, aber sie belasten deine Kopfhaut. Wir bauen einen Weg, der sie zur Geltung bringt, ohne irgendetwas zu stressen. Noch nie hatte jemand so mit mir über mein Haar gesprochen. Ich habe die Esperienza Ricciosa gewählt — nicht zu vergleichen mit allem anderen. Ich habe verstanden, dass meine Locken wichtig sind.",
         "058": "Giulia S.",
         "059": "EX·05 RicciOsa",
         "060": "Ich habe den Unterschied zwischen einem Salon und Luxosa verstanden, als man mir sagte: Die Farbe, die du willst, erfordert drei Schritte in zwei Monaten. Woanders hätte man sie sofort gemacht, in einer Sitzung, alles verbrannt um mir zu gefallen. Hier hatte man den Mut, mir Nein zu sagen — nicht heute. Und dieses Nein hat mir mehr Vertrauen gegeben als tausend Ja.",
@@ -149,22 +149,22 @@
       "final": {
         "test": {
           "eyebrow": "Luxosa Test",
-          "title": "Entdecken Sie, wo Sie beginnen.",
-          "lead": "Ein professioneller Test, der Orientierung gibt, statt für Sie zu entscheiden. Kopfhaut, Haar, Vorgeschichte, Ziele: Alles wird gelesen, um die stimmigste Richtung aufzuzeigen.",
+          "title": "Entdecken Sie, wo Sie am besten beginnen.",
+          "lead": "Ein professioneller Test, der Orientierung gibt, statt für Sie zu entscheiden. Kopfhaut, Haar, Vorgeschichte, Ziele: Alles wird ausgewertet, um die stimmigste Richtung aufzuzeigen.",
           "note": "Der Test ersetzt die Beratung nicht: Er bereitet sie vor.",
           "cta": "Deinen Weg entdecken"
         },
         "prima": {
           "eyebrow": "Prima Volta",
           "title": "Ihr Weg in die Maison.",
-          "lead": "Eine professionelle Beratung und ein Finish Ihrer Wahl. Alle Details auf der eigenen Seite.",
+          "lead": "Eine professionelle Beratung und ein Finish Ihrer Wahl. Alle Details auf der zugehörigen Seite.",
           "included": {
             "consult": "Erstberatung von 15–20 Minuten",
             "finish": "Finish Ihrer Wahl: PiegaLux oder RicciOsa",
             "summary": "Orientierende Zusammenfassung und Richtung für den nächsten Schritt"
           },
           "cta": "Prima Volta entdecken",
-          "ctaAria": "Prima Volta entdecken (öffnet sich in einer neuen Seite)"
+          "ctaAria": "Prima Volta entdecken (öffnet in einem neuen Tab)"
         },
         "help": {
           "lead": "Möchten Sie zuerst mit uns sprechen?",
@@ -183,8 +183,8 @@
         "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
         "proofAuthor": "Rosanna T.",
         "cta": "Prima Volta entdecken",
-        "ctaAria": "Prima Volta entdecken (öffnet sich in einer neuen Seite)",
-        "ctaNote": "Online-Kauf. Unser Empfang meldet sich innerhalb von 24 Arbeitsstunden bei Ihnen, um gemeinsam Tag und Uhrzeit festzulegen.",
+        "ctaAria": "Prima Volta entdecken (öffnet in einem neuen Tab)",
+        "ctaNote": "Online-Kauf. Unser Empfang meldet sich innerhalb von 24 Stunden (an Werktagen) bei Ihnen, um gemeinsam Tag und Uhrzeit festzulegen.",
         "cardLabel": "Prima Volta Luxosa",
         "duration": "Gesamtdauer ca. 1 Stunde",
         "price": "47 €",
@@ -192,11 +192,11 @@
         "items": {
           "consult": {
             "title": "Erstberatung",
-            "text": "15–20 Minuten. Der Luxosa-Techniker betrachtet Kopfhaut und Haarfaser, hört Ihre Geschichte an und erfasst die für Ihren Fall relevanten Parameter."
+            "text": "15–20 Minuten. Die Luxosa-Fachkraft begutachtet Kopfhaut und Haarfaser, hört sich Ihre Geschichte an und erfasst die für Ihren Fall relevanten Parameter."
           },
           "finish": {
             "title": "Finish Ihrer Wahl",
-            "text": "PiegaLux oder RicciOsa. Sie entscheiden: Der Techniker berät Sie passend zu Ihrem Haar."
+            "text": "PiegaLux oder RicciOsa. Sie entscheiden: Die Fachkraft berät Sie passend zu Ihrem Haar."
           },
           "summary": {
             "title": "Orientierende Zusammenfassung",
@@ -220,7 +220,7 @@
         "usual": "Reguläre Öffnungszeiten",
         "closedLabel": "Geschlossen",
         "pair": "{{a}} und {{b}}",
-        "range": "Vom {{from}} bis {{to}}",
+        "range": "Von {{from}} bis {{to}}",
         "variations": "Abweichungen von den regulären Öffnungszeiten",
         "noVariations": "Keine Abweichungen, es gelten die regulären Öffnungszeiten.",
         "note": {

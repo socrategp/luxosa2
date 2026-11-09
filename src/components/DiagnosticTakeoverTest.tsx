@@ -541,6 +541,9 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
         <div className="space-y-4">
           <input
             type="text"
+            name="given-name"
+            autoComplete="given-name"
+            autoCapitalize="words"
             placeholder={t('test:ui.form.name')}
             value={nome}
             onChange={e => { setNome(e.target.value); setError(''); }}
@@ -548,6 +551,9 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
           />
           <input
             type="text"
+            name="family-name"
+            autoComplete="family-name"
+            autoCapitalize="words"
             placeholder={t('test:ui.form.surname')}
             value={cognome}
             onChange={e => { setCognome(e.target.value); setError(''); }}
@@ -555,6 +561,8 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
           />
           <input
             type="email"
+            name="email"
+            autoComplete="email"
             placeholder={t('test:diagnostic.takeover.270')}
             value={email}
             onChange={e => { setEmail(e.target.value); setError(''); }}
@@ -565,6 +573,8 @@ function FormScreen({ onSubmit }: { onSubmit: (data: ContactFormData) => void })
           <div className="luxosa-phone-input">
             <PhoneInput
               defaultCountry="IT"
+              name="tel"
+              autoComplete="tel"
               value={phone}
               onChange={(val) => { setPhone(val); setError(''); }}
               placeholder={t('test:diagnostic.takeover.271')}

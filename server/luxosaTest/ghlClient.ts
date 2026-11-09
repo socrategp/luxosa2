@@ -254,6 +254,32 @@ export class EmailSendTimeoutError extends Error {
   }
 }
 
+const TEMPLATE_FETCH_TIMEOUT_MS = 5_000;
+
+// Read-only (scope emails/builder.readonly): returns the published HTML of an
+// email-builder template, or null on any failure so the caller can fall back
+// to its built-in email instead of blocking the send.
+export async function getEmailTemplateHtml(templateId: string): Promise<string | null> {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), TEMPLATE_FETCH_TIMEOUT_MS);
+  try {
+    const listRes = await fetch(`${BASE_URL}/emails/builder?locationId=${encodeURIComponent(getLocationId())}&limit=100`, {
+      signal: controller.signal,
+      headers: { Authorization: `Bearer ${getToken()}`, Version: CONTACTS_API_VERSION, Accept: 'application/json' },
+    });
+    if (!listRes.ok) return null;
+    const body = (await listRes.json()) as { builders?: Array<{ id?: string; previewUrl?: string }> };
+    const previewUrl = body.builders?.find((tpl) => tpl.id === templateId)?.previewUrl;
+    if (!previewUrl || !previewUrl.startsWith('https://')) return null;
+    const htmlRes = await fetch(previewUrl, { signal: controller.signal });
+    return htmlRes.ok ? await htmlRes.text() : null;
+  } catch {
+    return null;
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 const SEND_EMAIL_TIMEOUT_MS = 15_000;
 // Shape confirmed empirically against the real endpoint (2026-10-10):
 // POST /conversations/messages, Version 2021-04-15. Validation progression

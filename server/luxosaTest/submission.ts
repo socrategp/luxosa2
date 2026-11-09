@@ -22,6 +22,7 @@ import {
   createContact as realCreateContact,
   uploadDocument as realUploadDocument,
   sendDossierEmail as realSendDossierEmail,
+  getEmailTemplateHtml,
   GhlScopeBlockedError,
   EmailSendTimeoutError,
   getLuxosaMode,
@@ -33,6 +34,7 @@ import {
   FIELD_CONSENSO_MARKETING,
   CONSENSO_MARKETING_OPTION,
 } from './ghlClient.js';
+import { DOSSIER_EMAIL_TEMPLATE_ID, renderDossierTemplate } from './emailTemplate.js';
 
 export interface SubmissionOutcome {
   submissionId: string;
@@ -55,6 +57,7 @@ export interface SubmissionDeps {
   generateDossierPdf: typeof realGenerateDossierPdf;
   uploadDocument: typeof realUploadDocument;
   sendDossierEmail: typeof realSendDossierEmail;
+  getDossierEmailTemplate: () => Promise<string | null>;
   // Tests inject an in-memory fake; production leaves it undefined so the
   // Documenti lock falls back to the real Upstash client.
   lockClient?: LockClient;
@@ -75,6 +78,7 @@ function resolveDeps(overrides: Partial<SubmissionDeps>): SubmissionDeps {
     generateDossierPdf: overrides.generateDossierPdf ?? realGenerateDossierPdf,
     uploadDocument: overrides.uploadDocument ?? realUploadDocument,
     sendDossierEmail: overrides.sendDossierEmail ?? realSendDossierEmail,
+    getDossierEmailTemplate: overrides.getDossierEmailTemplate ?? (() => getEmailTemplateHtml(DOSSIER_EMAIL_TEMPLATE_ID)),
     lockClient: overrides.lockClient,
   };
 }
@@ -100,15 +104,31 @@ function escapeHtml(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
+// The GHL template's frame (closing line, signature, footer) is written in
+// Italian, so only Italian emails use it; other languages keep the built-in
+// email entirely in the client's language.
+export function usesDossierTemplate(language: string = DEFAULT_LANGUAGE): boolean {
+  return (isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE) === DEFAULT_LANGUAGE;
+}
+
 // Written in the client's language; non-Italian emails add one line saying the
 // attached dossier also carries the Italian copy the Maison reads.
 export function buildDossierEmailContent(
   firstName: string,
   percorsoName: string,
   language: string = DEFAULT_LANGUAGE,
+  templateHtml: string | null = null,
 ): { subject: string; html: string } {
   const lang = isSupportedLanguage(language) ? language : DEFAULT_LANGUAGE;
   return withLanguage(lang, () => {
+    if (templateHtml && usesDossierTemplate(lang)) {
+      const rendered = renderDossierTemplate(templateHtml, [
+        t('report:email.greeting', { firstName: escapeHtml(firstName) }),
+        t('report:email.intro', { percorso: `<strong>${escapeHtml(percorsoName)}</strong>` }),
+        t('report:email.preliminary'),
+      ]);
+      if (rendered) return { subject: t('report:email.subject'), html: rendered };
+    }
     const italianNote = lang === DEFAULT_LANGUAGE ? '' : `<p>${t('report:email.italianNote')}</p>`;
     const html = `
       <p>${t('report:email.greeting', { firstName: escapeHtml(firstName) })}</p>
@@ -363,7 +383,8 @@ export async function processSubmission(
       }
     }
 
-    const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName, data.language);
+    const templateHtml = usesDossierTemplate(data.language) ? await deps.getDossierEmailTemplate() : null;
+    const { subject, html } = buildDossierEmailContent(data.firstName, result.percorsoName, data.language, templateHtml);
 
     await ledger.update(data.submissionId, { status: 'EMAIL_SENDING' });
     let emailMessageId: string | null = null;

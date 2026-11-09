@@ -28,7 +28,7 @@ export const PAGES: readonly PageSeo[] = [
     path: '/sedi/messina-cavour',
     title: 'Luxosa Messina — Cura dei capelli e della cute in Corso Cavour',
     description:
-      'Luxosa a Messina, Corso Cavour 1: consulenza per capelli e cute, colore, taglio, piega e ricci con metodo. Prima Volta a €47. Orari aggiornati e contatti.',
+      'Luxosa a Messina, Corso Cavour 1: parrucchiere e cura della cute con metodo — consulenza, colore, taglio, piega e ricci. Prima Volta a €47. Orari e contatti.',
     image: '/images/og-messina-cavour.jpg',
     heroImage: '/images/messina-new.webp',
     breadcrumb: 'Messina Cavour',

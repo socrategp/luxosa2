@@ -22,3 +22,5 @@ server/luxosaTest/pdfGeneration.js
 
 # Logs del server di sviluppo
 *.log
+# Prove di stampa del dossier PDF (npm run pdf:test)
+tmp-*.pdf

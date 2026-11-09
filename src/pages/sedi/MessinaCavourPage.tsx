@@ -361,7 +361,7 @@ function MCContact() {
               </div>
               <div className="flex items-center gap-4">
                 <Mail size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="mailto:messinacavour@luxosa.it" className="text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">{t('messina-cavour:messina.cavour.page.080')}</a>
+                <a href="mailto:messinacavour@luxosa.it" className="inline-block py-[9px] -my-[9px] text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">{t('messina-cavour:messina.cavour.page.080')}</a>
               </div>
               <div className="flex items-start gap-4">
                 <Clock size={18} strokeWidth={1.3} className="text-brass-muted flex-shrink-0 mt-0.5" />

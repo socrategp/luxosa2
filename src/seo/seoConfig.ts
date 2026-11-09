@@ -8,6 +8,8 @@ export interface PageSeo {
   readonly heroImage?: string;
   readonly breadcrumb?: string;
   readonly priority: number;
+  /** Campaign landings stay out of search results and out of the sitemap. */
+  readonly noindex?: boolean;
 }
 
 export const DEFAULT_IMAGE = '/images/og-luxosa.jpg';
@@ -80,6 +82,7 @@ export const PAGES: readonly PageSeo[] = [
     image: DEFAULT_IMAGE,
     breadcrumb: 'Luxosa Test',
     priority: 0.6,
+    noindex: true,
   },
   {
     path: '/privacy-policy',

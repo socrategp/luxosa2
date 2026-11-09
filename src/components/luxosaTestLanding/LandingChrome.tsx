@@ -129,7 +129,7 @@ export function LandingFooter() {
             <Link to="/privacy-policy" target="_blank" rel="noopener" className="inline-block py-[13px] -my-[13px] text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/80 font-light transition-colors duration-500">
               {t('common:footer.033')}
             </Link>
-            <Link to="/cookie-policy" target="_blank" rel="noopener" className="text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/80 font-light transition-colors duration-500">
+            <Link to="/cookie-policy" target="_blank" rel="noopener" className="inline-block py-[13px] -my-[13px] text-[11px] tracking-[0.1em] text-ivory/50 hover:text-ivory/80 font-light transition-colors duration-500">
               {t('common:footer.034')}
             </Link>
           </div>

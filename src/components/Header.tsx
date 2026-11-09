@@ -28,6 +28,12 @@ export default function Header() {
   const [languageOpen, setLanguageOpen] = useState(false);
   const { quizOpen, openQuiz } = useQuiz();
   const location = useLocation();
+  const [menuPath, setMenuPath] = useState(location.pathname);
+  if (menuPath !== location.pathname) {
+    setMenuPath(location.pathname);
+    setMenuOpen(false);
+    setLanguageOpen(false);
+  }
   const lastScrollY = useRef(0);
   const desktopLanguageRef = useRef<HTMLDivElement>(null);
   const mobileLanguageRef = useRef<HTMLDivElement>(null);
@@ -74,11 +80,6 @@ export default function Header() {
   }, [menuOpen]);
 
   useEffect(() => {
-    setMenuOpen(false);
-    setLanguageOpen(false);
-  }, [location.pathname]);
-
-  useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Node;
       if (!desktopLanguageRef.current?.contains(target) && !mobileLanguageRef.current?.contains(target)) {
@@ -114,7 +115,7 @@ export default function Header() {
       >
         <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
           <div className="flex items-center justify-between h-20 md:h-24">
-            <Link to="/" className="relative z-50 transition-opacity duration-300 hover:opacity-80">
+            <Link to="/" className="relative z-50 py-2 -my-2 transition-opacity duration-300 hover:opacity-80">
               <img
                 src="/images/luxosa-logo-orizzontale-bianco-tras.png"
                 alt={t('common:header.009')}

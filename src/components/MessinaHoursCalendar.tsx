@@ -49,23 +49,28 @@ function statusText(hours: string | null): string {
 function describeException(exception: HoursException, format: DateFormat): string {
   const from = parseKey(exception.from);
   const to = parseKey(exception.to);
-  const day = (date: Date) => `${format(date, { weekday: 'long' })} ${date.getUTCDate()}`;
-  const month = (date: Date) => format(date, { month: 'long' });
+  // Intl puts weekday, day and month in the right order for each language.
+  // Italian keeps the compact forms ("Lunedì 7, 14 e 21 dicembre", "lunedì 7 – martedì 9 dicembre").
+  const isItalian = currentLanguage() === 'it';
+  const fullDate = (date: Date) => format(date, { weekday: 'long', day: 'numeric', month: 'long' });
+  const dayOnly = (date: Date) => format(date, { weekday: 'long', day: 'numeric' });
   const days = exception.weekdays
     ? Array.from({ length: daysBetween(from, to) + 1 }, (_, index) => addDays(from, index)).filter((date) =>
         exception.weekdays?.includes(date.getUTCDay() as WeekdayIndex),
       )
     : [];
   if (days.length > 0) {
-    // elenco compatto "Lunedì 7, 14 e 21 dicembre": le date vanno sempre nello stesso mese
-    const numbers = days.map((date) => String(date.getUTCDate()));
-    const lastNumber = numbers.pop() ?? '';
-    const list = numbers.length > 0 ? th('pair', { a: numbers.join(', '), b: lastNumber }) : lastNumber;
-    return capitalize(`${format(days[0], { weekday: 'long' })} ${list} ${month(to)}`);
+    const weekday = format(days[0], { weekday: 'long' });
+    const labels = days.map((date) =>
+      isItalian ? String(date.getUTCDate()) : format(date, { day: 'numeric', month: 'long' }),
+    );
+    const last = labels.pop() ?? '';
+    const list = labels.length > 0 ? th('pair', { a: labels.join(', '), b: last }) : last;
+    return capitalize(isItalian ? `${weekday} ${list} ${format(to, { month: 'long' })}` : `${weekday}: ${list}`);
   }
   const sameMonth = from.getUTCMonth() === to.getUTCMonth();
-  const fromLabel = sameMonth ? day(from) : `${day(from)} ${month(from)}`;
-  const toLabel = `${day(to)} ${month(to)}`;
+  const fromLabel = sameMonth && isItalian ? dayOnly(from) : fullDate(from);
+  const toLabel = fullDate(to);
 
   if (exception.from === exception.to) return capitalize(toLabel);
   if (daysBetween(from, to) === 1) return capitalize(th('pair', { a: fromLabel, b: toLabel }));

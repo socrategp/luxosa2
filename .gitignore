@@ -19,3 +19,6 @@ public_original/
 server/luxosaTest/pdf.js
 server/luxosaTest/pdfGeneration.js
 .ssr
+
+# Logs del server di sviluppo
+*.log

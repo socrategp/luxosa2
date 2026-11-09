@@ -47,6 +47,7 @@ for (const page of ssr.PAGES) {
     `<meta name="twitter:title" content="${escapeHtml(page.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(page.description)}" />`,
     `<meta name="twitter:image" content="${image}" />`,
+    ...(page.noindex ? [`<meta name="robots" content="noindex, nofollow" />`] : []),
     ...ssr.buildPageStructuredData(page, todayKey).map(jsonLd),
   ].join('\n    ');
 
@@ -66,7 +67,7 @@ for (const page of ssr.PAGES) {
 const lastmod = new Date().toISOString().slice(0, 10);
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${ssr.PAGES.map((page) => `  <url><loc>${ssr.absoluteUrl(page.path)}</loc><lastmod>${lastmod}</lastmod><priority>${page.priority.toFixed(1)}</priority></url>`).join('\n')}
+${ssr.PAGES.filter((page) => !page.noindex).map((page) => `  <url><loc>${ssr.absoluteUrl(page.path)}</loc><lastmod>${lastmod}</lastmod><priority>${page.priority.toFixed(1)}</priority></url>`).join('\n')}
 </urlset>
 `;
 writeFileSync(join(DIST, 'sitemap.xml'), sitemap);

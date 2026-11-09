@@ -40,7 +40,7 @@ export default function MessinaFinalEntry() {
             <p className="text-[17px] md:text-[18px] leading-[1.8] text-anthracite/80 font-light">{tf('test.lead')}</p>
             <p className="mt-4 mb-8 text-[15px] leading-[1.7] text-anthracite/60 font-light italic">{tf('test.note')}</p>
             <div aria-hidden="true" className="mb-8 aspect-[1440/346] overflow-hidden border border-sand bg-ivory">
-              <img src="/images/luxosa-test-snapshot.jpg" alt="" loading="lazy" className="h-full w-full object-cover object-bottom" />
+              <img src="/images/luxosa-test-snapshot.webp" alt="" loading="lazy" className="h-full w-full object-cover object-bottom" />
             </div>
             <button
               type="button"

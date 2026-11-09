@@ -643,6 +643,14 @@ function processingProgress(elapsedMs: number): number {
     + (PROCESSING_OVERTIME_CEILING - PROCESSING_TIMED_CEILING) * (1 - Math.exp(-overtime));
 }
 
+type DossierStatus = 'sending' | 'sent' | 'failed';
+
+const DOSSIER_STATUS_COPY: Record<DossierStatus, string> = {
+  sending: 'test:ui.result.confirmSending',
+  sent: 'test:ui.result.confirmSent',
+  failed: 'test:ui.result.confirmFailed',
+};
+
 function SendingScreen({ isDone, onFinished }: { isDone: boolean; onFinished: () => void }) {
   const [elapsed, setElapsed] = useState(0);
 
@@ -764,14 +772,14 @@ function ResultScreen({
   whatsapp,
   answers,
   onReset,
-  dossierDelivered,
+  dossierStatus,
 }: {
   nome: string;
   email: string;
   whatsapp: string;
   answers: Answers;
   onReset: () => void;
-  dossierDelivered: boolean;
+  dossierStatus: DossierStatus;
 }) {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [selectedLocationId, setSelectedLocationId] = useState<typeof LUXOSA_LOCATIONS[number]['id']>('messina-cavour');
@@ -897,20 +905,21 @@ function ResultScreen({
         </div>
 
         {/* Conferma invio — sintesi sul sito, dossier completo via PDF email.
-            dossierDelivered reflects the server's authoritative outcome
+            dossierStatus follows the server's authoritative outcome
             (status === 'COMPLETED'); never shown as sent when it wasn't. */}
         <div className="mb-12 -mx-6 md:-mx-10 px-6 md:px-10 py-10 md:py-12 bg-ecru/25 border-t border-b border-sand/30 text-center">
           <span className="text-[10px] tracking-[0.35em] uppercase text-brass-muted font-light block mb-4">Luxosa Test</span>
           <h3 className="font-serif text-[26px] md:text-[32px] font-light leading-[1.2] text-charcoal mb-4">{t('test:ui.result.confirmTitle')}</h3>
-          {dossierDelivered ? (
-            <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
-              {t('test:ui.result.confirmSent')}
-            </p>
-          ) : (
-            <p className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto">
-              {t('test:ui.result.confirmFailed')}
-            </p>
-          )}
+          <motion.p
+            key={dossierStatus}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, ease: premiumEase }}
+            aria-live="polite"
+            className="text-[16px] md:text-[17px] leading-[1.8] text-anthracite/80 font-light max-w-lg mx-auto"
+          >
+            {t(DOSSIER_STATUS_COPY[dossierStatus])}
+          </motion.p>
         </div>
 
         {/* Percorso secondario */}
@@ -1050,12 +1059,12 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
   const [contactData, setContactData] = useState<ContactFormData>({
     nome: '', cognome: '', email: '', whatsapp: '', privacyAcknowledged: false, marketingConsent: false,
   });
-  // Whether the server confirmed the dossier was actually generated and
-  // emailed (status === 'COMPLETED'). Only meaningful once screen==='result';
-  // defaults to true so an impossible render order never shows the fallback.
-  const [dossierDelivered, setDossierDelivered] = useState(true);
-  // Server outcome of the submission; null while still in flight.
-  const [submissionDelivered, setSubmissionDelivered] = useState<boolean | null>(null);
+  // The dossier is requested only once the analysis sequence has ended, so the
+  // email never lands before the client is told to look for it. 'sent' only
+  // when the server confirms the dossier was generated and emailed (COMPLETED).
+  const [dossierStatus, setDossierStatus] = useState<DossierStatus>('sending');
+  const pendingSubmissionRef = useRef<{ id: string; body: string } | null>(null);
+  const activeSubmissionIdRef = useRef<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const trackedStepsRef = useRef<Set<string>>(new Set());
   const questionsCompletedTrackedRef = useRef(false);
@@ -1158,7 +1167,6 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
 
   const handleFormSubmit = useCallback((data: ContactFormData) => {
     setContactData(data);
-    setSubmissionDelivered(null);
     setScreen('sending');
 
     const submissionId = crypto.randomUUID();
@@ -1175,18 +1183,30 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
       marketingConsent: data.marketingConsent,
     };
 
-    // The server result is authoritative for PDF/GHL/email. The client-side
-    // result (ResultScreen computing buildLuxosaTestResult itself) is always
-    // shown — it is correct regardless of delivery — but the dossier
-    // confirmation copy on that screen must reflect what actually happened
-    // server-side (COMPLETED = dossier emailed) rather than assume success:
-    // the "sending" screen stays up until we actually know. SendingScreen
-    // owns the timing and calls handleProcessingFinished once both its
-    // visual sequence and this outcome are done.
+    // Held until the analysis sequence ends (handleProcessingFinished).
+    pendingSubmissionRef.current = { id: submissionId, body: JSON.stringify(payload) };
+  }, [answers, language]);
+
+  // The server result is authoritative for PDF/GHL/email. The client-side
+  // result (ResultScreen computing buildLuxosaTestResult itself) is shown as
+  // soon as the analysis ends, together with the "we are sending it now"
+  // copy; the request starts at that moment and the copy then follows the
+  // real outcome (COMPLETED = dossier emailed), never assuming success.
+  const handleProcessingFinished = useCallback(() => {
+    const pending = pendingSubmissionRef.current;
+    pendingSubmissionRef.current = null;
+    setScreen('result');
+    if (!pending) {
+      setDossierStatus('failed');
+      return;
+    }
+    activeSubmissionIdRef.current = pending.id;
+    setDossierStatus('sending');
     fetch('/api/luxosa-test/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      body: pending.body,
+      keepalive: true,
     })
       .then(res => res.json())
       .then(outcome => {
@@ -1197,13 +1217,10 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
         console.error('[luxosa-test] submission request failed:', err);
         return false;
       })
-      .then(delivered => setSubmissionDelivered(delivered));
-  }, [answers, language]);
-
-  const handleProcessingFinished = useCallback(() => {
-    setDossierDelivered(submissionDelivered === true);
-    setScreen('result');
-  }, [submissionDelivered]);
+      .then(delivered => {
+        if (activeSubmissionIdRef.current === pending.id) setDossierStatus(delivered ? 'sent' : 'failed');
+      });
+  }, []);
 
   const handleStartTest = useCallback(() => {
     trackLuxosaTestEvent('luxosa_test_started', {
@@ -1321,7 +1338,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
           {screen === 'sending' && (
             <SendingScreen
               key="sending"
-              isDone={submissionDelivered !== null}
+              isDone
               onFinished={handleProcessingFinished}
             />
           )}
@@ -1334,7 +1351,7 @@ export function DiagnosticTakeover({ onReset }: { onReset: () => void }) {
               whatsapp={contactData.whatsapp}
               answers={answers}
               onReset={onReset}
-              dossierDelivered={dossierDelivered}
+              dossierStatus={dossierStatus}
             />
           )}
         </AnimatePresence>

@@ -245,12 +245,13 @@
     "signoff": "Ama, brilla, atrévete."
   },
   "email": {
-    "subject": "Tu Luxosa Test está listo",
-    "greeting": "Hola {{firstName}},",
-    "intro": "en el archivo adjunto encontrarás tu dossier Luxosa Test completo, con tu orientación personalizada hacia {{percorso}}.",
+    "subject": "Su Luxosa Test está listo",
+    "greeting": "Hola, {{firstName}}:",
+    "intro": "en el archivo adjunto encontrará su dossier Luxosa Test completo, con su orientación personalizada hacia {{percorso}}.",
     "preliminary": "Sigue siendo una orientación preliminar: el recorrido definitivo se confirmará durante la Consulenza Luxosa presencial.",
-    "questions": "Para cualquier duda, estamos a tu disposición por WhatsApp.",
-    "italianNote": "El dossier incluye también una versión en italiano, que nuestro equipo de la Maison utilizará para tu consulta.",
-    "signoff": "— Luxosa"
+    "questions": "Para cualquier duda, estamos a su disposición por WhatsApp.",
+    "italianNote": "El dossier incluye también una versión en italiano, que nuestro equipo de la Maison utilizará para su consulta.",
+    "closing": "Un cordial saludo,",
+    "signoff": "Luxosa Messina Cavour"
   }
 }

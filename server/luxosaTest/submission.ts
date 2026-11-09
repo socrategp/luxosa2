@@ -116,7 +116,7 @@ export function buildDossierEmailContent(
       <p>${t('report:email.preliminary')}</p>
       ${italianNote}
       <p>${t('report:email.questions')}</p>
-      <p>${t('report:email.signoff')}</p>
+      <p>${t('report:email.closing')}<br />${t('report:email.signoff')}</p>
     `.trim();
     return { subject: t('report:email.subject'), html };
   });

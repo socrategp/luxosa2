@@ -245,12 +245,13 @@
     "signoff": "Liebe, strahle, wage."
   },
   "email": {
-    "subject": "Dein Luxosa Test ist fertig",
-    "greeting": "Hallo {{firstName}},",
-    "intro": "im Anhang findest du dein vollständiges Luxosa Test Dossier mit deiner persönlichen Orientierung in Richtung {{percorso}}.",
+    "subject": "Ihr Luxosa Test ist fertig",
+    "greeting": "Guten Tag {{firstName}},",
+    "intro": "im Anhang finden Sie Ihr vollständiges Luxosa Test Dossier mit Ihrer persönlichen Orientierung in Richtung {{percorso}}.",
     "preliminary": "Es bleibt eine vorläufige Orientierung: Der endgültige Weg wird bei der persönlichen Consulenza Luxosa bestätigt.",
-    "questions": "Bei Fragen stehen wir dir jederzeit über WhatsApp zur Verfügung.",
-    "italianNote": "Das Dossier enthält außerdem eine italienische Fassung, die unser Maison-Team für deine Beratung liest.",
-    "signoff": "— Luxosa"
+    "questions": "Bei Fragen stehen wir Ihnen jederzeit über WhatsApp zur Verfügung.",
+    "italianNote": "Das Dossier enthält außerdem eine italienische Fassung, die unser Maison-Team für Ihre Beratung liest.",
+    "closing": "Mit freundlichen Grüßen",
+    "signoff": "Luxosa Messina Cavour"
   }
 }

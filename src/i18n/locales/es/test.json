@@ -335,6 +335,7 @@
         }
       },
       "confirmTitle": "Tu Luxosa Test está listo",
+      "confirmSending": "Te estamos enviando ahora por correo electrónico tu informe personalizado completo: en unos instantes lo encontrarás en tu bandeja de entrada. Revisa también las carpetas de Spam o Promociones.",
       "confirmSent": "Acabamos de enviarte por correo electrónico tu informe personalizado completo. Revisa tu bandeja de entrada y, si es necesario, también las carpetas de Spam o Promociones.",
       "confirmFailed": "Tu perfil está completo. Por un pequeño imprevisto técnico todavía no hemos podido enviarte el informe por correo electrónico — no te preocupes: puedes solicitarlo ahora mismo aquí abajo por WhatsApp, o la Maison te lo enviará en breve.",
       "slotAny": "Indiferente"

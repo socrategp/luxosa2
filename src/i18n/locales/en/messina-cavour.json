@@ -145,6 +145,90 @@
         "097": "We recommend arriving 5 minutes before your appointment.",
         "098": "The location is accessible for people with reduced mobility.",
         "099": "44 years old"
+      },
+      "hours": {
+        "calendar": "Calendar",
+        "openCta": "Hours and calendar",
+        "closeCta": "Close",
+        "nextVariation": "Next change: {{date}}",
+        "months": "Month",
+        "today": "Today, {{date}}",
+        "statusOpen": "open {{hours}}",
+        "statusClosed": "closed",
+        "legendToday": "Today",
+        "legendVaried": "Changed hours",
+        "legendClosed": "Closed",
+        "cellLabel": "{{date}}: {{status}}",
+        "usual": "Usual hours",
+        "closedLabel": "Closed",
+        "pair": "{{a}} and {{b}}",
+        "range": "From {{from}} to {{to}}",
+        "variations": "Changes to the usual hours",
+        "noVariations": "No changes, the usual hours apply.",
+        "note": {
+          "aperturaLunedi": "special opening",
+          "immacolata": "Feast of the Immaculate Conception",
+          "natale": "Christmas and Boxing Day",
+          "festivita": "Holiday period"
+        }
+      },
+      "final": {
+        "test": {
+          "eyebrow": "Luxosa Test",
+          "title": "Discover where to begin.",
+          "lead": "A professional test designed to guide you, not to choose for you. Scalp, hair, history, goals: everything is read to point to the most coherent direction.",
+          "note": "The test does not replace the consultation: it prepares for it.",
+          "cta": "Discover your pathway"
+        },
+        "prima": {
+          "eyebrow": "Prima Volta",
+          "title": "The way into the Maison.",
+          "lead": "A professional consultation and a finish of your choice. All the details on the dedicated page.",
+          "included": {
+            "consult": "Initial 15–20 minute consultation",
+            "finish": "A finish of your choice: PiegaLux or RicciOsa",
+            "summary": "An orientation summary and a direction for the next step"
+          },
+          "cta": "Discover Prima Volta",
+          "ctaAria": "Discover Prima Volta (opens in a new page)"
+        },
+        "help": {
+          "lead": "Would you rather talk to us first?",
+          "whatsapp": "Write to us on WhatsApp",
+          "phone": "Call us"
+        }
+      },
+      "prima": {
+        "eyebrow": "Prima Volta",
+        "title": "The first step is getting to know each other.",
+        "lead": "Every new relationship with Luxosa begins by getting to know each other. Prima Volta is a professional consultation and a finish of your choice: the way into the Maison.",
+        "outcome": "You leave with a clear direction for your hair and the finish already done.",
+        "heroLabel": "Prima Volta",
+        "heroText": "Begin with a professional consultation and a finish of your choice. A first meeting designed to get to know each other.",
+        "proofSource": "Google review",
+        "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
+        "proofAuthor": "Rosanna T.",
+        "cta": "Discover Prima Volta",
+        "ctaAria": "Discover Prima Volta (opens in a new page)",
+        "ctaNote": "Purchased online. Our Reception will contact you within 24 working hours to agree the day and time together.",
+        "cardLabel": "Prima Volta Luxosa",
+        "duration": "Total duration about 1 hour",
+        "price": "€47",
+        "priceNote": "fixed price",
+        "items": {
+          "consult": {
+            "title": "Initial consultation",
+            "text": "15–20 minutes. The Luxosa Technician observes scalp and hair fibre, listens to your story and gathers the parameters relevant to your case."
+          },
+          "finish": {
+            "title": "A finish of your choice",
+            "text": "PiegaLux or RicciOsa. The choice is yours: the Technician guides you according to your hair."
+          },
+          "summary": {
+            "title": "Orientation summary",
+            "text": "What has been observed, clearly explained, and the direction for the next step."
+          }
+        }
       }
     }
   }

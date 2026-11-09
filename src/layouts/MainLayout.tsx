@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import ScrollToTop from '../components/ScrollToTop';
 import BackToTop from '../components/BackToTop';
 import CustomCursor from '../components/CustomCursor';
+import LeadConnectorChatWidget from '../components/LeadConnectorChatWidget';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
@@ -23,6 +24,7 @@ export default function MainLayout() {
   return (
     <div className="min-h-screen bg-ivory">
       <ScrollToTop />
+      <LeadConnectorChatWidget />
       <CustomCursor />
       <Header />
       <AnimatePresence mode="wait">

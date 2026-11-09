@@ -1,7 +1,9 @@
 ﻿import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, Clock, CalendarDays, ArrowRight, ArrowLeft, Ear, Search, Fingerprint, Shield, Sparkles, Facebook, Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ArrowRight, ArrowDown, Ear, Search, Fingerprint, Shield, Sparkles, Facebook, Instagram } from 'lucide-react';
+import MessinaHoursCalendar from '../../components/MessinaHoursCalendar';
+import MessinaFinalEntry from '../../components/MessinaFinalEntry';
+import MessinaPrimaVolta from '../../components/MessinaPrimaVolta';
 import TestimonialsCarousel from '../../components/TestimonialsCarousel';
 import type { TestimonialItem } from '../../components/TestimonialsCarousel';
 import { t } from '../../i18n/t';
@@ -39,19 +41,29 @@ function MCHero() {
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0.75 }} className="mt-5 text-white/75 text-[18px] md:text-[20px] font-light leading-relaxed max-w-xl tracking-wide">{t('messina-cavour:messina.cavour.page.005')}</motion.p>
         </div>
       </div>
+      <motion.aside
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 1 }}
+        className="hidden xl:block absolute bottom-28 lg:bottom-32 left-3/4 -translate-x-1/2"
+      >
+        <div className="w-[340px]">
+          <div className="border border-white/30 bg-deep/40 backdrop-blur-sm p-8">
+            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light font-light">{t('messina-cavour:messina.cavour.prima.heroLabel')}</span>
+            <div className="w-8 h-[1px] bg-brass-light/60 mt-4 mb-5" />
+            <p className="text-[16px] leading-[1.7] text-white/85 font-light">{t('messina-cavour:messina.cavour.prima.heroText')}</p>
+            <button
+              type="button"
+              onClick={() => document.getElementById('mc-prima-volta')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              className="group mt-6 flex w-full items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-6 py-4 hover:bg-brass-light transition-colors duration-500"
+            >
+              {t('messina-cavour:messina.cavour.prima.cta')}
+              <ArrowDown size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-y-1" />
+            </button>
+          </div>
+        </div>
+      </motion.aside>
     </section>
-  );
-}
-
-// --- Back link ---
-function MCBackLink() {
-  return (
-    <div className="bg-ivory border-b border-sand/40">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16 py-4">
-        <Link to="/sedi" className="inline-flex items-center gap-2 text-[12px] tracking-[0.15em] uppercase text-stone hover:text-brass-muted font-light transition-colors">
-          <ArrowLeft size={14} strokeWidth={1.5} />{t('messina-cavour:messina.cavour.page.006')}</Link>
-      </div>
-    </div>
   );
 }
 
@@ -324,7 +336,7 @@ function MCContact() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="mc-contatti" className="py-28 md:py-40 lg:py-48 bg-ivory">
+    <section id="mc-contatti" className="py-28 md:py-40 lg:py-48 bg-ivory-warm">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
@@ -345,7 +357,7 @@ function MCContact() {
               </div>
               <div className="flex items-center gap-4">
                 <Phone size={18} strokeWidth={1.3} className="text-brass-muted" />
-                <a href="tel:+390902403220" className="text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">+39 090 240 3220</a>
+                <a href="tel:+390902403220" className="inline-block py-2 -my-2 text-[18px] font-light text-charcoal hover:text-brass-muted transition-colors">+39 090 240 3220</a>
               </div>
               <div className="flex items-center gap-4">
                 <Mail size={18} strokeWidth={1.3} className="text-brass-muted" />
@@ -401,156 +413,16 @@ function MCContact() {
   );
 }
 
-// --- Orari Speciali ---
-function MCSpecialHours() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
-  const periods = [
-    {
-      month: 'Luglio',
-      note: 'Orario standard confermato',
-      rows: [
-        { days: 'Mercoledi e sabato', hours: '9.00 - 14.30' },
-        { days: 'Altri giorni', hours: 'come orario standard' },
-      ],
-    },
-    {
-      month: 'Agosto',
-      note: '1 - 22 agosto',
-      rows: [
-        { days: 'Martedi, mercoledi, venerdi', hours: '9.00 - 14.30' },
-        { days: 'Giovedi', hours: '9.00 - 18.30' },
-        { days: 'Sabato', hours: 'chiuso' },
-      ],
-    },
-    {
-      month: 'Agosto',
-      note: '24 - 31 agosto',
-      rows: [
-        { days: 'Mercoledi e venerdi', hours: '9.00 - 14.30' },
-        { days: 'Martedi e giovedi', hours: '9.00 - 18.30' },
-        { days: 'Sabato', hours: '9.00 - 14.30' },
-      ],
-    },
-  ];
-
-  return (
-    <section id="mc-orari-speciali" className="py-24 md:py-32 bg-charcoal text-ivory">
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 1.1, ease: [0.25, 0.1, 0, 1] }}
-          className="border-y border-brass/25 py-12 md:py-16"
-        >
-          <div className="grid lg:grid-cols-[0.78fr_1.22fr] gap-12 lg:gap-16 items-start">
-            <div>
-              <div className="inline-flex items-center gap-3 text-brass-light mb-5">
-                <CalendarDays size={18} strokeWidth={1.3} />
-                <span className="text-[11px] tracking-[0.35em] uppercase font-light">Calendario sede</span>
-              </div>
-              <div className="w-10 h-[1px] bg-brass-light/60 mb-8" />
-              <h2 className="font-serif text-[30px] md:text-[38px] lg:text-[44px] font-light leading-[1.12] text-ivory">
-                Orari speciali
-              </h2>
-              <p className="mt-6 text-[17px] md:text-[18px] leading-[1.85] text-ivory/72 font-light max-w-lg">
-                Gli orari abituali restano il riferimento della sede. In alcuni periodi dell'anno, qui trovi le variazioni gia programmate per organizzare la tua visita con maggiore tranquillita.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4 md:gap-5">
-              {periods.map((period, index) => (
-                <motion.article
-                  key={`${period.month}-${period.note}`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.9, ease: [0.25, 0.1, 0, 1], delay: 0.12 + index * 0.08 }}
-                  className="bg-deep/42 border border-brass/25 p-6 md:p-7 min-h-[280px] flex flex-col backdrop-blur-sm"
-                >
-                  <div className="flex items-start justify-between gap-4 pb-5 border-b border-brass/20">
-                    <div>
-                      <p className="text-[10px] tracking-[0.3em] uppercase text-brass-light/70 font-light mb-2">{period.note}</p>
-                      <h3 className="font-serif text-[27px] md:text-[30px] font-light text-ivory leading-none">{period.month}</h3>
-                    </div>
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-brass/35 text-brass-light">
-                      <Clock size={16} strokeWidth={1.25} />
-                    </span>
-                  </div>
-
-                  <div className="pt-5 space-y-4">
-                    {period.rows.map((row) => (
-                      <div key={`${row.days}-${row.hours}`} className="grid grid-cols-[1fr_auto] gap-4 items-baseline">
-                        <p className="text-[13px] md:text-[14px] leading-[1.55] text-ivory/62 font-light">{row.days}</p>
-                        <p className="text-[14px] md:text-[15px] text-ivory font-light whitespace-nowrap">{row.hours}</p>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-auto pt-6">
-                    <div className="h-[1px] w-full bg-brass/20" />
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-// --- Booking & Info ---
-function MCBooking() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
-
-  return (
-    <section className="pb-28 md:pb-40 lg:pb-48 bg-ivory" ref={ref}>
-      <div className="max-w-[1400px] mx-auto px-6 md:px-10 lg:px-16">
-        <div className="border-t border-sand/50 pt-16 md:pt-20 grid md:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-
-          {/* Prima consulenza */}
-          <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.1 }} className="bg-charcoal text-ivory p-10 md:p-12 h-full flex flex-col">
-            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-light/60 font-light">{t('messina-cavour:messina.cavour.page.089')}</span>
-            <div className="w-8 h-[1px] bg-brass-light/30 mt-4 mb-6" />
-            <h3 className="font-serif text-[24px] md:text-[28px] font-light text-ivory mb-4">{t('messina-cavour:messina.cavour.page.090')}</h3>
-            <p className="text-[17px] md:text-[18px] leading-[1.8] text-ivory/70 font-light mb-8">{t('messina-cavour:messina.cavour.page.091')}</p>
-            <div className="space-y-4 mt-auto">
-              <a href="https://wa.me/390902403220?text=Salve%2C%20vorrei%20prenotare%20una%20consulenza%20presso%20Luxosa%20Messina%20Cavour." target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-3 bg-ivory text-charcoal text-[12px] tracking-[0.2em] uppercase font-light px-8 py-4 hover:bg-brass-light transition-all duration-500 w-full">{t('messina-cavour:messina.cavour.page.092')}<ArrowRight size={14} strokeWidth={1.5} className="transition-transform duration-500 group-hover:translate-x-1" />
-              </a>
-              <a href="tel:+390902403220" className="flex items-center justify-center gap-3 text-[12px] tracking-[0.2em] uppercase text-ivory/85 font-light border border-ivory/20 px-8 py-4 hover:border-ivory/40 hover:text-ivory transition-all duration-500 w-full">
-                <Phone size={14} strokeWidth={1.5} />{t('messina-cavour:messina.cavour.page.093')}</a>
-            </div>
-          </motion.div>
-
-          {/* Informazioni utili */}
-          <motion.div initial={{ opacity: 0, y: 25 }} animate={inView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.25 }} className="bg-ivory-warm border border-sand/60 p-10 md:p-12 h-full">
-            <span className="text-[11px] tracking-[0.35em] uppercase text-brass-muted font-light">{t('messina-cavour:messina.cavour.page.094')}</span>
-            <div className="w-8 h-[1px] bg-brass mt-4 mb-6" />
-            <h3 className="font-serif text-[24px] md:text-[28px] font-light text-charcoal mb-6">{t('messina-cavour:messina.cavour.page.095')}</h3>
-            <div className="space-y-5 text-[17px] font-light text-anthracite/80 leading-[1.8]">
-              <p>{t('messina-cavour:messina.cavour.page.096')}</p>
-              <p>{t('messina-cavour:messina.cavour.page.097')}</p>
-              <p>{t('messina-cavour:messina.cavour.page.098')}</p>
-            </div>
-          </motion.div>
-
-        </div>
-      </div>
-    </section>
-  );
-}
-
 // --- Main Page Component ---
-export default function MessinaCavourPage({ showSpecialHours = true }: { showSpecialHours?: boolean }) {
+export default function MessinaCavourPage() {
   const mcTestimonials = getMcTestimonials();
 
   return (
     <>
       <MCHero />
-      <MCBackLink />
+      <MessinaHoursCalendar />
       <MCAbout />
+      <MessinaPrimaVolta />
       <MCSpace />
       <MCMethod />
       <MCTeam />
@@ -560,9 +432,8 @@ export default function MessinaCavourPage({ showSpecialHours = true }: { showSpe
         label={t('messina-cavour:messina.cavour.page.115')}
         sectionClassName="py-28 md:py-40 lg:py-48 bg-charcoal overflow-hidden"
       />
+      <MessinaFinalEntry />
       <MCContact />
-      {showSpecialHours && <MCSpecialHours />}
-      <MCBooking />
     </>
   );
 }

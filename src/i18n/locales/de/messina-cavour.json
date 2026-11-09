@@ -145,6 +145,90 @@
         "097": "Es wird empfohlen, 5 Minuten vor dem Termin einzutreffen.",
         "098": "Der Standort ist für Personen mit eingeschränkter Mobilität zugänglich.",
         "099": "44 Jahre"
+      },
+      "final": {
+        "test": {
+          "eyebrow": "Luxosa Test",
+          "title": "Entdecken Sie, wo Sie beginnen.",
+          "lead": "Ein professioneller Test, der Orientierung gibt, statt für Sie zu entscheiden. Kopfhaut, Haar, Vorgeschichte, Ziele: Alles wird gelesen, um die stimmigste Richtung aufzuzeigen.",
+          "note": "Der Test ersetzt die Beratung nicht: Er bereitet sie vor.",
+          "cta": "Deinen Weg entdecken"
+        },
+        "prima": {
+          "eyebrow": "Prima Volta",
+          "title": "Ihr Weg in die Maison.",
+          "lead": "Eine professionelle Beratung und ein Finish Ihrer Wahl. Alle Details auf der eigenen Seite.",
+          "included": {
+            "consult": "Erstberatung von 15–20 Minuten",
+            "finish": "Finish Ihrer Wahl: PiegaLux oder RicciOsa",
+            "summary": "Orientierende Zusammenfassung und Richtung für den nächsten Schritt"
+          },
+          "cta": "Prima Volta entdecken",
+          "ctaAria": "Prima Volta entdecken (öffnet sich in einer neuen Seite)"
+        },
+        "help": {
+          "lead": "Möchten Sie zuerst mit uns sprechen?",
+          "whatsapp": "Schreiben Sie uns auf WhatsApp",
+          "phone": "Rufen Sie uns an"
+        }
+      },
+      "prima": {
+        "eyebrow": "Prima Volta",
+        "title": "Der erste Schritt ist, sich kennenzulernen.",
+        "lead": "Jede neue Beziehung mit Luxosa beginnt mit dem Kennenlernen. Prima Volta ist eine professionelle Beratung mit einem Finish Ihrer Wahl: Ihr Weg in die Maison.",
+        "outcome": "Sie gehen mit einer klaren Richtung für Ihr Haar und dem fertigen Finish.",
+        "heroLabel": "Prima Volta",
+        "heroText": "Beginnen Sie mit einer professionellen Beratung und einem Finish Ihrer Wahl. Ein erstes Treffen, um sich kennenzulernen.",
+        "proofSource": "Google-Bewertung",
+        "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
+        "proofAuthor": "Rosanna T.",
+        "cta": "Prima Volta entdecken",
+        "ctaAria": "Prima Volta entdecken (öffnet sich in einer neuen Seite)",
+        "ctaNote": "Online-Kauf. Unser Empfang meldet sich innerhalb von 24 Arbeitsstunden bei Ihnen, um gemeinsam Tag und Uhrzeit festzulegen.",
+        "cardLabel": "Prima Volta Luxosa",
+        "duration": "Gesamtdauer ca. 1 Stunde",
+        "price": "47 €",
+        "priceNote": "Festpreis",
+        "items": {
+          "consult": {
+            "title": "Erstberatung",
+            "text": "15–20 Minuten. Der Luxosa-Techniker betrachtet Kopfhaut und Haarfaser, hört Ihre Geschichte an und erfasst die für Ihren Fall relevanten Parameter."
+          },
+          "finish": {
+            "title": "Finish Ihrer Wahl",
+            "text": "PiegaLux oder RicciOsa. Sie entscheiden: Der Techniker berät Sie passend zu Ihrem Haar."
+          },
+          "summary": {
+            "title": "Orientierende Zusammenfassung",
+            "text": "Was beobachtet wurde, verständlich erklärt, und die Richtung für den nächsten Schritt."
+          }
+        }
+      },
+      "hours": {
+        "calendar": "Kalender",
+        "openCta": "Öffnungszeiten und Kalender",
+        "closeCta": "Schließen",
+        "nextVariation": "Nächste Änderung: {{date}}",
+        "months": "Monat",
+        "today": "Heute, {{date}}",
+        "statusOpen": "geöffnet {{hours}}",
+        "statusClosed": "geschlossen",
+        "legendToday": "Heute",
+        "legendVaried": "Geänderte Zeiten",
+        "legendClosed": "Geschlossen",
+        "cellLabel": "{{date}}: {{status}}",
+        "usual": "Reguläre Öffnungszeiten",
+        "closedLabel": "Geschlossen",
+        "pair": "{{a}} und {{b}}",
+        "range": "Vom {{from}} bis {{to}}",
+        "variations": "Abweichungen von den regulären Öffnungszeiten",
+        "noVariations": "Keine Abweichungen, es gelten die regulären Öffnungszeiten.",
+        "note": {
+          "aperturaLunedi": "Sonderöffnung",
+          "immacolata": "Mariä Empfängnis",
+          "natale": "Weihnachten und Stephanstag",
+          "festivita": "Feiertage"
+        }
       }
     }
   }

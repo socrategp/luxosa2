@@ -145,6 +145,90 @@
         "097": "Se recomienda llegar 5 minutos antes de la cita.",
         "098": "La sede es accesible para personas con movilidad reducida.",
         "099": "44 años"
+      },
+      "final": {
+        "test": {
+          "eyebrow": "Luxosa Test",
+          "title": "Descubra por dónde empezar.",
+          "lead": "Un test profesional pensado para orientar, no para elegir por usted. Cuero cabelludo, cabello, historia, objetivos: todo se lee para indicar la dirección más coherente.",
+          "note": "El test no sustituye la consulta: la prepara.",
+          "cta": "Descubre tu recorrido"
+        },
+        "prima": {
+          "eyebrow": "Prima Volta",
+          "title": "La manera de entrar en la Maison.",
+          "lead": "Una consulta profesional y un finish a su elección. Todos los detalles en la página dedicada.",
+          "included": {
+            "consult": "Consulta inicial de 15–20 minutos",
+            "finish": "Finish a su elección: PiegaLux o RicciOsa",
+            "summary": "Síntesis orientativa y dirección para el siguiente paso"
+          },
+          "cta": "Descubrir Prima Volta",
+          "ctaAria": "Descubrir Prima Volta (se abre en una nueva página)"
+        },
+        "help": {
+          "lead": "¿Prefiere hablarlo antes con nosotros?",
+          "whatsapp": "Escríbanos por WhatsApp",
+          "phone": "Llámenos"
+        }
+      },
+      "prima": {
+        "eyebrow": "Prima Volta",
+        "title": "El primer paso es conocerse.",
+        "lead": "Cada nueva relación con Luxosa empieza por conocerse. Prima Volta es una consulta profesional y un finish a su elección: la manera de entrar en la Maison.",
+        "outcome": "Sale con una dirección clara para su cabello y con el finish ya hecho.",
+        "heroLabel": "Prima Volta",
+        "heroText": "Empiece con una consulta profesional y un finish a su elección. Un primer encuentro pensado para conocerse.",
+        "proofSource": "Reseña de Google",
+        "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
+        "proofAuthor": "Rosanna T.",
+        "cta": "Descubrir Prima Volta",
+        "ctaAria": "Descubrir Prima Volta (se abre en una nueva página)",
+        "ctaNote": "Compra online. Recepción le contactará en un plazo de 24 horas laborables para fijar juntos el día y la hora.",
+        "cardLabel": "Prima Volta Luxosa",
+        "duration": "Duración total de aproximadamente 1 hora",
+        "price": "47 €",
+        "priceNote": "precio cerrado",
+        "items": {
+          "consult": {
+            "title": "Consulta inicial",
+            "text": "15–20 minutos. El Técnico Luxosa observa el cuero cabelludo y la fibra, escucha su historia y recoge los parámetros útiles para su caso."
+          },
+          "finish": {
+            "title": "Finish a su elección",
+            "text": "PiegaLux o RicciOsa. Usted elige: el Técnico le orienta según su cabello."
+          },
+          "summary": {
+            "title": "Síntesis orientativa",
+            "text": "Lo observado, explicado de forma comprensible, y la dirección para el siguiente paso."
+          }
+        }
+      },
+      "hours": {
+        "calendar": "Calendario",
+        "openCta": "Horario y calendario",
+        "closeCta": "Cerrar",
+        "nextVariation": "Próximo cambio: {{date}}",
+        "months": "Mes",
+        "today": "Hoy, {{date}}",
+        "statusOpen": "abierto {{hours}}",
+        "statusClosed": "cerrado",
+        "legendToday": "Hoy",
+        "legendVaried": "Horario modificado",
+        "legendClosed": "Cerrado",
+        "cellLabel": "{{date}}: {{status}}",
+        "usual": "Horario habitual",
+        "closedLabel": "Cerrado",
+        "pair": "{{a}} y {{b}}",
+        "range": "Del {{from}} al {{to}}",
+        "variations": "Cambios respecto al horario habitual",
+        "noVariations": "Sin cambios, se aplica el horario habitual.",
+        "note": {
+          "aperturaLunedi": "apertura extraordinaria",
+          "immacolata": "Inmaculada Concepción",
+          "natale": "Navidad y San Esteban",
+          "festivita": "Festividades"
+        }
       }
     }
   }

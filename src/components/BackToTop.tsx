@@ -24,7 +24,7 @@ export default function BackToTop() {
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.5, ease: [0.25, 0.1, 0, 1] }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-40 group cursor-pointer"
+          className="fixed bottom-24 right-8 z-40 group cursor-pointer"
           aria-label={t('common:backToTop.ariaLabel')}
         >
           <div className="relative w-12 h-12 flex items-center justify-center">

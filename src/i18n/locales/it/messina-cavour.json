@@ -145,6 +145,90 @@
         "097": "Si consiglia di arrivare 5 minuti prima dell'appuntamento.",
         "098": "La sede è accessibile per persone con mobilità ridotta.",
         "099": "44 anni"
+      },
+      "final": {
+        "test": {
+          "eyebrow": "Luxosa Test",
+          "title": "Scopra da dove iniziare.",
+          "lead": "Un test professionale pensato per orientare, non per scegliere. Cute, capello, storia, obiettivi: tutto viene letto per indicare la direzione più coerente.",
+          "note": "Il test non sostituisce la consulenza: la prepara.",
+          "cta": "Scopri il tuo percorso"
+        },
+        "prima": {
+          "eyebrow": "La Prima Volta",
+          "title": "Il modo in cui si entra nella Maison.",
+          "lead": "Una consulenza professionale e un finish a Sua scelta. Tutti i dettagli nella pagina dedicata.",
+          "included": {
+            "consult": "Consulenza iniziale di 15–20 minuti",
+            "finish": "Finish a Sua scelta: PiegaLux o RicciOsa",
+            "summary": "Sintesi orientativa e direzione sul passo successivo"
+          },
+          "cta": "Scopri Prima Volta",
+          "ctaAria": "Scopri Prima Volta (si apre in una nuova pagina)"
+        },
+        "help": {
+          "lead": "Preferisce parlarne prima con noi?",
+          "whatsapp": "Ci scriva su WhatsApp",
+          "phone": "Ci chiami"
+        }
+      },
+      "prima": {
+        "eyebrow": "La Prima Volta",
+        "title": "Il primo passo è conoscersi.",
+        "lead": "Ogni nuova relazione Luxosa inizia conoscendosi. La Prima Volta è una consulenza professionale e un finish a Sua scelta: il modo in cui si entra nella Maison.",
+        "outcome": "Esce con una direzione chiara per i Suoi capelli e con il finish già fatto.",
+        "heroLabel": "La Prima Volta",
+        "heroText": "Inizi da una consulenza professionale e da un finish a Sua scelta. Un primo incontro pensato per conoscersi.",
+        "proofSource": "Recensione Google",
+        "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
+        "proofAuthor": "Rosanna T.",
+        "cta": "Scopri Prima Volta",
+        "ctaAria": "Scopri Prima Volta (si apre in una nuova pagina)",
+        "ctaNote": "Acquisto online. L'Accoglienza La ricontatta entro 24 ore lavorative per definire insieme giorno e orario.",
+        "cardLabel": "Prima Volta Luxosa",
+        "duration": "Durata complessiva circa 1 ora",
+        "price": "€47",
+        "priceNote": "fisso e certo",
+        "items": {
+          "consult": {
+            "title": "Consulenza iniziale",
+            "text": "15–20 minuti. Il Tecnico Luxosa osserva cute e fibra, ascolta la Sua storia e raccoglie i parametri utili al Suo caso."
+          },
+          "finish": {
+            "title": "Finish a Sua scelta",
+            "text": "PiegaLux oppure RicciOsa. Sceglie Lei: il Tecnico La orienta secondo il Suo capello."
+          },
+          "summary": {
+            "title": "Sintesi orientativa",
+            "text": "Ciò che è stato osservato, spiegato in modo comprensibile, e la direzione sul passo successivo."
+          }
+        }
+      },
+      "hours": {
+        "calendar": "Calendario",
+        "openCta": "Orari e calendario",
+        "closeCta": "Chiudi",
+        "nextVariation": "Prossima variazione: {{date}}",
+        "months": "Mese",
+        "today": "Oggi, {{date}}",
+        "statusOpen": "aperto {{hours}}",
+        "statusClosed": "chiuso",
+        "legendToday": "Oggi",
+        "legendVaried": "Orario variato",
+        "legendClosed": "Chiuso",
+        "cellLabel": "{{date}}: {{status}}",
+        "usual": "Orario abituale",
+        "closedLabel": "Chiuso",
+        "pair": "{{a}} e {{b}}",
+        "range": "Da {{from}} a {{to}}",
+        "variations": "Variazioni rispetto all'orario abituale",
+        "noVariations": "Nessuna variazione, valgono gli orari abituali.",
+        "note": {
+          "aperturaLunedi": "apertura straordinaria",
+          "immacolata": "Immacolata",
+          "natale": "Natale e Santo Stefano",
+          "festivita": "Festività"
+        }
       }
     }
   }

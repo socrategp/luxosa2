@@ -145,6 +145,90 @@
         "097": "ご予約時間の5分前にご到着されることをお勧めします。",
         "098": "当拠点はバリアフリー対応です。",
         "099": "44歳"
+      },
+      "final": {
+        "test": {
+          "eyebrow": "Luxosa Test",
+          "title": "どこから始めるかを見つけましょう。",
+          "lead": "選ぶためではなく、方向を示すために設計されたプロフェッショナルなテストです。頭皮、髪、これまでの経緯、目標。すべてを読み取り、最も一貫した方向をご提案します。",
+          "note": "テストはコンサルテーションの代わりではなく、その準備です。",
+          "cta": "あなたのコースを見つける"
+        },
+        "prima": {
+          "eyebrow": "Prima Volta",
+          "title": "メゾンへの入り口。",
+          "lead": "プロフェッショナルなコンサルテーションと、お好みのフィニッシュ。詳しくは専用ページでご覧いただけます。",
+          "included": {
+            "consult": "15〜20分の初回コンサルテーション",
+            "finish": "お好みのフィニッシュ：PiegaLux または RicciOsa",
+            "summary": "方向性のサマリーと次のステップのご提案"
+          },
+          "cta": "Prima Volta を見る",
+          "ctaAria": "Prima Volta を見る（新しいページで開きます）"
+        },
+        "help": {
+          "lead": "まずは私たちにご相談されますか？",
+          "whatsapp": "WhatsAppでメッセージを送る",
+          "phone": "お電話する"
+        }
+      },
+      "prima": {
+        "eyebrow": "Prima Volta",
+        "title": "最初の一歩は、知り合うこと。",
+        "lead": "Luxosaとの新しい関係は、互いを知ることから始まります。Prima Volta は、プロフェッショナルなコンサルテーションとお好みのフィニッシュ。メゾンへの入り口です。",
+        "outcome": "髪のための明確な方向性と、仕上がったフィニッシュとともにお帰りいただけます。",
+        "heroLabel": "Prima Volta",
+        "heroText": "プロフェッショナルなコンサルテーションと、お好みのフィニッシュから始めましょう。互いを知るための最初の出会いです。",
+        "proofSource": "Googleレビュー",
+        "proofQuote": "Esperienza meravigliosa, mi sono rilassata tantissimo, personale gentile e qualificato.",
+        "proofAuthor": "Rosanna T.",
+        "cta": "Prima Volta を見る",
+        "ctaAria": "Prima Volta を見る（新しいページで開きます）",
+        "ctaNote": "オンラインでご購入いただけます。24営業時間以内に受付よりご連絡し、日時をご一緒に決めます。",
+        "cardLabel": "Prima Volta Luxosa",
+        "duration": "所要時間は合計約1時間",
+        "price": "€47",
+        "priceNote": "明確な固定料金",
+        "items": {
+          "consult": {
+            "title": "初回コンサルテーション",
+            "text": "15〜20分。Luxosaのテクニシャンが頭皮と髪の状態を観察し、お話を伺い、あなたに必要な情報を確認します。"
+          },
+          "finish": {
+            "title": "お好みのフィニッシュ",
+            "text": "PiegaLux または RicciOsa。お選びいただけます。テクニシャンが髪質に合わせてご案内します。"
+          },
+          "summary": {
+            "title": "方向性のサマリー",
+            "text": "観察した内容をわかりやすくご説明し、次のステップの方向性をお伝えします。"
+          }
+        }
+      },
+      "hours": {
+        "calendar": "カレンダー",
+        "openCta": "営業時間とカレンダー",
+        "closeCta": "閉じる",
+        "nextVariation": "次の変更：{{date}}",
+        "months": "月",
+        "today": "本日 {{date}}",
+        "statusOpen": "営業 {{hours}}",
+        "statusClosed": "休業",
+        "legendToday": "本日",
+        "legendVaried": "営業時間変更",
+        "legendClosed": "休業",
+        "cellLabel": "{{date}}：{{status}}",
+        "usual": "通常の営業時間",
+        "closedLabel": "休業",
+        "pair": "{{a}}と{{b}}",
+        "range": "{{from}}から{{to}}まで",
+        "variations": "通常営業時間からの変更",
+        "noVariations": "変更はありません。通常の営業時間です。",
+        "note": {
+          "aperturaLunedi": "特別営業",
+          "immacolata": "無原罪の御宿り",
+          "natale": "クリスマスと聖ステファノの日",
+          "festivita": "年始休業"
+        }
       }
     }
   }

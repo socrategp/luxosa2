@@ -1,7 +1,7 @@
 ﻿import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { t } from '../i18n/t';
-import { prefersStillMedia } from '../lib/liteMedia';
+import { useHeroMedia } from '../lib/liteMedia';
 
 export default function Hero() {
   const ref = useRef(null);
@@ -10,13 +10,13 @@ export default function Hero() {
     offset: ['start start', 'end start']
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const [stillMedia] = useState(prefersStillMedia);
+  const heroMedia = useHeroMedia();
 
   return (
     <section ref={ref} className="relative h-[100svh] min-h-[700px] max-h-[1100px] overflow-hidden bg-deep">
       {/* Background video */}
       <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
-        {stillMedia ? (
+        {heroMedia === 'pending' ? null : heroMedia === 'still' ? (
           <img src="/images/hero_lamaison_poster.webp" alt="" fetchPriority="high" className="w-full h-[120%] -top-[10%] object-cover object-[center_20%] absolute" />
         ) : (
         <video

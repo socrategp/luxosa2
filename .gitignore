@@ -18,3 +18,4 @@ public_original/
 # hand-edited, never the source of truth.
 server/luxosaTest/pdf.js
 server/luxosaTest/pdfGeneration.js
+.ssr

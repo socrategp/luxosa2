@@ -6,6 +6,7 @@ import { SpeedInsights } from '@vercel/speed-insights/react';
 import MainLayout from './layouts/MainLayout';
 import { QuizProvider, useQuiz } from './context/QuizContext';
 import CookieConsentBanner from './components/CookieConsentBanner';
+import SeoManager from './seo/SeoManager';
 const DiagnosticTakeover = lazy(() => import('./components/DiagnosticTakeover').then(m => ({ default: m.DiagnosticTakeover })));
 const DiagnosticTakeoverNew = lazy(() => import('./components/DiagnosticTakeoverTest').then(m => ({ default: m.DiagnosticTakeover })));
 
@@ -34,10 +35,12 @@ function QuizOverlay() {
   );
 }
 
-export default function App() {
+// Everything inside the router: shared by the browser (BrowserRouter) and the
+// build-time prerender (StaticRouter, src/entry-prerender.tsx).
+export function AppContent() {
   return (
-    <BrowserRouter>
       <QuizProvider>
+        <SeoManager />
         <Suspense fallback={null}>
           <Routes>
             {/* Luxosa Test landing for external traffic — not linked from the site navigation */}
@@ -56,9 +59,16 @@ export default function App() {
         </Suspense>
         <QuizOverlay />
         <CookieConsentBanner />
-        <Analytics />
-        <SpeedInsights />
       </QuizProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+      <Analytics />
+      <SpeedInsights />
     </BrowserRouter>
   );
 }

@@ -14,6 +14,7 @@ import {
   toKey,
 } from '../lib/messinaCavourHours';
 import type { HoursException, WeekdayIndex } from '../lib/messinaCavourHours';
+import { buildSalonStructuredData } from '../seo/site';
 
 const CLOCK_REFRESH_MS = 60_000;
 const MONDAY_REFERENCE = '2024-01-01';
@@ -75,31 +76,6 @@ function weekdayName(format: DateFormat, index: number, style: 'long' | 'short')
   return format(addDays(parseKey(MONDAY_REFERENCE), index === 0 ? 6 : index - 1), { weekday: style });
 }
 
-function buildStructuredData(todayKey: string) {
-  const toTime = (hours: string) => hours.split('—').map((part) => part.trim());
-  const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const closures = getVisibleExceptions(todayKey).map((exception) => {
-    const [opens, closes] = exception.hours ? toTime(exception.hours) : ['00:00', '00:00'];
-    const dayOfWeek = exception.weekdays?.map((index) => weekdays[index]);
-    return { '@type': 'OpeningHoursSpecification', ...(dayOfWeek && { dayOfWeek }), validFrom: exception.from, validThrough: exception.to, opens, closes };
-  });
-  const usual = Object.entries(WEEKLY_HOURS)
-    .filter(([, hours]) => hours)
-    .map(([index, hours]) => {
-      const [opens, closes] = toTime(hours as string);
-      return { '@type': 'OpeningHoursSpecification', dayOfWeek: weekdays[Number(index)], opens, closes };
-    });
-
-  return {
-    '@context': 'https://schema.org',
-    '@type': 'HairSalon',
-    name: 'Luxosa Messina Cavour',
-    telephone: '+39 090 240 3220',
-    address: { '@type': 'PostalAddress', streetAddress: 'Corso Cavour, 1', postalCode: '98122', addressLocality: 'Messina', addressCountry: 'IT' },
-    openingHoursSpecification: [...usual, ...closures],
-  };
-}
-
 function useHoursState() {
   const format = useDateFormat();
   const todayKey = useSalonToday();
@@ -109,7 +85,7 @@ function useHoursState() {
   const selected = chosen && months.some((month) => toKey(month) === chosen) ? chosen : toKey(months[0]);
   const monthStart = months.find((month) => toKey(month) === selected) ?? months[0];
   const todayText = `${th('today', { date: format(today, { weekday: 'long', day: 'numeric', month: 'long' }) })} · ${statusText(getDayHours(today).hours)}`;
-  const structuredData = useMemo(() => JSON.stringify(buildStructuredData(todayKey)).replace(/</g, '\\u003c'), [todayKey]);
+  const structuredData = useMemo(() => JSON.stringify(buildSalonStructuredData(todayKey)).replace(/</g, '\\u003c'), [todayKey]);
   return { format, todayKey, months, selected, monthStart, setChosen, todayText, structuredData };
 }
 

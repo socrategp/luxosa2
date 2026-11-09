@@ -13,7 +13,7 @@ export const LANDING_CTA_LABEL = 'Inizia il Luxosa Test';
 export const LANDING_DISCLAIMER =
   'Il Luxosa Test offre un orientamento preliminare. La personalizzazione definitiva nasce dalla consulenza e dalla valutazione professionale in Maison.';
 
-const PAGE_TITLE = 'Luxosa Test — Luxosa';
+const PAGE_TITLE = 'Luxosa Test — Il test professionale per cute e capelli';
 
 /**
  * Standalone frame for the Luxosa Test landing: lives outside MainLayout so

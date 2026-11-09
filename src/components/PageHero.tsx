@@ -1,7 +1,7 @@
 ﻿import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import React from 'react';
-import { prefersStillMedia } from '../lib/liteMedia';
+import { useHeroMedia } from '../lib/liteMedia';
 
 interface PageHeroProps {
   label: string;
@@ -14,7 +14,7 @@ interface PageHeroProps {
 }
 
 export default function PageHero({ label, title, subtitle, image, video, poster, children }: PageHeroProps) {
-  const [stillMedia] = useState(prefersStillMedia);
+  const heroMedia = useHeroMedia();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -25,7 +25,7 @@ export default function PageHero({ label, title, subtitle, image, video, poster,
   return (
     <section ref={ref} className="relative h-[85vh] min-h-[620px] max-h-[900px] overflow-hidden bg-deep">
       <motion.div className="absolute inset-0" style={{ y: video ? undefined : backgroundY }}>
-        {video && !(stillMedia && poster) ? (
+        {video && heroMedia === 'pending' ? null : video && !(heroMedia === 'still' && poster) ? (
           <video
             src={video}
             poster={poster}

@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && npm run build:pdf-functions",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-prerender.tsx --outDir .ssr --emptyOutDir && node scripts/prerender.mjs && npm run build:pdf-functions",
     "build:pdf-functions": "esbuild server/luxosaTest/pdf.tsx server/luxosaTest/pdfGeneration.tsx --jsx=automatic --format=esm --target=es2023 --outdir=server/luxosaTest",
     "lint": "eslint .",
     "preview": "vite preview",
